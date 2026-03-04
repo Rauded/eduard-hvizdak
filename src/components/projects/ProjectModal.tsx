@@ -35,21 +35,23 @@ interface ProjectModalProps {
     onClose: () => void;
 }
 
-// Import all screenshots dynamically
-const screenshotImports: { [key: string]: string } = {};
+// Import all media (screenshots + videos) dynamically
+const mediaImports: { [key: string]: string } = {};
 const importAll = (r: any) => {
     r.keys().forEach((key: string) => {
         const filename = key.replace('./', '');
-        screenshotImports[filename] = r(key);
+        mediaImports[filename] = r(key);
     });
 };
 
 try {
     // @ts-ignore
-    importAll(require.context('../../assets/projects', false, /\.(png|jpe?g|gif|webp)$/));
+    importAll(require.context('../../assets/projects', false, /\.(png|jpe?g|gif|webp|mp4|webm|mov)$/));
 } catch (e) {
     // Assets directory may not exist yet
 }
+
+const isVideo = (filename: string) => /\.(mp4|webm|mov)$/i.test(filename);
 
 const getIcon = (iconName: string) => {
     switch (iconName) {
@@ -108,12 +110,23 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) => {
                         <div className="modal-screenshots">
                             <div className="screenshots-track">
                                 {project.screenshots.map((filename, i) => (
-                                    <div key={i} className="screenshot-item">
-                                        <img
-                                            src={screenshotImports[filename]}
-                                            alt={`${project.title} screenshot ${i + 1}`}
-                                            loading="lazy"
-                                        />
+                                    <div key={i} className={`screenshot-item ${isVideo(filename) ? 'video-item' : ''}`}>
+                                        {isVideo(filename) ? (
+                                            <video
+                                                src={mediaImports[filename]}
+                                                controls
+                                                preload="metadata"
+                                                playsInline
+                                            >
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        ) : (
+                                            <img
+                                                src={mediaImports[filename]}
+                                                alt={`${project.title} screenshot ${i + 1}`}
+                                                loading="lazy"
+                                            />
+                                        )}
                                     </div>
                                 ))}
                             </div>
