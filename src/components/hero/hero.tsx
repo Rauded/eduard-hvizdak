@@ -82,7 +82,7 @@ const RightContainer = styled.div`
   min-height: 50vh; /* Minimum height for smaller screens */
 
   @media (min-width: 768px) {
-    flex: 0 0 80%; /* Take up 65% of the space on larger screens */
+    flex: 0 0 65%; /* Combined with LeftContainer (35%) = 100% */
   }
 `;
 
@@ -95,20 +95,20 @@ const patrolAnimation = keyframes`
   2.5% { transform: translateX(0%) scaleX(-1); }
 
   /* 2. Walk to the left edge */
-  22.5% { transform: translateX(-20%) scaleX(-1); }
-  27.5% { transform: translateX(-20%) scaleX(-1); } /* Pause */
+  22.5% { transform: translateX(-15%) scaleX(-1); }
+  27.5% { transform: translateX(-15%) scaleX(-1); } /* Pause */
 
   /* 3. Pivot instantly to face right */
-  27.6% { transform: translateX(-20%) scaleX(1); }
-  32.5% { transform: translateX(-20%) scaleX(1); }
+  27.6% { transform: translateX(-15%) scaleX(1); }
+  32.5% { transform: translateX(-15%) scaleX(1); }
 
   /* 4. Walk to the right edge */
-  72.5% { transform: translateX(20%) scaleX(1); }
-  77.5% { transform: translateX(20%) scaleX(1); } /* Pause */
+  72.5% { transform: translateX(15%) scaleX(1); }
+  77.5% { transform: translateX(15%) scaleX(1); } /* Pause */
 
   /* 5. Pivot instantly to face left */
-  77.6% { transform: translateX(20%) scaleX(-1); }
-  82.5% { transform: translateX(20%) scaleX(-1); }
+  77.6% { transform: translateX(15%) scaleX(-1); }
+  82.5% { transform: translateX(15%) scaleX(-1); }
 
   /* 6. Walk back to center */
   97.5% { transform: translateX(0%) scaleX(-1); }
@@ -126,7 +126,7 @@ const TarsContainer = styled.div`
   animation: ${patrolAnimation} 24s linear infinite; 
 
   @media (min-width: 768px) {
-    width: 65%;
+    width: 80%; /* Increased relative width now that RightContainer is constrained */
   }
 `;
 
