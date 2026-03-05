@@ -347,16 +347,22 @@ const Hero: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // Frequently switch colors (every 2.5 seconds) and occasionally mirror
+    // Frequently switch colors (every 6 seconds) and occasionally mirror
     const transitionInterval = setInterval(() => {
-      // Rotate through 8 distinct color steps (0, 45, 90, 135, 180, 225, 270, 315)
-      setHueRotate(prev => (prev + 45) % 360);
+      // Allowed hue rotation steps that exclude yellow (~300), pink (~210), and orange (~270)
+      // Steps: 0 (Green), 60 (Cyan), 120 (Blue), 180 (Purple), 240 (Red)
+      const allowedHues = [0, 60, 120, 180, 240];
+      setHueRotate(prev => {
+        const currentIndex = allowedHues.indexOf(prev);
+        const nextIndex = (currentIndex + 1) % allowedHues.length;
+        return allowedHues[nextIndex];
+      });
 
       // 15% chance to toggle mirroring during any color transition
       if (Math.random() < 0.15) {
         setIsMirrored(prev => !prev);
       }
-    }, 2500);
+    }, 6000);
 
     return () => clearInterval(transitionInterval);
   }, []);
