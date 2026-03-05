@@ -118,7 +118,6 @@ const roamAnimation = keyframes`
   }
 `;
 
-// Styling for the spaceship image with roaming + flip animation
 const SpaceshipContainer = styled.div<{ isMirrored: boolean }>`
   width: 95%;
   display: flex;
@@ -133,13 +132,11 @@ const SpaceshipContainer = styled.div<{ isMirrored: boolean }>`
   }
 `;
 
-// Styling for the spaceship image with roaming animation (color filters applied via hueRotate)
-const Spaceship = styled.img<{ hueRotate: number }>`
+// Styling for the spaceship image with roaming animation (static green theme)
+const Spaceship = styled.img`
   width: 100%;
   animation: ${roamAnimation} 8s ease-in-out infinite;
-  filter: drop-shadow(0 20px 40px hsla(${props => (props.hueRotate + 120) % 360}, 70%, 50%, 0.3)) 
-          hue-rotate(${props => props.hueRotate}deg);
-  transition: filter 1s ease-in-out;
+  filter: drop-shadow(0 20px 40px rgba(0, 255, 0, 0.25));
 `;
 
 // Animation for shrinking and moving circles
@@ -254,7 +251,6 @@ const Hero: React.FC = () => {
   const [circles, setCircles] = useState<CircleProps[]>([]); // State to manage circles
   const [topLine, setTopLine] = useState(''); // State for random headline
   const [currentText, setCurrentText] = useState(''); // State for typewriter text
-  const [hueRotate, setHueRotate] = useState(0); // State for simulated GIF color (0-360)
   const [isMirrored, setIsMirrored] = useState(false); // State for manual mirroring
   const rightContainerRef = useRef<HTMLDivElement>(null); // Ref to get the right container's dimensions
 
@@ -347,24 +343,15 @@ const Hero: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // Frequently switch colors (every 6 seconds) and occasionally mirror
-    const transitionInterval = setInterval(() => {
-      // Allowed hue rotation steps that exclude yellow (~300), pink (~210), and orange (~270)
-      // Steps: 0 (Green), 60 (Cyan), 120 (Blue), 180 (Purple), 240 (Red)
-      const allowedHues = [0, 60, 120, 180, 240];
-      setHueRotate(prev => {
-        const currentIndex = allowedHues.indexOf(prev);
-        const nextIndex = (currentIndex + 1) % allowedHues.length;
-        return allowedHues[nextIndex];
-      });
-
-      // 15% chance to toggle mirroring during any color transition
+    // Occasionally mirror the spaceship horizontally
+    const mirrorInterval = setInterval(() => {
+      // 15% chance to toggle mirroring every 8 seconds
       if (Math.random() < 0.15) {
         setIsMirrored(prev => !prev);
       }
-    }, 6000);
+    }, 8000);
 
-    return () => clearInterval(transitionInterval);
+    return () => clearInterval(mirrorInterval);
   }, []);
 
   return (
@@ -379,7 +366,6 @@ const Hero: React.FC = () => {
           <Spaceship
             src={`${process.env.PUBLIC_URL}/ascii_matrix.gif`}
             alt="ASCII art"
-            hueRotate={hueRotate}
           />
         </SpaceshipContainer>
         {circles.map(circle => (
