@@ -217,6 +217,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
+    /* Ensure padding doesn't overflow height */
 
     .project-header {
       margin-bottom: 12px;
@@ -330,9 +332,11 @@
   @media (max-width: 768px) {
     width: 100%;
     margin-bottom: 20px;
-    padding: 15px;
 
     .project-content {
+      padding: 20px;
+
+      /* Increased from 15px */
       .project-header h3 {
         font-size: 1.5em;
       }
@@ -381,10 +385,12 @@
     z-index: 2;
     background: linear-gradient(180deg, rgba(17, 17, 22, 0.98) 0%, rgba(17, 17, 22, 0.9) 100%);
     backdrop-filter: blur(8px);
-    padding: 18px;
+    padding: 24px;
+    /* Standardized with large cards */
     height: 100%;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
     text-align: center;
 
     .project-header {
@@ -514,7 +520,8 @@
     min-height: 260px;
 
     .project-content {
-      padding: 12px;
+      padding: 20px;
+      /* Increased from 12px to prevent clipping */
 
       .project-header h3 {
         font-size: 1.2em;

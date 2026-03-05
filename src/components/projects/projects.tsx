@@ -193,37 +193,39 @@ const Projects: React.FC = () => {
           </div>
           <p className="project-description">{project.description}</p>
           {renderTechnologies(project.technologies, isSmall)}
-          <div className="project-links">
-            {project.links.github ? (
-              <a href={project.links.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                <FaGithub /> See on GitHub
-              </a>
-            ) : (
-              <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.9em', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <FaGithub /> Private Repo
-              </span>
-            )}
-            {project.links.demo ? (
-              <a href={project.links.demo} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
-                <FaGlobe /> Try it Out
-              </a>
-            ) : (
-              <button onClick={(e) => { e.stopPropagation(); handleComingSoonClick(e); }} style={{
-                background: 'none',
-                border: 'none',
-                color: '#9b59b6',
-                fontSize: '1.2em',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                cursor: 'pointer',
-                textShadow: '1px 1px 2px rgba(0, 0, 0, 0.7)',
-                fontFamily: 'inherit'
-              }}>
-                <FaGlobe /> Try it Out
-              </button>
-            )}
-          </div>
+          {!isSmall && (
+            <div className="project-links">
+              {project.links.github ? (
+                <a href={project.links.github} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                  <FaGithub /> See on GitHub
+                </a>
+              ) : (
+                <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.9em', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <FaGithub /> Private Repo
+                </span>
+              )}
+              {project.links.demo ? (
+                <a href={project.links.demo} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
+                  <FaGlobe /> Try it Out
+                </a>
+              ) : (
+                <button onClick={(e) => { e.stopPropagation(); handleComingSoonClick(e); }} style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#9b59b6',
+                  fontSize: '1.2em',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  cursor: 'pointer',
+                  textShadow: '1px 1px 2px rgba(0, 0, 0, 0.7)',
+                  fontFamily: 'inherit'
+                }}>
+                  <FaGlobe /> Try it Out
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </div>
     );
