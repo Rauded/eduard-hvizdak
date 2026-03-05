@@ -11,7 +11,7 @@ const About: React.FC = () => {
         <div className="about-text">
           <h2 className="about-title">About Me</h2>
           <p>
-            Hello! My name is <span className="purple-text">Eduard Hvižďák</span>. I’m a computer science student and AI developer focused on building real-world systems powered by large language models. Most recently, I’ve been working on AI infrastructure for <span className="purple-text">document intelligence, multi-agent pipelines, and retrieval-augmented knowledge systems</span>.
+            Hello! My name is <span className="purple-text">Eduard Hvižďák</span>. I’m a computer science student at Masaryk University and AI developer focused on building real-world systems powered by large language models. Most recently, I’ve been working on AI infrastructure for <span className="purple-text">document intelligence, multi-agent pipelines, and retrieval-augmented knowledge systems</span>.
           </p>
           <p>
             My interests evolve with the problems I’m exploring, but lately I’ve been especially focused on <span className="purple-text">agentic AI systems, retrieval architectures, and large-scale document analysis</span> using modern embedding models and vector search.
@@ -23,7 +23,7 @@ const About: React.FC = () => {
             My interest in technology goes beyond just building software. I’m fascinated by how AI is reshaping how we interact with information and how new architectures like <span className="purple-text">RAG and agentic workflows</span> are changing what software systems can do.
           </p>
           <p>
-            Outside of programming, you’ll usually find me reading, travelling, exploring new places, and occasionally trying to understand German.
+            Outside of programming, you’ll usually find me reading, experimenting with new technologies and occasionally scrolling Twitter.
           </p>
           <p>
             If you want to keep up with my work, feel free to connect with me on{" "}

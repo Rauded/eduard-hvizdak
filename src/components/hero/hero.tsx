@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import styled, { keyframes, css } from 'styled-components';
-import spaceship from '../../assets/spaceship/webp/spaceship.webp'; // Importing spaceship image
 
 // Main container for the hero section
 const HeroContainer = styled.section`
@@ -324,7 +323,7 @@ const Hero: React.FC = () => {
         <TypewriterText>{currentText}</TypewriterText>
       </LeftContainer>
       <RightContainer ref={rightContainerRef}>
-        <Spaceship src={spaceship} alt="Spaceship" />
+        <Spaceship src={`${process.env.PUBLIC_URL}/ascii-art-2026-03-05.svg`} alt="ASCII art" />
         {circles.map(circle => (
           <Circle
             key={circle.id}
