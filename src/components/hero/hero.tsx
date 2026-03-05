@@ -136,33 +136,35 @@ const TarsRender = styled.img`
   filter: drop-shadow(0 20px 40px rgba(0, 255, 0, 0.25));
 `;
 
-// Animation for shrinking and moving circles (lighter version)
-const shrinkAndMove = (left: number, top: number, containerWidth: number, containerHeight: number) => keyframes`
+// Static animation for shrinking and moving circles (uses CSS vars for performance)
+const shrinkAndMove = keyframes`
   0% {
     transform: translate(0, 0) scale(1);
-    opacity: 0.3; /* Lighter starting opacity */
+    opacity: 0.3;
   }
   100% {
-    transform: translate(${containerWidth / 2 - left}px, ${containerHeight / 2 - top}px) scale(0);
+    transform: translate(var(--dest-x), var(--dest-y)) scale(0);
     opacity: 0;
   }
 `;
 
-// Circle styling with animation based on position and size
-const Circle = styled.div<{ left: number; top: number; size: number; containerWidth: number; containerHeight: number }>`
+// Circle styling with optimized animation
+const Circle = styled.div<{ left: number; top: number; size: number; destX: number; destY: number }>`
   position: absolute;
   background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(165, 180, 252, 0.2) 100%);
   border-radius: 50%;
   backdrop-filter: blur(1px);
-
-  ${({ left, top, size, containerWidth, containerHeight }) => css`
-    width: ${size}px;
-    height: ${size}px;
-    left: ${left}px;
-    top: ${top}px;
-    animation: ${shrinkAndMove(left, top, containerWidth, containerHeight)} 2.5s ease-out forwards;
-    box-shadow: 0 0 ${size}px rgba(99, 102, 241, 0.2);
-  `}
+  width: ${props => props.size}px;
+  height: ${props => props.size}px;
+  left: ${props => props.left}px;
+  top: ${props => props.top}px;
+  
+  /* Use CSS variables to avoid generating unique @keyframes for every particle */
+  --dest-x: ${props => props.destX}px;
+  --dest-y: ${props => props.destY}px;
+  
+  animation: ${shrinkAndMove} 2.5s ease-out forwards;
+  box-shadow: 0 0 ${props => props.size}px rgba(99, 102, 241, 0.2);
 `;
 
 // Styling for the gradient text (title)
@@ -209,26 +211,18 @@ const TypewriterText = styled.div`
 
 // Interface for circle properties
 interface CircleProps {
-  id: number; /* Unique ID for each circle */
-  left: number; /* Horizontal position */
-  top: number; /* Vertical position */
-  size: number; /* Circle size */
-  containerWidth: number; /* Width of the container */
-  containerHeight: number; /* Height of the container */
+  id: number;
+  left: number;
+  top: number;
+  size: number;
+  destX: number;
+  destY: number;
 }
 
 // Constants for hero component
 const topLines = [
-  "You're finally awake. Let's explore my work.",
   "Ahoj! Vitaj na mojom portfóliu.",
-  "Čau! Rád tě tady vidím.",
-  "Welcome to my corner of the web!",
   "Hey! Thanks for dropping by.",
-  "Hallo! Schön, dass du da bist.",
-  "It's dangerous to go alone! Take this portfolio.",
-  "Say hello to my little projects!",
-  "Welcome to the dark side of AI.",
-  "One RAG pipeline to rule them all.",
 ]; // Array of possible headline texts
 
 const typewriterTexts = [
@@ -258,43 +252,47 @@ const Hero: React.FC = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    // Typewriter effect
-    const typeWriter = () => {
-      let i = 0;
-      let textPos = 0;
-      let currentString = typewriterTexts[i];
-      const speed = 100; // Typing speed
-      const deleteSpeed = 50; // Deleting speed
-      const waitTime = 2000; // Time before deleting starts
+    // Optimized typewriter effect with safety cleanup
+    let isMounted = true;
+    let timeoutId: NodeJS.Timeout;
 
-      // Function to handle typing the text
-      function type() {
-        setCurrentText(currentString.substring(0, textPos));
+    let i = 0;
+    let textPos = 0;
+    let currentString = typewriterTexts[i];
+    const speed = 100;
+    const deleteSpeed = 50;
+    const waitTime = 2000;
 
-        if (textPos++ === currentString.length) {
-          setTimeout(() => deleteText(), waitTime); // Wait and start deleting
-        } else {
-          setTimeout(type, speed); // Continue typing
-        }
+    function type() {
+      if (!isMounted) return;
+      setCurrentText(currentString.substring(0, textPos));
+
+      if (textPos++ === currentString.length) {
+        timeoutId = setTimeout(() => deleteText(), waitTime);
+      } else {
+        timeoutId = setTimeout(type, speed);
       }
+    }
 
-      // Function to handle deleting the text
-      function deleteText() {
-        setCurrentText(currentString.substring(0, textPos));
+    function deleteText() {
+      if (!isMounted) return;
+      setCurrentText(currentString.substring(0, textPos));
 
-        if (textPos-- === 0) {
-          i = (i + 1) % typewriterTexts.length; // Cycle through text array
-          currentString = typewriterTexts[i]; // Get next string
-          setTimeout(type, speed); // Start typing again
-        } else {
-          setTimeout(deleteText, deleteSpeed); // Continue deleting
-        }
+      if (textPos-- === 0) {
+        i = (i + 1) % typewriterTexts.length;
+        currentString = typewriterTexts[i];
+        timeoutId = setTimeout(type, speed);
+      } else {
+        timeoutId = setTimeout(deleteText, deleteSpeed);
       }
+    }
 
-      type(); // Start the typewriter effect
+    type();
+
+    return () => {
+      isMounted = false;
+      clearTimeout(timeoutId);
     };
-
-    typeWriter(); // Invoke the typewriter function on component mount
   }, []);
 
   useEffect(() => {
@@ -318,9 +316,9 @@ const Hero: React.FC = () => {
             id: Date.now() + Math.random(),
             left,
             top,
-            size: Math.random() * 8 + 4, // Smaller size (4px - 12px)
-            containerWidth,
-            containerHeight,
+            size: Math.random() * 8 + 4,
+            destX: containerWidth / 2 - left,
+            destY: containerHeight / 2 - top,
           };
         });
 
@@ -348,7 +346,7 @@ const Hero: React.FC = () => {
       <RightContainer ref={rightContainerRef}>
         <TarsContainer>
           <TarsRender
-            src={`${process.env.PUBLIC_URL}/ascii_matrix.gif`}
+            src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
             alt="TARS walking ASCII art"
           />
           {circles.map(circle => (
@@ -357,8 +355,8 @@ const Hero: React.FC = () => {
               left={circle.left}
               top={circle.top}
               size={circle.size}
-              containerWidth={circle.containerWidth}
-              containerHeight={circle.containerHeight}
+              destX={circle.destX}
+              destY={circle.destY}
             />
           ))}
         </TarsContainer>
