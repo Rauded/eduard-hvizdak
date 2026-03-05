@@ -11,39 +11,22 @@ const About: React.FC = () => {
         <div className="about-text">
           <h2 className="about-title">About Me</h2>
           <p>
-            Hello! My name is <span className="purple-text">Eduard Hvižďák</span>.
-            I’m a passionate AI developer / programmer from Slovakia, currently based in Brno, Czechia,
-            where I’m studying{" "}
-            <span className="purple-text">Computer Science at Masaryk University</span>.
+            Hello! My name is <span className="purple-text">Eduard Hvižďák</span>. I’m a computer science student and AI developer focused on building real-world systems powered by large language models. Most recently, I’ve been working on AI infrastructure for <span className="purple-text">document intelligence, multi-agent pipelines, and retrieval-augmented knowledge systems</span>.
           </p>
           <p>
-            Currently I am working part-time for <span className="purple-text">Centre for International Cooperation Masaryk University</span>
-            . Where I am developing a chatbot for helping students with international
-            exchange questions.
+            My interests evolve with the problems I’m exploring, but lately I’ve been especially focused on <span className="purple-text">agentic AI systems, retrieval architectures, and large-scale document analysis</span> using modern embedding models and vector search.
           </p>
           <p>
-            My work is focused on{" "}
-            <span className="purple-text">
-              LangChain, RAG pipelines, multi-agent orchestration, and FastAPI backends
-            </span>
-            . I believe in choosing the right tool for the job and thrive in
-            environments where I can move fast, learn on the fly, and ship solutions
-            that make a real impact.
+            My skillset spans a wide range of technologies, and I believe strongly in choosing the right tool for the problem rather than locking into a single framework or stack. I enjoy designing systems where language models interact with retrieval engines, structured data, and external tools to solve complex tasks. Much of my work involves building <span className="purple-text">FastAPI backends, asynchronous pipelines, and vector search infrastructure</span> that allows AI systems to operate reliably at scale.
           </p>
           <p>
-            Beyond my main roles, I’ve worked as an AI Developer at{" "}
-            <span className="purple-text">iGalileo</span> (municipal chatbots and
-            form-filling agents) and as a Think Tank Member &amp; Programmer at the{" "}
-            <span className="purple-text">EDUC Alliance</span>, leading a team
-            building a digital campus platform for over 200,000 students across
-            10 European universities.
+            My interest in technology goes beyond just building software. I’m fascinated by how AI is reshaping how we interact with information and how new architectures like <span className="purple-text">RAG and agentic workflows</span> are changing what software systems can do.
           </p>
           <p>
-            Outside of tech, you’ll typically find me reading, travelling,
-            exploring new places, and occasionally pretending I understand German.
+            Outside of programming, you’ll usually find me reading, travelling, exploring new places, and occasionally trying to understand German.
           </p>
           <p>
-            If you want to keep up with my work, connect with me on{" "}
+            If you want to keep up with my work, feel free to connect with me on{" "}
             <a
               href="https://www.linkedin.com/in/eduard-hvizdak"
               target="_blank"
