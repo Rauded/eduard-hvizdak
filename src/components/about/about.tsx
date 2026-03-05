@@ -1,6 +1,7 @@
 import React from "react";
 import "./about.scss";
 import myPhoto from "../../assets/about/picture_of_me.jpeg";
+import myPhotoWebP from "../../assets/about/picture_of_me.webp";
 
 const About: React.FC = () => {
 
@@ -64,7 +65,10 @@ const About: React.FC = () => {
           </p>
         </div>
         <div className="about-photo">
-          <img src={myPhoto} alt="Eduard Hvižďák" className="profile-photo" />
+          <picture>
+            <source srcSet={myPhotoWebP} type="image/webp" />
+            <img src={myPhoto} alt="Eduard Hvižďák" className="profile-photo" loading="lazy" />
+          </picture>
         </div>
       </section>
     </div>

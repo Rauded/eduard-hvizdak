@@ -181,7 +181,7 @@ const Projects: React.FC = () => {
         tabIndex={0}
         onKeyDown={(e) => { if (e.key === 'Enter') handleProjectClick(project); }}
       >
-        {imageSrc && <img className="project-background-img" src={imageSrc} alt={`${project.title} Project`} />}
+        {imageSrc && <img className="project-background-img" src={imageSrc} alt={`${project.title} Project`} loading="lazy" />}
         <div className="project-content">
           <div className="project-header">
             <h3>{project.title}</h3>
