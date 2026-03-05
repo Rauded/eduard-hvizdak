@@ -2,7 +2,7 @@
   "name": "eduard-hvizdak-portfolio",
   "version": "0.1.0",
   "private": true,
-"packageManager": "pnpm@9.12.0",
+  "packageManager": "pnpm@9.12.0",
   "dependencies": {
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
@@ -56,6 +56,7 @@
   "devDependencies": {
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "baseline-browser-mapping": "^2.10.0",
     "gh-pages": "^6.1.1"
   },
   "pnpm": {
