@@ -2,8 +2,7 @@
   "name": "eduard-hvizdak-portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://tjklint.github.io",
-  "packageManager": "pnpm@9.12.0",
+"packageManager": "pnpm@9.12.0",
   "dependencies": {
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
