@@ -82,33 +82,52 @@ const RightContainer = styled.div`
   min-height: 50vh; /* Minimum height for smaller screens */
 
   @media (min-width: 768px) {
-    flex: 0 0 65%; /* Take up 65% of the space on larger screens */
+    flex: 0 0 80%; /* Take up 65% of the space on larger screens */
   }
 `;
 
-// Floating animation for the spaceship (smooth up and down motion)
-const floatAnimation = keyframes`
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
+// First half: roam forward (scaleY 1), second half: roam back flipped (scaleY -1)
+const roamAnimation = keyframes`
+  0% {
+    transform: translate(0px, 0px) scaleY(1);
   }
-  33% {
-    transform: translateY(-15px) rotate(1deg);
+  15% {
+    transform: translate(25px, -35px) scaleY(1);
   }
-  66% {
-    transform: translateY(-5px) rotate(-1deg);
+  30% {
+    transform: translate(-10px, -25px) scaleY(1);
+  }
+  45% {
+    transform: translate(-30px, 15px) scaleY(1);
+  }
+  /* instant vertical flip at the direction reversal */
+  50% {
+    transform: translate(-30px, 15px) scaleY(-1);
+  }
+  65% {
+    transform: translate(10px, 30px) scaleY(-1);
+  }
+  80% {
+    transform: translate(30px, -10px) scaleY(-1);
+  }
+  95% {
+    transform: translate(5px, -5px) scaleY(-1);
+  }
+  /* flip back before looping */
+  100% {
+    transform: translate(0px, 0px) scaleY(1);
   }
 `;
 
-// Styling for the spaceship image with floating animation
+// Styling for the spaceship image with roaming + flip animation
 const Spaceship = styled.img`
-  width: 80%; /* Set spaceship width to 80% of the container */
-  z-index: 1; /* Ensure it stays above any background elements */
-  animation: ${floatAnimation} 4s ease-in-out infinite; /* Apply floating animation */
-  filter: drop-shadow(0 20px 40px rgba(99, 102, 241, 0.2));
-  transition: transform 0.3s ease;
+  width: 95%;
+  z-index: 1;
+  animation: ${roamAnimation} 8s ease-in-out infinite;
+  filter: drop-shadow(0 20px 40px rgba(0, 255, 0, 0.25));
 
   @media (min-width: 768px) {
-    width: 50%; /* Make it smaller on larger screens */
+    width: 65%;
   }
 `;
 
@@ -283,11 +302,11 @@ const Hero: React.FC = () => {
 
         const newCircles: CircleProps[] = Array.from({ length: 7 }).map(() => {
           const isVerticalEdge = Math.random() > 0.5; // Randomly decide if circle spawns at vertical edge
-          const left = isVerticalEdge 
+          const left = isVerticalEdge
             ? (Math.random() > 0.5 ? 0 : containerWidth - 10)  // Either the left or right edge
             : Math.random() * containerWidth; // Random horizontal position
 
-          const top = !isVerticalEdge 
+          const top = !isVerticalEdge
             ? (Math.random() > 0.5 ? 0 : containerHeight - 10)  // Either the top or bottom edge
             : Math.random() * containerHeight; // Random vertical position
 
@@ -323,7 +342,7 @@ const Hero: React.FC = () => {
         <TypewriterText>{currentText}</TypewriterText>
       </LeftContainer>
       <RightContainer ref={rightContainerRef}>
-        <Spaceship src={`${process.env.PUBLIC_URL}/ascii-art-2026-03-05.svg`} alt="ASCII art" />
+        <Spaceship src={`${process.env.PUBLIC_URL}/ascii_matrix.gif`} alt="ASCII art" />
         {circles.map(circle => (
           <Circle
             key={circle.id}
