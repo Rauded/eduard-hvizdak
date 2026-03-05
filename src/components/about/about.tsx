@@ -12,7 +12,7 @@ const About: React.FC = () => {
           <h2 className="about-title">About Me</h2>
           <p>
             Hello! My name is <span className="purple-text">Eduard Hvižďák</span>.
-            I’m an AI developer / programmer from Slovakia, currently based in Brno, Czechia,
+            I’m a passionate AI developer / programmer from Slovakia, currently based in Brno, Czechia,
             where I’m studying{" "}
             <span className="purple-text">Computer Science at Masaryk University</span>.
           </p>
