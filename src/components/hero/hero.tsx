@@ -126,6 +126,35 @@ const TarsRender = styled.img`
   filter: drop-shadow(0 20px 40px rgba(0, 255, 0, 0.25));
 `;
 
+// Animation for shrinking and moving circles (lighter version)
+const shrinkAndMove = (left: number, top: number, containerWidth: number, containerHeight: number) => keyframes`
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3; /* Lighter starting opacity */
+  }
+  100% {
+    transform: translate(${containerWidth / 2 - left}px, ${containerHeight / 2 - top}px) scale(0);
+    opacity: 0;
+  }
+`;
+
+// Circle styling with animation based on position and size
+const Circle = styled.div<{ left: number; top: number; size: number; containerWidth: number; containerHeight: number }>`
+  position: absolute;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(165, 180, 252, 0.2) 100%);
+  border-radius: 50%;
+  backdrop-filter: blur(1px);
+
+  ${({ left, top, size, containerWidth, containerHeight }) => css`
+    width: ${size}px;
+    height: ${size}px;
+    left: ${left}px;
+    top: ${top}px;
+    animation: ${shrinkAndMove(left, top, containerWidth, containerHeight)} 2.5s ease-out forwards;
+    box-shadow: 0 0 ${size}px rgba(99, 102, 241, 0.2);
+  `}
+`;
+
 // Styling for the gradient text (title)
 const GradientText = styled.h2`
   color: #f8fafc;
@@ -168,6 +197,16 @@ const TypewriterText = styled.div`
   }
 `;
 
+// Interface for circle properties
+interface CircleProps {
+  id: number; /* Unique ID for each circle */
+  left: number; /* Horizontal position */
+  top: number; /* Vertical position */
+  size: number; /* Circle size */
+  containerWidth: number; /* Width of the container */
+  containerHeight: number; /* Height of the container */
+}
+
 // Constants for hero component
 const topLines = [
   "You're finally awake. Let's explore my work.",
@@ -196,6 +235,7 @@ const typewriterTexts = [
 
 // Main Hero component
 const Hero: React.FC = () => {
+  const [circles, setCircles] = useState<CircleProps[]>([]); // State to manage circles
   const [topLine, setTopLine] = useState(''); // State for random headline
   const [currentText, setCurrentText] = useState(''); // State for typewriter text
   const rightContainerRef = useRef<HTMLDivElement>(null); // Ref to get the right container's dimensions
@@ -248,8 +288,44 @@ const Hero: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // No additional effects needed. 
-    // Mirroring and movement strictly handled by the CSS patrolAnimation.
+    // Create new light circles every 500ms
+    const interval = setInterval(() => {
+      if (rightContainerRef.current) {
+        const containerWidth = rightContainerRef.current.clientWidth;
+        const containerHeight = rightContainerRef.current.clientHeight;
+
+        const newCircles: CircleProps[] = Array.from({ length: 3 }).map(() => {
+          const isVerticalEdge = Math.random() > 0.5;
+          const left = isVerticalEdge
+            ? (Math.random() > 0.5 ? 0 : containerWidth - 10)
+            : Math.random() * containerWidth;
+
+          const top = !isVerticalEdge
+            ? (Math.random() > 0.5 ? 0 : containerHeight - 10)
+            : Math.random() * containerHeight;
+
+          return {
+            id: Date.now() + Math.random(),
+            left,
+            top,
+            size: Math.random() * 8 + 4, // Smaller size (4px - 12px)
+            containerWidth,
+            containerHeight,
+          };
+        });
+
+        setCircles(prevCircles => [...prevCircles, ...newCircles]);
+
+        // Remove the circles after 2.5 seconds
+        setTimeout(() => {
+          setCircles(prevCircles =>
+            prevCircles.filter(circle => !newCircles.some(newCircle => newCircle.id === circle.id))
+          );
+        }, 2500);
+      }
+    }, 500); // Slower frequency
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -266,6 +342,16 @@ const Hero: React.FC = () => {
             alt="TARS walking ASCII art"
           />
         </TarsContainer>
+        {circles.map(circle => (
+          <Circle
+            key={circle.id}
+            left={circle.left}
+            top={circle.top}
+            size={circle.size}
+            containerWidth={circle.containerWidth}
+            containerHeight={circle.containerHeight}
+          />
+        ))}
       </RightContainer>
     </HeroContainer>
   );
