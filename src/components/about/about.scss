@@ -77,6 +77,40 @@
           text-decoration-color: rgba(199, 210, 254, 0.6);
         }
       }
+
+      .specializations {
+        margin: 28px 0;
+        padding: 20px 0;
+        border-top: 1px solid rgba(165, 180, 252, 0.15);
+        border-bottom: 1px solid rgba(165, 180, 252, 0.15);
+
+        .spec-title {
+          font-size: clamp(0.9em, 1.5vw, 1.05em);
+          color: #c7d2fe;
+          font-weight: 600;
+          letter-spacing: 0.05em;
+          margin: 0 0 14px 0;
+        }
+
+        .spec-item {
+          font-size: clamp(0.9em, 1.6vw, 1em);
+          color: rgba(248, 250, 252, 0.75);
+          padding: 5px 0;
+          line-height: 1.6;
+          letter-spacing: 0.02em;
+
+          .spec-arrow {
+            color: #a5b4fc;
+            font-weight: 600;
+            margin-right: 6px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          text-align: left;
+          padding-left: 20px;
+        }
+      }
     }
 
     .about-photo {

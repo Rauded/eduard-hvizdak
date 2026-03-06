@@ -22,6 +22,14 @@ const About: React.FC = () => {
           <p>
             My interest in technology goes beyond just building software. I’m fascinated by how AI is reshaping how we interact with information and how new architectures like <span className="purple-text">RAG and agentic workflows</span> are changing what software systems can do.
           </p>
+          <div className="specializations">
+            <h3 className="spec-title">Specializations</h3>
+            <div className="spec-item"><span className="spec-arrow">&gt;</span> Agentic AI Systems</div>
+            <div className="spec-item"><span className="spec-arrow">&gt;</span> Retrieval Architectures</div>
+            <div className="spec-item"><span className="spec-arrow">&gt;</span> Multi-Agent Pipelines</div>
+            <div className="spec-item"><span className="spec-arrow">&gt;</span> Document Intelligence</div>
+            <div className="spec-item"><span className="spec-arrow">&gt;</span> Vector Search Infrastructure</div>
+          </div>
           <p>
             Outside of programming, you’ll usually find me reading, experimenting with new technologies and occasionally scrolling Twitter.
           </p>

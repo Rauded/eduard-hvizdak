@@ -1,20 +1,20 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
 // Main container for the hero section
 const HeroContainer = styled.section`
   display: flex;
-  flex-direction: column; /* Stack items vertically by default */
-  min-height: 100vh; /* Full viewport height */
-  padding-top: 100px; /* Account for floating header with margin */
+  flex-direction: column;
+  min-height: 100vh;
+  padding-top: 100px;
   background-color: #09090b;
-  color: #fff; /* White text */
-  overflow: hidden; /* Prevent overflow */
-  font-family: 'RobotoMono', sans-serif; /* Use RobotoMono font */
+  color: #fff;
+  overflow: hidden;
+  font-family: 'RobotoMono', sans-serif;
   position: relative;
 
   @media (max-width: 768px) {
-    padding-top: 90px; /* Account for floating header on mobile */
+    padding-top: 90px;
   }
 
   &::before {
@@ -29,34 +29,32 @@ const HeroContainer = styled.section`
   }
 
   @media (min-width: 768px) {
-    flex-direction: row; /* On larger screens, layout side by side */
+    flex-direction: row;
   }
 `;
 
-// Left container for text and main title
 const LeftContainer = styled.div`
-  flex: 1; /* Take up equal space */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center text vertically */
-  padding: 40px; /* Padding around the text */
-  text-align: left; /* Left-align the text */
-  margin-top: -10%; /* Adjust to move text slightly up */
+  justify-content: center;
+  padding: 40px;
+  text-align: left;
+  margin-top: -10%;
   position: relative;
   z-index: 1;
 
   @media (max-width: 768px) {
-    padding: 24px; /* Reduced padding for smaller screens */
-    margin-top: 0; /* Remove negative margin for mobile */
+    padding: 24px;
+    margin-top: 0;
   }
 
   @media (min-width: 768px) {
-    flex: 0 0 35%; /* Take up 35% of the space on larger screens */
-    padding: 60px 40px; /* More padding on larger screens */
+    flex: 0 0 40%;
+    padding: 60px 40px;
   }
 `;
 
-// Styling for the headline
 const Headline = styled.h1`
   font-size: 1.25em;
   font-weight: 400;
@@ -71,103 +69,156 @@ const Headline = styled.h1`
   }
 `;
 
-// Right container for the spaceship and animations
 const RightContainer = styled.div`
-  flex: 1; /* Take up equal space */
-  position: relative; /* Needed for absolute positioning of circles */
+  flex: 1;
   display: flex;
-  justify-content: center; /* Center the spaceship horizontally */
-  align-items: center; /* Center the spaceship vertically */
-  overflow: hidden; /* Prevent overflow of elements */
-  min-height: 50vh; /* Minimum height for smaller screens */
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 40vh;
 
   @media (min-width: 768px) {
-    flex: 0 0 65%; /* Combined with LeftContainer (35%) = 100% */
+    flex: 0 0 60%;
+    min-height: auto;
   }
 `;
 
-// First half: roam forward (scaleY 1), second half: roam back flipped (scaleY -1)
-// TARS patrols back and forth on a flat plane.
-// TARS patrols back and forth starting from the center
+// Terminal window — realistic macOS-style
+const TerminalWindow = styled.div`
+  width: 90%;
+  max-width: 700px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1a1a2e;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+`;
+
+const TerminalBar = styled.div`
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #2d2d3f 0%, #252537 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  position: relative;
+`;
+
+const TrafficLights = styled.div`
+  display: flex;
+  gap: 7px;
+  align-items: center;
+`;
+
+const TrafficDot = styled.span<{ color: string }>`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: ${props => props.color};
+  box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 3px;
+    width: 5px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+  }
+`;
+
+const TerminalTabBar = styled.div`
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0;
+`;
+
+const TerminalTab = styled.div`
+  font-family: 'RobotoMono', sans-serif;
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.04em;
+  padding: 4px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+`;
+
+const TerminalBody = styled.div`
+  padding: 0;
+  background: #0d0d1a;
+  position: relative;
+  overflow: hidden;
+`;
+
+// TARS patrol animation inside the terminal
 const patrolAnimation = keyframes`
-  /* 1. Start at center, facing left */
   0% { transform: translateX(0%) scaleX(-1); }
   2.5% { transform: translateX(0%) scaleX(-1); }
-
-  /* 2. Walk to the left edge */
-  22.5% { transform: translateX(-15%) scaleX(-1); }
-  27.5% { transform: translateX(-15%) scaleX(-1); } /* Pause */
-
-  /* 3. Pivot instantly to face right */
-  27.6% { transform: translateX(-15%) scaleX(1); }
-  32.5% { transform: translateX(-15%) scaleX(1); }
-
-  /* 4. Walk to the right edge */
-  72.5% { transform: translateX(15%) scaleX(1); }
-  77.5% { transform: translateX(15%) scaleX(1); } /* Pause */
-
-  /* 5. Pivot instantly to face left */
-  77.6% { transform: translateX(15%) scaleX(-1); }
-  82.5% { transform: translateX(15%) scaleX(-1); }
-
-  /* 6. Walk back to center */
+  22.5% { transform: translateX(-12%) scaleX(-1); }
+  27.5% { transform: translateX(-12%) scaleX(-1); }
+  27.6% { transform: translateX(-12%) scaleX(1); }
+  32.5% { transform: translateX(-12%) scaleX(1); }
+  72.5% { transform: translateX(12%) scaleX(1); }
+  77.5% { transform: translateX(12%) scaleX(1); }
+  77.6% { transform: translateX(12%) scaleX(-1); }
+  82.5% { transform: translateX(12%) scaleX(-1); }
   97.5% { transform: translateX(0%) scaleX(-1); }
   100% { transform: translateX(0%) scaleX(-1); }
 `;
 
 const TarsContainer = styled.div`
-  width: 95%;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
-  align-items: flex-end; /* Ground TARS to the bottom of his container */
-  z-index: 1;
-  position: relative; /* Ensure particles spawn relative to TARS */
-  /* Move animation to container so children (TARS + Particles) follow the path */
-  animation: ${patrolAnimation} 24s linear infinite; 
-
-  @media (min-width: 768px) {
-    width: 80%; /* Increased relative width now that RightContainer is constrained */
-  }
+  align-items: flex-end;
+  animation: ${patrolAnimation} 24s linear infinite;
 `;
 
-// Styling for TARS (animation moved to container)
-const TarsRender = styled.img`
+const TarsImage = styled.img`
   width: 100%;
-  filter: drop-shadow(0 20px 40px rgba(0, 255, 0, 0.25));
+  display: block;
+  filter: grayscale(20%) contrast(1.1);
 `;
 
-// Static animation for shrinking and moving circles (uses CSS vars for performance)
-const shrinkAndMove = keyframes`
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.3;
-  }
-  100% {
-    transform: translate(var(--dest-x), var(--dest-y)) scale(0);
-    opacity: 0;
-  }
+const TerminalStatusBar = styled.div`
+  padding: 4px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(180deg, #1e1e30 0%, #1a1a2e 100%);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
 `;
 
-// Circle styling with optimized animation
-const Circle = styled.div<{ left: number; top: number; size: number; destX: number; destY: number }>`
-  position: absolute;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(165, 180, 252, 0.2) 100%);
+const StatusText = styled.span`
+  font-family: 'RobotoMono', sans-serif;
+  font-size: 0.55rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+`;
+
+const StatusDot = styled.span`
+  display: inline-block;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  backdrop-filter: blur(1px);
-  width: ${props => props.size}px;
-  height: ${props => props.size}px;
-  left: ${props => props.left}px;
-  top: ${props => props.top}px;
-  
-  /* Use CSS variables to avoid generating unique @keyframes for every particle */
-  --dest-x: ${props => props.destX}px;
-  --dest-y: ${props => props.destY}px;
-  
-  animation: ${shrinkAndMove} 2.5s ease-out forwards;
-  box-shadow: 0 0 ${props => props.size}px rgba(99, 102, 241, 0.2);
+  background: #4ade80;
+  margin-right: 6px;
+  box-shadow: 0 0 4px rgba(74, 222, 128, 0.4);
 `;
 
-// Styling for the gradient text (title)
 const GradientText = styled.h2`
   color: #f8fafc;
   font-size: clamp(2.5em, 8vw, 5em);
@@ -181,17 +232,11 @@ const GradientText = styled.h2`
   }
 `;
 
-// Blinking cursor animation
 const blink = keyframes`
-  0%, 50% {
-    opacity: 1;
-  }
-  51%, 100% {
-    opacity: 0;
-  }
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 `;
 
-// Styling for the typewriter effect text
 const TypewriterText = styled.div`
   color: #a5b4fc;
   font-size: clamp(1.1em, 3vw, 1.75em);
@@ -209,21 +254,10 @@ const TypewriterText = styled.div`
   }
 `;
 
-// Interface for circle properties
-interface CircleProps {
-  id: number;
-  left: number;
-  top: number;
-  size: number;
-  destX: number;
-  destY: number;
-}
-
-// Constants for hero component
 const topLines = [
   "Ahoj! Vitaj na mojom portfóliu.",
   "Hey! Thanks for dropping by.",
-]; // Array of possible headline texts
+];
 
 const typewriterTexts = [
   "AI Developer @ OneBond",
@@ -235,24 +269,19 @@ const typewriterTexts = [
   "Building AI agents & RAG pipelines",
   "Hackathon Fanatic",
   "AI Enthusiast"
-]; // Array of texts for the typewriter effect
+];
 
-// Main Hero component
 const Hero: React.FC = () => {
-  const [circles, setCircles] = useState<CircleProps[]>([]); // State to manage circles
-  const [topLine, setTopLine] = useState(''); // State for random headline
-  const [currentText, setCurrentText] = useState(''); // State for typewriter text
-  const rightContainerRef = useRef<HTMLDivElement>(null); // Ref to get the right container's dimensions
+  const [topLine, setTopLine] = useState('');
+  const [currentText, setCurrentText] = useState('');
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    // Pick a random top line for the header when the component mounts
     setTopLine(topLines[Math.floor(Math.random() * topLines.length)]);
   }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
-    // Optimized typewriter effect with safety cleanup
     let isMounted = true;
     let timeoutId: NodeJS.Timeout;
 
@@ -266,7 +295,6 @@ const Hero: React.FC = () => {
     function type() {
       if (!isMounted) return;
       setCurrentText(currentString.substring(0, textPos));
-
       if (textPos++ === currentString.length) {
         timeoutId = setTimeout(() => deleteText(), waitTime);
       } else {
@@ -277,7 +305,6 @@ const Hero: React.FC = () => {
     function deleteText() {
       if (!isMounted) return;
       setCurrentText(currentString.substring(0, textPos));
-
       if (textPos-- === 0) {
         i = (i + 1) % typewriterTexts.length;
         currentString = typewriterTexts[i];
@@ -288,52 +315,7 @@ const Hero: React.FC = () => {
     }
 
     type();
-
-    return () => {
-      isMounted = false;
-      clearTimeout(timeoutId);
-    };
-  }, []);
-
-  useEffect(() => {
-    // Create new light circles every 500ms
-    const interval = setInterval(() => {
-      if (rightContainerRef.current) {
-        const containerWidth = rightContainerRef.current.clientWidth;
-        const containerHeight = rightContainerRef.current.clientHeight;
-
-        const newCircles: CircleProps[] = Array.from({ length: 3 }).map(() => {
-          const isVerticalEdge = Math.random() > 0.5;
-          const left = isVerticalEdge
-            ? (Math.random() > 0.5 ? 0 : containerWidth - 10)
-            : Math.random() * containerWidth;
-
-          const top = !isVerticalEdge
-            ? (Math.random() > 0.5 ? 0 : containerHeight - 10)
-            : Math.random() * containerHeight;
-
-          return {
-            id: Date.now() + Math.random(),
-            left,
-            top,
-            size: Math.random() * 8 + 4,
-            destX: containerWidth / 2 - left,
-            destY: containerHeight / 2 - top,
-          };
-        });
-
-        setCircles(prevCircles => [...prevCircles, ...newCircles]);
-
-        // Remove the circles after 2.5 seconds
-        setTimeout(() => {
-          setCircles(prevCircles =>
-            prevCircles.filter(circle => !newCircles.some(newCircle => newCircle.id === circle.id))
-          );
-        }, 2500);
-      }
-    }, 500); // Slower frequency
-
-    return () => clearInterval(interval);
+    return () => { isMounted = false; clearTimeout(timeoutId); };
   }, []);
 
   return (
@@ -341,25 +323,33 @@ const Hero: React.FC = () => {
       <LeftContainer>
         <Headline>{topLine}</Headline>
         <GradientText>I'm Eduard Hvižďák.</GradientText>
-        <TypewriterText>{currentText}</TypewriterText>
+        <TypewriterText>&gt; {currentText}</TypewriterText>
       </LeftContainer>
-      <RightContainer ref={rightContainerRef}>
-        <TarsContainer>
-          <TarsRender
-            src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
-            alt="TARS walking ASCII art"
-          />
-          {circles.map(circle => (
-            <Circle
-              key={circle.id}
-              left={circle.left}
-              top={circle.top}
-              size={circle.size}
-              destX={circle.destX}
-              destY={circle.destY}
-            />
-          ))}
-        </TarsContainer>
+      <RightContainer>
+        <TerminalWindow>
+          <TerminalBar>
+            <TrafficLights>
+              <TrafficDot color="#ff5f57" />
+              <TrafficDot color="#febc2e" />
+              <TrafficDot color="#28c840" />
+            </TrafficLights>
+            <TerminalTabBar>
+              <TerminalTab>TARS — patrol module</TerminalTab>
+            </TerminalTabBar>
+          </TerminalBar>
+          <TerminalBody>
+            <TarsContainer>
+              <TarsImage
+                src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
+                alt="TARS walking ASCII art"
+              />
+            </TarsContainer>
+          </TerminalBody>
+          <TerminalStatusBar>
+            <StatusText><StatusDot />active</StatusText>
+            <StatusText>patrol module v2.0</StatusText>
+          </TerminalStatusBar>
+        </TerminalWindow>
       </RightContainer>
     </HeroContainer>
   );

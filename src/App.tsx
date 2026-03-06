@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { HashRouter as Router } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+
 
 // @ts-ignore
 import Header from './components/header/header.tsx';
@@ -35,25 +36,21 @@ const MainContent = styled.div`
 const App: React.FC = () => {
   return (
     <Router>
-      <AppContainer>
-        <Header />
-        <MainContent>
-          <Hero />
-          
-          <About />
-          
-          <Resume />
-          
-          <Projects />
-          
-          {/* <Techstack /> */}
-          
-          {/* <ContributionMap /> */}
-
-          <SocialLinks />
-        </MainContent>
-        <Footer />
-      </AppContainer>
+      <Routes>
+        <Route path="/" element={
+          <AppContainer>
+            <Header />
+            <MainContent>
+              <Hero />
+              <About />
+              <Resume />
+              <Projects />
+              <SocialLinks />
+            </MainContent>
+            <Footer />
+          </AppContainer>
+        } />
+      </Routes>
     </Router>
   );
 }
