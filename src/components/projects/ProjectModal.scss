@@ -237,7 +237,7 @@
     height: 100%;
     max-height: 400px;
     width: auto;
-    min-width: 500px;
+    max-width: 100%;
     border-radius: 8px;
   }
 
@@ -404,6 +404,10 @@
     img {
       max-height: 250px;
     }
+
+    video {
+      max-height: 250px;
+    }
   }
 
   .modal-link-button {
@@ -430,6 +434,10 @@
     max-height: 180px;
 
     img {
+      max-height: 180px;
+    }
+
+    video {
       max-height: 180px;
     }
   }
