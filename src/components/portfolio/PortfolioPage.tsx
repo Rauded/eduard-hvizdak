@@ -119,21 +119,6 @@ const PROJECTS: PortfolioProject[] = [
     accent: '#a855f7',
     reversed: true,
   },
-  {
-    id: 'bookreader-xr',
-    number: '05',
-    title: 'BookReader for Even G1',
-    subtitle: 'Read anywhere, eyes forward',
-    description:
-      'An XR reading application for the Even Realities G1 smart glasses running on MentaOS. Upload any book and read hands-free — commuting, exercising, anywhere. Chapter progress and bookmarks sync automatically across sessions.',
-    tags: ['JavaScript', 'MentaOS', 'XR', 'Extended Reality', 'Open Source'],
-    links: [
-      { label: 'GitHub', url: 'https://github.com/Rauded', type: 'github' },
-    ],
-    media: { type: 'concept' },
-    accent: '#06b6d4',
-    reversed: false,
-  },
 ];
 
 // ─── Scroll-reveal hook ──────────────────────────────────────────────────────
@@ -356,14 +341,13 @@ const PortfolioPage: React.FC = () => {
 
         <p className="port-hero__eyebrow">Selected Work</p>
         <h1 className="port-hero__title">
-          <span className="port-hero__title-line port-hero__title-line--accent">Port</span>
-          <span className="port-hero__title-line">folio</span>
+          Portfolio
         </h1>
         <p className="port-hero__tagline">
           Apps, tools, and experiments built to solve real problems.
         </p>
         <div className="port-hero__meta">
-          <span>5 projects</span>
+          <span>4 projects</span>
           <span className="port-hero__sep">·</span>
           <span>2023 – 2025</span>
           <span className="port-hero__sep">·</span>

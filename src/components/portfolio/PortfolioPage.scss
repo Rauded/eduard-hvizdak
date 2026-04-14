@@ -58,19 +58,12 @@
   }
 
   &__title {
-    font-size: clamp(4.5em, 13vw, 11em);
+    font-size: clamp(3em, 8vw, 7em);
     font-weight: 700;
-    line-height: 0.88;
+    line-height: 1;
     margin: 0 0 28px;
     letter-spacing: -0.03em;
-  }
-
-  &__title-line {
-    display: block;
-
-    &--accent {
-      color: #a5b4fc;
-    }
+    color: #a5b4fc;
   }
 
   &__tagline {
