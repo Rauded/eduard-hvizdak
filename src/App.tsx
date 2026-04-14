@@ -21,6 +21,8 @@ import Footer from './components/footer/footer.tsx';
 // import Techstack from './components/techstack/techstack.tsx';
 // @ts-ignore
 // import ContributionMap from './components/contribution_map/contribution_map.tsx';
+// @ts-ignore
+import PortfolioPage from './components/portfolio/PortfolioPage.tsx';
 
 const AppContainer = styled.div`
   background: linear-gradient(135deg, #1e1e1e 0%, #2a1a3d 50%, #1e1e1e 100%);
@@ -47,6 +49,13 @@ const App: React.FC = () => {
               <Projects />
               <SocialLinks />
             </MainContent>
+            <Footer />
+          </AppContainer>
+        } />
+        <Route path="/portfolio" element={
+          <AppContainer>
+            <Header />
+            <PortfolioPage />
             <Footer />
           </AppContainer>
         } />

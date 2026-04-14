@@ -1,0 +1,503 @@
+// ═══════════════════════════════════════════════════════════════
+//  Portfolio Page
+// ═══════════════════════════════════════════════════════════════
+
+.portfolio-page {
+  font-family: 'RobotoMono', monospace;
+  color: #f8fafc;
+  padding-top: 88px; // clear fixed header
+  min-height: 100vh;
+}
+
+// ─── Back link ───────────────────────────────────────────────────────────────
+.port-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(248, 250, 252, 0.4);
+  text-decoration: none;
+  font-size: 0.78em;
+  letter-spacing: 0.07em;
+  transition: color 0.2s ease;
+  margin-bottom: 40px;
+
+  &:hover {
+    color: #a5b4fc;
+  }
+
+  svg {
+    font-size: 0.85em;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover svg {
+    transform: translateX(-3px);
+  }
+}
+
+// ─── Hero ────────────────────────────────────────────────────────────────────
+.port-hero {
+  padding: 72px clamp(24px, 6vw, 100px) 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+
+  &--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &__eyebrow {
+    font-size: 0.72em;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(248, 250, 252, 0.35);
+    margin: 0 0 16px;
+  }
+
+  &__title {
+    font-size: clamp(4.5em, 13vw, 11em);
+    font-weight: 700;
+    line-height: 0.88;
+    margin: 0 0 28px;
+    letter-spacing: -0.03em;
+  }
+
+  &__title-line {
+    display: block;
+
+    &--accent {
+      color: #a5b4fc;
+    }
+  }
+
+  &__tagline {
+    font-size: clamp(0.88em, 1.6vw, 1.05em);
+    color: rgba(248, 250, 252, 0.55);
+    line-height: 1.75;
+    margin: 0 0 20px;
+    max-width: 480px;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.74em;
+    color: rgba(248, 250, 252, 0.25);
+    letter-spacing: 0.06em;
+  }
+
+  &__sep {
+    color: rgba(248, 250, 252, 0.12);
+  }
+}
+
+// ─── Project cards container ──────────────────────────────────────────────────
+.port-projects {
+  padding: 20px clamp(24px, 6vw, 100px) 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+}
+
+// ─── Project card ─────────────────────────────────────────────────────────────
+.pcard {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &--visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &--reversed {
+    grid-template-columns: 0.85fr 1.15fr;
+
+    .pcard__media { order: 2; }
+    .pcard__info  { order: 1; }
+  }
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr !important;
+    gap: 28px;
+
+    .pcard__media { order: 1 !important; }
+    .pcard__info  { order: 2 !important; }
+  }
+}
+
+// ─── Media wrapper ────────────────────────────────────────────────────────────
+.pcard__media {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  background: #0b0b14;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55),
+              inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.65),
+                0 0 48px rgba(99, 102, 241, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  @media (max-width: 900px) {
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+  }
+}
+
+.pcard__video,
+.pcard__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+// ─── Slideshow ────────────────────────────────────────────────────────────────
+.slideshow {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  &__slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    will-change: opacity;
+
+    &--active {
+      opacity: 1;
+    }
+  }
+
+  &__dots {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 10;
+  }
+
+  &__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s ease, transform 0.2s ease;
+
+    &--active {
+      transform: scale(1.4);
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+// ─── XR Concept card ─────────────────────────────────────────────────────────
+.concept-card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 50% 50%,
+      rgba(6, 182, 212, 0.07) 0%,
+      transparent 70%
+    );
+  }
+
+  &__hud {
+    position: relative;
+    z-index: 1;
+    width: calc(100% - 48px);
+    max-width: 460px;
+    border: 1px solid rgba(6, 182, 212, 0.25);
+    border-radius: 12px;
+    background: rgba(6, 182, 212, 0.04);
+    backdrop-filter: blur(6px);
+    padding: 0;
+    overflow: hidden;
+    font-size: clamp(0.65em, 1.2vw, 0.8em);
+  }
+
+  &__topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(6, 182, 212, 0.15);
+    background: rgba(6, 182, 212, 0.06);
+  }
+
+  &__logo {
+    color: #67e8f9;
+    font-weight: 600;
+    font-size: 0.88em;
+    letter-spacing: 0.05em;
+    flex: 1;
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(103, 232, 249, 0.5);
+    font-size: 0.78em;
+  }
+
+  &__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
+    animation: xr-pulse 2.4s ease-in-out infinite;
+  }
+
+  &__battery {
+    color: rgba(103, 232, 249, 0.4);
+    font-size: 0.78em;
+    letter-spacing: 0.02em;
+  }
+
+  &__body {
+    padding: 18px 20px;
+  }
+
+  &__chapter {
+    font-size: 0.72em;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(103, 232, 249, 0.45);
+    margin: 0 0 4px;
+  }
+
+  &__booktitle {
+    font-size: 1em;
+    font-weight: 600;
+    color: #e0f7fa;
+    margin: 0 0 14px;
+    letter-spacing: 0.02em;
+  }
+
+  &__divider {
+    height: 1px;
+    background: rgba(6, 182, 212, 0.12);
+    margin: 0 0 14px;
+  }
+
+  &__line {
+    font-size: 0.82em;
+    color: rgba(224, 247, 250, 0.7);
+    line-height: 1.9;
+    margin: 0;
+    letter-spacing: 0.01em;
+
+    &--faint {
+      color: rgba(224, 247, 250, 0.35);
+    }
+  }
+
+  &__footer {
+    padding: 12px 20px;
+    border-top: 1px solid rgba(6, 182, 212, 0.12);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  &__progress-track {
+    flex: 1;
+    height: 3px;
+    background: rgba(6, 182, 212, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  &__progress-fill {
+    height: 100%;
+    width: 67%;
+    background: linear-gradient(90deg, #06b6d4, #67e8f9);
+    border-radius: 2px;
+  }
+
+  &__page {
+    font-size: 0.72em;
+    color: rgba(103, 232, 249, 0.4);
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+}
+
+@keyframes xr-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+// ─── Project info ─────────────────────────────────────────────────────────────
+.pcard__info {
+  position: relative;
+  padding: 8px 0;
+
+  @media (max-width: 900px) {
+    padding: 0;
+  }
+}
+
+.pcard__number {
+  position: absolute;
+  top: -0.35em;
+  left: -0.08em;
+  font-size: clamp(5em, 10vw, 8.5em);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.025);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+.pcard__title {
+  font-size: clamp(2em, 4vw, 3.2em);
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0 0 6px;
+  letter-spacing: -0.025em;
+  position: relative;
+}
+
+.pcard__subtitle {
+  font-size: 0.77em;
+  color: rgba(248, 250, 252, 0.35);
+  margin: 0 0 22px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.pcard__description {
+  font-size: clamp(0.8em, 1.2vw, 0.88em);
+  color: rgba(248, 250, 252, 0.62);
+  line-height: 1.85;
+  margin: 0 0 28px;
+}
+
+// ─── Tags ─────────────────────────────────────────────────────────────────────
+.pcard__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
+}
+
+.pcard__tag {
+  font-size: 0.68em;
+  letter-spacing: 0.06em;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: rgba(248, 250, 252, 0.45);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+// ─── Links ────────────────────────────────────────────────────────────────────
+.pcard__links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pcard__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  font-size: 0.78em;
+  font-family: 'RobotoMono', monospace;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: all 0.2s ease;
+
+  &--github {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(248, 250, 252, 0.65);
+    background: rgba(255, 255, 255, 0.03);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.22);
+      color: #f8fafc;
+      background: rgba(255, 255, 255, 0.07);
+    }
+  }
+
+  &--demo {
+    background: transparent;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      opacity: 0.85;
+    }
+  }
+
+  svg {
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
+}
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+.port-footer {
+  padding: 20px clamp(24px, 6vw, 100px) 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 40px;
+
+  .port-back {
+    margin-bottom: 0;
+  }
+}

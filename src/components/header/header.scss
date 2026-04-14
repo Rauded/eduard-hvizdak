@@ -85,6 +85,14 @@
     color: #f8fafc;
   }
 
+  &--active {
+    color: #a5b4fc !important;
+
+    svg {
+      opacity: 1 !important;
+    }
+  }
+
   svg {
     margin-right: 7px;
     opacity: 0.6;

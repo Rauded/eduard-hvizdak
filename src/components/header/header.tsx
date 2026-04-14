@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaStar, FaCodeBranch } from 'react-icons/fa';
+import { Link, useLocation } from 'react-router-dom';
+import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaStar, FaCodeBranch, FaImages } from 'react-icons/fa';
 import './header.scss';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+  const isPortfolio = location.pathname === '/portfolio';
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>, target: string) => {
     e.preventDefault();
@@ -39,6 +42,14 @@ const Header: React.FC = () => {
           <FaFileAlt />
           Resume
         </a>
+        <Link
+          to="/portfolio"
+          className={`nav-link ${isPortfolio ? 'nav-link--active' : ''}`}
+          onClick={() => setIsOpen(false)}
+        >
+          <FaImages />
+          Portfolio
+        </Link>
         <a
           className="button"
           href="https://github.com/Rauded"
