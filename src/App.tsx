@@ -23,6 +23,10 @@ import Footer from './components/footer/footer.tsx';
 // import ContributionMap from './components/contribution_map/contribution_map.tsx';
 // @ts-ignore
 import PortfolioPage from './components/portfolio/PortfolioPage.tsx';
+// @ts-ignore
+import BlogListingPage from './components/blog/BlogListingPage.tsx';
+// @ts-ignore
+import BlogPostPage from './components/blog/BlogPostPage.tsx';
 
 const AppContainer = styled.div`
   background: linear-gradient(135deg, #1e1e1e 0%, #2a1a3d 50%, #1e1e1e 100%);
@@ -56,6 +60,20 @@ const App: React.FC = () => {
           <AppContainer>
             <Header />
             <PortfolioPage />
+            <Footer />
+          </AppContainer>
+        } />
+        <Route path="/blog" element={
+          <AppContainer>
+            <Header />
+            <BlogListingPage />
+            <Footer />
+          </AppContainer>
+        } />
+        <Route path="/blog/:slug" element={
+          <AppContainer>
+            <Header />
+            <BlogPostPage />
             <Footer />
           </AppContainer>
         } />

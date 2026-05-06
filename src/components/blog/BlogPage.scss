@@ -1,0 +1,210 @@
+// ═══════════════════════════════════════════════════════════════
+//  Blog Page & Post
+// ═══════════════════════════════════════════════════════════════
+
+$purple: #a5b4fc;
+$purple-dim: rgba(165, 180, 252, 0.18);
+$text: #f8fafc;
+$text-dim: rgba(248, 250, 252, 0.45);
+$text-mid: rgba(248, 250, 252, 0.75);
+$border: rgba(255, 255, 255, 0.07);
+
+// ─── Shared ───────────────────────────────────────────────────────────────────
+.blog-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: $text-dim;
+  text-decoration: none;
+  font-size: 0.78em;
+  letter-spacing: 0.07em;
+  transition: color 0.2s ease;
+  margin-bottom: 40px;
+  font-family: 'RobotoMono', monospace;
+
+  &:hover {
+    color: $purple;
+  }
+
+  svg {
+    font-size: 0.85em;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover svg {
+    transform: translateX(-3px);
+  }
+}
+
+// ─── Listing page ─────────────────────────────────────────────────────────────
+.blog-listing {
+  font-family: 'RobotoMono', monospace;
+  color: $text;
+  padding-top: 88px;
+  min-height: 100vh;
+
+  &__inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 64px clamp(24px, 6vw, 80px) 120px;
+  }
+
+  &__eyebrow {
+    font-size: 0.72em;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: $text-dim;
+    margin: 0 0 16px;
+  }
+
+  &__title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    line-height: 1.1;
+    color: $text;
+  }
+
+  &__subtitle {
+    font-size: 0.9em;
+    color: $text-dim;
+    margin: 0 0 64px;
+    letter-spacing: 0.04em;
+  }
+
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+// ─── Blog card ────────────────────────────────────────────────────────────────
+.blog-card {
+  display: block;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid $border;
+  border-radius: 12px;
+  padding: 28px 32px;
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
+
+  &:hover {
+    border-color: rgba(165, 180, 252, 0.3);
+    background: rgba(165, 180, 252, 0.05);
+    transform: translateY(-2px);
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  &__category {
+    font-size: 0.68em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $purple;
+    background: $purple-dim;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+
+  &__date {
+    font-size: 0.72em;
+    color: $text-dim;
+    letter-spacing: 0.06em;
+  }
+
+  &__title {
+    font-size: 1.15em;
+    font-weight: 600;
+    color: $text;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+  }
+
+  &__excerpt {
+    font-size: 0.83em;
+    color: $text-mid;
+    line-height: 1.65;
+    margin: 0;
+  }
+}
+
+// ─── Post page ────────────────────────────────────────────────────────────────
+.blog-post {
+  font-family: 'RobotoMono', monospace;
+  color: $text;
+  padding-top: 88px;
+  min-height: 100vh;
+
+  &__inner {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 64px clamp(24px, 6vw, 80px) 120px;
+  }
+
+  &__category {
+    display: inline-block;
+    font-size: 0.68em;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: $purple;
+    background: $purple-dim;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  &__title {
+    font-size: clamp(1.7rem, 4vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 16px;
+    color: $text;
+  }
+
+  &__date {
+    font-size: 0.74em;
+    color: $text-dim;
+    letter-spacing: 0.06em;
+    margin-bottom: 56px;
+    display: block;
+  }
+
+  &__body {
+    font-size: 0.92em;
+    line-height: 1.85;
+    color: $text-mid;
+
+    p {
+      margin: 0 0 1.5em;
+    }
+
+    h2 {
+      font-size: 1.2em;
+      font-weight: 600;
+      color: $text;
+      letter-spacing: -0.01em;
+      margin: 2.4em 0 0.8em;
+      padding-bottom: 8px;
+      border-bottom: 1px solid $border;
+    }
+
+    strong {
+      color: $text;
+      font-weight: 600;
+    }
+
+    em {
+      color: $purple;
+      font-style: normal;
+    }
+  }
+}
