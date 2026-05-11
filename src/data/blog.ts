@@ -16,37 +16,37 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt:
       'We took part in the Bridges not Walls Erasmus+ Youth exchange in Lithuania — a week of non-formal education, cultural nights, and human connection across six Eastern European countries.',
     content: `
-      <p>From <strong>20 to 29 April 2026</strong>, I had the privilege of taking part in <strong>Bridges, Not Walls</strong> — an Erasmus+ Youth Exchange hosted in <strong>Luoba, Lithuania</strong>. I was sent there by my organisation <strong>YouthFully Yours</strong>, and the whole project was organised by the incredible team at <strong>VšĮ Džiaugsmo slėnis</strong>. The idea behind the project was simple but powerful: learn how to build bridges with people — across cultures, backgrounds, and experiences — and walk away with stronger empathy and communication skills. Nine days later, I can say it delivered on every front.</p>
+      <p>From <strong>20 to 29 April 2026</strong>, I took part in <strong>Bridges, Not Walls</strong>, an Erasmus+ Youth Exchange in <strong>Luoba, Lithuania</strong>. I got there through my organisation <strong>YouthFully Yours</strong>, and the project itself was put together by <strong>VšĮ Džiaugsmo slėnis</strong>. The whole point was to get better at connecting with people across different cultures and backgrounds, and to build empathy in a very hands-on way. Nine days later, I can say it worked.</p>
 
       <figure class="blog-figure">
         <img src="/blog/erasmus/photo2.jpg" alt="Full group of Erasmus+ participants holding the Erasmus+ flag" class="blog-img" />
       </figure>
 
       <h2>How It Worked</h2>
-      <p>The whole week was built around non-formal education, which I honestly think is the best way to actually learn something. Each country's team prepared their own activity and taught it to everyone else — so we weren't just passive listeners, we were both students and teachers at the same time. The topics were genuinely interesting: <strong>active listening</strong>, identity, the impact of social media, conflict resolution. Every session blended theory with hands-on practice, so you didn't just hear about something — you immediately had to try it. It made everything stick in a way that a classroom lecture never could.</p>
+      <p>The week ran on non-formal education, which in practice meant each country prepared an activity and ran it for everyone else. So one day you were teaching, the next you were learning from someone else's workshop. The topics ranged from <strong>active listening</strong> and identity to social media and conflict. Every session had a practical part so you actually had to apply what you were learning, not just sit and listen. That format made a big difference in how much I took away from it.</p>
 
       <h2>The Countries</h2>
-      <p>Six countries came together for this exchange: <strong>Slovakia, Poland, Bulgaria, Ukraine, Romania, and Lithuania</strong>. It's a very Eastern European mix, and some people might wonder whether that limits the diversity of perspectives. In my experience, it was actually the opposite — the shared cultural undertone made it easier to open up, while the differences between each nation were still fascinating and very real. I came home knowing so much more about each of these countries than I did before.</p>
+      <p>Six countries were part of this: <strong>Slovakia, Poland, Bulgaria, Ukraine, Romania, and Lithuania</strong>. All Eastern European, which some people might see as limiting, but for me it was actually a plus. There was enough common ground to connect quickly, and still plenty of differences between each country that made every conversation interesting. I came back knowing a lot more about all of them.</p>
 
       <h2>The Venue</h2>
-      <p>We stayed at a stunning location in the Lithuanian countryside — a place that apparently doubles as a wedding venue when it's not hosting groups of young Europeans. There was an artificial lake, open nature all around, and comfortable rooms. After full days of workshops and activities, having that space to breathe and decompress made a real difference. Some of my favourite conversations happened on evening walks around the venue.</p>
+      <p>We stayed at a place in the Lithuanian countryside that also works as a wedding venue. Artificial lake nearby, a lot of open space, good rooms. After long workshop days it was nice to just go for a walk outside. Some of the best conversations I had during that week happened in the evenings around the venue.</p>
 
       <figure class="blog-figure">
         <img src="/blog/erasmus/photo3.jpg" alt="Group photo at sunset at the venue in Lithuania" class="blog-img" />
       </figure>
 
       <h2>Cultural Nights</h2>
-      <p>Honestly, the Cultural Nights were the highlight of the whole exchange for me. Each country took an evening to present their culture — food, music, dance, traditions, history. The energy in the room on those nights was something else entirely.</p>
-      <p>For the <strong>Slovak Cultural Night</strong>, our team put a lot of heart into it. We wanted to show more than just tourist-brochure Slovakia — so we included traditions from Slovak Christmas, the burning of <em>Morena</em> (a traditional spring ritual), a folk dance, and a singing performance. Watching the other participants genuinely engage with things that are so personal to us was a moment I won't forget.</p>
+      <p>The Cultural Nights were my favourite part. Each country got an evening to show off their culture through food, music, dance and whatever else they wanted to bring. The room always had a different feel on those nights.</p>
+      <p>For the <strong>Slovak Cultural Night</strong>, we wanted to go beyond the obvious stuff and show what Slovakia actually feels like. We cooked traditional food, did the burning of <em>Morena</em>, performed a folk dance, and sang. Seeing people from Ukraine or Romania or Bulgaria genuinely curious about our traditions was something I did not expect to feel as much as I did.</p>
 
       <figure class="blog-figure">
         <img src="/blog/erasmus/photo1.jpg" alt="Slovak team preparing food for the Cultural Night" class="blog-img" />
       </figure>
 
       <h2>Final Thoughts</h2>
-      <p>This was one of those experiences that's hard to put into words without sounding like a cliché — but it genuinely changed how I think about connection and empathy. I met people I hope to stay in touch with for years. I learned things about myself and about six different countries. And I came home with a much stronger belief that projects like this matter.</p>
-      <p>Huge thank you to <strong>YouthFully Yours</strong> for sending me, and to <strong>VšĮ Džiaugsmo slėnis</strong> (<a href="https://www.instagram.com/dziaugsmoslenis/" target="_blank" rel="noopener noreferrer">@dziaugsmoslenis</a>) for organising an unforgettable week.</p>
-      <p><em>— Eduard Hviždák</em></p>
+      <p>I came back from Lithuania with a different perspective on a few things. Not in a dramatic way, just the quiet kind where you realise you think about something slightly differently than before. I met people I want to stay in touch with, and I got to share a part of Slovak culture with people who had never encountered it before. That alone made the whole trip worth it.</p>
+      <p>Thanks to <strong>YouthFully Yours</strong> for sending me, and to <strong>VšĮ Džiaugsmo slėnis</strong> (<a href="https://www.instagram.com/dziaugsmoslenis/" target="_blank" rel="noopener noreferrer">@dziaugsmoslenis</a>) for putting it all together.</p>
+      <p><em>Eduard Hviždák</em></p>
 
       <p style="margin-top: 2.5em; font-size: 0.8em; opacity: 0.55;">
         <strong>Bridges, Not Walls</strong> – Erasmus+ Youth Exchange · 20–29.04.2026, Luoba, Lithuania<br/>
