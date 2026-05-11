@@ -197,6 +197,18 @@ $border: rgba(255, 255, 255, 0.07);
       border-bottom: 1px solid $border;
     }
 
+    .blog-figure {
+      margin: 2em 0;
+      padding: 0;
+    }
+
+    .blog-img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+      object-fit: cover;
+    }
+
     strong {
       color: $text;
       font-weight: 600;
