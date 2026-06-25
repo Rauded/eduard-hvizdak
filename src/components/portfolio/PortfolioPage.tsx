@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import './PortfolioPage.scss';
-import { PROJECTS } from './projectsData';
+import { VISIBLE_PROJECTS } from './projectsData';
 // @ts-ignore
 import ProjectCard from './ProjectCard.tsx';
 
@@ -36,7 +36,7 @@ const PortfolioPage: React.FC = () => {
           Apps, tools, and experiments built to solve real problems.
         </p>
         <div className="port-hero__meta">
-          <span>{PROJECTS.length} projects</span>
+          <span>{VISIBLE_PROJECTS.length} projects</span>
           <span className="port-hero__sep">·</span>
           <span>2023 – 2025</span>
           <span className="port-hero__sep">·</span>
@@ -46,7 +46,7 @@ const PortfolioPage: React.FC = () => {
 
       {/* ── Project cards ── */}
       <section className="port-projects">
-        {PROJECTS.map(project => (
+        {VISIBLE_PROJECTS.map(project => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </section>

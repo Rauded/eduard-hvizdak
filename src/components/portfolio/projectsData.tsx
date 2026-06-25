@@ -45,6 +45,7 @@ export interface PortfolioProject {
   media: ProjectMedia;
   accent: string;
   reversed: boolean;
+  hidden?: boolean; // kept in data but not rendered (toggle to re-enable)
 }
 
 // ─── Projects ────────────────────────────────────────────────────
@@ -186,6 +187,7 @@ export const PROJECTS: PortfolioProject[] = [
     },
     accent: '#14b8a6',
     reversed: false,
+    hidden: true,
   },
   {
     id: 'bookreader-xr',
@@ -203,5 +205,16 @@ export const PROJECTS: PortfolioProject[] = [
     },
     accent: '#38bdf8',
     reversed: true,
+    hidden: true,
   },
 ];
+
+// Renumber + fix alternating layout so the list stays correct no matter
+// which projects are hidden. This is the list both pages actually render.
+export const VISIBLE_PROJECTS: PortfolioProject[] = PROJECTS
+  .filter(p => !p.hidden)
+  .map((p, i) => ({
+    ...p,
+    number: String(i + 1).padStart(2, '0'),
+    reversed: i % 2 === 1,
+  }));

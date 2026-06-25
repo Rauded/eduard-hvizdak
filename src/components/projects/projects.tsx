@@ -1,7 +1,7 @@
 import React from 'react';
 import './projects.scss';
 import '../portfolio/PortfolioPage.scss';
-import { PROJECTS } from '../portfolio/projectsData';
+import { VISIBLE_PROJECTS } from '../portfolio/projectsData';
 // @ts-ignore
 import ProjectCard from '../portfolio/ProjectCard.tsx';
 
@@ -16,7 +16,7 @@ const Projects: React.FC = () => {
       </p>
 
       <section className="port-projects">
-        {PROJECTS.map(project => (
+        {VISIBLE_PROJECTS.map(project => (
           <ProjectCard key={project.id} project={project} />
         ))}
       </section>
