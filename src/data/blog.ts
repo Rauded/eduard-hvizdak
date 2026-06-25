@@ -10,6 +10,37 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: 'digital-fairness-act-youth-dialogue',
+    title: 'Talking the Digital Fairness Act with Commissioner McGrath',
+    date: '2026-06-25',
+    category: 'Tech & Policy',
+    excerpt:
+      'I joined a European Commission Youth Policy Dialogue in Ljubljana with EU Commissioner Michael McGrath, where we worked through what the upcoming Digital Fairness Act should actually do about deceptive design, pricing, and digital contracts.',
+    thumbnail: '/blog/digital-fairness/youth-policy-dialogue.png',
+    content: `
+      <p>I took part in a <strong>European Commission Youth Policy Dialogue</strong> in <strong>Ljubljana</strong>, sitting down with <strong>EU Commissioner Michael McGrath</strong> to talk about the <strong>Digital Fairness Act</strong> — the EU's upcoming push to clean up how online services treat people. It was one of those rare moments where the conversation about regulation happens <em>with</em> the people it's meant to protect, not just about them.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/digital-fairness/youth-policy-dialogue.png" alt="Youth Policy Dialogue on the Digital Fairness Act with Commissioner Michael McGrath in Ljubljana" class="blog-img" />
+      </figure>
+
+      <h2>What We Worked On</h2>
+      <p>Rather than abstract talking points, we mapped out concrete asks across three areas — <strong>pricing, marketing practices, and digital contracts</strong>. The themes that kept coming up: <strong>prohibiting deceptive practices and dark patterns</strong>, <strong>standardised requirements</strong> so users actually understand what they're agreeing to, and <strong>real-currency pricing</strong> instead of the in-app token systems designed to obscure how much you're really spending.</p>
+
+      <h2>Why It Matters</h2>
+      <p>So much of the modern web is built to nudge, pressure, and quietly extract — manipulative defaults, fake urgency, subscriptions that are easy to start and almost impossible to cancel. As someone who builds software, I care a lot about where the line sits between good design and exploitative design. Getting to argue that line directly with the Commissioner shaping the legislation was a real privilege.</p>
+
+      <h2>Final Thoughts</h2>
+      <p>I came away convinced that youth input on digital policy isn't a box-ticking exercise — the people who grew up inside these systems often see the manipulation most clearly. Thanks to the <strong>European Commission</strong> and Commissioner <strong>Michael McGrath</strong> for genuinely listening.</p>
+      <p><em>Eduard Hviždák</em></p>
+
+      <p style="margin-top: 2.5em; font-size: 0.8em; opacity: 0.55;">
+        <strong>Youth Policy Dialogue — Digital Fairness Act</strong> · Ljubljana, Slovenia<br/>
+        With European Commissioner Michael McGrath · European Commission
+      </p>
+    `,
+  },
+  {
     slug: 'erasmus-bridges-not-walls',
     title: 'Erasmus+ Bridges, Not Walls Experience',
     date: '2026-05-06',

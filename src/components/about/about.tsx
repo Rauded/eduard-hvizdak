@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./about.scss";
 import myPhoto from "../../assets/about/picture_of_me.jpeg";
 import myPhotoWebP from "../../assets/about/picture_of_me.webp";
@@ -30,6 +31,29 @@ const About: React.FC = () => {
           </picture>
         </div>
       </section>
+
+      <Link to="/blog/digital-fairness-act-youth-dialogue" className="about-highlight">
+        <div className="about-highlight__media">
+          <img
+            src="/blog/digital-fairness/youth-policy-dialogue.png"
+            alt="Youth Policy Dialogue on the Digital Fairness Act with Commissioner Michael McGrath in Ljubljana"
+            loading="lazy"
+          />
+        </div>
+        <div className="about-highlight__text">
+          <span className="about-highlight__eyebrow">Recent Highlight</span>
+          <h3 className="about-highlight__title">
+            Digital Fairness Act — Youth Policy Dialogue
+          </h3>
+          <p>
+            I joined a <span className="purple-text">European Commission</span> Youth Policy
+            Dialogue in Ljubljana with EU Commissioner <span className="purple-text">Michael
+            McGrath</span>, working through what the upcoming Digital Fairness Act should do
+            about deceptive design, pricing transparency, and digital contracts.
+          </p>
+          <span className="about-highlight__link">Read the story →</span>
+        </div>
+      </Link>
     </div>
   );
 };
