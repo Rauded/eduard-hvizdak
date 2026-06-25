@@ -4,6 +4,7 @@ export interface BlogPost {
   date: string;
   category: string;
   excerpt: string;
+  thumbnail?: string; // cover image for the blog listing card
   content: string; // HTML string
 }
 
@@ -15,6 +16,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Life & Travel',
     excerpt:
       'We took part in the Bridges not Walls Erasmus+ Youth exchange in Lithuania — a week of non-formal education, cultural nights, and human connection across six Eastern European countries.',
+    thumbnail: '/blog/erasmus/photo2.jpg',
     content: `
       <p>From <strong>20 to 29 April 2026</strong>, I took part in <strong>Bridges, Not Walls</strong>, an Erasmus+ Youth Exchange in <strong>Luoba, Lithuania</strong>. I got there through my organisation <strong>YouthFully Yours</strong>, and the project itself was put together by <strong>VšĮ Džiaugsmo slėnis</strong>. The whole point was to get better at connecting with people across different cultures and backgrounds, and to build empathy in a very hands-on way. Nine days later, I can say it worked.</p>
 

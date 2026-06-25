@@ -110,3 +110,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Offset in-page scroll targets so they land below the floating fixed header
+   instead of being hidden behind it when navigating from the navbar. */
+#home,
+#about,
+#projects,
+#resume {
+  scroll-margin-top: 100px;
+}
