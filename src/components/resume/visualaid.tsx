@@ -1,4 +1,5 @@
 import React from 'react';
+import { LuArrowUpRight } from 'react-icons/lu';
 import { ResumeSection } from './resumetypes';
 
 const VisualAid: React.FC<{ section: ResumeSection }> = ({ section }) => {
@@ -13,7 +14,7 @@ const VisualAid: React.FC<{ section: ResumeSection }> = ({ section }) => {
               {entry.website ? (
                 <a className="company company--link" href={entry.website} target="_blank" rel="noopener noreferrer">
                   {entry.company}
-                  <span className="company__external" aria-hidden="true"> ↗</span>
+                  <LuArrowUpRight className="company__external" aria-hidden="true" />
                 </a>
               ) : (
                 <span className="company">{entry.company}</span>
