@@ -64,7 +64,6 @@ export const PROJECTS: PortfolioProject[] = [
     media: {
       type: 'video',
       video: assetSafe('inzerpro.mp4'),
-      poster: assetSafe('inzerpro-poster.jpg') || undefined,
     },
     accent: '#3b82f6',
     reversed: false,
@@ -108,9 +107,8 @@ export const PROJECTS: PortfolioProject[] = [
       { label: 'Website', url: 'https://www.kouzelniknaakci.cz', type: 'demo' },
     ],
     media: {
-      type: 'video',
+      type: 'placeholder',
       video: assetSafe('kouzelnici.mp4'),
-      poster: assetSafe('kouzelnici-poster.jpg') || undefined,
     },
     accent: '#ec4899',
     reversed: false,
@@ -147,9 +145,9 @@ export const PROJECTS: PortfolioProject[] = [
       { label: 'Website', url: 'https://www.nasadclaw.cz', type: 'demo' },
     ],
     media: {
-      type: 'video',
-      video: assetSafe('nasadclaw.mp4'),
-      images: [asset('nasadclaw-real-image.png')], // used as the video poster
+      type: 'image',
+      video: assetSafe('nasadclaw.mp4'), // upgrades to video if dropped in
+      images: [asset('nasadclaw-real-image.png')],
     },
     accent: '#a855f7',
     reversed: false,
