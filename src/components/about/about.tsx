@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { LuArrowRight } from "react-icons/lu";
 import "./about.scss";
 import myPhoto from "../../assets/about/picture_of_me.jpeg";
 import myPhotoWebP from "../../assets/about/picture_of_me.webp";
@@ -51,7 +52,10 @@ const About: React.FC = () => {
             McGrath</span>, working through what the upcoming Digital Fairness Act should do
             about deceptive design, pricing transparency, and digital contracts.
           </p>
-          <span className="about-highlight__link">Read the story →</span>
+          <span className="about-highlight__cta">
+            Read the story
+            <LuArrowRight className="about-highlight__cta-icon" aria-hidden="true" />
+          </span>
         </div>
       </Link>
     </div>
