@@ -26,3 +26,5 @@ pnpm-debug.log*
 *.png
 !/src/assets/**/*
 !/public/blog/**/*.png
+# Local-only original showcase videos (kept for revert, not committed)
+/src/assets/projects/originals/
