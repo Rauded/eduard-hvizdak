@@ -25,3 +25,4 @@ pnpm-debug.log*
 !/public/*.gif
 *.png
 !/src/assets/**/*
+!/public/blog/**/*.png
