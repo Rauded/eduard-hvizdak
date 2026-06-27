@@ -124,10 +124,25 @@
   font-weight: 600;
 }
 
-a.company--link {
+.company__main {
   display: inline-flex;
   align-items: center;
-  gap: 0.2em;
+  gap: 0.28em;
+}
+
+.company__sub {
+  display: block;
+  font-size: 0.62em;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: rgba(165, 180, 252, 0.55);
+}
+
+a.company--link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  vertical-align: top;
   text-decoration: none;
   cursor: pointer;
   transition: color 0.15s ease;
@@ -136,18 +151,23 @@ a.company--link {
   &:focus-visible {
     color: #c7d2fe;
 
+    .company__sub {
+      color: rgba(199, 210, 254, 0.7);
+    }
+
     .company__external {
-      opacity: 1;
+      opacity: 0.95;
       transform: translate(1px, -1px);
     }
   }
 }
 
 .company__external {
-  width: 0.78em;
-  height: 0.78em;
+  width: 0.66em;
+  height: 0.66em;
   flex-shrink: 0;
-  opacity: 0.55;
+  stroke-width: 2.25;
+  opacity: 0.45;
   transition: opacity 0.15s ease, transform 0.15s ease;
 }
 
