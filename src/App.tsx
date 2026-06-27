@@ -27,6 +27,8 @@ import PortfolioPage from './components/portfolio/PortfolioPage.tsx';
 import BlogListingPage from './components/blog/BlogListingPage.tsx';
 // @ts-ignore
 import BlogPostPage from './components/blog/BlogPostPage.tsx';
+// @ts-ignore
+import NowPage from './components/now/NowPage.tsx';
 
 const AppContainer = styled.div`
   background: linear-gradient(135deg, #1e1e1e 0%, #2a1a3d 50%, #1e1e1e 100%);
@@ -74,6 +76,14 @@ const App: React.FC = () => {
           <AppContainer>
             <Header />
             <BlogPostPage />
+            <Footer />
+          </AppContainer>
+        } />
+        {/* Preview-only for now (not in nav) until live data + films/books cards land. */}
+        <Route path="/now" element={
+          <AppContainer>
+            <Header />
+            <NowPage />
             <Footer />
           </AppContainer>
         } />

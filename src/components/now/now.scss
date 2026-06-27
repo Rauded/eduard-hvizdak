@@ -1,0 +1,125 @@
+.now-page {
+  width: 92%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 56px 0 80px;
+  color: #fff;
+  font-family: 'RobotoMono', sans-serif;
+}
+
+.now-hero {
+  margin-bottom: 40px;
+
+  &__kicker {
+    display: inline-block;
+    font-size: 0.85em;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #818cf8;
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-size: clamp(2em, 5vw, 3em);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    color: #c7d2fe;
+  }
+
+  &__lead {
+    font-size: clamp(1em, 1.6vw, 1.15em);
+    line-height: 1.6;
+    color: rgba(248, 250, 252, 0.6);
+    max-width: 60ch;
+
+    a {
+      color: #a5b4fc;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(165, 180, 252, 0.35);
+      transition: color 0.15s ease, border-color 0.15s ease;
+
+      &:hover {
+        color: #c7d2fe;
+        border-color: #c7d2fe;
+      }
+    }
+  }
+}
+
+.now-block {
+  margin-bottom: 44px;
+
+  p {
+    font-size: clamp(0.98em, 1.5vw, 1.1em);
+    line-height: 1.75;
+    color: rgba(248, 250, 252, 0.78);
+    margin: 0 0 16px;
+  }
+
+  strong {
+    color: #f8fafc;
+    font-weight: 600;
+  }
+
+  .now-hl {
+    background: linear-gradient(135deg, #a5b4fc 0%, #c7d2fe 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+  }
+}
+
+.now-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.now-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 20px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.07) 0%, rgba(168, 85, 247, 0.05) 100%);
+  border: 1px solid rgba(165, 180, 252, 0.14);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: rgba(165, 180, 252, 0.32);
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  &__icon {
+    display: inline-flex;
+    color: #818cf8;
+    font-size: 1.35em;
+
+    svg { stroke-width: 2.1; }
+  }
+
+  &__value {
+    font-size: clamp(1.5em, 3vw, 2em);
+    font-weight: 700;
+    line-height: 1.1;
+    color: #f8fafc;
+    letter-spacing: -0.01em;
+  }
+
+  &__label {
+    font-size: 0.82em;
+    color: rgba(248, 250, 252, 0.5);
+    letter-spacing: 0.01em;
+  }
+}
+
+.now-foot {
+  font-size: 0.82em;
+  color: rgba(248, 250, 252, 0.4);
+  letter-spacing: 0.01em;
+}
