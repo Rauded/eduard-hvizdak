@@ -73,15 +73,30 @@ The idea Eduard liked: personal sites that show live "trackers" (Spotify, coding
 to show personality. Research done 2026-06-27. **Frame all of these inside a `/now` page.**
 Stack note: CRA + Vercel = we get `/api/*` serverless functions + Vercel Cron for the OAuth/secret ones.
 
-**Recommended shortlist (impact-to-effort, leaning AI-engineer/founder persona):**
-1. [ ] **WakaTime coding time** — "32 hrs coded this week, 60% TypeScript." Use the **embeddable JSON share URL** → purely client-side, no secret, no `/api`. **Easiest quick win, most on-brand. Ship first.** (Requires the WakaTime editor plugin installed to collect data.)
-2. [ ] **Lanyard (Discord presence)** — live status + what you're listening to on Spotify, **zero backend** (client-side REST/WebSocket). Best "alive" feel. Must join the Lanyard Discord.
-3. [ ] **Spotify Now Playing** — the classic if not using Discord. Needs `/api` route + one-time OAuth refresh token (env secret). Med effort.
-4. [ ] **chess.com / Lichess rating** — fully public API, no auth, client-side. "I think in systems." Low effort.
-5. [ ] **Letterboxd (films) or Goodreads (books)** — "what I'm watching/reading." RSS → small `/api` parser (CORS). Pick one.
-6. [ ] **Oura / Whoop sleep+recovery** — *only if Eduard owns the device*. "Founder optimizing recovery." Oura uses a simple Personal Access Token (easier than Whoop's OAuth).
+**DECISIONS (2026-06-27, Eduard):** ❌ NO Discord/Lanyard, ❌ NO Spotify, ❌ NO chess.
+✅ Letterboxd + Goodreads (Eduard will clean his Goodreads "read" shelf first).
+⭐ **Primary source = Eduard's own local `dashboard` project** (see below) — far more unique & authentic than WakaTime.
 
-**Quick win to ship first:** WakaTime via embed JSON (under an hour, no secrets). Runner-up: chess.com stats (`api.chess.com/pub/player/USERNAME/stats`, no key).
+**⚠️ WakaTime caveat — does it track Claude Code terminal time? Basically NO.** WakaTime tracks via
+**editor plugins** that emit "heartbeats" on activity *inside a supported editor* (typing/saving in
+VS Code, Cursor, JetBrains…). It does **not** track terminal usage, and when **Claude Code edits files
+on disk from the terminal**, no editor heartbeat fires → that work is **not counted**. There are hacky
+shell/terminal trackers but they're unreliable. Since Eduard codes heavily via Claude Code, WakaTime
+would **undercount badly** → **skip it in favour of the dashboard** (which sees real screen/focus time).
+
+**Chosen tracker shortlist:**
+1. [ ] **Coding / focus time — from the local `dashboard`** (screen-time + focus/productivity score + pomodoros + streaks). Authentic, unique, and actually captures Claude Code work. Needs a data bridge (below).
+2. [ ] **Letterboxd** (films) — RSS (`letterboxd.com/USERNAME/rss/`) → small `/api` parser (CORS/XML). *Need Eduard's username.*
+3. [ ] **Goodreads** (currently-reading / recently-read) — RSS still works → `/api` parser. *Need username + Eduard to clean the shelf first.*
+4. [ ] *(maybe, fun)* "Pavlok zaps this week / focus streak" pulled from the dashboard — huge personality, very on-brand.
+
+### The `dashboard` → site data bridge (how to surface local data publicly)
+The dashboard is a local Bun backend (`~/Desktop/Projects/dashboard/backend`, `localhost:3001`, SQLite)
+with endpoints incl. `/api/screen-time/weekly`, `/api/focus`, `/api/habits`, `/api/vision/stats`,
+`/api/income/*` (Stripe+Fio — **PRIVATE, do not publish**). To show selected aggregates on the Vercel site:
+- [ ] **Decide what's public** (e.g. focus hours/week, productivity score, pomodoros, habit streak, zap count). **Income stays private.**
+- [ ] Add a small job in the dashboard (or a Vercel cron) that **pushes a sanitized summary JSON** to a public place the site can read (GitHub Gist / repo JSON / Vercel KV / Edge Config).
+- [ ] Build the `/now` "Coding & focus" card to fetch that summary.
 
 **Implementation rule of thumb:**
 - Public/CORS-friendly (Lanyard, chess.com, Lichess, WakaTime-embed, GitHub image cards) → **pure client-side React**.
