@@ -9,8 +9,12 @@ Icons via **react-icons**. Routing via **react-router-dom**.
 
 - Repo: `~/portfolio/tjklint.github.io/`
 - Remote: `https://github.com/Rauded/eduard-hvizdak` (branch `main`)
-- Hosting: **Vercel**, auto-deploys on push to `main` (the `gh-pages` deploy script in
-  package.json is legacy from the template — we do NOT use it; just push to `main`).
+- Hosting: **Vercel**, auto-deploys on push to `main` via Vercel's GitHub integration
+  (independent of any repo workflow). Just push to `main`.
+- The template's GitHub Pages deploy was removed (2026-06-27): deleted
+  `.github/workflows/deploy.yml` and the `predeploy`/`deploy` (gh-pages) npm scripts. It was
+  running on every push and **failing**, sending "GitHub Pages failed to deploy" emails, while
+  Vercel was the real (successful) host. Do NOT re-add a Pages workflow.
 
 ## Deploy workflow (how we ship every change)
 1. Make the change.
