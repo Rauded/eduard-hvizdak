@@ -91,8 +91,13 @@ would **undercount badly** → **skip it in favour of the dashboard** (which see
    - Site: `src/components/now/NowPage.tsx` reads `public/now-data.json` (5 stat cards + hand-written "now" intro, graceful "—" empty state).
    - Generator: `~/Desktop/Projects/dashboard/scripts/now-summary.ts` (`bun scripts/now-summary.ts`) reads `~/.dashboard/dashboard.db`, writes the sanitized JSON straight into the portfolio's `public/now-data.json`. Zaps are derived from `activity_logs` distraction rows (no zap table exists).
    - ⚠️ **BLOCKER — dashboard is dormant:** DB has only ~34 activity logs (May 31) + 2 focus sessions (May 17, 0 completed pomodoros). Stats render empty until the **vision monitor runs regularly** and pomodoros actually get logged. TODO: [ ] run the dashboard collector, [ ] re-run generator, [ ] commit/push to publish, [ ] then add `/now` to the header nav.
-2. [ ] **Letterboxd** (films) — RSS (`letterboxd.com/USERNAME/rss/`) → small `/api` parser (CORS/XML). *Need Eduard's username.*
-3. [ ] **Goodreads** (currently-reading / recently-read) — RSS still works → `/api` parser. *Need username + Eduard to clean the shelf first.*
+2. [x] **Letterboxd** (films) — DONE. `api/letterboxd.js` (Vercel fn) parses `letterboxd.com/Rauded/rss/` → "Recently watched" poster grid on `/now`.
+3. [x] **Goodreads** (currently-reading) — DONE. `api/goodreads.js` parses the **currently-reading** shelf (user `126181458`) → "Reading now" cover grid. The "read" shelf is intentionally NOT used (awkward books) — safe to leave as-is.
+
+**`/now` is now LIVE in the nav** (Home · About · Projects · Resume · Blog · **Now**). It shows the
+hand-written intro + Reading now + Recently watched (real data via the two Vercel functions). The
+focus-stats block is **hidden until the dashboard syncs** real numbers (see blocker above), so the page
+reads complete today and the stats appear automatically once data flows.
 
 ### The `dashboard` → site data bridge (how to surface local data publicly)
 The dashboard is a local Bun backend (`~/Desktop/Projects/dashboard/backend`, `localhost:3001`, SQLite)
