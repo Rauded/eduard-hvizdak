@@ -2,6 +2,11 @@
 
 Guidance for Claude Code when working in this repo. Read this before making changes.
 
+## Roadmap
+Improvement ideas, gaps, and the prioritized TODO list live in **`ROADMAP.md`** (analytics, SEO/OG,
+`/now` + `/uses`, personal tracker widgets, founder/traction sections, "Elsewhere" links). Check it
+before proposing new features.
+
 ## What this is
 Personal portfolio / website for **Eduard Hvižďák** — live at **eduard-hvizdak.vercel.app**.
 Forked from the `tjklint` portfolio template. Create React App (CRA) + TypeScript + SCSS.
