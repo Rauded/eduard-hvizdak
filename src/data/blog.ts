@@ -10,6 +10,54 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: 'newsmatics-hackathon',
+    title: 'Newsmatics Hackathon',
+    date: '2026-06-27',
+    category: 'Hackathons & Builds',
+    excerpt:
+      'I spent a hackathon with team MOGGERS building Newsmatics Globe — a pipeline that pulls locations out of news articles and plots them on an interactive 3D globe. Here is how the weekend went, from the first line of code to the award ceremony.',
+    thumbnail: '/blog/newsmatics/group.jpg',
+    content: `
+      <p>I took part in the <strong>Newsmatics Hackathon</strong> in Brno with my team <strong>MOGGERS</strong>, where we built <strong>Newsmatics Globe</strong> — a geolocation pipeline that extracts locations from news articles via NLP, matches them against the GeoNames database, and visualises them on an interactive 3D globe, with timeline playback so you can watch events unfold across the world. You can read more about the project itself on my <a href="#/portfolio">portfolio page</a> (look for <strong>Newsmatics Globe</strong>).</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/newsmatics/group.jpg" alt="Full group photo of all Newsmatics Hackathon participants" class="blog-img" />
+        <figcaption>Everyone who took part in the Newsmatics Hackathon.</figcaption>
+      </figure>
+
+      <h2>The Build</h2>
+      <p>Most of the weekend looked exactly like this — heads down, laptops open, coffee and energy drinks within reach, working through the pipeline piece by piece. We split the work between the NLP extraction, the GeoNames matching, and the front-end globe, then spent the back half of the event stitching it all together and tuning the timeline playback.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/newsmatics/working.jpg" alt="Working at the hackathon — coding on laptops with a teammate" class="blog-img" />
+      </figure>
+
+      <h2>Team MOGGERS</h2>
+      <p>We competed as <strong>MOGGERS</strong> — three of us, each owning a different part of the stack. Pitching the globe to the judges with a live timeline running was the moment everything we'd built that weekend finally clicked into one demo.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/newsmatics/team.jpg" alt="Team MOGGERS portrait at the Newsmatics Hackathon" class="blog-img" />
+      </figure>
+
+      <h2>The Award Ceremony</h2>
+      <p>The event wrapped up with an award ceremony and certificates for the teams. Standing up there with the organisers and the other participants was a great way to close out an intense couple of days.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/newsmatics/awards.jpg" alt="Award ceremony at the Newsmatics Hackathon with participants holding certificates" class="blog-img" />
+      </figure>
+
+      <h2>Final Thoughts</h2>
+      <p>Hackathons are still my favourite way to build — a tight deadline, a real problem, and a small team that has to figure it out fast. Newsmatics Globe started as a weekend project here and ended up as one of the things I'm most proud of. Thanks to <strong>Newsmatics</strong> for putting on the event.</p>
+      <p>Want the technical details? Head over to the <a href="#/portfolio">portfolio</a> and find <strong>Newsmatics Globe</strong>.</p>
+      <p><em>Eduard Hviždák</em></p>
+
+      <p style="margin-top: 2.5em; font-size: 0.8em; opacity: 0.55;">
+        <strong>Newsmatics Hackathon</strong> · Brno<br/>
+        Team MOGGERS · Project: Newsmatics Globe
+      </p>
+    `,
+  },
+  {
     slug: 'digital-fairness-act-youth-dialogue',
     title: 'Talking the Digital Fairness Act with Commissioner McGrath',
     date: '2026-06-25',

@@ -123,11 +123,12 @@ export const PROJECTS: PortfolioProject[] = [
     tags: ['Python', 'JavaScript', 'Globe.gl', 'LangChain', 'NLP', 'Data Viz', 'Hackathon'],
     links: [
       { label: 'GitHub', url: 'https://github.com/Rauded', type: 'github' },
+      { label: 'Hackathon Story', url: '#/blog/newsmatics-hackathon', type: 'demo' },
     ],
     media: {
       type: 'video',
       video: asset('newsmatics-hackathon.mp4'),
-      poster: asset('newsmatics-globe-1.png'),
+      poster: asset('newsmatics-hackathon-group.jpg'),
     },
     accent: '#10b981',
     reversed: true,
