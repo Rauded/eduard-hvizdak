@@ -124,6 +124,24 @@
   font-weight: 600;
 }
 
+a.company--link {
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.15s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: #c7d2fe;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.company__external {
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
 .job-dates {
   font-size: 0.9em;
   color: rgba(248, 250, 252, 0.4);

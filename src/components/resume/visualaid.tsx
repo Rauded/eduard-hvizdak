@@ -11,8 +11,9 @@ const VisualAid: React.FC<{ section: ResumeSection }> = ({ section }) => {
             <h3 className="job-title">
               {entry.title}{' '}
               {entry.website ? (
-                <a className="company" href={entry.website} target="_blank" rel="noopener noreferrer">
+                <a className="company company--link" href={entry.website} target="_blank" rel="noopener noreferrer">
                   {entry.company}
+                  <span className="company__external" aria-hidden="true"> ↗</span>
                 </a>
               ) : (
                 <span className="company">{entry.company}</span>

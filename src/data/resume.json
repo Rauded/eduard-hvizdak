@@ -32,7 +32,7 @@
         {
           "title": "AI Systems Engineer",
           "company": "@CZS / Masaryk University",
-          "website": "https://czs.muni.cz",
+          "website": "https://czs.muni.cz/cs/",
           "dates": "2025 – Present",
           "bulletPoints": [
             "Engineered a multi-stage RAG system combining vector search (OpenSearch), BM25, MMR retrieval, and LLM reranking for university knowledge systems.",
