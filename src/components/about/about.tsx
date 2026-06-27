@@ -44,13 +44,12 @@ const About: React.FC = () => {
         <div className="about-highlight__text">
           <span className="about-highlight__eyebrow">Recent Highlight</span>
           <h3 className="about-highlight__title">
-            Digital Fairness Act — Youth Policy Dialogue
+            Invited by the <span className="purple-text">European Commission</span> to discuss
+            the Digital Fairness Act
           </h3>
           <p>
-            I joined a <span className="purple-text">European Commission</span> Youth Policy
-            Dialogue in Ljubljana with EU Commissioner <span className="purple-text">Michael
-            McGrath</span>, working through what the upcoming Digital Fairness Act should do
-            about deceptive design, pricing transparency, and digital contracts.
+            With EU Commissioner <span className="purple-text">Michael McGrath</span>, as part of
+            the Youth Policy Dialogue initiative.
           </p>
           <span className="about-highlight__cta">
             Read the story
