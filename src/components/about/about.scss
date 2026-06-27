@@ -151,6 +151,7 @@
 
   .about-highlight {
     display: flex;
+    flex-direction: column;
     align-items: stretch;
     gap: 0;
     margin-bottom: 40px;
@@ -183,8 +184,8 @@
     }
 
     &__media {
-      flex: 0 0 44%;
-      max-width: 360px;
+      width: 100%;
+      aspect-ratio: 16 / 10;
       overflow: hidden;
       background: #0b0b14;
       display: flex;
