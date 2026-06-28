@@ -2,9 +2,8 @@ import React from 'react';
 import { LuMail, LuCalendar, LuArrowRight } from 'react-icons/lu';
 import './contact.scss';
 
-// Booking link (Cal.com/Calendly). Set REACT_APP_BOOKING_URL in Vercel to
-// show the "Book 15 min" button; until then only the email CTA renders.
-const BOOKING_URL = process.env.REACT_APP_BOOKING_URL;
+// Booking link (Cal.com). Override with REACT_APP_BOOKING_URL in Vercel.
+const BOOKING_URL = process.env.REACT_APP_BOOKING_URL || 'https://cal.com/eduardhv/30min';
 const EMAIL = 'eduardd.hv@gmail.com';
 
 const Contact: React.FC = () => (

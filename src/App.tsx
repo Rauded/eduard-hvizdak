@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import posthog from 'posthog-js';
+import { analyticsEnabled } from './analytics';
 
 
 // @ts-ignore
@@ -32,7 +33,7 @@ const AppContainer = styled.div`
 const PostHogPageview: React.FC = () => {
   const location = useLocation();
   useEffect(() => {
-    if (process.env.REACT_APP_POSTHOG_KEY) {
+    if (analyticsEnabled) {
       posthog.capture('$pageview', { $current_url: window.location.href });
     }
   }, [location]);

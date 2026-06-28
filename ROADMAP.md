@@ -46,9 +46,12 @@ This is Sprint 1.
 - [ ] **Custom domain** — deferred (canonical currently `eduard-hvizdak.vercel.app`; swap `SITE_URL` + index.html + sitemap/rss when bought).
 - **Deferred (needs prerender/framework move):** per-**post** social-card unfurling on LinkedIn/X (helmet is client-rendered; Google sees it, social bots don't). Homepage card works for the most-shared link.
 
-### ⏳ Inputs to finish Sprint 1 (set in Vercel → Project → Settings → Environment Variables)
-- `REACT_APP_POSTHOG_KEY` (+ optional `REACT_APP_POSTHOG_HOST`, default `https://eu.i.posthog.com`) — create a *portfolio* PostHog project.
-- `REACT_APP_BOOKING_URL` — your Cal.com/Calendly link (button hidden until set).
+### ✅ PostHog + booking wired (2026-06-28)
+Defaults baked in from InzerPro's config: PostHog key `phc_T3kr4…` (EU host) in `src/analytics.ts`
+(portfolio traffic shares the **InzerPro** PostHog project for now), and booking link
+`https://cal.com/eduardhv/30min` in `src/components/contact/contact.tsx`. Both overridable via Vercel
+env (`REACT_APP_POSTHOG_KEY` / `REACT_APP_POSTHOG_HOST` / `REACT_APP_BOOKING_URL`).
+To split portfolio analytics into its own PostHog project later, create one and set `REACT_APP_POSTHOG_KEY`.
 
 ## Sprint 2 — Founder credibility & depth
 - [ ] **Products / "What I'm building" section** above projects: InzerPro, NasadClaw, KouzelníkNaAkci — one-line value prop + status (live, paying customers) + your role (founder, solo eng).

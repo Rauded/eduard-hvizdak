@@ -5,12 +5,12 @@ import './index.css';
 // @ts-ignore
 import App from './App.tsx';
 import reportWebVitals from './reportWebVitals';
+import { POSTHOG_KEY, POSTHOG_HOST, analyticsEnabled } from './analytics';
 
-// Analytics — no-op unless REACT_APP_POSTHOG_KEY is set (e.g. in Vercel env).
 // Pageviews are captured manually on route change (see App.tsx).
-if (process.env.REACT_APP_POSTHOG_KEY) {
-  posthog.init(process.env.REACT_APP_POSTHOG_KEY, {
-    api_host: process.env.REACT_APP_POSTHOG_HOST || 'https://eu.i.posthog.com',
+if (analyticsEnabled) {
+  posthog.init(POSTHOG_KEY, {
+    api_host: POSTHOG_HOST,
     capture_pageview: false,
     person_profiles: 'identified_only',
   });
