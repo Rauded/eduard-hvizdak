@@ -60,7 +60,7 @@ Footer keeps its baseline social links. `social_links.tsx` left in repo (unused)
 ### Polish & fixes (rolling)
 - [x] **Hackathon Story link** — Newsmatics project's "Hackathon Story" link was `#/blog/newsmatics-hackathon` (dead HashRouter URL after the BrowserRouter migration). Fixed to `/blog/newsmatics-hackathon` so it links from the project (`projectsData.tsx`).
 - [x] **PsycheTab Chrome Web Store link** — added next to GitHub on the PsycheTab project (`chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao`).
-- [ ] **Add blog for "Zero to Done"** — write up the Zero to Done hackathon (another hackathon Eduard attended). Remember to also add it to `sitemap.xml` + `rss.xml` when published.
+- [x] **Add blog for "Zero to Done"** — DONE. Post `zero-to-done` (slug) in `blog.ts`, dated 2026-06-08, links to `zero-to-done.com`. Story: presented InzerPro at the first run of the Zero to Done startup-build hackathon, hosted by Petr Sochora + mime digital in Brno — a "get real customers, not a demo" event, high quality, lots of advice. Added to `sitemap.xml` + `rss.xml`. No photos yet (organisers said end of June) → text-only, no thumbnail; add a cover later when photos arrive.
 - [ ] **Make it look good on mobile too** — full responsive pass across pages (projects, `/now`, contact, blog).
 
 ## Sprint 2 — Founder credibility & depth

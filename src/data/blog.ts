@@ -89,6 +89,36 @@ export const BLOG_POSTS: BlogPost[] = [
     `,
   },
   {
+    slug: 'zero-to-done',
+    title: 'Zero to Done: Pitching InzerPro at a Startup-Build Hackathon',
+    date: '2026-06-08',
+    category: 'Hackathons & Builds',
+    excerpt:
+      'I spent a weekend in Brno at Zero to Done — the first run of a different kind of hackathon, where the goal was not a demo but a real startup: get customers, test the product, prove value. I brought InzerPro, and it was one of the best events I have done.',
+    content: `
+      <p>I spent a weekend in Brno at <strong>Zero to Done</strong> — and it was genuinely one of the best events I've taken part in. It was the <strong>very first run</strong> of the event, put together by <strong>Petr Sochora</strong> and the team at <a href="https://www.mimedigital.cz/" target="_blank" rel="noopener noreferrer">mime digital</a>, who hosted everyone in their office in the centre of Brno. A room full of founders, builders, and mentors, all in for a few intense days. You can find the event at <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>.</p>
+
+      <h2>A Different Kind of Hackathon</h2>
+      <p>What made it stand out is that it <strong>wasn't a hackathon just for fun</strong>. It was a <strong>startup-build event</strong> — the bar wasn't "ship a cool demo," it was "build a real business." Over the weekend everyone was expected to actually <strong>get customers, test the product with real users, and prove there was value people would pay for</strong>. Investors were in the room, and the real question wasn't who won an audience vote — it was which teams were worth continuing to work with afterwards. That framing changed everything about how you spent your time.</p>
+
+      <h2>I Brought InzerPro</h2>
+      <p>I came and presented <strong>InzerPro</strong>, my classifieds-automation product, and used the weekend to push it forward the way the event wanted — talking to potential customers, testing, and sharpening the pitch instead of just adding features. Working on a real product I already care about, in a room full of people doing the same, made the whole thing click.</p>
+
+      <h2>High Quality, Top to Bottom</h2>
+      <p>The thing that surprised me most was how <strong>high quality</strong> the whole event was — both the execution and the people. The organisation was tight, the program was well thought out, and there were a lot of <strong>genuinely impressive projects</strong> being built around me. I walked away with a huge amount of <strong>concrete, practical advice</strong>: how to price on value rather than cost, why showing the product to 20 people beats adding 20 features, that "great idea!" means nothing until someone actually pays, and that a pivot isn't a failure. The kind of feedback you only get from people who've actually done it.</p>
+
+      <h2>Final Thoughts</h2>
+      <p>Huge thanks to <strong>Petr Sochora</strong> and the <strong>mime digital</strong> team for hosting and for setting the bar this high on a first run. Events that push you toward real customers instead of just a demo are rare, and this one nailed it — I'd do it again in a heartbeat.</p>
+      <p>Curious about the product I brought? Head to my <a href="/portfolio">portfolio</a> and look for <strong>InzerPro</strong>.</p>
+      <p><em>Eduard Hviždák</em></p>
+
+      <p style="margin-top: 2.5em; font-size: 0.8em; opacity: 0.55;">
+        <strong>Zero to Done</strong> · Brno, Czech Republic<br/>
+        Hosted by mime digital · Project: InzerPro · <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>
+      </p>
+    `,
+  },
+  {
     slug: 'erasmus-bridges-not-walls',
     title: 'Erasmus+ Bridges, Not Walls Experience',
     date: '2026-05-06',
