@@ -1,5 +1,6 @@
 import React from 'react';
 import { LuMail, LuCalendar, LuArrowRight } from 'react-icons/lu';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import './contact.scss';
 
 // Booking link (Cal.com). Override with REACT_APP_BOOKING_URL in Vercel.
@@ -29,9 +30,17 @@ const Contact: React.FC = () => (
             rel="noopener noreferrer"
           >
             <LuCalendar aria-hidden="true" />
-            Book 15 min
+            Book 30 min
           </a>
         )}
+      </div>
+      <div className="contact__socials">
+        <a href="https://github.com/Rauded" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <FaGithub />
+        </a>
+        <a href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <FaLinkedin />
+        </a>
       </div>
     </div>
   </section>

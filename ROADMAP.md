@@ -47,11 +47,15 @@ This is Sprint 1.
 - **Deferred (needs prerender/framework move):** per-**post** social-card unfurling on LinkedIn/X (helmet is client-rendered; Google sees it, social bots don't). Homepage card works for the most-shared link.
 
 ### ✅ PostHog + booking wired (2026-06-28)
-Defaults baked in from InzerPro's config: PostHog key `phc_T3kr4…` (EU host) in `src/analytics.ts`
-(portfolio traffic shares the **InzerPro** PostHog project for now), and booking link
-`https://cal.com/eduardhv/30min` in `src/components/contact/contact.tsx`. Both overridable via Vercel
-env (`REACT_APP_POSTHOG_KEY` / `REACT_APP_POSTHOG_HOST` / `REACT_APP_BOOKING_URL`).
-To split portfolio analytics into its own PostHog project later, create one and set `REACT_APP_POSTHOG_KEY`.
+PostHog now points at its **own** project — "Eduard Hvizdak Personal / Portfolio" (id 211425), key
+`phc_oMcK…` (EU host) in `src/analytics.ts`. Booking link `https://cal.com/eduardhv/30min` ("Book 30
+min") in `src/components/contact/contact.tsx`. Both overridable via Vercel env
+(`REACT_APP_POSTHOG_KEY` / `REACT_APP_POSTHOG_HOST` / `REACT_APP_BOOKING_URL`).
+
+### ✅ Contact consolidated (2026-06-28)
+Removed the redundant standalone "Find me on" `SocialLinks` card from the home — the "Let's work
+together" contact section is now the single reach-me hub (Email + Book 30 min + GitHub/LinkedIn icons).
+Footer keeps its baseline social links. `social_links.tsx` left in repo (unused) in case it's wanted back.
 
 ## Sprint 2 — Founder credibility & depth
 - [ ] **Products / "What I'm building" section** above projects: InzerPro, NasadClaw, KouzelníkNaAkci — one-line value prop + status (live, paying customers) + your role (founder, solo eng).

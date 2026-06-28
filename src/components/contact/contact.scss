@@ -91,6 +91,25 @@
     }
   }
 
+  &__socials {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 26px;
+
+    a {
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 1.5em;
+      display: inline-flex;
+      transition: color 0.2s ease, transform 0.2s ease;
+
+      &:hover {
+        color: #c7d2fe;
+        transform: translateY(-3px);
+      }
+    }
+  }
+
   @media (max-width: 600px) {
     padding: 36px 22px;
   }

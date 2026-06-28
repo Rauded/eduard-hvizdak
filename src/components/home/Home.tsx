@@ -10,8 +10,6 @@ import Resume from '../resume/resume.tsx';
 import Projects from '../projects/projects.tsx';
 // @ts-ignore
 import Contact from '../contact/contact.tsx';
-// @ts-ignore
-import SocialLinks from '../social_links/social_links.tsx';
 
 const Home: React.FC = () => (
   <>
@@ -25,7 +23,6 @@ const Home: React.FC = () => (
     <Resume />
     <Projects />
     <Contact />
-    <SocialLinks />
   </>
 );
 
