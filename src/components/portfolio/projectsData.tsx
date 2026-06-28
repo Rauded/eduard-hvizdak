@@ -123,7 +123,7 @@ export const PROJECTS: PortfolioProject[] = [
     tags: ['Python', 'JavaScript', 'Globe.gl', 'LangChain', 'NLP', 'Data Viz', 'Hackathon'],
     links: [
       { label: 'GitHub', url: 'https://github.com/Rauded', type: 'github' },
-      { label: 'Hackathon Story', url: '#/blog/newsmatics-hackathon', type: 'demo' },
+      { label: 'Hackathon Story', url: '/blog/newsmatics-hackathon', type: 'demo' },
     ],
     media: {
       type: 'video',
@@ -161,6 +161,7 @@ export const PROJECTS: PortfolioProject[] = [
       'A Chrome extension that replaces the new tab page with rotating collage wallpapers assembled from your own image library. Drag, resize, rotate, and layer each piece. Every byte lives locally in IndexedDB — no cloud, no tracking, ever.',
     tags: ['JavaScript', 'Manifest V3', 'LocalForage', 'IndexedDB', 'Chrome Extension'],
     links: [
+      { label: 'Chrome Web Store', url: 'https://chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao', type: 'demo' },
       { label: 'GitHub', url: 'https://github.com/Rauded/college_extension_chrome', type: 'github' },
     ],
     media: {

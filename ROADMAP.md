@@ -57,6 +57,12 @@ Removed the redundant standalone "Find me on" `SocialLinks` card from the home �
 together" contact section is now the single reach-me hub (Email + Book 30 min + GitHub/LinkedIn icons).
 Footer keeps its baseline social links. `social_links.tsx` left in repo (unused) in case it's wanted back.
 
+### Polish & fixes (rolling)
+- [x] **Hackathon Story link** — Newsmatics project's "Hackathon Story" link was `#/blog/newsmatics-hackathon` (dead HashRouter URL after the BrowserRouter migration). Fixed to `/blog/newsmatics-hackathon` so it links from the project (`projectsData.tsx`).
+- [x] **PsycheTab Chrome Web Store link** — added next to GitHub on the PsycheTab project (`chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao`).
+- [ ] **Add blog for "Zero to Done"** — write up the Zero to Done hackathon (another hackathon Eduard attended). Remember to also add it to `sitemap.xml` + `rss.xml` when published.
+- [ ] **Make it look good on mobile too** — full responsive pass across pages (projects, `/now`, contact, blog).
+
 ## Sprint 2 — Founder credibility & depth
 - [ ] **Products / "What I'm building" section** above projects: InzerPro, NasadClaw, KouzelníkNaAkci — one-line value prop + status (live, paying customers) + your role (founder, solo eng).
 - [ ] **Selective traction metrics** (honest, current): paying customers, listings auto-posted, live-since date, uptime. Show traction *signals*, not necessarily exact MRR.
