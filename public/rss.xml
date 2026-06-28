@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Hand-maintained. When adding a blog post, add an <item> here and a <url> to sitemap.xml. -->
+<rss version="2.0">
+  <channel>
+    <title>Eduard Hvižďák — Blog</title>
+    <link>https://eduard-hvizdak.vercel.app/blog</link>
+    <description>Writing on AI engineering, building SaaS, hackathons, and life by Eduard Hvižďák.</description>
+    <language>en</language>
+    <item>
+      <title>Newsmatics Hackathon</title>
+      <link>https://eduard-hvizdak.vercel.app/blog/newsmatics-hackathon</link>
+      <guid>https://eduard-hvizdak.vercel.app/blog/newsmatics-hackathon</guid>
+      <pubDate>Sat, 27 Jun 2026 00:00:00 GMT</pubDate>
+      <description>I spent a hackathon with team MOGGERS building Newsmatics Globe — a pipeline that pulls locations out of news articles and plots them on an interactive 3D globe.</description>
+    </item>
+    <item>
+      <title>Talking the Digital Fairness Act with Commissioner McGrath</title>
+      <link>https://eduard-hvizdak.vercel.app/blog/digital-fairness-act-youth-dialogue</link>
+      <guid>https://eduard-hvizdak.vercel.app/blog/digital-fairness-act-youth-dialogue</guid>
+      <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
+      <description>I joined a European Commission Youth Policy Dialogue in Ljubljana with EU Commissioner Michael McGrath, working through what the upcoming Digital Fairness Act should actually do.</description>
+    </item>
+    <item>
+      <title>Erasmus+ Bridges, Not Walls Experience</title>
+      <link>https://eduard-hvizdak.vercel.app/blog/erasmus-bridges-not-walls</link>
+      <guid>https://eduard-hvizdak.vercel.app/blog/erasmus-bridges-not-walls</guid>
+      <pubDate>Wed, 06 May 2026 00:00:00 GMT</pubDate>
+      <description>We took part in the Bridges not Walls Erasmus+ youth exchange in Lithuania — a week of non-formal education, cultural nights, and human connection across six countries.</description>
+    </item>
+  </channel>
+</rss>

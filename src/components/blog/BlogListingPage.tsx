@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import { BLOG_POSTS, BlogPost } from '../../data/blog';
+import Seo from '../../seo/Seo';
 import './BlogPage.scss';
 
 // Thumbnail for a post: the explicit `thumbnail` field, otherwise the first
@@ -15,6 +16,11 @@ function getThumbnail(post: BlogPost): string | null {
 const BlogListingPage: React.FC = () => {
   return (
     <div className="blog-listing">
+      <Seo
+        title="Blog"
+        description="Writing by Eduard Hvižďák — thoughts on AI engineering, building SaaS, hackathons, and life."
+        path="/blog"
+      />
       <div className="blog-listing__inner">
         <Link to="/" className="blog-back">
           <FaArrowLeft />

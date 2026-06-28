@@ -7,8 +7,45 @@
     <meta name="theme-color" content="#000000" />
     <meta
       name="description"
-      content="Eduard Hvižďák – AI Developer. Portfolio showcasing AI projects, RAG pipelines, and multi-agent systems."
+      content="Eduard Hvižďák – AI engineer and indie founder. Production AI systems (RAG, multi-agent) and real SaaS products."
     />
+
+    <!-- Canonical + sitemap -->
+    <link rel="canonical" href="https://eduard-hvizdak.vercel.app/" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <!-- Open Graph / social card (homepage default; per-page tags set via react-helmet-async) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Eduard Hvižďák" />
+    <meta property="og:title" content="Eduard Hvižďák – AI Engineer & Founder" />
+    <meta property="og:description" content="Production AI systems (RAG, multi-agent) and real SaaS products — InzerPro, NasadClaw, KouzelníkNaAkci." />
+    <meta property="og:url" content="https://eduard-hvizdak.vercel.app/" />
+    <meta property="og:image" content="https://eduard-hvizdak.vercel.app/og-image.png" />
+
+    <!-- Twitter card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Eduard Hvižďák – AI Engineer & Founder" />
+    <meta name="twitter:description" content="Production AI systems (RAG, multi-agent) and real SaaS products — InzerPro, NasadClaw, KouzelníkNaAkci." />
+    <meta name="twitter:image" content="https://eduard-hvizdak.vercel.app/og-image.png" />
+
+    <!-- Person structured data (stable @id reused as blog-post author) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": "https://eduard-hvizdak.vercel.app/#person",
+      "name": "Eduard Hvižďák",
+      "url": "https://eduard-hvizdak.vercel.app/",
+      "jobTitle": "AI Engineer & Founder",
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "Masaryk University" },
+      "knowsAbout": ["Artificial Intelligence", "Retrieval-Augmented Generation", "Multi-agent systems", "Full-stack engineering", "SaaS"],
+      "sameAs": [
+        "https://github.com/Rauded",
+        "https://www.linkedin.com/in/eduard-hvizdak"
+      ]
+    }
+    </script>
+
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a

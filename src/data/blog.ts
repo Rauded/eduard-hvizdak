@@ -18,7 +18,7 @@ export const BLOG_POSTS: BlogPost[] = [
       'I spent a hackathon with team MOGGERS building Newsmatics Globe — a pipeline that pulls locations out of news articles and plots them on an interactive 3D globe. Here is how the weekend went, from the first line of code to the award ceremony.',
     thumbnail: '/blog/newsmatics/group.jpg',
     content: `
-      <p>I took part in the <strong>Newsmatics Hackathon</strong> in Brno with my team <strong>MOGGERS</strong>, where we built <strong>Newsmatics Globe</strong> — a geolocation pipeline that extracts locations from news articles via NLP, matches them against the GeoNames database, and visualises them on an interactive 3D globe, with timeline playback so you can watch events unfold across the world. You can read more about the project itself on my <a href="#/portfolio">portfolio page</a> (look for <strong>Newsmatics Globe</strong>).</p>
+      <p>I took part in the <strong>Newsmatics Hackathon</strong> in Brno with my team <strong>MOGGERS</strong>, where we built <strong>Newsmatics Globe</strong> — a geolocation pipeline that extracts locations from news articles via NLP, matches them against the GeoNames database, and visualises them on an interactive 3D globe, with timeline playback so you can watch events unfold across the world. You can read more about the project itself on my <a href="/portfolio">portfolio page</a> (look for <strong>Newsmatics Globe</strong>).</p>
 
       <figure class="blog-figure">
         <img src="/blog/newsmatics/group.jpg" alt="Full group photo of all Newsmatics Hackathon participants" class="blog-img" />
@@ -48,7 +48,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
       <h2>Final Thoughts</h2>
       <p>Hackathons are still my favourite way to build — a tight deadline, a real problem, and a small team that has to figure it out fast. Newsmatics Globe started as a weekend project here and ended up as one of the things I'm most proud of. Thanks to <strong>Newsmatics</strong> for putting on the event.</p>
-      <p>Want the technical details? Head over to the <a href="#/portfolio">portfolio</a> and find <strong>Newsmatics Globe</strong>.</p>
+      <p>Want the technical details? Head over to the <a href="/portfolio">portfolio</a> and find <strong>Newsmatics Globe</strong>.</p>
       <p><em>Eduard Hviždák</em></p>
 
       <p style="margin-top: 2.5em; font-size: 0.8em; opacity: 0.55;">

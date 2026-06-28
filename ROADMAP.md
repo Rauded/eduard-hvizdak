@@ -35,16 +35,20 @@ This is Sprint 1.
 
 ---
 
-## Sprint 1 — Foundations (low effort, high impact)
-- [ ] **Analytics:** add `@vercel/analytics` (and/or PostHog). Know when someone visits.
-- [ ] **OG + Twitter meta** per page (`og:title/description/image` 1200×630, `twitter:card=summary_large_image`). Biggest "looks unprofessional" gap — links currently unfurl as naked URLs.
-- [ ] **JSON-LD `Person` schema** on home (name, url, `sameAs` socials, `jobTitle`, `alumniOf` Masaryk, `knowsAbout`). Reuse a stable `@id` as author on blog posts → Google merges you into one entity.
-- [ ] **`BlogPosting` JSON-LD** per post.
-- [ ] **sitemap.xml + robots.txt + RSS feed** (`/rss.xml`).
-- [ ] **Canonical tags** on every page (required before any cross-posting).
-- [ ] **Real contact CTA** — a "Work with me / Let's talk" block + booking link (Cal.com) instead of a buried mailto. You sell B2B + run a marketplace; make the next step obvious.
-- [ ] **Custom domain** — buy `eduardhvizdak.com` (or similar), point Vercel at it.
-- [ ] ⚠️ **SEO caveat:** CRA + `HashRouter` is weak for crawlers/unfurlers. Either add `react-helmet-async` + prerender (`react-snap`), switch to `BrowserRouter`, or plan a Next.js/Vite-SSG migration (makes every item above clean). Track as its own decision below.
+## Sprint 1 — Foundations (DONE 2026-06-28, pending 2 inputs + deploy verify)
+- [x] **Clean URLs** — `HashRouter` → `BrowserRouter` + `vercel.json` SPA rewrite (excludes `/api`). Fixed 2 hardcoded `#/portfolio` links in `blog.ts`.
+- [x] **Analytics: PostHog** — `posthog-js` in `src/index.tsx`, env-gated (`REACT_APP_POSTHOG_KEY`), manual `$pageview` on route change (`src/App.tsx`). ⏳ **needs the project key set in Vercel env** to start collecting (EU host default).
+- [x] **OG + Twitter meta** — static homepage card in `public/index.html` + branded `public/og-image.png` (1200×630) + per-page via `react-helmet-async` (`src/seo/Seo.tsx`, used on every page).
+- [x] **JSON-LD `Person`** in `index.html` (stable `@id` `…/#person`) + **`BlogPosting`** per post (`BlogPostPage.tsx`, author refs the Person @id).
+- [x] **sitemap.xml + robots.txt + RSS** (`public/sitemap.xml`, `public/rss.xml`, robots Sitemap line). Hand-maintained — **update both when adding a blog post.**
+- [x] **Canonical tags** — every page via `<Seo>` (base `SITE_URL` in `src/seo/Seo.tsx`).
+- [x] **Contact CTA** — `src/components/contact/` "Let's work together" section (email pill + Book-15-min). ⏳ **set `REACT_APP_BOOKING_URL`** in Vercel to show the booking button (Cal.com/Calendly).
+- [ ] **Custom domain** — deferred (canonical currently `eduard-hvizdak.vercel.app`; swap `SITE_URL` + index.html + sitemap/rss when bought).
+- **Deferred (needs prerender/framework move):** per-**post** social-card unfurling on LinkedIn/X (helmet is client-rendered; Google sees it, social bots don't). Homepage card works for the most-shared link.
+
+### ⏳ Inputs to finish Sprint 1 (set in Vercel → Project → Settings → Environment Variables)
+- `REACT_APP_POSTHOG_KEY` (+ optional `REACT_APP_POSTHOG_HOST`, default `https://eu.i.posthog.com`) — create a *portfolio* PostHog project.
+- `REACT_APP_BOOKING_URL` — your Cal.com/Calendly link (button hidden until set).
 
 ## Sprint 2 — Founder credibility & depth
 - [ ] **Products / "What I'm building" section** above projects: InzerPro, NasadClaw, KouzelníkNaAkci — one-line value prop + status (live, paying customers) + your role (founder, solo eng).

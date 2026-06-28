@@ -1,26 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import posthog from 'posthog-js';
 
 
 // @ts-ignore
 import Header from './components/header/header.tsx';
 // @ts-ignore
-import Hero from './components/hero/hero.tsx';
-// @ts-ignore
-import SocialLinks from './components/social_links/social_links.tsx';
-// @ts-ignore
-import Resume from './components/resume/resume.tsx';
-// @ts-ignore
-import Projects from './components/projects/projects.tsx';
-// @ts-ignore
-import About from './components/about/about.tsx';
-// @ts-ignore
 import Footer from './components/footer/footer.tsx';
 // @ts-ignore
-// import Techstack from './components/techstack/techstack.tsx';
-// @ts-ignore
-// import ContributionMap from './components/contribution_map/contribution_map.tsx';
+import Home from './components/home/Home.tsx';
 // @ts-ignore
 import PortfolioPage from './components/portfolio/PortfolioPage.tsx';
 // @ts-ignore
@@ -38,58 +28,40 @@ const AppContainer = styled.div`
   margin: 0;
 `;
 
-const MainContent = styled.div`
-`;
+// SPA route changes need a manual PostHog $pageview (init disables auto-capture).
+const PostHogPageview: React.FC = () => {
+  const location = useLocation();
+  useEffect(() => {
+    if (process.env.REACT_APP_POSTHOG_KEY) {
+      posthog.capture('$pageview', { $current_url: window.location.href });
+    }
+  }, [location]);
+  return null;
+};
+
+const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <AppContainer>
+    <Header />
+    {children}
+    <Footer />
+  </AppContainer>
+);
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={
-          <AppContainer>
-            <Header />
-            <MainContent>
-              <Hero />
-              <About />
-              <Resume />
-              <Projects />
-              <SocialLinks />
-            </MainContent>
-            <Footer />
-          </AppContainer>
-        } />
-        <Route path="/portfolio" element={
-          <AppContainer>
-            <Header />
-            <PortfolioPage />
-            <Footer />
-          </AppContainer>
-        } />
-        <Route path="/blog" element={
-          <AppContainer>
-            <Header />
-            <BlogListingPage />
-            <Footer />
-          </AppContainer>
-        } />
-        <Route path="/blog/:slug" element={
-          <AppContainer>
-            <Header />
-            <BlogPostPage />
-            <Footer />
-          </AppContainer>
-        } />
-        {/* Preview-only for now (not in nav) until live data + films/books cards land. */}
-        <Route path="/now" element={
-          <AppContainer>
-            <Header />
-            <NowPage />
-            <Footer />
-          </AppContainer>
-        } />
-      </Routes>
-    </Router>
+    <HelmetProvider>
+      <Router>
+        <PostHogPageview />
+        <Routes>
+          <Route path="/" element={<Shell><Home /></Shell>} />
+          <Route path="/portfolio" element={<Shell><PortfolioPage /></Shell>} />
+          <Route path="/blog" element={<Shell><BlogListingPage /></Shell>} />
+          <Route path="/blog/:slug" element={<Shell><BlogPostPage /></Shell>} />
+          <Route path="/now" element={<Shell><NowPage /></Shell>} />
+        </Routes>
+      </Router>
+    </HelmetProvider>
   );
-}
+};
 
 export default App;

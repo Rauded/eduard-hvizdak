@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import './PortfolioPage.scss';
+import Seo from '../../seo/Seo';
 import { VISIBLE_PROJECTS } from './projectsData';
 // @ts-ignore
 import ProjectCard from './ProjectCard.tsx';
@@ -18,6 +19,11 @@ const PortfolioPage: React.FC = () => {
 
   return (
     <div className="portfolio-page">
+      <Seo
+        title="Portfolio"
+        description="Selected work by Eduard Hvižďák — AI products, SaaS, and experiments: InzerPro, NasadClaw, KouzelníkNaAkci, Newsmatics Globe, and more."
+        path="/portfolio"
+      />
       {/* ── Hero ── */}
       <section
         ref={heroRef}

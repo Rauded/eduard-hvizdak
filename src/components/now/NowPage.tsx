@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap, LuFilm, LuBookOpen } from 'react-icons/lu';
+import Seo from '../../seo/Seo';
 import './now.scss';
 
 // ─── Live focus stats contract ───────────────────────────────────────
@@ -57,6 +58,11 @@ const NowPage: React.FC = () => {
 
   return (
     <div className="now-page" id="now">
+      <Seo
+        title="Now"
+        description="What Eduard Hvižďák is focused on right now — current projects, plus what he's reading and watching."
+        path="/now"
+      />
       <header className="now-hero">
         <span className="now-hero__kicker">/now</span>
         <h1 className="now-hero__title">What I'm doing now</h1>
