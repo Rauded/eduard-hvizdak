@@ -105,10 +105,31 @@ would **undercount badly** → **skip it in favour of the dashboard** (which see
 2. [x] **Letterboxd** (films) — DONE. `api/letterboxd.js` (Vercel fn) parses `letterboxd.com/Rauded/rss/` → "Recently watched" poster grid on `/now`.
 3. [x] **Goodreads** (currently-reading) — DONE. `api/goodreads.js` parses the **currently-reading** shelf (user `126181458`) → "Reading now" cover grid. The "read" shelf is intentionally NOT used (awkward books) — safe to leave as-is.
 
-**`/now` is now LIVE in the nav** (Home · About · Projects · Resume · Blog · **Now**). It shows the
-hand-written intro + Reading now + Recently watched (real data via the two Vercel functions). The
-focus-stats block is **hidden until the dashboard syncs** real numbers (see blocker above), so the page
-reads complete today and the stats appear automatically once data flows.
+**`/now` is now LIVE in the nav** (Home · About · Projects · Resume · Blog · **Now**). It shows
+Reading now + Recently watched (real data via the two Vercel functions). The focus-stats block is
+**hidden until the dashboard syncs** real numbers (see blocker above), so the page reads complete
+today and the stats appear automatically once data flows.
+
+**2026-06-28 update:** Removed the hand-written 3-paragraph intro (degree/products/Pavlok dashboard
+blurb) at Eduard's request. Each media section now carries its **brand icon** (`SiGoodreads` /
+`SiLetterboxd` from `react-icons/si`) + an **"Auto-synced from Goodreads/Letterboxd"** link
+(`.now-media__head` + `.now-media__auto`) so visitors know the lists update themselves (the two Vercel
+fns re-parse the RSS feeds live on every request — zero manual upkeep).
+
+**Ideas to expand `/now` later (researched — pick what's authentic):**
+- [ ] **Short "currently" intro, rewritten** — a 1–2 line honest status (not the removed blurb) if the
+  page feels thin once focus-stats are still hidden. Keep it short.
+- [ ] **Focus / coding stats** (the blocked dashboard pipeline above) — the highest-signal addition;
+  needs the vision monitor running regularly. Hidden gracefully until then.
+- [ ] **GitHub activity** — public, CORS-friendly contribution/streak image card or a "recently pushed"
+  repos list (pure client-side, no key). Good founder signal.
+- [ ] **Now playing / recent tracks** — only if Eduard wants music; needs Spotify OAuth refresh token
+  (he previously said *no Spotify*, so likely skip).
+- [ ] **Latest blog post** auto-pulled onto `/now` (already have `blog.ts` + `rss.xml`).
+- [ ] **"Currently building"** mini-card per active product (InzerPro / NasadClaw / KouzelníkNaAkci)
+  with a one-line live status — overlaps with the Sprint-2 traction section.
+- [ ] **Last commit / last deploy** timestamp from the dashboard or GitHub API ("shipped X ago").
+- [ ] **Location / timezone** line ("Brno, CET") for the founder-juggling-things vibe.
 
 ### The `dashboard` → site data bridge (how to surface local data publicly)
 The dashboard is a local Bun backend (`~/Desktop/Projects/dashboard/backend`, `localhost:3001`, SQLite)

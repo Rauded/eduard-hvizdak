@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap, LuFilm, LuBookOpen } from 'react-icons/lu';
+import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap } from 'react-icons/lu';
+import { SiGoodreads, SiLetterboxd } from 'react-icons/si';
 import Seo from '../../seo/Seo';
 import './now.scss';
 
@@ -72,23 +73,6 @@ const NowPage: React.FC = () => {
         </p>
       </header>
 
-      <section className="now-block">
-        <p>
-          Finishing my Computer Science degree at <strong>Masaryk University</strong> (graduating 2026) while running my
-          products: <strong>InzerPro</strong> (classifieds automation with paying customers), <strong>NasadClaw</strong>{' '}
-          (B2B AI deployment), and <strong>KouzelníkNaAkci.cz</strong> (a magician marketplace).
-        </p>
-        <p>
-          Day to day I'm deep in <span className="now-hl">agentic AI systems, retrieval pipelines, and large-scale
-          document analysis</span> — and shipping most of it through Claude Code.
-        </p>
-        <p>
-          I also built a local <strong>focus dashboard</strong> that watches my screen with a vision model and{' '}
-          <span className="now-hl">zaps me (literally, via a Pavlok)</span> when I drift onto YouTube. When it's running,
-          the focus stats here come straight from it.
-        </p>
-      </section>
-
       {hasStats && (
         <section className="now-stats" aria-label="Live focus stats from my dashboard">
           {stats.map((s) => (
@@ -103,7 +87,17 @@ const NowPage: React.FC = () => {
 
       {books.length > 0 && (
         <section className="now-media">
-          <h2 className="now-media__title"><LuBookOpen /> Reading now</h2>
+          <div className="now-media__head">
+            <h2 className="now-media__title"><SiGoodreads /> Reading now</h2>
+            <a
+              className="now-media__auto"
+              href="https://www.goodreads.com/user/show/126181458-rauded"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Auto-synced from Goodreads
+            </a>
+          </div>
           <div className="now-media__grid">
             {books.map((b, i) => (
               <a className="now-card" key={i} href={b.link} target="_blank" rel="noopener noreferrer" title={`${b.title} — ${b.author}`}>
@@ -118,7 +112,17 @@ const NowPage: React.FC = () => {
 
       {films.length > 0 && (
         <section className="now-media">
-          <h2 className="now-media__title"><LuFilm /> Recently watched</h2>
+          <div className="now-media__head">
+            <h2 className="now-media__title"><SiLetterboxd /> Recently watched</h2>
+            <a
+              className="now-media__auto"
+              href="https://letterboxd.com/Rauded/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Auto-synced from Letterboxd
+            </a>
+          </div>
           <div className="now-media__grid">
             {films.map((f, i) => (
               <a className="now-card" key={i} href={f.link} target="_blank" rel="noopener noreferrer" title={`${f.title} (${f.year})`}>
