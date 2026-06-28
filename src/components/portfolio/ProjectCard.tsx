@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { PortfolioProject } from './projectsData';
+import { LuChevronDown } from 'react-icons/lu';
+import { PortfolioProject, CaseStudy } from './projectsData';
 
 // ─── Scroll-reveal hook ──────────────────────────────────────────
 export function useReveal(threshold = 0.12) {
@@ -101,6 +102,58 @@ const PlaceholderCard: React.FC<{ title: string; accent: string }> = ({ title, a
   </div>
 );
 
+// ─── Case study (always in the DOM for SEO/GEO; collapsed via CSS) ─
+// The full problem→solution narrative is rendered for every project
+// regardless of expand state, so crawlers and LLM indexers always get
+// the keywords. The button only toggles a CSS class for human readers.
+const CASE_SECTIONS: { key: keyof CaseStudy; heading: string }[] = [
+  { key: 'problem', heading: 'The problem' },
+  { key: 'motivation', heading: 'Why I built it' },
+  { key: 'challenges', heading: 'What I ran into' },
+  { key: 'solution', heading: 'How it got solved' },
+  { key: 'story', heading: 'Where it happened' },
+];
+
+const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) => {
+  const [open, setOpen] = useState(false);
+  const cs = project.caseStudy;
+  if (!cs) return null;
+
+  return (
+    <div className={`pcard__case ${open ? 'pcard__case--open' : ''}`}>
+      <button
+        type="button"
+        className="pcard__case-toggle"
+        aria-expanded={open}
+        aria-controls={`case-${project.id}`}
+        onClick={() => setOpen(o => !o)}
+        style={{ color: project.accent }}
+      >
+        {open ? 'Hide the full story' : 'Read the full story'}
+        <LuChevronDown className="pcard__case-chevron" aria-hidden="true" />
+      </button>
+
+      <div className="pcard__case-body" id={`case-${project.id}`}>
+        <div className="pcard__case-inner">
+          {CASE_SECTIONS.map(({ key, heading }) =>
+            cs[key] ? (
+              <div className="pcard__case-section" key={key}>
+                <h3 className="pcard__case-h" style={{ color: project.accent }}>
+                  {heading}
+                </h3>
+                <p
+                  className="pcard__case-p"
+                  dangerouslySetInnerHTML={{ __html: cs[key] as string }}
+                />
+              </div>
+            ) : null
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // ─── Single project card ─────────────────────────────────────────
 export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project }) => {
   const { ref, visible } = useReveal();
@@ -194,6 +247,8 @@ export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project }
             </a>
           ))}
         </div>
+
+        <ProjectCaseStudy project={project} />
       </div>
     </article>
   );
