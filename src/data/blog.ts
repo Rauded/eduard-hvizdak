@@ -72,14 +72,47 @@ export const BLOG_POSTS: BlogPost[] = [
         <img src="/blog/digital-fairness/youth-policy-dialogue.png" alt="Youth Policy Dialogue on the Digital Fairness Act with Commissioner Michael McGrath in Ljubljana" class="blog-img" />
       </figure>
 
+      <figure class="blog-figure">
+        <video class="blog-video" controls preload="metadata" playsinline poster="/blog/digital-fairness/df-wetalk-poster.jpg">
+          <source src="/blog/digital-fairness/df-wetalk.mp4" type="video/mp4" />
+        </video>
+        <figcaption>A few moments from the day — roundtables, side conversations, and the open discussion.</figcaption>
+      </figure>
+
       <h2>What We Worked On</h2>
       <p>Rather than abstract talking points, we mapped out concrete asks across three areas — <strong>pricing, marketing practices, and digital contracts</strong>. The themes that kept coming up: <strong>prohibiting deceptive practices and dark patterns</strong>, <strong>standardised requirements</strong> so users actually understand what they're agreeing to, and <strong>real-currency pricing</strong> instead of the in-app token systems designed to obscure how much you're really spending.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/digital-fairness/df-05.jpg" alt="Working group mapping deceptive design and dark patterns for the Digital Fairness Act" class="blog-img" />
+        <figcaption>In our working group — the "Dark Patterns" board on the table and the Digital Fairness principles in hand.</figcaption>
+      </figure>
+
+      <figure class="blog-figure">
+        <img src="/blog/digital-fairness/df-04.jpg" alt="Open-circle format of the Youth Policy Dialogue in Ljubljana" class="blog-img" />
+        <figcaption>The dialogue ran as an open circle, so every participant could weigh in directly.</figcaption>
+      </figure>
 
       <h2>Why It Matters</h2>
       <p>So much of the modern web is built to nudge, pressure, and quietly extract — manipulative defaults, fake urgency, subscriptions that are easy to start and almost impossible to cancel. As someone who builds software, I care a lot about where the line sits between good design and exploitative design. Getting to argue that line directly with the Commissioner shaping the legislation was a real privilege.</p>
 
+      <figure class="blog-figure">
+        <img src="/blog/digital-fairness/df-03.jpg" alt="Open Q&amp;A with the panel during the Digital Fairness Act dialogue, Commissioner McGrath listening" class="blog-img" />
+        <figcaption>The open Q&amp;A with the panel — Commissioner McGrath listening on the right.</figcaption>
+      </figure>
+
+      <figure class="blog-figure">
+        <img src="/blog/digital-fairness/df-02.jpg" alt="Eduard Hviždák listening during a session of the Youth Policy Dialogue" class="blog-img" />
+        <figcaption>Listening in during one of the sessions.</figcaption>
+      </figure>
+
       <h2>Final Thoughts</h2>
       <p>I came away convinced that youth input on digital policy isn't a box-ticking exercise — the people who grew up inside these systems often see the manipulation most clearly. Thanks to the <strong>European Commission</strong> and Commissioner <strong>Michael McGrath</strong> for genuinely listening.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/digital-fairness/df-01.jpg" alt="Group photo of the young participants with Commissioner Michael McGrath in Ljubljana" class="blog-img" />
+        <figcaption>The full group of young participants with Commissioner Michael McGrath in Ljubljana.</figcaption>
+      </figure>
+
       <p><em>Eduard Hviždák</em></p>
 
       <p style="margin-top: 2.5em; font-size: 0.8em; opacity: 0.55;">
