@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
+import { LuArrowRight } from 'react-icons/lu';
 import { BLOG_POSTS, BlogPost } from '../../data/blog';
 import Seo from '../../seo/Seo';
+import { formatDate, readingTime } from './blogUtils';
 import './BlogPage.scss';
 
 // Thumbnail for a post: the explicit `thumbnail` field, otherwise the first
@@ -14,6 +16,9 @@ function getThumbnail(post: BlogPost): string | null {
 }
 
 const BlogListingPage: React.FC = () => {
+  const [featured, ...rest] = BLOG_POSTS;
+  const featuredThumb = featured ? getThumbnail(featured) : null;
+
   return (
     <div className="blog-listing">
       <Seo
@@ -29,26 +34,56 @@ const BlogListingPage: React.FC = () => {
         <p className="blog-listing__eyebrow">Writing</p>
         <h1 className="blog-listing__title">Blog</h1>
         <p className="blog-listing__subtitle">Thoughts, experiences, and reflections.</p>
-        <div className="blog-listing__grid">
-          {BLOG_POSTS.map((post) => {
-            const thumb = getThumbnail(post);
-            return (
-              <Link to={`/blog/${post.slug}`} key={post.slug} className="blog-card">
-                <div className="blog-card__thumb">
-                  {thumb && <img src={thumb} alt={post.title} loading="lazy" />}
-                </div>
-                <div className="blog-card__body">
-                  <div className="blog-card__meta">
-                    <span className="blog-card__category">{post.category}</span>
-                    <span className="blog-card__date">{post.date}</span>
+
+        {featured && (
+          <Link to={`/blog/${featured.slug}`} className="blog-feature">
+            {featuredThumb && (
+              <div className="blog-feature__thumb">
+                <img src={featuredThumb} alt={featured.title} loading="lazy" />
+              </div>
+            )}
+            <div className="blog-feature__body">
+              <div className="blog-feature__meta">
+                <span className="blog-chip">{featured.category}</span>
+                <span className="blog-feature__date">
+                  {formatDate(featured.date)} · {readingTime(featured.content)} min read
+                </span>
+              </div>
+              <h2 className="blog-feature__title">{featured.title}</h2>
+              <p className="blog-feature__excerpt">{featured.excerpt}</p>
+              <span className="blog-feature__more">
+                Read article <LuArrowRight />
+              </span>
+            </div>
+          </Link>
+        )}
+
+        {rest.length > 0 && (
+          <div className="blog-rows">
+            {rest.map((post) => {
+              const thumb = getThumbnail(post);
+              return (
+                <Link to={`/blog/${post.slug}`} key={post.slug} className="blog-row">
+                  <div className="blog-row__body">
+                    <div className="blog-row__meta">
+                      <span className="blog-chip">{post.category}</span>
+                      <span className="blog-row__date">
+                        {formatDate(post.date)} · {readingTime(post.content)} min read
+                      </span>
+                    </div>
+                    <h2 className="blog-row__title">{post.title}</h2>
+                    <p className="blog-row__excerpt">{post.excerpt}</p>
                   </div>
-                  <h2 className="blog-card__title">{post.title}</h2>
-                  <p className="blog-card__excerpt">{post.excerpt}</p>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+                  {thumb && (
+                    <div className="blog-row__thumb">
+                      <img src={thumb} alt={post.title} loading="lazy" />
+                    </div>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
