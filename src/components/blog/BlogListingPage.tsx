@@ -5,9 +5,13 @@ import { LuArrowRight, LuPin } from 'react-icons/lu';
 import { BLOG_POSTS } from '../../data/blog';
 import Seo from '../../seo/Seo';
 import { formatDate, getThumbnail, readingTime } from './blogUtils';
+import { useBlogTheme } from './useBlogTheme';
+import ThemeToggle from './ThemeToggle';
 import './BlogPage.scss';
 
 const BlogListingPage: React.FC = () => {
+  const [theme, toggleTheme] = useBlogTheme();
+
   // Newest first, but a pinned post is always surfaced as the featured hero.
   const byDate = [...BLOG_POSTS].sort((a, b) => b.date.localeCompare(a.date));
   const featured = byDate.find((p) => p.pinned) ?? byDate[0];
@@ -15,17 +19,20 @@ const BlogListingPage: React.FC = () => {
   const featuredThumb = featured ? getThumbnail(featured) : null;
 
   return (
-    <div className="blog-listing">
+    <div className="blog-listing" data-theme={theme}>
       <Seo
         title="Blog"
         description="Writing by Eduard Hvižďák — thoughts on AI engineering, building SaaS, hackathons, and life."
         path="/blog"
       />
       <div className="blog-listing__inner">
-        <Link to="/" className="blog-back">
-          <FaArrowLeft />
-          Back home
-        </Link>
+        <div className="blog-listing__topbar">
+          <Link to="/" className="blog-back">
+            <FaArrowLeft />
+            Back home
+          </Link>
+          <ThemeToggle theme={theme} onToggle={toggleTheme} />
+        </div>
         <p className="blog-listing__eyebrow">Writing</p>
         <h1 className="blog-listing__title">Blog</h1>
         <p className="blog-listing__subtitle">Thoughts, experiences, and reflections.</p>

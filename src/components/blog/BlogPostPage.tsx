@@ -1,17 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import { LuSun, LuMoon } from 'react-icons/lu';
 import { BLOG_POSTS } from '../../data/blog';
 import Seo, { SITE_URL, PERSON_ID } from '../../seo/Seo';
 import { formatDate, getThumbnail, readingTime } from './blogUtils';
+import { useBlogTheme } from './useBlogTheme';
+import ThemeToggle from './ThemeToggle';
 import './BlogPage.scss';
 
 type FontPref = 'serif' | 'sans';
-type ThemePref = 'light' | 'dark';
 
 const FONT_KEY = 'blog-font';
-const THEME_KEY = 'blog-theme';
 
 const AVATAR = '/eduard-hvizdak.jpg';
 const GITHUB = 'https://github.com/Rauded';
@@ -32,9 +31,7 @@ const BlogPostPage: React.FC = () => {
   const [font, setFont] = useState<FontPref>(() =>
     getStored<FontPref>(FONT_KEY, 'serif', ['serif', 'sans'])
   );
-  const [theme, setTheme] = useState<ThemePref>(() =>
-    getStored<ThemePref>(THEME_KEY, 'dark', ['light', 'dark'])
-  );
+  const [theme, toggleTheme] = useBlogTheme();
   const [progress, setProgress] = useState(0);
   const [zoomSrc, setZoomSrc] = useState<string | null>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -42,9 +39,6 @@ const BlogPostPage: React.FC = () => {
   useEffect(() => {
     window.localStorage.setItem(FONT_KEY, font);
   }, [font]);
-  useEffect(() => {
-    window.localStorage.setItem(THEME_KEY, theme);
-  }, [theme]);
 
   // Reading-progress bar tied to the article body's scroll position.
   useEffect(() => {
@@ -147,14 +141,7 @@ const BlogPostPage: React.FC = () => {
                 </button>
               ))}
             </div>
-            <button
-              type="button"
-              className="reading-controls__theme"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              aria-label={theme === 'dark' ? 'Switch to light reading mode' : 'Switch to dark reading mode'}
-            >
-              {theme === 'dark' ? <LuSun /> : <LuMoon />}
-            </button>
+            <ThemeToggle theme={theme} onToggle={toggleTheme} />
           </div>
         </div>
 

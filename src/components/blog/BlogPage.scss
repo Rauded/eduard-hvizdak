@@ -14,7 +14,7 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: $text-dim;
+  color: var(--text-soft, #{$text-dim});
   text-decoration: none;
   font-size: 0.78em;
   letter-spacing: 0.07em;
@@ -22,7 +22,7 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
   font-family: $ui-font;
 
   &:hover {
-    color: $text;
+    color: var(--text-strong, #{$text});
   }
 
   svg {
@@ -40,30 +40,89 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 600;
-  color: $text-dim;
+  color: var(--text-soft, #{$text-dim});
   font-family: $ui-font;
   white-space: nowrap;
 }
 
-// ─── Listing page ───────────────────────────────────────────────
+// Shared light/dark toggle (feed + article pages)
+.blog-theme-toggle {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-soft, #{$text-dim});
+  cursor: pointer;
+  flex: 0 0 auto;
+  transition: background 0.2s ease, color 0.2s ease;
+
+  &:hover {
+    color: var(--text-strong, #{$text});
+    background: var(--surface, rgba(255, 255, 255, 0.05));
+  }
+
+  svg {
+    font-size: 1rem;
+  }
+}
+
+// ─── Listing page (themeable) ───────────────────────────────────
 .blog-listing {
+  // Dark default — overridden by [data-theme='light'].
+  --bg: #0a0a0f;
+  --text: #ededf2;
+  --text-strong: #ffffff;
+  --text-soft: #9a9aa8;
+  --border: rgba(255, 255, 255, 0.09);
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-2: rgba(255, 255, 255, 0.06);
+  --accent: #a5b4fc;
+  --media-shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
+
+  &[data-theme='light'] {
+    --bg: #ffffff;
+    --text: #2b2b31;
+    --text-strong: #14141a;
+    --text-soft: #6b6b78;
+    --border: rgba(0, 0, 0, 0.1);
+    --surface: #fbfbfc;
+    --surface-2: #f1f1f4;
+    --accent: #5850ec;
+    --media-shadow: 0 16px 38px rgba(20, 20, 45, 0.1);
+  }
+
   font-family: $ui-font;
-  color: $text;
+  color: var(--text);
+  background: var(--bg);
   padding-top: 88px;
   min-height: 100vh;
+  transition: background 0.25s ease, color 0.25s ease;
 
   &__inner {
-    max-width: 880px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 64px clamp(24px, 6vw, 80px) 120px;
+    padding: 40px clamp(24px, 6vw, 72px) 120px;
+  }
+
+  &__topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 44px;
   }
 
   &__eyebrow {
     font-size: 0.72em;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: $text-dim;
-    margin: 32px 0 16px;
+    color: var(--text-soft);
+    margin: 0 0 16px;
   }
 
   &__title {
@@ -72,39 +131,39 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
     letter-spacing: -0.02em;
     margin: 0 0 12px;
     line-height: 1.1;
-    color: $text;
+    color: var(--text-strong);
   }
 
   &__subtitle {
     font-size: 0.9em;
-    color: $text-dim;
-    margin: 0 0 56px;
-    letter-spacing: 0.04em;
+    color: var(--text-soft);
+    margin: 0 0 52px;
+    letter-spacing: 0.02em;
   }
 }
 
-// ─── Featured (first) post ──────────────────────────────────────
+// ─── Featured (first) post — editorial side-by-side hero ────────
 .blog-feature {
-  display: block;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
   text-decoration: none;
   color: inherit;
-  border: 1px solid $border;
-  border-radius: 16px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.03);
-  transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
-  margin-bottom: 48px;
+  background: var(--surface);
+  min-height: 340px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
+  margin-bottom: 56px;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.18);
-    background: rgba(255, 255, 255, 0.05);
-    transform: translateY(-2px);
+    transform: translateY(-3px);
+    box-shadow: var(--media-shadow);
   }
 
   &__thumb {
-    aspect-ratio: 16 / 7;
     overflow: hidden;
-    background: linear-gradient(135deg, #18181f 0%, #23232b 100%);
+    background: var(--surface-2);
 
     img {
       width: 100%;
@@ -120,7 +179,10 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   &__body {
-    padding: clamp(24px, 4vw, 40px);
+    padding: clamp(26px, 3vw, 42px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   &__meta {
@@ -136,10 +198,10 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
     align-items: center;
     gap: 5px;
     font-size: 0.66em;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.13em;
     text-transform: uppercase;
-    color: $text-mid;
+    color: var(--accent);
 
     svg {
       font-size: 1.15em;
@@ -148,25 +210,28 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
 
   &__date {
     font-size: 0.72em;
-    color: $text-dim;
-    letter-spacing: 0.05em;
+    color: var(--text-soft);
+    letter-spacing: 0.04em;
   }
 
   &__title {
-    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
     font-weight: 700;
     letter-spacing: -0.02em;
-    line-height: 1.2;
+    line-height: 1.22;
     margin: 0 0 14px;
-    color: $text;
+    color: var(--text-strong);
   }
 
   &__excerpt {
-    font-size: 0.9em;
-    color: $text-mid;
-    line-height: 1.7;
-    margin: 0 0 20px;
-    max-width: 64ch;
+    font-size: 0.88em;
+    color: var(--text-soft);
+    line-height: 1.65;
+    margin: 0 0 22px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   &__more {
@@ -176,20 +241,25 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
     font-size: 0.8em;
     font-weight: 600;
     letter-spacing: 0.03em;
-    color: $text-mid;
-    transition: color 0.2s ease;
+    color: var(--accent);
+    transition: gap 0.2s ease;
 
     svg {
       transition: transform 0.2s ease;
     }
   }
 
-  &:hover &__more {
-    color: $text;
-  }
-
   &:hover &__more svg {
     transform: translateX(4px);
+  }
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+    min-height: 0;
+
+    &__thumb {
+      aspect-ratio: 16 / 9;
+    }
   }
 }
 
@@ -205,21 +275,15 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
   align-items: center;
   text-decoration: none;
   color: inherit;
-  padding: 28px 0;
-  border-top: 1px solid $border;
-  transition: opacity 0.2s ease;
+  padding: 26px 0;
+  border-top: 1px solid var(--border);
 
   &:last-child {
-    border-bottom: 1px solid $border;
-  }
-
-  &:hover {
-    border-top-color: rgba(255, 255, 255, 0.16);
+    border-bottom: 1px solid var(--border);
   }
 
   &:hover .blog-row__title {
-    color: $text;
-    opacity: 0.78;
+    color: var(--accent);
   }
 
   &:hover .blog-row__thumb img {
@@ -240,14 +304,14 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
 
   &__date {
     font-size: 0.72em;
-    color: $text-dim;
-    letter-spacing: 0.05em;
+    color: var(--text-soft);
+    letter-spacing: 0.04em;
   }
 
   &__title {
-    font-size: 1.2em;
+    font-size: 1.18em;
     font-weight: 600;
-    color: $text;
+    color: var(--text-strong);
     margin: 0 0 8px;
     letter-spacing: -0.01em;
     line-height: 1.35;
@@ -256,7 +320,7 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
 
   &__excerpt {
     font-size: 0.82em;
-    color: $text-mid;
+    color: var(--text-soft);
     line-height: 1.6;
     margin: 0;
     max-width: 60ch;
@@ -267,11 +331,12 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   &__thumb {
-    flex: 0 0 160px;
-    aspect-ratio: 4 / 3;
-    border-radius: 10px;
+    flex: 0 0 168px;
+    aspect-ratio: 16 / 11;
+    border-radius: 12px;
     overflow: hidden;
-    background: linear-gradient(135deg, #18181f 0%, #23232b 100%);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
 
     img {
       width: 100%;
@@ -323,8 +388,8 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
   --surface: rgba(255, 255, 255, 0.035);
   --accent: #a5b4fc;
   --accent-soft: rgba(165, 180, 252, 0.16);
-  --media-shadow: 0 18px 48px rgba(0, 0, 0, 0.5);
-  --media-shadow-hover: 0 28px 66px rgba(0, 0, 0, 0.62);
+  --media-shadow: 0 10px 30px rgba(0, 0, 0, 0.38);
+  --media-shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.5);
 
   // Reading font, switched by [data-font].
   --read-font: 'Source Serif 4', Georgia, Cambria, serif;
@@ -526,21 +591,18 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
       font-style: italic;
     }
 
-    // Figures break out a touch wider than the reading column (Medium-style),
-    // framed with a hairline border + soft shadow so they feel art-directed
-    // rather than pasted in.
+    // Figures stay within the reading column so they keep the page's slim,
+    // consistent measure — framed with a hairline border + soft shadow.
     .blog-figure {
-      width: min(800px, calc(100vw - 36px));
-      margin: 3.2em 0;
-      margin-left: 50%;
-      transform: translateX(-50%);
+      width: 100%;
+      margin: 2.4em 0;
       padding: 0;
     }
 
     .blog-img,
     .blog-video {
       width: 100%;
-      border-radius: 14px;
+      border-radius: 12px;
       display: block;
       border: 1px solid var(--border);
       box-shadow: var(--media-shadow);
@@ -549,10 +611,10 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
     .blog-img {
       object-fit: cover;
       cursor: zoom-in;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
 
       &:hover {
-        transform: translateY(-3px);
+        transform: translateY(-2px);
         box-shadow: var(--media-shadow-hover);
       }
     }
@@ -565,7 +627,7 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
 
     // Two stacked figures read as a pair, not a gap.
     .blog-figure + .blog-figure {
-      margin-top: 2em;
+      margin-top: 1.6em;
     }
 
     figcaption {
@@ -626,30 +688,6 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
         background: var(--accent-soft);
         color: var(--accent);
       }
-    }
-  }
-
-  &__theme {
-    appearance: none;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: transparent;
-    color: var(--text-soft);
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-
-    &:hover {
-      color: var(--text-strong);
-      background: var(--surface);
-    }
-
-    svg {
-      font-size: 1rem;
     }
   }
 }
