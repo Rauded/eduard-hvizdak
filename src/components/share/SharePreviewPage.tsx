@@ -59,7 +59,7 @@ const SharePreviewPage: React.FC = () => {
             <div><dt>twitter:card</dt><dd>summary_large_image</dd></div>
           </dl>
           <div className="share-rawimage">
-            <img src={SHARE.image} alt="Current Open Graph image" />
+            <img src={SHARE.image} alt="Current Open Graph share card" />
             <span className="share-rawimage__cap">The raw 1200×630 OG image</span>
           </div>
         </section>
