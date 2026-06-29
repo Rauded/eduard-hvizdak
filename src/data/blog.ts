@@ -17,10 +17,10 @@ export const BLOG_POSTS: BlogPost[] = [
     date: '2026-02-27',
     category: 'Hackathons & Builds',
     excerpt:
-      'I spent a hackathon with team MOGGERS building Newsmatics Globe — a pipeline that pulls locations out of news articles and plots them on an interactive 3D globe. Here is how the weekend went, from the first line of code to the award ceremony.',
+      'I spent a weekend hacking with team MOGGERS on Newsmatics Globe, a pipeline that pulls locations out of news articles and plots them on an interactive 3D globe. Here is how the weekend went.',
     thumbnail: '/blog/newsmatics/group.jpg',
     content: `
-      <p>On <strong>February 27–28, 2026</strong> I took part in the <strong><a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathon</a></strong> in Brno with my team <strong>MOGGERS</strong>, where we built <strong>Newsmatics Globe</strong> — a geolocation pipeline that extracts locations from news articles via NLP, matches them against the GeoNames database, and visualises them on an interactive 3D globe, with timeline playback so you can watch events unfold across the world. You can read more about the project itself on my <a href="/portfolio">portfolio page</a> (look for <strong>Newsmatics Globe</strong>).</p>
+      <p>On <strong>27-28 February 2026</strong> I took part in the <strong><a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathon</a></strong> in Brno with my team, <strong>MOGGERS</strong>. We built <strong>Newsmatics Globe</strong>, a geolocation pipeline: it pulls place names out of news articles with NLP, matches them against the GeoNames database, and plots them on an interactive 3D globe. There's a timeline you can scrub to watch events spread across the map. If you want the detail on the project itself, it's on my <a href="/portfolio">portfolio page</a> (look for <strong>Newsmatics Globe</strong>).</p>
 
       <figure class="blog-figure">
         <img src="/blog/newsmatics/group.jpg" alt="Full group photo of all Newsmatics Hackathon participants" class="blog-img" />
@@ -28,14 +28,14 @@ export const BLOG_POSTS: BlogPost[] = [
       </figure>
 
       <h2>The Build</h2>
-      <p>Most of the weekend looked exactly like this — heads down, laptops open, coffee and energy drinks within reach, working through the pipeline piece by piece. We split the work between the NLP extraction, the GeoNames matching, and the front-end globe, then spent the back half of the event stitching it all together and tuning the timeline playback.</p>
+      <p>Most of the weekend looked exactly like this: laptops open, too much coffee, working through the pipeline piece by piece. We split the work three ways, one of us on the NLP extraction, one on the GeoNames matching, one on the front-end globe. The back half of the event was mostly stitching it together and tuning the timeline.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/newsmatics/working.jpg" alt="Working at the hackathon — coding on laptops with a teammate" class="blog-img" />
+        <img src="/blog/newsmatics/working.jpg" alt="Working at the hackathon, coding on laptops with a teammate" class="blog-img" />
       </figure>
 
       <h2>Team MOGGERS</h2>
-      <p>We competed as <strong>MOGGERS</strong> — three of us, each owning a different part of the stack. Pitching the globe to the judges with a live timeline running was the moment everything we'd built that weekend finally clicked into one demo.</p>
+      <p>We competed as <strong>MOGGERS</strong>, three of us, each owning a different part of the stack. Pitching the globe to the judges with the timeline running live was the moment everything we'd built that weekend finally clicked into one demo.</p>
 
       <figure class="blog-figure">
         <img src="/blog/newsmatics/team.jpg" alt="Team MOGGERS portrait at the Newsmatics Hackathon" class="blog-img" />
@@ -49,11 +49,11 @@ export const BLOG_POSTS: BlogPost[] = [
       </figure>
 
       <h2>Final Thoughts</h2>
-      <p>Hackathons are still my favourite way to build — a tight deadline, a real problem, and a small team that has to figure it out fast. Newsmatics Globe started as a weekend project here and ended up as one of the things I'm most proud of. Thanks to <strong>Newsmatics</strong> for putting on the event — you can read their official recap on the <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathon 2026 page</a>.</p>
+      <p>Hackathons are still my favourite way to build. You get a tight deadline, a real problem, and a small team that has to figure it out fast. Newsmatics Globe started as a weekend project here and turned into one of the things I'm most proud of. Thanks to <strong>Newsmatics</strong> for putting it on. Their official recap is on the <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathon 2026 page</a>.</p>
       <p>Want the technical details? Head over to the <a href="/portfolio">portfolio</a> and find <strong>Newsmatics Globe</strong>.</p>
     `,
     footnote:
-      'Newsmatics Hackathon · Brno, Czech Republic · February 27–28, 2026<br/>Team MOGGERS · Project: Newsmatics Globe · <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">newsmatics.com</a>',
+      'Newsmatics Hackathon · Brno, Czech Republic · 27-28 February 2026<br/>Team MOGGERS · Project: Newsmatics Globe · <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">newsmatics.com</a>',
   },
   {
     slug: 'digital-fairness-act-youth-dialogue',
@@ -65,7 +65,7 @@ export const BLOG_POSTS: BlogPost[] = [
       'I joined a European Commission Youth Policy Dialogue in Ljubljana with EU Commissioner Michael McGrath, where we worked through what the upcoming Digital Fairness Act should actually do about deceptive design, pricing, and digital contracts.',
     thumbnail: '/blog/digital-fairness/youth-policy-dialogue.png',
     content: `
-      <p>I took part in a <strong>European Commission Youth Policy Dialogue</strong> in <strong>Ljubljana</strong>, sitting down with <strong>EU Commissioner Michael McGrath</strong> to talk about the <strong>Digital Fairness Act</strong> — the EU's upcoming push to clean up how online services treat people. It was one of those rare moments where the conversation about regulation happens <em>with</em> the people it's meant to protect, not just about them.</p>
+      <p>I took part in a <strong>European Commission Youth Policy Dialogue</strong> in <strong>Ljubljana</strong> and sat down with <strong>EU Commissioner Michael McGrath</strong> to talk about the <strong>Digital Fairness Act</strong>, the EU's upcoming push to clean up how online services treat people. What stuck with me was that the conversation about the rules happened <em>with</em> the people they're meant to protect, not just about them.</p>
 
       <figure class="blog-figure">
         <img src="/blog/digital-fairness/youth-policy-dialogue.png" alt="Youth Policy Dialogue on the Digital Fairness Act with Commissioner Michael McGrath in Ljubljana" class="blog-img" />
@@ -73,26 +73,26 @@ export const BLOG_POSTS: BlogPost[] = [
 
       <figure class="blog-figure">
         <img src="/blog/digital-fairness/df-03.jpg" alt="Open Q&amp;A with the panel during the Digital Fairness Act dialogue, Commissioner McGrath listening" class="blog-img" />
-        <figcaption>The open Q&amp;A with the panel — Commissioner McGrath listening on the right.</figcaption>
+        <figcaption>The open Q&amp;A with the panel, Commissioner McGrath listening on the right.</figcaption>
       </figure>
 
       <h2>What We Worked On</h2>
-      <p>Rather than abstract talking points, we mapped out concrete asks across three areas — <strong>pricing, marketing practices, and digital contracts</strong>. The themes that kept coming up: <strong>prohibiting deceptive practices and dark patterns</strong>, <strong>standardised requirements</strong> so users actually understand what they're agreeing to, and <strong>real-currency pricing</strong> instead of the in-app token systems designed to obscure how much you're really spending.</p>
+      <p>Instead of abstract talking points, we mapped out concrete asks across <strong>pricing, marketing practices, and digital contracts</strong>. A few themes kept coming up. Ban <strong>deceptive practices and dark patterns</strong>. Set <strong>standardised requirements</strong> so people actually understand what they're agreeing to. And price things in <strong>real currency</strong> instead of the in-app token systems built to hide how much you're really spending.</p>
 
       <figure class="blog-figure">
         <img src="/blog/digital-fairness/df-05.jpg" alt="Working group mapping deceptive design and dark patterns for the Digital Fairness Act" class="blog-img" />
-        <figcaption>In our working group — the "Dark Patterns" board on the table and the Digital Fairness principles in hand.</figcaption>
+        <figcaption>In our working group, with the "Dark Patterns" board on the table and the Digital Fairness principles in hand.</figcaption>
       </figure>
 
       <figure class="blog-figure">
         <video class="blog-video" controls preload="metadata" playsinline poster="/blog/digital-fairness/df-wetalk-poster.jpg">
           <source src="/blog/digital-fairness/df-wetalk.mp4" type="video/mp4" />
         </video>
-        <figcaption>A few moments from the day — roundtables, side conversations, and the open discussion.</figcaption>
+        <figcaption>A few moments from the day: the roundtables, the side conversations, the open discussion.</figcaption>
       </figure>
 
       <h2>Why It Matters</h2>
-      <p>So much of the modern web is built to nudge, pressure, and quietly extract — manipulative defaults, fake urgency, subscriptions that are easy to start and almost impossible to cancel. As someone who builds software, I care a lot about where the line sits between good design and exploitative design. Getting to argue that line directly with the Commissioner shaping the legislation was a real privilege.</p>
+      <p>So much of the modern web is built to nudge and pressure you into things: manipulative defaults, fake urgency, subscriptions that take one click to start and a support ticket to cancel. I build software, so I think a lot about where the line sits between good design and design that just exploits people. Getting to argue that line with the person actually shaping the legislation is not something I expected to be doing this year.</p>
 
       <figure class="blog-figure">
         <img src="/blog/digital-fairness/df-02.jpg" alt="Eduard Hviždák listening during a session of the Youth Policy Dialogue" class="blog-img" />
@@ -100,7 +100,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </figure>
 
       <h2>Final Thoughts</h2>
-      <p>I came away convinced that youth input on digital policy isn't a box-ticking exercise — the people who grew up inside these systems often see the manipulation most clearly. Thanks to the <strong>European Commission</strong> and Commissioner <strong>Michael McGrath</strong> for genuinely listening.</p>
+      <p>I left convinced that youth input on digital policy isn't just a box-ticking exercise. The people who grew up inside these systems tend to spot the manipulation fastest. Thanks to the <strong>European Commission</strong> and Commissioner <strong>Michael McGrath</strong> for actually listening.</p>
 
       <figure class="blog-figure">
         <img src="/blog/digital-fairness/df-01.jpg" alt="Group photo of the young participants with Commissioner Michael McGrath in Ljubljana" class="blog-img" />
@@ -108,7 +108,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </figure>
     `,
     footnote:
-      'Youth Policy Dialogue — Digital Fairness Act · Ljubljana, Slovenia<br/>With European Commissioner Michael McGrath · European Commission',
+      'Youth Policy Dialogue: Digital Fairness Act · Ljubljana, Slovenia<br/>With European Commissioner Michael McGrath · European Commission',
   },
   {
     slug: 'zero-to-done',
@@ -116,21 +116,21 @@ export const BLOG_POSTS: BlogPost[] = [
     date: '2026-06-08',
     category: 'Hackathons & Builds',
     excerpt:
-      'I spent a weekend in Brno at Zero to Done — the first run of a different kind of hackathon, where the goal was not a demo but a real startup: get customers, test the product, prove value. I brought InzerPro, and it was one of the best events I have done.',
+      'I spent a weekend in Brno at Zero to Done, the first run of a hackathon where the goal was not a demo but a real startup: get customers, test the product, see if anyone would actually pay. I brought InzerPro, and it was one of the best events I have done.',
     content: `
-      <p>I spent a weekend in Brno at <strong>Zero to Done</strong> — and it was genuinely one of the best events I've taken part in. It was the <strong>very first run</strong> of the event, put together by <strong>Petr Sochora</strong> and the team at <a href="https://www.mimedigital.cz/" target="_blank" rel="noopener noreferrer">mime digital</a>, who hosted everyone in their office in the centre of Brno. A room full of founders, builders, and mentors, all in for a few intense days. You can find the event at <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>.</p>
+      <p>I spent a weekend in Brno at <strong>Zero to Done</strong>, and it's one of the best events I've taken part in. It was the <strong>very first run</strong>, put together by <strong>Petr Sochora</strong> and the team at <a href="https://www.mimedigital.cz/" target="_blank" rel="noopener noreferrer">mime digital</a>, who hosted everyone in their office in the centre of Brno. A room full of founders and mentors, all in for a few intense days. The event is at <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>.</p>
 
       <h2>A Different Kind of Hackathon</h2>
-      <p>What made it stand out is that it <strong>wasn't a hackathon just for fun</strong>. It was a <strong>startup-build event</strong> — the bar wasn't "ship a cool demo," it was "build a real business." Over the weekend everyone was expected to actually <strong>get customers, test the product with real users, and prove there was value people would pay for</strong>. Investors were in the room, and the real question wasn't who won an audience vote — it was which teams were worth continuing to work with afterwards. That framing changed everything about how you spent your time.</p>
+      <p>What made it stand out is that it <strong>wasn't a hackathon for fun</strong>. It was a <strong>startup-build event</strong>. The bar wasn't "ship a cool demo," it was "build something people would actually pay for." Over the weekend you were expected to go talk to customers, test the product with real users, and show there was real demand. Investors were in the room, so it wasn't about winning an audience vote. It was about which teams were worth working with after the weekend ended. That changed how you spent every hour.</p>
 
       <h2>I Brought InzerPro</h2>
-      <p>I came and presented <strong>InzerPro</strong>, my classifieds-automation product, and used the weekend to push it forward the way the event wanted — talking to potential customers, testing, and sharpening the pitch instead of just adding features. Working on a real product I already care about, in a room full of people doing the same, made the whole thing click.</p>
+      <p>I brought <strong>InzerPro</strong>, my classifieds-automation product, and used the weekend the way the event wanted: talking to potential customers, testing, and sharpening the pitch instead of just adding features. Working on a real product I already care about, surrounded by people doing the same, made the whole thing click.</p>
 
       <h2>High Quality, Top to Bottom</h2>
-      <p>The thing that surprised me most was how <strong>high quality</strong> the whole event was — both the execution and the people. The organisation was tight, the program was well thought out, and there were a lot of <strong>genuinely impressive projects</strong> being built around me. I walked away with a huge amount of <strong>concrete, practical advice</strong>: how to price on value rather than cost, why showing the product to 20 people beats adding 20 features, that "great idea!" means nothing until someone actually pays, and that a pivot isn't a failure. The kind of feedback you only get from people who've actually done it.</p>
+      <p>What surprised me most was how good the whole thing was, both the execution and the people. The organisation was tight, the program was well thought out, and there were a lot of <strong>genuinely impressive projects</strong> being built around me. I walked away with a pile of <strong>concrete advice</strong>: price on value, not cost; showing the product to 20 people beats adding 20 features; "great idea!" means nothing until someone actually pays; a pivot isn't a failure. The kind of feedback you only get from people who've done it themselves.</p>
 
       <h2>Final Thoughts</h2>
-      <p>Huge thanks to <strong>Petr Sochora</strong> and the <strong>mime digital</strong> team for hosting and for setting the bar this high on a first run. Events that push you toward real customers instead of just a demo are rare, and this one nailed it — I'd do it again in a heartbeat.</p>
+      <p>Huge thanks to <strong>Petr Sochora</strong> and the <strong>mime digital</strong> team for hosting, and for setting the bar this high on a first run. Events that push you toward real customers instead of a demo are rare, and this one nailed it. I'd do it again in a heartbeat.</p>
       <p>Curious about the product I brought? Head to my <a href="/portfolio">portfolio</a> and look for <strong>InzerPro</strong>.</p>
     `,
     footnote:
@@ -142,7 +142,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: '2026-05-06',
     category: 'Life & Travel',
     excerpt:
-      'We took part in the Bridges not Walls Erasmus+ Youth exchange in Lithuania — a week of non-formal education, cultural nights, and human connection across six Eastern European countries.',
+      'We took part in the Bridges not Walls Erasmus+ Youth exchange in Lithuania, a week of non-formal education, cultural nights, and human connection across six Eastern European countries.',
     thumbnail: '/blog/erasmus/photo2.jpg',
     content: `
       <p>From <strong>20 to 29 April 2026</strong>, I took part in <strong>Bridges, Not Walls</strong>, an Erasmus+ Youth Exchange in <strong>Luoba, Lithuania</strong>. I got there through my organisation <strong>YouthFully Yours</strong>, and the project itself was put together by <strong>VšĮ Džiaugsmo slėnis</strong>. The whole point was to get better at connecting with people across different cultures and backgrounds, and to build empathy in a very hands-on way. Nine days later, I can say it worked.</p>
