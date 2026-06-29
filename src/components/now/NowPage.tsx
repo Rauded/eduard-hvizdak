@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap } from 'react-icons/lu';
+import { FaYoutube, FaGithub } from 'react-icons/fa6';
 import Seo from '../../seo/Seo';
 import './now.scss';
 
@@ -38,6 +39,23 @@ interface NowData {
 }
 interface Film { title: string; year: string; rating: number | null; link: string; poster: string }
 interface Book { title: string; author: string; cover: string; link: string }
+interface Video { id: string; title: string; published: string; url: string; thumbnail: string }
+interface ContribDay { date: string; count: number; level: number }
+interface GitHubData { total: number | null; contributions: ContribDay[] }
+
+// Group the day list into GitHub-style week columns (Sunday-aligned).
+function toWeeks(days: ContribDay[]): (ContribDay | null)[][] {
+  if (!days.length) return [];
+  const weeks: (ContribDay | null)[][] = [];
+  const [y, m, d] = days[0].date.split('-').map(Number);
+  let week: (ContribDay | null)[] = new Array(new Date(y, m - 1, d).getDay()).fill(null);
+  for (const day of days) {
+    week.push(day);
+    if (week.length === 7) { weeks.push(week); week = []; }
+  }
+  if (week.length) { while (week.length < 7) week.push(null); weeks.push(week); }
+  return weeks;
+}
 
 const fmt = (v: number | null, suffix = ''): string =>
   v === null || v === undefined ? '—' : `${v}${suffix}`;
@@ -49,6 +67,8 @@ const NowPage: React.FC = () => {
   const [data, setData] = useState<NowData | null>(null);
   const [films, setFilms] = useState<Film[]>([]);
   const [books, setBooks] = useState<Book[]>([]);
+  const [videos, setVideos] = useState<Video[]>([]);
+  const [gh, setGh] = useState<GitHubData | null>(null);
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/now-data.json`, { cache: 'no-store' })
@@ -63,7 +83,17 @@ const NowPage: React.FC = () => {
       .then((r) => (r.ok ? r.json() : { items: [] }))
       .then((d) => setBooks(d.items || []))
       .catch(() => {});
+    fetch('/api/youtube')
+      .then((r) => (r.ok ? r.json() : { items: [] }))
+      .then((d) => setVideos(d.items || []))
+      .catch(() => {});
+    fetch('/api/github')
+      .then((r) => (r.ok ? r.json() : null))
+      .then(setGh)
+      .catch(() => {});
   }, []);
+
+  const weeks = gh ? toWeeks(gh.contributions || []) : [];
 
   const stats = [
     { key: 'focus', icon: <LuBrain />, label: 'Focused this week', value: fmt(data?.focusHoursWeek ?? null, 'h') },
@@ -141,6 +171,65 @@ const NowPage: React.FC = () => {
               </a>
             ))}
           </div>
+        </section>
+      )}
+
+      {videos.length > 0 && (
+        <section className="now-media now-yt">
+          <div className="now-media__head">
+            <h2 className="now-media__title"><FaYoutube className="now-icon now-icon--yt" /> Latest video</h2>
+            <a className="now-media__auto" href="https://www.youtube.com/@eduardhvizdak" target="_blank" rel="noopener noreferrer">@eduardhvizdak</a>
+          </div>
+          <div className="now-video">
+            <iframe
+              src={`https://www.youtube-nocookie.com/embed/${videos[0].id}`}
+              title={videos[0].title}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+          {videos.length > 1 && (
+            <div className="now-yt__more">
+              {videos.slice(1, 4).map((v) => (
+                <a className="now-card now-card--video" key={v.id} href={v.url} target="_blank" rel="noopener noreferrer" title={v.title}>
+                  <img className="now-card__cover" src={v.thumbnail} alt="" loading="lazy" />
+                  <span className="now-card__title">{v.title}</span>
+                </a>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+
+      {gh && (gh.total !== null || weeks.length > 0) && (
+        <section className="now-github">
+          <div className="now-media__head">
+            <h2 className="now-media__title"><FaGithub className="now-icon" /> On GitHub</h2>
+            <a className="now-media__auto" href="https://github.com/Rauded" target="_blank" rel="noopener noreferrer">@Rauded</a>
+          </div>
+          {gh.total !== null && (
+            <p className="now-github__count">
+              <strong>{gh.total.toLocaleString()}</strong> contributions in the last year
+            </p>
+          )}
+          {weeks.length > 0 && (
+            <div className="now-github__scroll">
+              <div className="now-github__graph" role="img" aria-label={`${gh.total ?? ''} GitHub contributions in the last year`}>
+                {weeks.map((week, wi) => (
+                  <div className="now-github__week" key={wi}>
+                    {week.map((day, di) =>
+                      day ? (
+                        <span className="now-github__day" key={di} data-level={day.level} title={`${day.count} on ${day.date}`} />
+                      ) : (
+                        <span className="now-github__day now-github__day--pad" key={di} />
+                      )
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </section>
       )}
     </div>

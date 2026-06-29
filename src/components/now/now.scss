@@ -192,3 +192,88 @@
 
   &__stars { color: #818cf8; }
 }
+
+// ─── Section icons ──────────────────────────────────────────────────
+.now-icon {
+  font-size: 1.05em;
+  flex: 0 0 auto;
+
+  &--yt { color: #ff3041; }
+}
+
+// ─── Latest YouTube video ───────────────────────────────────────────
+.now-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  background: #000;
+
+  iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}
+
+.now-yt__more {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.now-card--video .now-card__cover {
+  aspect-ratio: 16 / 9;
+}
+
+// ─── GitHub contribution graph ──────────────────────────────────────
+.now-github {
+  margin-top: 40px;
+
+  &__count {
+    font-size: 0.85em;
+    color: rgba(248, 250, 252, 0.7);
+    margin: 0 0 16px;
+
+    strong {
+      color: #f8fafc;
+      font-weight: 700;
+    }
+  }
+
+  &__scroll {
+    overflow-x: auto;
+    padding-bottom: 6px;
+  }
+
+  &__graph {
+    display: inline-flex;
+    gap: 3px;
+  }
+
+  &__week {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  &__day {
+    width: 11px;
+    height: 11px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.06);
+
+    &[data-level='1'] { background: #0e4429; }
+    &[data-level='2'] { background: #006d32; }
+    &[data-level='3'] { background: #26a641; }
+    &[data-level='4'] { background: #39d353; }
+
+    &--pad { background: transparent; }
+  }
+}
