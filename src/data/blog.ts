@@ -6,19 +6,21 @@ export interface BlogPost {
   excerpt: string;
   thumbnail?: string; // cover image for the blog listing card
   content: string; // HTML string
+  pinned?: boolean; // surfaced as the featured post on the blog feed
+  footnote?: string; // event/credits dateline, rendered consistently after the article
 }
 
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: 'newsmatics-hackathon',
     title: 'Newsmatics Hackathon',
-    date: '2026-06-27',
+    date: '2026-02-27',
     category: 'Hackathons & Builds',
     excerpt:
       'I spent a hackathon with team MOGGERS building Newsmatics Globe — a pipeline that pulls locations out of news articles and plots them on an interactive 3D globe. Here is how the weekend went, from the first line of code to the award ceremony.',
     thumbnail: '/blog/newsmatics/group.jpg',
     content: `
-      <p>I took part in the <strong>Newsmatics Hackathon</strong> in Brno with my team <strong>MOGGERS</strong>, where we built <strong>Newsmatics Globe</strong> — a geolocation pipeline that extracts locations from news articles via NLP, matches them against the GeoNames database, and visualises them on an interactive 3D globe, with timeline playback so you can watch events unfold across the world. You can read more about the project itself on my <a href="/portfolio">portfolio page</a> (look for <strong>Newsmatics Globe</strong>).</p>
+      <p>On <strong>February 27–28, 2026</strong> I took part in the <strong><a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathon</a></strong> in Brno with my team <strong>MOGGERS</strong>, where we built <strong>Newsmatics Globe</strong> — a geolocation pipeline that extracts locations from news articles via NLP, matches them against the GeoNames database, and visualises them on an interactive 3D globe, with timeline playback so you can watch events unfold across the world. You can read more about the project itself on my <a href="/portfolio">portfolio page</a> (look for <strong>Newsmatics Globe</strong>).</p>
 
       <figure class="blog-figure">
         <img src="/blog/newsmatics/group.jpg" alt="Full group photo of all Newsmatics Hackathon participants" class="blog-img" />
@@ -47,21 +49,18 @@ export const BLOG_POSTS: BlogPost[] = [
       </figure>
 
       <h2>Final Thoughts</h2>
-      <p>Hackathons are still my favourite way to build — a tight deadline, a real problem, and a small team that has to figure it out fast. Newsmatics Globe started as a weekend project here and ended up as one of the things I'm most proud of. Thanks to <strong>Newsmatics</strong> for putting on the event.</p>
+      <p>Hackathons are still my favourite way to build — a tight deadline, a real problem, and a small team that has to figure it out fast. Newsmatics Globe started as a weekend project here and ended up as one of the things I'm most proud of. Thanks to <strong>Newsmatics</strong> for putting on the event — you can read their official recap on the <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathon 2026 page</a>.</p>
       <p>Want the technical details? Head over to the <a href="/portfolio">portfolio</a> and find <strong>Newsmatics Globe</strong>.</p>
-      <p><em>Eduard Hviždák</em></p>
-
-      <p style="margin-top: 2.5em; font-size: 0.8em; opacity: 0.55;">
-        <strong>Newsmatics Hackathon</strong> · Brno<br/>
-        Team MOGGERS · Project: Newsmatics Globe
-      </p>
     `,
+    footnote:
+      'Newsmatics Hackathon · Brno, Czech Republic · February 27–28, 2026<br/>Team MOGGERS · Project: Newsmatics Globe · <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">newsmatics.com</a>',
   },
   {
     slug: 'digital-fairness-act-youth-dialogue',
     title: 'Talking the Digital Fairness Act with Commissioner McGrath',
     date: '2026-06-25',
     category: 'Tech & Policy',
+    pinned: true,
     excerpt:
       'I joined a European Commission Youth Policy Dialogue in Ljubljana with EU Commissioner Michael McGrath, where we worked through what the upcoming Digital Fairness Act should actually do about deceptive design, pricing, and digital contracts.',
     thumbnail: '/blog/digital-fairness/youth-policy-dialogue.png',
@@ -107,14 +106,9 @@ export const BLOG_POSTS: BlogPost[] = [
         <img src="/blog/digital-fairness/df-01.jpg" alt="Group photo of the young participants with Commissioner Michael McGrath in Ljubljana" class="blog-img" />
         <figcaption>The full group of young participants with Commissioner Michael McGrath in Ljubljana.</figcaption>
       </figure>
-
-      <p><em>Eduard Hviždák</em></p>
-
-      <p style="margin-top: 2.5em; font-size: 0.8em; opacity: 0.55;">
-        <strong>Youth Policy Dialogue — Digital Fairness Act</strong> · Ljubljana, Slovenia<br/>
-        With European Commissioner Michael McGrath · European Commission
-      </p>
     `,
+    footnote:
+      'Youth Policy Dialogue — Digital Fairness Act · Ljubljana, Slovenia<br/>With European Commissioner Michael McGrath · European Commission',
   },
   {
     slug: 'zero-to-done',
@@ -138,13 +132,9 @@ export const BLOG_POSTS: BlogPost[] = [
       <h2>Final Thoughts</h2>
       <p>Huge thanks to <strong>Petr Sochora</strong> and the <strong>mime digital</strong> team for hosting and for setting the bar this high on a first run. Events that push you toward real customers instead of just a demo are rare, and this one nailed it — I'd do it again in a heartbeat.</p>
       <p>Curious about the product I brought? Head to my <a href="/portfolio">portfolio</a> and look for <strong>InzerPro</strong>.</p>
-      <p><em>Eduard Hviždák</em></p>
-
-      <p style="margin-top: 2.5em; font-size: 0.8em; opacity: 0.55;">
-        <strong>Zero to Done</strong> · Brno, Czech Republic<br/>
-        Hosted by mime digital · Project: InzerPro · <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>
-      </p>
     `,
+    footnote:
+      'Zero to Done · Brno, Czech Republic<br/>Hosted by mime digital · Project: InzerPro · <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>',
   },
   {
     slug: 'erasmus-bridges-not-walls',
@@ -185,14 +175,8 @@ export const BLOG_POSTS: BlogPost[] = [
       <h2>Final Thoughts</h2>
       <p>I came back from Lithuania with a different perspective on a few things. Not in a dramatic way, just the quiet kind where you realise you think about something slightly differently than before. I met people I want to stay in touch with, and I got to share a part of Slovak culture with people who had never encountered it before. That alone made the whole trip worth it.</p>
       <p>Thanks to <strong>YouthFully Yours</strong> for sending me, and to <strong>VšĮ Džiaugsmo slėnis</strong> (<a href="https://www.instagram.com/dziaugsmoslenis/" target="_blank" rel="noopener noreferrer">@dziaugsmoslenis</a>) for putting it all together.</p>
-      <p><em>Eduard Hviždák</em></p>
-
-      <p style="margin-top: 2.5em; font-size: 0.8em; opacity: 0.55;">
-        <strong>Bridges, Not Walls</strong> – Erasmus+ Youth Exchange · 20–29.04.2026, Luoba, Lithuania<br/>
-        Countries: Lithuania, Ukraine, Slovakia, Romania, Poland, Bulgaria<br/>
-        Funded by the Erasmus+ Programme of the European Union.<br/>
-        #BridgesNotWalls #ErasmusPlus #YouthExchange
-      </p>
     `,
+    footnote:
+      'Bridges, Not Walls – Erasmus+ Youth Exchange · 20–29.04.2026, Luoba, Lithuania<br/>Countries: Lithuania, Ukraine, Slovakia, Romania, Poland, Bulgaria<br/>Funded by the Erasmus+ Programme of the European Union.<br/>#BridgesNotWalls #ErasmusPlus #YouthExchange',
   },
 ];

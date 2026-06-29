@@ -1,14 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import { LuArrowRight } from 'react-icons/lu';
+import { LuArrowRight, LuPin } from 'react-icons/lu';
 import { BLOG_POSTS } from '../../data/blog';
 import Seo from '../../seo/Seo';
 import { formatDate, getThumbnail, readingTime } from './blogUtils';
 import './BlogPage.scss';
 
 const BlogListingPage: React.FC = () => {
-  const [featured, ...rest] = BLOG_POSTS;
+  // Newest first, but a pinned post is always surfaced as the featured hero.
+  const byDate = [...BLOG_POSTS].sort((a, b) => b.date.localeCompare(a.date));
+  const featured = byDate.find((p) => p.pinned) ?? byDate[0];
+  const rest = byDate.filter((p) => p.slug !== featured?.slug);
   const featuredThumb = featured ? getThumbnail(featured) : null;
 
   return (
@@ -36,6 +39,12 @@ const BlogListingPage: React.FC = () => {
             )}
             <div className="blog-feature__body">
               <div className="blog-feature__meta">
+                {featured.pinned && (
+                  <span className="blog-feature__pin">
+                    <LuPin />
+                    Pinned
+                  </span>
+                )}
                 <span className="blog-chip">{featured.category}</span>
                 <span className="blog-feature__date">
                   {formatDate(featured.date)} · {readingTime(featured.content)} min read

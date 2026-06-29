@@ -178,6 +178,10 @@ const BlogPostPage: React.FC = () => {
           dangerouslySetInnerHTML={{ __html: post.content }}
         />
 
+        {post.footnote && (
+          <p className="post-footnote" dangerouslySetInnerHTML={{ __html: post.footnote }} />
+        )}
+
         <aside className="author-card">
           <img className="author-card__avatar" src={AVATAR} alt="Eduard Hvižďák" loading="lazy" />
           <div className="author-card__info">
