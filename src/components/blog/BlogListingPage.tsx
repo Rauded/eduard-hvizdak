@@ -35,7 +35,12 @@ const BlogListingPage: React.FC = () => {
         </div>
         <p className="blog-listing__eyebrow">Writing</p>
         <h1 className="blog-listing__title">Blog</h1>
-        <p className="blog-listing__subtitle">Thoughts, experiences, and reflections.</p>
+        <p className="blog-listing__subtitle">
+          Thoughts, experiences, and reflections.{' '}
+          <Link to="/elsewhere" className="blog-listing__elsewhere">
+            See what I&rsquo;m posting elsewhere <LuArrowRight />
+          </Link>
+        </p>
 
         {featured && (
           <Link to={`/blog/${featured.slug}`} className="blog-feature">
