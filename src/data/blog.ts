@@ -73,10 +73,8 @@ export const BLOG_POSTS: BlogPost[] = [
       </figure>
 
       <figure class="blog-figure">
-        <video class="blog-video" controls preload="metadata" playsinline poster="/blog/digital-fairness/df-wetalk-poster.jpg">
-          <source src="/blog/digital-fairness/df-wetalk.mp4" type="video/mp4" />
-        </video>
-        <figcaption>A few moments from the day — roundtables, side conversations, and the open discussion.</figcaption>
+        <img src="/blog/digital-fairness/df-03.jpg" alt="Open Q&amp;A with the panel during the Digital Fairness Act dialogue, Commissioner McGrath listening" class="blog-img" />
+        <figcaption>The open Q&amp;A with the panel — Commissioner McGrath listening on the right.</figcaption>
       </figure>
 
       <h2>What We Worked On</h2>
@@ -88,17 +86,14 @@ export const BLOG_POSTS: BlogPost[] = [
       </figure>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-04.jpg" alt="Open-circle format of the Youth Policy Dialogue in Ljubljana" class="blog-img" />
-        <figcaption>The dialogue ran as an open circle, so every participant could weigh in directly.</figcaption>
+        <video class="blog-video" controls preload="metadata" playsinline poster="/blog/digital-fairness/df-wetalk-poster.jpg">
+          <source src="/blog/digital-fairness/df-wetalk.mp4" type="video/mp4" />
+        </video>
+        <figcaption>A few moments from the day — roundtables, side conversations, and the open discussion.</figcaption>
       </figure>
 
       <h2>Why It Matters</h2>
       <p>So much of the modern web is built to nudge, pressure, and quietly extract — manipulative defaults, fake urgency, subscriptions that are easy to start and almost impossible to cancel. As someone who builds software, I care a lot about where the line sits between good design and exploitative design. Getting to argue that line directly with the Commissioner shaping the legislation was a real privilege.</p>
-
-      <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-03.jpg" alt="Open Q&amp;A with the panel during the Digital Fairness Act dialogue, Commissioner McGrath listening" class="blog-img" />
-        <figcaption>The open Q&amp;A with the panel — Commissioner McGrath listening on the right.</figcaption>
-      </figure>
 
       <figure class="blog-figure">
         <img src="/blog/digital-fairness/df-02.jpg" alt="Eduard Hviždák listening during a session of the Youth Policy Dialogue" class="blog-img" />
