@@ -1,26 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap } from 'react-icons/lu';
-import { SiGoodreads } from 'react-icons/si';
 import Seo from '../../seo/Seo';
 import './now.scss';
 
-// ─── Official brand marks (real logos, official colours) ─────────────
-// Goodreads: brown "g" on its cream badge. Letterboxd: the three official
-// dots (orange/green/blue) on its dark badge.
+// ─── Official brand marks ────────────────────────────────────────────
+// Real, official logo files downloaded from each brand's own assets:
+// Goodreads' official 2025 "g" badge and Letterboxd's official dots
+// decal. Stored as SVGs in public/brand/ and served as images.
 const GoodreadsMark: React.FC = () => (
-  <span className="brandmark brandmark--goodreads" aria-hidden="true">
-    <SiGoodreads />
-  </span>
+  <img
+    className="brandmark brandmark--goodreads"
+    src="/brand/goodreads.svg"
+    alt=""
+    aria-hidden="true"
+  />
 );
 
 const LetterboxdMark: React.FC = () => (
-  <span className="brandmark brandmark--letterboxd" aria-hidden="true">
-    <svg viewBox="0 0 92 28" role="img">
-      <circle cx="14" cy="14" r="14" fill="#FF8000" />
-      <circle cx="78" cy="14" r="14" fill="#40BCF4" />
-      <circle cx="46" cy="14" r="14" fill="#00E054" />
-    </svg>
-  </span>
+  <img
+    className="brandmark brandmark--letterboxd"
+    src="/brand/letterboxd.svg"
+    alt=""
+    aria-hidden="true"
+  />
 );
 
 // ─── Live focus stats contract ───────────────────────────────────────

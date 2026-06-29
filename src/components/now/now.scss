@@ -137,27 +137,18 @@
 
 // ─── Official brand marks (Goodreads / Letterboxd) ──────────────────
 .brandmark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  vertical-align: -0.28em;
   height: 1.55em;
-  border-radius: 7px;
+  width: 1.55em;
   flex: 0 0 auto;
+  object-fit: contain;
 
-  &--goodreads {
-    width: 1.55em;
-    background: #f4f1ea; // Goodreads cream
-    color: #372213;      // Goodreads brown
+  // Official Goodreads badge: a rounded cream square.
+  &--goodreads { border-radius: 7px; }
 
-    svg { width: 1em; height: 1em; }
-  }
-
-  &--letterboxd {
-    padding: 0 0.32em;
-    background: #14181c; // Letterboxd dark
-
-    svg { width: 1.7em; height: 0.52em; display: block; }
-  }
+  // Official Letterboxd decal: already a self-contained dark circle.
+  &--letterboxd { border-radius: 50%; }
 }
 
 .now-card {
