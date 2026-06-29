@@ -99,7 +99,17 @@ const SharePreviewPage: React.FC = () => {
             </div>
             <div className="share-embed">
               <h3 className="share-embed__label">LinkedIn — post embed</h3>
-              <LinkedInEmbed />
+              <LinkedInEmbed
+                src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7475316031021031424"
+                height={1219}
+              />
+            </div>
+            <div className="share-embed">
+              <h3 className="share-embed__label">LinkedIn — post embed (2)</h3>
+              <LinkedInEmbed
+                src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7473426243208527872?collapsed=1"
+                height={628}
+              />
             </div>
           </div>
         </section>
