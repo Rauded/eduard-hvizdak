@@ -1,0 +1,63 @@
+// ─── Social embeds (X / LinkedIn) ───────────────────────────────
+.tweet-embed {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 550px;
+
+  &--fallback {
+    display: inline-block;
+    padding: 14px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    color: #a5b4fc;
+    text-decoration: none;
+    font-size: 0.9rem;
+
+    &:hover {
+      border-color: #a5b4fc;
+    }
+  }
+}
+
+.linkedin-embed {
+  display: block;
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: #fff;
+
+  &--empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 240px;
+    padding: 32px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.025);
+    color: rgba(248, 250, 252, 0.5);
+
+    svg {
+      font-size: 1.8rem;
+      color: #0a66c2;
+    }
+  }
+
+  &__title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(248, 250, 252, 0.85);
+    margin: 0;
+  }
+
+  &__hint {
+    font-size: 0.78rem;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 36ch;
+  }
+}

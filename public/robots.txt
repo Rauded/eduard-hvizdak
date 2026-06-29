@@ -1,5 +1,57 @@
 # https://www.robotstxt.org/robotstxt.html
+# Personal site for Eduard Hvizdak — everything here is public and meant to be
+# discovered, indexed, and cited (search engines + AI engines welcome).
+
 User-agent: *
-Disallow:
+Allow: /
+# Internal-only tools (not for indexing)
+Disallow: /share-preview
+
+# Search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: SeznamBot
+Allow: /
+
+# AI / LLM crawlers — explicitly allowed so the site can be summarized and cited.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
 
 Sitemap: https://eduard-hvizdak.vercel.app/sitemap.xml

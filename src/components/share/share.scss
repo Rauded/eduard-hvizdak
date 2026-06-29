@@ -1,0 +1,392 @@
+// ═══════════════════════════════════════════════════════════════
+//  Share Preview (internal tool)
+// ═══════════════════════════════════════════════════════════════
+$text: #f8fafc;
+$dim: rgba(248, 250, 252, 0.5);
+$mid: rgba(248, 250, 252, 0.72);
+$border: rgba(255, 255, 255, 0.09);
+$accent: #a5b4fc;
+$ui: 'Inter', system-ui, -apple-system, sans-serif;
+
+.share-preview {
+  font-family: $ui;
+  color: $text;
+  padding-top: 88px;
+  min-height: 100vh;
+
+  &__inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 48px clamp(22px, 5vw, 64px) 120px;
+  }
+
+  &__head {
+    margin: 28px 0 48px;
+  }
+
+  &__eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: $dim;
+    margin: 0 0 14px;
+  }
+
+  &__title {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+  }
+
+  &__subtitle {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: $mid;
+    max-width: 60ch;
+    margin: 0;
+
+    strong {
+      color: $text;
+    }
+  }
+}
+
+.share-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: $dim;
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $accent;
+  }
+
+  svg {
+    font-size: 0.85em;
+  }
+}
+
+.share-section {
+  margin-top: 56px;
+
+  &__title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+
+  &__note {
+    font-size: 0.85rem;
+    color: $dim;
+    margin: 0 0 24px;
+    max-width: 64ch;
+  }
+}
+
+// ── Raw metadata ──
+.share-meta {
+  display: grid;
+  gap: 10px;
+  margin: 0 0 28px;
+
+  > div {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid $border;
+
+    @media (max-width: 560px) {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+  }
+
+  dt {
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    color: $dim;
+    font-family: ui-monospace, Menlo, monospace;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 0.85rem;
+    color: $mid;
+    word-break: break-word;
+
+    a {
+      color: $accent;
+      text-decoration: none;
+    }
+  }
+}
+
+.share-rawimage {
+  img {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 12px;
+    border: 1px solid $border;
+    display: block;
+  }
+
+  &__cap {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.75rem;
+    color: $dim;
+  }
+}
+
+// ── Platform preview grid ──
+.share-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  gap: 28px;
+}
+
+.spc {
+  margin: 0;
+
+  &__platform {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $dim;
+    margin-bottom: 12px;
+
+    svg {
+      font-size: 0.95rem;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    overflow: hidden;
+  }
+
+  &__media {
+    img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1.91 / 1;
+      object-fit: cover;
+    }
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 12px 16px;
+    min-width: 0;
+  }
+
+  &__domain {
+    font-size: 0.72rem;
+    color: #8a8f98;
+  }
+
+  &__title {
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  &__desc {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: #8a8f98;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  // ── X / Twitter ──
+  &[data-platform='x'] .spc__card {
+    background: #000;
+    border: 1px solid #2f3336;
+    border-radius: 16px;
+  }
+  &[data-platform='x'] .spc__media img {
+    border-bottom: 1px solid #2f3336;
+  }
+  &[data-platform='x'] .spc__title {
+    color: #e7e9ea;
+    order: 2;
+  }
+  &[data-platform='x'] .spc__domain {
+    color: #71767b;
+    order: 1;
+  }
+  &[data-platform='x'] .spc__desc {
+    display: none;
+  }
+
+  // ── Facebook ──
+  &[data-platform='facebook'] .spc__card {
+    background: #fff;
+    border: 1px solid #dddfe2;
+    border-radius: 8px;
+  }
+  &[data-platform='facebook'] .spc__meta {
+    background: #f2f3f5;
+    padding: 12px 14px;
+  }
+  &[data-platform='facebook'] .spc__domain {
+    text-transform: uppercase;
+    font-size: 0.66rem;
+    letter-spacing: 0.03em;
+    color: #606770;
+    order: 1;
+  }
+  &[data-platform='facebook'] .spc__title {
+    color: #1d2129;
+    font-size: 1rem;
+    order: 2;
+  }
+  &[data-platform='facebook'] .spc__desc {
+    color: #606770;
+    order: 3;
+  }
+
+  // ── LinkedIn ──
+  &[data-platform='linkedin'] .spc__card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+  }
+  &[data-platform='linkedin'] .spc__title {
+    color: rgba(0, 0, 0, 0.9);
+    font-size: 0.95rem;
+    order: 1;
+  }
+  &[data-platform='linkedin'] .spc__domain {
+    color: rgba(0, 0, 0, 0.6);
+    order: 2;
+  }
+  &[data-platform='linkedin'] .spc__desc {
+    display: none;
+  }
+
+  // ── Discord ──
+  &[data-platform='discord'] .spc__card {
+    background: #2b2d31;
+    border-left: 4px solid #5865f2;
+    border-radius: 4px;
+    padding: 12px 16px;
+  }
+  &[data-platform='discord'] .spc__media {
+    order: 2;
+    margin-top: 12px;
+    img {
+      border-radius: 8px;
+      aspect-ratio: 1.91 / 1;
+    }
+  }
+  &[data-platform='discord'] .spc__meta {
+    padding: 0;
+    order: 1;
+  }
+  &[data-platform='discord'] .spc__domain {
+    color: #b5bac1;
+    order: 1;
+  }
+  &[data-platform='discord'] .spc__title {
+    color: #00a8fc;
+    font-size: 1rem;
+    order: 2;
+  }
+  &[data-platform='discord'] .spc__desc {
+    color: #dbdee1;
+    order: 3;
+  }
+
+  // ── Slack ──
+  &[data-platform='slack'] .spc__card {
+    background: #fff;
+    border: 1px solid #e8e8e8;
+    border-left: 4px solid #dddddd;
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  &[data-platform='slack'] .spc__media {
+    order: 2;
+    margin-top: 12px;
+    img {
+      border-radius: 8px;
+      max-width: 360px;
+    }
+  }
+  &[data-platform='slack'] .spc__meta {
+    padding: 0;
+    order: 1;
+  }
+  &[data-platform='slack'] .spc__domain {
+    color: #1d1c1d;
+    font-weight: 700;
+    order: 1;
+  }
+  &[data-platform='slack'] .spc__title {
+    color: #1264a3;
+    order: 2;
+  }
+  &[data-platform='slack'] .spc__desc {
+    color: #616061;
+    order: 3;
+  }
+
+  // ── iMessage ──
+  &[data-platform='imessage'] .spc__card {
+    background: #f1f1f3;
+    border: 1px solid #e2e2e6;
+    border-radius: 18px;
+  }
+  &[data-platform='imessage'] .spc__meta {
+    padding: 10px 14px 12px;
+  }
+  &[data-platform='imessage'] .spc__title {
+    color: #000;
+    font-size: 0.88rem;
+    order: 1;
+  }
+  &[data-platform='imessage'] .spc__domain {
+    color: #8e8e93;
+    order: 2;
+  }
+  &[data-platform='imessage'] .spc__desc {
+    display: none;
+  }
+}
+
+// ── Embeds showcase ──
+.share-embeds {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  align-items: start;
+}
+
+.share-embed {
+  &__label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: $mid;
+    margin: 0 0 16px;
+  }
+}

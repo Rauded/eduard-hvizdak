@@ -20,6 +20,8 @@ import BlogListingPage from './components/blog/BlogListingPage.tsx';
 import BlogPostPage from './components/blog/BlogPostPage.tsx';
 // @ts-ignore
 import NowPage from './components/now/NowPage.tsx';
+// @ts-ignore
+import SharePreviewPage from './components/share/SharePreviewPage.tsx';
 
 const AppContainer = styled.div`
   background: linear-gradient(135deg, #1e1e1e 0%, #2a1a3d 50%, #1e1e1e 100%);
@@ -59,6 +61,7 @@ const App: React.FC = () => {
           <Route path="/blog" element={<Shell><BlogListingPage /></Shell>} />
           <Route path="/blog/:slug" element={<Shell><BlogPostPage /></Shell>} />
           <Route path="/now" element={<Shell><NowPage /></Shell>} />
+          <Route path="/share-preview" element={<Shell><SharePreviewPage /></Shell>} />
         </Routes>
       </Router>
     </HelmetProvider>
