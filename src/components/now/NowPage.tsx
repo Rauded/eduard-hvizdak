@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap } from 'react-icons/lu';
-import { FaYoutube, FaGithub, FaLinkedinIn } from 'react-icons/fa6';
+import { FaYoutube, FaGithub, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
 import Seo from '../../seo/Seo';
 import LinkedInEmbed from '../embeds/LinkedInEmbed';
+import Tweet from '../embeds/Tweet';
 import '../embeds/embeds.scss';
 import './now.scss';
 
-// Latest LinkedIn post to feature — updated manually. Paste a post's
-// "Embed this post" URL (and its height) here when you post something new.
-const LINKEDIN_LATEST = {
-  src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7475316031021031424',
-  height: 1219,
-};
+// LinkedIn posts to feature — updated manually. Paste a post's "Embed this
+// post" URL (and its height) here when you post something new; newest first.
+const LINKEDIN_POSTS: { src: string; height: number }[] = [
+  { src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7475316031021031424', height: 1219 },
+  { src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7473426243208527872?collapsed=1', height: 628 },
+];
+
+// Favourite posts on X — add tweet URLs here to feature them.
+const FAVOURITE_TWEETS: string[] = [
+  'https://twitter.com/jack/status/20', // sample — replace with favourites
+];
 
 // ─── Official brand marks ────────────────────────────────────────────
 // Real, official logo files downloaded from each brand's own assets:
@@ -183,14 +189,6 @@ const NowPage: React.FC = () => {
         </section>
       )}
 
-      <section className="now-media now-linkedin">
-        <div className="now-media__head">
-          <h2 className="now-media__title"><FaLinkedinIn className="now-icon now-icon--li" /> Latest from LinkedIn</h2>
-          <a className="now-media__auto" href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer">@eduard-hvizdak</a>
-        </div>
-        <LinkedInEmbed src={LINKEDIN_LATEST.src} height={LINKEDIN_LATEST.height} />
-      </section>
-
       {videos.length > 0 && (
         <section className="now-media now-yt">
           <div className="now-media__head">
@@ -247,6 +245,34 @@ const NowPage: React.FC = () => {
               </div>
             </div>
           )}
+        </section>
+      )}
+
+      {LINKEDIN_POSTS.length > 0 && (
+        <section className="now-media now-linkedin">
+          <div className="now-media__head">
+            <h2 className="now-media__title"><FaLinkedinIn className="now-icon now-icon--li" /> Latest from LinkedIn</h2>
+            <a className="now-media__auto" href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer">@eduard-hvizdak</a>
+          </div>
+          <div className="now-embeds">
+            {LINKEDIN_POSTS.map((p) => (
+              <LinkedInEmbed key={p.src} src={p.src} height={p.height} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {FAVOURITE_TWEETS.length > 0 && (
+        <section className="now-media now-tweets">
+          <div className="now-media__head">
+            <h2 className="now-media__title"><FaXTwitter className="now-icon" /> Favourite posts on X</h2>
+            <a className="now-media__auto" href="https://twitter.com/" target="_blank" rel="noopener noreferrer">on X</a>
+          </div>
+          <div className="now-embeds">
+            {FAVOURITE_TWEETS.map((url) => (
+              <Tweet key={url} url={url} theme="dark" />
+            ))}
+          </div>
         </section>
       )}
     </div>

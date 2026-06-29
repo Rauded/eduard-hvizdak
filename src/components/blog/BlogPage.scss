@@ -140,26 +140,6 @@ $ui-font: 'Inter', system-ui, -apple-system, sans-serif;
     margin: 0 0 52px;
     letter-spacing: 0.02em;
   }
-
-  &__elsewhere {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    margin-left: 6px;
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 600;
-    white-space: nowrap;
-
-    svg {
-      font-size: 0.9em;
-      transition: transform 0.2s ease;
-    }
-
-    &:hover svg {
-      transform: translateX(3px);
-    }
-  }
 }
 
 // ─── Featured (first) post — editorial side-by-side hero ────────

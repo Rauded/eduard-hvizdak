@@ -8,9 +8,9 @@ const THEME_KEY = 'blog-theme';
 // persisted to localStorage so the choice carries across pages and devices.
 export function useBlogTheme(): [BlogTheme, () => void] {
   const [theme, setTheme] = useState<BlogTheme>(() => {
-    if (typeof window === 'undefined') return 'dark';
+    if (typeof window === 'undefined') return 'light';
     const v = window.localStorage.getItem(THEME_KEY);
-    return v === 'light' || v === 'dark' ? v : 'dark';
+    return v === 'light' || v === 'dark' ? v : 'light';
   });
 
   useEffect(() => {

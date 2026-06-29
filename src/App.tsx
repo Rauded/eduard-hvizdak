@@ -22,8 +22,6 @@ import BlogPostPage from './components/blog/BlogPostPage.tsx';
 import NowPage from './components/now/NowPage.tsx';
 // @ts-ignore
 import SharePreviewPage from './components/share/SharePreviewPage.tsx';
-// @ts-ignore
-import ElsewherePage from './components/elsewhere/ElsewherePage.tsx';
 
 const AppContainer = styled.div`
   background: linear-gradient(135deg, #1e1e1e 0%, #2a1a3d 50%, #1e1e1e 100%);
@@ -44,6 +42,16 @@ const PostHogPageview: React.FC = () => {
   return null;
 };
 
+// Reset scroll to the top whenever the path changes, so opening a post (or any
+// page) always starts at the top instead of inheriting the previous scroll.
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
+
 const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <AppContainer>
     <Header />
@@ -56,6 +64,7 @@ const App: React.FC = () => {
   return (
     <HelmetProvider>
       <Router>
+        <ScrollToTop />
         <PostHogPageview />
         <Routes>
           <Route path="/" element={<Shell><Home /></Shell>} />
@@ -64,7 +73,6 @@ const App: React.FC = () => {
           <Route path="/blog/:slug" element={<Shell><BlogPostPage /></Shell>} />
           <Route path="/now" element={<Shell><NowPage /></Shell>} />
           <Route path="/share-preview" element={<Shell><SharePreviewPage /></Shell>} />
-          <Route path="/elsewhere" element={<Shell><ElsewherePage /></Shell>} />
         </Routes>
       </Router>
     </HelmetProvider>
