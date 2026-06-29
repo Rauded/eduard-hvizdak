@@ -2,18 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import { LuArrowRight } from 'react-icons/lu';
-import { BLOG_POSTS, BlogPost } from '../../data/blog';
+import { BLOG_POSTS } from '../../data/blog';
 import Seo from '../../seo/Seo';
-import { formatDate, readingTime } from './blogUtils';
+import { formatDate, getThumbnail, readingTime } from './blogUtils';
 import './BlogPage.scss';
-
-// Thumbnail for a post: the explicit `thumbnail` field, otherwise the first
-// <img> found in its HTML content. Guarantees every card shows a cover image.
-function getThumbnail(post: BlogPost): string | null {
-  if (post.thumbnail) return post.thumbnail;
-  const match = post.content.match(/<img[^>]+src=["']([^"']+)["']/i);
-  return match ? match[1] : null;
-}
 
 const BlogListingPage: React.FC = () => {
   const [featured, ...rest] = BLOG_POSTS;

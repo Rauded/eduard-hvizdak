@@ -4,10 +4,10 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { LuSun, LuMoon } from 'react-icons/lu';
 import { BLOG_POSTS } from '../../data/blog';
 import Seo, { SITE_URL, PERSON_ID } from '../../seo/Seo';
-import { formatDate, readingTime } from './blogUtils';
+import { formatDate, getThumbnail, readingTime } from './blogUtils';
 import './BlogPage.scss';
 
-type FontPref = 'serif' | 'sans' | 'mono';
+type FontPref = 'serif' | 'sans';
 type ThemePref = 'light' | 'dark';
 
 const FONT_KEY = 'blog-font';
@@ -23,14 +23,14 @@ function getStored<T extends string>(key: string, fallback: T, allowed: readonly
   return v && allowed.includes(v) ? v : fallback;
 }
 
-const FONT_LABELS: Record<FontPref, string> = { serif: 'Serif', sans: 'Sans', mono: 'Mono' };
+const FONT_LABELS: Record<FontPref, string> = { serif: 'Serif', sans: 'Sans' };
 
 const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
   const post = BLOG_POSTS.find((p) => p.slug === slug);
 
   const [font, setFont] = useState<FontPref>(() =>
-    getStored<FontPref>(FONT_KEY, 'serif', ['serif', 'sans', 'mono'])
+    getStored<FontPref>(FONT_KEY, 'serif', ['serif', 'sans'])
   );
   const [theme, setTheme] = useState<ThemePref>(() =>
     getStored<ThemePref>(THEME_KEY, 'dark', ['light', 'dark'])
@@ -135,7 +135,7 @@ const BlogPostPage: React.FC = () => {
           </Link>
           <div className="reading-controls">
             <div className="reading-controls__fonts" role="group" aria-label="Reading font">
-              {(['serif', 'sans', 'mono'] as FontPref[]).map((f) => (
+              {(['serif', 'sans'] as FontPref[]).map((f) => (
                 <button
                   key={f}
                   type="button"
@@ -198,15 +198,23 @@ const BlogPostPage: React.FC = () => {
           <section className="related">
             <h2 className="related__heading">More from the blog</h2>
             <div className="related__grid">
-              {related.map((p) => (
-                <Link key={p.slug} to={`/blog/${p.slug}`} className="related__card">
-                  <span className="related__category">{p.category}</span>
-                  <span className="related__title">{p.title}</span>
-                  <span className="related__meta">
-                    {formatDate(p.date)} · {readingTime(p.content)} min read
-                  </span>
-                </Link>
-              ))}
+              {related.map((p) => {
+                const thumb = getThumbnail(p);
+                return (
+                  <Link key={p.slug} to={`/blog/${p.slug}`} className="related__card">
+                    <div className="related__thumb">
+                      {thumb && <img src={thumb} alt={p.title} loading="lazy" />}
+                    </div>
+                    <div className="related__body">
+                      <span className="related__category">{p.category}</span>
+                      <span className="related__title">{p.title}</span>
+                      <span className="related__meta">
+                        {formatDate(p.date)} · {readingTime(p.content)} min read
+                      </span>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </section>
         )}

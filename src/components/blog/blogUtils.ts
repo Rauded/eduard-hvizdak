@@ -12,6 +12,13 @@ export function formatDate(iso: string): string {
   });
 }
 
+/** Cover image for a post: explicit `thumbnail`, else the first <img> in its HTML. */
+export function getThumbnail(post: { thumbnail?: string; content: string }): string | null {
+  if (post.thumbnail) return post.thumbnail;
+  const match = post.content.match(/<img[^>]+src=["']([^"']+)["']/i);
+  return match ? match[1] : null;
+}
+
 /** Estimated reading time in minutes from an HTML content string (~200 wpm). */
 export function readingTime(html: string): number {
   const text = html
