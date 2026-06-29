@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap } from 'react-icons/lu';
-import { FaYoutube, FaGithub, FaLinkedinIn, FaXTwitter } from 'react-icons/fa6';
+import { FaYoutube, FaGithub, FaLinkedinIn, FaXTwitter, FaPlay } from 'react-icons/fa6';
 import Seo from '../../seo/Seo';
 import LinkedInEmbed from '../embeds/LinkedInEmbed';
 import Tweet from '../embeds/Tweet';
@@ -10,8 +10,7 @@ import './now.scss';
 // LinkedIn posts to feature — updated manually. Paste a post's "Embed this
 // post" URL (and its height) here when you post something new; newest first.
 const LINKEDIN_POSTS: { src: string; height: number }[] = [
-  { src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7475316031021031424', height: 1219 },
-  { src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7473426243208527872?collapsed=1', height: 628 },
+  { src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7473426243208527872', height: 712 },
 ];
 
 // Favourite posts on X — add tweet URLs here to feature them.
@@ -139,6 +138,37 @@ const NowPage: React.FC = () => {
         </p>
       </header>
 
+      {gh && (gh.total !== null || weeks.length > 0) && (
+        <section className="now-github">
+          <div className="now-media__head">
+            <h2 className="now-media__title"><FaGithub className="now-icon" /> On GitHub</h2>
+            <a className="now-media__auto" href="https://github.com/Rauded" target="_blank" rel="noopener noreferrer">@Rauded</a>
+          </div>
+          {gh.total !== null && (
+            <p className="now-github__count">
+              <strong>{gh.total.toLocaleString()}</strong> contributions in the last year
+            </p>
+          )}
+          {weeks.length > 0 && (
+            <div className="now-github__scroll">
+              <div className="now-github__graph" role="img" aria-label={`${gh.total ?? ''} GitHub contributions in the last year`}>
+                {weeks.map((week, wi) => (
+                  <div className="now-github__week" key={wi}>
+                    {week.map((day, di) =>
+                      day ? (
+                        <span className="now-github__day" key={di} data-level={day.level} title={`${day.count} on ${day.date}`} />
+                      ) : (
+                        <span className="now-github__day now-github__day--pad" key={di} />
+                      )
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
+      )}
+
       {hasStats && (
         <section className="now-stats" aria-label="Live focus stats from my dashboard">
           {stats.map((s) => (
@@ -195,56 +225,13 @@ const NowPage: React.FC = () => {
             <h2 className="now-media__title"><FaYoutube className="now-icon now-icon--yt" /> Latest video</h2>
             <a className="now-media__auto" href="https://www.youtube.com/@eduardhvizdak" target="_blank" rel="noopener noreferrer">@eduardhvizdak</a>
           </div>
-          <div className="now-video">
-            <iframe
-              src={`https://www.youtube-nocookie.com/embed/${videos[0].id}`}
-              title={videos[0].title}
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </div>
-          {videos.length > 1 && (
-            <div className="now-yt__more">
-              {videos.slice(1, 4).map((v) => (
-                <a className="now-card now-card--video" key={v.id} href={v.url} target="_blank" rel="noopener noreferrer" title={v.title}>
-                  <img className="now-card__cover" src={v.thumbnail} alt="" loading="lazy" />
-                  <span className="now-card__title">{v.title}</span>
-                </a>
-              ))}
-            </div>
-          )}
-        </section>
-      )}
-
-      {gh && (gh.total !== null || weeks.length > 0) && (
-        <section className="now-github">
-          <div className="now-media__head">
-            <h2 className="now-media__title"><FaGithub className="now-icon" /> On GitHub</h2>
-            <a className="now-media__auto" href="https://github.com/Rauded" target="_blank" rel="noopener noreferrer">@Rauded</a>
-          </div>
-          {gh.total !== null && (
-            <p className="now-github__count">
-              <strong>{gh.total.toLocaleString()}</strong> contributions in the last year
-            </p>
-          )}
-          {weeks.length > 0 && (
-            <div className="now-github__scroll">
-              <div className="now-github__graph" role="img" aria-label={`${gh.total ?? ''} GitHub contributions in the last year`}>
-                {weeks.map((week, wi) => (
-                  <div className="now-github__week" key={wi}>
-                    {week.map((day, di) =>
-                      day ? (
-                        <span className="now-github__day" key={di} data-level={day.level} title={`${day.count} on ${day.date}`} />
-                      ) : (
-                        <span className="now-github__day now-github__day--pad" key={di} />
-                      )
-                    )}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          <a className="now-ytcard" href={videos[0].url} target="_blank" rel="noopener noreferrer" title={videos[0].title}>
+            <span className="now-ytcard__thumb">
+              <img src={videos[0].thumbnail} alt="" loading="lazy" />
+              <span className="now-ytcard__play"><FaPlay /></span>
+            </span>
+            <span className="now-ytcard__title">{videos[0].title}</span>
+          </a>
         </section>
       )}
 
