@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap } from 'react-icons/lu';
-import { FaYoutube, FaGithub } from 'react-icons/fa6';
+import { FaYoutube, FaGithub, FaLinkedinIn } from 'react-icons/fa6';
 import Seo from '../../seo/Seo';
+import LinkedInEmbed from '../embeds/LinkedInEmbed';
+import '../embeds/embeds.scss';
 import './now.scss';
+
+// Latest LinkedIn post to feature — updated manually. Paste a post's
+// "Embed this post" URL (and its height) here when you post something new.
+const LINKEDIN_LATEST = {
+  src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7475316031021031424',
+  height: 1219,
+};
 
 // ─── Official brand marks ────────────────────────────────────────────
 // Real, official logo files downloaded from each brand's own assets:
@@ -173,6 +182,14 @@ const NowPage: React.FC = () => {
           </div>
         </section>
       )}
+
+      <section className="now-media now-linkedin">
+        <div className="now-media__head">
+          <h2 className="now-media__title"><FaLinkedinIn className="now-icon now-icon--li" /> Latest from LinkedIn</h2>
+          <a className="now-media__auto" href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer">@eduard-hvizdak</a>
+        </div>
+        <LinkedInEmbed src={LINKEDIN_LATEST.src} height={LINKEDIN_LATEST.height} />
+      </section>
 
       {videos.length > 0 && (
         <section className="now-media now-yt">
