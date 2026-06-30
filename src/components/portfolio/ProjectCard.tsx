@@ -102,6 +102,27 @@ const PlaceholderCard: React.FC<{ title: string; accent: string }> = ({ title, a
   </div>
 );
 
+// ─── Link icon ───────────────────────────────────────────────────
+// Shows the destination site's own favicon when one is provided, falling
+// back to the generic arrow if the image fails to load.
+const LinkIcon: React.FC<{ link: PortfolioProject['links'][number] }> = ({ link }) => {
+  const [failed, setFailed] = useState(false);
+  if (link.type === 'github') return <LuGithub />;
+  if (link.favicon && !failed) {
+    return (
+      <img
+        className="pcard__favicon"
+        src={link.favicon}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        onError={() => setFailed(true)}
+      />
+    );
+  }
+  return <LuArrowUpRight />;
+};
+
 // ─── Project media ───────────────────────────────────────────────
 // Shared by the showcase card AND the case-study reader so the story
 // shows the exact same video / slideshow / screenshot as the showcase.
@@ -286,7 +307,7 @@ export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project }
               rel="noopener noreferrer"
               className={`pcard__link pcard__link--${link.type}`}
             >
-              {link.type === 'github' ? <LuGithub /> : <LuArrowUpRight />}
+              <LinkIcon link={link} />
               {link.label}
             </a>
           ))}

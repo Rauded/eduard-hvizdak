@@ -25,6 +25,9 @@ export interface ProjectLink {
   label: string;
   url: string;
   type: 'github' | 'demo';
+  // Optional brand favicon (path under public/) shown on the link instead of
+  // the generic arrow — e.g. the destination site's own icon.
+  favicon?: string;
 }
 
 export interface ProjectMedia {
@@ -72,7 +75,7 @@ export const PROJECTS: PortfolioProject[] = [
       'Auto-renewal, bulk posting, and analytics for power sellers on the Bazoš.cz / Bazoš.sk classifieds. It keeps dozens of listings at the top automatically — the relisting grind power sellers used to do by hand. Born from a hackathon, now a side business with paying customers.',
     tags: ['React', 'Supabase', 'Stripe', 'Deno', 'PostHog', 'SaaS', 'Hackathon'],
     links: [
-      { label: 'Website', url: 'https://www.inzerpro.cz', type: 'demo' },
+      { label: 'Website', url: 'https://www.inzerpro.cz', type: 'demo', favicon: '/brand/sites/inzerpro.svg' },
     ],
     media: {
       type: 'video',
@@ -103,7 +106,7 @@ export const PROJECTS: PortfolioProject[] = [
     tags: ['Python', 'OpenAI API', 'Eye Tracking', 'Tkinter', 'Desktop App', 'AI'],
     links: [
       { label: 'GitHub', url: 'https://github.com/Rauded', type: 'github' },
-      { label: 'Website', url: 'https://www.studyexe.com', type: 'demo' },
+      { label: 'Website', url: 'https://www.studyexe.com', type: 'demo', favicon: '/brand/sites/studyexe.svg' },
     ],
     media: {
       type: 'slideshow',
@@ -141,7 +144,7 @@ export const PROJECTS: PortfolioProject[] = [
       'A two-sided marketplace connecting event organisers with professional magicians. Curated performer profiles, Stripe-powered listings, automated email, and 20+ city & occasion landing pages tuned for local search.',
     tags: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Vercel'],
     links: [
-      { label: 'Website', url: 'https://www.kouzelniknaakci.cz', type: 'demo' },
+      { label: 'Website', url: 'https://www.kouzelniknaakci.cz', type: 'demo', favicon: '/brand/sites/kouzelniknaakci.svg' },
     ],
     media: {
       type: 'placeholder',
@@ -203,7 +206,7 @@ export const PROJECTS: PortfolioProject[] = [
       "Professional deployment of the OpenClaw AI assistant for business teams. Physical installation on dedicated hardware at the client's office, full InfoSec hardening, and ongoing maintenance — so teams get leverage from day one without a new software project to manage.",
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'PostHog', 'B2B', 'SaaS'],
     links: [
-      { label: 'Website', url: 'https://www.nasadclaw.cz', type: 'demo' },
+      { label: 'Website', url: 'https://www.nasadclaw.cz', type: 'demo', favicon: '/brand/sites/nasadclaw.png' },
     ],
     media: {
       type: 'image',
@@ -234,7 +237,7 @@ export const PROJECTS: PortfolioProject[] = [
       'A Chrome extension that replaces the new tab page with rotating collage wallpapers assembled from your own image library. Drag, resize, rotate, and layer each piece. Every byte lives locally in IndexedDB — no cloud, no tracking, ever.',
     tags: ['JavaScript', 'Manifest V3', 'LocalForage', 'IndexedDB', 'Chrome Extension'],
     links: [
-      { label: 'Chrome Web Store', url: 'https://chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao', type: 'demo' },
+      { label: 'Chrome Web Store', url: 'https://chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao', type: 'demo', favicon: '/brand/sites/psychetab.jpg' },
       { label: 'GitHub', url: 'https://github.com/Rauded/college_extension_chrome', type: 'github' },
     ],
     media: {

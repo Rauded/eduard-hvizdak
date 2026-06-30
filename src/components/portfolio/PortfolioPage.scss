@@ -565,6 +565,18 @@
   }
 }
 
+// Destination-site favicon shown on a link — a tiny rounded "app icon" chip so
+// any favicon (light or dark) stays legible on the filled accent pill.
+.pcard__favicon {
+  width: 17px;
+  height: 17px;
+  border-radius: 4px;
+  object-fit: contain;
+  background: #fff;
+  padding: 1.5px;
+  flex: 0 0 auto;
+}
+
 // ─── Case study: trigger + on-page modal reader ───────────────────────────────
 // "Read the full story" opens a dialog ON THE SAME PAGE (rendered to <body> via
 // a React portal). The case-study text is ALWAYS in the DOM (visibility toggled
