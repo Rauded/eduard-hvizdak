@@ -1,0 +1,312 @@
+// ─── "Agents running" section ───────────────────────────────────────
+// Lives inside .now-page so it inherits the page theme variables (dark/light).
+// Polsia-style live feed of autonomous AI agents: status pulse, model badge,
+// a terminal-ish activity line and an expandable log + "shipped" chips.
+.now-page {
+  // Status colours (shared dark/light; tuned to read on both)
+  --agent-run: #34d399;     // green — running
+  --agent-idle: #fbbf24;    // amber — idle
+  --agent-done: #818cf8;    // indigo — done
+  --agent-error: #f87171;   // red — error
+
+  &[data-theme='light'] {
+    --agent-run: #059669;
+    --agent-idle: #d97706;
+    --agent-done: #4f46e5;
+    --agent-error: #dc2626;
+  }
+}
+
+@keyframes agent-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(52, 211, 153, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+@keyframes agent-blink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+
+.now-agents {
+  margin-top: 40px;
+
+  &__live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-left: 12px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 0.62em;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    background: rgba(120, 120, 140, 0.12);
+    border: 1px solid var(--card-border);
+    vertical-align: middle;
+
+    &--on {
+      color: var(--agent-run);
+      background: rgba(52, 211, 153, 0.12);
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+  }
+
+  &__livedot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  &__live--on &__livedot {
+    animation: agent-pulse 1.8s ease-out infinite;
+  }
+
+  &__lead {
+    font-size: 0.92em;
+    line-height: 1.6;
+    color: var(--text-soft);
+    max-width: 64ch;
+    margin: 0 0 20px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 16px;
+  }
+}
+
+.agent-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 18px 16px;
+  border-radius: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  // Status accent bar down the left edge.
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--accent, var(--agent-done));
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--card-border-hover);
+    box-shadow: var(--shadow);
+  }
+
+  &--running { --accent: var(--agent-run); border-color: rgba(52, 211, 153, 0.22); }
+  &--idle    { --accent: var(--agent-idle); }
+  &--done    { --accent: var(--agent-done); }
+  &--error   { --accent: var(--agent-error); border-color: rgba(248, 113, 113, 0.28); }
+
+  &--skeleton { pointer-events: none; }
+
+  // ── header row ──
+  &__top {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    flex-wrap: wrap;
+  }
+
+  &__status {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    flex: 0 0 auto;
+    background: var(--accent, var(--agent-done));
+  }
+
+  &--running &__status {
+    animation: agent-pulse 1.8s ease-out infinite;
+  }
+
+  &__name {
+    font-size: 0.98em;
+    font-weight: 700;
+    color: var(--text-strong);
+    letter-spacing: -0.01em;
+  }
+
+  &__model {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.64em;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 2px 7px;
+    border-radius: 6px;
+    color: var(--text-soft);
+    background: rgba(120, 120, 140, 0.14);
+    border: 1px solid var(--card-border);
+
+    svg { font-size: 1.05em; }
+
+    &--anthropic { color: #c08457; background: rgba(217, 119, 87, 0.14); border-color: rgba(217, 119, 87, 0.3); }
+    &--openai    { color: #10a37f; background: rgba(16, 163, 127, 0.14); border-color: rgba(16, 163, 127, 0.3); }
+    &--google    { color: #4285f4; background: rgba(66, 133, 244, 0.14); border-color: rgba(66, 133, 244, 0.3); }
+    &--meta      { color: #4267b2; background: rgba(66, 103, 178, 0.16); border-color: rgba(66, 103, 178, 0.32); }
+  }
+
+  &__state {
+    margin-left: auto;
+    font-size: 0.66em;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent, var(--agent-done));
+  }
+
+  // ── body ──
+  &__task {
+    margin: 12px 0 0;
+    font-size: 0.84em;
+    line-height: 1.5;
+    color: var(--text-soft);
+  }
+
+  &__live {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin-top: 12px;
+    padding: 9px 11px;
+    border-radius: 9px;
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid var(--card-border);
+    font-size: 0.76em;
+    line-height: 1.45;
+  }
+
+  &__prompt {
+    color: var(--agent-run);
+    font-weight: 700;
+    flex: 0 0 auto;
+  }
+
+  &__logline {
+    color: var(--text-soft);
+
+    &--blink::after {
+      content: '▋';
+      margin-left: 3px;
+      color: var(--agent-run);
+      animation: agent-blink 1s step-start infinite;
+    }
+  }
+
+  // ── meta row ──
+  &__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 7px 14px;
+    margin-top: 13px;
+    font-size: 0.72em;
+    color: var(--text-dim);
+  }
+
+  &__metric {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-variant-numeric: tabular-nums;
+
+    svg { font-size: 1.1em; color: var(--accent, var(--agent-done)); }
+  }
+
+  &__toggle {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    border-radius: 7px;
+    font: inherit;
+    font-size: 1em;
+    color: var(--link);
+    background: transparent;
+    border: 1px solid var(--link-border);
+    cursor: pointer;
+    transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+
+    svg { transition: transform 0.2s ease; }
+
+    &:hover { color: var(--heading); border-color: var(--heading); }
+    &--open svg { transform: rotate(180deg); }
+  }
+
+  // ── expandable detail ──
+  &__detail {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--card-border);
+  }
+
+  &__feed {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  &__feeditem {
+    display: flex;
+    gap: 7px;
+    font-size: 0.76em;
+    line-height: 1.45;
+    color: var(--text-soft);
+  }
+
+  &__shipped {
+    margin-top: 14px;
+  }
+
+  &__shipped-label {
+    display: block;
+    font-size: 0.64em;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  &__chip {
+    font-size: 0.72em;
+    padding: 4px 10px;
+    border-radius: 999px;
+    color: var(--text-soft);
+    background: rgba(129, 140, 248, 0.1);
+    border: 1px solid var(--card-border);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-card--running .agent-card__status,
+  .now-agents__live--on .now-agents__livedot { animation: none; }
+  .agent-card__logline--blink::after { animation: none; }
+}

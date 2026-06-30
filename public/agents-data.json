@@ -1,0 +1,83 @@
+{
+  "updatedAt": "2026-06-30T14:02:00Z",
+  "agents": [
+    {
+      "id": "now-sync",
+      "name": "Now-Sync",
+      "status": "running",
+      "model": "claude-haiku-4-5",
+      "task": "Refreshing the /now feeds — pulling Letterboxd, Goodreads, GitHub and YouTube, diffing against the cache and rewriting the page data.",
+      "startedAt": "2026-06-30T13:54:00Z",
+      "tokensToday": 18420,
+      "tasksDone": 146,
+      "log": [
+        "Fetched 6 Letterboxd entries · 1 new film since last run",
+        "Diffed GitHub contributions — 1,284 in the last year",
+        "Wrote public/now-data.json + agents-data.json"
+      ],
+      "shipped": [
+        "Daily /now feed refresh",
+        "GitHub contribution graph sync",
+        "Letterboxd + Goodreads + MAL mirrors"
+      ]
+    },
+    {
+      "id": "seo-sentinel",
+      "name": "SEO Sentinel",
+      "status": "running",
+      "model": "claude-opus-4-8",
+      "task": "Watching Search Console for ranking movement, then drafting comparison + use-case pages for the keywords I already rank for on page 2.",
+      "startedAt": "2026-06-30T11:30:00Z",
+      "tokensToday": 64900,
+      "tasksDone": 38,
+      "log": [
+        "Pulled 412 queries from Search Console (last 28d)",
+        "Found 9 keywords ranked 8–15 — opportunity cluster",
+        "Drafted outline: \"best X for Y\" listicle"
+      ],
+      "shipped": [
+        "3 programmatic landing pages",
+        "llms.txt + structured data audit",
+        "Internal-link suggestions for /blog"
+      ]
+    },
+    {
+      "id": "inbox-triage",
+      "name": "Inbox Triage",
+      "status": "idle",
+      "model": "claude-haiku-4-5",
+      "task": "Idle — wakes hourly to label new threads, flag anything that needs a reply, and surface the day's priorities.",
+      "startedAt": "2026-06-30T14:00:00Z",
+      "tokensToday": 5210,
+      "tasksDone": 73,
+      "log": [
+        "Labelled 12 threads · 2 flagged for reply",
+        "No action needed since 13:00 — sleeping",
+        "Next wake: 15:00"
+      ],
+      "shipped": [
+        "Auto-labelling rules",
+        "Daily priority digest"
+      ]
+    },
+    {
+      "id": "build-watch",
+      "name": "Build-Watch",
+      "status": "done",
+      "model": "claude-sonnet-4-6",
+      "task": "Verified the latest Vercel deploy, checked the live bundle contained the new build, and posted the all-clear.",
+      "startedAt": "2026-06-30T13:40:00Z",
+      "tokensToday": 9800,
+      "tasksDone": 211,
+      "log": [
+        "Build passed · CI=false npm run build clean",
+        "Confirmed main.[hash].js shipped the change",
+        "Deploy healthy — done"
+      ],
+      "shipped": [
+        "Post-deploy smoke checks",
+        "Stale-cache detection"
+      ]
+    }
+  ]
+}

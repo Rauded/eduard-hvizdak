@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap } from 'react-icons/lu';
 import { FaYoutube, FaGithub, FaLinkedinIn, FaXTwitter, FaPlay } from 'react-icons/fa6';
 import Seo from '../../seo/Seo';
+import AgentsRunning from './AgentsRunning';
 import LinkedInEmbed from '../embeds/LinkedInEmbed';
 import Tweet from '../embeds/Tweet';
 import { useBlogTheme } from '../blog/useBlogTheme';
@@ -222,6 +223,8 @@ const NowPage: React.FC = () => {
           <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now movement</a>.
         </p>
       </header>
+
+      <AgentsRunning />
 
       {gh === undefined ? (
         <GitHubSkeleton />
