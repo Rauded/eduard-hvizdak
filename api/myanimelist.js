@@ -19,14 +19,23 @@ function tag(block, name) {
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 // Look up a single anime's poster via Jikan (the public MAL API mirror).
-async function jikanCover(id) {
+// Retries once on a rate-limit/transient failure so fewer covers fall back.
+async function jikanCover(id, attempt = 0) {
   try {
     const r = await fetch(`https://api.jikan.moe/v4/anime/${id}`, { headers: { 'User-Agent': UA } });
+    if (r.status === 429 && attempt < 1) {
+      await sleep(900);
+      return jikanCover(id, attempt + 1);
+    }
     if (!r.ok) return '';
     const j = await r.json();
     const img = j && j.data && j.data.images && j.data.images.jpg;
     return (img && (img.image_url || img.large_image_url)) || '';
   } catch {
+    if (attempt < 1) {
+      await sleep(900);
+      return jikanCover(id, attempt + 1);
+    }
     return '';
   }
 }
@@ -64,14 +73,14 @@ module.exports = async (req, res) => {
 
     // Enrich with cover posters from Jikan, in small batches so we stay under
     // its rate limit (~3 req/s). Any lookup that fails just leaves cover ''.
-    const BATCH = 3;
+    const BATCH = 2;
     for (let i = 0; i < items.length; i += BATCH) {
       const slice = items.slice(i, i + BATCH);
       const covers = await Promise.all(
         slice.map((a) => (a.id ? jikanCover(a.id) : Promise.resolve('')))
       );
       slice.forEach((a, k) => { a.cover = covers[k]; });
-      if (i + BATCH < items.length) await sleep(400);
+      if (i + BATCH < items.length) await sleep(700);
     }
 
     // Strip the internal id before returning.

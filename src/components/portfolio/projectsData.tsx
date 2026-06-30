@@ -75,7 +75,7 @@ export const PROJECTS: PortfolioProject[] = [
       'Auto-renewal, bulk posting, and analytics for power sellers on the Bazoš.cz / Bazoš.sk classifieds. It keeps dozens of listings at the top automatically — the relisting grind power sellers used to do by hand. Born from a hackathon, now a side business with paying customers.',
     tags: ['React', 'Supabase', 'Stripe', 'Deno', 'PostHog', 'SaaS', 'Hackathon'],
     links: [
-      { label: 'Website', url: 'https://www.inzerpro.cz', type: 'demo', favicon: '/brand/sites/inzerpro.svg' },
+      { label: 'www.inzerpro.cz', url: 'https://www.inzerpro.cz', type: 'demo', favicon: '/brand/sites/inzerpro.svg' },
     ],
     media: {
       type: 'video',
@@ -106,7 +106,7 @@ export const PROJECTS: PortfolioProject[] = [
     tags: ['Python', 'OpenAI API', 'Eye Tracking', 'Tkinter', 'Desktop App', 'AI'],
     links: [
       { label: 'GitHub', url: 'https://github.com/Rauded', type: 'github' },
-      { label: 'Website', url: 'https://www.studyexe.com', type: 'demo', favicon: '/brand/sites/studyexe.svg' },
+      { label: 'www.studyexe.com', url: 'https://www.studyexe.com', type: 'demo', favicon: '/brand/sites/studyexe.svg' },
     ],
     media: {
       type: 'slideshow',
@@ -144,7 +144,7 @@ export const PROJECTS: PortfolioProject[] = [
       'A two-sided marketplace connecting event organisers with professional magicians. Curated performer profiles, Stripe-powered listings, automated email, and 20+ city & occasion landing pages tuned for local search.',
     tags: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Vercel'],
     links: [
-      { label: 'Website', url: 'https://www.kouzelniknaakci.cz', type: 'demo', favicon: '/brand/sites/kouzelniknaakci.svg' },
+      { label: 'www.kouzelniknaakci.cz', url: 'https://www.kouzelniknaakci.cz', type: 'demo', favicon: '/brand/sites/kouzelniknaakci.svg' },
     ],
     media: {
       type: 'placeholder',
@@ -206,7 +206,7 @@ export const PROJECTS: PortfolioProject[] = [
       "Professional deployment of the OpenClaw AI assistant for business teams. Physical installation on dedicated hardware at the client's office, full InfoSec hardening, and ongoing maintenance — so teams get leverage from day one without a new software project to manage.",
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'PostHog', 'B2B', 'SaaS'],
     links: [
-      { label: 'Website', url: 'https://www.nasadclaw.cz', type: 'demo', favicon: '/brand/sites/nasadclaw.png' },
+      { label: 'www.nasadclaw.cz', url: 'https://www.nasadclaw.cz', type: 'demo', favicon: '/brand/sites/nasadclaw.png' },
     ],
     media: {
       type: 'image',

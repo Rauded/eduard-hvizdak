@@ -243,12 +243,18 @@ const NowPage: React.FC = () => {
         <section className="now-media">
           <div className="now-media__head">
             <h2 className="now-media__title"><MalMark /> Recently watched anime</h2>
-            <a className="now-media__auto" href="https://myanimelist.net/profile/rauded" target="_blank" rel="noopener noreferrer">@rauded</a>
+            <a className="now-media__auto" href="https://myanimelist.net/profile/rauded" target="_blank" rel="noopener noreferrer">Auto-synced from MyAnimeList</a>
           </div>
           <div className="now-media__grid">
             {anime.map((a, i) => (
               <a className="now-card" key={i} href={a.link} target="_blank" rel="noopener noreferrer" title={a.title}>
-                {a.cover && <img className="now-card__cover" src={a.cover} alt="" loading="lazy" />}
+                {a.cover ? (
+                  <img className="now-card__cover" src={a.cover} alt="" loading="lazy" />
+                ) : (
+                  <span className="now-card__cover now-card__cover--ph" aria-hidden="true">
+                    {a.title.slice(0, 2)}
+                  </span>
+                )}
                 <span className="now-card__title">{a.title}</span>
                 {a.status && <span className="now-card__sub">{a.status}</span>}
               </a>
