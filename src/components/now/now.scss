@@ -17,6 +17,8 @@
   --cover-border: rgba(255, 255, 255, 0.08);
   --shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
   --gh-empty: rgba(255, 255, 255, 0.06);
+  --skel-base: rgba(255, 255, 255, 0.05);
+  --skel-hi: rgba(255, 255, 255, 0.11);
 
   position: relative;
   // Own stacking context so the fixed full-bleed ::before paints ABOVE the
@@ -58,7 +60,42 @@
     --cover-border: rgba(15, 23, 42, 0.1);
     --shadow: 0 14px 32px rgba(79, 70, 229, 0.14);
     --gh-empty: rgba(15, 23, 42, 0.06);
+    --skel-base: rgba(15, 23, 42, 0.06);
+    --skel-hi: rgba(15, 23, 42, 0.12);
   }
+}
+
+// ─── Loading skeletons (shimmer) ────────────────────────────────────
+@keyframes now-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.now-skel {
+  display: block;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--skel-base) 25%, var(--skel-hi) 37%, var(--skel-base) 63%);
+  background-size: 200% 100%;
+  animation: now-shimmer 1.5s ease-in-out infinite;
+
+  &--line { height: 0.78em; }
+  &--short { width: 60%; }
+  &--count { width: 210px; max-width: 70%; height: 0.85em; margin: 0; }
+  &--yt { width: 100%; max-width: 320px; height: 0.9em; }
+}
+
+// Skeleton card mirrors .now-card so swapping to real content doesn't shift.
+.now-card--skeleton {
+  pointer-events: none;
+}
+
+.now-card__cover--skel {
+  display: block; // <span> needs this for aspect-ratio to apply
+}
+
+// Reduced motion: hold a static tint instead of animating.
+@media (prefers-reduced-motion: reduce) {
+  .now-skel { animation: none; background: var(--skel-base); }
 }
 
 .now-topbar {

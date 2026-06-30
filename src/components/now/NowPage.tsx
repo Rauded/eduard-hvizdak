@@ -88,14 +88,79 @@ const fmt = (v: number | null, suffix = ''): string =>
 const stars = (r: number | null): string =>
   r === null ? '' : '★'.repeat(Math.floor(r)) + (r % 1 ? '½' : '');
 
+// ─── Loading skeletons ───────────────────────────────────────────────
+// Reserve the same layout the real content will occupy, so feeds swap in
+// place (no jumps) once their fetch resolves. Headers stay identical to the
+// loaded state; only the cards shimmer → real.
+const SkeletonGrid: React.FC<{ count?: number }> = ({ count = 6 }) => (
+  <div className="now-media__grid">
+    {Array.from({ length: count }).map((_, i) => (
+      <div className="now-card now-card--skeleton" key={i}>
+        <span className="now-card__cover now-card__cover--skel now-skel" />
+        <span className="now-skel now-skel--line" />
+        <span className="now-skel now-skel--line now-skel--short" />
+      </div>
+    ))}
+  </div>
+);
+
+const MediaSkeleton: React.FC<{ mark: React.ReactNode; title: string; auto: string; count?: number }> = ({
+  mark, title, auto, count,
+}) => (
+  <section className="now-media" aria-hidden="true">
+    <div className="now-media__head">
+      <h2 className="now-media__title">{mark} {title}</h2>
+      <span className="now-media__auto">{auto}</span>
+    </div>
+    <SkeletonGrid count={count} />
+  </section>
+);
+
+const GitHubSkeleton: React.FC = () => (
+  <section className="now-github" aria-hidden="true">
+    <div className="now-media__head">
+      <h2 className="now-media__title"><FaGithub className="now-icon" /> On GitHub</h2>
+      <span className="now-media__auto">@Rauded</span>
+    </div>
+    <p className="now-github__count"><span className="now-skel now-skel--line now-skel--count" /></p>
+    <div className="now-github__scroll">
+      <div className="now-github__graph">
+        {Array.from({ length: 52 }).map((_, wi) => (
+          <div className="now-github__week" key={wi}>
+            {Array.from({ length: 7 }).map((_, di) => (
+              <span className="now-github__day" key={di} />
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const YouTubeSkeleton: React.FC = () => (
+  <section className="now-media now-yt" aria-hidden="true">
+    <div className="now-media__head">
+      <h2 className="now-media__title"><FaYoutube className="now-icon now-icon--yt" /> Latest video</h2>
+      <span className="now-media__auto">@eduardhvizdak</span>
+    </div>
+    <div className="now-ytcard">
+      <span className="now-ytcard__thumb now-skel" />
+      <span className="now-skel now-skel--line now-skel--yt" />
+    </div>
+  </section>
+);
+
 const NowPage: React.FC = () => {
   const [theme, toggleTheme] = useBlogTheme();
+  // null = still loading (render a skeleton); [] = loaded but empty (hide the
+  // section); [...] = loaded with data. This lets the page reserve layout up
+  // front so content swaps in place instead of popping in and shifting things.
   const [data, setData] = useState<NowData | null>(null);
-  const [films, setFilms] = useState<Film[]>([]);
-  const [books, setBooks] = useState<Book[]>([]);
-  const [anime, setAnime] = useState<Anime[]>([]);
-  const [videos, setVideos] = useState<Video[]>([]);
-  const [gh, setGh] = useState<GitHubData | null>(null);
+  const [films, setFilms] = useState<Film[] | null>(null);
+  const [books, setBooks] = useState<Book[] | null>(null);
+  const [anime, setAnime] = useState<Anime[] | null>(null);
+  const [videos, setVideos] = useState<Video[] | null>(null);
+  const [gh, setGh] = useState<GitHubData | null | undefined>(undefined);
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/now-data.json`, { cache: 'no-store' })
@@ -158,7 +223,9 @@ const NowPage: React.FC = () => {
         </p>
       </header>
 
-      {gh && (gh.total !== null || weeks.length > 0) && (
+      {gh === undefined ? (
+        <GitHubSkeleton />
+      ) : gh && (gh.total !== null || weeks.length > 0) ? (
         <section className="now-github">
           <div className="now-media__head">
             <h2 className="now-media__title"><FaGithub className="now-icon" /> On GitHub</h2>
@@ -187,7 +254,7 @@ const NowPage: React.FC = () => {
             </div>
           )}
         </section>
-      )}
+      ) : null}
 
       {hasStats && (
         <section className="now-stats" aria-label="Live focus stats from my dashboard">
@@ -201,7 +268,9 @@ const NowPage: React.FC = () => {
         </section>
       )}
 
-      {books.length > 0 && (
+      {books === null ? (
+        <MediaSkeleton mark={<GoodreadsMark />} title="Reading now" auto="Auto-synced from Goodreads" count={4} />
+      ) : books.length > 0 ? (
         <section className="now-media">
           <div className="now-media__head">
             <h2 className="now-media__title"><GoodreadsMark /> Reading now</h2>
@@ -217,9 +286,11 @@ const NowPage: React.FC = () => {
             ))}
           </div>
         </section>
-      )}
+      ) : null}
 
-      {films.length > 0 && (
+      {films === null ? (
+        <MediaSkeleton mark={<LetterboxdMark />} title="Recently watched" auto="Auto-synced from Letterboxd" />
+      ) : films.length > 0 ? (
         <section className="now-media">
           <div className="now-media__head">
             <h2 className="now-media__title"><LetterboxdMark /> Recently watched</h2>
@@ -237,9 +308,11 @@ const NowPage: React.FC = () => {
             ))}
           </div>
         </section>
-      )}
+      ) : null}
 
-      {anime.length > 0 && (
+      {anime === null ? (
+        <MediaSkeleton mark={<MalMark />} title="Recently watched anime" auto="Auto-synced from MyAnimeList" />
+      ) : anime.length > 0 ? (
         <section className="now-media">
           <div className="now-media__head">
             <h2 className="now-media__title"><MalMark /> Recently watched anime</h2>
@@ -261,9 +334,11 @@ const NowPage: React.FC = () => {
             ))}
           </div>
         </section>
-      )}
+      ) : null}
 
-      {videos.length > 0 && (
+      {videos === null ? (
+        <YouTubeSkeleton />
+      ) : videos.length > 0 ? (
         <section className="now-media now-yt">
           <div className="now-media__head">
             <h2 className="now-media__title"><FaYoutube className="now-icon now-icon--yt" /> Latest video</h2>
@@ -287,7 +362,7 @@ const NowPage: React.FC = () => {
             <span className="now-ytcard__title">{videos[0].title}</span>
           </a>
         </section>
-      )}
+      ) : null}
 
       {LINKEDIN_POSTS.length > 0 && (
         <section className="now-media now-linkedin">
