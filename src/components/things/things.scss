@@ -1,0 +1,201 @@
+.things-page {
+  // ─── Theme variables (dark default) ──────────────────────────────
+  --bg: transparent; // dark mode lets the AppContainer gradient show through
+  --kicker: #818cf8;
+  --heading: #c7d2fe;
+  --text: #fff;
+  --text-strong: #f8fafc;
+  --text-soft: rgba(248, 250, 252, 0.6);
+  --text-dim: rgba(248, 250, 252, 0.45);
+  --card-bg: rgba(255, 255, 255, 0.025);
+  --card-border: rgba(255, 255, 255, 0.09);
+  --card-border-hover: rgba(255, 255, 255, 0.2);
+  --visual-bg: rgba(255, 255, 255, 0.03);
+  --shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
+
+  position: relative;
+  // Own stacking context so the fixed full-bleed ::before paints ABOVE the
+  // AppContainer's dark gradient (not behind it) in light mode.
+  isolation: isolate;
+  width: 92%;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 56px 0 90px;
+  color: var(--text);
+  font-family: 'RobotoMono', sans-serif;
+
+  // Full-bleed background so light mode paints over the dark AppContainer.
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  &[data-theme='light'] {
+    --bg: #ffffff;
+    --kicker: #6366f1;
+    --heading: #1e1b4b;
+    --text: #1f2937;
+    --text-strong: #0f172a;
+    --text-soft: rgba(30, 41, 59, 0.72);
+    --text-dim: rgba(30, 41, 59, 0.5);
+    --card-bg: #ffffff;
+    --card-border: rgba(15, 23, 42, 0.1);
+    --card-border-hover: rgba(79, 70, 229, 0.4);
+    --visual-bg: rgba(15, 23, 42, 0.03);
+    --shadow: 0 18px 40px rgba(79, 70, 229, 0.12);
+  }
+}
+
+.things-topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.things-hero {
+  margin-bottom: 44px;
+
+  &__kicker {
+    display: inline-block;
+    font-size: 0.85em;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--kicker);
+    margin-bottom: 12px;
+  }
+
+  &__title {
+    font-size: clamp(2em, 5vw, 3em);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    color: var(--heading);
+  }
+
+  &__lead {
+    font-size: clamp(1em, 1.6vw, 1.15em);
+    line-height: 1.6;
+    color: var(--text-soft);
+    max-width: 60ch;
+  }
+}
+
+// ─── Cards ──────────────────────────────────────────────────────────
+.things-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.things-card {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 22px;
+  border-radius: 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+
+  &:not(.things-card--static):hover {
+    transform: translateY(-4px);
+    border-color: var(--card-border-hover);
+    box-shadow: 0 24px 52px rgba(0, 0, 0, 0.32);
+  }
+
+  &__visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--thing-accent) 24%, transparent) 0%, transparent 62%),
+      var(--visual-bg);
+    border: 1px solid var(--card-border);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+
+  &__emoji {
+    font-size: clamp(2.6em, 6vw, 3.4em);
+    line-height: 1;
+    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  &__name {
+    font-size: 1.08em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--text-strong);
+  }
+
+  &__cat {
+    flex: 0 0 auto;
+    font-size: 0.64em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 999px;
+    color: var(--thing-accent);
+    background: color-mix(in srgb, var(--thing-accent) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--thing-accent) 32%, transparent);
+  }
+
+  &__blurb {
+    font-size: 0.86em;
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--text-soft);
+  }
+
+  &__why {
+    font-size: 0.82em;
+    line-height: 1.7;
+    color: var(--text-dim);
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 2px;
+    font-size: 0.74em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--thing-accent);
+    transition: gap 0.2s ease;
+
+    svg { font-size: 1.05em; }
+  }
+
+  &:hover &__link { gap: 9px; }
+}

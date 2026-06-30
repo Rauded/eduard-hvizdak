@@ -430,7 +430,9 @@
   left: -0.08em;
   font-size: clamp(5em, 10vw, 8.5em);
   font-weight: 700;
-  color: rgba(255, 255, 255, 0.025);
+  // Subtle per-project accent tint instead of flat white — ties the watermark
+  // to the card's colour without shouting.
+  color: color-mix(in srgb, var(--card-accent, #6366f1) 13%, transparent);
   line-height: 1;
   pointer-events: none;
   user-select: none;
@@ -444,15 +446,31 @@
 .pcard__title {
   font-size: clamp(2em, 4vw, 3.2em);
   font-weight: 700;
-  line-height: 1.05;
-  margin: 0 0 6px;
+  line-height: 1.08;
+  margin: 0 0 14px;
   letter-spacing: -0.025em;
   position: relative;
+  // Consistent high-contrast title across every card (no more raw, saturated
+  // per-project colour on the heading itself — that read garish/sloppy).
+  color: #f5f7fb;
+  display: inline-block;
+
+  // The accent now lives as a short underline marker, cohesive across cards.
+  &::after {
+    content: '';
+    display: block;
+    width: 46px;
+    height: 3px;
+    margin-top: 14px;
+    border-radius: 2px;
+    background: var(--card-accent, #6366f1);
+    box-shadow: 0 0 18px color-mix(in srgb, var(--card-accent, #6366f1) 55%, transparent);
+  }
 }
 
 .pcard__subtitle {
   font-size: 0.77em;
-  color: rgba(248, 250, 252, 0.35);
+  color: rgba(248, 250, 252, 0.4);
   margin: 0 0 22px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -496,129 +514,230 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 18px;
-  border-radius: 8px;
+  padding: 10px 20px;
+  border-radius: 10px;
   font-size: 0.78em;
   font-family: 'RobotoMono', monospace;
-  font-weight: 500;
-  letter-spacing: 0.06em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
+              border-color 0.2s ease, color 0.2s ease;
 
-  &--github {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(248, 250, 252, 0.65);
-    background: rgba(255, 255, 255, 0.03);
+  &:focus-visible {
+    outline: 2px solid var(--card-accent, #6366f1);
+    outline-offset: 3px;
+  }
+
+  // Primary: the live product / demo / story link — a filled accent pill.
+  &--demo {
+    color: #fff;
+    border: 1px solid transparent;
+    background: linear-gradient(
+      135deg,
+      var(--card-accent, #6366f1) 0%,
+      color-mix(in srgb, var(--card-accent, #6366f1) 68%, #000) 100%
+    );
+    box-shadow: 0 8px 22px color-mix(in srgb, var(--card-accent, #6366f1) 32%, transparent);
 
     &:hover {
-      border-color: rgba(255, 255, 255, 0.22);
-      color: #f8fafc;
-      background: rgba(255, 255, 255, 0.07);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px color-mix(in srgb, var(--card-accent, #6366f1) 45%, transparent);
     }
   }
 
-  &--demo {
-    background: transparent;
-    transition: all 0.2s ease;
+  // Secondary: source code — a restrained ghost button.
+  &--github {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: rgba(248, 250, 252, 0.78);
+    background: rgba(255, 255, 255, 0.035);
 
     &:hover {
-      background: rgba(255, 255, 255, 0.05);
-      opacity: 0.85;
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.28);
+      color: #f8fafc;
+      background: rgba(255, 255, 255, 0.08);
     }
   }
 
   svg {
-    font-size: 0.9em;
-    opacity: 0.8;
+    font-size: 1em;
   }
 }
 
-// ─── Expandable case study ────────────────────────────────────────────────────
-// The body is ALWAYS in the DOM (collapsed via max-height) so search engines and
-// LLM/GEO crawlers always read the full problem→solution narrative + keywords.
-.pcard__case {
-  margin-top: 22px;
-  width: 100%;
-}
-
-.pcard__case-toggle {
+// ─── Case study: trigger + on-page modal reader ───────────────────────────────
+// "Read the full story" opens a dialog ON THE SAME PAGE (rendered to <body> via
+// a React portal). The case-study text is ALWAYS in the DOM (visibility toggled
+// in CSS, never conditionally rendered) so search engines and LLM/GEO crawlers
+// still read the full problem→solution narrative + keywords.
+.pcard__case-trigger {
+  margin-top: 26px;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 8px 0;
+  gap: 9px;
+  padding: 9px 0;
   background: none;
   border: none;
   cursor: pointer;
   font-family: 'RobotoMono', monospace;
-  font-size: 0.78em;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  transition: opacity 0.2s ease;
-
-  &:hover { opacity: 0.78; }
-}
-
-.pcard__case-chevron {
-  font-size: 1.05em;
-  transition: transform 0.3s ease;
-}
-
-.pcard__case--open .pcard__case-chevron {
-  transform: rotate(180deg);
-}
-
-// max-height collapse keeps the content rendered (crawlable) while hidden.
-.pcard__case-body {
-  display: grid;
-  grid-template-rows: 0fr;
-  overflow: hidden;
-  opacity: 0;
-  transition: grid-template-rows 0.4s ease, opacity 0.3s ease;
-}
-
-.pcard__case--open .pcard__case-body {
-  grid-template-rows: 1fr;
-  opacity: 1;
-}
-
-.pcard__case-inner {
-  min-height: 0;
-  padding-top: 6px;
-}
-
-.pcard__case-section {
-  margin-bottom: 16px;
-
-  &:last-child { margin-bottom: 4px; }
-}
-
-.pcard__case-h {
-  margin: 0 0 5px;
-  font-family: 'RobotoMono', monospace;
-  font-size: 0.74em;
+  font-size: 0.76em;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  opacity: 0.9;
+  color: var(--card-accent, #a5b4fc);
+  transition: gap 0.2s ease, opacity 0.2s ease;
+
+  &:hover { gap: 13px; opacity: 0.85; }
+
+  svg { font-size: 1.1em; }
 }
 
-.pcard__case-p {
-  margin: 0;
-  font-size: 0.92em;
-  line-height: 1.7;
-  color: rgba(248, 250, 252, 0.72);
+// ─── Modal / overlay reader ───────────────────────────────────────────────────
+.case-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 4vw, 48px);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
 
-  strong { color: #f8fafc; font-weight: 600; }
+  &--open {
+    visibility: visible;
+    opacity: 1;
+  }
 
-  a {
-    color: inherit;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    text-decoration-color: rgba(255, 255, 255, 0.3);
-    transition: text-decoration-color 0.2s ease;
+  &__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(5, 5, 12, 0.74);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
 
-    &:hover { text-decoration-color: currentColor; }
+  &__panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 760px;
+    max-height: 86vh;
+    overflow-y: auto;
+    padding: clamp(28px, 5vw, 52px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: linear-gradient(180deg, #14141f 0%, #0d0d16 100%);
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7);
+    transform: translateY(16px) scale(0.985);
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+    font-family: 'RobotoMono', monospace;
+
+    // Accent edge tying the reader to its project.
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 20px 20px 0 0;
+      background: linear-gradient(90deg, var(--card-accent, #6366f1), transparent 85%);
+    }
+  }
+
+  &--open &__panel {
+    transform: translateY(0) scale(1);
+  }
+
+  &__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(248, 250, 252, 0.7);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+
+    &:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+
+    svg { font-size: 1.15em; }
+  }
+
+  &__head {
+    margin-bottom: 30px;
+    padding-right: 44px;
+  }
+
+  &__eyebrow {
+    font-size: 0.7em;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--card-accent, #a5b4fc);
+  }
+
+  &__title {
+    font-size: clamp(1.8em, 4vw, 2.6em);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: #f5f7fb;
+    margin: 9px 0 6px;
+  }
+
+  &__subtitle {
+    font-size: 0.78em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(248, 250, 252, 0.4);
+    margin: 0;
+  }
+
+  &__section {
+    margin-bottom: 24px;
+
+    &:last-child { margin-bottom: 0; }
+  }
+
+  &__h {
+    margin: 0 0 8px;
+    font-size: 0.74em;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--card-accent, #a5b4fc);
+  }
+
+  &__p {
+    margin: 0;
+    font-size: 0.95em;
+    line-height: 1.75;
+    color: rgba(248, 250, 252, 0.74);
+
+    strong { color: #f8fafc; font-weight: 600; }
+
+    a {
+      color: var(--card-accent, #a5b4fc);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      text-decoration-color: color-mix(in srgb, var(--card-accent, #6366f1) 50%, transparent);
+      transition: text-decoration-color 0.2s ease;
+
+      &:hover { text-decoration-color: currentColor; }
+    }
+  }
+
+  @media (max-width: 600px) {
+    &__panel { max-height: 92vh; border-radius: 16px; }
   }
 }
 

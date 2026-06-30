@@ -87,6 +87,31 @@ Footer keeps its baseline social links. `social_links.tsx` left in repo (unused)
 
 ---
 
+## ✅ Shipped 2026-06-30 (this batch)
+- **Favourite Things page** `/things` — new `src/components/things/` (ThingsPage + thingsData + things.scss),
+  route in `App.tsx`, "Things" nav link (`header.tsx`), light/dark toggle, sitemap entry. Seeded with
+  Kindle, Xteink 4, Even Realities G1, Pavlok (easy to extend; add photos via `image` field later).
+- **Case studies → on-page modal reader** — replaced the inline accordion with a portal-mounted
+  `.case-modal` (blurred backdrop, accent edge, Esc/backdrop/✕ close, scroll-lock). Text stays in the
+  DOM → SEO/GEO preserved. (`ProjectCard.tsx` + `PortfolioPage.scss`.)
+- **Project-card restyle** — consistent white titles + short accent underline (no more raw saturated
+  title colours), accent-tinted number watermark, filled-accent "Website" pills + ghost "GitHub"
+  buttons, Lucide icons.
+- **MyAnimeList on `/now`** — live "Recently watched anime" feed (user `rauded`) + official MAL icon
+  (`api/myanimelist.js`, `public/brand/myanimelist.svg`, NowPage section).
+- **Pro bio rewrite** — hero typewriter + About now lead with founding-engineer / paying-customer SaaS
+  positioning (`hero.tsx`, `about.tsx`). Drafts 2 & 3 (founder-first / hybrid) on file if a swap is wanted.
+- **Audit P0 fixes** — emptied the placeholder Jack-Dorsey tweet on `/now`; reordered hero titles.
+- **Light-mode bg bug** — `/now` + `/things` light mode now paint the full-bleed white correctly
+  (added `isolation: isolate` so the fixed `::before` sits above the AppContainer gradient).
+
+**Audit follow-ups still open (P0/P1 from the balance audit, not done this batch):** homepage Projects
+section duplicates the whole `/portfolio` page and `/portfolio` is orphaned from the nav — decide:
+curated 3-card teaser on home → "See all" link to `/portfolio` (+ add it to nav), or drop one. Add a
+scannable "What I'm building" products/traction strip. Delete dead code (`social_links/`, `techstack/`,
+`data/talks.json`). Fix `/portfolio` hero "2023–2025" staleness. Replace "Demo coming soon"
+placeholders on live products with a screenshot.
+
 ## 📥 Backlog synced from `goals.md` (2026-06-30)
 Pulled the **portfolio-relevant, not-yet-done** items out of the Obsidian
 `Dashboard - Project/goals.md` + `To-Do General.md` so they live in one place. (Items already

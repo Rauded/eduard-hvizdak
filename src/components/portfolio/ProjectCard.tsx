@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { LuChevronDown } from 'react-icons/lu';
+import { createPortal } from 'react-dom';
+import { LuBookOpen, LuArrowUpRight, LuGithub, LuX } from 'react-icons/lu';
 import { PortfolioProject, CaseStudy } from './projectsData';
 
 // ─── Scroll-reveal hook ──────────────────────────────────────────
@@ -102,10 +102,11 @@ const PlaceholderCard: React.FC<{ title: string; accent: string }> = ({ title, a
   </div>
 );
 
-// ─── Case study (always in the DOM for SEO/GEO; collapsed via CSS) ─
-// The full problem→solution narrative is rendered for every project
-// regardless of expand state, so crawlers and LLM indexers always get
-// the keywords. The button only toggles a CSS class for human readers.
+// ─── Case study sections ─────────────────────────────────────────
+// The full problem→solution narrative is ALWAYS rendered into the DOM
+// (inside the dialog markup, hidden via CSS when closed) so crawlers and
+// LLM/GEO indexers always get the keywords. The button only reveals the
+// reader for human readers — opening "like a window" on the same page.
 const CASE_SECTIONS: { key: keyof CaseStudy; heading: string }[] = [
   { key: 'problem', heading: 'The problem' },
   { key: 'motivation', heading: 'Why I built it' },
@@ -116,41 +117,87 @@ const CASE_SECTIONS: { key: keyof CaseStudy; heading: string }[] = [
 
 const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) => {
   const [open, setOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
   const cs = project.caseStudy;
+
+  // Lock body scroll + wire Esc while the reader is open; restore focus on close.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const trigger = triggerRef.current;
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+      trigger?.focus();
+    };
+  }, [open]);
+
   if (!cs) return null;
+  const titleId = `case-title-${project.id}`;
 
-  return (
-    <div className={`pcard__case ${open ? 'pcard__case--open' : ''}`}>
-      <button
-        type="button"
-        className="pcard__case-toggle"
-        aria-expanded={open}
-        aria-controls={`case-${project.id}`}
-        onClick={() => setOpen(o => !o)}
-        style={{ color: project.accent }}
-      >
-        {open ? 'Hide the full story' : 'Read the full story'}
-        <LuChevronDown className="pcard__case-chevron" aria-hidden="true" />
-      </button>
+  // Rendered to <body> so the overlay escapes any card stacking context.
+  // The markup is ALWAYS mounted (visibility toggled via CSS) to preserve
+  // the in-DOM, indexable case-study text.
+  const dialog = createPortal(
+    <div
+      className={`case-modal ${open ? 'case-modal--open' : ''}`}
+      aria-hidden={!open}
+      style={{ '--card-accent': project.accent } as React.CSSProperties}
+    >
+      <div className="case-modal__backdrop" onClick={() => setOpen(false)} />
+      <div className="case-modal__panel" role="dialog" aria-modal="true" aria-labelledby={titleId}>
+        <button
+          type="button"
+          className="case-modal__close"
+          onClick={() => setOpen(false)}
+          aria-label="Close case study"
+        >
+          <LuX aria-hidden="true" />
+        </button>
 
-      <div className="pcard__case-body" id={`case-${project.id}`}>
-        <div className="pcard__case-inner">
+        <header className="case-modal__head">
+          <span className="case-modal__eyebrow">Case study</span>
+          <h2 className="case-modal__title" id={titleId}>{project.title}</h2>
+          <p className="case-modal__subtitle">{project.subtitle}</p>
+        </header>
+
+        <div className="case-modal__body">
           {CASE_SECTIONS.map(({ key, heading }) =>
             cs[key] ? (
-              <div className="pcard__case-section" key={key}>
-                <h3 className="pcard__case-h" style={{ color: project.accent }}>
-                  {heading}
-                </h3>
+              <section className="case-modal__section" key={key}>
+                <h3 className="case-modal__h">{heading}</h3>
                 <p
-                  className="pcard__case-p"
+                  className="case-modal__p"
                   dangerouslySetInnerHTML={{ __html: cs[key] as string }}
                 />
-              </div>
+              </section>
             ) : null
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
+  );
+
+  return (
+    <>
+      <button
+        ref={triggerRef}
+        type="button"
+        className="pcard__case-trigger"
+        onClick={() => setOpen(true)}
+        aria-haspopup="dialog"
+      >
+        <LuBookOpen aria-hidden="true" />
+        Read the full story
+      </button>
+      {dialog}
+    </>
   );
 };
 
@@ -198,9 +245,10 @@ export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project }
       className={['pcard', project.reversed ? 'pcard--reversed' : '', visible ? 'pcard--visible' : '']
         .filter(Boolean)
         .join(' ')}
+      style={{ '--card-accent': project.accent } as React.CSSProperties}
     >
       {/* Media */}
-      <div className="pcard__media" style={{ '--card-accent': project.accent } as React.CSSProperties}>
+      <div className="pcard__media">
         {renderMedia()}
       </div>
 
@@ -210,9 +258,7 @@ export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project }
           {project.number}
         </span>
 
-        <h2 className="pcard__title" style={{ color: project.accent }}>
-          {project.title}
-        </h2>
+        <h2 className="pcard__title">{project.title}</h2>
         <p className="pcard__subtitle">{project.subtitle}</p>
         <p className="pcard__description">{project.description}</p>
 
@@ -232,17 +278,8 @@ export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project }
               target="_blank"
               rel="noopener noreferrer"
               className={`pcard__link pcard__link--${link.type}`}
-              style={
-                link.type === 'demo'
-                  ? ({
-                      '--btn-accent': project.accent,
-                      borderColor: `${project.accent}55`,
-                      color: project.accent,
-                    } as React.CSSProperties)
-                  : {}
-              }
             >
-              {link.type === 'github' ? <FaGithub /> : <FaExternalLinkAlt />}
+              {link.type === 'github' ? <LuGithub /> : <LuArrowUpRight />}
               {link.label}
             </a>
           ))}

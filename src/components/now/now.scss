@@ -19,6 +19,9 @@
   --gh-empty: rgba(255, 255, 255, 0.06);
 
   position: relative;
+  // Own stacking context so the fixed full-bleed ::before paints ABOVE the
+  // AppContainer's dark gradient (not behind it) in light mode.
+  isolation: isolate;
   width: 92%;
   max-width: 880px;
   margin: 0 auto;
@@ -209,6 +212,9 @@
 
   // Official Letterboxd decal: already a self-contained dark circle.
   &--letterboxd { border-radius: 50%; }
+
+  // Official MyAnimeList badge: a blue rounded square.
+  &--mal { border-radius: 6px; }
 }
 
 .now-card {

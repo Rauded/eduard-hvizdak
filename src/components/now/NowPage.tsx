@@ -15,10 +15,9 @@ const LINKEDIN_POSTS: { src: string; height: number }[] = [
   { src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7473426243208527872?collapsed=1', height: 628 },
 ];
 
-// Favourite posts on X — add tweet URLs here to feature them.
-const FAVOURITE_TWEETS: string[] = [
-  'https://twitter.com/jack/status/20', // sample — replace with favourites
-];
+// Favourite posts on X — add tweet URLs here to feature them. Empty = the
+// whole "Favourite posts on X" section hides itself (guarded by length > 0).
+const FAVOURITE_TWEETS: string[] = [];
 
 // ─── Official brand marks ────────────────────────────────────────────
 // Real, official logo files downloaded from each brand's own assets:
@@ -42,6 +41,15 @@ const LetterboxdMark: React.FC = () => (
   />
 );
 
+const MalMark: React.FC = () => (
+  <img
+    className="brandmark brandmark--mal"
+    src="/brand/myanimelist.svg"
+    alt=""
+    aria-hidden="true"
+  />
+);
+
 // ─── Live focus stats contract ───────────────────────────────────────
 // Filled by the local `dashboard` project's now-summary generator, which
 // writes a sanitized summary to public/now-data.json (income stays private).
@@ -55,6 +63,7 @@ interface NowData {
 }
 interface Film { title: string; year: string; rating: number | null; link: string; poster: string }
 interface Book { title: string; author: string; cover: string; link: string }
+interface Anime { title: string; status?: string; link: string; cover: string }
 interface Video { id: string; title: string; published: string; url: string; thumbnail: string; thumbnailFallback?: string }
 interface ContribDay { date: string; count: number; level: number }
 interface GitHubData { total: number | null; contributions: ContribDay[] }
@@ -84,6 +93,7 @@ const NowPage: React.FC = () => {
   const [data, setData] = useState<NowData | null>(null);
   const [films, setFilms] = useState<Film[]>([]);
   const [books, setBooks] = useState<Book[]>([]);
+  const [anime, setAnime] = useState<Anime[]>([]);
   const [videos, setVideos] = useState<Video[]>([]);
   const [gh, setGh] = useState<GitHubData | null>(null);
 
@@ -99,6 +109,10 @@ const NowPage: React.FC = () => {
     fetch('/api/goodreads')
       .then((r) => (r.ok ? r.json() : { items: [] }))
       .then((d) => setBooks(d.items || []))
+      .catch(() => {});
+    fetch('/api/myanimelist')
+      .then((r) => (r.ok ? r.json() : { items: [] }))
+      .then((d) => setAnime(d.items || []))
       .catch(() => {});
     fetch('/api/youtube')
       .then((r) => (r.ok ? r.json() : { items: [] }))
@@ -219,6 +233,24 @@ const NowPage: React.FC = () => {
                 <span className="now-card__sub">
                   {f.year}{f.rating ? <span className="now-card__stars"> · {stars(f.rating)}</span> : null}
                 </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {anime.length > 0 && (
+        <section className="now-media">
+          <div className="now-media__head">
+            <h2 className="now-media__title"><MalMark /> Recently watched anime</h2>
+            <a className="now-media__auto" href="https://myanimelist.net/profile/rauded" target="_blank" rel="noopener noreferrer">@rauded</a>
+          </div>
+          <div className="now-media__grid">
+            {anime.map((a, i) => (
+              <a className="now-card" key={i} href={a.link} target="_blank" rel="noopener noreferrer" title={a.title}>
+                {a.cover && <img className="now-card__cover" src={a.cover} alt="" loading="lazy" />}
+                <span className="now-card__title">{a.title}</span>
+                {a.status && <span className="now-card__sub">{a.status}</span>}
               </a>
             ))}
           </div>

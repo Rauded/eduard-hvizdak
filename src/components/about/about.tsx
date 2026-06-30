@@ -13,16 +13,13 @@ const About: React.FC = () => {
         <div className="about-text">
           <h2 className="about-title">About Me</h2>
           <p>
-            Hello! My name is <span className="purple-text">Eduard Hvižďák</span>. I’m a computer science student at Masaryk University and AI developer focused on building real-world systems powered by large language models. Most recently, I’ve been working on AI infrastructure for <span className="purple-text">document intelligence, multi-agent pipelines, and retrieval-augmented knowledge systems</span>.
+            I’m <span className="purple-text">Eduard Hvižďák</span>, a <span className="purple-text">founding engineer</span> who ships <span className="purple-text">production AI systems</span> end-to-end. My work centers on retrieval-augmented document intelligence, multi-agent tooling, and the infrastructure that makes language models reliable in production: <span className="purple-text">FastAPI backends, async pipelines, vector search, and LangChain orchestration</span>.
           </p>
           <p>
-            My interests evolve with the problems I’m exploring, but lately I’ve been especially focused on <span className="purple-text">agentic AI systems, retrieval architectures, and large-scale document analysis</span> using modern embedding models and vector search.
+            I don’t stop at prototypes. I’ve taken three SaaS products from zero to live, <span className="purple-text">paying customers</span>: <span className="purple-text">InzerPro</span>, an automation platform for the Bazoš classifieds (React, Supabase, Stripe, Deno); <span className="purple-text">NasadClaw</span>, on-prem AI deployment for Czech and Slovak enterprises (Next.js, TypeScript); and <span className="purple-text">KouzelníkNaAkci</span>, a two-sided marketplace. As an AI Developer at OneBond, Masaryk University’s CZS, and iGalileo, I’ve built the same kind of systems inside organisations.
           </p>
           <p>
-            My skillset spans a wide range of technologies, and I believe strongly in choosing the right tool for the problem rather than locking into a single framework or stack. I enjoy designing systems where language models interact with retrieval engines, structured data, and external tools to solve complex tasks. Much of my work involves building <span className="purple-text">FastAPI backends, asynchronous pipelines, and vector search infrastructure</span> that allows AI systems to operate reliably at scale.
-          </p>
-          <p>
-            Outside of programming, you’ll usually find me reading, experimenting with new technologies and occasionally scrolling Twitter.
+            I’m finishing a computer science degree at <span className="purple-text">Masaryk University</span> in Brno (2026) and I’m bilingual CZ/SK. I treat the stack as a means to an end — I pick the right tool for the problem and own the result from architecture to deploy.
           </p>
         </div>
         <div className="about-photo">
