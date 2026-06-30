@@ -88,6 +88,18 @@ Footer keeps its baseline social links. `social_links.tsx` left in repo (unused)
 ---
 
 ## ✅ Shipped 2026-06-30 (this batch)
+- **Build-time prerendering (crawlable + AI-searchable) — DONE & verified live.** `scripts/prerender.mjs`
+  runs after `react-scripts build` (chained in the `build` script) and snapshots each route's fully
+  rendered DOM into `build/<route>/index.html` via headless Chromium. Locally it uses full Puppeteer;
+  on Vercel it uses **`@sparticuz/chromium` + puppeteer-core** (bundled Puppeteer's Chromium can't
+  launch in Vercel's Linux build container — that's why the first attempt silently fell back to SPA).
+  `src/index.tsx` `hydrateRoot()`s the prerendered markup. Routes: `/`, `/portfolio`, `/blog`, `/now`,
+  `/things` + the 4 blog posts — **add new blog slugs to the `ROUTES` array in `scripts/prerender.mjs`.**
+  Verified on production: `/` raw HTML is 67 KB (was 8.8 KB), `/portfolio` raw HTML carries the full
+  case-study text, and every route has its own baked-in `<title>`/OG/canonical (also fixes the
+  previously client-only social unfurl). The step is fully guarded — any Chromium failure exits 0 so it
+  can never break the deploy. (Resolves the ROADMAP "CRA → Next.js/SSG migration?" SEO open question.)
+
 - **Favourite Things page** `/things` — new `src/components/things/` (ThingsPage + thingsData + things.scss),
   route in `App.tsx`, "Things" nav link (`header.tsx`), light/dark toggle, sitemap entry. Seeded with
   Kindle, Xteink 4, Even Realities G1, Pavlok (easy to extend; add photos via `image` field later).
