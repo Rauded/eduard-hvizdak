@@ -87,6 +87,81 @@ Footer keeps its baseline social links. `social_links.tsx` left in repo (unused)
 
 ---
 
+## 📥 Backlog synced from `goals.md` (2026-06-30)
+Pulled the **portfolio-relevant, not-yet-done** items out of the Obsidian
+`Dashboard - Project/goals.md` + `To-Do General.md` so they live in one place. (Items already
+shipped in goals.md — hackathon-story link, Zero-to-Done blog, PsycheTab store link, real
+Goodreads/Letterboxd marks, books→media swap, "what's running" showcase — are intentionally omitted.)
+
+### ⭐ Personal **tech / gear page** (the main new ask)
+- [ ] **Build a "Gear" / personal-tech page** — the kit Eduard actually loves: **Kindle**, **Xteink
+  e-ink reader**, **AR / "reality" glasses**, **Pavlok** electric-shock wristband, etc. This is the
+  planned **`/uses` page** (uses.tech) realised in Eduard's own voice — not a dry spec list but
+  "tech I'm into & why," one short blurb per device. Doubles as personality signal **and**
+  long-tail SEO. List on uses.tech for a backlink once live. (Replaces the abstract Sprint-3 `/uses`
+  bullet + goals.md "add a tech page / tech blog post" line.)
+  - Decide: dedicated `/uses` (or `/gear`) page vs a tagged blog post. Recommend a **page** (evergreen,
+    linkable in nav) and optionally a deeper blog post per gadget later.
+
+### Content & copy
+- [ ] **Rewrite/shorten the hero bio next to the photo** — quiz Eduard on personal-vs-professional
+  tone; it should lead with **founder-with-paying-customers + real CS/AI dev skills** (InzerPro,
+  hackathons, DIY/hackerspaces), be eye-catching and high-signal, not a wall of text. (goals.md)
+- [ ] **Whole-site balance audit** — "too much or too little?" Lean the *first impression*
+  professional/career; keep personal stuff (reading/watching/gear/now) on dedicated pages so it
+  enriches without diluting. Spotify already cut; Goodreads/Letterboxd kept. (goals.md)
+- [ ] **Record real videos / demos for the portfolio projects** — short screen-capture or talking-head
+  demos per flagship product. Highest-effort, highest-credibility. (goals.md)
+
+### Structure & polish
+- [ ] **Project "story" → dedicated case-study page** instead of the inline text expander — but keep
+  the narrative **crawlable/indexable** (real route + server-readable text, not JS-gated). (goals.md)
+- [ ] **Fix project-card link & title styling** — the "Website" link, "Read the full story" link, and
+  project **title colours** currently read sloppy/low-quality. Make links obvious Lucide-arrow pills;
+  fix title contrast/weight. (goals.md — recurring complaint)
+- [ ] **Full mobile responsive pass** (also already in Sprint-1 polish) — re-verify projects, `/now`,
+  contact, blog, and the new gear page on phone widths. (goals.md)
+- [ ] **Evaluate reactbits.dev/showcase** components for tasteful motion/polish — adopt only what fits
+  the restrained indigo aesthetic. (goals.md)
+- [ ] **Review the @bensig personal-site idea** — https://x.com/bensig/status/2070737149666926645 —
+  decide if the pattern is worth borrowing. (goals.md)
+
+### More "elsewhere" / live embeds (extends the /now work we just shipped)
+- [ ] **Add real favourite tweets to the `/now` X section** — the embed component is built but
+  `FAVOURITE_TWEETS` still holds a placeholder (`jack/status/20`); paste real tweet URLs or hide the
+  section until then. (loose end from this session + goals.md "embedded tweets")
+- [ ] **Instagram on `/now`** — LinkedIn + YouTube are done; IG remains. ⚠️ Personal IG has **no clean
+  public feed API** (needs a Business/Creator account + Graph API token, or a curated manual embed
+  like LinkedIn). Likely do the **manual-embed** route. (goals.md)
+- [ ] **Add MyAnimeList to the `/now` media row** — same pattern as Goodreads/Letterboxd: MAL exposes
+  per-user RSS (`myanimelist.net/rss.php?type=rw&u=<user>`) → a small `api/myanimelist.js` Vercel fn
+  → "Recently watched anime" card. (goals.md)
+
+---
+
+## 🎭 What a portfolio needs — professional credibility **and** personality (reference)
+Eduard asked how to appeal to *both* career/professional viewers **and** people sizing up culture-fit /
+personality. The site should serve both without compromising the founder-engineer first impression.
+
+**A) Professional / career signal (recruiters, founders, clients — keep above the fold):**
+- One-line **positioning headline** ("founder-engineer shipping real SaaS with paying customers").
+- **Proof of shipped products + traction** (live products, paying customers, listings posted, uptime).
+- **Case studies with outcomes/numbers**, not just screenshots; architecture depth for the AI work.
+- **Tech stack / `/uses`**, CV/résumé, and a **clear contact CTA** (email + book-a-call — done).
+- **Craft cues:** fast load, clean URLs, mobile-perfect, OG/SEO, GitHub graph, LinkedIn — done/ongoing.
+
+**B) Personality / culture-fit (people getting to know *you* — let it live on dedicated pages):**
+- **`/now`** (current focus) + **gear/`/uses`** page — already core to the plan.
+- **What you read/watch** (Goodreads/Letterboxd — done), and **MyAnimeList** (planned).
+- **Writing with a real voice** (the blog — keep the humanized tone), incl. a personal/origin story.
+- **Interests & DIY** — hackerspaces, hardware tinkering, the Pavlok/quantified-self angle.
+- **A touch of whimsy** + **favourite tweets**, photos, location/timezone ("Brno, CET").
+
+**Balance rule:** lead professional on `/` (positioning, products, traction, contact); route personality
+to `/now`, `/uses`/gear, and the blog — so it *adds* dimension instead of muddying the pitch.
+
+---
+
 ## 🎯 Personal tracker widgets — "what I'm currently into / tracking"
 The idea Eduard liked: personal sites that show live "trackers" (Spotify, coding time, screen time…)
 to show personality. Research done 2026-06-27. **Frame all of these inside a `/now` page.**
