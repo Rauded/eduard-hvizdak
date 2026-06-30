@@ -5,8 +5,9 @@ import { VISIBLE_PROJECTS } from '../portfolio/projectsData';
 // @ts-ignore
 import ProjectCard from '../portfolio/ProjectCard.tsx';
 
-// Homepage Projects section — the cinematic showcase, sharing the exact
-// same cards and data as the /portfolio page (single source of truth).
+// Homepage Projects section — the single home for the project showcase.
+// (The standalone /portfolio page was removed; each card's deep dive now
+// lives in the case-study modal opened from that card.)
 const Projects: React.FC = () => {
   return (
     <div className="projects-container" id="projects">

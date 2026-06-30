@@ -20,7 +20,7 @@ export const BLOG_POSTS: BlogPost[] = [
       'I spent a weekend hacking with team MOGGERS on Newsmatics Globe, a pipeline that pulls locations out of news articles and plots them on an interactive 3D globe. Here is how the weekend went.',
     thumbnail: '/blog/newsmatics/group.jpg',
     content: `
-      <p>On <strong>27-28 February 2026</strong> I took part in the <strong><a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathon</a></strong> in Brno with my team, <strong>MOGGERS</strong>. We built <strong>Newsmatics Globe</strong>, a geolocation pipeline: it pulls place names out of news articles with NLP, matches them against the GeoNames database, and plots them on an interactive 3D globe. There's a timeline you can scrub to watch events spread across the map. If you want the detail on the project itself, it's on my <a href="/portfolio">portfolio page</a> (look for <strong>Newsmatics Globe</strong>).</p>
+      <p>On <strong>27-28 February 2026</strong> I took part in the <strong><a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathon</a></strong> in Brno with my team, <strong>MOGGERS</strong>. We built <strong>Newsmatics Globe</strong>, a geolocation pipeline: it pulls place names out of news articles with NLP, matches them against the GeoNames database, and plots them on an interactive 3D globe. There's a timeline you can scrub to watch events spread across the map. If you want the detail on the project itself, it's in the <a href="/#projects">projects on my homepage</a> (look for <strong>Newsmatics Globe</strong>).</p>
 
       <figure class="blog-figure">
         <img src="/blog/newsmatics/group.jpg" alt="Full group photo of all Newsmatics Hackathon participants" class="blog-img" />
@@ -50,7 +50,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
       <h2>Final Thoughts</h2>
       <p>Hackathons are still my favourite way to build. You get a tight deadline, a real problem, and a small team that has to figure it out fast. Newsmatics Globe started as a weekend project here and turned into one of the things I'm most proud of. Thanks to <strong>Newsmatics</strong> for putting it on. Their official recap is on the <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathon 2026 page</a>.</p>
-      <p>Want the technical details? Head over to the <a href="/portfolio">portfolio</a> and find <strong>Newsmatics Globe</strong>.</p>
+      <p>Want the technical details? Head over to the <a href="/#projects">projects on my homepage</a> and find <strong>Newsmatics Globe</strong>.</p>
     `,
     footnote:
       'Newsmatics Hackathon · Brno, Czech Republic · 27-28 February 2026<br/>Team MOGGERS · Project: Newsmatics Globe · <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">newsmatics.com</a>',
@@ -131,7 +131,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
       <h2>Final Thoughts</h2>
       <p>Huge thanks to <strong>Petr Sochora</strong> and the <strong>mime digital</strong> team for hosting, and for setting the bar this high on a first run. Events that push you toward real customers instead of a demo are rare, and this one nailed it. I'd do it again in a heartbeat.</p>
-      <p>Curious about the product I brought? Head to my <a href="/portfolio">portfolio</a> and look for <strong>InzerPro</strong>.</p>
+      <p>Curious about the product I brought? Head to my <a href="/#projects">projects on my homepage</a> and look for <strong>InzerPro</strong>.</p>
     `,
     footnote:
       'Zero to Done · Brno, Czech Republic<br/>Hosted by mime digital · Project: InzerPro · <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>',

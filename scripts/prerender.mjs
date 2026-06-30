@@ -23,7 +23,6 @@ const PORT = 45678;
 // the static text (projects, case studies, blog posts, bio, things) bakes in.
 const ROUTES = [
   '/',
-  '/portfolio',
   '/blog',
   '/now',
   '/things',

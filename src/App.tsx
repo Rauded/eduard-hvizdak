@@ -13,8 +13,6 @@ import Footer from './components/footer/footer.tsx';
 // @ts-ignore
 import Home from './components/home/Home.tsx';
 // @ts-ignore
-import PortfolioPage from './components/portfolio/PortfolioPage.tsx';
-// @ts-ignore
 import BlogListingPage from './components/blog/BlogListingPage.tsx';
 // @ts-ignore
 import BlogPostPage from './components/blog/BlogPostPage.tsx';
@@ -47,10 +45,23 @@ const PostHogPageview: React.FC = () => {
 // Reset scroll to the top whenever the path changes, so opening a post (or any
 // page) always starts at the top instead of inheriting the previous scroll.
 const ScrollToTop: React.FC = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => {
+    // Honour in-page anchors (e.g. /#projects from a blog link): scroll to the
+    // target — retrying briefly while the destination section mounts — instead
+    // of jumping to the top.
+    if (hash) {
+      let tries = 0;
+      const tick = () => {
+        const el = document.getElementById(hash.slice(1));
+        if (el) el.scrollIntoView();
+        else if (tries++ < 25) setTimeout(tick, 40);
+      };
+      tick();
+      return;
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
   return null;
 };
 
@@ -70,7 +81,6 @@ const App: React.FC = () => {
         <PostHogPageview />
         <Routes>
           <Route path="/" element={<Shell><Home /></Shell>} />
-          <Route path="/portfolio" element={<Shell><PortfolioPage /></Shell>} />
           <Route path="/blog" element={<Shell><BlogListingPage /></Shell>} />
           <Route path="/blog/:slug" element={<Shell><BlogPostPage /></Shell>} />
           <Route path="/now" element={<Shell><NowPage /></Shell>} />
