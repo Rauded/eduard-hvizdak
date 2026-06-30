@@ -261,13 +261,15 @@ const topLines = [
 ];
 
 const typewriterTexts = [
-  "Founding engineer & indie founder",
-  "Founder — InzerPro · NasadClaw · KouzelníkNaAkci",
-  "Production AI — RAG & multi-agent systems",
-  "SaaS with real, paying customers",
   "AI Developer @ OneBond",
-  "Python · FastAPI · LangChain",
-  "CS @ Masaryk University · hackathon regular"
+  "AI Developer @ CZS / Masaryk University",
+  "AI Developer @ iGalileo",
+  "Think Tank @ EDUC Alliance",
+  "CS Student @ Masaryk University",
+  "Python & LangChain Developer",
+  "Building AI agents & RAG pipelines",
+  "Hackathon Fanatic",
+  "AI Enthusiast"
 ];
 
 const Hero: React.FC = () => {
