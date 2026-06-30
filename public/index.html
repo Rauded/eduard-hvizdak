@@ -25,24 +25,131 @@
 
     <!-- Twitter card -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@EduardHvizdak" />
+    <meta name="twitter:creator" content="@EduardHvizdak" />
     <meta name="twitter:title" content="Eduard Hvižďák – AI Engineer & Founder" />
     <meta name="twitter:description" content="Production AI systems (RAG, multi-agent) and real SaaS products — InzerPro, NasadClaw, KouzelníkNaAkci." />
     <meta name="twitter:image" content="https://eduard-hvizdak.vercel.app/og-image.png" />
 
-    <!-- Person structured data (stable @id reused as blog-post author) -->
+    <!--
+      Knowledge-Graph / entity schema (JSON-LD @graph).
+      One Person "brain" (@id #person) linked by @id to the WebSite and to each
+      product (SoftwareApplication). This is the site-side foundation for a Google
+      Knowledge Panel + AI-search citations.
+      TODO (manual, see KNOWLEDGE-PANEL.md): once the Wikidata Q-item exists, add its
+      URL ("https://www.wikidata.org/wiki/Q……") to the Person "sameAs" array below —
+      that bidirectional bridge is what ties this site to Google's Knowledge Graph.
+    -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "@id": "https://eduard-hvizdak.vercel.app/#person",
-      "name": "Eduard Hvižďák",
-      "url": "https://eduard-hvizdak.vercel.app/",
-      "jobTitle": "AI Engineer & Founder",
-      "alumniOf": { "@type": "CollegeOrUniversity", "name": "Masaryk University" },
-      "knowsAbout": ["Artificial Intelligence", "Retrieval-Augmented Generation", "Multi-agent systems", "Full-stack engineering", "SaaS"],
-      "sameAs": [
-        "https://github.com/Rauded",
-        "https://www.linkedin.com/in/eduard-hvizdak"
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://eduard-hvizdak.vercel.app/#person",
+          "name": "Eduard Hvižďák",
+          "alternateName": "EduardHvizdak",
+          "url": "https://eduard-hvizdak.vercel.app/",
+          "image": "https://eduard-hvizdak.vercel.app/eduard-hvizdak.jpg",
+          "description": "Eduard Hvižďák is an AI engineer and indie founder based in Brno, Czech Republic. He builds production AI systems — retrieval-augmented generation, multi-agent pipelines, and large-scale document analysis — and runs SaaS products including InzerPro, NasadClaw, and KouzelníkNaAkci.",
+          "jobTitle": "AI Engineer & Founder",
+          "homeLocation": {
+            "@type": "Place",
+            "name": "Brno, Czech Republic",
+            "address": { "@type": "PostalAddress", "addressLocality": "Brno", "addressCountry": "CZ" },
+            "sameAs": "https://www.wikidata.org/wiki/Q14960"
+          },
+          "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Masaryk University",
+            "url": "https://www.muni.cz/en",
+            "sameAs": "https://www.wikidata.org/wiki/Q909066"
+          },
+          "knowsAbout": [
+            "Artificial Intelligence",
+            "Retrieval-Augmented Generation",
+            "Multi-agent systems",
+            "Large language models",
+            "Document intelligence",
+            "Vector search",
+            "Full-stack engineering",
+            "SaaS"
+          ],
+          "affiliation": [
+            { "@type": "Organization", "name": "InzerPro", "url": "https://www.inzerpro.cz", "founder": { "@id": "https://eduard-hvizdak.vercel.app/#person" } },
+            { "@type": "Organization", "name": "NasadClaw", "url": "https://www.nasadclaw.cz", "founder": { "@id": "https://eduard-hvizdak.vercel.app/#person" } },
+            { "@type": "Organization", "name": "KouzelníkNaAkci", "url": "https://www.kouzelniknaakci.cz", "founder": { "@id": "https://eduard-hvizdak.vercel.app/#person" } }
+          ],
+          "sameAs": [
+            "https://github.com/Rauded",
+            "https://www.linkedin.com/in/eduard-hvizdak",
+            "https://x.com/EduardHvizdak"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://eduard-hvizdak.vercel.app/#website",
+          "url": "https://eduard-hvizdak.vercel.app/",
+          "name": "Eduard Hvižďák",
+          "inLanguage": "en",
+          "author": { "@id": "https://eduard-hvizdak.vercel.app/#person" },
+          "publisher": { "@id": "https://eduard-hvizdak.vercel.app/#person" }
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://eduard-hvizdak.vercel.app/#inzerpro",
+          "name": "InzerPro",
+          "url": "https://www.inzerpro.cz",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "description": "Auto-renewal, bulk posting, and analytics SaaS for power sellers on the Bazoš.cz / Bazoš.sk classifieds.",
+          "author": { "@id": "https://eduard-hvizdak.vercel.app/#person" },
+          "creator": { "@id": "https://eduard-hvizdak.vercel.app/#person" }
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://eduard-hvizdak.vercel.app/#nasadclaw",
+          "name": "NasadClaw",
+          "url": "https://www.nasadclaw.cz",
+          "applicationCategory": "BusinessApplication",
+          "operatingSystem": "Web",
+          "description": "Managed, on-premise deployment of the OpenClaw AI assistant for Czech and Slovak business teams — dedicated hardware, InfoSec hardening, and maintenance.",
+          "author": { "@id": "https://eduard-hvizdak.vercel.app/#person" },
+          "creator": { "@id": "https://eduard-hvizdak.vercel.app/#person" }
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://eduard-hvizdak.vercel.app/#kouzelniknaakci",
+          "name": "KouzelníkNaAkci",
+          "url": "https://www.kouzelniknaakci.cz",
+          "applicationCategory": "LifestyleApplication",
+          "operatingSystem": "Web",
+          "description": "A two-sided marketplace connecting event organisers with professional magicians across the Czech Republic and Slovakia.",
+          "author": { "@id": "https://eduard-hvizdak.vercel.app/#person" },
+          "creator": { "@id": "https://eduard-hvizdak.vercel.app/#person" }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://eduard-hvizdak.vercel.app/#studyexe",
+          "name": "StudyExe",
+          "url": "https://www.studyexe.com",
+          "applicationCategory": "EducationalApplication",
+          "operatingSystem": "Windows, macOS",
+          "description": "A deep-work desktop app with real-time eye tracking, full-screen distraction lock, and AI-scored recall sessions.",
+          "author": { "@id": "https://eduard-hvizdak.vercel.app/#person" },
+          "creator": { "@id": "https://eduard-hvizdak.vercel.app/#person" }
+        },
+        {
+          "@type": "WebApplication",
+          "@id": "https://eduard-hvizdak.vercel.app/#psychetab",
+          "name": "PsycheTab",
+          "url": "https://chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao",
+          "applicationCategory": "BrowserApplication",
+          "operatingSystem": "Chrome",
+          "description": "A Chrome extension that replaces the new tab page with private, editable collage wallpapers stored locally in IndexedDB.",
+          "author": { "@id": "https://eduard-hvizdak.vercel.app/#person" },
+          "creator": { "@id": "https://eduard-hvizdak.vercel.app/#person" }
+        }
       ]
     }
     </script>
@@ -69,7 +176,25 @@
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>
+      <h1>Eduard Hvižďák — AI Engineer &amp; Founder</h1>
+      <p>
+        Eduard Hvižďák is an AI engineer and indie founder based in Brno, Czech Republic.
+        He builds production AI systems — retrieval-augmented generation (RAG), multi-agent
+        pipelines, and large-scale document analysis — and runs SaaS products including
+        <strong>InzerPro</strong> (classifieds automation), <strong>NasadClaw</strong>
+        (on-premise B2B AI deployment), and <strong>KouzelníkNaAkci</strong> (a magician
+        marketplace). He is a Computer Science student at Masaryk University.
+      </p>
+      <p>Other projects: StudyExe (deep-work desktop app), PsycheTab (Chrome extension), Newsmatics Globe (news geolocation).</p>
+      <ul>
+        <li>Website: <a href="https://eduard-hvizdak.vercel.app/">eduard-hvizdak.vercel.app</a></li>
+        <li>GitHub: <a href="https://github.com/Rauded">github.com/Rauded</a></li>
+        <li>LinkedIn: <a href="https://www.linkedin.com/in/eduard-hvizdak">linkedin.com/in/eduard-hvizdak</a></li>
+        <li>X: <a href="https://x.com/EduardHvizdak">@EduardHvizdak</a></li>
+      </ul>
+      <p>This site is an interactive app — enable JavaScript for the full experience.</p>
+    </noscript>
     <div id="root"></div>
     <!--
       This HTML file is a template.

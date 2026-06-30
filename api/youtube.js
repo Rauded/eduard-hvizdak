@@ -24,7 +24,8 @@ module.exports = async (req, res) => {
           title: grab(block, /<title>([^<]+)<\/title>/),
           published: grab(block, /<published>([^<]+)<\/published>/),
           url: `https://www.youtube.com/watch?v=${id}`,
-          thumbnail: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+          thumbnail: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
+          thumbnailFallback: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
         };
       })
       .filter((v) => v.id)

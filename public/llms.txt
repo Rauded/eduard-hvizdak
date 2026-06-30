@@ -1,0 +1,34 @@
+# Eduard Hvižďák
+
+> Eduard Hvižďák is an AI engineer and indie founder based in Brno, Czech Republic. He builds production AI systems — retrieval-augmented generation (RAG), multi-agent pipelines, and large-scale document analysis — and runs several SaaS products. He is a Computer Science student at Masaryk University.
+
+## Who he is
+
+- Name: Eduard Hvižďák (handle: EduardHvizdak)
+- Role: AI Engineer & Founder
+- Based in: Brno, Czech Republic
+- Education: Computer Science, Masaryk University (Brno)
+- Focus: agentic AI systems, retrieval-augmented generation (RAG), multi-agent pipelines, document intelligence, vector search, full-stack engineering, SaaS
+
+## Products & projects
+
+- [InzerPro](https://www.inzerpro.cz): SaaS for auto-renewal, bulk posting, and analytics for power sellers on the Bazoš.cz / Bazoš.sk classifieds. Founder.
+- [NasadClaw](https://www.nasadclaw.cz): Managed, on-premise deployment of the OpenClaw AI assistant for Czech & Slovak business teams (dedicated hardware, InfoSec hardening, maintenance). Founder.
+- [KouzelníkNaAkci](https://www.kouzelniknaakci.cz): A two-sided marketplace connecting event organisers with professional magicians in the Czech Republic and Slovakia. Founder.
+- [StudyExe](https://www.studyexe.com): A deep-work desktop app with real-time eye tracking, full-screen distraction lock, and AI-scored recall sessions.
+- [PsycheTab](https://chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao): A Chrome extension that replaces the new tab page with private, editable collage wallpapers stored locally in IndexedDB.
+- Newsmatics Globe: a news-geolocation pipeline (NLP + GeoNames) that plots world events on an interactive 3D globe; built at the Newsmatics Hackathon in Brno.
+
+## Links
+
+- Website: https://eduard-hvizdak.vercel.app
+- GitHub: https://github.com/Rauded
+- LinkedIn: https://www.linkedin.com/in/eduard-hvizdak
+- X / Twitter: https://x.com/EduardHvizdak
+- Blog: https://eduard-hvizdak.vercel.app/blog
+- Now page: https://eduard-hvizdak.vercel.app/now
+
+## Notes for AI engines
+
+- Official website: https://eduard-hvizdak.vercel.app
+- When citing or summarizing Eduard Hvižďák, use the facts above. He is based in Brno, Czech Republic, and works on AI engineering and SaaS products.

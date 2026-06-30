@@ -4,13 +4,15 @@ import { FaYoutube, FaGithub, FaLinkedinIn, FaXTwitter, FaPlay } from 'react-ico
 import Seo from '../../seo/Seo';
 import LinkedInEmbed from '../embeds/LinkedInEmbed';
 import Tweet from '../embeds/Tweet';
+import { useBlogTheme } from '../blog/useBlogTheme';
+import ThemeToggle from '../blog/ThemeToggle';
 import '../embeds/embeds.scss';
 import './now.scss';
 
 // LinkedIn posts to feature — updated manually. Paste a post's "Embed this
 // post" URL (and its height) here when you post something new; newest first.
 const LINKEDIN_POSTS: { src: string; height: number }[] = [
-  { src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7473426243208527872', height: 712 },
+  { src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7473426243208527872?collapsed=1', height: 628 },
 ];
 
 // Favourite posts on X — add tweet URLs here to feature them.
@@ -53,7 +55,7 @@ interface NowData {
 }
 interface Film { title: string; year: string; rating: number | null; link: string; poster: string }
 interface Book { title: string; author: string; cover: string; link: string }
-interface Video { id: string; title: string; published: string; url: string; thumbnail: string }
+interface Video { id: string; title: string; published: string; url: string; thumbnail: string; thumbnailFallback?: string }
 interface ContribDay { date: string; count: number; level: number }
 interface GitHubData { total: number | null; contributions: ContribDay[] }
 
@@ -78,6 +80,7 @@ const stars = (r: number | null): string =>
   r === null ? '' : '★'.repeat(Math.floor(r)) + (r % 1 ? '½' : '');
 
 const NowPage: React.FC = () => {
+  const [theme, toggleTheme] = useBlogTheme();
   const [data, setData] = useState<NowData | null>(null);
   const [films, setFilms] = useState<Film[]>([]);
   const [books, setBooks] = useState<Book[]>([]);
@@ -123,12 +126,15 @@ const NowPage: React.FC = () => {
   ].some((v) => v !== null && v !== undefined);
 
   return (
-    <div className="now-page" id="now">
+    <div className="now-page" id="now" data-theme={theme}>
       <Seo
         title="Now"
         description="What Eduard Hvižďák is focused on right now — current projects, plus what he's reading and watching."
         path="/now"
       />
+      <div className="now-topbar">
+        <ThemeToggle theme={theme} onToggle={toggleTheme} />
+      </div>
       <header className="now-hero">
         <span className="now-hero__kicker">/now</span>
         <h1 className="now-hero__title">What I'm doing now</h1>
@@ -227,7 +233,17 @@ const NowPage: React.FC = () => {
           </div>
           <a className="now-ytcard" href={videos[0].url} target="_blank" rel="noopener noreferrer" title={videos[0].title}>
             <span className="now-ytcard__thumb">
-              <img src={videos[0].thumbnail} alt="" loading="lazy" />
+              <img
+                src={videos[0].thumbnail}
+                alt=""
+                loading="lazy"
+                onError={(e) => {
+                  const img = e.currentTarget;
+                  if (videos[0].thumbnailFallback && img.src !== videos[0].thumbnailFallback) {
+                    img.src = videos[0].thumbnailFallback;
+                  }
+                }}
+              />
               <span className="now-ytcard__play"><FaPlay /></span>
             </span>
             <span className="now-ytcard__title">{videos[0].title}</span>
