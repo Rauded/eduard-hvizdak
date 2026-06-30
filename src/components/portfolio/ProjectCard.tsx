@@ -102,6 +102,43 @@ const PlaceholderCard: React.FC<{ title: string; accent: string }> = ({ title, a
   </div>
 );
 
+// ─── Project media ───────────────────────────────────────────────
+// Shared by the showcase card AND the case-study reader so the story
+// shows the exact same video / slideshow / screenshot as the showcase.
+const ProjectMedia: React.FC<{ project: PortfolioProject }> = ({ project }) => {
+  const { media, accent } = project;
+
+  // A real video file always wins, whatever the declared type — this is
+  // how a dropped-in clip "upgrades" a slideshow/image/placeholder card.
+  if (media.video) {
+    return (
+      <video
+        className="pcard__video"
+        src={media.video}
+        poster={media.poster || (media.images && media.images[0])}
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+    );
+  }
+
+  switch (media.type) {
+    case 'slideshow':
+      return <Slideshow images={media.images!} accent={accent} />;
+    case 'image':
+      return <img className="pcard__img" src={media.images![0]} alt={project.title} />;
+    case 'concept':
+      return <ConceptCard accent={accent} />;
+    case 'placeholder':
+    case 'video': // declared video but file not present yet
+      return <PlaceholderCard title={project.title} accent={accent} />;
+    default:
+      return <PlaceholderCard title={project.title} accent={accent} />;
+  }
+};
+
 // ─── Case study sections ─────────────────────────────────────────
 // The full problem→solution narrative is ALWAYS rendered into the DOM
 // (inside the dialog markup, hidden via CSS when closed) so crawlers and
@@ -166,6 +203,10 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
           <p className="case-modal__subtitle">{project.subtitle}</p>
         </header>
 
+        <div className="case-modal__media">
+          <ProjectMedia project={project} />
+        </div>
+
         <div className="case-modal__body">
           {CASE_SECTIONS.map(({ key, heading }) =>
             cs[key] ? (
@@ -205,40 +246,6 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
 export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project }) => {
   const { ref, visible } = useReveal();
 
-  const renderMedia = () => {
-    const { media, accent } = project;
-
-    // A real video file always wins, whatever the declared type — this is
-    // how a dropped-in clip "upgrades" a slideshow/image/placeholder card.
-    if (media.video) {
-      return (
-        <video
-          className="pcard__video"
-          src={media.video}
-          poster={media.poster || (media.images && media.images[0])}
-          autoPlay
-          muted
-          loop
-          playsInline
-        />
-      );
-    }
-
-    switch (media.type) {
-      case 'slideshow':
-        return <Slideshow images={media.images!} accent={accent} />;
-      case 'image':
-        return <img className="pcard__img" src={media.images![0]} alt={project.title} />;
-      case 'concept':
-        return <ConceptCard accent={accent} />;
-      case 'placeholder':
-      case 'video': // declared video but file not present yet
-        return <PlaceholderCard title={project.title} accent={accent} />;
-      default:
-        return <PlaceholderCard title={project.title} accent={accent} />;
-    }
-  };
-
   return (
     <article
       ref={ref}
@@ -249,7 +256,7 @@ export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project }
     >
       {/* Media */}
       <div className="pcard__media">
-        {renderMedia()}
+        <ProjectMedia project={project} />
       </div>
 
       {/* Info */}
