@@ -16,12 +16,19 @@ if (analyticsEnabled) {
   });
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
-root.render(
+// The build prerenders each route to static HTML (scripts/prerender.mjs). If the
+// root already has server/prerendered markup, HYDRATE it; otherwise mount fresh.
+const rootEl = document.getElementById('root') as HTMLElement;
+const app = (
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
+if (rootEl.hasChildNodes()) {
+  ReactDOM.hydrateRoot(rootEl, app);
+} else {
+  ReactDOM.createRoot(rootEl).render(app);
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
