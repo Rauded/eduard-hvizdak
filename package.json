@@ -54,11 +54,13 @@
     ]
   },
   "devDependencies": {
+    "@sparticuz/chromium": "^149.0.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "baseline-browser-mapping": "^2.10.0",
     "gh-pages": "^6.1.1",
-    "puppeteer": "^25.2.1"
+    "puppeteer": "^25.2.1",
+    "puppeteer-core": "^25.2.1"
   },
   "pnpm": {
     "overrides": {

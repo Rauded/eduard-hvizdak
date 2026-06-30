@@ -63,19 +63,32 @@ async function main() {
   });
   await new Promise((r) => server.listen(PORT, r));
 
-  let puppeteer;
+  // Launch Chromium. On Vercel/Lambda (Linux build container that lacks the
+  // shared libs bundled Chromium needs) use @sparticuz/chromium + puppeteer-core;
+  // locally use full Puppeteer's own Chromium (works on macOS/Apple-Silicon).
+  const onServerless = !!process.env.VERCEL || !!process.env.AWS_LAMBDA_FUNCTION_NAME;
+  let browser;
   try {
-    puppeteer = (await import('puppeteer')).default;
+    if (onServerless) {
+      const chromium = (await import('@sparticuz/chromium')).default;
+      const puppeteerCore = (await import('puppeteer-core')).default;
+      browser = await puppeteerCore.launch({
+        args: [...chromium.args, '--no-sandbox', '--disable-setuid-sandbox'],
+        executablePath: await chromium.executablePath(),
+        headless: chromium.headless,
+      });
+    } else {
+      const puppeteer = (await import('puppeteer')).default;
+      browser = await puppeteer.launch({
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+      });
+    }
   } catch (e) {
-    console.warn('[prerender] puppeteer not installed — skipping:', e.message);
+    console.warn('[prerender] could not launch Chromium — skipping:', e.message);
     server.close();
     return;
   }
-
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
-  });
 
   let ok = 0;
   for (const route of ROUTES) {
