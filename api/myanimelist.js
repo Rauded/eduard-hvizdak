@@ -69,7 +69,7 @@ module.exports = async (req, res) => {
         };
       })
       .filter((a) => a.title)
-      .slice(0, 8);
+      .slice(0, 6); // match the films/books rows so it stays a single row
 
     // Enrich with cover posters from Jikan, in small batches so we stay under
     // its rate limit (~3 req/s). Any lookup that fails just leaves cover ''.
