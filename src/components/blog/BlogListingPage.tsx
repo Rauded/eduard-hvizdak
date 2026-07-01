@@ -5,12 +5,11 @@ import { LuArrowRight, LuPin } from 'react-icons/lu';
 import { BLOG_POSTS } from '../../data/blog';
 import Seo from '../../seo/Seo';
 import { formatDate, getThumbnail, readingTime } from './blogUtils';
-import { useBlogTheme } from './useBlogTheme';
-import ThemeToggle from './ThemeToggle';
+import { useTheme } from '../theme/ThemeContext';
 import './BlogPage.scss';
 
 const BlogListingPage: React.FC = () => {
-  const [theme, toggleTheme] = useBlogTheme();
+  const { theme } = useTheme();
 
   // Newest first, but a pinned post is always surfaced as the featured hero.
   const byDate = [...BLOG_POSTS].sort((a, b) => b.date.localeCompare(a.date));
@@ -31,7 +30,6 @@ const BlogListingPage: React.FC = () => {
             <FaArrowLeft />
             Back home
           </Link>
-          <ThemeToggle theme={theme} onToggle={toggleTheme} />
         </div>
         <p className="blog-listing__eyebrow">Writing</p>
         <h1 className="blog-listing__title">Blog</h1>

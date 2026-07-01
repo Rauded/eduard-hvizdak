@@ -27,7 +27,7 @@
   width: 92%;
   max-width: 880px;
   margin: 0 auto;
-  padding: 56px 0 80px;
+  padding: 96px 0 80px;
   color: var(--text);
   font-family: 'RobotoMono', sans-serif;
 
@@ -43,19 +43,19 @@
   }
 
   &[data-theme='light'] {
-    --bg: #ffffff;
-    --kicker: #6366f1;
-    --heading: #1e1b4b;
+    --bg: #fafaf8;
+    --kicker: #2563eb;
+    --heading: #0b0b0f;
     --text: #1f2937;
     --text-strong: #0f172a;
     --text-soft: rgba(30, 41, 59, 0.7);
     --text-dim: rgba(30, 41, 59, 0.5);
     --text-mute: rgba(30, 41, 59, 0.55);
-    --link: #4f46e5;
-    --link-border: rgba(79, 70, 229, 0.35);
-    --card-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.06) 0%, rgba(168, 85, 247, 0.04) 100%);
-    --card-border: rgba(79, 70, 229, 0.18);
-    --card-border-hover: rgba(79, 70, 229, 0.38);
+    --link: #1d4ed8;
+    --link-border: rgba(37, 99, 235, 0.35);
+    --card-bg: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(37, 99, 235, 0.03) 100%);
+    --card-border: rgba(37, 99, 235, 0.18);
+    --card-border-hover: rgba(37, 99, 235, 0.38);
     --cover-bg: #eef2ff;
     --cover-border: rgba(15, 23, 42, 0.1);
     --shadow: 0 14px 32px rgba(79, 70, 229, 0.14);
@@ -96,12 +96,6 @@
 // Reduced motion: hold a static tint instead of animating.
 @media (prefers-reduced-motion: reduce) {
   .now-skel { animation: none; background: var(--skel-base); }
-}
-
-.now-topbar {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 8px;
 }
 
 .now-hero {

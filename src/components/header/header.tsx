@@ -2,16 +2,12 @@ import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaPen, FaRegClock, FaHeart } from 'react-icons/fa';
 import { LuSun, LuMoon } from 'react-icons/lu';
+import { useTheme } from '../theme/ThemeContext';
 import './header.scss';
 
-type HeaderProps = {
-  theme?: 'light' | 'dark';
-  onToggleTheme?: () => void;
-  showThemeToggle?: boolean;
-};
-
-const Header: React.FC<HeaderProps> = ({ theme, onToggleTheme, showThemeToggle }) => {
+const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
   const isBlog = location.pathname.startsWith('/blog');
@@ -93,16 +89,14 @@ const Header: React.FC<HeaderProps> = ({ theme, onToggleTheme, showThemeToggle }
           <FaHeart />
           Things
         </Link>
-        {showThemeToggle && onToggleTheme && (
-          <button
-            type="button"
-            className="site-theme-toggle"
-            onClick={onToggleTheme}
-            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {theme === 'dark' ? <LuSun /> : <LuMoon />}
-          </button>
-        )}
+        <button
+          type="button"
+          className="site-theme-toggle"
+          onClick={toggleTheme}
+          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {theme === 'dark' ? <LuSun /> : <LuMoon />}
+        </button>
       </nav>
     </header>
   );

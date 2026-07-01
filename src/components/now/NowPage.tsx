@@ -5,8 +5,7 @@ import Seo from '../../seo/Seo';
 import AgentsRunning from './AgentsRunning';
 import LinkedInEmbed from '../embeds/LinkedInEmbed';
 import Tweet from '../embeds/Tweet';
-import { useBlogTheme } from '../blog/useBlogTheme';
-import ThemeToggle from '../blog/ThemeToggle';
+import { useTheme } from '../theme/ThemeContext';
 import '../embeds/embeds.scss';
 import './now.scss';
 
@@ -152,7 +151,7 @@ const YouTubeSkeleton: React.FC = () => (
 );
 
 const NowPage: React.FC = () => {
-  const [theme, toggleTheme] = useBlogTheme();
+  const { theme } = useTheme();
   // null = still loading (render a skeleton); [] = loaded but empty (hide the
   // section); [...] = loaded with data. This lets the page reserve layout up
   // front so content swaps in place instead of popping in and shifting things.
@@ -212,9 +211,6 @@ const NowPage: React.FC = () => {
         description="What Eduard Hvižďák is focused on right now — current projects, plus what he's reading and watching."
         path="/now"
       />
-      <div className="now-topbar">
-        <ThemeToggle theme={theme} onToggle={toggleTheme} />
-      </div>
       <header className="now-hero">
         <span className="now-hero__kicker">/now</span>
         <h1 className="now-hero__title">What I'm doing now</h1>

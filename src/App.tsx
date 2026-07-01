@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import { HelmetProvider } from 'react-helmet-async';
 import posthog from 'posthog-js';
 import { analyticsEnabled } from './analytics';
-import { useSiteTheme, SiteTheme } from './components/theme/useSiteTheme';
+import { ThemeProvider } from './components/theme/ThemeContext';
 import './styles/light.scss';
 
 
@@ -25,10 +25,9 @@ import ThingsPage from './components/things/ThingsPage.tsx';
 // @ts-ignore
 import SharePreviewPage from './components/share/SharePreviewPage.tsx';
 
-// Page background is theme-driven: on the home route the light/dark preference
-// sets `data-theme` on <html>, which flips `--page-bg`. Everywhere else the
-// variable is unset, so it falls back to the original dark gradient — sub-pages
-// keep their own theming untouched.
+// Page background is theme-driven: the site-wide light/dark preference sets
+// `data-theme` on <html> (see ThemeProvider), which flips `--page-bg`. In dark
+// the variable is unset, so it falls back to the original dark gradient.
 const AppContainer = styled.div`
   background: var(--page-bg, linear-gradient(135deg, #1e1e1e 0%, #2a1a3d 50%, #1e1e1e 100%));
   background-size: 200% 200%;
@@ -71,61 +70,34 @@ const ScrollToTop: React.FC = () => {
   return null;
 };
 
-type ShellProps = {
-  children: React.ReactNode;
-  theme?: SiteTheme;
-  onToggleTheme?: () => void;
-  showThemeToggle?: boolean;
-};
-
-const Shell: React.FC<ShellProps> = ({ children, theme, onToggleTheme, showThemeToggle }) => (
+// One shell for every route: the shared Header (with the single site-wide theme
+// toggle) and Footer wrap the page. Theme is owned by ThemeProvider and read via
+// context, so the header, footer, home, and sub-pages all stay in sync.
+const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <AppContainer>
-    <Header theme={theme} onToggleTheme={onToggleTheme} showThemeToggle={showThemeToggle} />
+    <Header />
     {children}
     <Footer />
   </AppContainer>
 );
 
-// Owns the site-wide light/dark preference and applies it as `data-theme` on
-// <html> — but only on the home route, so the CSS-variable light theme and the
-// `[data-theme='light']` overrides never leak onto sub-pages (blog/now/things),
-// which run their own independent theme systems.
-const ThemedApp: React.FC = () => {
-  const [theme, toggleTheme] = useSiteTheme();
-  const location = useLocation();
-  const isHome = location.pathname === '/';
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (isHome) root.setAttribute('data-theme', theme);
-    else root.removeAttribute('data-theme');
-    return () => root.removeAttribute('data-theme');
-  }, [isHome, theme]);
-
-  const homeShellProps = { theme, onToggleTheme: toggleTheme, showThemeToggle: true };
-
-  return (
-    <>
-      <ScrollToTop />
-      <PostHogPageview />
-      <Routes>
-        <Route path="/" element={<Shell {...homeShellProps}><Home /></Shell>} />
-        <Route path="/blog" element={<Shell><BlogListingPage /></Shell>} />
-        <Route path="/blog/:slug" element={<Shell><BlogPostPage /></Shell>} />
-        <Route path="/now" element={<Shell><NowPage /></Shell>} />
-        <Route path="/things" element={<Shell><ThingsPage /></Shell>} />
-        <Route path="/share-preview" element={<Shell><SharePreviewPage /></Shell>} />
-      </Routes>
-    </>
-  );
-};
-
 const App: React.FC = () => {
   return (
     <HelmetProvider>
-      <Router>
-        <ThemedApp />
-      </Router>
+      <ThemeProvider>
+        <Router>
+          <ScrollToTop />
+          <PostHogPageview />
+          <Routes>
+            <Route path="/" element={<Shell><Home /></Shell>} />
+            <Route path="/blog" element={<Shell><BlogListingPage /></Shell>} />
+            <Route path="/blog/:slug" element={<Shell><BlogPostPage /></Shell>} />
+            <Route path="/now" element={<Shell><NowPage /></Shell>} />
+            <Route path="/things" element={<Shell><ThingsPage /></Shell>} />
+            <Route path="/share-preview" element={<Shell><SharePreviewPage /></Shell>} />
+          </Routes>
+        </Router>
+      </ThemeProvider>
     </HelmetProvider>
   );
 };

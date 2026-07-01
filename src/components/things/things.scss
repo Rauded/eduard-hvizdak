@@ -20,7 +20,7 @@
   width: 92%;
   max-width: 980px;
   margin: 0 auto;
-  padding: 56px 0 90px;
+  padding: 96px 0 90px;
   color: var(--text);
   font-family: 'RobotoMono', sans-serif;
 
@@ -35,25 +35,19 @@
   }
 
   &[data-theme='light'] {
-    --bg: #ffffff;
-    --kicker: #6366f1;
-    --heading: #1e1b4b;
+    --bg: #fafaf8;
+    --kicker: #2563eb;
+    --heading: #0b0b0f;
     --text: #1f2937;
     --text-strong: #0f172a;
     --text-soft: rgba(30, 41, 59, 0.72);
     --text-dim: rgba(30, 41, 59, 0.5);
     --card-bg: #ffffff;
     --card-border: rgba(15, 23, 42, 0.1);
-    --card-border-hover: rgba(79, 70, 229, 0.4);
+    --card-border-hover: rgba(37, 99, 235, 0.4);
     --visual-bg: rgba(15, 23, 42, 0.03);
-    --shadow: 0 18px 40px rgba(79, 70, 229, 0.12);
+    --shadow: 0 18px 40px rgba(37, 99, 235, 0.12);
   }
-}
-
-.things-topbar {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 8px;
 }
 
 .things-hero {

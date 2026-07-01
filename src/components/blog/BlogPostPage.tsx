@@ -4,8 +4,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { BLOG_POSTS } from '../../data/blog';
 import Seo, { SITE_URL, PERSON_ID } from '../../seo/Seo';
 import { formatDate, getThumbnail, readingTime } from './blogUtils';
-import { useBlogTheme } from './useBlogTheme';
-import ThemeToggle from './ThemeToggle';
+import { useTheme } from '../theme/ThemeContext';
 import './BlogPage.scss';
 
 type FontPref = 'serif' | 'sans';
@@ -31,7 +30,7 @@ const BlogPostPage: React.FC = () => {
   const [font, setFont] = useState<FontPref>(() =>
     getStored<FontPref>(FONT_KEY, 'serif', ['serif', 'sans'])
   );
-  const [theme, toggleTheme] = useBlogTheme();
+  const { theme } = useTheme();
   const [progress, setProgress] = useState(0);
   const [zoomSrc, setZoomSrc] = useState<string | null>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
@@ -141,7 +140,6 @@ const BlogPostPage: React.FC = () => {
                 </button>
               ))}
             </div>
-            <ThemeToggle theme={theme} onToggle={toggleTheme} />
           </div>
         </div>
 

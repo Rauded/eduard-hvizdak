@@ -1,13 +1,12 @@
 import React from 'react';
 import { LuArrowUpRight } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
-import { useBlogTheme } from '../blog/useBlogTheme';
-import ThemeToggle from '../blog/ThemeToggle';
+import { useTheme } from '../theme/ThemeContext';
 import { THINGS } from './thingsData';
 import './things.scss';
 
 const ThingsPage: React.FC = () => {
-  const [theme, toggleTheme] = useBlogTheme();
+  const { theme } = useTheme();
 
   return (
     <div className="things-page" data-theme={theme}>
@@ -16,10 +15,6 @@ const ThingsPage: React.FC = () => {
         description="The tech and gear Eduard Hvižďák actually loves — Kindle, e-ink readers, AR glasses, Pavlok and more."
         path="/things"
       />
-
-      <div className="things-topbar">
-        <ThemeToggle theme={theme} onToggle={toggleTheme} />
-      </div>
 
       <header className="things-hero">
         <span className="things-hero__kicker">/things</span>
