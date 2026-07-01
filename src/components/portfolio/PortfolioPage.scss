@@ -3,7 +3,7 @@
 // ═══════════════════════════════════════════════════════════════
 
 .portfolio-page {
-  font-family: 'RobotoMono', monospace;
+  font-family: var(--font-mono);
   color: #f8fafc;
   padding-top: 88px; // clear fixed header
   min-height: 100vh;
@@ -517,7 +517,7 @@
   padding: 10px 20px;
   border-radius: 10px;
   font-size: 0.78em;
-  font-family: 'RobotoMono', monospace;
+  font-family: var(--font-mono);
   font-weight: 600;
   letter-spacing: 0.04em;
   text-decoration: none;
@@ -591,7 +591,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-family: 'RobotoMono', monospace;
+  font-family: var(--font-mono);
   font-size: 0.76em;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -644,7 +644,7 @@
     box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7);
     transform: translateY(16px) scale(0.985);
     transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-    font-family: 'RobotoMono', monospace;
+    font-family: var(--font-mono);
 
     // Accent edge tying the reader to its project.
     &::before {

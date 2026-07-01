@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import posthog from 'posthog-js';
 import { analyticsEnabled } from './analytics';
 import { ThemeProvider } from './components/theme/ThemeContext';
+import './styles/typography.scss';
 import './styles/light.scss';
 
 

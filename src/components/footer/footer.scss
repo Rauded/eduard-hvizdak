@@ -3,7 +3,7 @@
   color: #fff;
   padding: 24px 40px;
   text-align: center;
-  font-family: 'RobotoMono', sans-serif;
+  font-family: var(--font-body);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;

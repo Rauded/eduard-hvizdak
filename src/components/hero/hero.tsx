@@ -10,7 +10,7 @@ const HeroContainer = styled.section`
   background-color: var(--page-bg, #09090b);
   color: var(--text, #fff);
   overflow: hidden;
-  font-family: 'RobotoMono', sans-serif;
+  font-family: var(--font-body);
   position: relative;
 
   @media (max-width: 768px) {
@@ -144,7 +144,7 @@ const TerminalTabBar = styled.div`
 `;
 
 const TerminalTab = styled.div`
-  font-family: 'RobotoMono', sans-serif;
+  font-family: var(--font-mono);
   font-size: 0.65rem;
   color: rgba(255, 255, 255, 0.6);
   letter-spacing: 0.04em;
@@ -203,7 +203,7 @@ const TerminalStatusBar = styled.div`
 `;
 
 const StatusText = styled.span`
-  font-family: 'RobotoMono', sans-serif;
+  font-family: var(--font-mono);
   font-size: 0.55rem;
   color: rgba(255, 255, 255, 0.3);
   letter-spacing: 0.06em;
@@ -239,6 +239,7 @@ const blink = keyframes`
 `;
 
 const TypewriterText = styled.div`
+  font-family: var(--font-mono);
   color: var(--accent, #a5b4fc);
   font-size: clamp(1.1em, 3vw, 1.75em);
   margin-top: 1em;

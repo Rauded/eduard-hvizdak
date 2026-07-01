@@ -1,0 +1,48 @@
+// ════════════════════════════════════════════════════════════════════════════
+//  Typography roles layer.
+//
+//  The bulk of the site now reads in --font-body (a clean sans). This layer
+//  assigns the two accent roles on top of that:
+//    • Headings  → --font-display  (flip --font-display to var(--font-serif)
+//                                    in index.css for an editorial serif look)
+//    • Technical → --font-mono     (logo, eyebrows/labels, tags — the bits that
+//                                    keep the "engineer" signature)
+//
+//  !important is used deliberately: component SCSS sets font-family in ~30
+//  scattered places, and this central layer must win regardless of their
+//  specificity. It only ever touches font-family, so it can't break layout.
+// ════════════════════════════════════════════════════════════════════════════
+
+h1, h2, h3,
+.about-title,
+.about-highlight__title,
+.section-title,
+.resume-title,
+.job-title,
+.contact__title,
+.pcard__title,
+.blog-listing__title,
+.blog-feature__title,
+.blog-post__title,
+.blog-row__title,
+.now-hero__title,
+.now-media__title,
+.things-hero__title,
+.things-card__name {
+  font-family: var(--font-display) !important;
+  letter-spacing: -0.02em;
+}
+
+// Technical signature — kept in mono as a tasteful accent, not the whole page.
+.logo,
+.about-highlight__eyebrow,
+.contact__eyebrow,
+.now-hero__kicker,
+.things-hero__kicker,
+.blog-listing__eyebrow,
+.blog-post__category,
+.pcard__subtitle,
+.pcard__tag,
+.blog-chip {
+  font-family: var(--font-mono) !important;
+}

@@ -142,14 +142,41 @@
   font-display: swap;
 }
 
+/* ─── Typography system ─────────────────────────────────────────────────────
+   Three roles, swappable in one place. --font-mono keeps the technical
+   signature on the terminal / code / typewriter; --font-display drives the big
+   headings (flip it to var(--font-serif) for an editorial look); --font-body is
+   the clean sans everything else reads in. */
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, Cambria, 'Times New Roman', serif;
+  --font-mono: 'RobotoMono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --font-body: var(--font-sans);
+  --font-display: var(--font-sans);
+}
+
 html, body {
   margin: 0;
   padding: 0;
-  font-family: 'RobotoMono', monospace;
+  font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #09090b;
   overflow-x: hidden;
+}
+
+/* Ease the whole page across a theme toggle instead of a hard snap. Scoped to
+   colour props so layout/transform animations are untouched. */
+html[data-theme] body *,
+html[data-theme] body *::before,
+html[data-theme] body *::after {
+  transition: background-color 0.28s ease, border-color 0.28s ease, color 0.22s ease, box-shadow 0.28s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme] body *,
+  html[data-theme] body *::before,
+  html[data-theme] body *::after { transition: none; }
 }
 
 /* ─── Professional light theme (home page) ──────────────────────────────────
@@ -181,8 +208,7 @@ html, body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: var(--font-mono);
 }
 
 /* Offset in-page scroll targets so they land below the floating fixed header

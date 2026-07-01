@@ -11,7 +11,7 @@
   border: 1px solid rgba(165, 180, 252, 0.18);
   backdrop-filter: blur(14px);
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-  font-family: 'RobotoMono', sans-serif;
+  font-family: var(--font-body);
 
   &__eyebrow {
     font-size: 0.82em;

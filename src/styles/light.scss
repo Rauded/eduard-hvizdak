@@ -74,7 +74,7 @@
   .about-container {
     color: var(--text);
 
-    h2, .about-title { color: var(--text-strong); }
+    h2, .about-title { color: var(--accent); }
 
     .about-intro .about-text {
       p { color: var(--text-muted); }
@@ -157,8 +157,9 @@
 
   // ─── Resume ─────────────────────────────────────────────────────────────
   .resume-container { color: var(--text); }
+  // Big section headings pop in the brand blue; per-item job titles stay dark.
   .resume-title,
-  .section-title,
+  .section-title { color: var(--accent); }
   .job-title { color: var(--text-strong); }
 
   .company { color: var(--accent-strong); }
@@ -203,7 +204,7 @@
 
   // ─── Projects (shared .pcard) ───────────────────────────────────────────
   .projects-container { color: var(--text); }
-  .projects-container .section-title { color: var(--text-strong); }
+  .projects-container .section-title { color: var(--accent); }
   .projects-intro { color: var(--text-muted); }
 
   .pcard__title { color: var(--text-strong); }
@@ -247,7 +248,7 @@
     box-shadow: var(--shadow-card);
 
     &__eyebrow { color: var(--accent-strong); }
-    &__title { color: var(--text-strong); }
+    &__title { color: var(--accent); }
     &__lead { color: var(--text-muted); }
 
     &__btn--primary {

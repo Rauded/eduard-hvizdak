@@ -4,7 +4,23 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#fafaf8" />
+    <script>
+      // Set the theme before first paint so there's no flash of the wrong
+      // theme on load. Mirrors ThemeContext: saved choice wins, else OS pref,
+      // else light. Keep this in sync with that component.
+      (function () {
+        try {
+          var t = localStorage.getItem('site-theme');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          document.documentElement.setAttribute('data-theme', t);
+          var m = document.querySelector('meta[name="theme-color"]');
+          if (m) m.setAttribute('content', t === 'dark' ? '#09090b' : '#fafaf8');
+        } catch (e) {}
+      })();
+    </script>
     <meta
       name="description"
       content="Eduard Hvižďák – AI engineer and indie founder. Production AI systems (RAG, multi-agent) and real SaaS products."

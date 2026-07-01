@@ -22,7 +22,7 @@
   margin: 0 auto;
   padding: 96px 0 90px;
   color: var(--text);
-  font-family: 'RobotoMono', sans-serif;
+  font-family: var(--font-body);
 
   // Full-bleed background so light mode paints over the dark AppContainer.
   &::before {

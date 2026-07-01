@@ -7,7 +7,7 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 80px clamp(24px, 6vw, 100px) 40px;
-  font-family: 'RobotoMono', monospace;
+  font-family: var(--font-mono);
   color: #f8fafc;
 }
 

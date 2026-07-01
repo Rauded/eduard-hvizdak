@@ -29,7 +29,7 @@
   margin: 0 auto;
   padding: 96px 0 80px;
   color: var(--text);
-  font-family: 'RobotoMono', sans-serif;
+  font-family: var(--font-body);
 
   // Full-bleed background layer so light mode can paint over the dark
   // AppContainer gradient that sits behind this page.
