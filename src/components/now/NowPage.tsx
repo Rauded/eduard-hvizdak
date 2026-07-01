@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap } from 'react-icons/lu';
 import { FaYoutube, FaGithub, FaLinkedinIn, FaXTwitter, FaPlay } from 'react-icons/fa6';
 import Seo from '../../seo/Seo';
@@ -82,6 +83,16 @@ function toWeeks(days: ContribDay[]): (ContribDay | null)[][] {
   return weeks;
 }
 
+// Human-readable label for a contribution day, e.g. "3 contributions on Jun 14, 2025".
+function contribLabel(day: ContribDay): string {
+  const [y, m, d] = day.date.split('-').map(Number);
+  const date = new Date(y, m - 1, d).toLocaleDateString('en-US', {
+    month: 'short', day: 'numeric', year: 'numeric',
+  });
+  const noun = day.count === 1 ? 'contribution' : 'contributions';
+  return `${day.count} ${noun} on ${date}`;
+}
+
 const fmt = (v: number | null, suffix = ''): string =>
   v === null || v === undefined ? '—' : `${v}${suffix}`;
 
@@ -161,6 +172,8 @@ const NowPage: React.FC = () => {
   const [anime, setAnime] = useState<Anime[] | null>(null);
   const [videos, setVideos] = useState<Video[] | null>(null);
   const [gh, setGh] = useState<GitHubData | null | undefined>(undefined);
+  // Styled hover tooltip for the contribution graph (native `title` is too subtle).
+  const [tip, setTip] = useState<{ x: number; y: number; text: string } | null>(null);
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/now-data.json`, { cache: 'no-store' })
@@ -242,7 +255,14 @@ const NowPage: React.FC = () => {
                   <div className="now-github__week" key={wi}>
                     {week.map((day, di) =>
                       day ? (
-                        <span className="now-github__day" key={di} data-level={day.level} title={`${day.count} on ${day.date}`} />
+                        <span
+                          className="now-github__day"
+                          key={di}
+                          data-level={day.level}
+                          onMouseEnter={(e) => setTip({ x: e.clientX, y: e.clientY, text: contribLabel(day) })}
+                          onMouseMove={(e) => setTip({ x: e.clientX, y: e.clientY, text: contribLabel(day) })}
+                          onMouseLeave={() => setTip(null)}
+                        />
                       ) : (
                         <span className="now-github__day now-github__day--pad" key={di} />
                       )
@@ -251,6 +271,10 @@ const NowPage: React.FC = () => {
                 ))}
               </div>
             </div>
+          )}
+          {tip && createPortal(
+            <div className="now-github__tip" style={{ left: tip.x, top: tip.y }}>{tip.text}</div>,
+            document.body
           )}
         </section>
       ) : null}

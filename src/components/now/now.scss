@@ -429,6 +429,34 @@
   }
 }
 
+// Styled hover tooltip for the contribution graph (portaled to <body>, so it
+// follows the cursor via fixed viewport coords). Replaces the subtle native title.
+.now-github__tip {
+  position: fixed;
+  z-index: 1000;
+  transform: translate(-50%, calc(-100% - 10px));
+  pointer-events: none;
+  background: #1c2128;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.1;
+  font-weight: 500;
+  padding: 6px 9px;
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1c2128;
+  }
+}
+
 .now-page[data-theme='light'] .now-github__day {
   &[data-level='1'] { background: #9be9a8; }
   &[data-level='2'] { background: #40c463; }
