@@ -28,6 +28,13 @@ interface AgentsData {
   agents: Agent[];
 }
 
+// ─── Feature flag ────────────────────────────────────────────────────
+// The "Agents running" panel is hidden until real agents are actually
+// running around the clock and writing agents-data.json. Flip this to
+// `true` (or set REACT_APP_SHOW_AGENTS=true at build time) to switch it on.
+const AGENTS_ENABLED =
+  process.env.REACT_APP_SHOW_AGENTS === 'true' || false;
+
 const STATUS_LABEL: Record<AgentStatus, string> = {
   running: 'Running',
   idle: 'Idle',
@@ -156,6 +163,7 @@ const AgentsRunning: React.FC = () => {
   const [now, setNow] = useState<number>(() => Date.now());
 
   useEffect(() => {
+    if (!AGENTS_ENABLED) return;
     fetch(`${process.env.PUBLIC_URL}/agents-data.json`, { cache: 'no-store' })
       .then((r) => (r.ok ? r.json() : null))
       .then(setData)
@@ -170,6 +178,8 @@ const AgentsRunning: React.FC = () => {
     return () => window.clearInterval(id);
   }, []);
 
+  // Flagged off → render nothing at all.
+  if (!AGENTS_ENABLED) return null;
   // Loaded but empty → hide the whole section.
   if (data && (!data.agents || data.agents.length === 0)) return null;
 
