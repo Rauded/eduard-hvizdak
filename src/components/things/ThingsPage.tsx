@@ -11,17 +11,17 @@ const ThingsPage: React.FC = () => {
   return (
     <div className="things-page" data-theme={theme}>
       <Seo
-        title="Favourite Things"
-        description="The tech and gear Eduard Hvižďák actually loves — Kindle, e-ink readers, AR glasses, Pavlok and more."
+        title="Tech I'm obsessed with"
+        description="The tech Eduard Hvižďák is obsessed with and uses every day — MacBook Pro M4 Pro, AirPods Pro 3, e-ink readers, AR glasses, Pavlok and more."
         path="/things"
       />
 
       <header className="things-hero">
         <span className="things-hero__kicker">/things</span>
-        <h1 className="things-hero__title">Favourite things</h1>
+        <h1 className="things-hero__title">Tech I'm obsessed with</h1>
         <p className="things-hero__lead">
-          A few pieces of tech I genuinely love and use — the gadgets that earn a permanent
-          spot in my day. Mostly things that help me read, focus, or tinker.
+          The gear I genuinely love and use every day — the pieces that earn a permanent spot
+          in my setup. Mostly things that help me build, read, focus, or tinker.
         </p>
       </header>
 
