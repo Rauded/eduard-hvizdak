@@ -1,0 +1,289 @@
+// ════════════════════════════════════════════════════════════════════════════
+//  Professional light theme — home page only.
+//
+//  Everything here is scoped under `:root[data-theme='light']`, which the home
+//  route sets on <html>. Dark mode / sub-pages never match these selectors, so
+//  the original near-black look is fully preserved and this file is a pure,
+//  reversible additive layer. Palette + tokens live in src/index.css.
+//
+//  Design intent: calm off-white canvas, near-black text, one confident blue
+//  accent (#2563EB). Dark "device" surfaces (hero terminal, project media) are
+//  deliberately kept dark so they read as intentional focal objects on the
+//  light page — the way Vercel / Linear docs do it.
+// ════════════════════════════════════════════════════════════════════════════
+
+:root[data-theme='light'] {
+
+  // ─── Header (light glass) ───────────────────────────────────────────────
+  .header-container {
+    background: rgba(255, 255, 255, 0.72);
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 24px rgba(22, 22, 26, 0.08);
+    color: var(--text);
+  }
+
+  .logo {
+    color: var(--text-strong);
+    &:hover { color: var(--accent); }
+  }
+
+  .nav-link {
+    color: var(--text-muted);
+    &:hover { color: var(--text-strong); }
+    &--active {
+      color: var(--accent) !important;
+    }
+    @media (max-width: 768px) {
+      color: var(--text-muted);
+    }
+  }
+
+  .button {
+    border-color: var(--accent-ring);
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+    &:hover {
+      background: rgba(37, 99, 235, 0.16);
+      color: var(--accent-strong);
+      border-color: var(--accent);
+      box-shadow: 0 2px 12px rgba(37, 99, 235, 0.18);
+    }
+  }
+
+  .hamburger { color: var(--text-strong); }
+
+  // Mobile full-screen menu
+  .nav {
+    @media (max-width: 768px) {
+      background: rgba(250, 250, 248, 0.98);
+    }
+  }
+
+  // ─── Header theme toggle ────────────────────────────────────────────────
+  .site-theme-toggle {
+    border-color: var(--border-strong);
+    color: var(--text-muted);
+    &:hover {
+      color: var(--accent-strong);
+      border-color: var(--accent-ring);
+      background: var(--accent-soft);
+    }
+  }
+
+  // ─── About ──────────────────────────────────────────────────────────────
+  .about-container {
+    color: var(--text);
+
+    h2, .about-title { color: var(--text-strong); }
+
+    .about-intro .about-text {
+      p { color: var(--text-muted); }
+
+      .purple-text {
+        color: var(--accent-strong);
+        a { color: var(--accent-strong); &:hover { color: var(--accent); } }
+      }
+
+      a {
+        color: var(--accent-strong);
+        text-decoration-color: var(--accent-ring);
+        &:visited { color: var(--accent-strong); }
+        &:hover { color: var(--accent); text-decoration-color: var(--accent); }
+      }
+
+      .specializations {
+        border-top-color: var(--border);
+        border-bottom-color: var(--border);
+        .spec-title { color: var(--text-strong); }
+        .spec-item {
+          color: var(--text-muted);
+          .spec-arrow { color: var(--accent); }
+        }
+      }
+    }
+
+    .about-photo .profile-photo {
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+      &:hover {
+        box-shadow: 0 12px 32px rgba(37, 99, 235, 0.18);
+        border-color: var(--accent-ring);
+      }
+    }
+  }
+
+  // Recent-highlight card
+  .about-highlight {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+
+    &:hover {
+      border-color: var(--accent-ring);
+      background: var(--surface);
+      box-shadow: 0 14px 40px rgba(22, 22, 26, 0.10);
+
+      .about-highlight__cta {
+        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        box-shadow: 0 12px 28px rgba(37, 99, 235, 0.42);
+      }
+    }
+
+    &__media { background: var(--surface-sunken); }
+    &__text p { color: var(--text-muted); }
+    &__eyebrow { color: var(--accent-strong); }
+    &__title { color: var(--text-strong) !important; }
+
+    &__cta {
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      box-shadow: var(--shadow-accent);
+    }
+  }
+
+  // About contact form (defensive — renders only in some configs)
+  .about-container .about-contact form {
+    input, textarea {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      &:focus { border-color: var(--accent); }
+    }
+    button {
+      background: var(--accent);
+      color: #fff;
+      &:hover { background: var(--accent-strong); }
+    }
+  }
+
+  // ─── Resume ─────────────────────────────────────────────────────────────
+  .resume-container { color: var(--text); }
+  .resume-title,
+  .section-title,
+  .job-title { color: var(--text-strong); }
+
+  .company { color: var(--accent-strong); }
+  .company__sub { color: var(--text-faint); }
+  a.company--link:hover,
+  a.company--link:focus-visible {
+    color: var(--accent);
+    .company__sub { color: var(--text-muted); }
+  }
+
+  .job-dates { color: var(--text-faint); }
+
+  .bullet-point {
+    color: var(--text-muted);
+    &:before { color: var(--accent); }
+  }
+
+  .line-container:before {
+    background: linear-gradient(180deg, var(--accent) 0%, rgba(37, 99, 235, 0.08) 100%);
+  }
+  .job-container:before { background: var(--accent); }
+
+  .right-column iframe {
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+  }
+
+  .cv-actions__btn--primary {
+    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    box-shadow: var(--shadow-accent);
+    &:hover { box-shadow: 0 12px 32px rgba(37, 99, 235, 0.42); }
+  }
+  .cv-actions__btn--ghost {
+    background: var(--surface);
+    color: var(--accent-strong);
+    border: 1px solid var(--accent-ring);
+    &:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+  }
+
+  // ─── Projects (shared .pcard) ───────────────────────────────────────────
+  .projects-container { color: var(--text); }
+  .projects-container .section-title { color: var(--text-strong); }
+  .projects-intro { color: var(--text-muted); }
+
+  .pcard__title { color: var(--text-strong); }
+  .pcard__subtitle { color: var(--text-faint); }
+  .pcard__description { color: var(--text-muted); }
+
+  .pcard__tag {
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: var(--surface-sunken);
+  }
+
+  // Project media stays a dark focal tile — just soften the shadow for light.
+  .pcard__media {
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    &:hover {
+      border-color: var(--accent-ring);
+      box-shadow: 0 20px 48px rgba(22, 22, 26, 0.14);
+    }
+  }
+
+  // Source-code link: light ghost button (the demo link keeps its per-card accent).
+  .pcard__link--github {
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+    background: var(--surface);
+    &:hover {
+      border-color: var(--accent-ring);
+      color: var(--text-strong);
+      background: var(--surface-sunken);
+    }
+  }
+
+  // ─── Contact ────────────────────────────────────────────────────────────
+  .contact {
+    background:
+      radial-gradient(120% 120% at 50% 0%, rgba(37, 99, 235, 0.10) 0%, transparent 60%),
+      var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+
+    &__eyebrow { color: var(--accent-strong); }
+    &__title { color: var(--text-strong); }
+    &__lead { color: var(--text-muted); }
+
+    &__btn--primary {
+      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      box-shadow: var(--shadow-accent);
+      &:hover { box-shadow: 0 14px 34px rgba(37, 99, 235, 0.42); }
+    }
+    &__btn--ghost {
+      background: var(--surface);
+      color: var(--accent-strong);
+      border: 1px solid var(--accent-ring);
+      &:hover { border-color: var(--accent); background: var(--accent-soft); }
+    }
+
+    &__socials a {
+      color: var(--text-faint);
+      &:hover { color: var(--accent); }
+    }
+  }
+
+  // ─── Footer ─────────────────────────────────────────────────────────────
+  .footer-container {
+    background-color: var(--surface);
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+
+    .purple-heart { color: var(--accent); }
+    .footer-link {
+      color: var(--accent-strong);
+      text-decoration-color: var(--accent-ring);
+      &:hover { color: var(--accent); text-decoration-color: var(--accent); }
+    }
+    .social-icons a {
+      color: var(--text-faint);
+      &:hover { color: var(--accent); }
+    }
+    p { color: var(--text-faint); }
+  }
+}

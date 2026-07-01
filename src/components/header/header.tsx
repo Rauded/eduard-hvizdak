@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaPen, FaRegClock, FaHeart } from 'react-icons/fa';
+import { LuSun, LuMoon } from 'react-icons/lu';
 import './header.scss';
 
-const Header: React.FC = () => {
+type HeaderProps = {
+  theme?: 'light' | 'dark';
+  onToggleTheme?: () => void;
+  showThemeToggle?: boolean;
+};
+
+const Header: React.FC<HeaderProps> = ({ theme, onToggleTheme, showThemeToggle }) => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -86,6 +93,16 @@ const Header: React.FC = () => {
           <FaHeart />
           Things
         </Link>
+        {showThemeToggle && onToggleTheme && (
+          <button
+            type="button"
+            className="site-theme-toggle"
+            onClick={onToggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? <LuSun /> : <LuMoon />}
+          </button>
+        )}
       </nav>
     </header>
   );

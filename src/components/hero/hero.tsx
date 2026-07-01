@@ -7,8 +7,8 @@ const HeroContainer = styled.section`
   flex-direction: column;
   min-height: 100vh;
   padding-top: 100px;
-  background-color: #09090b;
-  color: #fff;
+  background-color: var(--page-bg, #09090b);
+  color: var(--text, #fff);
   overflow: hidden;
   font-family: 'RobotoMono', sans-serif;
   position: relative;
@@ -24,7 +24,7 @@ const HeroContainer = styled.section`
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(ellipse at 20% 60%, rgba(99, 102, 241, 0.07) 0%, transparent 55%);
+    background: radial-gradient(ellipse at 20% 60%, var(--hero-glow, rgba(99, 102, 241, 0.07)) 0%, transparent 55%);
     pointer-events: none;
   }
 
@@ -58,7 +58,7 @@ const LeftContainer = styled.div`
 const Headline = styled.h1`
   font-size: 1.25em;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-muted, rgba(255, 255, 255, 0.7));
   margin-bottom: 1.5em;
   letter-spacing: 0.05em;
   line-height: 1.6;
@@ -221,7 +221,7 @@ const StatusDot = styled.span`
 `;
 
 const GradientText = styled.h2`
-  color: #f8fafc;
+  color: var(--text-strong, #f8fafc);
   font-size: clamp(2.5em, 8vw, 5em);
   font-weight: 700;
   margin: 0.3em 0;
@@ -239,7 +239,7 @@ const blink = keyframes`
 `;
 
 const TypewriterText = styled.div`
-  color: #a5b4fc;
+  color: var(--accent, #a5b4fc);
   font-size: clamp(1.1em, 3vw, 1.75em);
   margin-top: 1em;
   white-space: nowrap;
@@ -250,7 +250,7 @@ const TypewriterText = styled.div`
   &::after {
     content: '_';
     animation: ${blink} 1s infinite;
-    color: #6366f1;
+    color: var(--accent-strong, #6366f1);
     font-weight: 300;
   }
 `;
