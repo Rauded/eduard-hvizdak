@@ -129,11 +129,25 @@ const LinkIcon: React.FC<{ link: PortfolioProject['links'][number] }> = ({ link 
 const ProjectMedia: React.FC<{ project: PortfolioProject }> = ({ project }) => {
   const { media, accent } = project;
 
-  // A real video file always wins, whatever the declared type — this is
+  // React does not reliably reflect the `muted` prop to the DOM property, and
+  // browsers block autoplay on any video that isn't actually muted. That is what
+  // left the case-study reader showing a black box. Force it on via a ref and
+  // kick off playback so the clip plays everywhere, including inside the modal.
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = true;
+    const p = v.play();
+    if (p) p.catch(() => {});
+  }, [media.video]);
+
+  // A real video file always wins, whatever the declared type. This is
   // how a dropped-in clip "upgrades" a slideshow/image/placeholder card.
   if (media.video) {
     return (
       <video
+        ref={videoRef}
         className="pcard__video"
         src={media.video}
         poster={media.poster || (media.images && media.images[0])}

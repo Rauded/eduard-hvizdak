@@ -239,6 +239,51 @@
     }
   }
 
+  // ─── Case-study reader ("Read the full story") ──────────────────────────
+  // The modal is portalled to <body>, but data-theme lives on <html>, so these
+  // selectors still match. Turn the dark reader into a clean light document with
+  // the same near-black text / blue accent as the rest of the light page.
+  .case-modal {
+    &__backdrop {
+      background: rgba(22, 22, 26, 0.38);
+    }
+
+    &__panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 90px rgba(22, 22, 26, 0.22);
+    }
+
+    &__close {
+      background: var(--surface-sunken);
+      border: 1px solid var(--border-strong);
+      color: var(--text-muted);
+      &:hover { background: var(--accent-soft); color: var(--accent-strong); }
+    }
+
+    &__title { color: var(--text-strong); }
+    &__subtitle { color: var(--text-faint); }
+    &__eyebrow,
+    &__h { color: var(--accent-strong); }
+
+    // The media stays a dark focal tile so video/screenshots read as intentional
+    // objects on the light page; just soften the frame to match light surfaces.
+    &__media {
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-card);
+    }
+
+    &__p {
+      color: var(--text-muted);
+      strong { color: var(--text-strong); }
+      a {
+        color: var(--accent-strong);
+        text-decoration-color: var(--accent-ring);
+        &:hover { text-decoration-color: var(--accent); }
+      }
+    }
+  }
+
   // ─── Contact ────────────────────────────────────────────────────────────
   .contact {
     background:

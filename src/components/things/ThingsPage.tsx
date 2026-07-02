@@ -12,7 +12,7 @@ const ThingsPage: React.FC = () => {
     <div className="things-page" data-theme={theme}>
       <Seo
         title="Tech I'm obsessed with"
-        description="The tech Eduard Hvižďák is obsessed with and uses every day — MacBook Pro M4 Pro, AirPods Pro 3, e-ink readers, AR glasses, Pavlok and more."
+        description="The tech Eduard Hvižďák is obsessed with and uses every day: MacBook Pro M4 Pro, AirPods Pro 3, e-ink readers, AR glasses, Pavlok and more."
         path="/things"
       />
 
@@ -20,7 +20,7 @@ const ThingsPage: React.FC = () => {
         <span className="things-hero__kicker">/things</span>
         <h1 className="things-hero__title">Tech I'm obsessed with</h1>
         <p className="things-hero__lead">
-          The gear I genuinely love and use every day — the pieces that earn a permanent spot
+          The gear I genuinely love and use every day, the pieces that earn a permanent spot
           in my setup. Mostly things that help me build, read, focus, or tinker.
         </p>
       </header>
