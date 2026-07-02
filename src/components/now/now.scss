@@ -136,6 +136,134 @@
       }
     }
   }
+
+  // Location + "last updated" — the signal that this page is genuinely alive.
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 0 0;
+    font-size: 0.82em;
+    color: var(--text-dim);
+    letter-spacing: 0.01em;
+  }
+
+  &__loc {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    svg { color: var(--kicker); font-size: 1.1em; stroke-width: 2.1; }
+  }
+
+  &__mdot {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.5;
+  }
+}
+
+// ─── "Right now" written status — the human core of the page ──────────
+.now-focus {
+  margin: 4px 0 6px;
+
+  &__lead {
+    font-size: clamp(1em, 1.5vw, 1.12em);
+    line-height: 1.7;
+    color: var(--text-soft);
+    max-width: 66ch;
+    margin: 0;
+
+    strong { color: var(--text-strong); font-weight: 600; }
+
+    a {
+      color: var(--link);
+      text-decoration: none;
+      border-bottom: 1px solid var(--link-border);
+      transition: color 0.15s ease, border-color 0.15s ease;
+
+      &:hover { color: var(--heading); border-color: var(--heading); }
+    }
+  }
+}
+
+// ─── "Currently building" — active products, founder signal ───────────
+.now-building {
+  margin-top: 34px;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+}
+
+.now-build {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 16px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    border-color: var(--card-border-hover);
+    box-shadow: var(--shadow);
+  }
+
+  &:hover &__arrow { transform: translate(2px, -2px); opacity: 1; }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  &__name {
+    font-size: 1.05em;
+    font-weight: 700;
+    color: var(--text-strong);
+    letter-spacing: -0.01em;
+  }
+
+  &__arrow {
+    flex-shrink: 0;
+    color: var(--kicker);
+    opacity: 0.6;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  &__tag {
+    flex: 1;
+    margin: 0;
+    font-size: 0.86em;
+    line-height: 1.5;
+    color: var(--text-mute);
+  }
+
+  &__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.76em;
+    color: var(--text-soft);
+    letter-spacing: 0.01em;
+  }
+
+  &__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.16);
+  }
 }
 
 .now-stats {

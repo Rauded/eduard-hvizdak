@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap } from 'react-icons/lu';
+import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap, LuMapPin, LuHammer, LuArrowUpRight } from 'react-icons/lu';
 import { FaYoutube, FaGithub, FaLinkedinIn, FaXTwitter, FaPlay } from 'react-icons/fa6';
 import Seo from '../../seo/Seo';
 import AgentsRunning from './AgentsRunning';
@@ -19,6 +19,36 @@ const LINKEDIN_POSTS: { src: string; height: number }[] = [
 // Favourite posts on X — add tweet URLs here to feature them. Empty = the
 // whole "Favourite posts on X" section hides itself (guarded by length > 0).
 const FAVOURITE_TWEETS: string[] = [];
+
+// Hand-maintained "last updated" stamp for the /now header. Bump this whenever
+// you meaningfully rewrite the "Right now" copy below — a real /now page proves
+// it's alive by showing when it was last touched. Location is static.
+const LAST_UPDATED = 'July 2026';
+const LOCATION = 'Brno, Czech Republic';
+
+// Products I'm actively running — hand-maintained, one honest line each. These
+// are the founder signal on the page (paying customers, real B2B, live sites),
+// so they lead above the auto-synced reading/watching feeds.
+const BUILDING: { name: string; tagline: string; status: string; href: string }[] = [
+  {
+    name: 'InzerPro',
+    tagline: 'Listing automation for power sellers on the Bazoš classifieds — auto-renewal, bulk posting, analytics.',
+    status: 'Live · paying customers',
+    href: 'https://www.inzerpro.cz',
+  },
+  {
+    name: 'NasadClaw',
+    tagline: 'Private, on-site AI assistants for Czech & Slovak businesses — installed and managed end-to-end.',
+    status: 'Live · B2B',
+    href: 'https://www.nasadclaw.cz',
+  },
+  {
+    name: 'KouzelníkNaAkci',
+    tagline: 'A two-sided marketplace connecting event organisers with professional magicians.',
+    status: 'Live · marketplace',
+    href: 'https://www.kouzelniknaakci.cz',
+  },
+];
 
 // ─── Official brand marks ────────────────────────────────────────────
 // Real, official logo files downloaded from each brand's own assets:
@@ -231,7 +261,44 @@ const NowPage: React.FC = () => {
           A snapshot of what's got my attention — inspired by Derek Sivers'{' '}
           <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now movement</a>.
         </p>
+        <p className="now-hero__meta">
+          <span className="now-hero__loc"><LuMapPin /> {LOCATION}</span>
+          <span className="now-hero__mdot" aria-hidden="true" />
+          <span className="now-hero__updated">Updated {LAST_UPDATED}</span>
+        </p>
       </header>
+
+      <section className="now-focus" aria-label="What I'm focused on right now">
+        <p className="now-focus__lead">
+          I'm finishing my <strong>BSc in Computer Science</strong> at Masaryk University while working
+          as an <strong>AI engineer</strong> — building RAG pipelines and multi-agent systems by day —
+          and running a few <strong>SaaS products</strong> of my own on the side. Most of my building
+          energy right now goes into{' '}
+          <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">InzerPro</a>; the
+          rest is split across the products below, and whatever I'm reading and watching further down.
+        </p>
+      </section>
+
+      <section className="now-building">
+        <div className="now-media__head">
+          <h2 className="now-media__title"><LuHammer className="now-icon" /> Currently building</h2>
+          <span className="now-media__auto">3 products in production</span>
+        </div>
+        <div className="now-building__grid">
+          {BUILDING.map((p) => (
+            <a className="now-build" key={p.name} href={p.href} target="_blank" rel="noopener noreferrer">
+              <div className="now-build__top">
+                <span className="now-build__name">{p.name}</span>
+                <LuArrowUpRight className="now-build__arrow" />
+              </div>
+              <p className="now-build__tag">{p.tagline}</p>
+              <span className="now-build__status">
+                <span className="now-build__dot" aria-hidden="true" />{p.status}
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
 
       <AgentsRunning />
 
