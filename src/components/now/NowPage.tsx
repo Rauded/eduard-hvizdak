@@ -37,8 +37,8 @@ const BUILDING: { name: string; tagline: string; status: string; href: string }[
   },
   {
     name: 'KouzelníkNaAkci',
-    tagline: 'A niche magician-booking marketplace I mostly run as a live SEO, GEO, and online-ads experiment.',
-    status: 'Live · marketing experiment',
+    tagline: 'A marketplace connecting event organisers with magicians across Czechia and Slovakia, and my live sandbox for SEO, GEO, and online-ads experiments.',
+    status: 'Live · marketplace + marketing lab',
     href: 'https://www.kouzelniknaakci.cz',
   },
   {
