@@ -27,26 +27,25 @@ const LAST_UPDATED = 'July 2026';
 const LOCATION = 'Brno, Czech Republic';
 
 // Products I'm actively running (hand-maintained, one honest line each). These
-// are the founder signal on the page (paying customers, real B2B, live sites),
-// so they lead above the auto-synced reading/watching feeds.
+// lead above the auto-synced reading/watching feeds.
 const BUILDING: { name: string; tagline: string; status: string; href: string }[] = [
   {
     name: 'InzerPro',
-    tagline: 'Listing automation for power sellers on the Bazoš classifieds: auto-renewal, bulk posting, and analytics.',
+    tagline: 'A cross-listing and automation platform for Czech and Slovak second-hand marketplaces.',
     status: 'Live · paying customers',
     href: 'https://www.inzerpro.cz',
   },
   {
-    name: 'NasadClaw',
-    tagline: 'Private, on-site AI assistants for Czech & Slovak businesses, installed and managed end-to-end.',
-    status: 'Live · B2B',
-    href: 'https://www.nasadclaw.cz',
+    name: 'KouzelníkNaAkci',
+    tagline: 'A niche magician-booking marketplace I mostly run as a live SEO, GEO, and online-ads experiment.',
+    status: 'Live · marketing experiment',
+    href: 'https://www.kouzelniknaakci.cz',
   },
   {
-    name: 'KouzelníkNaAkci',
-    tagline: 'A two-sided marketplace connecting event organisers with professional magicians.',
-    status: 'Live · marketplace',
-    href: 'https://www.kouzelniknaakci.cz',
+    name: 'NasadClaw',
+    tagline: 'A front-end brochure site for my AI consulting, automation, and deployment work, where people can read up and get in touch.',
+    status: 'Live · services site',
+    href: 'https://www.nasadclaw.cz',
   },
 ];
 
@@ -295,19 +294,21 @@ const NowPage: React.FC = () => {
 
       <section className="now-focus" aria-label="What I'm focused on right now">
         <p className="now-focus__lead">
-          I'm finishing my <strong>BSc in Computer Science</strong> at Masaryk University while working
-          as an <strong>AI engineer</strong>, building RAG pipelines and multi-agent systems by day,
-          and running a few <strong>SaaS products</strong> of my own on the side. Most of my building
-          energy right now goes into{' '}
-          <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">InzerPro</a>; the
-          rest is split across the products below, and whatever I'm reading and watching further down.
+          I'm wrapping up my <strong>BSc in Computer Science</strong> at Masaryk University and working
+          as an <strong>AI engineer</strong>. Most of my time goes into building{' '}
+          <strong>AI agents and agentic systems</strong>: automations, multi-agent orchestration, and
+          the wiring that keeps them running. I've also had a go at running a few SaaS products of my
+          own, and the one still going is{' '}
+          <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">InzerPro</a>. On
+          the side, more of an extra than a main job, I do AI consultations plus automation and AI
+          implementation work, just me, no company behind it.
         </p>
       </section>
 
       <section className="now-building">
         <div className="now-media__head">
           <h2 className="now-media__title"><LuHammer className="now-icon" /> Currently building</h2>
-          <span className="now-media__auto">3 products in production</span>
+          <span className="now-media__auto">3 live projects</span>
         </div>
         <div className="now-building__grid">
           {BUILDING.map((p) => (
