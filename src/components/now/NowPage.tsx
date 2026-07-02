@@ -233,6 +233,9 @@ const NowPage: React.FC = () => {
   const [videos, setVideos] = useState<Video[] | null>(null);
   const [seo, setSeo] = useState<SeoItem[] | null>(null);
   const [gh, setGh] = useState<GitHubData | null | undefined>(undefined);
+  // Latest X posts, scraped nightly by scripts/scrape-tweets.mjs into
+  // public/latest-tweets.json. null = loading, [] = none, [...] = tweet urls.
+  const [latestTweets, setLatestTweets] = useState<string[] | null>(null);
   // Styled hover tooltip for the contribution graph (native `title` is too subtle).
   const [tip, setTip] = useState<{ x: number; y: number; text: string } | null>(null);
   // Live Brno clock in the hero meta line; re-render on the minute.
@@ -272,6 +275,10 @@ const NowPage: React.FC = () => {
       .then((r) => (r.ok ? r.json() : { items: [] }))
       .then((d) => setSeo(d.items || []))
       .catch(() => {});
+    fetch(`${process.env.PUBLIC_URL}/latest-tweets.json`, { cache: 'no-store' })
+      .then((r) => (r.ok ? r.json() : { tweets: [] }))
+      .then((d) => setLatestTweets((d.tweets || []).map((t: { url: string }) => t.url)))
+      .catch(() => setLatestTweets([]));
   }, []);
 
   const weeks = gh ? toWeeks(gh.contributions || []) : [];
@@ -524,6 +531,20 @@ const NowPage: React.FC = () => {
           <div className="now-embeds">
             {LINKEDIN_POSTS.map((p) => (
               <LinkedInEmbed key={p.src} src={p.src} height={p.height} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {latestTweets && latestTweets.length > 0 && (
+        <section className="now-media now-tweets">
+          <div className="now-media__head">
+            <h2 className="now-media__title"><FaXTwitter className="now-icon" /> Latest posts on X</h2>
+            <a className="now-media__auto" href="https://x.com/EduardHvizdak" target="_blank" rel="noopener noreferrer">@EduardHvizdak</a>
+          </div>
+          <div className="now-embeds">
+            {latestTweets.map((url) => (
+              <Tweet key={url} url={url} theme={theme === 'light' ? 'light' : 'dark'} />
             ))}
           </div>
         </section>

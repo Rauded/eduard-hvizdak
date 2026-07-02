@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- launchd job: scrape latest X posts once a day at 09:00 local time.
+     Install:
+       mkdir -p ~/.portfolio-x-scraper
+       cp scripts/com.eduard.scrape-tweets.plist ~/Library/LaunchAgents/
+       launchctl load ~/Library/LaunchAgents/com.eduard.scrape-tweets.plist
+     Run once now to test:
+       launchctl start com.eduard.scrape-tweets
+     Uninstall:
+       launchctl unload ~/Library/LaunchAgents/com.eduard.scrape-tweets.plist -->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.eduard.scrape-tweets</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/macbook/Desktop/Projects/portfolio/tjklint.github.io/scripts/run-scrape-tweets.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <dict>
+    <key>Hour</key>
+    <integer>9</integer>
+    <key>Minute</key>
+    <integer>0</integer>
+  </dict>
+  <key>RunAtLoad</key>
+  <false/>
+  <key>StandardOutPath</key>
+  <string>/Users/macbook/.portfolio-x-scraper/launchd.out.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/macbook/.portfolio-x-scraper/launchd.err.log</string>
+</dict>
+</plist>
