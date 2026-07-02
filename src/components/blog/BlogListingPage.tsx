@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import { LuArrowRight, LuPin } from 'react-icons/lu';
 import { BLOG_POSTS } from '../../data/blog';
+import { CHAPTERS } from '../things/thingsData';
 import Seo from '../../seo/Seo';
 import { formatDate, getThumbnail, readingTime } from './blogUtils';
 import { useTheme } from '../theme/ThemeContext';
@@ -93,19 +94,24 @@ const BlogListingPage: React.FC = () => {
 
         {/* Evergreen, always-growing page. It lives here rather than in the top
             nav so the blog stays the one place for anything long-form. */}
-        <Link to="/things" className="blog-evergreen">
-          <div className="blog-evergreen__body">
-            <div className="blog-row__meta">
-              <span className="blog-chip">Living page</span>
-              <span className="blog-row__date">Updated often</span>
-            </div>
-            <h2 className="blog-row__title">Tech I love</h2>
-            <p className="blog-row__excerpt">
-              The gear I genuinely use every day, grouped and indexed. It keeps growing as my setup
-              evolves.
-            </p>
+        <p className="blog-living-label">Living pages</p>
+        <Link to="/things" className="blog-living">
+          <div className="blog-living__head">
+            <span className="blog-chip">Tech I love</span>
+            <span className="blog-living__meta">{CHAPTERS.length} chapters · updated often</span>
           </div>
-          <span className="blog-evergreen__go"><LuArrowRight /></span>
+          <h2 className="blog-living__title">The gear I actually use, one chapter at a time</h2>
+          <p className="blog-living__excerpt">
+            A chaptered write-up of the tech I love and reach for every day, with my own notes,
+            photos and clips. It keeps growing as my setup evolves.
+          </p>
+          <ul className="blog-living__chapters" aria-hidden="true">
+            {CHAPTERS.slice(0, 6).map((c) => (
+              <li key={c.id}>{c.title}</li>
+            ))}
+            {CHAPTERS.length > 6 && <li className="blog-living__more">+{CHAPTERS.length - 6} more</li>}
+          </ul>
+          <span className="blog-living__cta">Read the page <LuArrowRight /></span>
         </Link>
       </div>
     </div>

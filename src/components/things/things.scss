@@ -5,26 +5,24 @@
   --heading: #c7d2fe;
   --text: #fff;
   --text-strong: #f8fafc;
-  --text-soft: rgba(248, 250, 252, 0.6);
+  --text-soft: rgba(248, 250, 252, 0.72);
   --text-dim: rgba(248, 250, 252, 0.45);
   --card-bg: rgba(255, 255, 255, 0.025);
   --card-border: rgba(255, 255, 255, 0.09);
   --card-border-hover: rgba(255, 255, 255, 0.2);
   --visual-bg: rgba(255, 255, 255, 0.03);
+  --rule: rgba(255, 255, 255, 0.09);
   --shadow: 0 18px 40px rgba(0, 0, 0, 0.4);
 
   position: relative;
-  // Own stacking context so the fixed full-bleed ::before paints ABOVE the
-  // AppContainer's dark gradient (not behind it) in light mode.
   isolation: isolate;
   width: 92%;
-  max-width: 980px;
+  max-width: 760px; // narrower, reads like an article column
   margin: 0 auto;
   padding: 96px 0 90px;
   color: var(--text);
   font-family: var(--font-body);
 
-  // Full-bleed background so light mode paints over the dark AppContainer.
   &::before {
     content: '';
     position: fixed;
@@ -40,48 +38,52 @@
     --heading: #0b0b0f;
     --text: #1f2937;
     --text-strong: #0f172a;
-    --text-soft: rgba(30, 41, 59, 0.72);
+    --text-soft: rgba(30, 41, 59, 0.82);
     --text-dim: rgba(30, 41, 59, 0.5);
     --card-bg: #ffffff;
     --card-border: rgba(15, 23, 42, 0.1);
     --card-border-hover: rgba(37, 99, 235, 0.4);
     --visual-bg: rgba(15, 23, 42, 0.03);
+    --rule: rgba(15, 23, 42, 0.1);
     --shadow: 0 18px 40px rgba(37, 99, 235, 0.12);
   }
 }
 
+// ─── Hero ───────────────────────────────────────────────────────────
 .things-hero {
-  margin-bottom: 44px;
+  margin-bottom: 40px;
 
   &__kicker {
     display: inline-block;
-    font-size: 0.85em;
-    letter-spacing: 0.18em;
+    font-family: var(--font-mono);
+    font-size: 0.78em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--kicker);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
   &__title {
-    font-size: clamp(2em, 5vw, 3em);
+    font-family: var(--font-display);
+    font-size: clamp(2.1em, 5.5vw, 3.1em);
     font-weight: 700;
     letter-spacing: -0.02em;
-    margin: 0 0 14px;
+    margin: 0 0 16px;
     color: var(--heading);
   }
 
   &__lead {
-    font-size: clamp(1em, 1.6vw, 1.15em);
-    line-height: 1.6;
+    font-size: clamp(1.02em, 1.7vw, 1.18em);
+    line-height: 1.65;
     color: var(--text-soft);
-    max-width: 60ch;
+    margin: 0;
   }
 }
 
-// ─── Index (table of contents) ──────────────────────────────────────
+// ─── Chapter index ──────────────────────────────────────────────────
 .things-index {
-  margin: 0 0 40px;
-  padding: 20px 22px;
+  margin: 0 0 56px;
+  padding: 22px 24px;
   border-radius: 14px;
   background: var(--card-bg);
   border: 1px solid var(--card-border);
@@ -93,173 +95,155 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--text-dim);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
   &__list {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 10px;
-
-    a {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 13px;
-      border-radius: 999px;
-      border: 1px solid var(--card-border);
-      font-size: 0.9em;
-      font-weight: 500;
-      color: var(--text-soft);
-      text-decoration: none;
-      transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
-
-      &:hover {
-        color: var(--heading);
-        border-color: var(--card-border-hover);
-      }
-    }
+    display: grid;
+    gap: 2px;
   }
 
-  &__count {
+  &__list a {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 8px 0;
+    font-size: 1.02em;
+    color: var(--text-soft);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.15s ease;
+
+    &:hover { color: var(--kicker); }
+  }
+
+  &__num {
     font-family: var(--font-mono);
     font-size: 0.82em;
-    color: var(--kicker);
+    color: var(--text-dim);
+    min-width: 2em;
   }
 }
 
-// ─── Category sections ──────────────────────────────────────────────
-.things-section {
-  margin-top: 40px;
+// ─── Chapters ───────────────────────────────────────────────────────
+.chapters {
+  display: flex;
+  flex-direction: column;
+  gap: 72px;
+}
+
+.chapter {
   scroll-margin-top: 96px; // clear the fixed header when jumping from the index
+
+  &__head {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+
+  &__num {
+    font-family: var(--font-mono);
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--accent);
+    padding-top: 6px;
+    min-width: 2.2em;
+  }
+
+  &__cat {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
 
   &__title {
     font-family: var(--font-display);
-    font-size: clamp(1.25em, 2.4vw, 1.6em);
+    font-size: clamp(1.5em, 3.4vw, 2.1em);
     font-weight: 700;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
+    line-height: 1.12;
     color: var(--heading);
-    margin: 0 0 18px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--card-border);
-  }
-}
-
-// ─── Cards ──────────────────────────────────────────────────────────
-.things-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-}
-
-.things-card {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding: 22px;
-  border-radius: 18px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  box-shadow: var(--shadow);
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
-
-  &:not(.things-card--static):hover {
-    transform: translateY(-4px);
-    border-color: var(--card-border-hover);
-    box-shadow: 0 24px 52px rgba(0, 0, 0, 0.32);
+    margin: 0 0 8px;
   }
 
-  &__visual {
+  &__lead {
+    font-size: 1.02em;
+    line-height: 1.5;
+    color: var(--text-soft);
+    margin: 0;
+  }
+
+  // Coloured cover tile shown until a real photo/video is dropped in.
+  &__cover {
     display: flex;
     align-items: center;
     justify-content: center;
     aspect-ratio: 16 / 9;
-    border-radius: 12px;
-    overflow: hidden;
+    border-radius: 16px;
+    margin-bottom: 26px;
     background:
-      radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--thing-accent) 24%, transparent) 0%, transparent 62%),
+      radial-gradient(120% 120% at 30% 0%, color-mix(in srgb, var(--accent) 26%, transparent) 0%, transparent 62%),
       var(--visual-bg);
     border: 1px solid var(--card-border);
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-  }
-
-  &__emoji {
-    font-size: clamp(2.6em, 6vw, 3.4em);
-    line-height: 1;
-    filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+    span { font-size: clamp(3em, 10vw, 5em); line-height: 1; }
   }
 
   &__body {
+    font-size: 1.05em;
+    line-height: 1.75;
+    color: var(--text);
+
+    p { margin: 0 0 20px; }
+    p:last-child { margin-bottom: 0; }
+  }
+
+  &__gallery {
+    margin-top: 28px;
     display: flex;
     flex-direction: column;
-    gap: 9px;
-  }
-
-  &__head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  &__name {
-    font-size: 1.08em;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: var(--text-strong);
-  }
-
-  &__cat {
-    flex: 0 0 auto;
-    font-size: 0.64em;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    padding: 4px 9px;
-    border-radius: 999px;
-    color: var(--thing-accent);
-    background: color-mix(in srgb, var(--thing-accent) 14%, transparent);
-    border: 1px solid color-mix(in srgb, var(--thing-accent) 32%, transparent);
-  }
-
-  &__blurb {
-    font-size: 0.86em;
-    font-weight: 600;
-    line-height: 1.5;
-    color: var(--text-soft);
-  }
-
-  &__why {
-    font-size: 0.82em;
-    line-height: 1.7;
-    color: var(--text-dim);
+    gap: 22px;
   }
 
   &__link {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    margin-top: 2px;
-    font-size: 0.74em;
+    gap: 7px;
+    margin-top: 24px;
+    font-size: 0.95em;
     font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--thing-accent);
-    transition: gap 0.2s ease;
+    color: var(--accent);
+    text-decoration: none;
 
-    svg { font-size: 1.05em; }
+    svg { transition: transform 0.18s ease; }
+    &:hover svg { transform: translate(2px, -2px); }
+  }
+}
+
+// ─── Figures (photos / videos) ──────────────────────────────────────
+.chapter-figure {
+  margin: 26px 0 0;
+
+  img, video {
+    display: block;
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+    background: var(--visual-bg);
   }
 
-  &:hover &__link { gap: 9px; }
+  figcaption {
+    margin-top: 10px;
+    font-size: 0.85em;
+    line-height: 1.5;
+    color: var(--text-dim);
+    text-align: center;
+  }
 }
