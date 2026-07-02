@@ -15,6 +15,9 @@
   --card-border-hover: rgba(165, 180, 252, 0.32);
   --cover-bg: #15101f;
   --cover-border: rgba(255, 255, 255, 0.08);
+  --build-bg: rgba(255, 255, 255, 0.03);
+  --build-border: rgba(255, 255, 255, 0.1);
+  --build-border-hover: rgba(255, 255, 255, 0.2);
   --shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
   --gh-empty: rgba(255, 255, 255, 0.06);
   --skel-base: rgba(255, 255, 255, 0.05);
@@ -58,6 +61,9 @@
     --card-border-hover: rgba(37, 99, 235, 0.38);
     --cover-bg: #eef2ff;
     --cover-border: rgba(15, 23, 42, 0.1);
+    --build-bg: #ffffff;
+    --build-border: rgba(15, 23, 42, 0.1);
+    --build-border-hover: rgba(15, 23, 42, 0.22);
     --shadow: 0 14px 32px rgba(79, 70, 229, 0.14);
     --gh-empty: rgba(15, 23, 42, 0.06);
     --skel-base: rgba(15, 23, 42, 0.06);
@@ -207,14 +213,16 @@
   gap: 12px;
   padding: 20px;
   border-radius: 16px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
+  // Neutral surface (not the page's blue-tinted card token) so the product
+  // marks carry the colour and the cards read clean against the warm page.
+  background: var(--build-bg);
+  border: 1px solid var(--build-border);
   text-decoration: none;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
     transform: translateY(-3px);
-    border-color: var(--card-border-hover);
+    border-color: var(--build-border-hover);
     box-shadow: var(--shadow);
   }
 
@@ -226,25 +234,22 @@
     gap: 12px;
   }
 
-  // Plain white chip holding each product's real mark, like an app icon in a
-  // directory. Solid neutral background, one hairline border, no gradients.
+  // The real product mark shown full-bleed as its own app icon: each SVG/PNG
+  // already carries a rounded coloured tile, so we just clip to a uniform
+  // radius. No wrapper fill, no gradient.
   &__logo {
     flex: 0 0 auto;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     width: 40px;
     height: 40px;
-    padding: 6px;
-    border-radius: 9px;
-    background: #fff;
-    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--cover-border);
 
     img {
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
     }
   }
 
