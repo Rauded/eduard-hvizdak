@@ -94,7 +94,7 @@ interface NowData {
 interface Film { title: string; year: string; rating: number | null; link: string; poster: string }
 interface Book { title: string; author: string; cover: string; link: string }
 interface Anime { title: string; status?: string; link: string; cover: string }
-interface Video { id: string; title: string; published: string; url: string; thumbnail: string; thumbnailFallback?: string }
+interface Video { id: string; title: string; published: string; url: string; thumbnail: string; thumbnailFallback?: string; views?: number | null }
 interface ContribDay { date: string; count: number; level: number }
 interface GitHubData { total: number | null; contributions: ContribDay[] }
 
@@ -308,7 +308,6 @@ const NowPage: React.FC = () => {
       <section className="now-building">
         <div className="now-media__head">
           <h2 className="now-media__title"><LuHammer className="now-icon" /> Currently building</h2>
-          <span className="now-media__auto">3 live projects</span>
         </div>
         <div className="now-building__grid">
           {BUILDING.map((p) => (
@@ -475,7 +474,12 @@ const NowPage: React.FC = () => {
               />
               <span className="now-ytcard__play"><FaPlay /></span>
             </span>
-            <span className="now-ytcard__title">{videos[0].title}</span>
+            <span className="now-ytcard__body">
+              <span className="now-ytcard__title">{videos[0].title}</span>
+              {typeof videos[0].views === 'number' && (
+                <span className="now-ytcard__views">{videos[0].views.toLocaleString()} views</span>
+              )}
+            </span>
           </a>
         </section>
       ) : null}

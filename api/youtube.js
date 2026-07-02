@@ -19,6 +19,7 @@ module.exports = async (req, res) => {
       .slice(1)
       .map((block) => {
         const id = grab(block, /<yt:videoId>([^<]+)<\/yt:videoId>/);
+        const viewsRaw = grab(block, /<media:statistics\s+views="(\d+)"/);
         return {
           id,
           title: grab(block, /<title>([^<]+)<\/title>/),
@@ -26,6 +27,7 @@ module.exports = async (req, res) => {
           url: `https://www.youtube.com/watch?v=${id}`,
           thumbnail: `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`,
           thumbnailFallback: `https://i.ytimg.com/vi/${id}/hqdefault.jpg`,
+          views: viewsRaw ? Number(viewsRaw) : null,
         };
       })
       .filter((v) => v.id)
