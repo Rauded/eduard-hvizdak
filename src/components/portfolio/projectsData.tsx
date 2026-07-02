@@ -147,7 +147,7 @@ export const PROJECTS: PortfolioProject[] = [
       { label: 'www.kouzelniknaakci.cz', url: 'https://www.kouzelniknaakci.cz', type: 'demo', favicon: '/brand/sites/kouzelniknaakci.svg' },
     ],
     media: {
-      type: 'placeholder',
+      type: 'video',
       video: assetSafe('kouzelnici.mp4'),
     },
     accent: '#ec4899',
