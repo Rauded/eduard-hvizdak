@@ -10,35 +10,35 @@ import { useTheme } from '../theme/ThemeContext';
 import '../embeds/embeds.scss';
 import './now.scss';
 
-// LinkedIn posts to feature — updated manually. Paste a post's "Embed this
+// LinkedIn posts to feature (updated manually). Paste a post's "Embed this
 // post" URL (and its height) here when you post something new; newest first.
 const LINKEDIN_POSTS: { src: string; height: number }[] = [
   { src: 'https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7473426243208527872?collapsed=1', height: 628 },
 ];
 
-// Favourite posts on X — add tweet URLs here to feature them. Empty = the
+// Favourite posts on X: add tweet URLs here to feature them. Empty = the
 // whole "Favourite posts on X" section hides itself (guarded by length > 0).
 const FAVOURITE_TWEETS: string[] = [];
 
 // Hand-maintained "last updated" stamp for the /now header. Bump this whenever
-// you meaningfully rewrite the "Right now" copy below — a real /now page proves
+// you meaningfully rewrite the "Right now" copy below; a real /now page proves
 // it's alive by showing when it was last touched. Location is static.
 const LAST_UPDATED = 'July 2026';
 const LOCATION = 'Brno, Czech Republic';
 
-// Products I'm actively running — hand-maintained, one honest line each. These
+// Products I'm actively running (hand-maintained, one honest line each). These
 // are the founder signal on the page (paying customers, real B2B, live sites),
 // so they lead above the auto-synced reading/watching feeds.
 const BUILDING: { name: string; tagline: string; status: string; href: string }[] = [
   {
     name: 'InzerPro',
-    tagline: 'Listing automation for power sellers on the Bazoš classifieds — auto-renewal, bulk posting, analytics.',
+    tagline: 'Listing automation for power sellers on the Bazoš classifieds: auto-renewal, bulk posting, and analytics.',
     status: 'Live · paying customers',
     href: 'https://www.inzerpro.cz',
   },
   {
     name: 'NasadClaw',
-    tagline: 'Private, on-site AI assistants for Czech & Slovak businesses — installed and managed end-to-end.',
+    tagline: 'Private, on-site AI assistants for Czech & Slovak businesses, installed and managed end-to-end.',
     status: 'Live · B2B',
     href: 'https://www.nasadclaw.cz',
   },
@@ -126,7 +126,7 @@ function contribLabel(day: ContribDay): string {
 const fmt = (v: number | null, suffix = ''): string =>
   v === null || v === undefined ? '—' : `${v}${suffix}`;
 
-// Live local time in Brno (Europe/Prague) — home base even when I'm travelling.
+// Live local time in Brno (Europe/Prague); home base even when I'm travelling.
 // Prague runs CET (UTC+1) in winter, CEST (UTC+2) in summer, so derive the label
 // from the actual offset instead of hardcoding it.
 function pragueOffsetMin(now: number): number {
@@ -274,14 +274,14 @@ const NowPage: React.FC = () => {
     <div className="now-page" id="now" data-theme={theme}>
       <Seo
         title="Now"
-        description="What Eduard Hvižďák is focused on right now — current projects, plus what he's reading and watching."
+        description="What Eduard Hvižďák is focused on right now: current projects, plus what he's reading and watching."
         path="/now"
       />
       <header className="now-hero">
         <span className="now-hero__kicker">/now</span>
         <h1 className="now-hero__title">What I'm doing now</h1>
         <p className="now-hero__lead">
-          A snapshot of what's got my attention — inspired by Derek Sivers'{' '}
+          A snapshot of what's got my attention, inspired by Derek Sivers'{' '}
           <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now movement</a>.
         </p>
         <p className="now-hero__meta">
@@ -296,7 +296,7 @@ const NowPage: React.FC = () => {
       <section className="now-focus" aria-label="What I'm focused on right now">
         <p className="now-focus__lead">
           I'm finishing my <strong>BSc in Computer Science</strong> at Masaryk University while working
-          as an <strong>AI engineer</strong> — building RAG pipelines and multi-agent systems by day —
+          as an <strong>AI engineer</strong>, building RAG pipelines and multi-agent systems by day,
           and running a few <strong>SaaS products</strong> of my own on the side. Most of my building
           energy right now goes into{' '}
           <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">InzerPro</a>; the
@@ -393,7 +393,7 @@ const NowPage: React.FC = () => {
           </div>
           <div className="now-media__grid">
             {books.map((b, i) => (
-              <a className="now-card" key={i} href={b.link} target="_blank" rel="noopener noreferrer" title={`${b.title} — ${b.author}`}>
+              <a className="now-card" key={i} href={b.link} target="_blank" rel="noopener noreferrer" title={`${b.title} · ${b.author}`}>
                 {b.cover && <img className="now-card__cover" src={b.cover} alt="" loading="lazy" />}
                 <span className="now-card__title">{b.title}</span>
                 <span className="now-card__sub">{b.author}</span>
