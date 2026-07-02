@@ -298,31 +298,19 @@ const NowPage: React.FC = () => {
       <header className="now-hero">
         <span className="now-hero__kicker">/now</span>
         <h1 className="now-hero__title">What I'm doing now</h1>
-        <p className="now-hero__lead">
-          A snapshot of what's got my attention, inspired by Derek Sivers'{' '}
-          <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer">/now movement</a>.
-        </p>
-        <p className="now-hero__meta">
-          <span className="now-hero__loc"><LuMapPin /> {LOCATION}</span>
-          <span className="now-hero__mdot" aria-hidden="true" />
-          <span className="now-hero__loc" title="My local time in Brno"><LuClock /> {brnoClock(clock)}</span>
-          <span className="now-hero__mdot" aria-hidden="true" />
-          <span className="now-hero__updated">Updated {LAST_UPDATED}</span>
-        </p>
       </header>
 
       <section className="now-focus" aria-label="What I'm focused on right now">
         <p className="now-focus__lead">
-          I'm an <strong>AI engineer</strong> finishing my <strong>BSc in Computer Science</strong> at
-          Masaryk University. Most days go into building <strong>AI agents</strong> and the systems that
-          keep them running.
+          I'm wrapping up my <strong>BSc in Computer Science</strong> at Masaryk University and working
+          as an <strong>AI engineer</strong>. Most of my time goes into building{' '}
+          <strong>AI agents and agentic systems</strong>: automations, multi-agent orchestration, and
+          the wiring that keeps them running. I've also had a go at running a few SaaS products of my
+          own, and the one still going is{' '}
+          <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">InzerPro</a>. On
+          the side, more of an extra than a main job, I do AI consultations plus automation and AI
+          implementation work, just me, no company behind it.
         </p>
-        <ul className="now-focus__tags" aria-label="What I'm focused on">
-          <li>AI agents</li>
-          <li>Multi-agent orchestration</li>
-          <li>Automation</li>
-          <li>AI consulting on the side</li>
-        </ul>
       </section>
 
       <section className="now-building">
@@ -547,6 +535,14 @@ const NowPage: React.FC = () => {
           </div>
         </section>
       )}
+
+      <footer className="now-metafoot">
+        <span className="now-hero__loc"><LuMapPin /> {LOCATION}</span>
+        <span className="now-hero__mdot" aria-hidden="true" />
+        <span className="now-hero__loc" title="My local time in Brno"><LuClock /> {brnoClock(clock)}</span>
+        <span className="now-hero__mdot" aria-hidden="true" />
+        <span className="now-hero__updated">Updated {LAST_UPDATED}</span>
+      </footer>
     </div>
   );
 };

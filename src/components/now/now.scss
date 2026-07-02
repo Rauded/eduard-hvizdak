@@ -194,27 +194,22 @@
       &:hover { color: var(--heading); border-color: var(--heading); }
     }
   }
+}
 
-  // Scannable focus tags under the short lead, so the top of the page reads at
-  // a glance instead of as one dense paragraph. Neutral pills, no gradients.
-  &__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin: 14px 0 0;
-    padding: 0;
-    list-style: none;
-
-    li {
-      font-size: 0.82em;
-      font-weight: 500;
-      color: var(--text-soft);
-      padding: 5px 12px;
-      border: 1px solid var(--build-border);
-      border-radius: 999px;
-      background: var(--build-bg);
-    }
-  }
+// Location, local time and "last updated": the /now freshness signal. Kept for
+// visitors who want it, but moved to the foot of the page so it no longer
+// crowds the first impression.
+.now-metafoot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--build-border);
+  font-size: 0.8em;
+  color: var(--text-dim);
+  letter-spacing: 0.01em;
 }
 
 // ─── "Currently building" — active products, founder signal ───────────
