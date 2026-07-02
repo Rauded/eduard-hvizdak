@@ -296,6 +296,15 @@
     &__title { color: var(--accent); }
     &__lead { color: var(--text-muted); }
 
+    &__direct {
+      color: var(--text-muted);
+      a {
+        color: var(--accent-strong);
+        border-bottom-color: var(--accent-ring);
+        &:hover { color: var(--accent); border-bottom-color: var(--accent); }
+      }
+    }
+
     &__btn--primary {
       background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
       box-shadow: var(--shadow-accent);
@@ -325,6 +334,11 @@
       color: var(--accent-strong);
       text-decoration-color: var(--accent-ring);
       &:hover { color: var(--accent); text-decoration-color: var(--accent); }
+    }
+    .footer-email {
+      color: var(--text-muted);
+      border-bottom-color: var(--border-strong);
+      &:hover { color: var(--accent); border-bottom-color: var(--accent); }
     }
     .social-icons a {
       color: var(--text-faint);
