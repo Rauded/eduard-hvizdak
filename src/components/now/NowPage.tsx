@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap, LuMapPin, LuHammer, LuArrowUpRight, LuClock, LuTrendingUp } from 'react-icons/lu';
+import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap, LuMapPin, LuBlocks, LuArrowUpRight, LuClock, LuTrendingUp } from 'react-icons/lu';
 import { FaYoutube, FaGithub, FaLinkedinIn, FaXTwitter, FaPlay } from 'react-icons/fa6';
 import Seo from '../../seo/Seo';
 import AgentsRunning from './AgentsRunning';
@@ -28,24 +28,37 @@ const LOCATION = 'Brno, Czech Republic';
 
 // Products I'm actively running (hand-maintained, one honest line each). These
 // lead above the auto-synced reading/watching feeds.
-const BUILDING: { name: string; tagline: string; status: string; href: string }[] = [
+const BUILDING: {
+  name: string;
+  tagline: string;
+  status: string;
+  href: string;
+  logo: string;
+  accent: string;
+}[] = [
   {
     name: 'InzerPro',
     tagline: 'A cross-listing and automation platform for Czech and Slovak second-hand marketplaces.',
     status: 'Live · paying customers',
     href: 'https://www.inzerpro.cz',
+    logo: '/brand/sites/inzerpro.svg',
+    accent: '#ff5c00',
   },
   {
     name: 'KouzelníkNaAkci',
     tagline: 'A marketplace connecting event organisers with magicians across Czechia and Slovakia, and my live sandbox for SEO, GEO, and online-ads experiments.',
     status: 'Live · marketplace + marketing lab',
     href: 'https://www.kouzelniknaakci.cz',
+    logo: '/brand/sites/kouzelniknaakci.svg',
+    accent: '#7c3aed',
   },
   {
     name: 'NasadClaw',
     tagline: 'A front-end brochure site for my AI consulting, automation, and deployment work, where people can read up and get in touch.',
     status: 'Live · services site',
     href: 'https://www.nasadclaw.cz',
+    logo: '/brand/sites/nasadclaw.png',
+    accent: '#e11d2f',
   },
 ];
 
@@ -317,14 +330,24 @@ const NowPage: React.FC = () => {
 
       <section className="now-building">
         <div className="now-media__head">
-          <h2 className="now-media__title"><LuHammer className="now-icon" /> Currently building</h2>
+          <h2 className="now-media__title"><LuBlocks className="now-icon now-icon--build" /> Currently building</h2>
         </div>
         <div className="now-building__grid">
           {BUILDING.map((p) => {
             const s = seo?.find((x) => p.href.includes(x.domain));
             return (
-              <a className="now-build" key={p.name} href={p.href} target="_blank" rel="noopener noreferrer">
+              <a
+                className="now-build"
+                key={p.name}
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ ['--accent' as string]: p.accent }}
+              >
                 <div className="now-build__top">
+                  <span className="now-build__logo">
+                    <img src={p.logo} alt="" loading="lazy" />
+                  </span>
                   <span className="now-build__name">{p.name}</span>
                   <LuArrowUpRight className="now-build__arrow" />
                 </div>
