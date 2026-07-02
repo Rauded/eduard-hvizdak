@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap, LuMapPin, LuHammer, LuArrowUpRight } from 'react-icons/lu';
+import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap, LuMapPin, LuHammer, LuArrowUpRight, LuClock } from 'react-icons/lu';
 import { FaYoutube, FaGithub, FaLinkedinIn, FaXTwitter, FaPlay } from 'react-icons/fa6';
 import Seo from '../../seo/Seo';
 import AgentsRunning from './AgentsRunning';
@@ -126,6 +126,22 @@ function contribLabel(day: ContribDay): string {
 const fmt = (v: number | null, suffix = ''): string =>
   v === null || v === undefined ? '—' : `${v}${suffix}`;
 
+// Live local time in Brno (Europe/Prague) — home base even when I'm travelling.
+// Prague runs CET (UTC+1) in winter, CEST (UTC+2) in summer, so derive the label
+// from the actual offset instead of hardcoding it.
+function pragueOffsetMin(now: number): number {
+  const d = new Date(now);
+  const local = new Date(d.toLocaleString('en-US', { timeZone: 'Europe/Prague' }));
+  const utc = new Date(d.toLocaleString('en-US', { timeZone: 'UTC' }));
+  return Math.round((local.getTime() - utc.getTime()) / 60000);
+}
+function brnoClock(now: number): string {
+  const time = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Europe/Prague', hour: '2-digit', minute: '2-digit', hour12: false,
+  }).format(now);
+  return `${time} ${pragueOffsetMin(now) === 120 ? 'CEST' : 'CET'}`;
+}
+
 const stars = (r: number | null): string =>
   r === null ? '' : '★'.repeat(Math.floor(r)) + (r % 1 ? '½' : '');
 
@@ -204,6 +220,13 @@ const NowPage: React.FC = () => {
   const [gh, setGh] = useState<GitHubData | null | undefined>(undefined);
   // Styled hover tooltip for the contribution graph (native `title` is too subtle).
   const [tip, setTip] = useState<{ x: number; y: number; text: string } | null>(null);
+  // Live Brno clock in the hero meta line; re-render on the minute.
+  const [clock, setClock] = useState<number>(() => Date.now());
+
+  useEffect(() => {
+    const id = window.setInterval(() => setClock(Date.now()), 15000);
+    return () => window.clearInterval(id);
+  }, []);
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/now-data.json`, { cache: 'no-store' })
@@ -263,6 +286,8 @@ const NowPage: React.FC = () => {
         </p>
         <p className="now-hero__meta">
           <span className="now-hero__loc"><LuMapPin /> {LOCATION}</span>
+          <span className="now-hero__mdot" aria-hidden="true" />
+          <span className="now-hero__loc" title="My local time in Brno"><LuClock /> {brnoClock(clock)}</span>
           <span className="now-hero__mdot" aria-hidden="true" />
           <span className="now-hero__updated">Updated {LAST_UPDATED}</span>
         </p>
