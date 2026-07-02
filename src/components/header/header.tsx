@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaPen, FaRegClock, FaHeart } from 'react-icons/fa';
+import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaPen, FaRegClock, FaHeart, FaBriefcase } from 'react-icons/fa';
 import { LuSun, LuMoon } from 'react-icons/lu';
 import { useTheme } from '../theme/ThemeContext';
 import './header.scss';
@@ -13,6 +13,7 @@ const Header: React.FC = () => {
   const isBlog = location.pathname.startsWith('/blog');
   const isNow = location.pathname.startsWith('/now');
   const isThings = location.pathname.startsWith('/things');
+  const isServices = location.pathname.startsWith('/services');
 
   // Scroll to an in-page section, retrying briefly so it also works right
   // after navigating home from another route (the section needs to mount).
@@ -65,6 +66,14 @@ const Header: React.FC = () => {
           <FaFileAlt />
           Resume
         </a>
+        <Link
+          to="/services"
+          className={`nav-link ${isServices ? 'nav-link--active' : ''}`}
+          onClick={() => setIsOpen(false)}
+        >
+          <FaBriefcase />
+          Services
+        </Link>
         <Link
           to="/blog"
           className={`nav-link ${isBlog ? 'nav-link--active' : ''}`}

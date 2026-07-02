@@ -22,6 +22,8 @@ import BlogPostPage from './components/blog/BlogPostPage.tsx';
 // @ts-ignore
 import NowPage from './components/now/NowPage.tsx';
 // @ts-ignore
+import ServicesPage from './components/services/ServicesPage.tsx';
+// @ts-ignore
 import ThingsPage from './components/things/ThingsPage.tsx';
 // @ts-ignore
 import SharePreviewPage from './components/share/SharePreviewPage.tsx';
@@ -94,6 +96,7 @@ const App: React.FC = () => {
             <Route path="/blog" element={<Shell><BlogListingPage /></Shell>} />
             <Route path="/blog/:slug" element={<Shell><BlogPostPage /></Shell>} />
             <Route path="/now" element={<Shell><NowPage /></Shell>} />
+            <Route path="/services" element={<Shell><ServicesPage /></Shell>} />
             <Route path="/things" element={<Shell><ThingsPage /></Shell>} />
             <Route path="/share-preview" element={<Shell><SharePreviewPage /></Shell>} />
           </Routes>
