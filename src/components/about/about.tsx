@@ -4,8 +4,10 @@ import { LuArrowRight } from "react-icons/lu";
 import "./about.scss";
 import myPhoto from "../../assets/about/picture_of_me.jpeg";
 import myPhotoWebP from "../../assets/about/picture_of_me.webp";
+import { isExpertMode } from "../../config/positioning";
 
 const About: React.FC = () => {
+  const expert = isExpertMode();
 
   return (
     <div className="about-container" id="about">
@@ -13,7 +15,11 @@ const About: React.FC = () => {
         <div className="about-text">
           <h2 className="about-title">About Me</h2>
           <p>
-            Hello! My name is <span className="purple-text">Eduard Hvizdak</span>. I’m a computer science student at Masaryk University and AI developer focused on building real-world systems powered by large language models. Most recently, I’ve been working on AI infrastructure for <span className="purple-text">document intelligence, multi-agent pipelines, and retrieval-augmented knowledge systems</span>.
+            Hello! My name is <span className="purple-text">Eduard Hvizdak</span>.{' '}
+            {expert
+              ? "I'm an AI engineer focused on building real-world systems powered by large language models."
+              : 'I’m a computer science student at Masaryk University and AI developer focused on building real-world systems powered by large language models.'}{' '}
+            Most recently, I’ve been working on AI infrastructure for <span className="purple-text">document intelligence, multi-agent pipelines, and retrieval-augmented knowledge systems</span>.
           </p>
           <p>
             My interests evolve with the problems I’m exploring, but lately I’ve been especially focused on <span className="purple-text">agentic AI systems, retrieval architectures, and large-scale document analysis</span> using modern embedding models and vector search.

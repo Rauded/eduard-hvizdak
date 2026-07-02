@@ -7,6 +7,7 @@ import AgentsRunning from './AgentsRunning';
 import LinkedInEmbed from '../embeds/LinkedInEmbed';
 import Tweet from '../embeds/Tweet';
 import { useTheme } from '../theme/ThemeContext';
+import { isExpertMode } from '../../config/positioning';
 import '../embeds/embeds.scss';
 import './now.scss';
 
@@ -302,8 +303,14 @@ const NowPage: React.FC = () => {
 
       <section className="now-focus" aria-label="What I'm focused on right now">
         <p className="now-focus__lead">
-          I'm wrapping up my <strong>BSc in Computer Science</strong> at Masaryk University and working
-          as an <strong>AI engineer</strong>. Most of my time goes into building{' '}
+          {isExpertMode() ? (
+            <>I'm an <strong>AI engineer</strong>, and most of my time goes into building </>
+          ) : (
+            <>
+              I'm wrapping up my <strong>BSc in Computer Science</strong> at Masaryk University and
+              working as an <strong>AI engineer</strong>. Most of my time goes into building{' '}
+            </>
+          )}
           <strong>AI agents and agentic systems</strong>: automations, multi-agent orchestration, and
           the wiring that keeps them running. I've also had a go at running a few SaaS products of my
           own, and the one still going is{' '}

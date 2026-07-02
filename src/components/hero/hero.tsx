@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { isExpertMode } from '../../config/positioning';
 
 // Main container for the hero section
 const HeroContainer = styled.section`
@@ -261,12 +262,15 @@ const topLines = [
   "Hey! Thanks for dropping by.",
 ];
 
+// Expert mode drops the "CS Student" line (and swaps in a consulting-facing
+// title) so the rotating role never leads with a student framing. See
+// src/config/positioning.ts.
 const typewriterTexts = [
   "AI Developer @ OneBond",
   "AI Developer @ CZS / Masaryk University",
   "AI Developer @ iGalileo",
   "Think Tank @ EDUC Alliance",
-  "CS Student @ Masaryk University",
+  isExpertMode() ? "AI Consultant & Automation Engineer" : "CS Student @ Masaryk University",
   "Python & LangChain Developer",
   "Building AI agents & RAG pipelines",
   "Hackathon Fanatic",

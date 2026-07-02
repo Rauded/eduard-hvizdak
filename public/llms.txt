@@ -1,6 +1,6 @@
 # Eduard Hvizdak
 
-> Eduard Hvizdak is an AI engineer and indie founder based in Brno, Czech Republic. He builds production AI systems — retrieval-augmented generation (RAG), multi-agent pipelines, and large-scale document analysis — and runs several SaaS products. He is a Computer Science student at Masaryk University.
+> Eduard Hvizdak is an AI engineer and indie founder based in Brno, Czech Republic. He builds production AI systems — retrieval-augmented generation (RAG), multi-agent pipelines, and large-scale document analysis — and runs several SaaS products. He studied Computer Science at Masaryk University.
 
 ## Who he is
 
