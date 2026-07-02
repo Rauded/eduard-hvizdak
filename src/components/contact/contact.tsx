@@ -1,6 +1,7 @@
 import React from 'react';
 import { LuMail, LuCalendar, LuArrowRight } from 'react-icons/lu';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 import './contact.scss';
 
 // Booking link (Cal.com). Override with REACT_APP_BOOKING_URL in Vercel.
@@ -34,9 +35,16 @@ const Contact: React.FC = () => (
           </a>
         )}
       </div>
+      <p className="contact__direct">
+        Or email me directly at{' '}
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+      </p>
       <div className="contact__socials">
         <a href="https://github.com/Rauded" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
           <FaGithub />
+        </a>
+        <a href="https://x.com/EduardHvizdak" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)">
+          <FaXTwitter />
         </a>
         <a href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
           <FaLinkedin />
