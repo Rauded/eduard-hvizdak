@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap, LuMapPin, LuHammer, LuArrowUpRight, LuClock } from 'react-icons/lu';
+import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap, LuMapPin, LuHammer, LuArrowUpRight, LuClock, LuTrendingUp } from 'react-icons/lu';
 import { FaYoutube, FaGithub, FaLinkedinIn, FaXTwitter, FaPlay } from 'react-icons/fa6';
 import Seo from '../../seo/Seo';
 import AgentsRunning from './AgentsRunning';
@@ -95,6 +95,7 @@ interface Film { title: string; year: string; rating: number | null; link: strin
 interface Book { title: string; author: string; cover: string; link: string }
 interface Anime { title: string; status?: string; link: string; cover: string }
 interface Video { id: string; title: string; published: string; url: string; thumbnail: string; thumbnailFallback?: string; views?: number | null }
+interface SeoItem { label: string; domain: string; impressions: number; clicks: number }
 interface ContribDay { date: string; count: number; level: number }
 interface GitHubData { total: number | null; contributions: ContribDay[] }
 
@@ -123,7 +124,11 @@ function contribLabel(day: ContribDay): string {
 }
 
 const fmt = (v: number | null, suffix = ''): string =>
-  v === null || v === undefined ? '—' : `${v}${suffix}`;
+  v === null || v === undefined ? '-' : `${v}${suffix}`;
+
+// Short form for big counts, e.g. 128432 becomes "128K".
+const compact = (n: number): string =>
+  new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(n);
 
 // Live local time in Brno (Europe/Prague); home base even when I'm travelling.
 // Prague runs CET (UTC+1) in winter, CEST (UTC+2) in summer, so derive the label
@@ -216,6 +221,7 @@ const NowPage: React.FC = () => {
   const [books, setBooks] = useState<Book[] | null>(null);
   const [anime, setAnime] = useState<Anime[] | null>(null);
   const [videos, setVideos] = useState<Video[] | null>(null);
+  const [seo, setSeo] = useState<SeoItem[] | null>(null);
   const [gh, setGh] = useState<GitHubData | null | undefined>(undefined);
   // Styled hover tooltip for the contribution graph (native `title` is too subtle).
   const [tip, setTip] = useState<{ x: number; y: number; text: string } | null>(null);
@@ -251,6 +257,10 @@ const NowPage: React.FC = () => {
     fetch('/api/github')
       .then((r) => (r.ok ? r.json() : null))
       .then(setGh)
+      .catch(() => {});
+    fetch('/api/seo')
+      .then((r) => (r.ok ? r.json() : { items: [] }))
+      .then((d) => setSeo(d.items || []))
       .catch(() => {});
   }, []);
 
@@ -310,18 +320,31 @@ const NowPage: React.FC = () => {
           <h2 className="now-media__title"><LuHammer className="now-icon" /> Currently building</h2>
         </div>
         <div className="now-building__grid">
-          {BUILDING.map((p) => (
-            <a className="now-build" key={p.name} href={p.href} target="_blank" rel="noopener noreferrer">
-              <div className="now-build__top">
-                <span className="now-build__name">{p.name}</span>
-                <LuArrowUpRight className="now-build__arrow" />
-              </div>
-              <p className="now-build__tag">{p.tagline}</p>
-              <span className="now-build__status">
-                <span className="now-build__dot" aria-hidden="true" />{p.status}
-              </span>
-            </a>
-          ))}
+          {BUILDING.map((p) => {
+            const s = seo?.find((x) => p.href.includes(x.domain));
+            return (
+              <a className="now-build" key={p.name} href={p.href} target="_blank" rel="noopener noreferrer">
+                <div className="now-build__top">
+                  <span className="now-build__name">{p.name}</span>
+                  <LuArrowUpRight className="now-build__arrow" />
+                </div>
+                <p className="now-build__tag">{p.tagline}</p>
+                <div className="now-build__foot">
+                  <span className="now-build__status">
+                    <span className="now-build__dot" aria-hidden="true" />{p.status}
+                  </span>
+                  {s && s.impressions > 0 && (
+                    <span
+                      className="now-build__metric"
+                      title={`${s.impressions.toLocaleString()} Google Search impressions in the last 28 days`}
+                    >
+                      <LuTrendingUp /> {compact(s.impressions)} search impressions / 28d
+                    </span>
+                  )}
+                </div>
+              </a>
+            );
+          })}
         </div>
       </section>
 
