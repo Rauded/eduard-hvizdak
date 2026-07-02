@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaPen, FaRegClock, FaHeart, FaBriefcase } from 'react-icons/fa';
+import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaPen, FaRegClock, FaBriefcase } from 'react-icons/fa';
 import { LuSun, LuMoon } from 'react-icons/lu';
 import { useTheme } from '../theme/ThemeContext';
 import './header.scss';
@@ -12,7 +12,6 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const isBlog = location.pathname.startsWith('/blog');
   const isNow = location.pathname.startsWith('/now');
-  const isThings = location.pathname.startsWith('/things');
   const isServices = location.pathname.startsWith('/services');
 
   // Scroll to an in-page section, retrying briefly so it also works right
@@ -89,14 +88,6 @@ const Header: React.FC = () => {
         >
           <FaRegClock />
           Now
-        </Link>
-        <Link
-          to="/things"
-          className={`nav-link ${isThings ? 'nav-link--active' : ''}`}
-          onClick={() => setIsOpen(false)}
-        >
-          <FaHeart />
-          Things
         </Link>
         <button
           type="button"

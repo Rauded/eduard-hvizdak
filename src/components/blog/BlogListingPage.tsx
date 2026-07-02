@@ -90,6 +90,23 @@ const BlogListingPage: React.FC = () => {
             })}
           </div>
         )}
+
+        {/* Evergreen, always-growing page. It lives here rather than in the top
+            nav so the blog stays the one place for anything long-form. */}
+        <Link to="/things" className="blog-evergreen">
+          <div className="blog-evergreen__body">
+            <div className="blog-row__meta">
+              <span className="blog-chip">Living page</span>
+              <span className="blog-row__date">Updated often</span>
+            </div>
+            <h2 className="blog-row__title">Tech I love</h2>
+            <p className="blog-row__excerpt">
+              The gear I genuinely use every day, grouped and indexed. It keeps growing as my setup
+              evolves.
+            </p>
+          </div>
+          <span className="blog-evergreen__go"><LuArrowRight /></span>
+        </Link>
       </div>
     </div>
   );
