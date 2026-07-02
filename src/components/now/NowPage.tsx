@@ -8,6 +8,7 @@ import LinkedInEmbed from '../embeds/LinkedInEmbed';
 import Tweet from '../embeds/Tweet';
 import { useTheme } from '../theme/ThemeContext';
 import { isExpertMode } from '../../config/positioning';
+import { isFeatureOn } from '../../config/features';
 import '../embeds/embeds.scss';
 import './now.scss';
 
@@ -275,10 +276,14 @@ const NowPage: React.FC = () => {
       .then((r) => (r.ok ? r.json() : { items: [] }))
       .then((d) => setSeo(d.items || []))
       .catch(() => {});
-    fetch(`${process.env.PUBLIC_URL}/latest-tweets.json`, { cache: 'no-store' })
-      .then((r) => (r.ok ? r.json() : { tweets: [] }))
-      .then((d) => setLatestTweets((d.tweets || []).map((t: { url: string }) => t.url)))
-      .catch(() => setLatestTweets([]));
+    // Behind the latestTweets feature flag (off by default). Skip the fetch
+    // entirely when the flag is off so we do no work for a hidden section.
+    if (isFeatureOn('latestTweets')) {
+      fetch(`${process.env.PUBLIC_URL}/latest-tweets.json`, { cache: 'no-store' })
+        .then((r) => (r.ok ? r.json() : { tweets: [] }))
+        .then((d) => setLatestTweets((d.tweets || []).map((t: { url: string }) => t.url)))
+        .catch(() => setLatestTweets([]));
+    }
   }, []);
 
   const weeks = gh ? toWeeks(gh.contributions || []) : [];
@@ -536,7 +541,7 @@ const NowPage: React.FC = () => {
         </section>
       )}
 
-      {latestTweets && latestTweets.length > 0 && (
+      {isFeatureOn('latestTweets') && latestTweets && latestTweets.length > 0 && (
         <section className="now-media now-tweets">
           <div className="now-media__head">
             <h2 className="now-media__title"><FaXTwitter className="now-icon" /> Latest posts on X</h2>
