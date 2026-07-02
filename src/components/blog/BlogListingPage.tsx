@@ -21,7 +21,7 @@ const BlogListingPage: React.FC = () => {
     <div className="blog-listing" data-theme={theme}>
       <Seo
         title="Blog"
-        description="Writing by Eduard Hvižďák — thoughts on AI engineering, building SaaS, hackathons, and life."
+        description="Writing by Eduard Hvizdak — thoughts on AI engineering, building SaaS, hackathons, and life."
         path="/blog"
       />
       <div className="blog-listing__inner">

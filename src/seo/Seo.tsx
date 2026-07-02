@@ -16,7 +16,7 @@ interface SeoProps {
   jsonLd?: object | object[];
 }
 
-const fullTitle = (t: string) => (t === 'Eduard Hvižďák' ? t : `${t} · Eduard Hvižďák`);
+const fullTitle = (t: string) => (t === 'Eduard Hvizdak' ? t : `${t} · Eduard Hvizdak`);
 const abs = (img?: string) =>
   !img ? DEFAULT_OG_IMAGE : img.startsWith('http') ? img : `${SITE_URL}${img}`;
 
@@ -30,7 +30,7 @@ const Seo: React.FC<SeoProps> = ({ title, description, path, image, type = 'webs
       <meta name="description" content={description} />
       <link rel="canonical" href={url} />
       <meta property="og:type" content={type} />
-      <meta property="og:site_name" content="Eduard Hvižďák" />
+      <meta property="og:site_name" content="Eduard Hvizdak" />
       <meta property="og:title" content={t} />
       <meta property="og:description" content={description} />
       <meta property="og:url" content={url} />

@@ -12,7 +12,7 @@ const ThingsPage: React.FC = () => {
     <div className="things-page" data-theme={theme}>
       <Seo
         title="Tech I'm obsessed with"
-        description="The tech Eduard Hvižďák is obsessed with and uses every day: MacBook Pro M4 Pro, AirPods Pro 3, e-ink readers, AR glasses, Pavlok and more."
+        description="The tech Eduard Hvizdak is obsessed with and uses every day: MacBook Pro M4 Pro, AirPods Pro 3, e-ink readers, AR glasses, Pavlok and more."
         path="/things"
       />
 

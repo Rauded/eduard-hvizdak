@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
         </p>
       </div>
       <div className="center-align">
-        <p>&copy; Eduard Hvižďák 2026</p>
+        <p>&copy; Eduard Hvizdak 2026</p>
         <p>
           <a className="footer-email" href={`mailto:${EMAIL}`}>{EMAIL}</a>
         </p>

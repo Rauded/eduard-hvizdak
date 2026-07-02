@@ -324,7 +324,7 @@ const Hero: React.FC = () => {
     <HeroContainer id="home">
       <LeftContainer>
         <Headline>{topLine}</Headline>
-        <GradientText>I'm Eduard Hvižďák.</GradientText>
+        <GradientText>I'm Eduard Hvizdak.</GradientText>
         <TypewriterText>&gt; {currentText}</TypewriterText>
       </LeftContainer>
       <RightContainer>

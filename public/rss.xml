@@ -2,9 +2,9 @@
 <!-- Hand-maintained. When adding a blog post, add an <item> here and a <url> to sitemap.xml. -->
 <rss version="2.0">
   <channel>
-    <title>Eduard Hvižďák — Blog</title>
+    <title>Eduard Hvizdak — Blog</title>
     <link>https://eduard-hvizdak.vercel.app/blog</link>
-    <description>Writing on AI engineering, building SaaS, hackathons, and life by Eduard Hvižďák.</description>
+    <description>Writing on AI engineering, building SaaS, hackathons, and life by Eduard Hvizdak.</description>
     <language>en</language>
     <item>
       <title>Newsmatics Hackathon</title>

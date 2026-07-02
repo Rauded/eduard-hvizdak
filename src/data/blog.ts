@@ -95,7 +95,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>So much of the modern web is built to nudge and pressure you into things: manipulative defaults, fake urgency, subscriptions that take one click to start and a support ticket to cancel. I build software, so I think a lot about where the line sits between good design and design that just exploits people. Getting to argue that line with the person actually shaping the legislation is not something I expected to be doing this year.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-02.jpg" alt="Eduard Hviždák listening during a session of the Youth Policy Dialogue" class="blog-img" />
+        <img src="/blog/digital-fairness/df-02.jpg" alt="Eduard Hvizdak listening during a session of the Youth Policy Dialogue" class="blog-img" />
         <figcaption>Listening in during one of the sessions.</figcaption>
       </figure>
 

@@ -292,7 +292,7 @@ const NowPage: React.FC = () => {
     <div className="now-page" id="now" data-theme={theme}>
       <Seo
         title="Now"
-        description="What Eduard Hvižďák is focused on right now: current projects, plus what he's reading and watching."
+        description="What Eduard Hvizdak is focused on right now: current projects, plus what he's reading and watching."
         path="/now"
       />
       <header className="now-hero">

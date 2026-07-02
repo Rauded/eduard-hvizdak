@@ -14,7 +14,7 @@ import Contact from '../contact/contact.tsx';
 const Home: React.FC = () => (
   <>
     <Seo
-      title="Eduard Hvižďák"
+      title="Eduard Hvizdak"
       description="AI engineer and indie founder. I build production AI systems — RAG pipelines, multi-agent tooling — and run real SaaS products (InzerPro, NasadClaw, KouzelníkNaAkci)."
       path="/"
     />

@@ -11,8 +11,8 @@ import './share.scss';
 // Current share metadata (mirrors public/index.html). Update these here when
 // the OG tags change so this page always reflects what gets shared.
 const SHARE = {
-  siteName: 'Eduard Hvižďák',
-  title: 'Eduard Hvižďák – AI Engineer & Founder',
+  siteName: 'Eduard Hvizdak',
+  title: 'Eduard Hvizdak – AI Engineer & Founder',
   description:
     'Production AI systems (RAG, multi-agent) and real SaaS products — InzerPro, NasadClaw, KouzelníkNaAkci.',
   url: `${SITE_URL}/`,

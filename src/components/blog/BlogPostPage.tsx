@@ -104,7 +104,7 @@ const BlogPostPage: React.FC = () => {
     description: post.excerpt,
     ...(post.thumbnail ? { image: `${SITE_URL}${post.thumbnail}` } : {}),
     url: `${SITE_URL}/blog/${post.slug}`,
-    author: { '@type': 'Person', '@id': PERSON_ID, name: 'Eduard Hvižďák' },
+    author: { '@type': 'Person', '@id': PERSON_ID, name: 'Eduard Hvizdak' },
     mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
   };
 
@@ -147,9 +147,9 @@ const BlogPostPage: React.FC = () => {
         <h1 className="blog-post__title">{post.title}</h1>
 
         <div className="blog-post__byline">
-          <img className="blog-post__avatar" src={AVATAR} alt="Eduard Hvižďák" loading="lazy" />
+          <img className="blog-post__avatar" src={AVATAR} alt="Eduard Hvizdak" loading="lazy" />
           <div className="blog-post__byline-meta">
-            <span className="blog-post__author">Eduard Hvižďák</span>
+            <span className="blog-post__author">Eduard Hvizdak</span>
             <span className="blog-post__sub">
               {formatDate(post.date)} · {minutes} min read
             </span>
@@ -168,10 +168,10 @@ const BlogPostPage: React.FC = () => {
         )}
 
         <aside className="author-card">
-          <img className="author-card__avatar" src={AVATAR} alt="Eduard Hvižďák" loading="lazy" />
+          <img className="author-card__avatar" src={AVATAR} alt="Eduard Hvizdak" loading="lazy" />
           <div className="author-card__info">
             <span className="author-card__label">Written by</span>
-            <span className="author-card__name">Eduard Hvižďák</span>
+            <span className="author-card__name">Eduard Hvizdak</span>
             <p className="author-card__bio">
               AI engineer and founder. I build SaaS and AI products, compete at hackathons, and
               write about what I learn along the way.

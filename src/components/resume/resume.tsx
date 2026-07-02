@@ -30,7 +30,7 @@ const Resume: React.FC = () => {
               thumbnail sidebar (Chrome ignores navpanes/pagemode). The
               download/open actions below replace the toolbar's buttons. */}
           <iframe
-            title="Eduard Hvižďák Resume"
+            title="Eduard Hvizdak Resume"
             src={`${cvPdf}#toolbar=0`}
           ></iframe>
           <div className="cv-actions">
