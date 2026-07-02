@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════════
-//  "Tech I love": a living, chaptered piece. One chapter per thing
-//  I actually use and love, written like a blog: your own words plus
-//  your own photos and videos.
+//  "Tech I love": one chapter per thing I actually use and love,
+//  written like a blog post, your own words plus your own photos
+//  and videos.
 //
 //  HOW TO EXPAND A CHAPTER
 //  - body: add as many paragraphs as you like (each string is one
@@ -26,7 +26,6 @@ export interface Chapter {
   title: string;       // chapter heading, e.g. "Even Realities G1"
   category: string;    // small kicker, e.g. "XR glasses"
   accent: string;
-  emoji: string;       // used for the cover tile until real media is added
   link?: string;
   lead: string;        // one-line summary under the title
   body: string[];      // paragraphs: your personal take
@@ -39,7 +38,6 @@ export const CHAPTERS: Chapter[] = [
     title: 'MacBook Pro (M4 Pro)',
     category: 'Daily driver',
     accent: '#a1a1aa',
-    emoji: '💻',
     link: 'https://www.apple.com/macbook-pro/',
     lead: 'The 14-inch workhorse everything gets built on.',
     body: [
@@ -52,7 +50,6 @@ export const CHAPTERS: Chapter[] = [
     title: 'Even Realities G1',
     category: 'XR glasses',
     accent: '#a855f7',
-    emoji: '🕶️',
     link: 'https://www.evenrealities.com',
     lead: 'Lightweight AR glasses with a subtle heads-up display.',
     body: [
@@ -66,7 +63,6 @@ export const CHAPTERS: Chapter[] = [
     title: 'Amazon Kindle',
     category: 'Reading',
     accent: '#f59e0b',
-    emoji: '📖',
     link: 'https://www.amazon.com/kindle',
     lead: 'A dedicated, glare-free e-ink reader with weeks of battery.',
     body: [
@@ -80,7 +76,6 @@ export const CHAPTERS: Chapter[] = [
     title: 'Xteink 4',
     category: 'E-ink',
     accent: '#38bdf8',
-    emoji: '🗒️',
     lead: 'A pocket colour e-ink device for reading and quick notes.',
     body: [
       'E-ink that fits in a pocket. I like the calm of a paper-like screen for notes and longer reads. It slows me down in the good way and keeps my eyes happier than another LCD.',
@@ -92,7 +87,6 @@ export const CHAPTERS: Chapter[] = [
     title: 'Xteink 3',
     category: 'E-ink',
     accent: '#22d3ee',
-    emoji: '📟',
     lead: 'The earlier pocket e-ink reader, the one that got me into it.',
     body: [
       'This is the device that sold me on pocket e-ink in the first place. It still earns its spot: a calm, paper-like screen I reach for when I want to read or jot something without falling into a glowing phone.',
@@ -104,7 +98,6 @@ export const CHAPTERS: Chapter[] = [
     title: 'AirPods Pro 3',
     category: 'Audio',
     accent: '#60a5fa',
-    emoji: '🎧',
     link: 'https://www.apple.com/airpods-pro/',
     lead: 'Noise-cancelling earbuds that disappear into the day.',
     body: [
@@ -118,7 +111,6 @@ export const CHAPTERS: Chapter[] = [
     title: 'Pavlok',
     category: 'Quantified self',
     accent: '#ef4444',
-    emoji: '⚡',
     link: 'https://pavlok.com',
     lead: 'A wristband that buzzes (or zaps) to break bad habits.',
     body: [

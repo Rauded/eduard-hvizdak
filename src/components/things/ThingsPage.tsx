@@ -35,15 +35,7 @@ const ChapterSection: React.FC<{ c: Chapter; index: number }> = ({ c, index }) =
         </div>
       </div>
 
-      {/* Cover: a real photo/video if provided, otherwise a coloured tile so the
-          chapter never looks empty before media is added. */}
-      {c.media.length > 0 ? (
-        <Figure m={c.media[0]} />
-      ) : (
-        <div className="chapter__cover" aria-hidden="true">
-          <span>{c.emoji}</span>
-        </div>
-      )}
+      {c.media.length > 0 && <Figure m={c.media[0]} />}
 
       <div className="chapter__body">
         {c.body.map((p, i) => <p key={i}>{p}</p>)}
@@ -76,12 +68,12 @@ const ThingsPage: React.FC = () => {
       />
 
       <header className="things-hero">
-        <span className="things-hero__kicker">Living page · updated {LAST_UPDATED}</span>
+        <span className="things-hero__kicker">Updated {LAST_UPDATED}</span>
         <h1 className="things-hero__title">Tech I love</h1>
         <p className="things-hero__lead">
-          A running write-up of the gear I genuinely love and use every day, one chapter each. Why it
-          earned a permanent spot, what it is actually like to live with, and the photos and clips to
-          go with it. I add to this whenever something new sticks.
+          The gear I actually use every day, one piece at a time. What it is like to live with, what
+          I like and what I do not, and why it earns a permanent spot in my setup. With photos and
+          clips to go with it.
         </p>
       </header>
 

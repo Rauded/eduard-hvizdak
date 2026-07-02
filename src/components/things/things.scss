@@ -180,22 +180,6 @@
     margin: 0;
   }
 
-  // Coloured cover tile shown until a real photo/video is dropped in.
-  &__cover {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    aspect-ratio: 16 / 9;
-    border-radius: 16px;
-    margin-bottom: 26px;
-    background:
-      radial-gradient(120% 120% at 30% 0%, color-mix(in srgb, var(--accent) 26%, transparent) 0%, transparent 62%),
-      var(--visual-bg);
-    border: 1px solid var(--card-border);
-
-    span { font-size: clamp(3em, 10vw, 5em); line-height: 1; }
-  }
-
   &__body {
     font-size: 1.05em;
     line-height: 1.75;
