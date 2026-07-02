@@ -313,15 +313,16 @@ const NowPage: React.FC = () => {
 
       <section className="now-focus" aria-label="What I'm focused on right now">
         <p className="now-focus__lead">
-          I'm wrapping up my <strong>BSc in Computer Science</strong> at Masaryk University and working
-          as an <strong>AI engineer</strong>. Most of my time goes into building{' '}
-          <strong>AI agents and agentic systems</strong>: automations, multi-agent orchestration, and
-          the wiring that keeps them running. I've also had a go at running a few SaaS products of my
-          own, and the one still going is{' '}
-          <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">InzerPro</a>. On
-          the side, more of an extra than a main job, I do AI consultations plus automation and AI
-          implementation work, just me, no company behind it.
+          I'm an <strong>AI engineer</strong> finishing my <strong>BSc in Computer Science</strong> at
+          Masaryk University. Most days go into building <strong>AI agents</strong> and the systems that
+          keep them running.
         </p>
+        <ul className="now-focus__tags" aria-label="What I'm focused on">
+          <li>AI agents</li>
+          <li>Multi-agent orchestration</li>
+          <li>Automation</li>
+          <li>AI consulting on the side</li>
+        </ul>
       </section>
 
       <section className="now-building">

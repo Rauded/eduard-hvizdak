@@ -194,6 +194,27 @@
       &:hover { color: var(--heading); border-color: var(--heading); }
     }
   }
+
+  // Scannable focus tags under the short lead, so the top of the page reads at
+  // a glance instead of as one dense paragraph. Neutral pills, no gradients.
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      font-size: 0.82em;
+      font-weight: 500;
+      color: var(--text-soft);
+      padding: 5px 12px;
+      border: 1px solid var(--build-border);
+      border-radius: 999px;
+      background: var(--build-bg);
+    }
+  }
 }
 
 // ─── "Currently building" — active products, founder signal ───────────
