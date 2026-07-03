@@ -117,36 +117,31 @@ export const BLOG_POSTS: BlogPost[] = [
     category: 'Hackathons & Builds',
     excerpt:
       'I spent a weekend in Brno at Zero to Done, the first run of a hackathon where the goal was not a demo but a real startup: get customers, test the product, see if anyone would actually pay. I brought InzerPro, and it was one of the best events I have done.',
-    thumbnail: '/blog/zero-to-done/on-stage.jpg',
+    thumbnail: '/blog/zero-to-done/fireside.jpg',
     content: `
       <p>I spent a weekend in Brno at <strong>Zero to Done</strong>, and it's one of the best events I've taken part in. It was the <strong>very first run</strong>, put together by <strong>Petr Sochora</strong> and the team at <a href="https://www.mimedigital.cz/" target="_blank" rel="noopener noreferrer">mime digital</a>, who hosted everyone in their office in the centre of Brno. A room full of founders and mentors, all in for a few intense days. The event is at <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>.</p>
-
-      <figure class="blog-figure">
-        <img src="/blog/zero-to-done/on-stage.jpg" alt="Presenting on stage at Zero to Done in front of the event banner" class="blog-img" />
-        <figcaption>On stage in front of the event's line: <em>Máš nápad, ale nevíš kde začít?</em> (Got an idea, but don't know where to start?).</figcaption>
-      </figure>
-
-      <h2>A Different Kind of Hackathon</h2>
-      <p>What made it stand out is that it <strong>wasn't a hackathon for fun</strong>. It was a <strong>startup-build event</strong>. The bar wasn't "ship a cool demo," it was "build something people would actually pay for." Over the weekend you were expected to go talk to customers, test the product with real users, and show there was real demand. Investors were in the room, so it wasn't about winning an audience vote. It was about which teams were worth working with after the weekend ended. That changed how you spent every hour.</p>
 
       <figure class="blog-figure">
         <img src="/blog/zero-to-done/fireside.jpg" alt="Fireside talk on stage at Zero to Done with the audience watching" class="blog-img" />
         <figcaption>One of the fireside talks. A lot of the value was in these sessions and the people running them.</figcaption>
       </figure>
 
+      <h2>A Different Kind of Hackathon</h2>
+      <p>What made it stand out is that it <strong>wasn't a hackathon for fun</strong>. It was a <strong>startup-build event</strong>. The bar wasn't "ship a cool demo," it was "build something people would actually pay for." Over the weekend you were expected to go talk to customers, test the product with real users, and show there was real demand. Investors were in the room, so it wasn't about winning an audience vote. It was about which teams were worth working with after the weekend ended. That changed how you spent every hour.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/zero-to-done/demo-day.jpg" alt="The whole room gathered on couches watching teams present" class="blog-img" />
+        <figcaption>Pitch time, with the whole room watching teams present.</figcaption>
+      </figure>
+
       <h2>I Brought InzerPro</h2>
       <p>I brought <strong>InzerPro</strong>, my classifieds-automation product, and used the weekend the way the event wanted: talking to potential customers, testing, and sharpening the pitch instead of just adding features. Working on a real product I already care about, surrounded by people doing the same, made the whole thing click.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/zero-to-done/mentoring.jpg" alt="Sitting with a mentor at a laptop, going through the InzerPro pitch" class="blog-img" />
-        <figcaption>Getting the pitch picked apart in the best way, one mentor going through it with me.</figcaption>
-      </figure>
-
-      <figure class="blog-figure">
-        <video class="blog-video" controls preload="metadata" playsinline poster="/blog/zero-to-done/build-montage-poster.jpg">
+        <video class="blog-video" autoplay muted loop playsinline preload="metadata" poster="/blog/zero-to-done/build-montage-poster.jpg">
           <source src="/blog/zero-to-done/build-montage.mp4" type="video/mp4" />
         </video>
-        <figcaption>Heads-down with a mentor, working the product instead of just adding to it.</figcaption>
+        <figcaption>A few minutes at a mentor table, working the product instead of just adding to it.</figcaption>
       </figure>
 
       <h2>High Quality, Top to Bottom</h2>
@@ -157,17 +152,12 @@ export const BLOG_POSTS: BlogPost[] = [
         <figcaption>The room mid-build: laptops open, notes all over the desk.</figcaption>
       </figure>
 
-      <figure class="blog-figure">
-        <img src="/blog/zero-to-done/demo-day.jpg" alt="The whole room gathered on couches watching teams present" class="blog-img" />
-        <figcaption>Pitch time, with the whole room watching teams present.</figcaption>
-      </figure>
-
       <h2>Off the Clock</h2>
       <p>The office had a rooftop terrace, and that's where most of the breaks happened. Some of the better conversations of the weekend were up there in the sun, away from the laptops.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/zero-to-done/terrace-lunch.jpg" alt="Two founders having lunch on the sunny rooftop terrace" class="blog-img" />
-        <figcaption>Lunch on the terrace.</figcaption>
+        <img src="/blog/zero-to-done/terrace.jpg" alt="Participants networking on the rooftop terrace with the city behind them" class="blog-img" />
+        <figcaption>The top-floor terrace, where a lot of the between-session talking happened.</figcaption>
       </figure>
 
       <figure class="blog-figure">
