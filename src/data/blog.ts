@@ -147,18 +147,8 @@ export const BLOG_POSTS: BlogPost[] = [
       <h2>High Quality, Top to Bottom</h2>
       <p>What surprised me most was how good the whole thing was, both the execution and the people. The organisation was tight, the program was well thought out, and there were a lot of <strong>genuinely impressive projects</strong> being built around me. Between <strong>Petr Sochora</strong> and the other mentors, I walked away with a pile of <strong>concrete advice</strong>: price on value, not cost; showing the product to 20 people beats adding 20 features; "great idea!" means nothing until someone actually pays; a pivot isn't a failure. The kind of feedback you only get from people who've actually built and sold things.</p>
 
-      <figure class="blog-figure">
-        <img src="/blog/zero-to-done/building.jpg" alt="Participants heads-down building at their laptops in the mime digital office" class="blog-img" />
-        <figcaption>The room mid-build: laptops open, notes all over the desk.</figcaption>
-      </figure>
-
       <h2>Off the Clock</h2>
       <p>The office had a rooftop terrace, and that's where most of the breaks happened. Some of the better conversations of the weekend were up there in the sun, away from the laptops.</p>
-
-      <figure class="blog-figure">
-        <img src="/blog/zero-to-done/terrace.jpg" alt="Participants networking on the rooftop terrace with the city behind them" class="blog-img" />
-        <figcaption>The top-floor terrace, where a lot of the between-session talking happened.</figcaption>
-      </figure>
 
       <figure class="blog-figure">
         <video class="blog-video blog-video--portrait" autoplay muted loop playsinline preload="metadata" poster="/blog/zero-to-done/rooftop-poster.jpg">
