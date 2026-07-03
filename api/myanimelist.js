@@ -3,7 +3,7 @@
 // its real cover poster from the Jikan API (MAL RSS itself exposes no images).
 // Browser CORS blocks both, so the /now page calls this instead.
 const FEED = 'https://myanimelist.net/rss.php?type=rw&u=rauded';
-const UA = 'eduard-hvizdak.vercel.app';
+const UA = 'eduardhvizdak.com';
 
 const strip = (s) =>
   (s || '')

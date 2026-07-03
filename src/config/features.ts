@@ -9,7 +9,7 @@
 //   line), commit, push. Vercel redeploys.
 //
 // HOW TO PREVIEW IT LIVE without redeploying: add ?tweets=on to any URL, e.g.
-//   eduard-hvizdak.vercel.app/now?tweets=on . The choice is remembered as you
+//   eduardhvizdak.com/now?tweets=on . The choice is remembered as you
 //   click around. Use ?tweets=off to hide it again, or ?tweets=reset to clear
 //   the override and fall back to the default.
 

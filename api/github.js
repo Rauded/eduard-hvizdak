@@ -5,7 +5,7 @@ const SRC = `https://github-contributions-api.jogruber.de/v4/${USER}?y=last`;
 
 module.exports = async (req, res) => {
   try {
-    const r = await fetch(SRC, { headers: { 'User-Agent': 'eduard-hvizdak.vercel.app' } });
+    const r = await fetch(SRC, { headers: { 'User-Agent': 'eduardhvizdak.com' } });
     if (!r.ok) throw new Error(`GitHub contributions ${r.status}`);
     const data = await r.json();
 

@@ -1,4 +1,4 @@
-# Portfolio Roadmap & Ideas — eduard-hvizdak.vercel.app
+# Portfolio Roadmap & Ideas: eduardhvizdak.com
 
 Living TODO for improving the personal site. Checkboxes = not done yet. Created 2026-06-27.
 See `CLAUDE.md` for build/deploy conventions.
@@ -43,7 +43,7 @@ This is Sprint 1.
 - [x] **sitemap.xml + robots.txt + RSS** (`public/sitemap.xml`, `public/rss.xml`, robots Sitemap line). Hand-maintained — **update both when adding a blog post.**
 - [x] **Canonical tags** — every page via `<Seo>` (base `SITE_URL` in `src/seo/Seo.tsx`).
 - [x] **Contact CTA** — `src/components/contact/` "Let's work together" section (email pill + Book-15-min). ⏳ **set `REACT_APP_BOOKING_URL`** in Vercel to show the booking button (Cal.com/Calendly).
-- [ ] **Custom domain** — deferred (canonical currently `eduard-hvizdak.vercel.app`; swap `SITE_URL` + index.html + sitemap/rss when bought).
+- [x] **Custom domain** DONE 2026-07-03: **eduardhvizdak.com** is live. Swapped `SITE_URL` (`src/seo/Seo.tsx`), `public/index.html` (OG/canonical/JSON-LD), `sitemap.xml`, `rss.xml`, `robots.txt`, `llms.txt`, share-preview label, and the User-Agent strings in all `api/*.js` functions.
 - **Deferred (needs prerender/framework move):** per-**post** social-card unfurling on LinkedIn/X (helmet is client-rendered; Google sees it, social bots don't). Homepage card works for the most-shared link.
 
 ### ✅ PostHog + booking wired (2026-06-28)
@@ -120,9 +120,10 @@ Footer keeps its baseline social links. `social_links.tsx` left in repo (unused)
 **Audit follow-ups still open (P0/P1 from the balance audit, not done this batch):** homepage Projects
 section duplicates the whole `/portfolio` page and `/portfolio` is orphaned from the nav — decide:
 curated 3-card teaser on home → "See all" link to `/portfolio` (+ add it to nav), or drop one. Add a
-scannable "What I'm building" products/traction strip. Delete dead code (`social_links/`, `techstack/`,
-`data/talks.json`). Fix `/portfolio` hero "2023–2025" staleness. Replace "Demo coming soon"
-placeholders on live products with a screenshot.
+scannable "What I'm building" products/traction strip. Replace "Demo coming soon"
+placeholders on live products with a screenshot. (Verified 2026-07-03: the dead-code deletion
+(`social_links/`, `techstack/`, `data/talks.json`) and the `/portfolio` hero year staleness are
+already fixed; no such files or strings remain.)
 
 ## 📥 Backlog synced from `goals.md` (2026-06-30)
 Pulled the **portfolio-relevant, not-yet-done** items out of the Obsidian

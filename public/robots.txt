@@ -54,4 +54,4 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
-Sitemap: https://eduard-hvizdak.vercel.app/sitemap.xml
+Sitemap: https://eduardhvizdak.com/sitemap.xml

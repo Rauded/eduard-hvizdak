@@ -16,7 +16,7 @@ const SHARE = {
   description:
     'Production AI systems (RAG, multi-agent) and real SaaS products — InzerPro, NasadClaw, KouzelníkNaAkci.',
   url: `${SITE_URL}/`,
-  domain: 'eduard-hvizdak.vercel.app',
+  domain: 'eduardhvizdak.com',
   image: DEFAULT_OG_IMAGE,
 };
 

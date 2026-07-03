@@ -10,7 +10,7 @@ function tag(block, name) {
 
 module.exports = async (req, res) => {
   try {
-    const r = await fetch(FEED, { headers: { 'User-Agent': 'eduard-hvizdak.vercel.app' } });
+    const r = await fetch(FEED, { headers: { 'User-Agent': 'eduardhvizdak.com' } });
     if (!r.ok) throw new Error(`Letterboxd ${r.status}`);
     const xml = await r.text();
 

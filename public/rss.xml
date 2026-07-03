@@ -3,34 +3,34 @@
 <rss version="2.0">
   <channel>
     <title>Eduard Hvizdak — Blog</title>
-    <link>https://eduard-hvizdak.vercel.app/blog</link>
+    <link>https://eduardhvizdak.com/blog</link>
     <description>Writing on AI engineering, building SaaS, hackathons, and life by Eduard Hvizdak.</description>
     <language>en</language>
     <item>
       <title>Newsmatics Hackathon</title>
-      <link>https://eduard-hvizdak.vercel.app/blog/newsmatics-hackathon</link>
-      <guid>https://eduard-hvizdak.vercel.app/blog/newsmatics-hackathon</guid>
+      <link>https://eduardhvizdak.com/blog/newsmatics-hackathon</link>
+      <guid>https://eduardhvizdak.com/blog/newsmatics-hackathon</guid>
       <pubDate>Sat, 27 Jun 2026 00:00:00 GMT</pubDate>
       <description>I spent a hackathon with team MOGGERS building Newsmatics Globe — a pipeline that pulls locations out of news articles and plots them on an interactive 3D globe.</description>
     </item>
     <item>
       <title>Talking the Digital Fairness Act with Commissioner McGrath</title>
-      <link>https://eduard-hvizdak.vercel.app/blog/digital-fairness-act-youth-dialogue</link>
-      <guid>https://eduard-hvizdak.vercel.app/blog/digital-fairness-act-youth-dialogue</guid>
+      <link>https://eduardhvizdak.com/blog/digital-fairness-act-youth-dialogue</link>
+      <guid>https://eduardhvizdak.com/blog/digital-fairness-act-youth-dialogue</guid>
       <pubDate>Thu, 25 Jun 2026 00:00:00 GMT</pubDate>
       <description>I joined a European Commission Youth Policy Dialogue in Ljubljana with EU Commissioner Michael McGrath, working through what the upcoming Digital Fairness Act should actually do.</description>
     </item>
     <item>
       <title>Zero to Done: Pitching InzerPro at a Startup-Build Hackathon</title>
-      <link>https://eduard-hvizdak.vercel.app/blog/zero-to-done</link>
-      <guid>https://eduard-hvizdak.vercel.app/blog/zero-to-done</guid>
+      <link>https://eduardhvizdak.com/blog/zero-to-done</link>
+      <guid>https://eduardhvizdak.com/blog/zero-to-done</guid>
       <pubDate>Mon, 08 Jun 2026 00:00:00 GMT</pubDate>
       <description>A weekend in Brno at Zero to Done — the first run of a startup-build hackathon where the goal was real customers, not a demo. I brought InzerPro, and it was one of the best events I have done.</description>
     </item>
     <item>
       <title>Erasmus+ Bridges, Not Walls Experience</title>
-      <link>https://eduard-hvizdak.vercel.app/blog/erasmus-bridges-not-walls</link>
-      <guid>https://eduard-hvizdak.vercel.app/blog/erasmus-bridges-not-walls</guid>
+      <link>https://eduardhvizdak.com/blog/erasmus-bridges-not-walls</link>
+      <guid>https://eduardhvizdak.com/blog/erasmus-bridges-not-walls</guid>
       <pubDate>Wed, 06 May 2026 00:00:00 GMT</pubDate>
       <description>We took part in the Bridges not Walls Erasmus+ youth exchange in Lithuania — a week of non-formal education, cultural nights, and human connection across six countries.</description>
     </item>

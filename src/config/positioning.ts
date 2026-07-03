@@ -9,7 +9,7 @@
 // HOW TO CHANGE THE DEFAULT for everyone: flip DEFAULT_MODE below (one line).
 //
 // HOW TO COMPARE BOTH VERSIONS LIVE (no redeploy): add ?mode=expert or
-// ?mode=student to any URL, e.g. eduard-hvizdak.vercel.app/?mode=student. The
+// ?mode=student to any URL, e.g. eduardhvizdak.com/?mode=student. The
 // choice is remembered as you click around; use ?mode=reset to clear it and
 // fall back to the default.
 

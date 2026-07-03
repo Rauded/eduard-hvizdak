@@ -8,7 +8,8 @@ Improvement ideas, gaps, and the prioritized TODO list live in **`ROADMAP.md`** 
 before proposing new features.
 
 ## What this is
-Personal portfolio / website for **Eduard Hvižďák** — live at **eduard-hvizdak.vercel.app**.
+Personal portfolio / website for **Eduard Hvižďák** — live at **eduardhvizdak.com** (Vercel, old
+`eduard-hvizdak.vercel.app` subdomain redirects/serves the same deploy).
 Forked from the `tjklint` portfolio template. Create React App (CRA) + TypeScript + SCSS.
 Icons via **react-icons**. Routing via **react-router-dom**.
 
@@ -28,7 +29,7 @@ Icons via **react-icons**. Routing via **react-router-dom**.
 4. Vercel auto-deploys (~1–2 min). Tell Eduard to **hard-refresh (Cmd+Shift+R)** — he has
    repeatedly seen stale cached versions and thought a change "didn't deploy". When in doubt,
    verify the live bundle actually contains the change rather than assuming cache:
-   `curl -s https://eduard-hvizdak.vercel.app/ | grep -oE 'main\.[a-z0-9]+\.js'` then grep that
+   `curl -s https://eduardhvizdak.com/ | grep -oE 'main\.[a-z0-9]+\.js'` then grep that
    bundle for a class name or string you added.
 
 ## Conventions & decisions (follow these)

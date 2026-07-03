@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 // Canonical base. Swap this single constant when a custom domain lands.
-export const SITE_URL = 'https://eduard-hvizdak.vercel.app';
+export const SITE_URL = 'https://eduardhvizdak.com';
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
 // Stable @id so blog-post authors resolve to one Person entity (see index.html).
 export const PERSON_ID = `${SITE_URL}/#person`;
