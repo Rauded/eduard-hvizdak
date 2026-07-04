@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaPen, FaRegClock, FaBriefcase } from 'react-icons/fa';
-import { LuSun, LuMoon } from 'react-icons/lu';
+import { LuHouse, LuUser, LuCode, LuFileText, LuMenu, LuX, LuPenLine, LuClock, LuBriefcase, LuSun, LuMoon } from 'react-icons/lu';
 import { useTheme } from '../theme/ThemeContext';
 import './header.scss';
 
@@ -46,23 +45,23 @@ const Header: React.FC = () => {
         Eduard Hvizdak
       </a>
       <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <FaTimes size={30} className="close-icon" /> : <FaBars size={30} />}
+        {isOpen ? <LuX size={30} className="close-icon" /> : <LuMenu size={30} />}
       </div>
       <nav className={`nav ${isOpen ? 'open' : ''}`}>
         <a href="#home" className="nav-link" onClick={(e) => goToSection(e, 'home')}>
-          <FaHome />
+          <LuHouse />
           Home
         </a>
         <a href="#about" className="nav-link" onClick={(e) => goToSection(e, 'about')}>
-          <FaUser />
+          <LuUser />
           About
         </a>
         <a href="#projects" className="nav-link" onClick={(e) => goToSection(e, 'projects')}>
-          <FaCode />
+          <LuCode />
           Projects
         </a>
         <a href="#resume" className="nav-link" onClick={(e) => goToSection(e, 'resume')}>
-          <FaFileAlt />
+          <LuFileText />
           Resume
         </a>
         <Link
@@ -70,7 +69,7 @@ const Header: React.FC = () => {
           className={`nav-link ${isServices ? 'nav-link--active' : ''}`}
           onClick={() => setIsOpen(false)}
         >
-          <FaBriefcase />
+          <LuBriefcase />
           Services
         </Link>
         <Link
@@ -78,7 +77,7 @@ const Header: React.FC = () => {
           className={`nav-link ${isBlog ? 'nav-link--active' : ''}`}
           onClick={() => setIsOpen(false)}
         >
-          <FaPen />
+          <LuPenLine />
           Blog
         </Link>
         <Link
@@ -86,7 +85,7 @@ const Header: React.FC = () => {
           className={`nav-link ${isNow ? 'nav-link--active' : ''}`}
           onClick={() => setIsOpen(false)}
         >
-          <FaRegClock />
+          <LuClock />
           Now
         </Link>
         <button

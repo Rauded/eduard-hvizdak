@@ -1,6 +1,6 @@
 import React from 'react';
 import './footer.scss';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { LuGithub, LuLinkedin } from 'react-icons/lu';
 import { FaXTwitter } from 'react-icons/fa6';
 
 const EMAIL = 'eduardd.hv@gmail.com';
@@ -10,8 +10,8 @@ const Footer: React.FC = () => {
     <footer className="footer-container">
       <div className="left-align">
         <p>
-          Developed & Designed with <span className="purple-heart">❤️</span> by
-          <a href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer" className="footer-link">Me</a>.
+          Designed and built by{' '}
+          <a href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer" className="footer-link">Eduard Hvizdak</a>.
         </p>
       </div>
       <div className="center-align">
@@ -21,9 +21,9 @@ const Footer: React.FC = () => {
         </p>
       </div>
       <div className="right-align social-icons">
-        <a href="https://github.com/Rauded" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><FaGithub /></a>
+        <a href="https://github.com/Rauded" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><LuGithub /></a>
         <a href="https://x.com/EduardHvizdak" target="_blank" rel="noopener noreferrer" aria-label="X (formerly Twitter)"><FaXTwitter /></a>
-        <a href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><FaLinkedin /></a>
+        <a href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><LuLinkedin /></a>
       </div>
     </footer>
   );

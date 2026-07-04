@@ -48,17 +48,15 @@
         color: rgba(248, 250, 252, 0.65);
       }
 
+      /* Legacy keyword-highlight class, now a quiet ink emphasis. Only the
+         highlight card still uses it. */
       .purple-text {
-        color: var(--accent-bright);
+        color: var(--text-strong, #f8fafc);
         font-weight: 600;
 
         a {
-          color: var(--accent-bright);
+          color: inherit;
           text-decoration: none;
-
-          &:hover {
-            color: var(--accent-bright);
-          }
         }
       }
 
@@ -317,84 +315,6 @@
 
         &:hover {
           background: var(--accent-strong);
-        }
-      }
-    }
-  }
-}
-
-.about-technologies-container {
-  width: 70%;
-  margin: 0 auto;
-  padding: 20px 0;
-  font-family: var(--font-body);
-  color: #fff;
-
-  .about-technologies {
-    h2 {
-      font-size: 2em;
-      margin-bottom: 20px;
-      text-align: center;
-      color: #fff;
-      font-family: var(--font-body);
-    }
-
-    .technology-categories {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-
-      @media (max-width: 500px) {
-        grid-template-columns: 1fr;
-      }
-
-      .technology-category {
-        background-color: #2a2a2a;
-        padding: 20px;
-        border-radius: 10px;
-        color: #fff;
-
-        h3 {
-          font-size: 1.5em;
-          margin-bottom: 30px;
-          text-align: center;
-          color: #fff;
-        }
-
-        .technology-items {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 10px;
-
-          @media (max-width: 500px) {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-
-          .technology-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 1.2em;
-            cursor: pointer;
-            color: #fff;
-
-            i {
-              font-size: 3em;
-              margin-bottom: 10px;
-              color: #fff;
-            }
-
-            p {
-              margin: 0;
-              text-align: center;
-              color: #fff;
-              font-family: var(--font-body);
-            }
-
-            &:hover {
-              color: var(--accent-bright);
-            }
-          }
         }
       }
     }

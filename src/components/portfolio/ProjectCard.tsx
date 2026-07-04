@@ -87,7 +87,7 @@ const ConceptCard: React.FC<{ accent: string }> = ({ accent }) => (
         <div className="concept-card__progress-track">
           <div className="concept-card__progress-fill" />
         </div>
-        <span className="concept-card__page">p. 127 / 190 — 67%</span>
+        <span className="concept-card__page">p. 127 / 190 (67%)</span>
       </div>
     </div>
   </div>
