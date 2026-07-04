@@ -9,9 +9,16 @@ import { useTheme } from '../theme/ThemeContext';
 import flowerSrc from '../../assets/hero/flower.jpg';
 
 // Experimental hero background: the flower photo is re-rendered live as a
-// coarse Bayer-dithered dot field or an ASCII glyph field in the accent color,
-// with a slow bloom of the source and a gentle shimmer of the pattern.
+// fine-grained Bayer-dithered halftone (2 to 3 px dots, like a risograph
+// print) or an ASCII glyph field in the accent color, with a slow bloom of
+// the source and a gentle shimmer of the pattern.
 // Gated behind the heroAscii feature flag (?hero=on, ?heroMode=dither|ascii).
+//
+// The dither renderer writes one cell per ImageData pixel at grid resolution
+// and upscales with image smoothing off, then knocks a 1px grid out of the
+// result so the dots read as printed halftone instead of smeared blocks.
+// That is dramatically cheaper than per-cell fillRect calls, which is what
+// makes the fine dot pitch affordable.
 
 interface Props {
   mode: 'dither' | 'ascii';
@@ -27,9 +34,10 @@ const BgCanvas = styled.canvas`
   opacity: 0;
   transition: opacity 0.6s ease;
   /* one focal mass: the field lives around the bloom in the lower right and
-     dissolves before it reaches the headline column */
-  -webkit-mask-image: radial-gradient(95% 115% at 86% 76%, #000 32%, transparent 63%);
-  mask-image: radial-gradient(95% 115% at 86% 76%, #000 32%, transparent 63%);
+     dissolves before it reaches the headline column. The fine dot pitch is
+     quiet enough to be more present than the old coarse blocks were. */
+  -webkit-mask-image: radial-gradient(105% 120% at 82% 72%, #000 44%, transparent 73%);
+  mask-image: radial-gradient(105% 120% at 82% 72%, #000 44%, transparent 73%);
 
   &.ready {
     opacity: 1;
@@ -50,19 +58,20 @@ const BAYER8 = [
 
 const ASCII_RAMP = ' .:-=+*#%@';
 
-const MAX_CELLS = 14000;
+// Dither cells are ImageData pixels, so the budget is generous: 1440x900 at a
+// 3px pitch is ~144k cells and still one putImageData + one drawImage.
+const MAX_DITHER_CELLS = 220000;
+const MAX_ASCII_CELLS = 14000;
 const FRAME_MS = 50; // ~20fps; the shimmer reads fine well below 60fps
 // Cells darker than this never draw, so the photo's black ground stays truly
-// empty and the bloom keeps a crisp silhouette (the shimmer amplitude of 0.05
-// cannot lift background cells over it).
-const LUM_FLOOR = 0.09;
+// empty and the bloom keeps a crisp silhouette (the shimmer amplitude cannot
+// lift background cells over it).
+const LUM_FLOOR = 0.06;
 
-// Levels curve applied at sample time. The daisy is mid-tone almost
-// everywhere, and raw mid-tones dither to a uniform 50% checkerboard with no
-// petal structure. Expanding the contrast pushes highlights toward solid
-// fill and drops the shadows between petals below the floor, so the floret
-// pattern survives the dither.
-const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.18) * 1.9));
+// Levels curve applied at sample time. A gentle contrast expansion keeps the
+// long backlit gradients (which the fine dither turns into smooth density
+// ramps) while dropping the near-black ground below the floor.
+const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.12) * 1.55));
 
 const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -77,25 +86,38 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Accent-only palettes per theme. On the light page the dim tone is mixed
-    // toward the page background instead of using alpha alone, which looks
-    // harsh on white.
+    // Accent-only palettes per theme. css strings feed the ascii glyph mode;
+    // the rgba tuples feed the dither's ImageData directly (base tone for the
+    // body of the bloom, hi tone for petal highlights).
     const palette =
       theme === 'dark'
         ? {
             dim: 'rgba(59, 130, 246, 0.28)', // #3b82f6
             mid: 'rgba(96, 165, 250, 0.5)', // #60a5fa
             bright: 'rgba(147, 197, 253, 0.75)', // #93c5fd
+            base: [96, 165, 250, 82] as const, // #60a5fa at 0.32
+            hi: [147, 197, 253, 210] as const, // #93c5fd at 0.82
           }
         : {
             dim: '#a5bef3', // #2563eb mixed 60% toward page bg #fafaf8
             mid: 'rgba(101, 144, 239, 0.7)', // #2563eb mixed 30% toward page bg
             bright: 'rgba(37, 99, 235, 0.55)', // #2563eb
+            base: [76, 118, 235, 120] as const, // soft blue at 0.47
+            hi: [37, 99, 235, 205] as const, // #2563eb at 0.8
           };
 
     const off = document.createElement('canvas');
     const offCtx = off.getContext('2d', { willReadFrequently: true });
     if (!offCtx) return undefined;
+    // Dither dots are written here at 1px per cell, then upscaled.
+    const dotCanvas = document.createElement('canvas');
+    const dotCtx = dotCanvas.getContext('2d');
+    if (!dotCtx) return undefined;
+    // Static 1px grid knocked out of the upscaled dots each frame so they
+    // read as separate printed dots, not merged blocks.
+    const gridCanvas = document.createElement('canvas');
+    const gridCtx = gridCanvas.getContext('2d');
+    if (!gridCtx) return undefined;
 
     const img = new Image();
     let imgReady = false;
@@ -103,6 +125,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
     let rows = 0;
     let cell = 0;
     let hash = new Float32Array(0);
+    let dots: ImageData | null = null;
     let rafId = 0;
     let running = false;
     let inView = true;
@@ -114,9 +137,10 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
       const rect = parent.getBoundingClientRect();
       const w = Math.max(1, Math.round(rect.width));
       const h = Math.max(1, Math.round(rect.height));
-      cell = mode === 'dither' ? Math.max(9, Math.round(w / 110)) : Math.max(13, Math.round(w / 70));
+      const maxCells = mode === 'dither' ? MAX_DITHER_CELLS : MAX_ASCII_CELLS;
+      cell = mode === 'dither' ? (w < 768 ? 2 : 3) : Math.max(13, Math.round(w / 70));
       // Bound total work regardless of viewport size.
-      while (Math.ceil(w / cell) * Math.ceil(h / cell) > MAX_CELLS) cell += 1;
+      while (Math.ceil(w / cell) * Math.ceil(h / cell) > maxCells) cell += 1;
       cols = Math.ceil(w / cell);
       rows = Math.ceil(h / cell);
       const dpr = Math.min(window.devicePixelRatio || 1, mode === 'dither' ? 2 : 1.5);
@@ -125,6 +149,24 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       off.width = cols;
       off.height = rows;
+      if (mode === 'dither') {
+        dotCanvas.width = cols;
+        dotCanvas.height = rows;
+        dots = dotCtx.createImageData(cols, rows);
+        // Grid mask in device pixels: opaque 1px lines on every cell boundary.
+        gridCanvas.width = canvas.width;
+        gridCanvas.height = canvas.height;
+        gridCtx.setTransform(1, 0, 0, 1, 0, 0);
+        gridCtx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
+        gridCtx.fillStyle = '#000';
+        const step = cell * dpr;
+        for (let gx = 0; gx <= cols; gx++) {
+          gridCtx.fillRect(Math.round(gx * step) - 1, 0, 1, gridCanvas.height);
+        }
+        for (let gy = 0; gy <= rows; gy++) {
+          gridCtx.fillRect(0, Math.round(gy * step) - 1, gridCanvas.width, 1);
+        }
+      }
       // Per-cell deterministic hash so the shimmer breathes instead of
       // flickering with fresh randomness every frame.
       hash = new Float32Array(cols * rows);
@@ -157,12 +199,13 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      if (mode === 'dither') {
-        const dimPath = new Path2D();
-        const brightPath = new Path2D();
-        let drewDim = false;
-        let drewBright = false;
+      if (mode === 'dither' && dots) {
+        const px = dots.data;
+        px.fill(0);
+        const [br, bg, bb, ba] = palette.base;
+        const [hr, hg, hb, ha] = palette.hi;
         for (let y = 0; y < rows; y++) {
+          const bayerRow = BAYER8[y % 8];
           for (let x = 0; x < cols; x++) {
             const i = y * cols + x;
             const p = i * 4;
@@ -170,26 +213,25 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
               (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255
             );
             if (lum < LUM_FLOOR) continue;
-            const v = lum + 0.05 * Math.sin(t * 1.4 + hash[i] * 6.283);
-            const threshold = BAYER8[y % 8][x % 8];
+            const v = lum + 0.04 * Math.sin(t * 1.4 + hash[i] * 6.283);
+            const threshold = bayerRow[x % 8];
             if (v <= threshold) continue;
-            if (v > threshold + 0.45) {
-              brightPath.rect(x * cell, y * cell, cell - 1, cell - 1);
-              drewBright = true;
+            if (v > threshold + 0.5) {
+              px[p] = hr; px[p + 1] = hg; px[p + 2] = hb; px[p + 3] = ha;
             } else {
-              dimPath.rect(x * cell, y * cell, cell - 1, cell - 1);
-              drewDim = true;
+              px[p] = br; px[p + 1] = bg; px[p + 2] = bb; px[p + 3] = ba;
             }
           }
         }
-        if (drewDim) {
-          ctx.fillStyle = palette.dim;
-          ctx.fill(dimPath);
-        }
-        if (drewBright) {
-          ctx.fillStyle = palette.bright;
-          ctx.fill(brightPath);
-        }
+        dotCtx.putImageData(dots, 0, 0);
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(dotCanvas, 0, 0, cols, rows, 0, 0, cols * cell, rows * cell);
+        // Knock the 1px grid out so dots stay discrete (device-pixel space).
+        ctx.save();
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.drawImage(gridCanvas, 0, 0);
+        ctx.restore();
       } else {
         // Glyph density follows luminance in both themes: on dark the dense
         // glyphs read as bright petals, on light they read as the blue bloom.
