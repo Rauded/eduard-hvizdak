@@ -1,19 +1,23 @@
 .about-container {
-  width: 80%;
-  margin: 0 auto;
+  width: min(100% - 2 * clamp(24px, 5vw, 64px), 1200px);
+  margin-inline: auto;
   font-family: var(--font-body);
   color: white;
-  padding: 40px 0;
+  padding-block: 96px;
+
+  @media (max-width: 768px) {
+    padding-block: 64px;
+  }
 
   h2 {
-    font-size: clamp(1.8em, 4vw, 2.5em);
-    padding-top: 10px;
+    font-size: clamp(1.75rem, 3.2vw, 2.35rem);
+    padding-top: 0;
     margin: 0 0 30px 0;
     color: var(--text-strong);
     font-family: var(--font-body);
     text-align: left;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
   }
 
   .about-intro {
@@ -123,7 +127,7 @@
         max-width: 500px;
         aspect-ratio: 3 / 4;
         object-fit: cover;
-        border-radius: 12px;
+        border-radius: var(--radius-md);
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         border: 1px solid rgba(255, 255, 255, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -156,7 +160,7 @@
     margin: 0 auto 40px;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border);
-    border-radius: 14px;
+    border-radius: var(--radius-md);
     overflow: hidden;
     text-decoration: none;
     color: inherit;
@@ -241,7 +245,7 @@
       letter-spacing: 0.02em;
       color: var(--on-accent);
       background: var(--accent);
-      border-radius: 999px;
+      border-radius: var(--radius-pill);
       box-shadow: var(--shadow-card);
       transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
     }
@@ -291,7 +295,7 @@
         padding: 10px;
         font-size: 1em;
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 6px;
+        border-radius: var(--radius-sm);
         font-family: var(--font-body);
         background: rgba(255, 255, 255, 0.04);
         color: #f8fafc;
@@ -308,7 +312,7 @@
         color: var(--on-accent);
         background: var(--accent);
         border: none;
-        border-radius: 6px;
+        border-radius: var(--radius-sm);
         cursor: pointer;
         transition: background 0.2s ease;
         font-family: var(--font-body);

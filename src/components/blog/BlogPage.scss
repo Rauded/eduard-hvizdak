@@ -54,7 +54,7 @@ $ui-font: var(--font-body);
   width: 34px;
   height: 34px;
   border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--text-soft, #{$text-dim});
   cursor: pointer;
@@ -149,7 +149,7 @@ $ui-font: var(--font-body);
   text-decoration: none;
   color: inherit;
   border: 1px solid var(--border);
-  border-radius: 18px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--surface);
   min-height: 340px;
@@ -332,7 +332,7 @@ $ui-font: var(--font-body);
   &__thumb {
     flex: 0 0 168px;
     aspect-ratio: 16 / 11;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     overflow: hidden;
     background: var(--surface-2);
     border: 1px solid var(--border);
@@ -578,7 +578,7 @@ $ui-font: var(--font-body);
       font-size: 0.86em;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 5px;
+      border-radius: var(--radius-sm);
       padding: 1px 6px;
     }
 
@@ -602,7 +602,7 @@ $ui-font: var(--font-body);
     .blog-img,
     .blog-video {
       width: 100%;
-      border-radius: 12px;
+      border-radius: var(--radius-md);
       display: block;
       border: 1px solid var(--border);
       box-shadow: var(--media-shadow);
@@ -668,7 +668,7 @@ $ui-font: var(--font-body);
   &__fonts {
     display: inline-flex;
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     overflow: hidden;
 
     button {
@@ -729,7 +729,7 @@ $ui-font: var(--font-body);
   margin: 72px 0 0;
   padding: 28px;
   border: 1px solid var(--border);
-  border-radius: 14px;
+  border-radius: var(--radius-md);
   background: var(--surface);
 
   &__avatar {
@@ -818,7 +818,7 @@ $ui-font: var(--font-body);
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
-    border-radius: 14px;
+    border-radius: var(--radius-md);
     overflow: hidden;
     text-decoration: none;
     background: var(--surface);
@@ -904,7 +904,7 @@ $ui-font: var(--font-body);
   img {
     max-width: 100%;
     max-height: 100%;
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
   }
 }

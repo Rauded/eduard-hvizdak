@@ -154,7 +154,7 @@ const TerminalTab = styled.div`
   letter-spacing: 0.04em;
   padding: 4px 16px;
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
+  border-radius: var(--radius-sm, 8px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 `;
 

@@ -37,7 +37,7 @@
     gap: 6px;
     margin-left: 12px;
     padding: 3px 10px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     font-size: 0.62em;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -85,7 +85,7 @@
   display: flex;
   flex-direction: column;
   padding: 18px 18px 16px;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   overflow: hidden;
@@ -149,7 +149,7 @@
     font-weight: 600;
     letter-spacing: 0.02em;
     padding: 2px 7px;
-    border-radius: 6px;
+    border-radius: var(--radius-sm);
     color: var(--text-soft);
     background: rgba(120, 120, 140, 0.14);
     border: 1px solid var(--card-border);
@@ -185,7 +185,7 @@
     gap: 7px;
     margin-top: 12px;
     padding: 9px 11px;
-    border-radius: 9px;
+    border-radius: var(--radius-sm);
     background: rgba(0, 0, 0, 0.28);
     border: 1px solid var(--card-border);
     font-size: 0.76em;
@@ -235,7 +235,7 @@
     align-items: center;
     gap: 4px;
     padding: 3px 8px;
-    border-radius: 7px;
+    border-radius: var(--radius-sm);
     font: inherit;
     font-size: 1em;
     color: var(--link);
@@ -297,7 +297,7 @@
   &__chip {
     font-size: 0.72em;
     padding: 4px 10px;
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     color: var(--text-soft);
     background: var(--accent-soft);
     border: 1px solid var(--card-border);

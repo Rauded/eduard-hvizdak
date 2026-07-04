@@ -89,7 +89,7 @@
   align-items: center;
   gap: 9px;
   padding: 13px 24px;
-  border-radius: 12px;
+  border-radius: var(--radius-sm);
   font-size: 0.96em;
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -148,7 +148,7 @@
 
 .services-card {
   padding: 24px;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -164,7 +164,7 @@
     justify-content: center;
     width: 44px;
     height: 44px;
-    border-radius: 11px;
+    border-radius: var(--radius-md);
     margin-bottom: 16px;
     color: var(--accent-bright);
     background: var(--accent-soft);
@@ -271,7 +271,7 @@
 .services-cta {
   margin-top: 72px;
   padding: 44px 36px;
-  border-radius: 20px;
+  border-radius: var(--radius-md);
   text-align: center;
   background: var(--card-bg);
   border: 1px solid var(--card-border);

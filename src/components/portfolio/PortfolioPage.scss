@@ -142,7 +142,7 @@
 // ─── Media wrapper ────────────────────────────────────────────────────────────
 .pcard__media {
   position: relative;
-  border-radius: 20px;
+  border-radius: var(--radius-md);
   overflow: hidden;
   aspect-ratio: 16 / 10;
   background: #0b0b14;
@@ -159,7 +159,7 @@
 
   @media (max-width: 900px) {
     aspect-ratio: 16 / 9;
-    border-radius: 14px;
+    border-radius: var(--radius-md);
   }
 }
 
@@ -299,7 +299,7 @@
     width: calc(100% - 48px);
     max-width: 460px;
     border: 1px solid rgba(6, 182, 212, 0.25);
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     background: rgba(6, 182, 212, 0.04);
     backdrop-filter: blur(6px);
     padding: 0;
@@ -503,7 +503,7 @@
   font-size: 0.68em;
   letter-spacing: 0.06em;
   padding: 4px 10px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   border: 1px solid rgba(255, 255, 255, 0.09);
   color: rgba(248, 250, 252, 0.45);
   background: rgba(255, 255, 255, 0.025);
@@ -521,7 +521,7 @@
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   font-size: 0.78em;
   font-family: var(--font-mono);
   font-weight: 600;
@@ -641,7 +641,7 @@
     max-height: 86vh;
     overflow-y: auto;
     padding: clamp(28px, 5vw, 52px);
-    border-radius: 20px;
+    border-radius: var(--radius-md);
     border: 1px solid rgba(255, 255, 255, 0.09);
     background: linear-gradient(180deg, #14141f 0%, #0d0d16 100%);
     box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7);
@@ -657,7 +657,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      border-radius: 20px 20px 0 0;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
       background: linear-gradient(90deg, var(--card-accent, var(--accent)), transparent 85%);
     }
   }
@@ -672,7 +672,7 @@
     right: 16px;
     width: 38px;
     height: 38px;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -697,7 +697,7 @@
   &__media {
     position: relative;
     aspect-ratio: 16 / 10;
-    border-radius: 14px;
+    border-radius: var(--radius-md);
     overflow: hidden;
     margin-bottom: 30px;
     background: #0b0b14;
@@ -776,7 +776,7 @@
   }
 
   @media (max-width: 600px) {
-    &__panel { max-height: 92vh; border-radius: 16px; }
+    &__panel { max-height: 92vh; border-radius: var(--radius-md); }
   }
 }
 

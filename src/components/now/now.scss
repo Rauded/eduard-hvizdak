@@ -79,7 +79,7 @@
 
 .now-skel {
   display: block;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   background: linear-gradient(90deg, var(--skel-base) 25%, var(--skel-hi) 37%, var(--skel-base) 63%);
   background-size: 200% 100%;
   animation: now-shimmer 1.5s ease-in-out infinite;
@@ -228,7 +228,7 @@
   flex-direction: column;
   gap: 12px;
   padding: 20px;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   // Neutral surface (not the page's blue-tinted card token) so the product
   // marks carry the colour and the cards read clean against the warm page.
   background: var(--build-bg);
@@ -256,7 +256,7 @@
     flex: 0 0 auto;
     width: 40px;
     height: 40px;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
     overflow: hidden;
     border: 1px solid var(--cover-border);
 
@@ -341,7 +341,7 @@
   align-items: flex-start;
   gap: 6px;
   padding: 20px;
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -448,7 +448,7 @@
     width: 100%;
     aspect-ratio: 2 / 3;
     object-fit: cover;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     background: var(--cover-bg);
     border: 1px solid var(--cover-border);
     box-shadow: var(--shadow);
@@ -514,7 +514,7 @@
     position: relative;
     display: block;
     aspect-ratio: 16 / 9;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     overflow: hidden;
     border: 1px solid var(--cover-border);
     box-shadow: 0 10px 26px rgba(0, 0, 0, 0.4);
@@ -642,7 +642,7 @@
   line-height: 1.1;
   font-weight: 500;
   padding: 6px 9px;
-  border-radius: 6px;
+  border-radius: var(--radius-sm);
   white-space: nowrap;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 
