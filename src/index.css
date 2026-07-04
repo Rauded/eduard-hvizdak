@@ -154,6 +154,12 @@
 
   --font-body: var(--font-sans);
   --font-display: var(--font-serif);
+
+  /* Radius system: chips/small controls, cards/media/modals, pills. Circles
+     (50%) and 2px hairlines stay literal. */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-pill: 999px;
 }
 
 html, body {
@@ -180,10 +186,9 @@ html[data-theme] body *::after {
 }
 
 /* ─── Professional light theme (home page) ──────────────────────────────────
-   Applied only when the home route sets data-theme="light" on <html>. Drives
-   every home section through CSS variables + the [data-theme='light'] overrides
-   in styles/light.scss. Dark mode leaves these unset so the original look — the
-   near-black gradient — falls through unchanged. */
+   Applied when data-theme="light" is set on <html>. Drives every home section
+   through CSS variables + the [data-theme='light'] overrides in
+   styles/light.scss. Dark mode has its own token block below. */
 :root[data-theme='light'] {
   --page-bg: #fafaf8;
   --surface: #ffffff;
@@ -201,9 +206,41 @@ html[data-theme] body *::after {
   --shadow-card: 0 1px 2px rgba(22, 22, 26, 0.05), 0 10px 30px rgba(22, 22, 26, 0.06);
   --shadow-accent: 0 8px 24px rgba(37, 99, 235, 0.24);
   --hero-glow: rgba(37, 99, 235, 0.07);
+  --on-accent: #ffffff;
+  --accent-bright: #2563eb;
 }
 
 :root[data-theme='light'] body {
+  background-color: var(--page-bg);
+}
+
+/* ─── Dark theme tokens ──────────────────────────────────────────────────────
+   Same variable names as light so components read one system. One accent
+   family across both themes: blue. --accent is for filled surfaces (with
+   --on-accent text), --accent-bright for accent-colored text and links on the
+   near-black canvas. Shadows are neutral: no colored glows. */
+:root[data-theme='dark'] {
+  --page-bg: #09090b;
+  --surface: #131316;
+  --surface-sunken: #0e0e11;
+  --text: #e7e7ea;
+  --text-strong: #f8fafc;
+  --text-muted: rgba(231, 231, 234, 0.64);
+  --text-faint: rgba(231, 231, 234, 0.42);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --accent: #3b82f6;
+  --accent-strong: #2563eb;
+  --accent-bright: #60a5fa;
+  --accent-soft: rgba(59, 130, 246, 0.14);
+  --accent-ring: rgba(96, 165, 250, 0.35);
+  --on-accent: #ffffff;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.45);
+  --shadow-accent: 0 8px 24px rgba(0, 0, 0, 0.45);
+  --hero-glow: rgba(59, 130, 246, 0.07);
+}
+
+:root[data-theme='dark'] body {
   background-color: var(--page-bg);
 }
 
