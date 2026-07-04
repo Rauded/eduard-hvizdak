@@ -25,9 +25,10 @@ const BgCanvas = styled.canvas`
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.6s ease;
-  /* keep the pattern quiet under the headline column on the left */
-  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.25) 0%, #000 45%);
-  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.25) 0%, #000 45%);
+  /* one focal mass: the field lives around the bloom in the lower right and
+     dissolves before it reaches the headline column */
+  -webkit-mask-image: radial-gradient(95% 115% at 86% 76%, #000 32%, transparent 63%);
+  mask-image: radial-gradient(95% 115% at 86% 76%, #000 32%, transparent 63%);
 
   &.ready {
     opacity: 1;
@@ -50,6 +51,17 @@ const ASCII_RAMP = ' .:-=+*#%@';
 
 const MAX_CELLS = 14000;
 const FRAME_MS = 50; // ~20fps; the shimmer reads fine well below 60fps
+// Cells darker than this never draw, so the photo's black ground stays truly
+// empty and the bloom keeps a crisp silhouette (the shimmer amplitude of 0.05
+// cannot lift background cells over it).
+const LUM_FLOOR = 0.09;
+
+// Levels curve applied at sample time. The daisy is mid-tone almost
+// everywhere, and raw mid-tones dither to a uniform 50% checkerboard with no
+// petal structure. Expanding the contrast pushes highlights toward solid
+// fill and drops the shadows between petals below the floor, so the floret
+// pattern survives the dither.
+const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.18) * 1.9));
 
 const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -70,9 +82,9 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
     const palette =
       theme === 'dark'
         ? {
-            dim: 'rgba(99, 102, 241, 0.35)', // #6366f1
-            mid: 'rgba(129, 140, 248, 0.55)', // #818cf8
-            bright: 'rgba(165, 180, 252, 0.8)', // #a5b4fc
+            dim: 'rgba(99, 102, 241, 0.28)', // #6366f1
+            mid: 'rgba(129, 140, 248, 0.5)', // #818cf8
+            bright: 'rgba(165, 180, 252, 0.75)', // #a5b4fc
           }
         : {
             dim: '#a5bef3', // #2563eb mixed 60% toward page bg #fafaf8
@@ -127,14 +139,15 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
       if (!imgReady || cols === 0) return;
       const t = (now - start) / 1000;
 
-      // Slow bloom + drift of the source, cover-fit anchored right-of-center
-      // so the flower sits behind the terminal side of the hero.
+      // Slow bloom + drift of the source. The daisy fans out of the photo's
+      // bottom-right corner, so anchor that corner to the canvas corner and
+      // let the petals arc up toward the middle of the hero.
       const base = Math.max(cols / img.width, rows / img.height);
-      const scale = base * (1.04 + 0.04 * Math.sin(t * 0.15));
+      const scale = base * (1.06 + 0.05 * Math.sin(t * 0.15));
       const dw = img.width * scale;
       const dh = img.height * scale;
-      const dx = cols * 0.6 - dw * 0.55 + 1.5 * Math.sin(t * 0.07);
-      const dy = rows * 0.5 - dh * 0.5 + Math.cos(t * 0.05);
+      const dx = cols - dw + 1.5 * Math.sin(t * 0.07);
+      const dy = rows - dh + Math.cos(t * 0.05);
       offCtx.clearRect(0, 0, cols, rows);
       offCtx.drawImage(img, dx, dy, dw, dh);
       const data = offCtx.getImageData(0, 0, cols, rows).data;
@@ -150,8 +163,10 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
           for (let x = 0; x < cols; x++) {
             const i = y * cols + x;
             const p = i * 4;
-            const lum =
-              (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255;
+            const lum = shape(
+              (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255
+            );
+            if (lum < LUM_FLOOR) continue;
             const v = lum + 0.05 * Math.sin(t * 1.4 + hash[i] * 6.283);
             const threshold = BAYER8[y % 8][x % 8];
             if (v <= threshold) continue;
@@ -182,10 +197,11 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
           for (let x = 0; x < cols; x++) {
             const i = y * cols + x;
             const p = i * 4;
-            const lum =
-              (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255;
+            const lum = shape(
+              (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255
+            );
+            if (lum < LUM_FLOOR) continue;
             const v = lum + 0.05 * Math.sin(t * 1.4 + hash[i] * 6.283);
-            if (v < 0.06) continue;
             // Bayer threshold nudges the ramp index by one step for texture.
             const dith = (BAYER8[y % 8][x % 8] - 0.5) / ASCII_RAMP.length;
             const idx = Math.min(
