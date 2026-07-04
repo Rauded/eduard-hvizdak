@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { isExpertMode } from '../../config/positioning';
+import { isFeatureOn, heroMode, HeroMode } from '../../config/features';
+import AsciiDitherBackground from './AsciiDitherBackground';
 
 // Main container for the hero section
-const HeroContainer = styled.section`
+const HeroContainer = styled.section<{ $dither: boolean }>`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -27,6 +29,8 @@ const HeroContainer = styled.section`
     bottom: 0;
     background: radial-gradient(ellipse at 20% 60%, var(--hero-glow, rgba(99, 102, 241, 0.07)) 0%, transparent 55%);
     pointer-events: none;
+    /* the dither canvas replaces the glow; two soft layers read as mud */
+    opacity: ${(p) => (p.$dither ? 0 : 1)};
   }
 
   @media (min-width: 768px) {
@@ -76,6 +80,7 @@ const RightContainer = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 1;
   min-height: 40vh;
 
   @media (min-width: 768px) {
@@ -280,6 +285,13 @@ const typewriterTexts = [
 const Hero: React.FC = () => {
   const [topLine, setTopLine] = useState('');
   const [currentText, setCurrentText] = useState('');
+  // Resolved in an effect (not during render) so the prerendered HTML never
+  // differs from the first client render; the canvas fades in a frame later.
+  const [ditherBg, setDitherBg] = useState<HeroMode | null>(null);
+
+  useEffect(() => {
+    if (isFeatureOn('heroAscii')) setDitherBg(heroMode());
+  }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -325,7 +337,8 @@ const Hero: React.FC = () => {
   }, []);
 
   return (
-    <HeroContainer id="home">
+    <HeroContainer id="home" $dither={ditherBg !== null}>
+      {ditherBg && <AsciiDitherBackground mode={ditherBg} />}
       <LeftContainer>
         <Headline>{topLine}</Headline>
         <GradientText>I'm Eduard Hvizdak.</GradientText>

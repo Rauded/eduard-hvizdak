@@ -12,17 +12,23 @@
 //   eduardhvizdak.com/now?tweets=on . The choice is remembered as you
 //   click around. Use ?tweets=off to hide it again, or ?tweets=reset to clear
 //   the override and fall back to the default.
+//
+// heroAscii: experimental animated dither/ASCII canvas background in the home
+//   hero (AsciiDitherBackground). Preview with ?hero=on; pick the render style
+//   with ?heroMode=dither or ?heroMode=ascii (see heroMode below).
 
-export type FeatureFlag = 'latestTweets';
+export type FeatureFlag = 'latestTweets' | 'heroAscii';
 
 const DEFAULTS: Record<FeatureFlag, boolean> = {
   latestTweets: false,
+  heroAscii: false,
 };
 
 // URL query param that overrides each flag, plus the localStorage key it is
 // remembered under. Keeps the query names short and readable.
 const PARAM: Record<FeatureFlag, string> = {
   latestTweets: 'tweets',
+  heroAscii: 'hero',
 };
 
 // Resolve a flag: URL query wins (on/off, and is remembered), then the last
@@ -46,4 +52,26 @@ export function isFeatureOn(flag: FeatureFlag): boolean {
     /* localStorage can throw in private mode; fall through to default */
   }
   return def;
+}
+
+// Render style for the heroAscii experiment. Same cascade as isFeatureOn:
+// ?heroMode=dither|ascii wins and is remembered, ?heroMode=reset clears the
+// saved choice, otherwise the last remembered choice, then the default.
+export type HeroMode = 'dither' | 'ascii';
+
+export function heroMode(): HeroMode {
+  if (typeof window === 'undefined') return 'dither';
+  try {
+    const q = new URLSearchParams(window.location.search).get('heroMode');
+    if (q === 'dither' || q === 'ascii') {
+      window.localStorage.setItem('feature:heroMode', q);
+      return q;
+    }
+    if (q === 'reset') window.localStorage.removeItem('feature:heroMode');
+    const saved = window.localStorage.getItem('feature:heroMode');
+    if (saved === 'dither' || saved === 'ascii') return saved;
+  } catch {
+    /* localStorage can throw in private mode; fall through to default */
+  }
+  return 'dither';
 }
