@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useTheme } from '../theme/ThemeContext';
-// Source photo: "Macro Shot of a Pink pom pom daisy flower Against Black
-// Background" by Loic92, Wikimedia Commons, CC BY-SA 4.0
-// (https://commons.wikimedia.org/wiki/File:Macro_Shot_of_a_Pink_pom_pom_daisy_flower_Against_Black_Background.jpg)
-// mirrored + contrast-boosted so the bloom rises from the right of the hero.
+// Source photo: "Back-lit tulip on a black background" by photochem_PA,
+// Wikimedia Commons, CC BY 2.0
+// (https://commons.wikimedia.org/wiki/File:Back-lit_tulip_on_a_black_background_(14020051016).jpg)
+// Chosen for the dither: a few large backlit petals with long smooth
+// gradients survive Bayer dithering far better than fine floret detail.
 import flowerSrc from '../../assets/hero/flower.jpg';
 
 // Experimental hero background: the flower photo is re-rendered live as a
@@ -139,15 +140,17 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
       if (!imgReady || cols === 0) return;
       const t = (now - start) / 1000;
 
-      // Slow bloom + drift of the source. The daisy fans out of the photo's
-      // bottom-right corner, so anchor that corner to the canvas corner and
-      // let the petals arc up toward the middle of the hero.
+      // Slow bloom + drift of the source. The tulip's petals sweep out of the
+      // photo's lower right, so anchor that corner to the canvas corner and
+      // let the petal edge arc up toward the middle of the hero.
       const base = Math.max(cols / img.width, rows / img.height);
       const scale = base * (1.06 + 0.05 * Math.sin(t * 0.15));
       const dw = img.width * scale;
       const dh = img.height * scale;
       const dx = cols - dw + 1.5 * Math.sin(t * 0.07);
-      const dy = rows - dh + Math.cos(t * 0.05);
+      // Push the crop down so the petal crown arcs through the middle of the
+      // hero with dark space above it, instead of filling the whole frame.
+      const dy = rows - dh + rows * 0.22 + Math.cos(t * 0.05);
       offCtx.clearRect(0, 0, cols, rows);
       offCtx.drawImage(img, dx, dy, dw, dh);
       const data = offCtx.getImageData(0, 0, cols, rows).data;
@@ -170,7 +173,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
             const v = lum + 0.05 * Math.sin(t * 1.4 + hash[i] * 6.283);
             const threshold = BAYER8[y % 8][x % 8];
             if (v <= threshold) continue;
-            if (v > threshold + 0.35) {
+            if (v > threshold + 0.45) {
               brightPath.rect(x * cell, y * cell, cell - 1, cell - 1);
               drewBright = true;
             } else {
