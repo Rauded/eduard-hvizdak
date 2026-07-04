@@ -21,7 +21,9 @@ export type FeatureFlag = 'latestTweets' | 'heroAscii';
 
 const DEFAULTS: Record<FeatureFlag, boolean> = {
   latestTweets: false,
-  heroAscii: false,
+  // Default ON only on the experiment/hero-dither branch so the Vercel
+  // preview shows the effect without query params. Keep false on main.
+  heroAscii: true,
 };
 
 // URL query param that overrides each flag, plus the localStorage key it is
