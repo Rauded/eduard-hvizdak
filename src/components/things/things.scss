@@ -1,8 +1,8 @@
 .things-page {
   // ─── Theme variables (dark default) ──────────────────────────────
   --bg: transparent; // dark mode lets the AppContainer gradient show through
-  --kicker: #818cf8;
-  --heading: #c7d2fe;
+  --kicker: var(--accent-bright);
+  --heading: var(--text-strong);
   --text: #fff;
   --text-strong: #f8fafc;
   --text-soft: rgba(248, 250, 252, 0.72);

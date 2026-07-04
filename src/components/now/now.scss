@@ -1,18 +1,18 @@
 .now-page {
   // ─── Theme variables (dark default) ──────────────────────────────
   --bg: transparent; // dark mode lets the AppContainer gradient show through
-  --kicker: #818cf8;
-  --heading: #c7d2fe;
+  --kicker: var(--accent-bright);
+  --heading: var(--text-strong);
   --text: #fff;
   --text-strong: #f8fafc;
   --text-soft: rgba(248, 250, 252, 0.6);
   --text-dim: rgba(248, 250, 252, 0.4);
   --text-mute: rgba(248, 250, 252, 0.5);
-  --link: #a5b4fc;
-  --link-border: rgba(165, 180, 252, 0.35);
-  --card-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.07) 0%, rgba(168, 85, 247, 0.05) 100%);
-  --card-border: rgba(165, 180, 252, 0.14);
-  --card-border-hover: rgba(165, 180, 252, 0.32);
+  --link: var(--accent-bright);
+  --link-border: var(--border-strong);
+  --card-bg: var(--surface);
+  --card-border: var(--border);
+  --card-border-hover: var(--border-strong);
   --cover-bg: #15101f;
   --cover-border: rgba(255, 255, 255, 0.08);
   --build-bg: rgba(255, 255, 255, 0.03);
@@ -237,7 +237,6 @@
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    transform: translateY(-3px);
     border-color: var(--build-border-hover);
     box-shadow: var(--shadow);
   }
@@ -348,7 +347,6 @@
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    transform: translateY(-3px);
     border-color: var(--card-border-hover);
     box-shadow: var(--shadow);
   }
@@ -472,7 +470,6 @@
   }
 
   &:hover &__cover {
-    transform: translateY(-4px);
     box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
   }
 

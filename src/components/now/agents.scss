@@ -6,13 +6,13 @@
   // Status colours (shared dark/light; tuned to read on both)
   --agent-run: #34d399;     // green — running
   --agent-idle: #fbbf24;    // amber — idle
-  --agent-done: #818cf8;    // indigo — done
+  --agent-done: var(--accent-bright); // accent, done
   --agent-error: #f87171;   // red — error
 
   &[data-theme='light'] {
     --agent-run: #059669;
     --agent-idle: #d97706;
-    --agent-done: #4f46e5;
+    --agent-done: var(--accent-bright);
     --agent-error: #dc2626;
   }
 }
@@ -103,7 +103,6 @@
   }
 
   &:hover {
-    transform: translateY(-3px);
     border-color: var(--card-border-hover);
     box-shadow: var(--shadow);
   }
@@ -300,7 +299,7 @@
     padding: 4px 10px;
     border-radius: 999px;
     color: var(--text-soft);
-    background: rgba(129, 140, 248, 0.1);
+    background: var(--accent-soft);
     border: 1px solid var(--card-border);
   }
 }

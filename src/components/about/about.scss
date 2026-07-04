@@ -9,7 +9,7 @@
     font-size: clamp(1.8em, 4vw, 2.5em);
     padding-top: 10px;
     margin: 0 0 30px 0;
-    color: #c7d2fe;
+    color: var(--text-strong);
     font-family: var(--font-body);
     text-align: left;
     font-weight: 700;
@@ -49,44 +49,44 @@
       }
 
       .purple-text {
-        color: #a5b4fc;
+        color: var(--accent-bright);
         font-weight: 600;
 
         a {
-          color: #a5b4fc;
+          color: var(--accent-bright);
           text-decoration: none;
 
           &:hover {
-            color: #c7d2fe;
+            color: var(--accent-bright);
           }
         }
       }
 
       a {
-        color: #a5b4fc;
+        color: var(--accent-bright);
         text-decoration: underline;
-        text-decoration-color: rgba(165, 180, 252, 0.35);
+        text-decoration-color: var(--border);
         transition: all 0.2s ease;
 
         &:visited {
-          color: #a5b4fc;
+          color: var(--accent-bright);
         }
 
         &:hover {
-          color: #c7d2fe;
-          text-decoration-color: rgba(199, 210, 254, 0.6);
+          color: var(--accent-bright);
+          text-decoration-color: var(--border-strong);
         }
       }
 
       .specializations {
         margin: 28px 0;
         padding: 20px 0;
-        border-top: 1px solid rgba(165, 180, 252, 0.15);
-        border-bottom: 1px solid rgba(165, 180, 252, 0.15);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
 
         .spec-title {
           font-size: clamp(0.9em, 1.5vw, 1.05em);
-          color: #c7d2fe;
+          color: var(--text-strong);
           font-weight: 600;
           letter-spacing: 0.05em;
           margin: 0 0 14px 0;
@@ -100,7 +100,7 @@
           letter-spacing: 0.02em;
 
           .spec-arrow {
-            color: #a5b4fc;
+            color: var(--accent-bright);
             font-weight: 600;
             margin-right: 6px;
           }
@@ -131,9 +131,8 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
 
         &:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 8px 32px rgba(99, 102, 241, 0.25);
-          border-color: rgba(165, 180, 252, 0.3);
+          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+          border-color: var(--border-strong);
         }
       }
 
@@ -158,7 +157,7 @@
     max-width: 840px;
     margin: 0 auto 40px;
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(165, 180, 252, 0.15);
+    border: 1px solid var(--border);
     border-radius: 14px;
     overflow: hidden;
     text-decoration: none;
@@ -166,13 +165,12 @@
     transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
 
     &:hover {
-      border-color: rgba(165, 180, 252, 0.45);
-      background: rgba(165, 180, 252, 0.06);
-      transform: translateY(-2px);
+      border-color: var(--border-strong);
+      background: var(--accent-soft);
 
       .about-highlight__cta {
-        background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
-        box-shadow: 0 10px 28px rgba(99, 102, 241, 0.5);
+        background: var(--accent-strong);
+        box-shadow: var(--shadow-card);
         transform: translateY(-1px);
       }
 
@@ -221,7 +219,7 @@
       font-size: 0.7em;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #a5b4fc;
+      color: var(--accent-bright);
       margin-bottom: 10px;
     }
 
@@ -243,10 +241,10 @@
       font-size: clamp(0.9em, 1.5vw, 1.02em);
       font-weight: 700;
       letter-spacing: 0.02em;
-      color: #ffffff;
-      background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+      color: var(--on-accent);
+      background: var(--accent);
       border-radius: 999px;
-      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.35);
+      box-shadow: var(--shadow-card);
       transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
     }
 
@@ -302,15 +300,15 @@
 
         &:focus {
           outline: none;
-          border-color: rgba(99, 102, 241, 0.5);
+          border-color: var(--accent-ring);
         }
       }
 
       button {
         padding: 10px 20px;
         font-size: 1.1em;
-        color: #f8fafc;
-        background: #6366f1;
+        color: var(--on-accent);
+        background: var(--accent);
         border: none;
         border-radius: 6px;
         cursor: pointer;
@@ -318,7 +316,7 @@
         font-family: var(--font-body);
 
         &:hover {
-          background: #818cf8;
+          background: var(--accent-strong);
         }
       }
     }
@@ -394,7 +392,7 @@
             }
 
             &:hover {
-              color: #a5b4fc;
+              color: var(--accent-bright);
             }
           }
         }

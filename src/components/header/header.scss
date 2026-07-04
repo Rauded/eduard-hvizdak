@@ -53,7 +53,7 @@
   z-index: 1;
 
   &:hover {
-    color: #a5b4fc;
+    color: var(--accent-bright);
   }
 }
 
@@ -102,7 +102,7 @@
   }
 
   &--active {
-    color: #a5b4fc !important;
+    color: var(--accent-bright) !important;
 
     svg {
       opacity: 1 !important;
@@ -146,9 +146,9 @@
   align-items: center;
   margin-left: 32px;
   padding: 8px 16px;
-  border: 1px solid rgba(165, 180, 252, 0.35);
-  background: rgba(99, 102, 241, 0.08);
-  color: #a5b4fc;
+  border: 1px solid var(--border-strong);
+  background: var(--accent-soft);
+  color: var(--accent-bright);
   text-decoration: none;
   font-size: clamp(0.85em, 1.3vw, 0.95em);
   transition: all 0.2s ease;
@@ -160,19 +160,15 @@
   z-index: 1;
 
   &:hover {
-    background: rgba(99, 102, 241, 0.18);
-    color: #c7d2fe;
-    border-color: rgba(165, 180, 252, 0.6);
-    box-shadow: 0 2px 12px rgba(99, 102, 241, 0.2);
+    background: var(--accent-soft);
+    color: var(--accent-bright);
+    border-color: var(--border-strong);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
   }
 
   svg {
     margin-right: 7px;
     transition: transform 0.2s ease;
-  }
-
-  &:hover svg {
-    transform: scale(1.1) rotate(5deg);
   }
 
   @media (max-width: 768px) {

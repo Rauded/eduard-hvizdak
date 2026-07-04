@@ -43,10 +43,10 @@
     background: var(--accent-soft);
     color: var(--accent-strong);
     &:hover {
-      background: rgba(37, 99, 235, 0.16);
+      background: var(--accent-soft);
       color: var(--accent-strong);
       border-color: var(--accent);
-      box-shadow: 0 2px 12px rgba(37, 99, 235, 0.18);
+      box-shadow: var(--shadow-card);
     }
   }
 
@@ -74,7 +74,7 @@
   .about-container {
     color: var(--text);
 
-    h2, .about-title { color: var(--accent); }
+    h2, .about-title { color: var(--text-strong); }
 
     .about-intro .about-text {
       p { color: var(--text-muted); }
@@ -106,7 +106,7 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow-card);
       &:hover {
-        box-shadow: 0 12px 32px rgba(37, 99, 235, 0.18);
+        box-shadow: 0 12px 32px rgba(22, 22, 26, 0.14);
         border-color: var(--accent-ring);
       }
     }
@@ -124,8 +124,8 @@
       box-shadow: 0 14px 40px rgba(22, 22, 26, 0.10);
 
       .about-highlight__cta {
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        box-shadow: 0 12px 28px rgba(37, 99, 235, 0.42);
+        background: var(--accent-strong);
+        box-shadow: var(--shadow-card);
       }
     }
 
@@ -135,7 +135,7 @@
     &__title { color: var(--text-strong) !important; }
 
     &__cta {
-      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      background: var(--accent);
       box-shadow: var(--shadow-accent);
     }
   }
@@ -150,7 +150,7 @@
     }
     button {
       background: var(--accent);
-      color: #fff;
+      color: var(--on-accent);
       &:hover { background: var(--accent-strong); }
     }
   }
@@ -159,7 +159,7 @@
   .resume-container { color: var(--text); }
   // Big section headings pop in the brand blue; per-item job titles stay dark.
   .resume-title,
-  .section-title { color: var(--accent); }
+  .section-title { color: var(--text-strong); }
   .job-title { color: var(--text-strong); }
 
   .company { color: var(--accent-strong); }
@@ -178,7 +178,7 @@
   }
 
   .line-container:before {
-    background: linear-gradient(180deg, var(--accent) 0%, rgba(37, 99, 235, 0.08) 100%);
+    background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
   }
   .job-container:before { background: var(--accent); }
 
@@ -188,9 +188,9 @@
   }
 
   .cv-actions__btn--primary {
-    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    background: var(--accent);
     box-shadow: var(--shadow-accent);
-    &:hover { box-shadow: 0 12px 32px rgba(37, 99, 235, 0.42); }
+    &:hover { background: var(--accent-strong); }
   }
   .cv-actions__btn--ghost {
     background: var(--surface);
@@ -204,7 +204,7 @@
 
   // ─── Projects (shared .pcard) ───────────────────────────────────────────
   .projects-container { color: var(--text); }
-  .projects-container .section-title { color: var(--accent); }
+  .projects-container .section-title { color: var(--text-strong); }
   .projects-intro { color: var(--text-muted); }
 
   .pcard__title { color: var(--text-strong); }
@@ -286,14 +286,12 @@
 
   // ─── Contact ────────────────────────────────────────────────────────────
   .contact {
-    background:
-      radial-gradient(120% 120% at 50% 0%, rgba(37, 99, 235, 0.10) 0%, transparent 60%),
-      var(--surface);
+    background: var(--surface);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-card);
 
-    &__eyebrow { color: var(--accent-strong); }
-    &__title { color: var(--accent); }
+    &__eyebrow { color: var(--accent-bright); }
+    &__title { color: var(--text-strong); }
     &__lead { color: var(--text-muted); }
 
     &__direct {
@@ -306,9 +304,9 @@
     }
 
     &__btn--primary {
-      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      background: var(--accent);
       box-shadow: var(--shadow-accent);
-      &:hover { box-shadow: 0 14px 34px rgba(37, 99, 235, 0.42); }
+      &:hover { background: var(--accent-strong); }
     }
     &__btn--ghost {
       background: var(--surface);

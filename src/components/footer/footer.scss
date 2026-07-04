@@ -28,7 +28,7 @@
   }
 
   .purple-heart {
-    color: #a5b4fc;
+    color: var(--accent-bright);
     animation: pulse 2s ease-in-out infinite;
   }
 
@@ -42,16 +42,16 @@
   }
 
   .footer-link {
-    color: #a5b4fc;
+    color: var(--accent-bright);
     text-decoration: underline;
-    text-decoration-color: rgba(165, 180, 252, 0.3);
+    text-decoration-color: var(--border);
     margin-left: 5px;
     transition: color 0.2s ease;
     font-weight: 600;
 
     &:hover {
-      color: #c7d2fe;
-      text-decoration-color: rgba(199, 210, 254, 0.5);
+      color: var(--accent-bright);
+      text-decoration-color: var(--border-strong);
     }
   }
 
@@ -65,8 +65,8 @@
     transition: color 0.2s ease, border-color 0.2s ease;
 
     &:hover {
-      color: #c7d2fe;
-      border-color: rgba(199, 210, 254, 0.5);
+      color: var(--accent-bright);
+      border-color: var(--border-strong);
     }
   }
 
@@ -87,8 +87,8 @@
       z-index: 1;
 
       &:hover {
-        color: #a5b4fc;
-        transform: translateY(-2px);
+        color: var(--accent-bright);
+        transform: translateY(-1px);
       }
     }
   }

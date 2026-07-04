@@ -22,7 +22,7 @@
   margin-bottom: 40px;
 
   &:hover {
-    color: #a5b4fc;
+    color: var(--accent-bright);
   }
 
   svg {
@@ -63,7 +63,7 @@
     line-height: 1;
     margin: 0 0 28px;
     letter-spacing: -0.03em;
-    color: #a5b4fc;
+    color: var(--text-strong);
   }
 
   &__tagline {
@@ -100,6 +100,14 @@
 }
 
 // ─── Project card ─────────────────────────────────────────────────────────────
+// Neutralize per-project data accents: every card and modal renders with the
+// site accent. The inline style attribute sets --card-accent per project, so
+// !important is required for this rule to win.
+.pcard,
+.case-modal {
+  --card-accent: var(--accent) !important;
+}
+
 .pcard {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -146,7 +154,6 @@
   &:hover {
     border-color: rgba(255, 255, 255, 0.14);
     box-shadow: 0 28px 80px rgba(0, 0, 0, 0.65),
-                0 0 48px rgba(99, 102, 241, 0.08),
                 inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
@@ -432,7 +439,7 @@
   font-weight: 700;
   // Subtle per-project accent tint instead of flat white — ties the watermark
   // to the card's colour without shouting.
-  color: color-mix(in srgb, var(--card-accent, #6366f1) 13%, transparent);
+  color: color-mix(in srgb, var(--card-accent, var(--accent)) 13%, transparent);
   line-height: 1;
   pointer-events: none;
   user-select: none;
@@ -463,8 +470,7 @@
     height: 3px;
     margin-top: 14px;
     border-radius: 2px;
-    background: var(--card-accent, #6366f1);
-    box-shadow: 0 0 18px color-mix(in srgb, var(--card-accent, #6366f1) 55%, transparent);
+    background: var(--card-accent, var(--accent));
   }
 }
 
@@ -525,24 +531,21 @@
               border-color 0.2s ease, color 0.2s ease;
 
   &:focus-visible {
-    outline: 2px solid var(--card-accent, #6366f1);
+    outline: 2px solid var(--accent-ring);
     outline-offset: 3px;
   }
 
   // Primary: the live product / demo / story link — a filled accent pill.
   &--demo {
-    color: #fff;
+    color: var(--on-accent);
     border: 1px solid transparent;
-    background: linear-gradient(
-      135deg,
-      var(--card-accent, #6366f1) 0%,
-      color-mix(in srgb, var(--card-accent, #6366f1) 68%, #000) 100%
-    );
-    box-shadow: 0 8px 22px color-mix(in srgb, var(--card-accent, #6366f1) 32%, transparent);
+    background: var(--card-accent, var(--accent));
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35);
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px color-mix(in srgb, var(--card-accent, #6366f1) 45%, transparent);
+      transform: translateY(-1px);
+      background: var(--accent-strong);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
     }
   }
 
@@ -553,7 +556,7 @@
     background: rgba(255, 255, 255, 0.035);
 
     &:hover {
-      transform: translateY(-2px);
+      transform: translateY(-1px);
       border-color: rgba(255, 255, 255, 0.28);
       color: #f8fafc;
       background: rgba(255, 255, 255, 0.08);
@@ -596,7 +599,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--card-accent, #a5b4fc);
+  color: var(--card-accent, var(--accent-bright));
   transition: gap 0.2s ease, opacity 0.2s ease;
 
   &:hover { gap: 13px; opacity: 0.85; }
@@ -655,7 +658,7 @@
       right: 0;
       height: 3px;
       border-radius: 20px 20px 0 0;
-      background: linear-gradient(90deg, var(--card-accent, #6366f1), transparent 85%);
+      background: linear-gradient(90deg, var(--card-accent, var(--accent)), transparent 85%);
     }
   }
 
@@ -718,7 +721,7 @@
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--card-accent, #a5b4fc);
+    color: var(--card-accent, var(--accent-bright));
   }
 
   &__title {
@@ -750,7 +753,7 @@
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--card-accent, #a5b4fc);
+    color: var(--card-accent, var(--accent-bright));
   }
 
   &__p {
@@ -762,10 +765,10 @@
     strong { color: #f8fafc; font-weight: 600; }
 
     a {
-      color: var(--card-accent, #a5b4fc);
+      color: var(--card-accent, var(--accent-bright));
       text-decoration: underline;
       text-underline-offset: 2px;
-      text-decoration-color: color-mix(in srgb, var(--card-accent, #6366f1) 50%, transparent);
+      text-decoration-color: color-mix(in srgb, var(--card-accent, var(--accent)) 50%, transparent);
       transition: text-decoration-color 0.2s ease;
 
       &:hover { text-decoration-color: currentColor; }
