@@ -82,9 +82,9 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
     const palette =
       theme === 'dark'
         ? {
-            dim: 'rgba(99, 102, 241, 0.28)', // #6366f1
-            mid: 'rgba(129, 140, 248, 0.5)', // #818cf8
-            bright: 'rgba(165, 180, 252, 0.75)', // #a5b4fc
+            dim: 'rgba(59, 130, 246, 0.28)', // #3b82f6
+            mid: 'rgba(96, 165, 250, 0.5)', // #60a5fa
+            bright: 'rgba(147, 197, 253, 0.75)', // #93c5fd
           }
         : {
             dim: '#a5bef3', // #2563eb mixed 60% toward page bg #fafaf8

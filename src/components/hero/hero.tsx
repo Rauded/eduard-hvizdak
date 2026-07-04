@@ -27,7 +27,7 @@ const HeroContainer = styled.section<{ $dither: boolean }>`
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(ellipse at 20% 60%, var(--hero-glow, rgba(99, 102, 241, 0.07)) 0%, transparent 55%);
+    background: radial-gradient(ellipse at 20% 60%, var(--hero-glow, rgba(59, 130, 246, 0.07)) 0%, transparent 55%);
     pointer-events: none;
     /* the dither canvas replaces the glow; two soft layers read as mud */
     opacity: ${(p) => (p.$dither ? 0 : 1)};
@@ -89,18 +89,16 @@ const RightContainer = styled.div`
   }
 `;
 
-// Terminal window — realistic macOS-style
+// Terminal window, macOS-style but in neutral graphite: a real terminal is
+// not purple.
 const TerminalWindow = styled.div`
   width: 90%;
   max-width: 700px;
   position: relative;
-  border-radius: 10px;
+  border-radius: var(--radius-md, 14px);
   overflow: hidden;
-  background: #1a1a2e;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 2px 8px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: #17171a;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.08);
 `;
 
@@ -109,7 +107,7 @@ const TerminalBar = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(180deg, #2d2d3f 0%, #252537 100%);
+  background: #202024;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   position: relative;
 `;
@@ -162,7 +160,7 @@ const TerminalTab = styled.div`
 
 const TerminalBody = styled.div`
   padding: 0;
-  background: #0d0d1a;
+  background: #0f0f11;
   position: relative;
   overflow: hidden;
 `;
@@ -189,8 +187,11 @@ const TarsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  animation: ${patrolAnimation} 24s linear infinite;
-  will-change: transform;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: ${patrolAnimation} 24s linear infinite;
+    will-change: transform;
+  }
 `;
 
 const TarsImage = styled.img`
@@ -203,8 +204,8 @@ const TerminalStatusBar = styled.div`
   padding: 4px 12px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(180deg, #1e1e30 0%, #1a1a2e 100%);
+  justify-content: flex-start;
+  background: #1a1a1d;
   border-top: 1px solid rgba(255, 255, 255, 0.04);
 `;
 
@@ -239,27 +240,17 @@ const GradientText = styled.h2`
   }
 `;
 
-const blink = keyframes`
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-`;
-
-const TypewriterText = styled.div`
+// One static line instead of the old typewriter carousel: a fixed claim reads
+// senior, a cycling animation reads template. Mono keeps the terminal
+// signature; the > prefix stays.
+const RoleLine = styled.p`
   font-family: var(--font-mono);
-  color: var(--accent, #a5b4fc);
-  font-size: clamp(1.1em, 3vw, 1.75em);
-  margin-top: 1em;
-  white-space: nowrap;
-  overflow: hidden;
+  color: var(--accent-bright, #60a5fa);
+  font-size: clamp(1.05em, 2.4vw, 1.4em);
+  margin: 1em 0 0;
   font-weight: 400;
   letter-spacing: 0.01em;
-
-  &::after {
-    content: '_';
-    animation: ${blink} 1s infinite;
-    color: var(--accent-strong, #6366f1);
-    font-weight: 300;
-  }
+  line-height: 1.5;
 `;
 
 const topLines = [
@@ -267,24 +258,14 @@ const topLines = [
   "Hey! Thanks for dropping by.",
 ];
 
-// Expert mode drops the "CS Student" line (and swaps in a consulting-facing
-// title) so the rotating role never leads with a student framing. See
-// src/config/positioning.ts.
-const typewriterTexts = [
-  "AI Developer @ OneBond",
-  "AI Developer @ CZS / Masaryk University",
-  "AI Developer @ iGalileo",
-  "Think Tank @ EDUC Alliance",
-  isExpertMode() ? "AI Consultant & Automation Engineer" : "CS Student @ Masaryk University",
-  "Python & LangChain Developer",
-  "Building AI agents & RAG pipelines",
-  "Hackathon Fanatic",
-  "AI Enthusiast"
-];
+// Expert mode leads with the consulting-facing framing; student mode keeps
+// the honest university line. See src/config/positioning.ts.
+const roleLine = isExpertMode()
+  ? "AI engineer. I build agents, RAG systems, and products people pay for."
+  : "CS student at Masaryk University, building AI agents and RAG systems.";
 
 const Hero: React.FC = () => {
   const [topLine, setTopLine] = useState('');
-  const [currentText, setCurrentText] = useState('');
   // Resolved in an effect (not during render) so the prerendered HTML never
   // differs from the first client render; the canvas fades in a frame later.
   const [ditherBg, setDitherBg] = useState<HeroMode | null>(null);
@@ -298,51 +279,13 @@ const Hero: React.FC = () => {
     setTopLine(topLines[Math.floor(Math.random() * topLines.length)]);
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    let isMounted = true;
-    let timeoutId: NodeJS.Timeout;
-
-    let i = 0;
-    let textPos = 0;
-    let currentString = typewriterTexts[i];
-    const speed = 100;
-    const deleteSpeed = 50;
-    const waitTime = 2000;
-
-    function type() {
-      if (!isMounted) return;
-      setCurrentText(currentString.substring(0, textPos));
-      if (textPos++ === currentString.length) {
-        timeoutId = setTimeout(() => deleteText(), waitTime);
-      } else {
-        timeoutId = setTimeout(type, speed);
-      }
-    }
-
-    function deleteText() {
-      if (!isMounted) return;
-      setCurrentText(currentString.substring(0, textPos));
-      if (textPos-- === 0) {
-        i = (i + 1) % typewriterTexts.length;
-        currentString = typewriterTexts[i];
-        timeoutId = setTimeout(type, speed);
-      } else {
-        timeoutId = setTimeout(deleteText, deleteSpeed);
-      }
-    }
-
-    type();
-    return () => { isMounted = false; clearTimeout(timeoutId); };
-  }, []);
-
   return (
     <HeroContainer id="home" $dither={ditherBg !== null}>
       {ditherBg && <AsciiDitherBackground mode={ditherBg} />}
       <LeftContainer>
         <Headline>{topLine}</Headline>
         <GradientText>I'm Eduard Hvizdak.</GradientText>
-        <TypewriterText>&gt; {currentText}</TypewriterText>
+        <RoleLine>&gt; {roleLine}</RoleLine>
       </LeftContainer>
       <RightContainer>
         <TerminalWindow>
@@ -353,7 +296,7 @@ const Hero: React.FC = () => {
               <TrafficDot color="#28c840" />
             </TrafficLights>
             <TerminalTabBar>
-              <TerminalTab>TARS — patrol module</TerminalTab>
+              <TerminalTab>tars@eduard:~</TerminalTab>
             </TerminalTabBar>
           </TerminalBar>
           <TerminalBody>
@@ -366,7 +309,6 @@ const Hero: React.FC = () => {
           </TerminalBody>
           <TerminalStatusBar>
             <StatusText><StatusDot />active</StatusText>
-            <StatusText>patrol module v2.0</StatusText>
           </TerminalStatusBar>
         </TerminalWindow>
       </RightContainer>
