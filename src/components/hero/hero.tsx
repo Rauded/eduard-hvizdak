@@ -146,9 +146,8 @@ const RightContainer = styled.div`
   }
 `;
 
-// Frameless TARS: the high-detail navy-ink render walks directly on the
-// page, no terminal window. A hairline floor grounds him; a mono caption
-// keeps the "patrol module" signature. Hover deepens the ink slightly.
+// Frameless TARS: the high-detail navy render walks directly on the page,
+// no terminal window, no caption. Hover deepens the ink slightly.
 const TarsStage = styled.div`
   width: 100%;
   max-width: 760px;
@@ -187,32 +186,8 @@ const TarsImage = styled.img`
   transition: filter 0.25s ease;
 `;
 
-const TarsFloor = styled.div`
-  width: 82%;
-  height: 1px;
-  background: var(--border, #e6e9ec);
-  margin-top: -6px;
-`;
 
-const TarsCaption = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 14px;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--text-faint, #7484a0);
-`;
 
-const CaptionDot = styled.span`
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--status-good, #1f8f4e);
-`;
 
 const Hero: React.FC = () => {
   return (
@@ -235,11 +210,6 @@ const Hero: React.FC = () => {
             src={`${process.env.PUBLIC_URL}/ascii_navy_ink_hd.gif`}
             alt="TARS walking ASCII art"
           />
-          <TarsFloor />
-          <TarsCaption>
-            <CaptionDot />
-            TARS · patrol module
-          </TarsCaption>
         </TarsStage>
       </RightContainer>
     </HeroContainer>
