@@ -4,22 +4,20 @@ import { LuArrowRight } from 'react-icons/lu';
 import HalftoneWave from './HalftoneWave';
 
 // ════════════════════════════════════════════════════════════════════════════
-// Hero, humandelta experiment.
-//
-// Split layout: serif name headline on the left with the CTAs below it, and
-// TARS on the right rendered frameless, straight on the page. The gif is a
-// high-detail navy-ink ASCII render regenerated from the original source
-// frames (see ascii_matrix.py in the portfolio root), so it needs no window
-// chrome or filter to sit on the white canvas. The humandelta halftone dot
-// wave drifts across the whole hero behind both.
+// Hero, humandelta experiment: the pure reference composition. Centered serif
+// headline and CTAs over the full-bleed animated halftone wave, nothing else.
+// The TARS mascot was tried in many forms (terminal, ascii, halftone print)
+// and cut: the footage never survived abstraction. The wave carries the hero.
 // ════════════════════════════════════════════════════════════════════════════
 
 const HeroContainer = styled.section`
   position: relative;
+  min-height: 88vh;
   display: flex;
   flex-direction: column;
-  min-height: 92vh;
-  padding-top: 100px;
+  align-items: center;
+  justify-content: center;
+  padding: 120px var(--container-px, 64px) 80px;
   box-sizing: border-box;
   color: var(--text, #0e1320);
   overflow: hidden;
@@ -28,12 +26,8 @@ const HeroContainer = styled.section`
   background: var(--page-bg, #ffffff);
 
   @media (max-width: 768px) {
-    padding-top: 90px;
-    min-height: 88vh;
-  }
-
-  @media (min-width: 768px) {
-    flex-direction: row;
+    padding: 110px var(--container-px, 24px) 64px;
+    min-height: 80vh;
   }
 `;
 
@@ -43,37 +37,23 @@ const WaveLayer = styled.div`
   overflow: hidden;
 `;
 
-const LeftContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  box-sizing: border-box;
-  padding: 40px;
-  text-align: left;
-  margin-top: -6%;
+const Content = styled.div`
   position: relative;
   z-index: 1;
-
-  @media (max-width: 768px) {
-    padding: 24px;
-    margin-top: 0;
-  }
-
-  @media (min-width: 768px) {
-    flex: 0 0 44%;
-    padding: 60px 40px 60px var(--container-px, 64px);
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 760px;
 `;
 
 // Full serif headline, humandelta style (their h1 is the serif face, navy).
 const Headline = styled.h1`
   font-family: var(--font-serif) !important;
-  font-size: clamp(2.6em, 5.5vw, 4.2em);
+  font-size: clamp(2.8em, 6.5vw, 4.8em);
   font-weight: 400;
   color: var(--accent, #182e5f);
-  margin: 0 0 0.55em;
+  margin: 0 0 0.5em;
   letter-spacing: -0.01em;
   line-height: 1.12;
 `;
@@ -81,6 +61,7 @@ const Headline = styled.h1`
 const CtaRow = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 14px;
   flex-wrap: wrap;
 `;
@@ -129,75 +110,13 @@ const GhostCta = styled.a`
   }
 `;
 
-const RightContainer = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-  min-height: 40vh;
-
-  @media (min-width: 768px) {
-    flex: 0 0 56%;
-    min-height: auto;
-    padding-right: var(--container-px, 64px);
-    box-sizing: border-box;
-  }
-`;
-
-// Frameless TARS: the high-detail navy render walks directly on the page,
-// no terminal window, no caption. Hover deepens the ink slightly.
-const TarsStage = styled.div`
-  width: 100%;
-  max-width: 460px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-
-  /* Soft white halo quiets the wave directly behind TARS so the two navy
-     patterns never blend into each other. */
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -12% -6%;
-    background: radial-gradient(
-      ellipse 60% 55% at 50% 45%,
-      var(--page-bg, #ffffff) 0%,
-      var(--page-bg, #ffffff) 45%,
-      transparent 78%
-    );
-    pointer-events: none;
-  }
-
-  > * {
-    position: relative;
-  }
-
-  &:hover img {
-    filter: brightness(0.82);
-  }
-`;
-
-const TarsImage = styled.img`
-  width: 100%;
-  max-height: 66vh;
-  object-fit: contain;
-  display: block;
-  transition: filter 0.25s ease;
-`;
-
-
-
-
 const Hero: React.FC = () => {
   return (
     <HeroContainer id="home">
       <WaveLayer>
         <HalftoneWave />
       </WaveLayer>
-      <LeftContainer>
+      <Content>
         <Headline>I'm Eduard Hvizdak.</Headline>
         <CtaRow>
           <PrimaryCta href="#projects">
@@ -205,15 +124,7 @@ const Hero: React.FC = () => {
           </PrimaryCta>
           <GhostCta href="#contact">Email me</GhostCta>
         </CtaRow>
-      </LeftContainer>
-      <RightContainer>
-        <TarsStage>
-          <TarsImage
-            src={`${process.env.PUBLIC_URL}/tars_halftone_navy.gif`}
-            alt="TARS walking ASCII art"
-          />
-        </TarsStage>
-      </RightContainer>
+      </Content>
     </HeroContainer>
   );
 };
