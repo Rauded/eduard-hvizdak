@@ -11,9 +11,6 @@
 //                terminal's screen becomes a starfield + grid floor scene
 //   'edges'    → embroidery: smaller blooms cropped in from the hero's
 //                edges behind the standard terminal
-//   'symbols'  → no TARS: the flower bloom again, but rebuilt as a symbol
-//                halftone (dots / rings / frames per brightness band, after
-//                arlan.me/vault/sandbox) instead of the fine dither
 //
 // HOW TO CHANGE THE DEFAULT for everyone: flip DEFAULT_VARIANT below.
 //
@@ -21,9 +18,9 @@
 // terminal) to any URL. The choice is remembered as you click around;
 // use ?tars=reset to clear it and fall back to the default.
 
-export type TarsVariant = 'terminal' | 'grid' | 'space' | 'rose' | 'combo' | 'edges' | 'symbols';
+export type TarsVariant = 'terminal' | 'grid' | 'space' | 'rose' | 'combo' | 'edges';
 
-const VARIANTS: TarsVariant[] = ['terminal', 'grid', 'space', 'rose', 'combo', 'edges', 'symbols'];
+const VARIANTS: TarsVariant[] = ['terminal', 'grid', 'space', 'rose', 'combo', 'edges'];
 
 const DEFAULT_VARIANT: TarsVariant = 'terminal';
 

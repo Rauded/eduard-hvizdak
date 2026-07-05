@@ -20,18 +20,9 @@ import flowerSrc from '../../assets/hero/flower.jpg';
 //   'edges' (?tars=edges) → smaller blooms cropped by the hero's edges, like
 //     embroidery growing in from the sides; masked so the center stays clear
 //     and drawn at reduced alpha so text and the terminal keep contrast.
-//
-// Two render modes:
-//   'dither'  → the original fine Bayer halftone (2 to 3 px dots)
-//   'symbols' (?tars=symbols) → symbol halftone, after arlan.me/vault/sandbox:
-//     the bloom is rebuilt from little marks at a coarser pitch. Luminance is
-//     split into three bands and each band stamps its own glyph in its own
-//     blue: dim cells a small dot, mid cells a ring, bright cells a frame.
-//     Reads like a print made of tiny instrument markings.
 
 interface Props {
   layout?: 'bloom' | 'edges';
-  mode?: 'dither' | 'symbols';
 }
 //
 // The dither renderer writes one cell per ImageData pixel at grid resolution
@@ -89,16 +80,6 @@ const BAYER8 = [
 // 3px pitch is ~144k cells and still one putImageData + one drawImage.
 const MAX_DITHER_CELLS = 220000;
 const FRAME_MS = 50; // ~20fps; the shimmer reads fine well below 60fps
-
-// Symbols mode stamps one small drawImage per lit cell, so the pitch is much
-// coarser and the frame rate lower; both keep the per-frame stamp count in
-// the low thousands.
-const SYMBOL_CELL = 9;
-const MAX_SYMBOL_CELLS = 26000;
-const SYMBOL_FRAME_MS = 90;
-// Luminance splits between the three symbol bands (after shape()).
-const SYMBOL_EDGE_1 = 0.4; // below: dot, above: ring
-const SYMBOL_EDGE_2 = 0.72; // below: ring, above: frame
 // Cells darker than this never draw, so the photo's black ground stays truly
 // empty and the bloom keeps a crisp silhouette (the shimmer amplitude cannot
 // lift background cells over it).
@@ -109,7 +90,7 @@ const LUM_FLOOR = 0.06;
 // ramps) while dropping the near-black ground below the floor.
 const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.12) * 1.55));
 
-const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom', mode = 'dither' }) => {
+const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
 
@@ -135,21 +116,6 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom', mode = 'dith
             hi: [37, 99, 235, 205] as const, // #2563eb at 0.8
           };
 
-    // Symbol-band inks, dim to bright. Alpha carries the depth: dots are
-    // whispers, frames are full-strength brand blue.
-    const symbolInk =
-      theme === 'dark'
-        ? {
-            dot: 'rgba(96, 165, 250, 0.5)',
-            ring: 'rgba(96, 165, 250, 0.8)',
-            frame: 'rgba(147, 197, 253, 0.95)',
-          }
-        : {
-            dot: 'rgba(96, 165, 250, 0.6)',
-            ring: 'rgba(59, 130, 246, 0.85)',
-            frame: 'rgba(37, 99, 235, 0.95)',
-          };
-
     const off = document.createElement('canvas');
     const offCtx = off.getContext('2d', { willReadFrequently: true });
     if (!offCtx) return undefined;
@@ -170,7 +136,6 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom', mode = 'dith
     let cell = 0;
     let hash = new Float32Array(0);
     let dots: ImageData | null = null;
-    let sprites: HTMLCanvasElement[] = [];
     let rafId = 0;
     let running = false;
     let inView = true;
@@ -182,8 +147,8 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom', mode = 'dith
       const rect = parent.getBoundingClientRect();
       const w = Math.max(1, Math.round(rect.width));
       const h = Math.max(1, Math.round(rect.height));
-      const maxCells = mode === 'symbols' ? MAX_SYMBOL_CELLS : MAX_DITHER_CELLS;
-      cell = mode === 'symbols' ? SYMBOL_CELL : w < 768 ? 2 : 3;
+      const maxCells = MAX_DITHER_CELLS;
+      cell = w < 768 ? 2 : 3;
       // Bound total work regardless of viewport size.
       while (Math.ceil(w / cell) * Math.ceil(h / cell) > maxCells) cell += 1;
       cols = Math.ceil(w / cell);
@@ -194,35 +159,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom', mode = 'dith
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       off.width = cols;
       off.height = rows;
-      if (mode === 'symbols') {
-        // One tiny sprite per band, drawn once at device resolution, then
-        // stamped per cell. Dot for dim, ring for mid, frame for bright.
-        const s = Math.max(2, Math.round(cell * dpr));
-        const inks = [symbolInk.dot, symbolInk.ring, symbolInk.frame];
-        sprites = inks.map((ink, band) => {
-          const sc = document.createElement('canvas');
-          sc.width = s;
-          sc.height = s;
-          const g = sc.getContext('2d');
-          if (!g) return sc;
-          g.strokeStyle = ink;
-          g.fillStyle = ink;
-          g.lineWidth = Math.max(1, s * 0.11);
-          if (band === 0) {
-            g.beginPath();
-            g.arc(s / 2, s / 2, s * 0.16, 0, Math.PI * 2);
-            g.fill();
-          } else if (band === 1) {
-            g.beginPath();
-            g.arc(s / 2, s / 2, s * 0.27, 0, Math.PI * 2);
-            g.stroke();
-          } else {
-            const inset = s * 0.2;
-            g.strokeRect(inset, inset, s - 2 * inset, s - 2 * inset);
-          }
-          return sc;
-        });
-      } else {
+      {
         dotCanvas.width = cols;
         dotCanvas.height = rows;
         dots = dotCtx.createImageData(cols, rows);
@@ -299,26 +236,6 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom', mode = 'dith
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      if (mode === 'symbols') {
-        if (sprites.length !== 3) return;
-        for (let y = 0; y < rows; y++) {
-          for (let x = 0; x < cols; x++) {
-            const i = y * cols + x;
-            const p = i * 4;
-            const lum = shape(
-              (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255
-            );
-            if (lum < LUM_FLOOR) continue;
-            // The shimmer nudges cells near a band edge across it now and
-            // then, so the print sparkles instead of sitting frozen.
-            const v = lum + 0.03 * Math.sin(t * 1.2 + hash[i] * 6.283);
-            const band = v < SYMBOL_EDGE_1 ? 0 : v < SYMBOL_EDGE_2 ? 1 : 2;
-            ctx.drawImage(sprites[band], x * cell, y * cell, cell, cell);
-          }
-        }
-        return;
-      }
-
       if (dots) {
         const px = dots.data;
         px.fill(0);
@@ -358,10 +275,9 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom', mode = 'dith
       }
     };
 
-    const frameMs = mode === 'symbols' ? SYMBOL_FRAME_MS : FRAME_MS;
     const loop = (now: number) => {
       rafId = requestAnimationFrame(loop);
-      if (now - lastFrame < frameMs) return;
+      if (now - lastFrame < FRAME_MS) return;
       lastFrame = now;
       drawFrame(now);
     };
@@ -417,7 +333,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom', mode = 'dith
       document.removeEventListener('visibilitychange', onVisibility);
       if (resizeTimer) clearTimeout(resizeTimer);
     };
-  }, [theme, layout, mode]);
+  }, [theme, layout]);
 
   return <BgCanvas ref={canvasRef} $layout={layout} aria-hidden="true" />;
 };

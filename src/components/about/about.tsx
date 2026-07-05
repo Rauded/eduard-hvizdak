@@ -5,7 +5,6 @@ import "./about.scss";
 import myPhoto from "../../assets/about/picture_of_me.jpeg";
 import myPhotoWebP from "../../assets/about/picture_of_me.webp";
 import { isExpertMode } from "../../config/positioning";
-import GhostyReveal from "../effects/GhostyReveal";
 
 const About: React.FC = () => {
   const expert = isExpertMode();
@@ -42,13 +41,11 @@ const About: React.FC = () => {
 
       <Link to="/blog/digital-fairness-act-youth-dialogue" className="about-highlight">
         <div className="about-highlight__media">
-          <GhostyReveal direction="up" duration={1.4}>
-            <img
-              src="/blog/digital-fairness/youth-policy-dialogue.png"
-              alt="Youth Policy Dialogue on the Digital Fairness Act with Commissioner Michael McGrath in Ljubljana"
-              loading="lazy"
-            />
-          </GhostyReveal>
+          <img
+            src="/blog/digital-fairness/youth-policy-dialogue.png"
+            alt="Youth Policy Dialogue on the Digital Fairness Act with Commissioner Michael McGrath in Ljubljana"
+            loading="lazy"
+          />
         </div>
         <div className="about-highlight__text">
           <span className="about-highlight__eyebrow">Recent Highlight</span>

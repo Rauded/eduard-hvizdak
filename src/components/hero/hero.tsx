@@ -3,7 +3,6 @@ import styled, { keyframes } from 'styled-components';
 import { isExpertMode } from '../../config/positioning';
 import { getTarsVariant } from '../../config/tarsVariant';
 import AsciiDitherBackground from './AsciiDitherBackground';
-import Typer from '../effects/Typer';
 
 // Main container for the hero section
 const HeroContainer = styled.section`
@@ -374,7 +373,6 @@ const Hero: React.FC = () => {
   const isRose = tarsVariant === 'rose';
   const isCombo = tarsVariant === 'combo';
   const isEdges = tarsVariant === 'edges';
-  const isSymbols = tarsVariant === 'symbols';
 
   // One terminal, two screens: the flat body, or the starfield+grid scene.
   const renderTerminal = (scene: boolean) => {
@@ -453,16 +451,13 @@ const Hero: React.FC = () => {
   return (
     <HeroContainer id="home">
       {(isRose || isCombo) && <AsciiDitherBackground />}
-      {isSymbols && <AsciiDitherBackground mode="symbols" />}
       {isEdges && <AsciiDitherBackground layout="edges" />}
       <LeftContainer>
         <Headline>{topLine}</Headline>
-        <GradientText>
-          <Typer text="I'm Eduard Hvizdak." />
-        </GradientText>
+        <GradientText>I'm Eduard Hvizdak.</GradientText>
         <TypewriterText>&gt; {currentText}</TypewriterText>
       </LeftContainer>
-      {!isRose && !isSymbols && <RightContainer>
+      {!isRose && <RightContainer>
         {(tarsVariant === 'terminal' || isEdges) && renderTerminal(false)}
         {isCombo && renderTerminal(true)}
         {tarsVariant === 'grid' && (
