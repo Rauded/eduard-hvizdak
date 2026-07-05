@@ -11,7 +11,6 @@ const EMAIL = 'eduardd.hv@gmail.com';
 const Contact: React.FC = () => (
   <section className="contact" id="contact">
     <div className="contact__inner">
-      <p className="contact__eyebrow">Get in touch</p>
       <h2 className="contact__title">Let's work together</h2>
       <p className="contact__lead">
         Building something with AI, need a product shipped, or just want to talk shop? I'm always up
@@ -35,10 +34,6 @@ const Contact: React.FC = () => (
           </a>
         )}
       </div>
-      <p className="contact__direct">
-        Or email me directly at{' '}
-        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-      </p>
       <div className="contact__socials">
         <a href="https://github.com/Rauded" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
           <FaGithub />

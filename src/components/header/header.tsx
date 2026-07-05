@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaPen, FaRegClock, FaBriefcase } from 'react-icons/fa';
-import { LuSun, LuMoon } from 'react-icons/lu';
-import { useTheme } from '../theme/ThemeContext';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import './header.scss';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
   const isBlog = location.pathname.startsWith('/blog');
@@ -49,20 +46,13 @@ const Header: React.FC = () => {
         {isOpen ? <FaTimes size={30} className="close-icon" /> : <FaBars size={30} />}
       </div>
       <nav className={`nav ${isOpen ? 'open' : ''}`}>
-        <a href="#home" className="nav-link" onClick={(e) => goToSection(e, 'home')}>
-          <FaHome />
-          Home
-        </a>
         <a href="#about" className="nav-link" onClick={(e) => goToSection(e, 'about')}>
-          <FaUser />
           About
         </a>
         <a href="#projects" className="nav-link" onClick={(e) => goToSection(e, 'projects')}>
-          <FaCode />
           Projects
         </a>
         <a href="#resume" className="nav-link" onClick={(e) => goToSection(e, 'resume')}>
-          <FaFileAlt />
           Resume
         </a>
         <Link
@@ -70,7 +60,6 @@ const Header: React.FC = () => {
           className={`nav-link ${isServices ? 'nav-link--active' : ''}`}
           onClick={() => setIsOpen(false)}
         >
-          <FaBriefcase />
           Services
         </Link>
         <Link
@@ -78,7 +67,6 @@ const Header: React.FC = () => {
           className={`nav-link ${isBlog ? 'nav-link--active' : ''}`}
           onClick={() => setIsOpen(false)}
         >
-          <FaPen />
           Blog
         </Link>
         <Link
@@ -86,17 +74,8 @@ const Header: React.FC = () => {
           className={`nav-link ${isNow ? 'nav-link--active' : ''}`}
           onClick={() => setIsOpen(false)}
         >
-          <FaRegClock />
           Now
         </Link>
-        <button
-          type="button"
-          className="site-theme-toggle"
-          onClick={toggleTheme}
-          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {theme === 'dark' ? <LuSun /> : <LuMoon />}
-        </button>
       </nav>
     </header>
   );

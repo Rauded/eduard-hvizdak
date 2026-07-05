@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { LuArrowRight } from "react-icons/lu";
 import "./about.scss";
-import myPhoto from "../../assets/about/picture_of_me.jpeg";
-import myPhotoWebP from "../../assets/about/picture_of_me.webp";
 import { isExpertMode } from "../../config/positioning";
 
 const About: React.FC = () => {
@@ -30,12 +28,6 @@ const About: React.FC = () => {
           <p>
             Outside of programming, you’ll usually find me reading, experimenting with new technologies and occasionally scrolling Twitter.
           </p>
-        </div>
-        <div className="about-photo">
-          <picture>
-            <source srcSet={myPhotoWebP} type="image/webp" />
-            <img src={myPhoto} alt="Eduard Hvizdak" className="profile-photo" loading="lazy" />
-          </picture>
         </div>
       </section>
 

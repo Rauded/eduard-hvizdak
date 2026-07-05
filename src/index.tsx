@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import posthog from 'posthog-js';
+import '@fontsource-variable/archivo';
 import './index.css';
 // @ts-ignore
 import App from './App.tsx';

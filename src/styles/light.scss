@@ -1,86 +1,47 @@
 // ════════════════════════════════════════════════════════════════════════════
-//  Professional light theme — home page only.
+//  Design v2 master layer: Swiss print / engineering editorial.
 //
-//  Everything here is scoped under `:root[data-theme='light']`, which the home
-//  route sets on <html>. Dark mode / sub-pages never match these selectors, so
-//  the original near-black look is fully preserved and this file is a pure,
-//  reversible additive layer. Palette + tokens live in src/index.css.
-//
-//  Design intent: calm off-white canvas, near-black text, one confident blue
-//  accent (#2563EB). Dark "device" surfaces (hero terminal, project media) are
-//  deliberately kept dark so they read as intentional focal objects on the
-//  light page — the way Vercel / Linear docs do it.
+//  This branch pins data-theme='light' (see ThemeContext), so everything in
+//  here always applies and wins over the component SCSS through the
+//  :root[data-theme='light'] scope. Language: cool paper canvas, near-black
+//  ink, one burnt-orange accent (#d1481d), hairline ink rules, sharp corners,
+//  wide Archivo display type. Tokens live in src/index.css.
 // ════════════════════════════════════════════════════════════════════════════
 
 :root[data-theme='light'] {
 
-  // ─── Header (light glass) ───────────────────────────────────────────────
-  .header-container {
-    background: rgba(255, 255, 255, 0.72);
-    border: 1px solid var(--border);
-    box-shadow: 0 6px 24px rgba(22, 22, 26, 0.08);
-    color: var(--text);
-  }
-
-  .logo {
+  // ─── Shared section-title treatment ─────────────────────────────────────
+  .about-title,
+  .resume-title,
+  .projects-container .section-title {
+    font-family: var(--font-display) !important;
+    font-stretch: 118%;
+    font-weight: 780;
+    font-size: clamp(2.1em, 4.6vw, 3.2em);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
     color: var(--text-strong);
-    &:hover { color: var(--accent); }
-  }
-
-  .nav-link {
-    color: var(--text-muted);
-    &:hover { color: var(--text-strong); }
-    &--active {
-      color: var(--accent) !important;
-    }
-    @media (max-width: 768px) {
-      color: var(--text-muted);
-    }
-  }
-
-  .button {
-    border-color: var(--accent-ring);
-    background: var(--accent-soft);
-    color: var(--accent-strong);
-    &:hover {
-      background: rgba(37, 99, 235, 0.16);
-      color: var(--accent-strong);
-      border-color: var(--accent);
-      box-shadow: 0 2px 12px rgba(37, 99, 235, 0.18);
-    }
-  }
-
-  .hamburger { color: var(--text-strong); }
-
-  // Mobile full-screen menu
-  .nav {
-    @media (max-width: 768px) {
-      background: rgba(250, 250, 248, 0.98);
-    }
-  }
-
-  // ─── Header theme toggle ────────────────────────────────────────────────
-  .site-theme-toggle {
-    border-color: var(--border-strong);
-    color: var(--text-muted);
-    &:hover {
-      color: var(--accent-strong);
-      border-color: var(--accent-ring);
-      background: var(--accent-soft);
-    }
   }
 
   // ─── About ──────────────────────────────────────────────────────────────
   .about-container {
     color: var(--text);
+    width: 100%;
+    max-width: 1400px;
+    padding: 72px clamp(24px, 6vw, 100px) 48px;
+    box-sizing: border-box;
 
-    h2, .about-title { color: var(--accent); }
+    h2, .about-title { color: var(--text-strong); margin-bottom: 36px; }
 
     .about-intro .about-text {
-      p { color: var(--text-muted); }
+      max-width: 68ch;
+
+      p { color: var(--text-muted); line-height: 1.75; }
 
       .purple-text {
-        color: var(--accent-strong);
+        color: var(--text-strong);
+        font-weight: 600;
         a { color: var(--accent-strong); &:hover { color: var(--accent); } }
       }
 
@@ -92,8 +53,8 @@
       }
 
       .specializations {
-        border-top-color: var(--border);
-        border-bottom-color: var(--border);
+        border-top-color: var(--border-strong);
+        border-bottom-color: var(--border-strong);
         .spec-title { color: var(--text-strong); }
         .spec-item {
           color: var(--text-muted);
@@ -101,65 +62,66 @@
         }
       }
     }
-
-    .about-photo .profile-photo {
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-card);
-      &:hover {
-        box-shadow: 0 12px 32px rgba(37, 99, 235, 0.18);
-        border-color: var(--accent-ring);
-      }
-    }
   }
 
-  // Recent-highlight card
+  // Recent-highlight card: flat print object, no glow, no pill.
   .about-highlight {
     background: var(--surface);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-strong);
+    border-radius: 0;
+    box-shadow: none;
+    max-width: 900px;
+    margin-left: 0;
 
     &:hover {
-      border-color: var(--accent-ring);
+      transform: none;
+      border-color: var(--ink);
       background: var(--surface);
-      box-shadow: 0 14px 40px rgba(22, 22, 26, 0.10);
+      box-shadow: 8px 8px 0 var(--accent);
 
       .about-highlight__cta {
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        box-shadow: 0 12px 28px rgba(37, 99, 235, 0.42);
+        background: var(--accent-strong);
+        box-shadow: none;
+        transform: none;
       }
     }
 
     &__media { background: var(--surface-sunken); }
     &__text p { color: var(--text-muted); }
-    &__eyebrow { color: var(--accent-strong); }
+    &__eyebrow { color: var(--accent-strong); letter-spacing: 0.16em; }
     &__title { color: var(--text-strong) !important; }
 
     &__cta {
-      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-      box-shadow: var(--shadow-accent);
-    }
-  }
-
-  // About contact form (defensive — renders only in some configs)
-  .about-container .about-contact form {
-    input, textarea {
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--text);
-      &:focus { border-color: var(--accent); }
-    }
-    button {
       background: var(--accent);
+      border-radius: 0;
+      box-shadow: none;
       color: #fff;
-      &:hover { background: var(--accent-strong); }
     }
   }
 
   // ─── Resume ─────────────────────────────────────────────────────────────
-  .resume-container { color: var(--text); }
-  // Big section headings pop in the brand blue; per-item job titles stay dark.
-  .resume-title,
-  .section-title { color: var(--accent); }
+  .resume-container {
+    color: var(--text);
+    border-top: 1px solid var(--border-strong);
+    width: 100%;
+    max-width: 1400px;
+    padding: 72px clamp(24px, 6vw, 100px) 48px;
+    box-sizing: border-box;
+  }
+
+  .resume-title { margin-bottom: 40px; }
+
+  // Sub-section headings ("Experience", "Education") stay smaller than the
+  // page-level title but pick up the same wide display voice.
+  .section-container .section-title {
+    font-stretch: 112%;
+    font-weight: 700;
+    font-size: clamp(1.3em, 2.4vw, 1.7em);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-strong);
+  }
+
   .job-title { color: var(--text-strong); }
 
   .company { color: var(--accent-strong); }
@@ -170,93 +132,118 @@
     .company__sub { color: var(--text-muted); }
   }
 
-  .job-dates { color: var(--text-faint); }
+  .job-dates {
+    color: var(--text-faint);
+    font-family: var(--font-mono);
+    font-size: 0.82em;
+  }
 
   .bullet-point {
     color: var(--text-muted);
     &:before { color: var(--accent); }
   }
 
-  .line-container:before {
-    background: linear-gradient(180deg, var(--accent) 0%, rgba(37, 99, 235, 0.08) 100%);
-  }
-  .job-container:before { background: var(--accent); }
+  .line-container:before { background: var(--border-strong); }
+  .job-container:before { background: var(--accent); height: 2px; }
 
   .right-column iframe {
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-strong);
+    border-radius: 0;
+    box-shadow: none;
   }
 
+  .cv-actions__btn { border-radius: 0; }
   .cv-actions__btn--primary {
-    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
-    box-shadow: var(--shadow-accent);
-    &:hover { box-shadow: 0 12px 32px rgba(37, 99, 235, 0.42); }
+    background: var(--accent);
+    box-shadow: none;
+    &:hover { background: var(--accent-strong); box-shadow: none; transform: none; }
   }
   .cv-actions__btn--ghost {
-    background: var(--surface);
-    color: var(--accent-strong);
-    border: 1px solid var(--accent-ring);
-    &:hover {
-      border-color: var(--accent);
-      background: var(--accent-soft);
-    }
+    background: transparent;
+    color: var(--text-strong);
+    border: 1px solid var(--border-strong);
+    &:hover { border-color: var(--text-strong); background: transparent; transform: none; }
   }
 
   // ─── Projects (shared .pcard) ───────────────────────────────────────────
-  .projects-container { color: var(--text); }
-  .projects-container .section-title { color: var(--accent); }
+  .projects-container {
+    color: var(--text);
+    border-top: 1px solid var(--border-strong);
+    font-family: var(--font-body);
+  }
+  .projects-container .section-title { margin-bottom: 16px; }
   .projects-intro { color: var(--text-muted); }
 
-  .pcard__title { color: var(--text-strong); }
+  // Card index numbers ("01") are decoration, not information; drop them.
+  .pcard__number { display: none; }
+  .pcard__title {
+    color: var(--text-strong);
+    &::after { background: var(--accent); }
+  }
   .pcard__subtitle { color: var(--text-faint); }
   .pcard__description { color: var(--text-muted); }
 
   .pcard__tag {
     border: 1px solid var(--border);
+    border-radius: 0;
     color: var(--text-muted);
-    background: var(--surface-sunken);
+    background: transparent;
+    font-family: var(--font-mono);
   }
 
-  // Project media stays a dark focal tile — just soften the shadow for light.
+  // Media stays a dark focal tile; frame it like a plate in a print layout.
   .pcard__media {
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-card);
+    border: 1px solid var(--ink);
+    border-radius: 0;
+    box-shadow: none;
+    transition: box-shadow 0.18s ease, transform 0.18s ease;
     &:hover {
-      border-color: var(--accent-ring);
-      box-shadow: 0 20px 48px rgba(22, 22, 26, 0.14);
+      border-color: var(--ink);
+      transform: translate(-4px, -4px);
+      box-shadow: 8px 8px 0 var(--accent);
     }
   }
+  .pcard__video,
+  .pcard__img { border-radius: 0; }
 
-  // Source-code link: light ghost button (the demo link keeps its per-card accent).
+  .pcard__link { border-radius: 0; }
+  .pcard__link--demo {
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
+    box-shadow: none;
+    &:hover { background: var(--accent-strong); border-color: var(--accent-strong); box-shadow: none; }
+  }
   .pcard__link--github {
     border: 1px solid var(--border-strong);
-    color: var(--text-muted);
-    background: var(--surface);
+    color: var(--text-strong);
+    background: transparent;
     &:hover {
-      border-color: var(--accent-ring);
+      border-color: var(--text-strong);
       color: var(--text-strong);
-      background: var(--surface-sunken);
+      background: transparent;
     }
   }
+
+  .pcard__case-trigger { color: var(--accent-strong); }
 
   // ─── Case-study reader ("Read the full story") ──────────────────────────
   // The modal is portalled to <body>, but data-theme lives on <html>, so these
-  // selectors still match. Turn the dark reader into a clean light document with
-  // the same near-black text / blue accent as the rest of the light page.
+  // selectors still match: a clean paper document with ink text.
   .case-modal {
-    &__backdrop {
-      background: rgba(22, 22, 26, 0.38);
-    }
+    &__backdrop { background: rgba(13, 13, 15, 0.45); }
 
     &__panel {
       background: var(--surface);
-      border: 1px solid var(--border);
-      box-shadow: 0 30px 90px rgba(22, 22, 26, 0.22);
+      border: 1px solid var(--ink);
+      border-radius: 0;
+      box-shadow: 16px 16px 0 rgba(13, 13, 15, 0.18);
     }
 
     &__close {
       background: var(--surface-sunken);
       border: 1px solid var(--border-strong);
+      border-radius: 0;
       color: var(--text-muted);
       &:hover { background: var(--accent-soft); color: var(--accent-strong); }
     }
@@ -266,11 +253,10 @@
     &__eyebrow,
     &__h { color: var(--accent-strong); }
 
-    // The media stays a dark focal tile so video/screenshots read as intentional
-    // objects on the light page; just soften the frame to match light surfaces.
     &__media {
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-card);
+      border: 1px solid var(--border-strong);
+      border-radius: 0;
+      box-shadow: none;
     }
 
     &__p {
@@ -284,52 +270,56 @@
     }
   }
 
-  // ─── Contact ────────────────────────────────────────────────────────────
+  // ─── Contact: the one deliberate theme flip, a full-bleed ink block ─────
   .contact {
-    background:
-      radial-gradient(120% 120% at 50% 0%, rgba(37, 99, 235, 0.10) 0%, transparent 60%),
-      var(--surface);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-card);
+    width: 100%;
+    max-width: none;
+    margin: 64px 0 0;
+    padding: 96px clamp(24px, 6vw, 100px);
+    border-radius: 0;
+    background: var(--ink);
+    border: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    box-sizing: border-box;
 
-    &__eyebrow { color: var(--accent-strong); }
-    &__title { color: var(--accent); }
-    &__lead { color: var(--text-muted); }
-
-    &__direct {
-      color: var(--text-muted);
-      a {
-        color: var(--accent-strong);
-        border-bottom-color: var(--accent-ring);
-        &:hover { color: var(--accent); border-bottom-color: var(--accent); }
-      }
+    &__title {
+      font-stretch: 118%;
+      font-weight: 780;
+      font-size: clamp(2.2em, 5vw, 3.6em);
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: var(--paper-on-ink);
     }
+    &__lead { color: var(--paper-on-ink-muted); }
 
+    &__btn { border-radius: 0; }
     &__btn--primary {
-      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
-      box-shadow: var(--shadow-accent);
-      &:hover { box-shadow: 0 14px 34px rgba(37, 99, 235, 0.42); }
+      background: var(--accent);
+      border: 1px solid var(--accent);
+      box-shadow: none;
+      &:hover { background: var(--accent-strong); border-color: var(--accent-strong); box-shadow: none; transform: none; }
     }
     &__btn--ghost {
-      background: var(--surface);
-      color: var(--accent-strong);
-      border: 1px solid var(--accent-ring);
-      &:hover { border-color: var(--accent); background: var(--accent-soft); }
+      background: transparent;
+      color: var(--paper-on-ink);
+      border: 1px solid rgba(242, 242, 238, 0.4);
+      &:hover { border-color: var(--paper-on-ink); background: transparent; transform: none; }
     }
 
     &__socials a {
-      color: var(--text-faint);
-      &:hover { color: var(--accent); }
+      color: rgba(242, 242, 238, 0.5);
+      &:hover { color: var(--paper-on-ink); }
     }
   }
 
   // ─── Footer ─────────────────────────────────────────────────────────────
   .footer-container {
-    background-color: var(--surface);
+    background-color: var(--page-bg);
     color: var(--text-muted);
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--border-strong);
 
-    .purple-heart { color: var(--accent); }
+    .purple-heart { color: var(--accent); animation: none; }
     .footer-link {
       color: var(--accent-strong);
       text-decoration-color: var(--accent-ring);

@@ -17,7 +17,7 @@ const ThemeContext = createContext<ThemeContextValue>({
 // Browser-chrome colours (mobile address bar) per theme — kept in sync with the
 // page so the bar never clashes with the canvas.
 const CHROME_COLOR: Record<SiteTheme, string> = {
-  light: '#fafaf8',
+  light: '#f2f2ee',
   dark: '#09090b',
 };
 
@@ -27,13 +27,10 @@ const CHROME_COLOR: Record<SiteTheme, string> = {
 // stay in sync live. First-time visitors follow their OS preference; after that
 // their explicit choice wins. SSR/prerender-safe.
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<SiteTheme>(() => {
-    if (typeof window === 'undefined') return 'light';
-    const v = window.localStorage.getItem(THEME_KEY);
-    if (v === 'light' || v === 'dark') return v;
-    // No saved choice yet — respect the OS setting on first visit.
-    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  });
+  // Design v2 experiment: the paper/ink/orange language is a single locked
+  // theme. We pin the existing 'light' scope so every [data-theme='light']
+  // selector keeps working, and the header hides its toggle.
+  const [theme] = useState<SiteTheme>('light');
 
   useEffect(() => {
     window.localStorage.setItem(THEME_KEY, theme);
@@ -42,7 +39,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (meta) meta.setAttribute('content', CHROME_COLOR[theme]);
   }, [theme]);
 
-  const toggleTheme = () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'));
+  const toggleTheme = () => {};
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>

@@ -1,59 +1,42 @@
+// Design v2 header: flat paper bar, full width, one hairline rule underneath.
+// No glass, no radius, no floating card. The logo carries the display type.
 .header-container {
-  background: rgba(9, 9, 11, 0.85);
-  padding: 16px 36px;
+  background: var(--page-bg, #f2f2ee);
+  padding: 0 40px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #fff;
+  color: var(--text, #1a1a1d);
   font-family: var(--font-body);
   position: fixed;
-  top: 18px;
-  left: 18px;
-  right: 18px;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-  max-width: calc(100% - 36px);
-  margin: 0 auto;
-
-  // The blur lives on a pseudo-element rather than the container itself.
-  // A `backdrop-filter` on the container would make it the containing block
-  // for the position:fixed mobile nav, collapsing the full-screen menu to
-  // the header's height and pushing links off-screen. Keeping it here
-  // preserves the glass look without trapping the fixed overlay.
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    z-index: -1;
-  }
+  border-bottom: 1px solid var(--border-strong, rgba(20, 20, 22, 0.32));
 
   @media (max-width: 768px) {
-    padding: 14px 20px;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    max-width: calc(100% - 20px);
-    border-radius: 12px;
+    padding: 0 20px;
+    height: 58px;
   }
 }
 
 .logo {
-  font-size: clamp(0.95em, 2vw, 1.25em);
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: #f8fafc;
+  font-family: var(--font-display);
+  font-stretch: 115%;
+  font-size: 1.02rem;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-strong, #0d0d0f);
   text-decoration: none;
   transition: color 0.2s ease;
   position: relative;
   z-index: 1;
 
   &:hover {
-    color: #a5b4fc;
+    color: var(--accent, #d1481d);
   }
 }
 
@@ -68,9 +51,7 @@
     width: 100vw;
     height: 100vh;
     height: 100dvh;
-    background: rgba(9, 9, 11, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: var(--page-bg, #f2f2ee);
     flex-direction: column;
     justify-content: center;
     overflow-y: auto;
@@ -86,44 +67,38 @@
 .nav-link {
   display: flex;
   align-items: center;
-  margin-left: 32px;
-  color: rgba(248, 250, 252, 0.55);
+  margin-left: 34px;
+  color: var(--text-muted, rgba(20, 20, 22, 0.68));
   text-decoration: none;
-  font-size: clamp(0.85em, 1.3vw, 0.95em);
-  transition: color 0.2s ease;
+  font-size: 0.86rem;
+  transition: color 0.15s ease;
   font-family: var(--font-body);
   position: relative;
   z-index: 1;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.01em;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
 
   &:hover {
-    color: #f8fafc;
+    color: var(--text-strong, #0d0d0f);
+    border-bottom-color: var(--border-strong, rgba(20, 20, 22, 0.32));
   }
 
   &--active {
-    color: #a5b4fc !important;
-
-    svg {
-      opacity: 1 !important;
-    }
-  }
-
-  svg {
-    margin-right: 7px;
-    opacity: 0.6;
-    transition: opacity 0.2s ease;
-  }
-
-  &:hover svg {
-    opacity: 1;
+    color: var(--text-strong, #0d0d0f) !important;
+    border-bottom-color: var(--accent, #d1481d);
   }
 
   @media (max-width: 768px) {
     margin-left: 0;
-    margin-bottom: 28px;
-    font-size: clamp(1.2em, 4vw, 1.5em);
-    color: rgba(248, 250, 252, 0.7);
+    margin-bottom: 26px;
+    font-size: clamp(1.3em, 5vw, 1.7em);
+    font-family: var(--font-display);
+    font-stretch: 112%;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--text, #1a1a1d);
   }
 }
 
@@ -134,93 +109,14 @@
   @media (max-width: 768px) {
     display: block;
     position: absolute;
-    top: 12px;
+    top: 14px;
     right: 20px;
     z-index: 1001;
-    color: rgba(248, 250, 252, 0.7);
-  }
-}
-
-.button {
-  display: flex;
-  align-items: center;
-  margin-left: 32px;
-  padding: 8px 16px;
-  border: 1px solid rgba(165, 180, 252, 0.35);
-  background: rgba(99, 102, 241, 0.08);
-  color: #a5b4fc;
-  text-decoration: none;
-  font-size: clamp(0.85em, 1.3vw, 0.95em);
-  transition: all 0.2s ease;
-  font-family: var(--font-body);
-  border-radius: 8px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  position: relative;
-  z-index: 1;
-
-  &:hover {
-    background: rgba(99, 102, 241, 0.18);
-    color: #c7d2fe;
-    border-color: rgba(165, 180, 252, 0.6);
-    box-shadow: 0 2px 12px rgba(99, 102, 241, 0.2);
-  }
-
-  svg {
-    margin-right: 7px;
-    transition: transform 0.2s ease;
-  }
-
-  &:hover svg {
-    transform: scale(1.1) rotate(5deg);
-  }
-
-  @media (max-width: 768px) {
-    margin-left: 0;
-    margin-bottom: 24px;
-    font-size: clamp(1.2em, 4vw, 1.5em);
-    padding: 12px 24px;
+    color: var(--text-strong, #0d0d0f);
   }
 }
 
 .close-icon {
   display: block;
   z-index: 1002;
-}
-
-// Site light/dark toggle — sits at the end of the nav. Base (dark) styling; the
-// light theme retints it via styles/light.scss.
-.site-theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 24px;
-  width: 38px;
-  height: 38px;
-  border-radius: 9px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(248, 250, 252, 0.75);
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
-  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-
-  svg {
-    width: 1.05em;
-    height: 1.05em;
-  }
-
-  &:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.09);
-    border-color: rgba(255, 255, 255, 0.28);
-  }
-
-  @media (max-width: 768px) {
-    margin-left: 0;
-    margin-top: 8px;
-    width: 46px;
-    height: 46px;
-  }
 }
