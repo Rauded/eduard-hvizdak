@@ -144,27 +144,27 @@ const RightContainer = styled.div`
   }
 `;
 
-// The terminal window in the brand navy instead of stark black, so the dark
-// object belongs to the same palette as the wave and the buttons. Hovering
-// lifts the card and brightens the glyphs.
+// Transparent glass terminal: the halftone wave shows through the window, so
+// the frame is just hairlines and a light blur, and TARS carries the color.
 const TerminalWindow = styled.div`
   width: 90%;
   max-width: 700px;
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  background: #0f1f44;
-  box-shadow:
-    0 8px 32px rgba(15, 31, 68, 0.22),
-    0 2px 8px rgba(15, 31, 68, 0.14);
-  border: 1px solid rgba(195, 210, 234, 0.14);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  background: rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow: var(--shadow-card, 0 1px 2px rgba(14, 19, 32, 0.05), 0 8px 24px rgba(14, 19, 32, 0.05));
+  border: 1px solid var(--border, #e6e9ec);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
 
   &:hover {
     transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.6);
     box-shadow:
-      0 14px 40px rgba(15, 31, 68, 0.28),
-      0 3px 10px rgba(15, 31, 68, 0.16);
+      0 14px 40px rgba(14, 19, 32, 0.10),
+      0 3px 10px rgba(14, 19, 32, 0.06);
   }
 `;
 
@@ -173,8 +173,8 @@ const TerminalBar = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #16295a;
-  border-bottom: 1px solid rgba(10, 21, 48, 0.6);
+  background: rgba(246, 246, 246, 0.55);
+  border-bottom: 1px solid var(--border, #e6e9ec);
   position: relative;
 `;
 
@@ -189,8 +189,8 @@ const TrafficDot = styled.span`
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: rgba(138, 165, 216, 0.35);
-  border: 1px solid rgba(195, 210, 234, 0.25);
+  background: rgba(138, 165, 216, 0.3);
+  border: 1px solid rgba(63, 91, 160, 0.35);
 `;
 
 const TerminalTabBar = styled.div`
@@ -204,17 +204,17 @@ const TerminalTabBar = styled.div`
 const TerminalTab = styled.div`
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: rgba(195, 210, 234, 0.75);
+  color: var(--text-faint, #7484a0);
   letter-spacing: 0.04em;
   padding: 4px 16px;
-  background: rgba(195, 210, 234, 0.07);
+  background: rgba(255, 255, 255, 0.65);
   border-radius: 4px;
-  border: 1px solid rgba(195, 210, 234, 0.14);
+  border: 1px solid var(--border, #e6e9ec);
 `;
 
 const TerminalBody = styled.div`
   padding: 0;
-  background: #0a1530;
+  background: transparent;
   position: relative;
   overflow: hidden;
 `;
@@ -227,16 +227,17 @@ const TarsContainer = styled.div`
   align-items: flex-end;
 `;
 
-// Gray glyphs tinted toward the pale navy of the ramp so TARS reads as part
-// of the palette; hover brings him up to near-white.
+// On the transparent window TARS carries the color himself: the gray-on-
+// transparency glyphs are remapped to solid brand navy (tested filter chain),
+// deepening slightly on hover.
 const TarsImage = styled.img`
   width: 100%;
   display: block;
-  filter: sepia(1) saturate(1.6) hue-rotate(190deg) brightness(1.02);
+  filter: brightness(0) saturate(100%) invert(14%) sepia(31%) saturate(2274%) hue-rotate(200deg) brightness(93%) contrast(97%);
   transition: filter 0.25s ease;
 
   ${TerminalWindow}:hover & {
-    filter: sepia(0.5) saturate(1.3) hue-rotate(190deg) brightness(1.18);
+    filter: brightness(0) saturate(100%) invert(10%) sepia(35%) saturate(2600%) hue-rotate(202deg) brightness(85%) contrast(100%);
   }
 `;
 
@@ -245,14 +246,14 @@ const TerminalStatusBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #16295a;
-  border-top: 1px solid rgba(195, 210, 234, 0.08);
+  background: rgba(246, 246, 246, 0.55);
+  border-top: 1px solid var(--border, #e6e9ec);
 `;
 
 const StatusText = styled.span`
   font-family: var(--font-mono);
   font-size: 0.55rem;
-  color: rgba(195, 210, 234, 0.45);
+  color: var(--text-faint, #7484a0);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 `;
@@ -262,7 +263,7 @@ const StatusDot = styled.span`
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #8aa5d8;
+  background: var(--status-good, #1f8f4e);
   margin-right: 6px;
 `;
 
