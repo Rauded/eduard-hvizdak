@@ -150,7 +150,7 @@ const RightContainer = styled.div`
 // no terminal window, no caption. Hover deepens the ink slightly.
 const TarsStage = styled.div`
   width: 100%;
-  max-width: 760px;
+  max-width: 460px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -182,6 +182,8 @@ const TarsStage = styled.div`
 
 const TarsImage = styled.img`
   width: 100%;
+  max-height: 66vh;
+  object-fit: contain;
   display: block;
   transition: filter 0.25s ease;
 `;
@@ -207,7 +209,7 @@ const Hero: React.FC = () => {
       <RightContainer>
         <TarsStage>
           <TarsImage
-            src={`${process.env.PUBLIC_URL}/ascii_navy_ink_hd.gif`}
+            src={`${process.env.PUBLIC_URL}/tars_halftone_navy.gif`}
             alt="TARS walking ASCII art"
           />
         </TarsStage>
