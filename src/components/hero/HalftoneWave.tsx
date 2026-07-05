@@ -53,6 +53,12 @@ const HalftoneWave: React.FC = () => {
     let height = 0;
     let dpr = 1;
     let last = 0;
+    // Pointer state for the hover ripple; lags the cursor slightly so the
+    // swell feels physical instead of glued to the pointer.
+    let mx = -1e4;
+    let my = -1e4;
+    let px = -1e4;
+    let py = -1e4;
 
     const resize = () => {
       const rect = canvas.getBoundingClientRect();
@@ -95,11 +101,20 @@ const HalftoneWave: React.FC = () => {
               if (v > intensity) intensity = v;
             }
           }
+          // Hover ripple: dots near the pointer swell and darken, and the
+          // cursor can wake dots just outside a ribbon's dithered edge.
+          const dxm = x - px;
+          const dym = y - py;
+          const md2 = dxm * dxm + dym * dym;
+          const boost = md2 < 32400 ? Math.exp(-md2 / 9000) : 0; // 180px radius
+          if (boost > 0.02 && intensity > 0) {
+            intensity = Math.min(1, intensity + boost * 0.7);
+          }
           if (intensity <= 0.03) continue;
           // Bayer threshold gives the dithered edge instead of a smooth fade.
           const threshold = (BAYER[xi % 4][yi % 4] + 0.5) / 16;
           if (intensity < threshold) continue;
-          const r = 0.8 + intensity * 1.0;
+          const r = 0.8 + intensity * 1.0 + boost * 1.4;
           ctx.fillStyle = `rgba(${NAVY}, ${0.16 + intensity * 0.42})`;
           ctx.beginPath();
           ctx.arc(x, y, r, 0, Math.PI * 2);
@@ -114,6 +129,9 @@ const HalftoneWave: React.FC = () => {
       raf = requestAnimationFrame(loop);
       if (now - last < 33) return; // ~30fps is plenty for a slow drift
       last = now;
+      // Ease the ripple center toward the real pointer position.
+      px += (mx - px) * 0.18;
+      py += (my - py) * 0.18;
       draw(now / 1000);
     };
 
@@ -128,10 +146,27 @@ const HalftoneWave: React.FC = () => {
       resize();
       if (reduced) draw(0);
     };
+    // The canvas keeps pointer-events: none so buttons stay clickable; track
+    // the pointer over the whole hero instead and map into canvas space.
+    const onMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      mx = e.clientX - rect.left;
+      my = e.clientY - rect.top;
+    };
+    const onLeave = () => {
+      mx = -1e4;
+      my = -1e4;
+    };
     window.addEventListener('resize', onResize);
+    if (!reduced) {
+      window.addEventListener('mousemove', onMove);
+      window.addEventListener('mouseout', onLeave);
+    }
     return () => {
       cancelAnimationFrame(raf);
       window.removeEventListener('resize', onResize);
+      window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('mouseout', onLeave);
     };
   }, []);
 

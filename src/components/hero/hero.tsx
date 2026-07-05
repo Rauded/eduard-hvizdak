@@ -144,19 +144,28 @@ const RightContainer = styled.div`
   }
 `;
 
-// The one deliberate dark object on the light page: a dark terminal window,
-// same treatment as the shipped light mode.
+// The terminal window in the brand navy instead of stark black, so the dark
+// object belongs to the same palette as the wave and the buttons. Hovering
+// lifts the card and brightens the glyphs.
 const TerminalWindow = styled.div`
   width: 90%;
   max-width: 700px;
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  background: #18181b;
+  background: #0f1f44;
   box-shadow:
-    0 8px 32px rgba(14, 19, 32, 0.28),
-    0 2px 8px rgba(14, 19, 32, 0.16);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+    0 8px 32px rgba(15, 31, 68, 0.22),
+    0 2px 8px rgba(15, 31, 68, 0.14);
+  border: 1px solid rgba(195, 210, 234, 0.14);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 14px 40px rgba(15, 31, 68, 0.28),
+      0 3px 10px rgba(15, 31, 68, 0.16);
+  }
 `;
 
 const TerminalBar = styled.div`
@@ -164,8 +173,8 @@ const TerminalBar = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #232326;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  background: #16295a;
+  border-bottom: 1px solid rgba(10, 21, 48, 0.6);
   position: relative;
 `;
 
@@ -175,12 +184,13 @@ const TrafficLights = styled.div`
   align-items: center;
 `;
 
-const TrafficDot = styled.span<{ color: string }>`
-  width: 12px;
-  height: 12px;
+// Muted navy dots instead of macOS candy colors; quieter, same affordance.
+const TrafficDot = styled.span`
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
-  background: ${(props) => props.color};
-  box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+  background: rgba(138, 165, 216, 0.35);
+  border: 1px solid rgba(195, 210, 234, 0.25);
 `;
 
 const TerminalTabBar = styled.div`
@@ -194,17 +204,17 @@ const TerminalTabBar = styled.div`
 const TerminalTab = styled.div`
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(195, 210, 234, 0.75);
   letter-spacing: 0.04em;
   padding: 4px 16px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(195, 210, 234, 0.07);
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(195, 210, 234, 0.14);
 `;
 
 const TerminalBody = styled.div`
   padding: 0;
-  background: #0f0f12;
+  background: #0a1530;
   position: relative;
   overflow: hidden;
 `;
@@ -217,11 +227,17 @@ const TarsContainer = styled.div`
   align-items: flex-end;
 `;
 
-// Light gray glyphs on the dark terminal body: no filter needed.
+// Gray glyphs tinted toward the pale navy of the ramp so TARS reads as part
+// of the palette; hover brings him up to near-white.
 const TarsImage = styled.img`
   width: 100%;
   display: block;
-  filter: grayscale(20%) contrast(1.1);
+  filter: sepia(1) saturate(1.6) hue-rotate(190deg) brightness(1.02);
+  transition: filter 0.25s ease;
+
+  ${TerminalWindow}:hover & {
+    filter: sepia(0.5) saturate(1.3) hue-rotate(190deg) brightness(1.18);
+  }
 `;
 
 const TerminalStatusBar = styled.div`
@@ -229,14 +245,14 @@ const TerminalStatusBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #1c1c1f;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  background: #16295a;
+  border-top: 1px solid rgba(195, 210, 234, 0.08);
 `;
 
 const StatusText = styled.span`
   font-family: var(--font-mono);
   font-size: 0.55rem;
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(195, 210, 234, 0.45);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 `;
@@ -246,7 +262,7 @@ const StatusDot = styled.span`
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #4ade80;
+  background: #8aa5d8;
   margin-right: 6px;
 `;
 
@@ -269,9 +285,9 @@ const Hero: React.FC = () => {
         <TerminalWindow>
           <TerminalBar>
             <TrafficLights>
-              <TrafficDot color="#ff5f57" />
-              <TrafficDot color="#febc2e" />
-              <TrafficDot color="#28c840" />
+              <TrafficDot />
+              <TrafficDot />
+              <TrafficDot />
             </TrafficLights>
             <TerminalTabBar>
               <TerminalTab>TARS · patrol module</TerminalTab>
