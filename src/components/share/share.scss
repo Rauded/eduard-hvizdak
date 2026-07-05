@@ -1,11 +1,11 @@
 // ═══════════════════════════════════════════════════════════════
 //  Share Preview (internal tool)
 // ═══════════════════════════════════════════════════════════════
-$text: #f8fafc;
+$text: var(--text-strong);
 $dim: rgba(248, 250, 252, 0.5);
 $mid: rgba(248, 250, 252, 0.72);
 $border: rgba(255, 255, 255, 0.09);
-$accent: #a5b4fc;
+$accent: var(--accent);
 $ui: var(--font-body);
 
 .share-preview {

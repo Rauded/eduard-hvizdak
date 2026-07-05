@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap, LuMapPin, LuWrench, LuArrowUpRight, LuClock, LuTrendingUp } from 'react-icons/lu';
+import { LuBrain, LuTimer, LuFlame, LuMonitorSmartphone, LuZap, LuWrench, LuArrowUpRight, LuTrendingUp } from 'react-icons/lu';
 import { FaYoutube, FaGithub, FaLinkedinIn, FaXTwitter, FaPlay } from 'react-icons/fa6';
 import Seo from '../../seo/Seo';
 import AgentsRunning from './AgentsRunning';
@@ -311,6 +311,9 @@ const NowPage: React.FC = () => {
       <header className="now-hero">
         <span className="now-hero__kicker">/now</span>
         <h1 className="now-hero__title">What I'm doing now</h1>
+        <p className="now-hero__meta" title="My local time in Brno">
+          {LOCATION} · {brnoClock(clock)}
+        </p>
       </header>
 
       <section className="now-focus" aria-label="What I'm focused on right now">
@@ -350,9 +353,7 @@ const NowPage: React.FC = () => {
                 </div>
                 <p className="now-build__tag">{p.tagline}</p>
                 <div className="now-build__foot">
-                  <span className="now-build__status">
-                    <span className="now-build__dot" aria-hidden="true" />{p.status}
-                  </span>
+                  <span className="now-build__status">{p.status}</span>
                   {s && s.impressions > 0 && (
                     <span
                       className="now-build__metric"
@@ -570,10 +571,6 @@ const NowPage: React.FC = () => {
       )}
 
       <footer className="now-metafoot">
-        <span className="now-hero__loc"><LuMapPin /> {LOCATION}</span>
-        <span className="now-hero__mdot" aria-hidden="true" />
-        <span className="now-hero__loc" title="My local time in Brno"><LuClock /> {brnoClock(clock)}</span>
-        <span className="now-hero__mdot" aria-hidden="true" />
         <span className="now-hero__updated">Updated {LAST_UPDATED}</span>
       </footer>
     </div>

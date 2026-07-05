@@ -22,17 +22,12 @@ const Figure: React.FC<{ m: Media }> = ({ m }) => (
   </figure>
 );
 
-const ChapterSection: React.FC<{ c: Chapter; index: number }> = ({ c, index }) => {
-  const style = { '--accent': c.accent } as React.CSSProperties;
+const ChapterSection: React.FC<{ c: Chapter }> = ({ c }) => {
   return (
-    <section className="chapter" id={c.id} style={style}>
+    <section className="chapter" id={c.id}>
       <div className="chapter__head">
-        <span className="chapter__num">{String(index + 1).padStart(2, '0')}</span>
-        <div>
-          <span className="chapter__cat">{c.category}</span>
-          <h2 className="chapter__title">{c.title}</h2>
-          <p className="chapter__lead">{c.lead}</p>
-        </div>
+        <h2 className="chapter__title">{c.title}</h2>
+        <p className="chapter__lead">{c.lead}</p>
       </div>
 
       {c.media.length > 0 && <Figure m={c.media[0]} />}
@@ -68,31 +63,28 @@ const ThingsPage: React.FC = () => {
       />
 
       <header className="things-hero">
-        <span className="things-hero__kicker">Updated {LAST_UPDATED}</span>
         <h1 className="things-hero__title">Tech I love</h1>
         <p className="things-hero__lead">
           The gear I actually use every day, one piece at a time. What it is like to live with, what
           I like and what I do not, and why it earns a permanent spot in my setup. With photos and
           clips to go with it.
         </p>
+        <p className="things-hero__meta">Updated {LAST_UPDATED}</p>
       </header>
 
       <nav className="things-index" aria-label="Chapters">
         <span className="things-index__label">Chapters</span>
         <ol className="things-index__list">
-          {CHAPTERS.map((c, i) => (
+          {CHAPTERS.map((c) => (
             <li key={c.id}>
-              <a href={`#${c.id}`}>
-                <span className="things-index__num">{String(i + 1).padStart(2, '0')}</span>
-                {c.title}
-              </a>
+              <a href={`#${c.id}`}>{c.title}</a>
             </li>
           ))}
         </ol>
       </nav>
 
       <div className="chapters">
-        {CHAPTERS.map((c, i) => <ChapterSection c={c} index={i} key={c.id} />)}
+        {CHAPTERS.map((c) => <ChapterSection c={c} key={c.id} />)}
       </div>
     </article>
   );

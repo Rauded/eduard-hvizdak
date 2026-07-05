@@ -2,11 +2,6 @@
 //  Blog — listing feed & Medium-style reading experience
 // ═══════════════════════════════════════════════════════════════
 
-$text: #f8fafc;
-$text-dim: rgba(248, 250, 252, 0.45);
-$text-mid: rgba(248, 250, 252, 0.75);
-$border: rgba(255, 255, 255, 0.07);
-
 $ui-font: var(--font-body);
 
 // ─── Shared ─────────────────────────────────────────────────────
@@ -14,7 +9,7 @@ $ui-font: var(--font-body);
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--text-soft, #{$text-dim});
+  color: var(--text-muted);
   text-decoration: none;
   font-size: 0.78em;
   letter-spacing: 0.07em;
@@ -22,7 +17,7 @@ $ui-font: var(--font-body);
   font-family: $ui-font;
 
   &:hover {
-    color: var(--text-strong, #{$text});
+    color: var(--text-strong);
   }
 
   svg {
@@ -40,7 +35,7 @@ $ui-font: var(--font-body);
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 600;
-  color: var(--text-soft, #{$text-dim});
+  color: var(--text-muted);
   font-family: $ui-font;
   white-space: nowrap;
 }
@@ -53,17 +48,17 @@ $ui-font: var(--font-body);
   justify-content: center;
   width: 34px;
   height: 34px;
-  border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
+  border: 1px solid var(--border);
   border-radius: 8px;
   background: transparent;
-  color: var(--text-soft, #{$text-dim});
+  color: var(--text-muted);
   cursor: pointer;
   flex: 0 0 auto;
   transition: background 0.2s ease, color 0.2s ease;
 
   &:hover {
-    color: var(--text-strong, #{$text});
-    background: var(--surface, rgba(255, 255, 255, 0.05));
+    color: var(--text-strong);
+    background: var(--surface);
   }
 
   svg {
@@ -73,32 +68,11 @@ $ui-font: var(--font-body);
 
 // ─── Listing page (themeable) ───────────────────────────────────
 .blog-listing {
-  // Dark default — overridden by [data-theme='light'].
-  --bg: #0a0a0f;
-  --text: #ededf2;
-  --text-strong: #ffffff;
-  --text-soft: #9a9aa8;
-  --border: rgba(255, 255, 255, 0.09);
-  --surface: rgba(255, 255, 255, 0.035);
-  --surface-2: rgba(255, 255, 255, 0.06);
-  --accent: #a5b4fc;
-  --media-shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
-
-  &[data-theme='light'] {
-    --bg: #fafaf8;
-    --text: #2b2b31;
-    --text-strong: #14141a;
-    --text-soft: #6b6b78;
-    --border: rgba(0, 0, 0, 0.1);
-    --surface: #ffffff;
-    --surface-2: #f1f1f4;
-    --accent: #2563eb;
-    --media-shadow: 0 16px 38px rgba(20, 20, 45, 0.1);
-  }
+  --media-shadow: var(--shadow-card);
 
   font-family: $ui-font;
   color: var(--text);
-  background: var(--bg);
+  background: var(--page-bg);
   padding-top: 88px;
   min-height: 100vh;
   transition: background 0.25s ease, color 0.25s ease;
@@ -121,7 +95,7 @@ $ui-font: var(--font-body);
     font-size: 0.72em;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--text-soft);
+    color: var(--text-muted);
     margin: 0 0 16px;
   }
 
@@ -136,7 +110,7 @@ $ui-font: var(--font-body);
 
   &__subtitle {
     font-size: 0.9em;
-    color: var(--text-soft);
+    color: var(--text-muted);
     margin: 0 0 52px;
     letter-spacing: 0.02em;
   }
@@ -163,7 +137,7 @@ $ui-font: var(--font-body);
 
   &__thumb {
     overflow: hidden;
-    background: var(--surface-2);
+    background: var(--surface-raised);
 
     img {
       width: 100%;
@@ -210,7 +184,7 @@ $ui-font: var(--font-body);
 
   &__date {
     font-size: 0.72em;
-    color: var(--text-soft);
+    color: var(--text-muted);
     letter-spacing: 0.04em;
   }
 
@@ -225,7 +199,7 @@ $ui-font: var(--font-body);
 
   &__excerpt {
     font-size: 0.88em;
-    color: var(--text-soft);
+    color: var(--text-muted);
     line-height: 1.65;
     margin: 0 0 22px;
     display: -webkit-box;
@@ -304,7 +278,7 @@ $ui-font: var(--font-body);
 
   &__date {
     font-size: 0.72em;
-    color: var(--text-soft);
+    color: var(--text-muted);
     letter-spacing: 0.04em;
   }
 
@@ -320,7 +294,7 @@ $ui-font: var(--font-body);
 
   &__excerpt {
     font-size: 0.82em;
-    color: var(--text-soft);
+    color: var(--text-muted);
     line-height: 1.6;
     margin: 0;
     max-width: 60ch;
@@ -335,7 +309,7 @@ $ui-font: var(--font-body);
     aspect-ratio: 16 / 11;
     border-radius: 12px;
     overflow: hidden;
-    background: var(--surface-2);
+    background: var(--surface-raised);
     border: 1px solid var(--border);
 
     img {
@@ -367,7 +341,7 @@ $ui-font: var(--font-body);
   left: 0;
   width: 100%;
   height: 3px;
-  background: var(--accent, #818cf8);
+  background: var(--accent);
   transform-origin: left center;
   transform: scaleX(0);
   z-index: 1200;
@@ -379,17 +353,8 @@ $ui-font: var(--font-body);
 //  Article (post) page — themeable reading surface
 // ═══════════════════════════════════════════════════════════════
 .blog-post {
-  // Default (dark) palette — overridden by [data-theme].
-  --bg: #0a0a0f;
-  --text: #e7e7ee;
-  --text-strong: #f8fafc;
-  --text-soft: #9a9aa8;
-  --border: rgba(255, 255, 255, 0.08);
-  --surface: rgba(255, 255, 255, 0.035);
-  --accent: #a5b4fc;
-  --accent-soft: rgba(165, 180, 252, 0.16);
-  --media-shadow: 0 10px 30px rgba(0, 0, 0, 0.38);
-  --media-shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.5);
+  --media-shadow: var(--shadow-card);
+  --media-shadow-hover: var(--shadow-card);
 
   // Reading font, switched by [data-font].
   --read-font: 'Source Serif 4', Georgia, Cambria, serif;
@@ -398,23 +363,10 @@ $ui-font: var(--font-body);
 
   font-family: $ui-font;
   color: var(--text);
-  background: var(--bg);
+  background: var(--page-bg);
   padding-top: 88px;
   min-height: 100vh;
   transition: background 0.25s ease, color 0.25s ease;
-
-  &[data-theme='light'] {
-    --bg: #fafaf8;
-    --text: #2b2b31;
-    --text-strong: #15151b;
-    --text-soft: #6b6b78;
-    --border: rgba(0, 0, 0, 0.1);
-    --surface: rgba(0, 0, 0, 0.025);
-    --accent: #2563eb;
-    --accent-soft: rgba(37, 99, 235, 0.1);
-    --media-shadow: 0 14px 36px rgba(20, 20, 45, 0.14);
-    --media-shadow-hover: 0 22px 52px rgba(20, 20, 45, 0.2);
-  }
 
   &[data-font='serif'] {
     --read-font: 'Source Serif 4', Georgia, Cambria, serif;
@@ -450,7 +402,7 @@ $ui-font: var(--font-body);
     letter-spacing: 0.18em;
     text-transform: uppercase;
     font-weight: 600;
-    color: var(--text-soft);
+    color: var(--text-muted);
     margin-bottom: 18px;
   }
 
@@ -498,7 +450,7 @@ $ui-font: var(--font-body);
 
   &__sub {
     font-size: 0.74em;
-    color: var(--text-soft);
+    color: var(--text-muted);
     letter-spacing: 0.04em;
   }
 
@@ -561,7 +513,7 @@ $ui-font: var(--font-body);
       margin: 1.8em 0;
       padding: 0.2em 0 0.2em 1.2em;
       border-left: 3px solid var(--accent);
-      color: var(--text-soft);
+      color: var(--text-muted);
       font-style: italic;
       font-size: 1.05em;
     }
@@ -644,7 +596,7 @@ $ui-font: var(--font-body);
       max-width: 92%;
       font-size: 0.76em;
       line-height: 1.55;
-      color: var(--text-soft);
+      color: var(--text-muted);
       text-align: center;
       font-family: $ui-font;
       letter-spacing: 0.01em;
@@ -654,7 +606,7 @@ $ui-font: var(--font-body);
     p > em:only-child {
       display: inline-block;
       margin-top: 0.5em;
-      color: var(--text-soft);
+      color: var(--text-muted);
     }
   }
 }
@@ -676,7 +628,7 @@ $ui-font: var(--font-body);
       appearance: none;
       border: none;
       background: transparent;
-      color: var(--text-soft);
+      color: var(--text-muted);
       font-family: $ui-font;
       font-size: 0.66rem;
       letter-spacing: 0.06em;
@@ -709,7 +661,7 @@ $ui-font: var(--font-body);
   font-family: $ui-font;
   font-size: 0.78em;
   line-height: 1.75;
-  color: var(--text-soft);
+  color: var(--text-muted);
   letter-spacing: 0.01em;
 
   a {
@@ -752,7 +704,7 @@ $ui-font: var(--font-body);
     font-size: 0.66em;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--text-soft);
+    color: var(--text-muted);
     margin-bottom: 6px;
   }
 
@@ -766,7 +718,7 @@ $ui-font: var(--font-body);
   &__bio {
     font-size: 0.82em;
     line-height: 1.65;
-    color: var(--text-soft);
+    color: var(--text-muted);
     margin: 0 0 14px;
     max-width: 52ch;
   }
@@ -804,7 +756,7 @@ $ui-font: var(--font-body);
     font-size: 0.78em;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--text-soft);
+    color: var(--text-muted);
     margin: 0 0 24px;
     font-family: $ui-font;
   }
@@ -868,7 +820,7 @@ $ui-font: var(--font-body);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     font-weight: 600;
-    color: var(--text-soft);
+    color: var(--text-muted);
   }
 
   &__title {
@@ -882,7 +834,7 @@ $ui-font: var(--font-body);
 
   &__meta {
     font-size: 0.7em;
-    color: var(--text-soft);
+    color: var(--text-muted);
     letter-spacing: 0.04em;
     margin-top: auto;
     padding-top: 4px;
@@ -907,7 +859,7 @@ $ui-font: var(--font-body);
     max-width: 100%;
     max-height: 100%;
     border-radius: 8px;
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+    box-shadow: var(--shadow-card);
   }
 }
 
