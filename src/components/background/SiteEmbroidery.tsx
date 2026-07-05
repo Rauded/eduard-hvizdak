@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 import { useTheme } from '../theme/ThemeContext';
 // Same CC0 water-lily source as the hero bloom (see AsciiDitherBackground).
 import flowerSrc from '../../assets/hero/flower.jpg';
@@ -13,6 +14,11 @@ import flowerSrc from '../../assets/hero/flower.jpg';
 // every section surface) and is masked so the middle of the viewport, where
 // the text columns live, stays completely clear.
 //
+// The hero owns its own composition, so the layer stays invisible while the
+// hero is on screen and fades in smoothly as it scrolls away (opacity is
+// driven by an IntersectionObserver on #home, never a scroll listener).
+// Pages without a hero show it from the top.
+//
 // Toggle via ?bg=off / ?bg=embroidery (src/config/background.ts).
 
 const Canvas = styled.canvas`
@@ -23,7 +29,7 @@ const Canvas = styled.canvas`
   z-index: -1;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.8s ease;
+  transition: opacity 0.25s linear;
   /* only the side bands show; the content column stays clear */
   -webkit-mask-image: linear-gradient(
     90deg,
@@ -43,10 +49,6 @@ const Canvas = styled.canvas`
     rgba(0, 0, 0, 0.9) 90%,
     #000 100%
   );
-
-  &.ready {
-    opacity: 1;
-  }
 
   /* On stacked mobile layouts the text runs edge to edge, so the bands
      would sit behind it. Desktop moment only. */
@@ -88,6 +90,7 @@ const PLACEMENTS = [
 const SiteEmbroidery: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -109,6 +112,12 @@ const SiteEmbroidery: React.FC = () => {
 
     const img = new Image();
     let imgReady = false;
+    // 0 = hero fully visible (layer hidden), 1 = hero gone (layer full on).
+    const heroEl = document.getElementById('home');
+    let heroGone = heroEl ? 0 : 1;
+    const applyOpacity = () => {
+      canvas.style.opacity = imgReady ? String(Math.min(1, Math.max(0, heroGone))) : '0';
+    };
     let cols = 0;
     let rows = 0;
     let cell = 0;
@@ -202,6 +211,7 @@ const SiteEmbroidery: React.FC = () => {
     const loop = (now: number) => {
       rafId = requestAnimationFrame(loop);
       if (now - lastFrame < FRAME_MS) return;
+      if (heroGone <= 0.02) return; // invisible behind the hero: skip the work
       lastFrame = now;
       drawFrame(now);
     };
@@ -221,10 +231,28 @@ const SiteEmbroidery: React.FC = () => {
       imgReady = true;
       layoutCanvas();
       drawFrame(performance.now());
-      canvas.classList.add('ready');
+      applyOpacity();
       startLoop(); // no-op under reduced motion: the single frame above stays
     };
     img.src = flowerSrc;
+
+    // Fade with the hero: intersectionRatio is the visible fraction of the
+    // (viewport-tall) hero, so 1 - ratio tracks the scroll transition.
+    let heroIO: IntersectionObserver | undefined;
+    if (heroEl) {
+      heroIO = new IntersectionObserver(
+        ([entry]) => {
+          heroGone = 1 - entry.intersectionRatio;
+          applyOpacity();
+          // Draw immediately so the fade never reveals a stale frame.
+          if (imgReady && heroGone > 0.02) drawFrame(performance.now());
+        },
+        { threshold: Array.from({ length: 21 }, (_, i) => i / 20) }
+      );
+      heroIO.observe(heroEl);
+    } else {
+      applyOpacity();
+    }
 
     const onVisibility = () => {
       if (document.hidden) stopLoop();
@@ -245,11 +273,12 @@ const SiteEmbroidery: React.FC = () => {
     return () => {
       stopLoop();
       img.onload = null;
+      heroIO?.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
       window.removeEventListener('resize', onResize);
       if (resizeTimer) clearTimeout(resizeTimer);
     };
-  }, [theme]);
+  }, [theme, pathname]);
 
   return <Canvas ref={canvasRef} aria-hidden="true" />;
 };
