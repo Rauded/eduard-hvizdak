@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useTheme } from '../theme/ThemeContext';
-// Source photo: "Back-lit tulip on a black background" by photochem_PA,
-// Wikimedia Commons, CC BY 2.0
-// (https://commons.wikimedia.org/wiki/File:Back-lit_tulip_on_a_black_background_(14020051016).jpg)
-// Chosen for the dither: a few large backlit petals with long smooth
-// gradients survive Bayer dithering far better than fine floret detail.
+// Source photo: "Water lily on black" by ryan baker thefirebaker, Wikimedia
+// Commons, CC0, cropped around the bloom
+// (https://commons.wikimedia.org/wiki/File:Water_lily_on_black_(Unsplash).jpg)
+// Chosen because the whole flower has an iconic, instantly readable
+// silhouette: layered petals radiating from a bright center. Abstract petal
+// macros dither into elegant mush; a full bloom stays a flower.
 import flowerSrc from '../../assets/hero/flower.jpg';
 
 // Experimental hero background: the flower photo is re-rendered live as a
@@ -33,14 +34,20 @@ const BgCanvas = styled.canvas`
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.6s ease;
-  /* one focal mass: the field lives around the bloom in the lower right and
-     dissolves before it reaches the headline column. The fine dot pitch is
-     quiet enough to be more present than the old coarse blocks were. */
-  -webkit-mask-image: radial-gradient(105% 120% at 82% 72%, #000 44%, transparent 73%);
-  mask-image: radial-gradient(105% 120% at 82% 72%, #000 44%, transparent 73%);
+  /* one focal mass: the whole bloom sits in the upper right and dissolves
+     softly at its own edges, well before the headline column */
+  -webkit-mask-image: radial-gradient(68% 74% at 79% 38%, #000 55%, transparent 76%);
+  mask-image: radial-gradient(68% 74% at 79% 38%, #000 55%, transparent 76%);
 
   &.ready {
     opacity: 1;
+  }
+
+  /* The composition needs the empty space of the two-column desktop hero; on
+     the stacked mobile layout the bloom lands behind the text, so it stays a
+     desktop moment (and saves the battery work). */
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -182,17 +189,16 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
       if (!imgReady || cols === 0) return;
       const t = (now - start) / 1000;
 
-      // Slow bloom + drift of the source. The tulip's petals sweep out of the
-      // photo's lower right, so anchor that corner to the canvas corner and
-      // let the petal edge arc up toward the middle of the hero.
-      const base = Math.max(cols / img.width, rows / img.height);
-      const scale = base * (1.06 + 0.05 * Math.sin(t * 0.15));
+      // Contain the WHOLE bloom, large, in the upper right of the hero (the
+      // silhouette is the point; never crop the flower). The bloom's center
+      // sits at ~(0.42, 0.42) of the cropped photo. Slow breathing scale plus
+      // a slight drift keep it alive.
+      const base = Math.min((cols * 0.62) / img.width, (rows * 0.96) / img.height);
+      const scale = base * (1.0 + 0.035 * Math.sin(t * 0.15));
       const dw = img.width * scale;
       const dh = img.height * scale;
-      const dx = cols - dw + 1.5 * Math.sin(t * 0.07);
-      // Push the crop down so the petal crown arcs through the middle of the
-      // hero with dark space above it, instead of filling the whole frame.
-      const dy = rows - dh + rows * 0.22 + Math.cos(t * 0.05);
+      const dx = cols * 0.79 - dw * 0.42 + 1.5 * Math.sin(t * 0.07);
+      const dy = rows * 0.4 - dh * 0.42 + Math.cos(t * 0.05);
       offCtx.clearRect(0, 0, cols, rows);
       offCtx.drawImage(img, dx, dy, dw, dh);
       const data = offCtx.getImageData(0, 0, cols, rows).data;
