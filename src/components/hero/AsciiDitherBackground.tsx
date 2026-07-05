@@ -103,17 +103,18 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Brand-blue palette per theme: rgba tuples feed the dither's ImageData
-    // directly (base tone for the body of the bloom, hi for petal highlights).
+    // Navy palette for the humandelta experiment: rgba tuples feed the
+    // dither's ImageData directly (base tone for the body of the bloom, hi
+    // for petal highlights). Retinted from the original brand blue.
     const palette =
       theme === 'dark'
         ? {
-            base: [96, 165, 250, 82] as const, // #60a5fa at 0.32
-            hi: [147, 197, 253, 210] as const, // #93c5fd at 0.82
+            base: [92, 123, 192, 82] as const, // #5c7bc0 at 0.32
+            hi: [138, 165, 216, 210] as const, // #8aa5d8 at 0.82
           }
         : {
-            base: [76, 118, 235, 120] as const, // soft blue at 0.47
-            hi: [37, 99, 235, 205] as const, // #2563eb at 0.8
+            base: [63, 91, 160, 120] as const, // #3f5ba0 at 0.47
+            hi: [24, 46, 95, 205] as const, // #182e5f at 0.8
           };
 
     const off = document.createElement('canvas');

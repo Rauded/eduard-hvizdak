@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { LuArrowRight } from 'react-icons/lu';
 import HalftoneWave from './HalftoneWave';
+import AsciiDitherBackground from './AsciiDitherBackground';
 
 // ════════════════════════════════════════════════════════════════════════════
 // Hero, humandelta experiment: the pure reference composition. Centered serif
@@ -45,6 +46,22 @@ const Content = styled.div`
   align-items: center;
   text-align: center;
   max-width: 760px;
+
+  /* Quiet zone: a soft page-color halo keeps the wave and bloom from ever
+     running through the headline. */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -22% -18%;
+    background: radial-gradient(
+      ellipse 62% 58% at 50% 46%,
+      var(--page-bg, #ffffff) 0%,
+      var(--page-bg, #ffffff) 42%,
+      transparent 74%
+    );
+    pointer-events: none;
+    z-index: -1;
+  }
 `;
 
 // Full serif headline, humandelta style (their h1 is the serif face, navy).
@@ -116,6 +133,7 @@ const Hero: React.FC = () => {
       <WaveLayer>
         <HalftoneWave />
       </WaveLayer>
+      <AsciiDitherBackground />
       <Content>
         <Headline>I'm Eduard Hvizdak.</Headline>
         <CtaRow>
