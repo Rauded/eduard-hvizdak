@@ -229,6 +229,23 @@ html[data-theme] body *::after {
   --shadow-accent: 0 1px 2px rgba(22, 22, 26, 0.12);
 }
 
+/* ─── Canvas presets (light mode only) ──────────────────────────────────────
+   'paper' swaps the cool off-white canvas for a warm beige/paper look.
+   Preview live with ?canvas=paper (?canvas=reset to clear) - see
+   src/config/canvas.ts. Dark mode is unaffected. */
+:root[data-canvas='paper'][data-theme='light'] {
+  --page-bg: #f3eee4;
+  --surface: #faf7f0;
+  --surface-sunken: #ebe4d6;
+  --text: #1d1a13;
+  --text-strong: #12100a;
+  --text-muted: rgba(29, 26, 19, 0.68);
+  --text-faint: rgba(29, 26, 19, 0.47);
+  --border: rgba(29, 26, 19, 0.11);
+  --border-strong: rgba(29, 26, 19, 0.18);
+  --shadow-card: 0 1px 2px rgba(29, 26, 19, 0.05), 0 10px 30px rgba(29, 26, 19, 0.07);
+}
+
 /* Light-mode values for the accent presets (darker, canvas-appropriate). */
 :root[data-accent='emerald'][data-theme='light'] { --accent: #059669; --accent-strong: #047857; }
 :root[data-accent='teal'][data-theme='light']    { --accent: #0d9488; --accent-strong: #0f766e; }

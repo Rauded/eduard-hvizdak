@@ -46,7 +46,7 @@
   }
 
   &[data-theme='light'] {
-    --bg: #fafaf8;
+    --bg: var(--page-bg);
     --kicker: var(--accent);
     --heading: #0b0b0f;
     --text: #1f2937;

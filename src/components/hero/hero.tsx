@@ -178,10 +178,31 @@ const TarsContainer = styled.div`
   will-change: transform;
 `;
 
+// Accent tinting: the gif's glyphs are neutral gray, so when an accent preset
+// is active the ASCII is tinted toward it (sepia gives a warm base hue of
+// roughly 38deg; hue-rotate travels from there). Default blue stays monochrome.
+const TARS_TINT_HUES: Record<string, string> = {
+  emerald: '122deg',
+  teal: '136deg',
+  amber: '0deg',
+  rose: '312deg',
+};
+
+const tarsTintRules = (invert: boolean) =>
+  Object.entries(TARS_TINT_HUES)
+    .map(
+      ([preset, hue]) => `
+  html${invert ? "[data-theme='light']" : ''}[data-accent='${preset}'] & {
+    filter: ${invert ? 'invert(1) ' : ''}sepia(1) saturate(2.6) hue-rotate(${hue}) ${invert ? 'brightness(0.85)' : 'brightness(1.05)'} contrast(1.05);
+  }`
+    )
+    .join('\n');
+
 const TarsImage = styled.img`
   width: 100%;
   display: block;
   filter: grayscale(20%) contrast(1.1);
+  ${tarsTintRules(false)}
 `;
 
 // ─── Frameless TARS variants (?tars=card|bare|floor) ─────────────────
@@ -191,6 +212,7 @@ const BareTarsImage = styled(TarsImage)`
   html[data-theme='light'] & {
     filter: invert(1) grayscale(20%) contrast(1.1);
   }
+  ${tarsTintRules(true)}
 `;
 
 // Quiet dark tile: keeps TARS a dark focal object without the window chrome.

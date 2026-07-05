@@ -32,7 +32,7 @@
   }
 
   &[data-theme='light'] {
-    --bg: #fafaf8;
+    --bg: var(--page-bg);
     // Undo the dark-mode shadowing above: on light, the page accent is the
     // global light accent (inherited computed values, so presets still apply).
     --accent: var(--accent-text-soft);
