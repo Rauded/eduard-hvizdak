@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { LuArrowRight } from 'react-icons/lu';
 import HalftoneWave from './HalftoneWave';
@@ -176,18 +176,142 @@ const Ruler: React.FC<{ side: 'left' | 'right' }> = ({ side }) => (
   </RulerRail>
 );
 
-// Whisper line under the CTAs, mono small caps (bookmark heroes pair the
-// primary button with one quiet availability fact).
-const CtaNote = styled.div`
-  margin-top: 18px;
+// Status pill framed by hairline wings with square end caps (Barqen hero
+// pattern from the bookmarks). The one green dot on the page.
+const StatusRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+`;
+
+const StatusWing = styled.span<{ $flip?: boolean }>`
+  position: relative;
+  width: 72px;
+  height: 1px;
+  background: var(--border, #e6e9ec);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    ${(p) => (p.$flip ? 'right' : 'left')}: 0;
+    width: 5px;
+    height: 5px;
+    background: var(--page-bg, #ffffff);
+    border: 1px solid var(--border, #e6e9ec);
+  }
+
+  @media (max-width: 768px) {
+    width: 36px;
+  }
+`;
+
+const StatusPill = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border, #e6e9ec);
+  background: #ffffff;
   font-family: var(--font-mono);
   font-size: 0.62rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-faint, #7484a0);
+  color: var(--text-muted, #3e4b66);
+  white-space: nowrap;
 `;
 
+const StatusDot = styled.span`
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--status-good, #1f8f4e);
+`;
+
+// Keyboard-shortcut chips inside the CTAs (bookmark pattern; the keys work).
+const KeyChip = styled.span<{ $ghost?: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  border: 1px solid ${(p) => (p.$ghost ? 'var(--border, #e6e9ec)' : 'rgba(255, 255, 255, 0.3)')};
+  background: ${(p) => (p.$ghost ? 'var(--surface, #f6f6f6)' : 'rgba(255, 255, 255, 0.14)')};
+  color: ${(p) => (p.$ghost ? 'var(--text-faint, #7484a0)' : 'rgba(255, 255, 255, 0.9)')};
+  margin-left: 4px;
+
+  /* No keyboard on touch layouts; the chip would just be noise. */
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
+// Figma-style corner ticks marking the content zone (blueprint frame).
+const CornerTick = styled.span<{ $pos: string }>`
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  pointer-events: none;
+  color: var(--border, #e6e9ec);
+  ${(p) => p.$pos};
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: currentColor;
+  }
+  &::before {
+    left: 5px;
+    top: 0;
+    width: 1px;
+    height: 11px;
+  }
+  &::after {
+    left: 0;
+    top: 5px;
+    width: 11px;
+    height: 1px;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+
+const CORNERS = [
+  'top: -26px; left: -34px;',
+  'top: -26px; right: -34px;',
+  'bottom: -26px; left: -34px;',
+  'bottom: -26px; right: -34px;',
+];
+
+const scrollToId = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+};
+
 const Hero: React.FC = () => {
+  // Working single-key shortcuts for the CTA chips: P scrolls to projects,
+  // E to contact. Ignored while typing or when a modifier is held.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      if (e.key === 'p' || e.key === 'P') scrollToId('projects');
+      if (e.key === 'e' || e.key === 'E') scrollToId('contact');
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
   return (
     <HeroContainer id="home">
       <WaveLayer>
@@ -197,14 +321,26 @@ const Hero: React.FC = () => {
       <Ruler side="left" />
       <Ruler side="right" />
       <Content>
+        {CORNERS.map((pos) => (
+          <CornerTick key={pos} $pos={pos} aria-hidden="true" />
+        ))}
+        <StatusRow>
+          <StatusWing aria-hidden="true" />
+          <StatusPill>
+            <StatusDot />
+            Accepting new projects
+          </StatusPill>
+          <StatusWing $flip aria-hidden="true" />
+        </StatusRow>
         <Headline>I'm Eduard Hvizdak.</Headline>
         <CtaRow>
           <PrimaryCta href="#projects">
-            View projects <LuArrowRight />
+            View projects <LuArrowRight /> <KeyChip>P</KeyChip>
           </PrimaryCta>
-          <GhostCta href="#contact">Email me</GhostCta>
+          <GhostCta href="#contact">
+            Email me <KeyChip $ghost>E</KeyChip>
+          </GhostCta>
         </CtaRow>
-        <CtaNote>Open for new projects</CtaNote>
       </Content>
     </HeroContainer>
   );
