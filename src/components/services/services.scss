@@ -32,7 +32,7 @@
   }
 
   &[data-theme='light'] {
-    --bg: var(--page-bg);
+    --bg: transparent; // body paints the page color; stay clear for SiteEmbroidery
     // Undo the dark-mode shadowing above: on light, the page accent is the
     // global light accent (inherited computed values, so presets still apply).
     --accent: var(--accent-text-soft);

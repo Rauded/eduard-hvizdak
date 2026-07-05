@@ -85,7 +85,7 @@ $ui-font: var(--font-body);
   --media-shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
 
   &[data-theme='light'] {
-    --bg: var(--page-bg);
+    --bg: transparent; // body paints the page color; stay clear for SiteEmbroidery
     --text: #2b2b31;
     --text-strong: #14141a;
     --text-soft: #6b6b78;
@@ -403,7 +403,7 @@ $ui-font: var(--font-body);
   transition: background 0.25s ease, color 0.25s ease;
 
   &[data-theme='light'] {
-    --bg: var(--page-bg);
+    --bg: transparent; // body paints the page color; stay clear for SiteEmbroidery
     --text: #2b2b31;
     --text-strong: #15151b;
     --text-soft: #6b6b78;

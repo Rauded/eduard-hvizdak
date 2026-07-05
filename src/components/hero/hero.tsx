@@ -10,7 +10,6 @@ const HeroContainer = styled.section`
   flex-direction: column;
   min-height: 100vh;
   padding-top: 100px;
-  background-color: var(--page-bg, #09090b);
   color: var(--text, #fff);
   overflow: hidden;
   font-family: var(--font-body);

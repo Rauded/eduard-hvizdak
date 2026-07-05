@@ -46,7 +46,7 @@
   }
 
   &[data-theme='light'] {
-    --bg: var(--page-bg);
+    --bg: transparent; // body paints the page color; stay clear for SiteEmbroidery
     --kicker: var(--accent);
     --heading: #0b0b0f;
     --text: #1f2937;

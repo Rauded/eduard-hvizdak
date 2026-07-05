@@ -6,6 +6,9 @@ import posthog from 'posthog-js';
 import { analyticsEnabled } from './analytics';
 import { ThemeProvider } from './components/theme/ThemeContext';
 import { applyCanvasPreset } from './config/canvas';
+import { getBackgroundPreset } from './config/background';
+// @ts-ignore
+import SiteEmbroidery from './components/background/SiteEmbroidery.tsx';
 import './styles/typography.scss';
 import './styles/light.scss';
 
@@ -29,11 +32,11 @@ import ThingsPage from './components/things/ThingsPage.tsx';
 // @ts-ignore
 import SharePreviewPage from './components/share/SharePreviewPage.tsx';
 
-// Page background is theme-driven: the site-wide light/dark preference sets
-// `data-theme` on <html> (see ThemeProvider), which flips `--page-bg`. In dark
-// the variable is unset, so it falls back to a flat near-black.
+// The page color itself lives on <body> (see index.css), theme-driven via
+// `data-theme` on <html>. The container stays transparent so the fixed
+// SiteEmbroidery layer (z-index -1) can sit between the body color and the
+// content.
 const AppContainer = styled.div`
-  background: var(--page-bg, #09090b);
   min-height: 100vh;
   padding: 0;
   margin: 0;
@@ -78,6 +81,7 @@ const ScrollToTop: React.FC = () => {
 // context, so the header, footer, home, and sub-pages all stay in sync.
 const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <AppContainer>
+    {getBackgroundPreset() === 'embroidery' && <SiteEmbroidery />}
     <Header />
     {children}
     <Footer />
