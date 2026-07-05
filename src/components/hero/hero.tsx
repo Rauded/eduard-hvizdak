@@ -127,6 +127,66 @@ const GhostCta = styled.a`
   }
 `;
 
+// ── Blueprint frame (from Eduard's design bookmarks: hero pages framed like
+// a design canvas, with faint ruler rails and measurement ticks) ────────────
+const RulerRail = styled.div<{ $side: 'left' | 'right' }>`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  ${(p) => p.$side}: calc(var(--container-px, 64px) / 2);
+  width: 1px;
+  background: var(--border, #e6e9ec);
+  z-index: 0;
+  pointer-events: none;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+
+const RulerTick = styled.span<{ $top: number }>`
+  position: absolute;
+  top: ${(p) => p.$top}%;
+  left: -3px;
+  width: 7px;
+  height: 1px;
+  background: var(--border, #e6e9ec);
+`;
+
+const RulerLabel = styled.span<{ $top: number }>`
+  position: absolute;
+  top: calc(${(p) => p.$top}% - 4px);
+  left: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.06em;
+  color: color-mix(in srgb, var(--text-faint, #7484a0) 55%, transparent);
+`;
+
+const TICKS = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+
+const Ruler: React.FC<{ side: 'left' | 'right' }> = ({ side }) => (
+  <RulerRail $side={side} aria-hidden="true">
+    {TICKS.map((t) => (
+      <React.Fragment key={t}>
+        <RulerTick $top={t} />
+        {side === 'left' && t % 20 === 10 && <RulerLabel $top={t}>{t * 8}</RulerLabel>}
+      </React.Fragment>
+    ))}
+  </RulerRail>
+);
+
+// Whisper line under the CTAs, mono small caps (bookmark heroes pair the
+// primary button with one quiet availability fact).
+const CtaNote = styled.div`
+  margin-top: 18px;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint, #7484a0);
+`;
+
 const Hero: React.FC = () => {
   return (
     <HeroContainer id="home">
@@ -134,6 +194,8 @@ const Hero: React.FC = () => {
         <HalftoneWave />
       </WaveLayer>
       <AsciiDitherBackground />
+      <Ruler side="left" />
+      <Ruler side="right" />
       <Content>
         <Headline>I'm Eduard Hvizdak.</Headline>
         <CtaRow>
@@ -142,6 +204,7 @@ const Hero: React.FC = () => {
           </PrimaryCta>
           <GhostCta href="#contact">Email me</GhostCta>
         </CtaRow>
+        <CtaNote>Open for new projects</CtaNote>
       </Content>
     </HeroContainer>
   );
