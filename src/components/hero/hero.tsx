@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { isExpertMode } from '../../config/positioning';
+import { getTarsVariant } from '../../config/tarsVariant';
 
 // Main container for the hero section
 const HeroContainer = styled.section`
@@ -183,6 +184,45 @@ const TarsImage = styled.img`
   filter: grayscale(20%) contrast(1.1);
 `;
 
+// ─── Frameless TARS variants (?tars=card|bare|floor) ─────────────────
+// The gif is light-gray glyphs on a transparent background, so outside a
+// dark container it must invert on the light theme to stay readable.
+const BareTarsImage = styled(TarsImage)`
+  html[data-theme='light'] & {
+    filter: invert(1) grayscale(20%) contrast(1.1);
+  }
+`;
+
+// Quiet dark tile: keeps TARS a dark focal object without the window chrome.
+const CardTile = styled.div`
+  width: 90%;
+  max-width: 700px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0e0e14;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 14px 0;
+`;
+
+const BareStage = styled.div`
+  width: 90%;
+  max-width: 700px;
+  overflow: hidden;
+`;
+
+// Hairline floor under TARS so the bare variant does not float.
+const FloorLine = styled.div`
+  height: 1px;
+  background: rgba(255, 255, 255, 0.16);
+
+  html[data-theme='light'] & {
+    background: rgba(22, 22, 26, 0.18);
+  }
+`;
+
 const TerminalStatusBar = styled.div`
   padding: 4px 12px;
   display: flex;
@@ -268,6 +308,7 @@ const typewriterTexts = [
 const Hero: React.FC = () => {
   const [topLine, setTopLine] = useState('');
   const [currentText, setCurrentText] = useState('');
+  const tarsVariant = getTarsVariant();
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -320,30 +361,53 @@ const Hero: React.FC = () => {
         <TypewriterText>&gt; {currentText}</TypewriterText>
       </LeftContainer>
       <RightContainer>
-        <TerminalWindow>
-          <TerminalBar>
-            <TrafficLights>
-              <TrafficDot color="#ff5f57" />
-              <TrafficDot color="#febc2e" />
-              <TrafficDot color="#28c840" />
-            </TrafficLights>
-            <TerminalTabBar>
-              <TerminalTab>TARS · patrol module</TerminalTab>
-            </TerminalTabBar>
-          </TerminalBar>
-          <TerminalBody>
+        {tarsVariant === 'terminal' && (
+          <TerminalWindow>
+            <TerminalBar>
+              <TrafficLights>
+                <TrafficDot color="#ff5f57" />
+                <TrafficDot color="#febc2e" />
+                <TrafficDot color="#28c840" />
+              </TrafficLights>
+              <TerminalTabBar>
+                <TerminalTab>TARS · patrol module</TerminalTab>
+              </TerminalTabBar>
+            </TerminalBar>
+            <TerminalBody>
+              <TarsContainer>
+                <TarsImage
+                  src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
+                  alt="TARS walking ASCII art"
+                />
+              </TarsContainer>
+            </TerminalBody>
+            <TerminalStatusBar>
+              <StatusText><StatusDot />active</StatusText>
+              <StatusText>patrol module</StatusText>
+            </TerminalStatusBar>
+          </TerminalWindow>
+        )}
+        {tarsVariant === 'card' && (
+          <CardTile>
             <TarsContainer>
               <TarsImage
                 src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
                 alt="TARS walking ASCII art"
               />
             </TarsContainer>
-          </TerminalBody>
-          <TerminalStatusBar>
-            <StatusText><StatusDot />active</StatusText>
-            <StatusText>patrol module</StatusText>
-          </TerminalStatusBar>
-        </TerminalWindow>
+          </CardTile>
+        )}
+        {(tarsVariant === 'bare' || tarsVariant === 'floor') && (
+          <BareStage>
+            <TarsContainer>
+              <BareTarsImage
+                src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
+                alt="TARS walking ASCII art"
+              />
+            </TarsContainer>
+            {tarsVariant === 'floor' && <FloorLine />}
+          </BareStage>
+        )}
       </RightContainer>
     </HeroContainer>
   );
