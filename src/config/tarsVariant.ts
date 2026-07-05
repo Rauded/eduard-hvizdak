@@ -9,6 +9,8 @@
 //   'rose'     → no TARS: the blue halftone flower bloom fills the hero
 //   'combo'    → everything at once: flower bloom behind the hero, and the
 //                terminal's screen becomes a starfield + grid floor scene
+//   'edges'    → embroidery: smaller blooms cropped in from the hero's
+//                edges behind the standard terminal
 //
 // HOW TO CHANGE THE DEFAULT for everyone: flip DEFAULT_VARIANT below.
 //
@@ -16,9 +18,9 @@
 // terminal) to any URL. The choice is remembered as you click around;
 // use ?tars=reset to clear it and fall back to the default.
 
-export type TarsVariant = 'terminal' | 'grid' | 'space' | 'rose' | 'combo';
+export type TarsVariant = 'terminal' | 'grid' | 'space' | 'rose' | 'combo' | 'edges';
 
-const VARIANTS: TarsVariant[] = ['terminal', 'grid', 'space', 'rose', 'combo'];
+const VARIANTS: TarsVariant[] = ['terminal', 'grid', 'space', 'rose', 'combo', 'edges'];
 
 const DEFAULT_VARIANT: TarsVariant = 'terminal';
 

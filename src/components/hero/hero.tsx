@@ -373,6 +373,38 @@ const Hero: React.FC = () => {
   const tarsVariant = getTarsVariant();
   const isRose = tarsVariant === 'rose';
   const isCombo = tarsVariant === 'combo';
+  const isEdges = tarsVariant === 'edges';
+
+  // One terminal, two screens: the flat body, or the starfield+grid scene.
+  const renderTerminal = (scene: boolean) => {
+    const Body = scene ? SceneBody : TerminalBody;
+    return (
+      <TerminalWindow>
+        <TerminalBar>
+          <TrafficLights>
+            <TrafficDot color="#ff5f57" />
+            <TrafficDot color="#febc2e" />
+            <TrafficDot color="#28c840" />
+          </TrafficLights>
+          <TerminalTabBar>
+            <TerminalTab>TARS · patrol module</TerminalTab>
+          </TerminalTabBar>
+        </TerminalBar>
+        <Body>
+          <TarsContainer>
+            <TarsImage
+              src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
+              alt="TARS walking ASCII art"
+            />
+          </TarsContainer>
+        </Body>
+        <TerminalStatusBar>
+          <StatusText><StatusDot />active</StatusText>
+          <StatusText>patrol module</StatusText>
+        </TerminalStatusBar>
+      </TerminalWindow>
+    );
+  };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -420,64 +452,15 @@ const Hero: React.FC = () => {
   return (
     <HeroContainer id="home">
       {(isRose || isCombo) && <AsciiDitherBackground />}
+      {isEdges && <AsciiDitherBackground layout="edges" />}
       <LeftContainer>
         <Headline>{topLine}</Headline>
         <GradientText>I'm Eduard Hvizdak.</GradientText>
         <TypewriterText>&gt; {currentText}</TypewriterText>
       </LeftContainer>
       {!isRose && <RightContainer>
-        {tarsVariant === 'terminal' && (
-          <TerminalWindow>
-            <TerminalBar>
-              <TrafficLights>
-                <TrafficDot color="#ff5f57" />
-                <TrafficDot color="#febc2e" />
-                <TrafficDot color="#28c840" />
-              </TrafficLights>
-              <TerminalTabBar>
-                <TerminalTab>TARS · patrol module</TerminalTab>
-              </TerminalTabBar>
-            </TerminalBar>
-            <TerminalBody>
-              <TarsContainer>
-                <TarsImage
-                  src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
-                  alt="TARS walking ASCII art"
-                />
-              </TarsContainer>
-            </TerminalBody>
-            <TerminalStatusBar>
-              <StatusText><StatusDot />active</StatusText>
-              <StatusText>patrol module</StatusText>
-            </TerminalStatusBar>
-          </TerminalWindow>
-        )}
-        {isCombo && (
-          <TerminalWindow>
-            <TerminalBar>
-              <TrafficLights>
-                <TrafficDot color="#ff5f57" />
-                <TrafficDot color="#febc2e" />
-                <TrafficDot color="#28c840" />
-              </TrafficLights>
-              <TerminalTabBar>
-                <TerminalTab>TARS · patrol module</TerminalTab>
-              </TerminalTabBar>
-            </TerminalBar>
-            <SceneBody>
-              <TarsContainer>
-                <TarsImage
-                  src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
-                  alt="TARS walking ASCII art"
-                />
-              </TarsContainer>
-            </SceneBody>
-            <TerminalStatusBar>
-              <StatusText><StatusDot />active</StatusText>
-              <StatusText>patrol module</StatusText>
-            </TerminalStatusBar>
-          </TerminalWindow>
-        )}
+        {(tarsVariant === 'terminal' || isEdges) && renderTerminal(false)}
+        {isCombo && renderTerminal(true)}
         {tarsVariant === 'grid' && (
           <GridTile>
             <TarsContainer>

@@ -13,7 +13,17 @@ import flowerSrc from '../../assets/hero/flower.jpg';
 // Bayer-dithered halftone (2 to 3 px dots, like a risograph print) in the
 // brand blue, with a slow bloom of the source and a gentle shimmer of the
 // pattern. Ported from the experiment/hero-dither branch (dither mode only;
-// the ASCII glyph mode was tried and dropped); selected via ?tars=rose.
+// the ASCII glyph mode was tried and dropped).
+//
+// Two layouts:
+//   'bloom' (?tars=rose)  → one large bloom, upper right
+//   'edges' (?tars=edges) → smaller blooms cropped by the hero's edges, like
+//     embroidery growing in from the sides; masked so the center stays clear
+//     and drawn at reduced alpha so text and the terminal keep contrast.
+
+interface Props {
+  layout?: 'bloom' | 'edges';
+}
 //
 // The dither renderer writes one cell per ImageData pixel at grid resolution
 // and upscales with image smoothing off, then knocks a 1px grid out of the
@@ -21,7 +31,16 @@ import flowerSrc from '../../assets/hero/flower.jpg';
 // That is dramatically cheaper than per-cell fillRect calls, which is what
 // makes the fine dot pitch affordable.
 
-const BgCanvas = styled.canvas`
+const MASKS = {
+  /* one focal mass: the whole bloom sits in the upper right and dissolves
+     softly at its own edges, well before the headline column */
+  bloom: 'radial-gradient(68% 74% at 79% 38%, #000 55%, transparent 76%)',
+  /* embroidery: only the side bands show, the center of the hero stays clear */
+  edges:
+    'linear-gradient(90deg, #000 0%, rgba(0,0,0,0.85) 12%, transparent 38%, transparent 62%, rgba(0,0,0,0.85) 88%, #000 100%)',
+} as const;
+
+const BgCanvas = styled.canvas<{ $layout: 'bloom' | 'edges' }>`
   position: absolute;
   inset: 0;
   width: 100%;
@@ -30,10 +49,8 @@ const BgCanvas = styled.canvas`
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.6s ease;
-  /* one focal mass: the whole bloom sits in the upper right and dissolves
-     softly at its own edges, well before the headline column */
-  -webkit-mask-image: radial-gradient(68% 74% at 79% 38%, #000 55%, transparent 76%);
-  mask-image: radial-gradient(68% 74% at 79% 38%, #000 55%, transparent 76%);
+  -webkit-mask-image: ${(p) => MASKS[p.$layout]};
+  mask-image: ${(p) => MASKS[p.$layout]};
 
   &.ready {
     opacity: 1;
@@ -73,7 +90,7 @@ const LUM_FLOOR = 0.06;
 // ramps) while dropping the near-black ground below the floor.
 const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.12) * 1.55));
 
-const AsciiDitherBackground: React.FC = () => {
+const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
 
@@ -126,7 +143,7 @@ const AsciiDitherBackground: React.FC = () => {
     let resizeTimer: ReturnType<typeof setTimeout> | undefined;
     const start = performance.now();
 
-    const layout = () => {
+    const layoutCanvas = () => {
       const rect = parent.getBoundingClientRect();
       const w = Math.max(1, Math.round(rect.width));
       const h = Math.max(1, Math.round(rect.height));
@@ -175,18 +192,46 @@ const AsciiDitherBackground: React.FC = () => {
       if (!imgReady || cols === 0) return;
       const t = (now - start) / 1000;
 
-      // Contain the WHOLE bloom, large, in the upper right of the hero (the
-      // silhouette is the point; never crop the flower). The bloom's center
-      // sits at ~(0.42, 0.42) of the cropped photo. Slow breathing scale plus
-      // a slight drift keep it alive.
-      const base = Math.min((cols * 0.62) / img.width, (rows * 0.96) / img.height);
-      const scale = base * (1.0 + 0.035 * Math.sin(t * 0.15));
-      const dw = img.width * scale;
-      const dh = img.height * scale;
-      const dx = cols * 0.79 - dw * 0.42 + 1.5 * Math.sin(t * 0.07);
-      const dy = rows * 0.4 - dh * 0.42 + Math.cos(t * 0.05);
       offCtx.clearRect(0, 0, cols, rows);
-      offCtx.drawImage(img, dx, dy, dw, dh);
+      if (layout === 'bloom') {
+        // Contain the WHOLE bloom, large, in the upper right of the hero (the
+        // silhouette is the point; never crop the flower). The bloom's center
+        // sits at ~(0.42, 0.42) of the cropped photo. Slow breathing scale
+        // plus a slight drift keep it alive.
+        const base = Math.min((cols * 0.62) / img.width, (rows * 0.96) / img.height);
+        const scale = base * (1.0 + 0.035 * Math.sin(t * 0.15));
+        const dw = img.width * scale;
+        const dh = img.height * scale;
+        const dx = cols * 0.79 - dw * 0.42 + 1.5 * Math.sin(t * 0.07);
+        const dy = rows * 0.4 - dh * 0.42 + Math.cos(t * 0.05);
+        offCtx.drawImage(img, dx, dy, dw, dh);
+      } else {
+        // Edge embroidery: blooms anchored on the hero's edges, deliberately
+        // cropped by them (the mask keeps the hero's center clear). Each one
+        // breathes on its own phase; mirrored so they grow inward.
+        const placements = [
+          { cx: 0.0, cy: 0.82, h: 0.56, mirror: true, phase: 0 },
+          { cx: 1.0, cy: 0.14, h: 0.68, mirror: false, phase: 2.1 },
+          { cx: 1.02, cy: 0.92, h: 0.4, mirror: false, phase: 4.2 },
+        ];
+        for (const b of placements) {
+          const bs = ((rows * b.h) / img.height) * (1 + 0.03 * Math.sin(t * 0.13 + b.phase));
+          const dw = img.width * bs;
+          const dh = img.height * bs;
+          const dx = cols * b.cx - dw * 0.42 + Math.sin(t * 0.06 + b.phase);
+          const dy = rows * b.cy - dh * 0.42 + Math.cos(t * 0.05 + b.phase);
+          if (b.mirror) {
+            offCtx.save();
+            offCtx.translate(dx + dw / 2, 0);
+            offCtx.scale(-1, 1);
+            offCtx.translate(-(dx + dw / 2), 0);
+            offCtx.drawImage(img, dx, dy, dw, dh);
+            offCtx.restore();
+          } else {
+            offCtx.drawImage(img, dx, dy, dw, dh);
+          }
+        }
+      }
       const data = offCtx.getImageData(0, 0, cols, rows).data;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -194,8 +239,11 @@ const AsciiDitherBackground: React.FC = () => {
       if (dots) {
         const px = dots.data;
         px.fill(0);
-        const [br, bg, bb, ba] = palette.base;
-        const [hr, hg, hb, ha] = palette.hi;
+        const aScale = layout === 'edges' ? 0.68 : 1;
+        const [br, bg, bb] = palette.base;
+        const ba = Math.round(palette.base[3] * aScale);
+        const [hr, hg, hb] = palette.hi;
+        const ha = Math.round(palette.hi[3] * aScale);
         for (let y = 0; y < rows; y++) {
           const bayerRow = BAYER8[y % 8];
           for (let x = 0; x < cols; x++) {
@@ -247,7 +295,7 @@ const AsciiDitherBackground: React.FC = () => {
 
     img.onload = () => {
       imgReady = true;
-      layout();
+      layoutCanvas();
       drawFrame(performance.now());
       canvas.classList.add('ready');
       startLoop(); // no-op under reduced motion: the single frame above stays
@@ -271,7 +319,7 @@ const AsciiDitherBackground: React.FC = () => {
       if (resizeTimer) clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         if (!imgReady) return;
-        layout();
+        layoutCanvas();
         drawFrame(performance.now());
       }, 150);
     });
@@ -285,9 +333,9 @@ const AsciiDitherBackground: React.FC = () => {
       document.removeEventListener('visibilitychange', onVisibility);
       if (resizeTimer) clearTimeout(resizeTimer);
     };
-  }, [theme]);
+  }, [theme, layout]);
 
-  return <BgCanvas ref={canvasRef} aria-hidden="true" />;
+  return <BgCanvas ref={canvasRef} $layout={layout} aria-hidden="true" />;
 };
 
 export default AsciiDitherBackground;
