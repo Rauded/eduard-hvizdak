@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { LuBookOpen, LuArrowUpRight, LuGithub, LuX } from 'react-icons/lu';
 import { PortfolioProject, CaseStudy } from './projectsData';
+import GhostyReveal from '../effects/GhostyReveal';
 
 // ─── Scroll-reveal hook ──────────────────────────────────────────
 export function useReveal(threshold = 0.12) {
@@ -284,9 +285,11 @@ export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project }
         .filter(Boolean)
         .join(' ')}
     >
-      {/* Media */}
+      {/* Media: bleeds in through the ghosty fog edge as the card scrolls in */}
       <div className="pcard__media">
-        <ProjectMedia project={project} />
+        <GhostyReveal direction="up" duration={1.4}>
+          <ProjectMedia project={project} />
+        </GhostyReveal>
       </div>
 
       {/* Info */}
