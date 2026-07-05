@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { isExpertMode } from '../../config/positioning';
 import { getTarsVariant } from '../../config/tarsVariant';
+import AsciiDitherBackground from './AsciiDitherBackground';
 
 // Main container for the hero section
 const HeroContainer = styled.section`
@@ -394,6 +395,7 @@ const Hero: React.FC = () => {
   const [topLine, setTopLine] = useState('');
   const [currentText, setCurrentText] = useState('');
   const tarsVariant = getTarsVariant();
+  const isRose = tarsVariant === 'rose' || tarsVariant === 'rose-dither';
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -440,12 +442,15 @@ const Hero: React.FC = () => {
 
   return (
     <HeroContainer id="home">
+      {isRose && (
+        <AsciiDitherBackground mode={tarsVariant === 'rose' ? 'ascii' : 'dither'} />
+      )}
       <LeftContainer>
         <Headline>{topLine}</Headline>
         <GradientText>I'm Eduard Hvizdak.</GradientText>
         <TypewriterText>&gt; {currentText}</TypewriterText>
       </LeftContainer>
-      <RightContainer>
+      {!isRose && <RightContainer>
         {tarsVariant === 'terminal' && (
           <TerminalWindow>
             <TerminalBar>
@@ -514,7 +519,7 @@ const Hero: React.FC = () => {
             {tarsVariant === 'floor' && <FloorLine />}
           </BareStage>
         )}
-      </RightContainer>
+      </RightContainer>}
     </HeroContainer>
   );
 };
