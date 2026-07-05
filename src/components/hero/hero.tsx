@@ -1,115 +1,72 @@
 import React from 'react';
 import styled from 'styled-components';
 import { LuArrowRight } from 'react-icons/lu';
-import { isExpertMode } from '../../config/positioning';
+import HalftoneWave from './HalftoneWave';
 
 // ════════════════════════════════════════════════════════════════════════════
-// Hero, humandelta experiment version.
+// Hero, humandelta experiment version 2.
 //
-// Static headline (no typewriter), one Jeju Myeongjo italic accent word,
-// availability badge, two CTAs, and the TARS terminal reworked as a light
-// mockup card in the humandelta dashboard style. The dark terminal variants
-// (?tars=grid|space|combo) and the dither background are intentionally not
-// wired on this branch; the light card is the single hero visual.
+// Faithful to the humandelta.ai hero: a full-bleed animated halftone dot wave
+// canvas with a centered Jeju Myeongjo serif headline over it, one primary
+// pill and one ghost CTA. The TARS mockup card sits centered below the CTAs
+// with a high-contrast navy tint so it clearly reads on white.
 // ════════════════════════════════════════════════════════════════════════════
 
 const HeroContainer = styled.section`
+  position: relative;
+  min-height: 92vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding-top: 100px;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 150px var(--container-px, 64px) 60px;
+  box-sizing: border-box;
   color: var(--text, #0e1320);
   overflow: hidden;
   font-family: var(--font-body);
-  position: relative;
+  border-bottom: 1px solid var(--border, #e6e9ec);
+  background: var(--page-bg, #ffffff);
 
   @media (max-width: 768px) {
-    padding-top: 90px;
-  }
-
-  @media (min-width: 768px) {
-    flex-direction: row;
+    padding: 120px var(--container-px, 24px) 48px;
+    min-height: 88vh;
   }
 `;
 
-const LeftContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  box-sizing: border-box;
-  padding: 40px;
-  text-align: left;
-  margin-top: -6%;
+const WaveLayer = styled.div`
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+`;
+
+const Content = styled.div`
   position: relative;
   z-index: 1;
-
-  @media (max-width: 768px) {
-    padding: 24px;
-    margin-top: 0;
-  }
-
-  @media (min-width: 768px) {
-    flex: 0 0 44%;
-    padding: 60px 40px 60px var(--container-px, 64px);
-  }
-`;
-
-// Availability badge, humandelta credential-pill style. The one place on the
-// page the status green is allowed.
-const AvailabilityBadge = styled.span`
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background: var(--status-good-surface, #eef6f0);
-  border: 1px solid var(--border, #e6e9ec);
-  color: var(--text-muted, #3e4b66);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  margin-bottom: 1.6em;
+  text-align: center;
+  width: 100%;
 `;
 
-const BadgeDot = styled.span`
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--status-good, #1f8f4e);
-`;
-
+// Full serif headline, humandelta style (their h1 is the serif face, navy).
 const Headline = styled.h1`
-  font-size: clamp(2.4em, 7vw, 4.4em);
-  font-weight: 600;
-  color: var(--text-strong, #0a1530);
-  margin: 0 0 0.35em;
-  letter-spacing: -0.03em;
-  line-height: 1.06;
-
-  .serif-accent {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-    color: var(--accent-text, #182e5f);
-  }
-`;
-
-const Subline = styled.p`
-  font-size: clamp(1em, 2vw, 1.15em);
-  color: var(--text-muted, #3e4b66);
-  margin: 0 0 2em;
-  line-height: 1.6;
-  max-width: 34em;
+  font-family: var(--font-serif) !important;
+  font-size: clamp(2.6em, 6.5vw, 4.6em);
+  font-weight: 400;
+  color: var(--accent, #182e5f);
+  margin: 0 0 0.55em;
+  letter-spacing: -0.01em;
+  line-height: 1.12;
 `;
 
 const CtaRow = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 14px;
   flex-wrap: wrap;
+  margin-bottom: 56px;
 `;
 
 const PrimaryCta = styled.a`
@@ -123,7 +80,7 @@ const PrimaryCta = styled.a`
   font-weight: 600;
   font-size: 0.95em;
   text-decoration: none;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease;
 
   svg {
     transition: transform 0.2s ease;
@@ -156,46 +113,10 @@ const GhostCta = styled.a`
   }
 `;
 
-// Trust row: real credentials only, small caps, bounded by a hairline.
-const TrustRow = styled.div`
-  margin-top: 3em;
-  padding-top: 1.2em;
-  border-top: 1px solid var(--border, #e6e9ec);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 22px;
-`;
-
-const TrustItem = styled.span`
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--text-faint, #7484a0);
-  white-space: nowrap;
-`;
-
-const RightContainer = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  min-height: 40vh;
-
-  @media (min-width: 768px) {
-    flex: 0 0 56%;
-    min-height: auto;
-    padding-right: var(--container-px, 64px);
-    box-sizing: border-box;
-  }
-`;
-
-// Light mockup window, humandelta dashboard-card style: white body, raised
-// title bar, hairline border, neutral shadow.
+// Light mockup window, humandelta dashboard-card style.
 const MockupWindow = styled.div`
-  width: 90%;
-  max-width: 700px;
+  width: 100%;
+  max-width: 640px;
   position: relative;
   border-radius: 12px;
   overflow: hidden;
@@ -220,7 +141,6 @@ const TrafficLights = styled.div`
   align-items: center;
 `;
 
-// Neutral slate dots instead of macOS red/yellow/green.
 const TrafficDot = styled.span`
   width: 10px;
   height: 10px;
@@ -264,11 +184,12 @@ const TarsContainer = styled.div`
 `;
 
 // The gif is light gray glyphs on transparency (drawn for a dark terminal).
-// Invert + hue-rotate retints it into the brand navy for the white card.
+// Invert hard and clamp brightness low so the glyphs read as solid dark navy
+// ink on the white card; v1's soft tint was too transparent to see.
 const TarsImage = styled.img`
   width: 100%;
   display: block;
-  filter: invert(1) sepia(1) saturate(2.6) hue-rotate(200deg) brightness(0.5);
+  filter: brightness(0) saturate(100%) invert(14%) sepia(31%) saturate(2274%) hue-rotate(200deg) brightness(93%) contrast(97%);
 `;
 
 const MockupStatusBar = styled.div`
@@ -297,46 +218,20 @@ const StatusDot = styled.span`
   margin-right: 6px;
 `;
 
-// Real credentials only: employers and affiliations from the resume.
-const trustItems = [
-  'European Commission · Digital Fairness Act',
-  'EDUC Alliance',
-  'Masaryk University',
-  'OneBond',
-  'iGalileo',
-];
-
 const Hero: React.FC = () => {
-  const roleLine = isExpertMode()
-    ? 'AI consultant and automation engineer. Python, LangChain, RAG pipelines and production AI agents.'
-    : 'Computer science student at Masaryk University building AI agents and RAG pipelines.';
-
   return (
     <HeroContainer id="home">
-      <LeftContainer>
-        <AvailabilityBadge>
-          <BadgeDot />
-          Available for projects
-        </AvailabilityBadge>
-        <Headline>
-          I'm Eduard Hvizdak.
-          <br />
-          AI that ships to <span className="serif-accent">production</span>.
-        </Headline>
-        <Subline>{roleLine}</Subline>
+      <WaveLayer>
+        <HalftoneWave />
+      </WaveLayer>
+      <Content>
+        <Headline>I'm Eduard Hvizdak.</Headline>
         <CtaRow>
           <PrimaryCta href="#projects">
             View projects <LuArrowRight />
           </PrimaryCta>
           <GhostCta href="#contact">Email me</GhostCta>
         </CtaRow>
-        <TrustRow>
-          {trustItems.map((item) => (
-            <TrustItem key={item}>{item}</TrustItem>
-          ))}
-        </TrustRow>
-      </LeftContainer>
-      <RightContainer>
         <MockupWindow>
           <MockupBar>
             <TrafficLights>
@@ -364,7 +259,7 @@ const Hero: React.FC = () => {
             <StatusText>patrol module</StatusText>
           </MockupStatusBar>
         </MockupWindow>
-      </RightContainer>
+      </Content>
     </HeroContainer>
   );
 };

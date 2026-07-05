@@ -30,8 +30,9 @@ h1, h2, h3,
 .things-hero__title,
 .things-card__name {
   font-family: var(--font-display) !important;
-  letter-spacing: -0.02em;
-  font-weight: 600;
+  letter-spacing: -0.01em;
+  // Jeju Myeongjo ships one weight; anything bolder is faux-bold and smears.
+  font-weight: 400;
 }
 
 // Serif accent: exactly one word inside a display headline gets the Jeju

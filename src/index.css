@@ -181,7 +181,8 @@
   --font-mono: 'RobotoMono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --font-body: var(--font-sans);
-  --font-display: var(--font-sans);
+  /* humandelta sets every display heading in the serif face. */
+  --font-display: var(--font-serif);
 }
 
 /* ─── Accent system (dark-mode defaults) ─────────────────────────────────────
