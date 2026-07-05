@@ -31,6 +31,16 @@ h1, h2, h3,
 .things-card__name {
   font-family: var(--font-display) !important;
   letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+// Serif accent: exactly one word inside a display headline gets the Jeju
+// Myeongjo italic treatment (humandelta style). Use sparingly.
+.serif-accent {
+  font-family: var(--font-serif) !important;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent-text, inherit);
 }
 
 // Technical signature — kept in mono as a tasteful accent, not the whole page.

@@ -11,7 +11,9 @@ export type BackgroundPreset = 'embroidery' | 'off';
 
 const PRESETS: BackgroundPreset[] = ['embroidery', 'off'];
 
-const DEFAULT_BG: BackgroundPreset = 'embroidery';
+// experiment/humandelta: the clean white canvas is the point, so the
+// embroidery layer defaults off. Compare live with ?bg=embroidery.
+const DEFAULT_BG: BackgroundPreset = 'off';
 
 const STORAGE_KEY = 'bg-preset';
 
