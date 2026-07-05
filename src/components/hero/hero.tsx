@@ -155,6 +155,26 @@ const TarsStage = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+
+  /* Soft white halo quiets the wave directly behind TARS so the two navy
+     patterns never blend into each other. */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -12% -6%;
+    background: radial-gradient(
+      ellipse 60% 55% at 50% 45%,
+      var(--page-bg, #ffffff) 0%,
+      var(--page-bg, #ffffff) 45%,
+      transparent 78%
+    );
+    pointer-events: none;
+  }
+
+  > * {
+    position: relative;
+  }
 
   &:hover img {
     filter: brightness(0.82);
