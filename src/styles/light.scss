@@ -14,61 +14,8 @@
 
 :root[data-theme='light'] {
 
-  // ─── Header (light glass) ───────────────────────────────────────────────
-  .header-container {
-    background: rgba(255, 255, 255, 0.72);
-    border: 1px solid var(--border);
-    box-shadow: 0 6px 24px rgba(22, 22, 26, 0.08);
-    color: var(--text);
-  }
-
-  .logo {
-    color: var(--text-strong);
-    &:hover { color: var(--accent); }
-  }
-
-  .nav-link {
-    color: var(--text-muted);
-    &:hover { color: var(--text-strong); }
-    &--active {
-      color: var(--accent) !important;
-    }
-    @media (max-width: 768px) {
-      color: var(--text-muted);
-    }
-  }
-
-  .button {
-    border-color: var(--accent-ring);
-    background: var(--accent-soft);
-    color: var(--accent-strong);
-    &:hover {
-      background: rgba(37, 99, 235, 0.16);
-      color: var(--accent-strong);
-      border-color: var(--accent);
-      box-shadow: 0 2px 12px rgba(37, 99, 235, 0.18);
-    }
-  }
-
-  .hamburger { color: var(--text-strong); }
-
-  // Mobile full-screen menu
-  .nav {
-    @media (max-width: 768px) {
-      background: rgba(250, 250, 248, 0.98);
-    }
-  }
-
-  // ─── Header theme toggle ────────────────────────────────────────────────
-  .site-theme-toggle {
-    border-color: var(--border-strong);
-    color: var(--text-muted);
-    &:hover {
-      color: var(--accent-strong);
-      border-color: var(--accent-ring);
-      background: var(--accent-soft);
-    }
-  }
+  // Header, nav, and theme toggle are fully tokenized in header.scss; no
+  // light-specific overrides needed.
 
   // ─── About ──────────────────────────────────────────────────────────────
   .about-container {
@@ -106,7 +53,7 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow-card);
       &:hover {
-        box-shadow: 0 12px 32px rgba(37, 99, 235, 0.18);
+        box-shadow: var(--shadow-card);
         border-color: var(--accent-ring);
       }
     }
@@ -124,8 +71,8 @@
       box-shadow: 0 14px 40px rgba(22, 22, 26, 0.10);
 
       .about-highlight__cta {
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        box-shadow: 0 12px 28px rgba(37, 99, 235, 0.42);
+        background: var(--accent-strong);
+        box-shadow: var(--shadow-accent);
       }
     }
 
@@ -135,7 +82,7 @@
     &__title { color: var(--text-strong) !important; }
 
     &__cta {
-      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      background: var(--accent);
       box-shadow: var(--shadow-accent);
     }
   }
@@ -178,7 +125,7 @@
   }
 
   .line-container:before {
-    background: linear-gradient(180deg, var(--accent) 0%, rgba(37, 99, 235, 0.08) 100%);
+    background: linear-gradient(180deg, var(--accent) 0%, var(--accent-soft) 100%);
   }
   .job-container:before { background: var(--accent); }
 
@@ -188,9 +135,9 @@
   }
 
   .cv-actions__btn--primary {
-    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    background: var(--accent);
     box-shadow: var(--shadow-accent);
-    &:hover { box-shadow: 0 12px 32px rgba(37, 99, 235, 0.42); }
+    &:hover { box-shadow: var(--shadow-accent); }
   }
   .cv-actions__btn--ghost {
     background: var(--surface);
@@ -287,7 +234,7 @@
   // ─── Contact ────────────────────────────────────────────────────────────
   .contact {
     background:
-      radial-gradient(120% 120% at 50% 0%, rgba(37, 99, 235, 0.10) 0%, transparent 60%),
+      radial-gradient(120% 120% at 50% 0%, var(--accent-soft) 0%, transparent 60%),
       var(--surface);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-card);
@@ -306,9 +253,9 @@
     }
 
     &__btn--primary {
-      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      background: var(--accent);
       box-shadow: var(--shadow-accent);
-      &:hover { box-shadow: 0 14px 34px rgba(37, 99, 235, 0.42); }
+      &:hover { box-shadow: var(--shadow-accent); }
     }
     &__btn--ghost {
       background: var(--surface);
@@ -323,27 +270,5 @@
     }
   }
 
-  // ─── Footer ─────────────────────────────────────────────────────────────
-  .footer-container {
-    background-color: var(--surface);
-    color: var(--text-muted);
-    border-top: 1px solid var(--border);
-
-    .purple-heart { color: var(--accent); }
-    .footer-link {
-      color: var(--accent-strong);
-      text-decoration-color: var(--accent-ring);
-      &:hover { color: var(--accent); text-decoration-color: var(--accent); }
-    }
-    .footer-email {
-      color: var(--text-muted);
-      border-bottom-color: var(--border-strong);
-      &:hover { color: var(--accent); border-bottom-color: var(--accent); }
-    }
-    .social-icons a {
-      color: var(--text-faint);
-      &:hover { color: var(--accent); }
-    }
-    p { color: var(--text-faint); }
-  }
+  // Footer is fully tokenized in footer.scss; no light-specific overrides needed.
 }

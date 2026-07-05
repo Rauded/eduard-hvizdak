@@ -1,18 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaPen, FaRegClock, FaBriefcase } from 'react-icons/fa';
-import { LuSun, LuMoon } from 'react-icons/lu';
+import { LuSun, LuMoon, LuMenu, LuX } from 'react-icons/lu';
 import { useTheme } from '../theme/ThemeContext';
 import './header.scss';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const sentinelRef = useRef<HTMLDivElement | null>(null);
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
   const isBlog = location.pathname.startsWith('/blog');
   const isNow = location.pathname.startsWith('/now');
   const isServices = location.pathname.startsWith('/services');
+
+  // The hairline under the nav appears only once the page has scrolled past a
+  // zero-height sentinel parked at the top of the document flow.
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el || !('IntersectionObserver' in window)) return;
+    const obs = new IntersectionObserver(([entry]) => setScrolled(!entry.isIntersecting));
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   // Scroll to an in-page section, retrying briefly so it also works right
   // after navigating home from another route (the section needs to mount).
@@ -41,64 +52,60 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="header-container">
-      <a href="#home" className="logo" onClick={(e) => goToSection(e, 'home')}>
-        Eduard Hvizdak
-      </a>
-      <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <FaTimes size={30} className="close-icon" /> : <FaBars size={30} />}
-      </div>
-      <nav className={`nav ${isOpen ? 'open' : ''}`}>
-        <a href="#home" className="nav-link" onClick={(e) => goToSection(e, 'home')}>
-          <FaHome />
-          Home
+    <>
+      <div ref={sentinelRef} className="header-sentinel" aria-hidden="true" />
+      <header className={`header-container ${scrolled ? 'is-scrolled' : ''}`}>
+        <a href="#home" className="logo" onClick={(e) => goToSection(e, 'home')}>
+          eduard hvizdak
         </a>
-        <a href="#about" className="nav-link" onClick={(e) => goToSection(e, 'about')}>
-          <FaUser />
-          About
-        </a>
-        <a href="#projects" className="nav-link" onClick={(e) => goToSection(e, 'projects')}>
-          <FaCode />
-          Projects
-        </a>
-        <a href="#resume" className="nav-link" onClick={(e) => goToSection(e, 'resume')}>
-          <FaFileAlt />
-          Resume
-        </a>
-        <Link
-          to="/services"
-          className={`nav-link ${isServices ? 'nav-link--active' : ''}`}
-          onClick={() => setIsOpen(false)}
-        >
-          <FaBriefcase />
-          Services
-        </Link>
-        <Link
-          to="/blog"
-          className={`nav-link ${isBlog ? 'nav-link--active' : ''}`}
-          onClick={() => setIsOpen(false)}
-        >
-          <FaPen />
-          Blog
-        </Link>
-        <Link
-          to="/now"
-          className={`nav-link ${isNow ? 'nav-link--active' : ''}`}
-          onClick={() => setIsOpen(false)}
-        >
-          <FaRegClock />
-          Now
-        </Link>
-        <button
-          type="button"
-          className="site-theme-toggle"
-          onClick={toggleTheme}
-          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {theme === 'dark' ? <LuSun /> : <LuMoon />}
-        </button>
-      </nav>
-    </header>
+        <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <LuX size={28} className="close-icon" /> : <LuMenu size={28} />}
+        </div>
+        <nav className={`nav ${isOpen ? 'open' : ''}`}>
+          <a href="#home" className="nav-link" onClick={(e) => goToSection(e, 'home')}>
+            Home
+          </a>
+          <a href="#about" className="nav-link" onClick={(e) => goToSection(e, 'about')}>
+            About
+          </a>
+          <a href="#projects" className="nav-link" onClick={(e) => goToSection(e, 'projects')}>
+            Projects
+          </a>
+          <a href="#resume" className="nav-link" onClick={(e) => goToSection(e, 'resume')}>
+            Resume
+          </a>
+          <Link
+            to="/services"
+            className={`nav-link ${isServices ? 'nav-link--active' : ''}`}
+            onClick={() => setIsOpen(false)}
+          >
+            Services
+          </Link>
+          <Link
+            to="/blog"
+            className={`nav-link ${isBlog ? 'nav-link--active' : ''}`}
+            onClick={() => setIsOpen(false)}
+          >
+            Blog
+          </Link>
+          <Link
+            to="/now"
+            className={`nav-link ${isNow ? 'nav-link--active' : ''}`}
+            onClick={() => setIsOpen(false)}
+          >
+            Now
+          </Link>
+          <button
+            type="button"
+            className="site-theme-toggle"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? <LuSun /> : <LuMoon />}
+          </button>
+        </nav>
+      </header>
+    </>
   );
 };
 

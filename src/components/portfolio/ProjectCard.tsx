@@ -28,7 +28,7 @@ export function useReveal(threshold = 0.12) {
 }
 
 // ─── Slideshow ───────────────────────────────────────────────────
-const Slideshow: React.FC<{ images: string[]; accent: string }> = ({ images, accent }) => {
+const Slideshow: React.FC<{ images: string[]; accent?: string }> = ({ images }) => {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -52,7 +52,6 @@ const Slideshow: React.FC<{ images: string[]; accent: string }> = ({ images, acc
             key={i}
             aria-label={`Slide ${i + 1}`}
             className={`slideshow__dot ${i === current ? 'slideshow__dot--active' : ''}`}
-            style={i === current ? { background: accent } : {}}
             onClick={() => setCurrent(i)}
           />
         ))}
@@ -133,13 +132,40 @@ const ProjectMedia: React.FC<{ project: PortfolioProject }> = ({ project }) => {
   // browsers block autoplay on any video that isn't actually muted. That is what
   // left the case-study reader showing a black box. Force it on via a ref and
   // kick off playback so the clip plays everywhere, including inside the modal.
+  // Under prefers-reduced-motion the clip stays parked on its poster frame, and
+  // offscreen clips pause so six looping videos never decode at once.
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const v = videoRef.current;
     if (!v) return;
     v.muted = true;
-    const p = v.play();
-    if (p) p.catch(() => {});
+
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) {
+      v.autoplay = false;
+      v.pause();
+      return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      const p = v.play();
+      if (p) p.catch(() => {});
+      return;
+    }
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          const p = v.play();
+          if (p) p.catch(() => {});
+        } else {
+          v.pause();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    obs.observe(v);
+    return () => obs.disconnect();
   }, [media.video]);
 
   // A real video file always wins, whatever the declared type. This is
@@ -155,6 +181,7 @@ const ProjectMedia: React.FC<{ project: PortfolioProject }> = ({ project }) => {
         muted
         loop
         playsInline
+        preload="metadata"
       />
     );
   }
@@ -216,11 +243,7 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
   // The markup is ALWAYS mounted (visibility toggled via CSS) to preserve
   // the in-DOM, indexable case-study text.
   const dialog = createPortal(
-    <div
-      className={`case-modal ${open ? 'case-modal--open' : ''}`}
-      aria-hidden={!open}
-      style={{ '--card-accent': project.accent } as React.CSSProperties}
-    >
+    <div className={`case-modal ${open ? 'case-modal--open' : ''}`} aria-hidden={!open}>
       <div className="case-modal__backdrop" onClick={() => setOpen(false)} />
       <div className="case-modal__panel" role="dialog" aria-modal="true" aria-labelledby={titleId}>
         <button
@@ -280,14 +303,19 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
 // ─── Single project card ─────────────────────────────────────────
 export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project }) => {
   const { ref, visible } = useReveal();
+  const layout = project.layout ?? (project.reversed ? 'split-reversed' : 'split');
 
   return (
     <article
       ref={ref}
-      className={['pcard', project.reversed ? 'pcard--reversed' : '', visible ? 'pcard--visible' : '']
+      className={[
+        'pcard',
+        layout === 'split-reversed' ? 'pcard--reversed' : '',
+        layout === 'full' ? 'pcard--full' : '',
+        visible ? 'pcard--visible' : '',
+      ]
         .filter(Boolean)
         .join(' ')}
-      style={{ '--card-accent': project.accent } as React.CSSProperties}
     >
       {/* Media */}
       <div className="pcard__media">
@@ -296,10 +324,6 @@ export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project }
 
       {/* Info */}
       <div className="pcard__info">
-        <span className="pcard__number" aria-hidden="true">
-          {project.number}
-        </span>
-
         <h2 className="pcard__title">{project.title}</h2>
         <p className="pcard__subtitle">{project.subtitle}</p>
         <p className="pcard__description">{project.description}</p>

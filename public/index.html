@@ -4,26 +4,26 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#fafaf8" />
+    <meta name="theme-color" content="#0a0a0b" />
     <script>
       // Set the theme before first paint so there's no flash of the wrong
       // theme on load. Mirrors ThemeContext: saved choice wins, else OS pref,
-      // else light. Keep this in sync with that component.
+      // else dark. Keep this in sync with that component.
       (function () {
         try {
           var t = localStorage.getItem('site-theme');
           if (t !== 'light' && t !== 'dark') {
-            t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
           }
           document.documentElement.setAttribute('data-theme', t);
           var m = document.querySelector('meta[name="theme-color"]');
-          if (m) m.setAttribute('content', t === 'dark' ? '#09090b' : '#fafaf8');
+          if (m) m.setAttribute('content', t === 'dark' ? '#0a0a0b' : '#fafafa');
         } catch (e) {}
       })();
     </script>
     <meta
       name="description"
-      content="Eduard Hvizdak – AI engineer and indie founder. Production AI systems (RAG, multi-agent) and real SaaS products."
+      content="Eduard Hvizdak, AI engineer and indie founder. Production AI systems (RAG, multi-agent) and real SaaS products."
     />
 
     <!-- Sitemap. NOTE: no static <link rel="canonical"> here on purpose — this one
@@ -34,8 +34,8 @@
     <!-- Open Graph / social card (homepage default; per-page tags set via react-helmet-async) -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Eduard Hvizdak" />
-    <meta property="og:title" content="Eduard Hvizdak – AI Engineer & Founder" />
-    <meta property="og:description" content="Production AI systems (RAG, multi-agent) and real SaaS products — InzerPro, NasadClaw, KouzelníkNaAkci." />
+    <meta property="og:title" content="Eduard Hvizdak, AI Engineer & Founder" />
+    <meta property="og:description" content="Production AI systems (RAG, multi-agent) and real SaaS products: InzerPro, NasadClaw, KouzelníkNaAkci." />
     <meta property="og:url" content="https://eduardhvizdak.com/" />
     <meta property="og:image" content="https://eduardhvizdak.com/og-image.png" />
 
@@ -187,9 +187,33 @@
     -->
     <title>Eduard Hvizdak</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="%PUBLIC_URL%/fonts/general-sans/GeneralSans-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="%PUBLIC_URL%/fonts/geist-mono/GeistMono-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <style>
+      /* Self-hosted webfonts. Declared here (not in src CSS) because they live
+         in public/ for stable preloadable URLs. */
+      @font-face {
+        font-family: 'General Sans';
+        src: url('%PUBLIC_URL%/fonts/general-sans/GeneralSans-Variable.woff2') format('woff2');
+        font-weight: 200 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'General Sans';
+        src: url('%PUBLIC_URL%/fonts/general-sans/GeneralSans-VariableItalic.woff2') format('woff2');
+        font-weight: 200 700;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Geist Mono';
+        src: url('%PUBLIC_URL%/fonts/geist-mono/GeistMono-Variable.woff2') format('woff2');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
   </head>
   <body>
     <noscript>

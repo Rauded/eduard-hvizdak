@@ -1,59 +1,55 @@
+/* Fixed single-line nav, 64px, flat canvas. The bottom hairline appears only
+   after the page scrolls past the sentinel (see header.tsx). */
+
+.header-sentinel {
+  position: absolute;
+  top: 0;
+  height: 1px;
+  width: 1px;
+}
+
 .header-container {
-  background: rgba(9, 9, 11, 0.85);
-  padding: 16px 36px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: 64px;
+  padding: 0 clamp(20px, 4vw, 48px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #fff;
+  background: color-mix(in srgb, var(--page-bg) 88%, transparent);
+  border-bottom: 1px solid transparent;
   font-family: var(--font-body);
-  position: fixed;
-  top: 18px;
-  left: 18px;
-  right: 18px;
-  z-index: 1000;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-  max-width: calc(100% - 36px);
-  margin: 0 auto;
 
-  // The blur lives on a pseudo-element rather than the container itself.
-  // A `backdrop-filter` on the container would make it the containing block
-  // for the position:fixed mobile nav, collapsing the full-screen menu to
-  // the header's height and pushing links off-screen. Keeping it here
-  // preserves the glass look without trapping the fixed overlay.
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: inherit;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     z-index: -1;
   }
 
-  @media (max-width: 768px) {
-    padding: 14px 20px;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    max-width: calc(100% - 20px);
-    border-radius: 12px;
+  &.is-scrolled {
+    border-bottom-color: var(--border);
   }
 }
 
 .logo {
-  font-size: clamp(0.95em, 2vw, 1.25em);
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  color: #f8fafc;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--text-strong);
   text-decoration: none;
   transition: color 0.2s ease;
   position: relative;
   z-index: 1;
 
   &:hover {
-    color: #a5b4fc;
+    color: var(--accent);
   }
 }
 
@@ -68,9 +64,7 @@
     width: 100vw;
     height: 100vh;
     height: 100dvh;
-    background: rgba(9, 9, 11, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: var(--page-bg);
     flex-direction: column;
     justify-content: center;
     overflow-y: auto;
@@ -84,46 +78,38 @@
 }
 
 .nav-link {
-  display: flex;
-  align-items: center;
-  margin-left: 32px;
-  color: rgba(248, 250, 252, 0.55);
+  margin-left: 30px;
+  color: var(--text-muted);
   text-decoration: none;
-  font-size: clamp(0.85em, 1.3vw, 0.95em);
+  font-size: 0.92rem;
+  font-weight: 480;
+  letter-spacing: 0;
   transition: color 0.2s ease;
-  font-family: var(--font-body);
   position: relative;
   z-index: 1;
-  font-weight: 500;
-  letter-spacing: 0.04em;
 
   &:hover {
-    color: #f8fafc;
+    color: var(--text-strong);
   }
 
   &--active {
-    color: #a5b4fc !important;
+    color: var(--text-strong) !important;
 
-    svg {
-      opacity: 1 !important;
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      height: 2px;
+      background: var(--accent);
     }
-  }
-
-  svg {
-    margin-right: 7px;
-    opacity: 0.6;
-    transition: opacity 0.2s ease;
-  }
-
-  &:hover svg {
-    opacity: 1;
   }
 
   @media (max-width: 768px) {
     margin-left: 0;
     margin-bottom: 28px;
-    font-size: clamp(1.2em, 4vw, 1.5em);
-    color: rgba(248, 250, 252, 0.7);
+    font-size: clamp(1.2em, 4vw, 1.4em);
   }
 }
 
@@ -134,52 +120,10 @@
   @media (max-width: 768px) {
     display: block;
     position: absolute;
-    top: 12px;
+    top: 18px;
     right: 20px;
     z-index: 1001;
-    color: rgba(248, 250, 252, 0.7);
-  }
-}
-
-.button {
-  display: flex;
-  align-items: center;
-  margin-left: 32px;
-  padding: 8px 16px;
-  border: 1px solid rgba(165, 180, 252, 0.35);
-  background: rgba(99, 102, 241, 0.08);
-  color: #a5b4fc;
-  text-decoration: none;
-  font-size: clamp(0.85em, 1.3vw, 0.95em);
-  transition: all 0.2s ease;
-  font-family: var(--font-body);
-  border-radius: 8px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  position: relative;
-  z-index: 1;
-
-  &:hover {
-    background: rgba(99, 102, 241, 0.18);
-    color: #c7d2fe;
-    border-color: rgba(165, 180, 252, 0.6);
-    box-shadow: 0 2px 12px rgba(99, 102, 241, 0.2);
-  }
-
-  svg {
-    margin-right: 7px;
-    transition: transform 0.2s ease;
-  }
-
-  &:hover svg {
-    transform: scale(1.1) rotate(5deg);
-  }
-
-  @media (max-width: 768px) {
-    margin-left: 0;
-    margin-bottom: 24px;
-    font-size: clamp(1.2em, 4vw, 1.5em);
-    padding: 12px 24px;
+    color: var(--text);
   }
 }
 
@@ -188,19 +132,17 @@
   z-index: 1002;
 }
 
-// Site light/dark toggle — sits at the end of the nav. Base (dark) styling; the
-// light theme retints it via styles/light.scss.
 .site-theme-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-left: 24px;
-  width: 38px;
-  height: 38px;
-  border-radius: 9px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(248, 250, 252, 0.75);
+  margin-left: 26px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--text-muted);
   cursor: pointer;
   position: relative;
   z-index: 1;
@@ -212,15 +154,15 @@
   }
 
   &:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.09);
-    border-color: rgba(255, 255, 255, 0.28);
+    color: var(--text-strong);
+    background: var(--surface-raised);
+    border-color: var(--text-faint);
   }
 
   @media (max-width: 768px) {
     margin-left: 0;
     margin-top: 8px;
-    width: 46px;
-    height: 46px;
+    width: 44px;
+    height: 44px;
   }
 }

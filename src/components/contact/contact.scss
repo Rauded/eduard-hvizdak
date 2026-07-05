@@ -1,134 +1,80 @@
+/* Closing CTA band. One contact intent: "Book a call" plus a visible mono
+   email link. Centered composition is deliberate here (it is a closer, not
+   the hero). */
+
 .contact {
   width: 92%;
   max-width: 760px;
-  margin: 40px auto;
-  padding: 48px 40px;
-  border-radius: 24px;
+  margin: clamp(72px, 10vh, 120px) auto;
+  padding: 56px 40px;
+  border-radius: var(--radius-lg);
   text-align: center;
-  background:
-    radial-gradient(120% 120% at 50% 0%, rgba(99, 102, 241, 0.16) 0%, transparent 60%),
-    linear-gradient(135deg, rgba(42, 42, 42, 0.55) 0%, rgba(42, 26, 61, 0.55) 100%);
-  border: 1px solid rgba(165, 180, 252, 0.18);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  background: var(--surface);
+  border: 1px solid var(--border);
   font-family: var(--font-body);
 
-  &__eyebrow {
-    font-size: 0.82em;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #818cf8;
-    margin: 0 0 10px;
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   &__title {
-    font-size: clamp(1.7em, 4vw, 2.4em);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: #c7d2fe;
+    font-size: clamp(1.7em, 3.6vw, 2.4em);
+    color: var(--text-strong);
     margin: 0 0 14px;
+    letter-spacing: -0.025em;
   }
 
   &__lead {
-    font-size: clamp(0.95em, 1.6vw, 1.1em);
-    line-height: 1.65;
-    color: rgba(248, 250, 252, 0.7);
-    max-width: 52ch;
-    margin: 0 auto 28px;
+    font-size: clamp(0.98em, 1.5vw, 1.08em);
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 46ch;
+    margin: 0 0 28px;
   }
 
   &__actions {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 14px;
-  }
-
-  &__btn {
-    display: inline-flex;
     align-items: center;
-    gap: 9px;
-    padding: 13px 26px;
-    border-radius: 999px;
-    font-size: 0.95em;
-    font-weight: 600;
-    letter-spacing: 0.01em;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  &__email {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    color: var(--text-muted);
     text-decoration: none;
-    cursor: pointer;
-    transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
-
-    svg {
-      width: 1.1em;
-      height: 1.1em;
-      stroke-width: 2.25;
-      transition: transform 0.18s ease;
-    }
-
-    &:hover { transform: translateY(-2px); }
-  }
-
-  &__btn--primary {
-    background: linear-gradient(135deg, #6366f1 0%, #818cf8 100%);
-    color: #fff;
-    border: 1px solid transparent;
-    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.4);
+    border-bottom: 1px solid var(--border-strong);
+    padding-bottom: 2px;
+    transition: color 0.18s ease, border-color 0.18s ease;
 
     &:hover {
-      box-shadow: 0 14px 34px rgba(99, 102, 241, 0.55);
-      .contact__btn-arrow { transform: translateX(4px); }
-    }
-  }
-
-  &__btn--ghost {
-    background: rgba(255, 255, 255, 0.03);
-    color: #c7d2fe;
-    border: 1px solid rgba(165, 180, 252, 0.35);
-
-    &:hover {
-      border-color: rgba(165, 180, 252, 0.7);
-      background: rgba(99, 102, 241, 0.1);
-      svg { transform: translate(2px, -2px); }
-    }
-  }
-
-  &__direct {
-    margin: 20px 0 0;
-    font-size: 0.92em;
-    color: rgba(248, 250, 252, 0.6);
-
-    a {
-      color: #c7d2fe;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(199, 210, 254, 0.35);
-      transition: color 0.18s ease, border-color 0.18s ease;
-
-      &:hover {
-        color: #fff;
-        border-color: rgba(199, 210, 254, 0.7);
-      }
+      color: var(--accent);
+      border-bottom-color: var(--accent);
     }
   }
 
   &__socials {
     display: flex;
     justify-content: center;
-    gap: 22px;
-    margin-top: 26px;
+    gap: 18px;
 
     a {
-      color: rgba(255, 255, 255, 0.45);
-      font-size: 1.5em;
-      display: inline-flex;
-      transition: color 0.2s ease, transform 0.2s ease;
+      color: var(--text-faint);
+      font-size: 1.25rem;
+      transition: color 0.2s ease;
 
       &:hover {
-        color: #c7d2fe;
-        transform: translateY(-3px);
+        color: var(--accent);
       }
     }
   }
 
   @media (max-width: 600px) {
-    padding: 36px 22px;
+    padding: 44px 24px;
   }
 }

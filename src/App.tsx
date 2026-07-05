@@ -6,6 +6,7 @@ import posthog from 'posthog-js';
 import { analyticsEnabled } from './analytics';
 import { ThemeProvider } from './components/theme/ThemeContext';
 import './styles/typography.scss';
+import './styles/buttons.scss';
 import './styles/light.scss';
 
 
@@ -29,11 +30,9 @@ import ThingsPage from './components/things/ThingsPage.tsx';
 import SharePreviewPage from './components/share/SharePreviewPage.tsx';
 
 // Page background is theme-driven: the site-wide light/dark preference sets
-// `data-theme` on <html> (see ThemeProvider), which flips `--page-bg`. In dark
-// the variable is unset, so it falls back to the original dark gradient.
+// `data-theme` on <html> (see ThemeProvider), which flips `--page-bg`.
 const AppContainer = styled.div`
-  background: var(--page-bg, linear-gradient(135deg, #1e1e1e 0%, #2a1a3d 50%, #1e1e1e 100%));
-  background-size: 200% 200%;
+  background: var(--page-bg);
   min-height: 100vh;
   padding: 0;
   margin: 0;

@@ -1,73 +1,36 @@
-.services {
-  // ─── Theme variables (dark default) ──────────────────────────────
-  --bg: transparent;
-  --accent: #818cf8;
-  --accent-strong: #a5b4fc;
-  --heading: #f4f4f6;
-  --text: #e5e7eb;
-  --text-soft: rgba(248, 250, 252, 0.68);
-  --text-mute: rgba(248, 250, 252, 0.5);
-  --card-bg: rgba(255, 255, 255, 0.03);
-  --card-border: rgba(255, 255, 255, 0.1);
-  --card-border-hover: rgba(255, 255, 255, 0.22);
-  --rule: rgba(255, 255, 255, 0.09);
-  --shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
+/* /services: premium editorial-engineer reskin. All colors come from the
+   global tokens in src/index.css, so light mode works with no local theme
+   variables. CTAs use the shared .btn classes from styles/buttons.scss. */
 
+.services {
   position: relative;
-  isolation: isolate;
   width: 92%;
   max-width: 900px;
   margin: 0 auto;
-  padding: 96px 0 90px;
+  padding: clamp(88px, 11vh, 144px) 0 90px;
   color: var(--text);
   font-family: var(--font-body);
-
-  &::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    z-index: -1;
-    pointer-events: none;
-  }
-
-  &[data-theme='light'] {
-    --bg: #fafaf8;
-    --accent: #2563eb;
-    --accent-strong: #1d4ed8;
-    --heading: #0b0b0f;
-    --text: #1f2937;
-    --text-soft: rgba(30, 41, 59, 0.72);
-    --text-mute: rgba(30, 41, 59, 0.55);
-    --card-bg: #ffffff;
-    --card-border: rgba(15, 23, 42, 0.1);
-    --card-border-hover: rgba(37, 99, 235, 0.4);
-    --rule: rgba(15, 23, 42, 0.1);
-    --shadow: 0 14px 32px rgba(79, 70, 229, 0.14);
-  }
 }
 
 // ─── Hero ───────────────────────────────────────────────────────────
 .services-hero {
-  margin-bottom: 64px;
+  margin-bottom: 72px;
 
   &__eyebrow {
     display: inline-block;
     font-family: var(--font-mono);
-    font-size: 0.82em;
-    letter-spacing: 0.16em;
+    font-size: 0.8em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--text-faint);
     margin-bottom: 16px;
   }
 
   &__title {
     font-family: var(--font-display);
     font-size: clamp(2em, 5vw, 3.1em);
-    font-weight: 700;
     line-height: 1.08;
-    letter-spacing: -0.02em;
-    color: var(--heading);
+    color: var(--text-strong);
     margin: 0 0 18px;
     max-width: 18ch;
   }
@@ -75,8 +38,8 @@
   &__lead {
     font-size: clamp(1em, 1.6vw, 1.16em);
     line-height: 1.65;
-    color: var(--text-soft);
-    max-width: 60ch;
+    color: var(--text-muted);
+    max-width: 52ch;
     margin: 0 0 28px;
   }
 
@@ -87,231 +50,200 @@
   }
 }
 
-// ─── Buttons ────────────────────────────────────────────────────────
-.services-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 13px 24px;
-  border-radius: 12px;
-  font-size: 0.96em;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  text-decoration: none;
-  cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
-
-  svg { width: 1.1em; height: 1.1em; stroke-width: 2.2; transition: transform 0.18s ease; }
-
-  &:hover { transform: translateY(-2px); }
-
-  &--primary {
-    background: var(--accent);
-    color: #fff;
-    border: 1px solid transparent;
-    box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 40%, transparent);
-
-    &:hover {
-      background: var(--accent-strong);
-      .services-btn__arrow { transform: translateX(4px); }
-    }
-  }
-
-  &--ghost {
-    background: var(--card-bg);
-    color: var(--accent-strong);
-    border: 1px solid var(--card-border);
-
-    &:hover { border-color: var(--accent); }
-  }
-}
-
 // ─── Content blocks ─────────────────────────────────────────────────
 .services-block {
-  margin-top: 56px;
+  margin-top: 72px;
 
   &__title {
     font-family: var(--font-display);
     font-size: clamp(1.3em, 2.6vw, 1.7em);
-    font-weight: 700;
-    letter-spacing: -0.01em;
-    color: var(--heading);
-    margin: 0 0 24px;
+    color: var(--text-strong);
+    margin: 0 0 28px;
   }
 }
 
-.services-grid {
+// "What I do": stacked wide rows, single hairline between rows, no cards.
+.services-rows {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 18px;
-
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-  }
 }
 
-.services-card {
-  padding: 24px;
-  border-radius: 16px;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+.services-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) 1fr;
+  gap: clamp(20px, 4vw, 48px);
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
 
-  &:hover {
-    transform: translateY(-3px);
-    border-color: var(--card-border-hover);
-    box-shadow: var(--shadow);
+  &:first-child {
+    padding-top: 8px;
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__title {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 1.08em;
+    font-weight: 600;
+    color: var(--text-strong);
+    letter-spacing: -0.01em;
+    margin: 0;
+    line-height: 1.35;
   }
 
   &__icon {
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 11px;
-    margin-bottom: 16px;
     color: var(--accent);
-    background: color-mix(in srgb, var(--accent) 12%, transparent);
+    margin-top: 1px;
 
-    svg { width: 1.4em; height: 1.4em; stroke-width: 2; }
-  }
-
-  &__title {
-    font-size: 1.12em;
-    font-weight: 700;
-    color: var(--heading);
-    letter-spacing: -0.01em;
-    margin: 0 0 8px;
-  }
-
-  &__outcome {
-    font-size: 0.98em;
-    font-weight: 600;
-    color: var(--accent-strong);
-    margin: 0 0 10px;
-    line-height: 1.4;
+    svg { width: 1.25em; height: 1.25em; stroke-width: 2; }
   }
 
   &__body {
-    font-size: 0.9em;
-    line-height: 1.6;
-    color: var(--text-mute);
+    font-size: 0.95em;
+    line-height: 1.65;
+    color: var(--text-muted);
     margin: 0;
+    max-width: 62ch;
+  }
+
+  &__outcome {
+    display: block;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 22px 0;
   }
 }
 
-// ─── Why work with me ───────────────────────────────────────────────
+// ─── Why work with me: 2x2 asymmetric checklist, no card chrome ─────
 .services-proof {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 14px;
+  grid-template-columns: 1.2fr 1fr;
+  column-gap: clamp(24px, 4vw, 56px);
+  row-gap: 20px;
 
   li {
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    font-size: 1em;
-    line-height: 1.55;
-    color: var(--text-soft);
+    font-size: 0.98em;
+    line-height: 1.6;
+    color: var(--text-muted);
 
     svg {
       flex: 0 0 auto;
-      width: 1.25em;
-      height: 1.25em;
-      margin-top: 2px;
+      width: 1.2em;
+      height: 1.2em;
+      margin-top: 3px;
       color: var(--accent);
-      stroke-width: 2.1;
+      stroke-width: 2;
     }
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
   }
 }
 
-// ─── Process ────────────────────────────────────────────────────────
+// ─── Process: horizontal 4-step rail, semantic order, no numerals ───
 .services-steps {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 2px;
-  counter-reset: none;
-  border-top: 1px solid var(--rule);
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(20px, 3vw, 36px);
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
 }
 
 .services-step {
-  display: flex;
-  gap: 20px;
-  padding: 22px 4px;
-  border-bottom: 1px solid var(--rule);
-
-  &__n {
-    flex: 0 0 auto;
-    font-family: var(--font-mono);
-    font-size: 0.95em;
-    font-weight: 700;
-    color: var(--accent);
-    padding-top: 2px;
-    min-width: 2.4em;
-  }
+  padding-top: 18px;
+  border-top: 2px solid var(--border-strong);
 
   &__title {
-    font-size: 1.08em;
-    font-weight: 700;
-    color: var(--heading);
-    margin: 0 0 6px;
+    font-size: 1.02em;
+    font-weight: 600;
+    color: var(--text-strong);
+    margin: 0 0 8px;
     letter-spacing: -0.01em;
   }
 
   &__body {
-    font-size: 0.92em;
+    font-size: 0.9em;
     line-height: 1.6;
-    color: var(--text-mute);
+    color: var(--text-muted);
     margin: 0;
-    max-width: 60ch;
+  }
+
+  @media (max-width: 900px) {
+    border-top: none;
+    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+
+    &:last-child { border-bottom: none; }
   }
 }
 
 // ─── Closing CTA ────────────────────────────────────────────────────
 .services-cta {
-  margin-top: 72px;
-  padding: 44px 36px;
-  border-radius: 20px;
+  margin-top: 96px;
+  padding: 56px 36px;
+  border-radius: var(--radius-lg);
   text-align: center;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
+  background: var(--surface);
+  border: 1px solid var(--border);
 
   &__title {
     font-family: var(--font-display);
     font-size: clamp(1.4em, 3vw, 2em);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--heading);
+    color: var(--text-strong);
     margin: 0 0 12px;
   }
 
   &__lead {
     font-size: 1em;
     line-height: 1.6;
-    color: var(--text-soft);
+    color: var(--text-muted);
     max-width: 52ch;
-    margin: 0 auto 26px;
+    margin: 0 auto 28px;
   }
 
-  .services-hero__cta { justify-content: center; }
+  &__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
 
-  &__direct {
-    margin: 22px 0 0;
+  &__email {
+    font-family: var(--font-mono);
     font-size: 0.9em;
-    color: var(--text-mute);
+    color: var(--text-muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-strong);
+    padding-bottom: 2px;
+    transition: color 0.18s ease, border-color 0.18s ease;
 
-    a {
-      color: var(--accent-strong);
-      text-decoration: none;
-      border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-      transition: color 0.18s ease, border-color 0.18s ease;
-
-      &:hover { color: var(--accent); border-bottom-color: var(--accent); }
+    &:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
     }
   }
 }

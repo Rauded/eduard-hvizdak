@@ -1,0 +1,82 @@
+/* Shared CTA system. Every call-to-action on the site uses one of these two
+   classes so intent, shape, and contrast stay locked across pages.
+   Radius system: buttons 12px (--radius-md). */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.72rem 1.35rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.98rem;
+  font-weight: 550;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.12s ease;
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--accent-ring);
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--accent-contrast);
+
+  &:hover {
+    background: var(--accent-strong);
+    color: var(--accent-contrast);
+  }
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-strong);
+  border-color: var(--border-strong);
+
+  &:hover {
+    border-color: var(--text-faint);
+    background: var(--surface-raised);
+    color: var(--text-strong);
+  }
+}
+
+:root[data-theme='light'] .btn--ghost:hover {
+  background: var(--surface-sunken);
+}
+
+/* Scroll reveal. Elements start shifted and fade in when useReveal marks them
+   visible. Under reduced motion the hook adds the class immediately and the
+   media query removes the offset, so content is never hidden. */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

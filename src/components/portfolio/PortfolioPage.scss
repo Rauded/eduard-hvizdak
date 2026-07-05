@@ -1,10 +1,10 @@
-// ═══════════════════════════════════════════════════════════════
-//  Portfolio Page
-// ═══════════════════════════════════════════════════════════════
+// Project showcase: large-media case rows built around the product videos.
+// Rhythm comes from projectsData (split / split-reversed / full-width).
+// One locked accent (var(--accent)); no per-project colors.
 
 .portfolio-page {
-  font-family: var(--font-mono);
-  color: #f8fafc;
+  font-family: var(--font-body);
+  color: var(--text);
   padding-top: 88px; // clear fixed header
   min-height: 100vh;
 }
@@ -14,7 +14,7 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: rgba(248, 250, 252, 0.4);
+  color: var(--text-faint);
   text-decoration: none;
   font-size: 0.78em;
   letter-spacing: 0.07em;
@@ -22,7 +22,7 @@
   margin-bottom: 40px;
 
   &:hover {
-    color: #a5b4fc;
+    color: var(--accent);
   }
 
   svg {
@@ -35,78 +35,22 @@
   }
 }
 
-// ─── Hero ────────────────────────────────────────────────────────────────────
-.port-hero {
-  padding: 72px clamp(24px, 6vw, 100px) 80px;
-  max-width: 1200px;
-  margin: 0 auto;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-
-  &--visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  &__eyebrow {
-    font-size: 0.72em;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: rgba(248, 250, 252, 0.35);
-    margin: 0 0 16px;
-  }
-
-  &__title {
-    font-size: clamp(3em, 8vw, 7em);
-    font-weight: 700;
-    line-height: 1;
-    margin: 0 0 28px;
-    letter-spacing: -0.03em;
-    color: #a5b4fc;
-  }
-
-  &__tagline {
-    font-size: clamp(0.88em, 1.6vw, 1.05em);
-    color: rgba(248, 250, 252, 0.55);
-    line-height: 1.75;
-    margin: 0 0 20px;
-    max-width: 480px;
-  }
-
-  &__meta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    font-size: 0.74em;
-    color: rgba(248, 250, 252, 0.25);
-    letter-spacing: 0.06em;
-  }
-
-  &__sep {
-    color: rgba(248, 250, 252, 0.12);
-  }
-}
-
 // ─── Project cards container ──────────────────────────────────────────────────
 .port-projects {
-  padding: 20px clamp(24px, 6vw, 100px) 80px;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding: 20px 0 80px;
   display: flex;
   flex-direction: column;
-  gap: 120px;
+  gap: clamp(96px, 12vh, 140px);
 }
 
 // ─── Project card ─────────────────────────────────────────────────────────────
 .pcard {
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.55fr 1fr;
   gap: clamp(32px, 5vw, 72px);
   align-items: center;
   opacity: 0;
-  transform: translateY(48px);
+  transform: translateY(32px);
   transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
               transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -116,10 +60,45 @@
   }
 
   &--reversed {
-    grid-template-columns: 0.85fr 1.15fr;
+    grid-template-columns: 1fr 1.55fr;
 
     .pcard__media { order: 2; }
     .pcard__info  { order: 1; }
+  }
+
+  // Full-width break row: media spans the container, info sits below in a
+  // two-column band (title/tags left, description/links right).
+  &--full {
+    grid-template-columns: 1fr;
+    gap: 36px;
+
+    .pcard__media {
+      aspect-ratio: 21 / 9;
+    }
+
+    .pcard__info {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+      column-gap: clamp(32px, 5vw, 72px);
+      align-items: start;
+
+      .pcard__title,
+      .pcard__subtitle,
+      .pcard__tags {
+        grid-column: 1;
+      }
+
+      .pcard__description,
+      .pcard__links,
+      .pcard__case-trigger {
+        grid-column: 2;
+      }
+
+      .pcard__description {
+        grid-row: 1;
+        margin-top: 6px;
+      }
+    }
   }
 
   @media (max-width: 900px) {
@@ -128,31 +107,42 @@
 
     .pcard__media { order: 1 !important; }
     .pcard__info  { order: 2 !important; }
+
+    &--full .pcard__info {
+      display: block;
+    }
+
+    &--full .pcard__media {
+      aspect-ratio: 16 / 9;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pcard {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 
 // ─── Media wrapper ────────────────────────────────────────────────────────────
 .pcard__media {
   position: relative;
-  border-radius: 20px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
   aspect-ratio: 16 / 10;
-  background: #0b0b14;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55),
-              inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.35s ease;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.14);
-    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.65),
-                0 0 48px rgba(99, 102, 241, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    border-color: var(--border-strong);
   }
 
   @media (max-width: 900px) {
     aspect-ratio: 16 / 9;
-    border-radius: 14px;
   }
 }
 
@@ -164,7 +154,7 @@
   display: block;
 }
 
-// ─── Branded media placeholder (until a real video/screenshot exists) ──────────
+// ─── Media placeholder (until a real video/screenshot exists) ──────────────────
 .media-placeholder {
   position: relative;
   width: 100%;
@@ -176,43 +166,29 @@
   gap: 10px;
   text-align: center;
   padding: 24px;
-  background:
-    radial-gradient(120% 120% at 50% 0%, color-mix(in srgb, var(--ph-accent) 22%, transparent) 0%, transparent 60%),
-    linear-gradient(135deg, #0b0b14 0%, #15101f 100%);
+  background: var(--surface-sunken);
   overflow: hidden;
 
   &__glow {
-    position: absolute;
-    width: 60%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: var(--ph-accent);
-    filter: blur(90px);
-    opacity: 0.35;
-    top: -20%;
-    animation: ph-float 9s ease-in-out infinite;
+    display: none;
   }
 
   &__label {
     position: relative;
     font-size: clamp(1.2em, 2.4vw, 1.9em);
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: -0.01em;
-    color: #f8fafc;
+    color: var(--text-strong);
   }
 
   &__note {
     position: relative;
+    font-family: var(--font-mono);
     font-size: 0.72em;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(248, 250, 252, 0.45);
+    color: var(--text-faint);
   }
-}
-
-@keyframes ph-float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50%      { transform: translateY(14px) scale(1.06); }
 }
 
 // ─── Slideshow ────────────────────────────────────────────────────────────────
@@ -251,22 +227,23 @@
     height: 6px;
     border-radius: 50%;
     border: none;
-    background: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.3);
     cursor: pointer;
     padding: 0;
     transition: background 0.3s ease, transform 0.2s ease;
 
     &--active {
       transform: scale(1.4);
+      background: var(--accent);
     }
 
     &:hover {
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.55);
     }
   }
 }
 
-// ─── XR Concept card ─────────────────────────────────────────────────────────
+// ─── XR Concept card (hidden project; kept for re-enable) ─────────────────────
 .concept-card {
   width: 100%;
   height: 100%;
@@ -279,11 +256,7 @@
   &__bg {
     position: absolute;
     inset: 0;
-    background: radial-gradient(
-      ellipse at 50% 50%,
-      rgba(6, 182, 212, 0.07) 0%,
-      transparent 70%
-    );
+    background: var(--surface-sunken);
   }
 
   &__hud {
@@ -291,13 +264,13 @@
     z-index: 1;
     width: calc(100% - 48px);
     max-width: 460px;
-    border: 1px solid rgba(6, 182, 212, 0.25);
-    border-radius: 12px;
-    background: rgba(6, 182, 212, 0.04);
-    backdrop-filter: blur(6px);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-md);
+    background: var(--surface);
     padding: 0;
     overflow: hidden;
     font-size: clamp(0.65em, 1.2vw, 0.8em);
+    font-family: var(--font-mono);
   }
 
   &__topbar {
@@ -305,12 +278,12 @@
     align-items: center;
     gap: 12px;
     padding: 10px 16px;
-    border-bottom: 1px solid rgba(6, 182, 212, 0.15);
-    background: rgba(6, 182, 212, 0.06);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface-raised);
   }
 
   &__logo {
-    color: #67e8f9;
+    color: var(--text);
     font-weight: 600;
     font-size: 0.88em;
     letter-spacing: 0.05em;
@@ -321,7 +294,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    color: rgba(103, 232, 249, 0.5);
+    color: var(--text-faint);
     font-size: 0.78em;
   }
 
@@ -329,13 +302,11 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #4ade80;
-    box-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
-    animation: xr-pulse 2.4s ease-in-out infinite;
+    background: var(--text-faint);
   }
 
   &__battery {
-    color: rgba(103, 232, 249, 0.4);
+    color: var(--text-faint);
     font-size: 0.78em;
     letter-spacing: 0.02em;
   }
@@ -348,39 +319,39 @@
     font-size: 0.72em;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(103, 232, 249, 0.45);
+    color: var(--text-faint);
     margin: 0 0 4px;
   }
 
   &__booktitle {
     font-size: 1em;
     font-weight: 600;
-    color: #e0f7fa;
+    color: var(--text-strong);
     margin: 0 0 14px;
     letter-spacing: 0.02em;
   }
 
   &__divider {
     height: 1px;
-    background: rgba(6, 182, 212, 0.12);
+    background: var(--border);
     margin: 0 0 14px;
   }
 
   &__line {
     font-size: 0.82em;
-    color: rgba(224, 247, 250, 0.7);
+    color: var(--text-muted);
     line-height: 1.9;
     margin: 0;
     letter-spacing: 0.01em;
 
     &--faint {
-      color: rgba(224, 247, 250, 0.35);
+      color: var(--text-faint);
     }
   }
 
   &__footer {
     padding: 12px 20px;
-    border-top: 1px solid rgba(6, 182, 212, 0.12);
+    border-top: 1px solid var(--border);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -389,7 +360,7 @@
   &__progress-track {
     flex: 1;
     height: 3px;
-    background: rgba(6, 182, 212, 0.15);
+    background: var(--border);
     border-radius: 2px;
     overflow: hidden;
   }
@@ -397,21 +368,16 @@
   &__progress-fill {
     height: 100%;
     width: 67%;
-    background: linear-gradient(90deg, #06b6d4, #67e8f9);
+    background: var(--accent);
     border-radius: 2px;
   }
 
   &__page {
     font-size: 0.72em;
-    color: rgba(103, 232, 249, 0.4);
+    color: var(--text-faint);
     white-space: nowrap;
     letter-spacing: 0.04em;
   }
-}
-
-@keyframes xr-pulse {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.4; }
 }
 
 // ─── Project info ─────────────────────────────────────────────────────────────
@@ -424,63 +390,29 @@
   }
 }
 
-.pcard__number {
-  position: absolute;
-  top: -0.35em;
-  left: -0.08em;
-  font-size: clamp(5em, 10vw, 8.5em);
-  font-weight: 700;
-  // Subtle per-project accent tint instead of flat white — ties the watermark
-  // to the card's colour without shouting.
-  color: color-mix(in srgb, var(--card-accent, #6366f1) 13%, transparent);
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-  letter-spacing: -0.04em;
-
-  @media (max-width: 900px) {
-    display: none;
-  }
-}
-
 .pcard__title {
-  font-size: clamp(2em, 4vw, 3.2em);
-  font-weight: 700;
-  line-height: 1.08;
-  margin: 0 0 14px;
+  font-size: clamp(1.7em, 3vw, 2.3em);
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0 0 10px;
   letter-spacing: -0.025em;
-  position: relative;
-  // Consistent high-contrast title across every card (no more raw, saturated
-  // per-project colour on the heading itself — that read garish/sloppy).
-  color: #f5f7fb;
-  display: inline-block;
-
-  // The accent now lives as a short underline marker, cohesive across cards.
-  &::after {
-    content: '';
-    display: block;
-    width: 46px;
-    height: 3px;
-    margin-top: 14px;
-    border-radius: 2px;
-    background: var(--card-accent, #6366f1);
-    box-shadow: 0 0 18px color-mix(in srgb, var(--card-accent, #6366f1) 55%, transparent);
-  }
+  color: var(--text-strong);
 }
 
 .pcard__subtitle {
-  font-size: 0.77em;
-  color: rgba(248, 250, 252, 0.4);
-  margin: 0 0 22px;
+  font-size: 0.78em;
+  color: var(--text-faint);
+  margin: 0 0 20px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .pcard__description {
-  font-size: clamp(0.8em, 1.2vw, 0.88em);
-  color: rgba(248, 250, 252, 0.62);
-  line-height: 1.85;
-  margin: 0 0 28px;
+  font-size: clamp(0.92em, 1.2vw, 1em);
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin: 0 0 26px;
+  max-width: 58ch;
 }
 
 // ─── Tags ─────────────────────────────────────────────────────────────────────
@@ -489,18 +421,18 @@
   flex-wrap: wrap;
   gap: 7px;
   list-style: none;
-  margin: 0 0 32px;
+  margin: 0 0 30px;
   padding: 0;
 }
 
 .pcard__tag {
-  font-size: 0.68em;
-  letter-spacing: 0.06em;
+  font-size: 0.72em;
+  letter-spacing: 0.04em;
   padding: 4px 10px;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  color: rgba(248, 250, 252, 0.45);
-  background: rgba(255, 255, 255, 0.025);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  background: var(--surface-sunken);
 }
 
 // ─── Links ────────────────────────────────────────────────────────────────────
@@ -514,49 +446,45 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-size: 0.78em;
-  font-family: var(--font-mono);
-  font-weight: 600;
-  letter-spacing: 0.04em;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  font-size: 0.86em;
+  font-family: var(--font-body);
+  font-weight: 550;
+  letter-spacing: -0.01em;
   text-decoration: none;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
-              border-color 0.2s ease, color 0.2s ease;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.12s ease;
 
-  &:focus-visible {
-    outline: 2px solid var(--card-accent, #6366f1);
-    outline-offset: 3px;
+  &:active {
+    transform: translateY(1px);
   }
 
-  // Primary: the live product / demo / story link — a filled accent pill.
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--accent-ring);
+  }
+
+  // Primary: the live product / demo link.
   &--demo {
-    color: #fff;
+    color: var(--accent-contrast);
     border: 1px solid transparent;
-    background: linear-gradient(
-      135deg,
-      var(--card-accent, #6366f1) 0%,
-      color-mix(in srgb, var(--card-accent, #6366f1) 68%, #000) 100%
-    );
-    box-shadow: 0 8px 22px color-mix(in srgb, var(--card-accent, #6366f1) 32%, transparent);
+    background: var(--accent);
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 30px color-mix(in srgb, var(--card-accent, #6366f1) 45%, transparent);
+      background: var(--accent-strong);
     }
   }
 
-  // Secondary: source code — a restrained ghost button.
+  // Secondary: source code.
   &--github {
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    color: rgba(248, 250, 252, 0.78);
-    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    background: transparent;
 
     &:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.28);
-      color: #f8fafc;
-      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--text-faint);
+      color: var(--text-strong);
+      background: var(--surface-raised);
     }
   }
 
@@ -565,8 +493,8 @@
   }
 }
 
-// Destination-site favicon shown on a link — a tiny rounded "app icon" chip so
-// any favicon (light or dark) stays legible on the filled accent pill.
+// Destination-site favicon shown on a link: a tiny rounded "app icon" chip so
+// any favicon (light or dark) stays legible on the filled accent button.
 .pcard__favicon {
   width: 17px;
   height: 17px;
@@ -581,9 +509,9 @@
 // "Read the full story" opens a dialog ON THE SAME PAGE (rendered to <body> via
 // a React portal). The case-study text is ALWAYS in the DOM (visibility toggled
 // in CSS, never conditionally rendered) so search engines and LLM/GEO crawlers
-// still read the full problem→solution narrative + keywords.
+// still read the full problem-to-solution narrative + keywords.
 .pcard__case-trigger {
-  margin-top: 26px;
+  margin-top: 24px;
   display: inline-flex;
   align-items: center;
   gap: 9px;
@@ -591,15 +519,16 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-family: var(--font-mono);
-  font-size: 0.76em;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--card-accent, #a5b4fc);
-  transition: gap 0.2s ease, opacity 0.2s ease;
+  font-family: var(--font-body);
+  font-size: 0.88em;
+  font-weight: 550;
+  color: var(--accent);
+  transition: gap 0.2s ease, color 0.2s ease;
 
-  &:hover { gap: 13px; opacity: 0.85; }
+  &:hover {
+    gap: 13px;
+    color: var(--accent-strong);
+  }
 
   svg { font-size: 1.1em; }
 }
@@ -625,7 +554,7 @@
   &__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(5, 5, 12, 0.74);
+    background: rgba(0, 0, 0, 0.65);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
   }
@@ -638,25 +567,13 @@
     max-height: 86vh;
     overflow-y: auto;
     padding: clamp(28px, 5vw, 52px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    background: linear-gradient(180deg, #14141f 0%, #0d0d16 100%);
-    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    box-shadow: var(--shadow-card);
     transform: translateY(16px) scale(0.985);
     transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-    font-family: var(--font-mono);
-
-    // Accent edge tying the reader to its project.
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      border-radius: 20px 20px 0 0;
-      background: linear-gradient(90deg, var(--card-accent, #6366f1), transparent 85%);
-    }
+    font-family: var(--font-body);
   }
 
   &--open &__panel {
@@ -669,17 +586,17 @@
     right: 16px;
     width: 38px;
     height: 38px;
-    border-radius: 10px;
+    border-radius: var(--radius-sm);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(248, 250, 252, 0.7);
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
     cursor: pointer;
     transition: background 0.2s ease, color 0.2s ease;
 
-    &:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+    &:hover { background: var(--surface-sunken); color: var(--text-strong); }
 
     svg { font-size: 1.15em; }
   }
@@ -694,12 +611,11 @@
   &__media {
     position: relative;
     aspect-ratio: 16 / 10;
-    border-radius: 14px;
+    border-radius: var(--radius-md);
     overflow: hidden;
     margin-bottom: 30px;
-    background: #0b0b14;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+    background: var(--surface-sunken);
+    border: 1px solid var(--border);
 
     video,
     img,
@@ -714,27 +630,28 @@
   }
 
   &__eyebrow {
-    font-size: 0.7em;
-    font-weight: 700;
-    letter-spacing: 0.2em;
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    font-weight: 500;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--card-accent, #a5b4fc);
+    color: var(--accent);
   }
 
   &__title {
-    font-size: clamp(1.8em, 4vw, 2.6em);
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-size: clamp(1.8em, 4vw, 2.4em);
+    font-weight: 600;
+    letter-spacing: -0.025em;
     line-height: 1.05;
-    color: #f5f7fb;
+    color: var(--text-strong);
     margin: 9px 0 6px;
   }
 
   &__subtitle {
-    font-size: 0.78em;
+    font-size: 0.8em;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: rgba(248, 250, 252, 0.4);
+    color: var(--text-faint);
     margin: 0;
   }
 
@@ -746,26 +663,26 @@
 
   &__h {
     margin: 0 0 8px;
-    font-size: 0.74em;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-size: 0.82em;
+    font-weight: 600;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--card-accent, #a5b4fc);
+    color: var(--text-strong);
   }
 
   &__p {
     margin: 0;
-    font-size: 0.95em;
-    line-height: 1.75;
-    color: rgba(248, 250, 252, 0.74);
+    font-size: 0.98em;
+    line-height: 1.72;
+    color: var(--text-muted);
 
-    strong { color: #f8fafc; font-weight: 600; }
+    strong { color: var(--text-strong); font-weight: 600; }
 
     a {
-      color: var(--card-accent, #a5b4fc);
+      color: var(--accent);
       text-decoration: underline;
       text-underline-offset: 2px;
-      text-decoration-color: color-mix(in srgb, var(--card-accent, #6366f1) 50%, transparent);
+      text-decoration-color: var(--accent-ring);
       transition: text-decoration-color 0.2s ease;
 
       &:hover { text-decoration-color: currentColor; }
@@ -773,7 +690,7 @@
   }
 
   @media (max-width: 600px) {
-    &__panel { max-height: 92vh; border-radius: 16px; }
+    &__panel { max-height: 92vh; }
   }
 }
 
@@ -782,7 +699,7 @@
   padding: 20px clamp(24px, 6vw, 100px) 80px;
   max-width: 1200px;
   margin: 0 auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--border);
   padding-top: 40px;
 
   .port-back {

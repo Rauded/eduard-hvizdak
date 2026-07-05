@@ -1,102 +1,8 @@
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-Thin.ttf') format('truetype');
-  font-weight: 100;
-  font-style: normal;
-}
+/* General Sans (display + body) and Geist Mono (technical accents) are
+   declared in public/index.html: they live in public/fonts/ for stable
+   preloadable URLs, which CRA's css-loader cannot reference from here. */
 
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-ThinItalic.ttf') format('truetype');
-  font-weight: 100;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-ExtraLight.ttf') format('truetype');
-  font-weight: 200;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-ExtraLightItalic.ttf') format('truetype');
-  font-weight: 200;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-LightItalic.ttf') format('truetype');
-  font-weight: 300;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-MediumItalic.ttf') format('truetype');
-  font-weight: 500;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-SemiBoldItalic.ttf') format('truetype');
-  font-weight: 600;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-BoldItalic.ttf') format('truetype');
-  font-weight: 700;
-  font-style: italic;
-}
-
-/* ── Source Serif 4 (variable) — article reading serif ───────────── */
+/* Source Serif 4 (variable): blog article prose only */
 @font-face {
   font-family: 'Source Serif 4';
   src: url('./fonts/SourceSerif4/SourceSerif4.ttf') format('truetype');
@@ -112,48 +18,45 @@
   font-display: swap;
 }
 
-/* ── Inter — article reading sans (also used elsewhere in the UI) ── */
-@font-face {
-  font-family: 'Inter';
-  src: url('./fonts/Inter/Inter-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Inter';
-  src: url('./fonts/Inter/Inter-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Inter';
-  src: url('./fonts/Inter/Inter-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Inter';
-  src: url('./fonts/Inter/Inter-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* ─── Typography system ─────────────────────────────────────────────────────
-   Three roles, swappable in one place. --font-mono keeps the technical
-   signature on the terminal / code / typewriter; --font-display drives the big
-   headings (flip it to var(--font-serif) for an editorial look); --font-body is
-   the clean sans everything else reads in. */
+/* Typography system.
+   Three roles, swappable in one place. --font-mono carries the technical
+   signature (terminal, dates, tags); --font-display drives headings;
+   --font-body is everything else. Serif exists only for blog article prose. */
 :root {
-  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: 'General Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-serif: 'Source Serif 4', Georgia, Cambria, 'Times New Roman', serif;
-  --font-mono: 'RobotoMono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --font-body: var(--font-sans);
-  --font-display: var(--font-serif);
+  --font-display: var(--font-sans);
+}
+
+/* Dark theme (the designed default).
+   Off-black editorial-engineer canvas: neutral zinc, no purple cast, one
+   locked accent (signal red). Light mode overrides below. */
+:root {
+  --page-bg: #0a0a0b;
+  --surface: #111113;
+  --surface-sunken: #0d0d0f;
+  --surface-raised: #17171a;
+  --text: #dedee3;
+  --text-strong: #f7f7f8;
+  --text-muted: rgba(222, 222, 227, 0.62);
+  --text-faint: rgba(222, 222, 227, 0.40);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --accent: #e5484d;
+  --accent-strong: #f2555a;
+  --accent-soft: rgba(229, 72, 77, 0.12);
+  --accent-ring: rgba(229, 72, 77, 0.35);
+  --accent-contrast: #ffffff;
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px rgba(0, 0, 0, 0.35);
+  --shadow-accent: 0 8px 24px rgba(229, 72, 77, 0.25);
+  --hero-glow: transparent;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
 }
 
 html, body {
@@ -162,7 +65,8 @@ html, body {
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #09090b;
+  background-color: var(--page-bg);
+  color: var(--text);
   overflow-x: hidden;
 }
 
@@ -179,28 +83,28 @@ html[data-theme] body *::after {
   html[data-theme] body *::after { transition: none; }
 }
 
-/* ─── Professional light theme (home page) ──────────────────────────────────
-   Applied only when the home route sets data-theme="light" on <html>. Drives
-   every home section through CSS variables + the [data-theme='light'] overrides
-   in styles/light.scss. Dark mode leaves these unset so the original look — the
-   near-black gradient — falls through unchanged. */
+/* Light theme (secondary).
+   Same variable names, recalibrated values. Applied when <html> carries
+   data-theme="light"; styles/light.scss layers component overrides on top. */
 :root[data-theme='light'] {
-  --page-bg: #fafaf8;
+  --page-bg: #fafafa;
   --surface: #ffffff;
-  --surface-sunken: #f3f3ef;
-  --text: #16161a;
-  --text-strong: #0b0b0f;
-  --text-muted: rgba(22, 22, 26, 0.66);
-  --text-faint: rgba(22, 22, 26, 0.45);
-  --border: rgba(22, 22, 26, 0.10);
-  --border-strong: rgba(22, 22, 26, 0.16);
-  --accent: #2563eb;
-  --accent-strong: #1d4ed8;
-  --accent-soft: rgba(37, 99, 235, 0.10);
-  --accent-ring: rgba(37, 99, 235, 0.28);
+  --surface-sunken: #f4f4f5;
+  --surface-raised: #ffffff;
+  --text: #202024;
+  --text-strong: #0b0b0d;
+  --text-muted: rgba(32, 32, 36, 0.64);
+  --text-faint: rgba(32, 32, 36, 0.44);
+  --border: rgba(32, 32, 36, 0.10);
+  --border-strong: rgba(32, 32, 36, 0.16);
+  --accent: #ce2c31;
+  --accent-strong: #b02a30;
+  --accent-soft: rgba(206, 44, 49, 0.08);
+  --accent-ring: rgba(206, 44, 49, 0.28);
+  --accent-contrast: #ffffff;
   --shadow-card: 0 1px 2px rgba(22, 22, 26, 0.05), 0 10px 30px rgba(22, 22, 26, 0.06);
-  --shadow-accent: 0 8px 24px rgba(37, 99, 235, 0.24);
-  --hero-glow: rgba(37, 99, 235, 0.07);
+  --shadow-accent: 0 8px 24px rgba(206, 44, 49, 0.22);
+  --hero-glow: transparent;
 }
 
 :root[data-theme='light'] body {

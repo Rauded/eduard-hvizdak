@@ -1,37 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { isExpertMode } from '../../config/positioning';
 
-// Main container for the hero section
 const HeroContainer = styled.section`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding-top: 100px;
-  background-color: var(--page-bg, #09090b);
-  color: var(--text, #fff);
+  min-height: 100dvh;
+  padding-top: 64px;
+  background-color: var(--page-bg);
+  color: var(--text);
   overflow: hidden;
   font-family: var(--font-body);
   position: relative;
 
-  @media (max-width: 768px) {
-    padding-top: 90px;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(ellipse at 20% 60%, var(--hero-glow, rgba(99, 102, 241, 0.07)) 0%, transparent 55%);
-    pointer-events: none;
-  }
-
   @media (min-width: 768px) {
     flex-direction: row;
   }
+`;
+
+const enter = keyframes`
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
 `;
 
 const LeftContainer = styled.div`
@@ -39,35 +28,52 @@ const LeftContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 40px;
+  padding: 48px clamp(20px, 4vw, 48px);
   text-align: left;
-  margin-top: -10%;
   position: relative;
   z-index: 1;
 
-  @media (max-width: 768px) {
-    padding: 24px;
-    margin-top: 0;
-  }
-
   @media (min-width: 768px) {
-    flex: 0 0 40%;
-    padding: 60px 40px;
+    flex: 0 0 45%;
+    padding-left: clamp(24px, 6vw, 96px);
   }
 `;
 
-const Headline = styled.h1`
-  font-size: 1.25em;
-  font-weight: 400;
-  color: var(--text-muted, rgba(255, 255, 255, 0.7));
-  margin-bottom: 1.5em;
-  letter-spacing: 0.05em;
-  line-height: 1.6;
-  transition: color 0.3s ease;
+const Reveal = styled.div<{ $delay: number }>`
+  opacity: 0;
+  animation: ${enter} 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: ${(p) => p.$delay}ms;
 
-  @media (min-width: 768px) {
-    font-size: 1.5em;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 1;
   }
+`;
+
+const Title = styled.h1`
+  color: var(--text-strong);
+  font-size: clamp(2.4rem, 4.6vw, 3.9rem);
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.03em;
+  line-height: 1.06;
+  max-width: 13ch;
+`;
+
+const Subtext = styled.p`
+  color: var(--text-muted);
+  font-size: clamp(1.02rem, 1.4vw, 1.15rem);
+  line-height: 1.6;
+  margin: 1.4em 0 0;
+  max-width: 44ch;
+`;
+
+const CtaRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 2.2em;
+  flex-wrap: wrap;
 `;
 
 const RightContainer = styled.div`
@@ -77,26 +83,24 @@ const RightContainer = styled.div`
   align-items: center;
   position: relative;
   min-height: 40vh;
+  padding: 0 clamp(20px, 4vw, 48px) 48px;
 
   @media (min-width: 768px) {
-    flex: 0 0 60%;
+    flex: 0 0 55%;
     min-height: auto;
+    padding-bottom: 0;
   }
 `;
 
-// Terminal window — realistic macOS-style
 const TerminalWindow = styled.div`
-  width: 90%;
-  max-width: 700px;
+  width: 100%;
+  max-width: 680px;
   position: relative;
-  border-radius: 10px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  background: #1a1a2e;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 2px 8px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
 `;
 
 const TerminalBar = styled.div`
@@ -104,8 +108,8 @@ const TerminalBar = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(180deg, #2d2d3f 0%, #252537 100%);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  background: var(--surface-raised);
+  border-bottom: 1px solid var(--border);
   position: relative;
 `;
 
@@ -115,24 +119,11 @@ const TrafficLights = styled.div`
   align-items: center;
 `;
 
-const TrafficDot = styled.span<{ color: string }>`
-  width: 12px;
-  height: 12px;
+const TrafficDot = styled.span`
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
-  background: ${props => props.color};
-  box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.2);
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 3px;
-    width: 5px;
-    height: 3px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
-  }
+  background: var(--border-strong);
 `;
 
 const TerminalTabBar = styled.div`
@@ -141,23 +132,22 @@ const TerminalTabBar = styled.div`
   transform: translateX(-50%);
   display: flex;
   align-items: center;
-  gap: 0;
 `;
 
 const TerminalTab = styled.div`
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.68rem;
+  color: var(--text-faint);
   letter-spacing: 0.04em;
   padding: 4px 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--surface-sunken);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
 `;
 
 const TerminalBody = styled.div`
   padding: 0;
-  background: #0d0d1a;
+  background: var(--surface-sunken);
   position: relative;
   overflow: hidden;
 `;
@@ -186,176 +176,77 @@ const TarsContainer = styled.div`
   align-items: flex-end;
   animation: ${patrolAnimation} 24s linear infinite;
   will-change: transform;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
 `;
 
 const TarsImage = styled.img`
   width: 100%;
   display: block;
-  filter: grayscale(20%) contrast(1.1);
+  filter: grayscale(100%) contrast(1.08);
 `;
 
-const TerminalStatusBar = styled.div`
-  padding: 4px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: linear-gradient(180deg, #1e1e30 0%, #1a1a2e 100%);
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-`;
-
-const StatusText = styled.span`
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  color: rgba(255, 255, 255, 0.3);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-`;
-
-const StatusDot = styled.span`
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #4ade80;
-  margin-right: 6px;
-  box-shadow: 0 0 4px rgba(74, 222, 128, 0.4);
-`;
-
-const GradientText = styled.h2`
-  color: var(--text-strong, #f8fafc);
-  font-size: clamp(2.5em, 8vw, 5em);
-  font-weight: 700;
-  margin: 0.3em 0;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-
-  @media (min-width: 768px) {
-    font-size: clamp(3.5em, 6vw, 5.5em);
-  }
-`;
-
-const blink = keyframes`
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-`;
-
-const TypewriterText = styled.div`
-  font-family: var(--font-mono);
-  color: var(--accent, #a5b4fc);
-  font-size: clamp(1.1em, 3vw, 1.75em);
-  margin-top: 1em;
-  white-space: nowrap;
-  overflow: hidden;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-
-  &::after {
-    content: '_';
-    animation: ${blink} 1s infinite;
-    color: var(--accent-strong, #6366f1);
-    font-weight: 300;
-  }
-`;
-
-const topLines = [
-  "Ahoj! Vitaj na mojom portfóliu.",
-  "Hey! Thanks for dropping by.",
-];
-
-// Expert mode drops the "CS Student" line (and swaps in a consulting-facing
-// title) so the rotating role never leads with a student framing. See
-// src/config/positioning.ts.
-const typewriterTexts = [
-  "AI Developer @ OneBond",
-  "AI Developer @ CZS / Masaryk University",
-  "AI Developer @ iGalileo",
-  "Think Tank @ EDUC Alliance",
-  isExpertMode() ? "AI Consultant & Automation Engineer" : "CS Student @ Masaryk University",
-  "Python & LangChain Developer",
-  "Building AI agents & RAG pipelines",
-  "Hackathon Fanatic",
-  "AI Enthusiast"
-];
+const EXPERT_SUBTEXT =
+  'AI engineer in Brno. RAG pipelines, agents, and three SaaS products with paying customers.';
+const STUDENT_SUBTEXT =
+  'CS student at Masaryk University building RAG pipelines, agents, and SaaS products with paying customers.';
 
 const Hero: React.FC = () => {
-  const [topLine, setTopLine] = useState('');
-  const [currentText, setCurrentText] = useState('');
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    setTopLine(topLines[Math.floor(Math.random() * topLines.length)]);
-  }, []);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    let isMounted = true;
-    let timeoutId: NodeJS.Timeout;
-
-    let i = 0;
-    let textPos = 0;
-    let currentString = typewriterTexts[i];
-    const speed = 100;
-    const deleteSpeed = 50;
-    const waitTime = 2000;
-
-    function type() {
-      if (!isMounted) return;
-      setCurrentText(currentString.substring(0, textPos));
-      if (textPos++ === currentString.length) {
-        timeoutId = setTimeout(() => deleteText(), waitTime);
-      } else {
-        timeoutId = setTimeout(type, speed);
-      }
-    }
-
-    function deleteText() {
-      if (!isMounted) return;
-      setCurrentText(currentString.substring(0, textPos));
-      if (textPos-- === 0) {
-        i = (i + 1) % typewriterTexts.length;
-        currentString = typewriterTexts[i];
-        timeoutId = setTimeout(type, speed);
-      } else {
-        timeoutId = setTimeout(deleteText, deleteSpeed);
-      }
-    }
-
-    type();
-    return () => { isMounted = false; clearTimeout(timeoutId); };
-  }, []);
+  const scrollToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <HeroContainer id="home">
       <LeftContainer>
-        <Headline>{topLine}</Headline>
-        <GradientText>I'm Eduard Hvizdak.</GradientText>
-        <TypewriterText>&gt; {currentText}</TypewriterText>
+        <Reveal $delay={0}>
+          <Title>Eduard Hvizdak builds AI systems that hold up in production.</Title>
+        </Reveal>
+        <Reveal $delay={90}>
+          <Subtext>{isExpertMode() ? EXPERT_SUBTEXT : STUDENT_SUBTEXT}</Subtext>
+        </Reveal>
+        <Reveal $delay={180}>
+          <CtaRow>
+            <a href="#projects" className="btn btn--primary" onClick={scrollToProjects}>
+              View projects
+            </a>
+            <a
+              href="https://cal.com/eduardhv/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn--ghost"
+            >
+              Book a call
+            </a>
+          </CtaRow>
+        </Reveal>
       </LeftContainer>
       <RightContainer>
-        <TerminalWindow>
-          <TerminalBar>
-            <TrafficLights>
-              <TrafficDot color="#ff5f57" />
-              <TrafficDot color="#febc2e" />
-              <TrafficDot color="#28c840" />
-            </TrafficLights>
-            <TerminalTabBar>
-              <TerminalTab>TARS — patrol module</TerminalTab>
-            </TerminalTabBar>
-          </TerminalBar>
-          <TerminalBody>
-            <TarsContainer>
-              <TarsImage
-                src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
-                alt="TARS walking ASCII art"
-              />
-            </TarsContainer>
-          </TerminalBody>
-          <TerminalStatusBar>
-            <StatusText><StatusDot />active</StatusText>
-            <StatusText>patrol module v2.0</StatusText>
-          </TerminalStatusBar>
-        </TerminalWindow>
+        <Reveal $delay={140} style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+          <TerminalWindow>
+            <TerminalBar>
+              <TrafficLights>
+                <TrafficDot />
+                <TrafficDot />
+                <TrafficDot />
+              </TrafficLights>
+              <TerminalTabBar>
+                <TerminalTab>tars</TerminalTab>
+              </TerminalTabBar>
+            </TerminalBar>
+            <TerminalBody>
+              <TarsContainer>
+                <TarsImage
+                  src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
+                  alt="TARS walking ASCII art"
+                />
+              </TarsContainer>
+            </TerminalBody>
+          </TerminalWindow>
+        </Reveal>
       </RightContainer>
     </HeroContainer>
   );

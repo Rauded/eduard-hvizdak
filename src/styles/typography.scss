@@ -30,7 +30,8 @@ h1, h2, h3,
 .things-hero__title,
 .things-card__name {
   font-family: var(--font-display) !important;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: -0.025em;
 }
 
 // Technical signature — kept in mono as a tasteful accent, not the whole page.

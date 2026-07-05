@@ -1,10 +1,8 @@
 import React from 'react';
 import {
-  LuArrowRight, LuMail, LuCalendar, LuWorkflow, LuFileSearch, LuBot, LuServer,
-  LuCircleCheck,
+  LuWorkflow, LuFileSearch, LuBot, LuServer, LuCircleCheck,
 } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
-import { useTheme } from '../theme/ThemeContext';
 import './services.scss';
 
 const EMAIL = 'eduardd.hv@gmail.com';
@@ -47,17 +45,15 @@ const PROOF = [
 ];
 
 const STEPS = [
-  { n: '01', title: 'Discovery call', body: 'A short call to understand the problem, the stakeholders, and what a good outcome actually looks like.' },
-  { n: '02', title: 'Scope and proposal', body: 'A written scope with a clear deliverable, timeline and fixed price. You know exactly what you are getting.' },
-  { n: '03', title: 'Build and iterate', body: 'I build in short cycles and show working software early, so we correct course before it is expensive.' },
-  { n: '04', title: 'Deploy and hand over', body: 'The system goes live in your environment, documented, with a handover so your team can run it without me.' },
+  { title: 'Discovery call', body: 'A short call to understand the problem, the stakeholders, and what a good outcome actually looks like.' },
+  { title: 'Scope and proposal', body: 'A written scope with a clear deliverable, timeline and fixed price. You know exactly what you are getting.' },
+  { title: 'Build and iterate', body: 'I build in short cycles and show working software early, so we correct course before it is expensive.' },
+  { title: 'Deploy and hand over', body: 'The system goes live in your environment, documented, with a handover so your team can run it without me.' },
 ];
 
 const ServicesPage: React.FC = () => {
-  const { theme } = useTheme();
-
   return (
-    <div className="services" data-theme={theme}>
+    <div className="services">
       <Seo
         title="AI Consulting & Automation"
         description="AI consulting and automation for teams: workflow automation, document intelligence and RAG, AI agents, and private on-premise deployment. Scoped, built, and shipped end to end by Eduard Hvizdak."
@@ -70,32 +66,29 @@ const ServicesPage: React.FC = () => {
           I ship AI systems that pay for themselves.
         </h1>
         <p className="services-hero__lead">
-          I help teams put AI to work on real problems: automating the manual work that slows them
-          down, making their documents answerable, and deploying systems that run reliably in
-          production. Scoped, built and delivered end to end.
+          I help teams automate the manual work that slows them down, make their
+          documents answerable, and run AI reliably in production.
         </p>
         <div className="services-hero__cta">
-          <a className="services-btn services-btn--primary" href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>
-            <LuMail aria-hidden="true" />
-            Start a conversation
-            <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
-          </a>
-          <a className="services-btn services-btn--ghost" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-            <LuCalendar aria-hidden="true" />
-            Book a 30-min call
+          <a className="btn btn--primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+            Book a call
           </a>
         </div>
       </header>
 
       <section className="services-block" aria-labelledby="what-i-do">
         <h2 className="services-block__title" id="what-i-do">What I do</h2>
-        <div className="services-grid">
+        <div className="services-rows">
           {SERVICES.map((s) => (
-            <article className="services-card" key={s.title}>
-              <span className="services-card__icon">{s.icon}</span>
-              <h3 className="services-card__title">{s.title}</h3>
-              <p className="services-card__outcome">{s.outcome}</p>
-              <p className="services-card__body">{s.body}</p>
+            <article className="services-row" key={s.title}>
+              <h3 className="services-row__title">
+                <span className="services-row__icon">{s.icon}</span>
+                {s.title}
+              </h3>
+              <p className="services-row__body">
+                <strong className="services-row__outcome">{s.outcome}</strong>{' '}
+                {s.body}
+              </p>
             </article>
           ))}
         </div>
@@ -114,12 +107,9 @@ const ServicesPage: React.FC = () => {
         <h2 className="services-block__title" id="how-it-works">How it works</h2>
         <ol className="services-steps">
           {STEPS.map((step) => (
-            <li className="services-step" key={step.n}>
-              <span className="services-step__n">{step.n}</span>
-              <div>
-                <h3 className="services-step__title">{step.title}</h3>
-                <p className="services-step__body">{step.body}</p>
-              </div>
+            <li className="services-step" key={step.title}>
+              <h3 className="services-step__title">{step.title}</h3>
+              <p className="services-step__body">{step.body}</p>
             </li>
           ))}
         </ol>
@@ -131,20 +121,12 @@ const ServicesPage: React.FC = () => {
           Tell me what is slowing your team down. If I can help, I will say so, and if I am not the
           right fit, I will tell you that too.
         </p>
-        <div className="services-hero__cta">
-          <a className="services-btn services-btn--primary" href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>
-            <LuMail aria-hidden="true" />
-            Email me
-            <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
+        <div className="services-cta__actions">
+          <a className="btn btn--primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+            Book a call
           </a>
-          <a className="services-btn services-btn--ghost" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-            <LuCalendar aria-hidden="true" />
-            Book a 30-min call
-          </a>
+          <a className="services-cta__email" href={`mailto:${EMAIL}`}>{EMAIL}</a>
         </div>
-        <p className="services-cta__direct">
-          Or email me directly at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-        </p>
       </section>
     </div>
   );

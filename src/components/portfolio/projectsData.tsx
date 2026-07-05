@@ -60,6 +60,7 @@ export interface PortfolioProject {
   media: ProjectMedia;
   accent: string;
   reversed: boolean;
+  layout?: 'split' | 'split-reversed' | 'full';
   caseStudy?: CaseStudy;
   hidden?: boolean; // kept in data but not rendered (toggle to re-enable)
 }
@@ -299,12 +300,17 @@ export const PROJECTS: PortfolioProject[] = [
   },
 ];
 
-// Renumber + fix alternating layout so the list stays correct no matter
-// which projects are hidden. This is the list both pages actually render.
+// Fix the layout rhythm so the list stays correct no matter which projects
+// are hidden. Rows run split / split-reversed / full-width in threes, so two
+// alternating splits never stack past the zigzag cap before a full-bleed
+// row breaks the pattern. This is the list both pages actually render.
+const LAYOUT_CYCLE: PortfolioProject['layout'][] = ['split', 'split-reversed', 'full'];
+
 export const VISIBLE_PROJECTS: PortfolioProject[] = PROJECTS
   .filter(p => !p.hidden)
   .map((p, i) => ({
     ...p,
     number: String(i + 1).padStart(2, '0'),
-    reversed: i % 2 === 1,
+    reversed: i % 3 === 1,
+    layout: LAYOUT_CYCLE[i % 3],
   }));
