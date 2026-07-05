@@ -1,28 +1,22 @@
 // ─── TARS hero display switch ──────────────────────────────────────────────
-// One place that decides how the hero's TARS patrol animation is framed.
+// One place that decides how the hero's right-hand visual is framed.
 // The variants themselves live in src/components/hero/hero.tsx; this module
 // only resolves WHICH one is active.
 //
-//   'terminal' → the original macOS-style terminal window
-//   'card'     → a quiet dark tile: same dark focal object, no window chrome
-//   'bare'     → TARS walks directly on the page, no container at all
-//   'floor'    → bare, plus a hairline floor under his feet
+//   'terminal' → the macOS-style terminal window (default)
 //   'grid'     → dark tile with a faint engineering grid fading upward
 //   'space'    → dark tile with a sparse starfield, TARS on a floor line
-//   'rose'         → no TARS: the blue ASCII flower bloom fills the hero
-//   'rose-dither'  → same bloom as a halftone dot print instead of glyphs
+//   'rose'     → no TARS: the blue halftone flower bloom fills the hero
 //
 // HOW TO CHANGE THE DEFAULT for everyone: flip DEFAULT_VARIANT below.
 //
-// HOW TO COMPARE LIVE (no redeploy): add ?tars=card (or bare, floor,
+// HOW TO COMPARE LIVE (no redeploy): add ?tars=grid (or space, rose,
 // terminal) to any URL. The choice is remembered as you click around;
 // use ?tars=reset to clear it and fall back to the default.
 
-export type TarsVariant =
-  | 'terminal' | 'card' | 'bare' | 'floor' | 'grid' | 'space'
-  | 'rose' | 'rose-dither';
+export type TarsVariant = 'terminal' | 'grid' | 'space' | 'rose';
 
-const VARIANTS: TarsVariant[] = ['terminal', 'card', 'bare', 'floor', 'grid', 'space', 'rose', 'rose-dither'];
+const VARIANTS: TarsVariant[] = ['terminal', 'grid', 'space', 'rose'];
 
 const DEFAULT_VARIANT: TarsVariant = 'terminal';
 
@@ -31,7 +25,8 @@ const STORAGE_KEY = 'tars-variant';
 export function getTarsVariant(): TarsVariant {
   if (typeof window === 'undefined') return DEFAULT_VARIANT;
   try {
-    const q = new URLSearchParams(window.location.search).get('tars');
+    let q = new URLSearchParams(window.location.search).get('tars');
+    if (q === 'rose-dither') q = 'rose'; // old preview URLs keep working
     if (q && (VARIANTS as string[]).includes(q)) {
       window.localStorage.setItem(STORAGE_KEY, q);
       return q as TarsVariant;

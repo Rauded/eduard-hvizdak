@@ -5,7 +5,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import posthog from 'posthog-js';
 import { analyticsEnabled } from './analytics';
 import { ThemeProvider } from './components/theme/ThemeContext';
-import { applyAccentPreset } from './config/accent';
 import { applyCanvasPreset } from './config/canvas';
 import './styles/typography.scss';
 import './styles/light.scss';
@@ -86,8 +85,8 @@ const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 );
 
 const App: React.FC = () => {
-  // Resolve ?accent= / ?canvas= previews (remembered presets) once on mount.
-  useEffect(() => { applyAccentPreset(); applyCanvasPreset(); }, []);
+  // Resolve the ?canvas= preview (remembered preset) once on mount.
+  useEffect(() => { applyCanvasPreset(); }, []);
   return (
     <HelmetProvider>
       <ThemeProvider>

@@ -179,72 +179,12 @@ const TarsContainer = styled.div`
   will-change: transform;
 `;
 
-// Accent tinting: the gif's glyphs are neutral gray, so when an accent preset
-// is active the ASCII is tinted toward it (sepia gives a warm base hue of
-// roughly 38deg; hue-rotate travels from there). Default blue stays monochrome.
-const TARS_TINT_HUES: Record<string, string> = {
-  emerald: '122deg',
-  teal: '136deg',
-  amber: '0deg',
-  rose: '312deg',
-};
-
-const tarsTintRules = (invert: boolean) =>
-  Object.entries(TARS_TINT_HUES)
-    .map(
-      ([preset, hue]) => `
-  html${invert ? "[data-theme='light']" : ''}[data-accent='${preset}'] & {
-    filter: ${invert ? 'invert(1) ' : ''}sepia(1) saturate(2.6) hue-rotate(${hue}) ${invert ? 'brightness(0.85)' : 'brightness(1.05)'} contrast(1.05);
-  }`
-    )
-    .join('\n');
-
 const TarsImage = styled.img`
   width: 100%;
   display: block;
   filter: grayscale(20%) contrast(1.1);
-  ${tarsTintRules(false)}
 `;
 
-// ─── Frameless TARS variants (?tars=card|bare|floor) ─────────────────
-// The gif is light-gray glyphs on a transparent background, so outside a
-// dark container it must invert on the light theme to stay readable.
-const BareTarsImage = styled(TarsImage)`
-  html[data-theme='light'] & {
-    filter: invert(1) grayscale(20%) contrast(1.1);
-  }
-  ${tarsTintRules(true)}
-`;
-
-// Quiet dark tile: keeps TARS a dark focal object without the window chrome.
-const CardTile = styled.div`
-  width: 90%;
-  max-width: 700px;
-  border-radius: 16px;
-  overflow: hidden;
-  background: #0e0e14;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 2px 8px rgba(0, 0, 0, 0.3);
-  padding: 14px 0;
-`;
-
-const BareStage = styled.div`
-  width: 90%;
-  max-width: 700px;
-  overflow: hidden;
-`;
-
-// Hairline floor under TARS so the bare variant does not float.
-const FloorLine = styled.div`
-  height: 1px;
-  background: rgba(255, 255, 255, 0.16);
-
-  html[data-theme='light'] & {
-    background: rgba(22, 22, 26, 0.18);
-  }
-`;
 
 // Engineering-grid stage: a dark tile whose grid reads as the floor TARS
 // patrols, fading out toward the top so it stays a backdrop, not a pattern.
@@ -395,7 +335,7 @@ const Hero: React.FC = () => {
   const [topLine, setTopLine] = useState('');
   const [currentText, setCurrentText] = useState('');
   const tarsVariant = getTarsVariant();
-  const isRose = tarsVariant === 'rose' || tarsVariant === 'rose-dither';
+  const isRose = tarsVariant === 'rose';
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -442,9 +382,7 @@ const Hero: React.FC = () => {
 
   return (
     <HeroContainer id="home">
-      {isRose && (
-        <AsciiDitherBackground mode={tarsVariant === 'rose' ? 'ascii' : 'dither'} />
-      )}
+      {isRose && <AsciiDitherBackground />}
       <LeftContainer>
         <Headline>{topLine}</Headline>
         <GradientText>I'm Eduard Hvizdak.</GradientText>
@@ -477,16 +415,6 @@ const Hero: React.FC = () => {
             </TerminalStatusBar>
           </TerminalWindow>
         )}
-        {tarsVariant === 'card' && (
-          <CardTile>
-            <TarsContainer>
-              <TarsImage
-                src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
-                alt="TARS walking ASCII art"
-              />
-            </TarsContainer>
-          </CardTile>
-        )}
         {tarsVariant === 'grid' && (
           <GridTile>
             <TarsContainer>
@@ -507,17 +435,6 @@ const Hero: React.FC = () => {
             </TarsContainer>
             <SpaceFloor />
           </SpaceTile>
-        )}
-        {(tarsVariant === 'bare' || tarsVariant === 'floor') && (
-          <BareStage>
-            <TarsContainer>
-              <BareTarsImage
-                src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
-                alt="TARS walking ASCII art"
-              />
-            </TarsContainer>
-            {tarsVariant === 'floor' && <FloorLine />}
-          </BareStage>
         )}
       </RightContainer>}
     </HeroContainer>

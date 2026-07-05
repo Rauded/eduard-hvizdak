@@ -10,22 +10,16 @@ import { useTheme } from '../theme/ThemeContext';
 import flowerSrc from '../../assets/hero/flower.jpg';
 
 // Hero background: the flower photo is re-rendered live as a fine-grained
-// Bayer-dithered halftone (2 to 3 px dots, like a risograph print) or an
-// ASCII glyph field in the brand blue, with a slow bloom of the source and a
-// gentle shimmer of the pattern. Ported from the experiment/hero-dither
-// branch; selected via the ?tars=rose | ?tars=rose-dither hero variants.
-// The blue palette is deliberately fixed (Eduard's call), so it does not
-// follow the ?accent= presets.
+// Bayer-dithered halftone (2 to 3 px dots, like a risograph print) in the
+// brand blue, with a slow bloom of the source and a gentle shimmer of the
+// pattern. Ported from the experiment/hero-dither branch (dither mode only;
+// the ASCII glyph mode was tried and dropped); selected via ?tars=rose.
 //
 // The dither renderer writes one cell per ImageData pixel at grid resolution
 // and upscales with image smoothing off, then knocks a 1px grid out of the
 // result so the dots read as printed halftone instead of smeared blocks.
 // That is dramatically cheaper than per-cell fillRect calls, which is what
 // makes the fine dot pitch affordable.
-
-interface Props {
-  mode: 'dither' | 'ascii';
-}
 
 const BgCanvas = styled.canvas`
   position: absolute;
@@ -65,12 +59,9 @@ const BAYER8 = [
   [63, 31, 55, 23, 61, 29, 53, 21],
 ].map((row) => row.map((v) => (v + 0.5) / 64));
 
-const ASCII_RAMP = ' .:-=+*#%@';
-
 // Dither cells are ImageData pixels, so the budget is generous: 1440x900 at a
 // 3px pitch is ~144k cells and still one putImageData + one drawImage.
 const MAX_DITHER_CELLS = 220000;
-const MAX_ASCII_CELLS = 14000;
 const FRAME_MS = 50; // ~20fps; the shimmer reads fine well below 60fps
 // Cells darker than this never draw, so the photo's black ground stays truly
 // empty and the bloom keeps a crisp silhouette (the shimmer amplitude cannot
@@ -82,7 +73,7 @@ const LUM_FLOOR = 0.06;
 // ramps) while dropping the near-black ground below the floor.
 const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.12) * 1.55));
 
-const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
+const AsciiDitherBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
 
@@ -95,22 +86,15 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Accent-only palettes per theme. css strings feed the ascii glyph mode;
-    // the rgba tuples feed the dither's ImageData directly (base tone for the
-    // body of the bloom, hi tone for petal highlights).
+    // Brand-blue palette per theme: rgba tuples feed the dither's ImageData
+    // directly (base tone for the body of the bloom, hi for petal highlights).
     const palette =
       theme === 'dark'
         ? {
-            dim: 'rgba(59, 130, 246, 0.28)', // #3b82f6
-            mid: 'rgba(96, 165, 250, 0.5)', // #60a5fa
-            bright: 'rgba(147, 197, 253, 0.75)', // #93c5fd
             base: [96, 165, 250, 82] as const, // #60a5fa at 0.32
             hi: [147, 197, 253, 210] as const, // #93c5fd at 0.82
           }
         : {
-            dim: '#a5bef3', // #2563eb mixed 60% toward page bg #fafaf8
-            mid: 'rgba(101, 144, 239, 0.7)', // #2563eb mixed 30% toward page bg
-            bright: 'rgba(37, 99, 235, 0.55)', // #2563eb
             base: [76, 118, 235, 120] as const, // soft blue at 0.47
             hi: [37, 99, 235, 205] as const, // #2563eb at 0.8
           };
@@ -146,19 +130,19 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
       const rect = parent.getBoundingClientRect();
       const w = Math.max(1, Math.round(rect.width));
       const h = Math.max(1, Math.round(rect.height));
-      const maxCells = mode === 'dither' ? MAX_DITHER_CELLS : MAX_ASCII_CELLS;
-      cell = mode === 'dither' ? (w < 768 ? 2 : 3) : Math.max(13, Math.round(w / 70));
+      const maxCells = MAX_DITHER_CELLS;
+      cell = w < 768 ? 2 : 3;
       // Bound total work regardless of viewport size.
       while (Math.ceil(w / cell) * Math.ceil(h / cell) > maxCells) cell += 1;
       cols = Math.ceil(w / cell);
       rows = Math.ceil(h / cell);
-      const dpr = Math.min(window.devicePixelRatio || 1, mode === 'dither' ? 2 : 1.5);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       off.width = cols;
       off.height = rows;
-      if (mode === 'dither') {
+      {
         dotCanvas.width = cols;
         dotCanvas.height = rows;
         dots = dotCtx.createImageData(cols, rows);
@@ -207,7 +191,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      if (mode === 'dither' && dots) {
+      if (dots) {
         const px = dots.data;
         px.fill(0);
         const [br, bg, bb, ba] = palette.base;
@@ -240,39 +224,6 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
         ctx.globalCompositeOperation = 'destination-out';
         ctx.drawImage(gridCanvas, 0, 0);
         ctx.restore();
-      } else {
-        // Glyph density follows luminance in both themes: on dark the dense
-        // glyphs read as bright petals, on light they read as the blue bloom.
-        ctx.font = `${cell}px ui-monospace, SFMono-Regular, Menlo, monospace`;
-        ctx.textBaseline = 'top';
-        const buckets: Array<Array<[string, number, number]>> = [[], [], []];
-        for (let y = 0; y < rows; y++) {
-          for (let x = 0; x < cols; x++) {
-            const i = y * cols + x;
-            const p = i * 4;
-            const lum = shape(
-              (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255
-            );
-            if (lum < LUM_FLOOR) continue;
-            const v = lum + 0.05 * Math.sin(t * 1.4 + hash[i] * 6.283);
-            // Bayer threshold nudges the ramp index by one step for texture.
-            const dith = (BAYER8[y % 8][x % 8] - 0.5) / ASCII_RAMP.length;
-            const idx = Math.min(
-              ASCII_RAMP.length - 1,
-              Math.max(0, Math.floor((v + dith) * ASCII_RAMP.length))
-            );
-            const glyph = ASCII_RAMP[idx];
-            if (glyph === ' ') continue;
-            const bucket = v < 0.35 ? 0 : v < 0.65 ? 1 : 2;
-            buckets[bucket].push([glyph, x * cell, y * cell]);
-          }
-        }
-        const styles = [palette.dim, palette.mid, palette.bright];
-        buckets.forEach((bucket, b) => {
-          if (!bucket.length) return;
-          ctx.fillStyle = styles[b];
-          bucket.forEach(([glyph, gx, gy]) => ctx.fillText(glyph, gx, gy));
-        });
       }
     };
 
@@ -334,7 +285,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ mode }) => {
       document.removeEventListener('visibilitychange', onVisibility);
       if (resizeTimer) clearTimeout(resizeTimer);
     };
-  }, [mode, theme]);
+  }, [theme]);
 
   return <BgCanvas ref={canvasRef} aria-hidden="true" />;
 };
