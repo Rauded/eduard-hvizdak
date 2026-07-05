@@ -1,18 +1,18 @@
 .now-page {
   // ─── Theme variables (dark default) ──────────────────────────────
   --bg: transparent; // dark mode lets the AppContainer background show through
-  --kicker: #60a5fa;
-  --heading: #bfdbfe;
+  --kicker: var(--accent-text);
+  --heading: var(--accent-heading);
   --text: #fff;
   --text-strong: #f8fafc;
   --text-soft: rgba(248, 250, 252, 0.6);
   --text-dim: rgba(248, 250, 252, 0.4);
   --text-mute: rgba(248, 250, 252, 0.5);
-  --link: #93c5fd;
-  --link-border: rgba(147, 197, 253, 0.35);
+  --link: var(--accent-text-soft);
+  --link-border: color-mix(in srgb, var(--accent-text-soft) 35%, transparent);
   --card-bg: rgba(255, 255, 255, 0.03);
-  --card-border: rgba(147, 197, 253, 0.14);
-  --card-border-hover: rgba(147, 197, 253, 0.32);
+  --card-border: color-mix(in srgb, var(--accent-text-soft) 14%, transparent);
+  --card-border-hover: color-mix(in srgb, var(--accent-text-soft) 32%, transparent);
   --cover-bg: #15101f;
   --cover-border: rgba(255, 255, 255, 0.08);
   --build-bg: rgba(255, 255, 255, 0.03);
@@ -47,18 +47,18 @@
 
   &[data-theme='light'] {
     --bg: #fafaf8;
-    --kicker: #2563eb;
+    --kicker: var(--accent);
     --heading: #0b0b0f;
     --text: #1f2937;
     --text-strong: #0f172a;
     --text-soft: rgba(30, 41, 59, 0.7);
     --text-dim: rgba(30, 41, 59, 0.5);
     --text-mute: rgba(30, 41, 59, 0.55);
-    --link: #1d4ed8;
-    --link-border: rgba(37, 99, 235, 0.35);
-    --card-bg: rgba(37, 99, 235, 0.04);
-    --card-border: rgba(37, 99, 235, 0.18);
-    --card-border-hover: rgba(37, 99, 235, 0.38);
+    --link: var(--accent-strong);
+    --link-border: color-mix(in srgb, var(--accent) 35%, transparent);
+    --card-bg: color-mix(in srgb, var(--accent) 4%, transparent);
+    --card-border: color-mix(in srgb, var(--accent) 18%, transparent);
+    --card-border-hover: color-mix(in srgb, var(--accent) 38%, transparent);
     --cover-bg: #eef2ff;
     --cover-border: rgba(15, 23, 42, 0.1);
     --build-bg: #ffffff;

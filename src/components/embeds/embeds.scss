@@ -10,12 +10,12 @@
     padding: 14px 20px;
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 12px;
-    color: #93c5fd;
+    color: var(--accent-text-soft);
     text-decoration: none;
     font-size: 0.9rem;
 
     &:hover {
-      border-color: #93c5fd;
+      border-color: var(--accent-text-soft);
     }
   }
 }

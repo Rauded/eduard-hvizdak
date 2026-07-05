@@ -44,6 +44,14 @@ Icons via **react-icons**. Routing via **react-router-dom**.
   blurred glow blobs, no colored accent shadows, flat near-black page background (no purple-tinted
   gradient). Functional blur (header glass, modal backdrops) and loading skeletons are fine.
   Do not reintroduce the old indigo gradient/glow look.
+- **Accent is tokenized (2026-07-05).** No component hardcodes an accent hex: everything reads
+  the semantic tokens in `src/index.css` (`--accent`, `--accent-strong`, `--accent-text`,
+  `--accent-text-soft`, `--accent-heading`, `--accent-soft`, `--accent-ring`; text tints derive
+  from `--accent` via color-mix). Candidate palettes are `[data-accent]` presets there; preview
+  live with `?accent=emerald|teal|amber|rose` (`?accent=reset` to clear), resolved by
+  `src/config/accent.ts` (same pattern as the `?mode=` positioning switch). To change the site
+  accent for everyone, edit the preset values or flip `DEFAULT_ACCENT`. Project cards use the
+  single site accent (the per-project rainbow was removed); only /things keeps per-item colors.
 - **Resume data** lives in `src/data/resume.json` (typed by `src/components/resume/resumetypes.tsx`).
   Each experience entry can carry a `website` field → company name renders as a Lucide-arrow link
   via `src/components/resume/visualaid.tsx`. A parenthetical in a company label (e.g.

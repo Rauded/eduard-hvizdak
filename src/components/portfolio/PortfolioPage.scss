@@ -22,7 +22,7 @@
   margin-bottom: 40px;
 
   &:hover {
-    color: #93c5fd;
+    color: var(--accent-text-soft);
   }
 
   svg {
@@ -63,7 +63,7 @@
     line-height: 1;
     margin: 0 0 28px;
     letter-spacing: -0.03em;
-    color: #93c5fd;
+    color: var(--accent-text-soft);
   }
 
   &__tagline {
@@ -238,6 +238,7 @@
 
     &--active {
       transform: scale(1.4);
+      background: var(--accent);
     }
 
     &:hover {
@@ -401,7 +402,7 @@
   font-weight: 700;
   // Subtle per-project accent tint instead of flat white — ties the watermark
   // to the card's colour without shouting.
-  color: color-mix(in srgb, var(--card-accent, #3b82f6) 13%, transparent);
+  color: color-mix(in srgb, var(--accent) 13%, transparent);
   line-height: 1;
   pointer-events: none;
   user-select: none;
@@ -432,7 +433,7 @@
     height: 3px;
     margin-top: 14px;
     border-radius: 2px;
-    background: var(--card-accent, #3b82f6);
+    background: var(--accent);
   }
 }
 
@@ -493,7 +494,7 @@
               border-color 0.2s ease, color 0.2s ease;
 
   &:focus-visible {
-    outline: 2px solid var(--card-accent, #3b82f6);
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
   }
 
@@ -501,11 +502,11 @@
   &--demo {
     color: #fff;
     border: 1px solid transparent;
-    background: var(--card-accent, #3b82f6);
+    background: var(--accent);
 
     &:hover {
       transform: translateY(-2px);
-      background: color-mix(in srgb, var(--card-accent, #3b82f6) 85%, #000);
+      background: color-mix(in srgb, var(--accent) 85%, #000);
     }
   }
 
@@ -559,7 +560,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--card-accent, #93c5fd);
+  color: var(--accent-text);
   transition: gap 0.2s ease, opacity 0.2s ease;
 
   &:hover { gap: 13px; opacity: 0.85; }
@@ -618,7 +619,7 @@
       right: 0;
       height: 3px;
       border-radius: 20px 20px 0 0;
-      background: var(--card-accent, #3b82f6);
+      background: var(--accent);
     }
   }
 
@@ -681,7 +682,7 @@
     font-weight: 700;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--card-accent, #93c5fd);
+    color: var(--accent-text);
   }
 
   &__title {
@@ -713,7 +714,7 @@
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--card-accent, #93c5fd);
+    color: var(--accent-text);
   }
 
   &__p {
@@ -725,10 +726,10 @@
     strong { color: #f8fafc; font-weight: 600; }
 
     a {
-      color: var(--card-accent, #93c5fd);
+      color: var(--accent-text);
       text-decoration: underline;
       text-underline-offset: 2px;
-      text-decoration-color: color-mix(in srgb, var(--card-accent, #3b82f6) 50%, transparent);
+      text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent);
       transition: text-decoration-color 0.2s ease;
 
       &:hover { text-decoration-color: currentColor; }

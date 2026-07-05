@@ -1,8 +1,8 @@
 .services {
   // ─── Theme variables (dark default) ──────────────────────────────
   --bg: transparent;
-  --accent: #60a5fa;
-  --accent-strong: #93c5fd;
+  --accent: var(--accent-text);
+  --accent-strong: var(--accent-text-soft);
   --heading: #f4f4f6;
   --text: #e5e7eb;
   --text-soft: rgba(248, 250, 252, 0.68);
@@ -33,15 +33,17 @@
 
   &[data-theme='light'] {
     --bg: #fafaf8;
-    --accent: #2563eb;
-    --accent-strong: #1d4ed8;
+    // Undo the dark-mode shadowing above: on light, the page accent is the
+    // global light accent (inherited computed values, so presets still apply).
+    --accent: var(--accent-text-soft);
+    --accent-strong: var(--accent-text);
     --heading: #0b0b0f;
     --text: #1f2937;
     --text-soft: rgba(30, 41, 59, 0.72);
     --text-mute: rgba(30, 41, 59, 0.55);
     --card-bg: #ffffff;
     --card-border: rgba(15, 23, 42, 0.1);
-    --card-border-hover: rgba(37, 99, 235, 0.4);
+    --card-border-hover: color-mix(in srgb, var(--accent) 40%, transparent);
     --rule: rgba(15, 23, 42, 0.1);
     --shadow: 0 14px 32px rgba(22, 22, 26, 0.10);
   }

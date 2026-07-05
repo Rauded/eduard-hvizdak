@@ -28,7 +28,7 @@
   }
 
   .purple-heart {
-    color: #93c5fd;
+    color: var(--accent-text-soft);
     animation: pulse 2s ease-in-out infinite;
   }
 
@@ -42,16 +42,16 @@
   }
 
   .footer-link {
-    color: #93c5fd;
+    color: var(--accent-text-soft);
     text-decoration: underline;
-    text-decoration-color: rgba(147, 197, 253, 0.3);
+    text-decoration-color: color-mix(in srgb, var(--accent-text-soft) 30%, transparent);
     margin-left: 5px;
     transition: color 0.2s ease;
     font-weight: 600;
 
     &:hover {
-      color: #bfdbfe;
-      text-decoration-color: rgba(191, 219, 254, 0.5);
+      color: var(--accent-heading);
+      text-decoration-color: color-mix(in srgb, var(--accent-heading) 50%, transparent);
     }
   }
 
@@ -65,8 +65,8 @@
     transition: color 0.2s ease, border-color 0.2s ease;
 
     &:hover {
-      color: #bfdbfe;
-      border-color: rgba(191, 219, 254, 0.5);
+      color: var(--accent-heading);
+      border-color: color-mix(in srgb, var(--accent-heading) 50%, transparent);
     }
   }
 
@@ -87,7 +87,7 @@
       z-index: 1;
 
       &:hover {
-        color: #93c5fd;
+        color: var(--accent-text-soft);
         transform: translateY(-2px);
       }
     }

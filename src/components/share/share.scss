@@ -5,7 +5,7 @@ $text: #f8fafc;
 $dim: rgba(248, 250, 252, 0.5);
 $mid: rgba(248, 250, 252, 0.72);
 $border: rgba(255, 255, 255, 0.09);
-$accent: #93c5fd;
+$accent: var(--accent-text-soft);
 $ui: var(--font-body);
 
 .share-preview {

@@ -43,7 +43,7 @@
     background: var(--accent-soft);
     color: var(--accent-strong);
     &:hover {
-      background: rgba(37, 99, 235, 0.16);
+      background: color-mix(in srgb, var(--accent) 16%, transparent);
       color: var(--accent-strong);
       border-color: var(--accent);
       

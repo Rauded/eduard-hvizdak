@@ -156,6 +156,31 @@
   --font-display: var(--font-serif);
 }
 
+/* ─── Accent system (dark-mode defaults) ─────────────────────────────────────
+   ONE accent drives the whole site. Every component reads these tokens; no
+   component hardcodes an accent hex. Tints for text/headings on the dark
+   canvas are derived from --accent with color-mix, so switching the accent
+   means changing at most two values here (or via a [data-accent] preset).
+   Light mode overrides below; presets override both. Preview live with
+   ?accent=emerald|teal|amber|rose (?accent=reset to clear) - see
+   src/config/accent.ts. */
+:root {
+  --accent: #3b82f6;        /* fills: buttons, bars, markers */
+  --accent-strong: #2563eb; /* hover/darker fill */
+  --accent-text: color-mix(in srgb, var(--accent) 72%, #fff);      /* links, eyebrows */
+  --accent-text-soft: color-mix(in srgb, var(--accent) 52%, #fff); /* softer accent text */
+  --accent-heading: color-mix(in srgb, var(--accent) 30%, #fff);   /* big headings */
+  --accent-soft: color-mix(in srgb, var(--accent) 10%, transparent);
+  --accent-ring: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+/* Accent presets: candidate palettes, switchable live via <html data-accent>.
+   Default (no attribute) is the blue above. */
+:root[data-accent='emerald'] { --accent: #10b981; --accent-strong: #059669; }
+:root[data-accent='teal']    { --accent: #14b8a6; --accent-strong: #0d9488; }
+:root[data-accent='amber']   { --accent: #f59e0b; --accent-strong: #d97706; }
+:root[data-accent='rose']    { --accent: #f43f5e; --accent-strong: #e11d48; }
+
 html, body {
   margin: 0;
   padding: 0;
@@ -196,11 +221,19 @@ html[data-theme] body *::after {
   --border-strong: rgba(22, 22, 26, 0.16);
   --accent: #2563eb;
   --accent-strong: #1d4ed8;
-  --accent-soft: rgba(37, 99, 235, 0.10);
-  --accent-ring: rgba(37, 99, 235, 0.28);
+  /* On a light canvas, accent text runs darker, not lighter. */
+  --accent-text: var(--accent-strong);
+  --accent-text-soft: var(--accent);
+  --accent-heading: var(--accent-strong);
   --shadow-card: 0 1px 2px rgba(22, 22, 26, 0.05), 0 10px 30px rgba(22, 22, 26, 0.06);
   --shadow-accent: 0 1px 2px rgba(22, 22, 26, 0.12);
 }
+
+/* Light-mode values for the accent presets (darker, canvas-appropriate). */
+:root[data-accent='emerald'][data-theme='light'] { --accent: #059669; --accent-strong: #047857; }
+:root[data-accent='teal'][data-theme='light']    { --accent: #0d9488; --accent-strong: #0f766e; }
+:root[data-accent='amber'][data-theme='light']   { --accent: #d97706; --accent-strong: #b45309; }
+:root[data-accent='rose'][data-theme='light']    { --accent: #e11d48; --accent-strong: #be123c; }
 
 :root[data-theme='light'] body {
   background-color: var(--page-bg);

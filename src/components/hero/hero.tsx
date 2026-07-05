@@ -229,7 +229,7 @@ const blink = keyframes`
 
 const TypewriterText = styled.div`
   font-family: var(--font-mono);
-  color: var(--accent, #93c5fd);
+  color: var(--accent-text, #60a5fa);
   font-size: clamp(1.1em, 3vw, 1.75em);
   margin-top: 1em;
   white-space: nowrap;
@@ -240,7 +240,7 @@ const TypewriterText = styled.div`
   &::after {
     content: '_';
     animation: ${blink} 1s infinite;
-    color: var(--accent-strong, #3b82f6);
+    color: var(--accent, #3b82f6);
     font-weight: 300;
   }
 `;

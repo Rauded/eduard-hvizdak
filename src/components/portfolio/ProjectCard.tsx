@@ -28,7 +28,7 @@ export function useReveal(threshold = 0.12) {
 }
 
 // ─── Slideshow ───────────────────────────────────────────────────
-const Slideshow: React.FC<{ images: string[]; accent: string }> = ({ images, accent }) => {
+const Slideshow: React.FC<{ images: string[] }> = ({ images }) => {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -52,7 +52,6 @@ const Slideshow: React.FC<{ images: string[]; accent: string }> = ({ images, acc
             key={i}
             aria-label={`Slide ${i + 1}`}
             className={`slideshow__dot ${i === current ? 'slideshow__dot--active' : ''}`}
-            style={i === current ? { background: accent } : {}}
             onClick={() => setCurrent(i)}
           />
         ))}
@@ -62,8 +61,8 @@ const Slideshow: React.FC<{ images: string[]; accent: string }> = ({ images, acc
 };
 
 // ─── XR Concept card (BookReader) ────────────────────────────────
-const ConceptCard: React.FC<{ accent: string }> = ({ accent }) => (
-  <div className="concept-card" style={{ '--concept-accent': accent } as React.CSSProperties}>
+const ConceptCard: React.FC = () => (
+  <div className="concept-card">
     <div className="concept-card__hud">
       <div className="concept-card__topbar">
         <span className="concept-card__logo">◈ Even Realities G1</span>
@@ -93,8 +92,8 @@ const ConceptCard: React.FC<{ accent: string }> = ({ accent }) => (
 );
 
 // ─── Branded placeholder (used until a real video/screenshot exists) ──
-const PlaceholderCard: React.FC<{ title: string; accent: string }> = ({ title, accent }) => (
-  <div className="media-placeholder" style={{ '--ph-accent': accent } as React.CSSProperties}>
+const PlaceholderCard: React.FC<{ title: string }> = ({ title }) => (
+  <div className="media-placeholder">
     <span className="media-placeholder__label">{title}</span>
     <span className="media-placeholder__note">Demo coming soon</span>
   </div>
@@ -125,7 +124,7 @@ const LinkIcon: React.FC<{ link: PortfolioProject['links'][number] }> = ({ link 
 // Shared by the showcase card AND the case-study reader so the story
 // shows the exact same video / slideshow / screenshot as the showcase.
 const ProjectMedia: React.FC<{ project: PortfolioProject }> = ({ project }) => {
-  const { media, accent } = project;
+  const { media } = project;
 
   // React does not reliably reflect the `muted` prop to the DOM property, and
   // browsers block autoplay on any video that isn't actually muted. That is what
@@ -159,16 +158,16 @@ const ProjectMedia: React.FC<{ project: PortfolioProject }> = ({ project }) => {
 
   switch (media.type) {
     case 'slideshow':
-      return <Slideshow images={media.images!} accent={accent} />;
+      return <Slideshow images={media.images!} />;
     case 'image':
       return <img className="pcard__img" src={media.images![0]} alt={project.title} />;
     case 'concept':
-      return <ConceptCard accent={accent} />;
+      return <ConceptCard />;
     case 'placeholder':
     case 'video': // declared video but file not present yet
-      return <PlaceholderCard title={project.title} accent={accent} />;
+      return <PlaceholderCard title={project.title} />;
     default:
-      return <PlaceholderCard title={project.title} accent={accent} />;
+      return <PlaceholderCard title={project.title} />;
   }
 };
 
@@ -217,7 +216,6 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
     <div
       className={`case-modal ${open ? 'case-modal--open' : ''}`}
       aria-hidden={!open}
-      style={{ '--card-accent': project.accent } as React.CSSProperties}
     >
       <div className="case-modal__backdrop" onClick={() => setOpen(false)} />
       <div className="case-modal__panel" role="dialog" aria-modal="true" aria-labelledby={titleId}>
@@ -285,7 +283,6 @@ export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project }
       className={['pcard', project.reversed ? 'pcard--reversed' : '', visible ? 'pcard--visible' : '']
         .filter(Boolean)
         .join(' ')}
-      style={{ '--card-accent': project.accent } as React.CSSProperties}
     >
       {/* Media */}
       <div className="pcard__media">
