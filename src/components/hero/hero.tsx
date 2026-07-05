@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { LuArrowRight } from 'react-icons/lu';
 import HalftoneWave from './HalftoneWave';
-import AsciiDitherBackground from './AsciiDitherBackground';
+import { assetSafe } from '../portfolio/projectsData';
 
 // ════════════════════════════════════════════════════════════════════════════
-// Hero, humandelta experiment: the pure reference composition. Centered serif
-// headline and CTAs over the full-bleed animated halftone wave, nothing else.
-// The TARS mascot was tried in many forms (terminal, ascii, halftone print)
-// and cut: the footage never survived abstraction. The wave carries the hero.
+// Hero, humandelta experiment. Centered serif headline and CTAs over the
+// full-bleed animated halftone wave, blueprint frame details from Eduard's
+// design bookmarks, and a hairline browser mockup below the CTAs playing the
+// real InzerPro showcase video (the bookmark-hero product-card pattern; also
+// how humandelta presents its own dashcards). TARS and the flower bloom were
+// both tried here and cut.
 // ════════════════════════════════════════════════════════════════════════════
 
 const HeroContainer = styled.section`
@@ -293,6 +295,60 @@ const CORNERS = [
   'bottom: -26px; right: -34px;',
 ];
 
+// Browser-framed product mockup below the CTAs (Flowtix/Designify bookmark
+// pattern): hairline chrome, surface bar with a URL pill, real product video.
+const MockupCard = styled.div`
+  position: relative;
+  z-index: 1;
+  width: min(880px, 92vw);
+  margin-top: 64px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+  border: 1px solid var(--border, #e6e9ec);
+  box-shadow: var(--shadow-card, 0 1px 2px rgba(14, 19, 32, 0.05), 0 8px 24px rgba(14, 19, 32, 0.05));
+
+  @media (max-width: 768px) {
+    margin-top: 44px;
+  }
+`;
+
+const MockupBar = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px;
+  background: var(--surface, #f6f6f6);
+  border-bottom: 1px solid var(--border, #e6e9ec);
+`;
+
+const MockupDot = styled.span`
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--surface-sunken, #eef0f2);
+  border: 1px solid var(--border, #e6e9ec);
+`;
+
+const MockupUrl = styled.span`
+  margin: 0 auto;
+  padding: 3px 18px;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid var(--border, #e6e9ec);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.05em;
+  color: var(--text-faint, #7484a0);
+`;
+
+const MockupVideo = styled.video`
+  display: block;
+  width: 100%;
+`;
+
+const inzerproVideo = assetSafe('inzerpro.mp4');
+
 const scrollToId = (id: string) => {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 };
@@ -317,7 +373,6 @@ const Hero: React.FC = () => {
       <WaveLayer>
         <HalftoneWave />
       </WaveLayer>
-      <AsciiDitherBackground />
       <Ruler side="left" />
       <Ruler side="right" />
       <Content>
@@ -342,6 +397,17 @@ const Hero: React.FC = () => {
           </GhostCta>
         </CtaRow>
       </Content>
+      {inzerproVideo && (
+        <MockupCard>
+          <MockupBar>
+            <MockupDot />
+            <MockupDot />
+            <MockupDot />
+            <MockupUrl>inzerpro.cz</MockupUrl>
+          </MockupBar>
+          <MockupVideo src={inzerproVideo} autoPlay muted loop playsInline />
+        </MockupCard>
+      )}
     </HeroContainer>
   );
 };
