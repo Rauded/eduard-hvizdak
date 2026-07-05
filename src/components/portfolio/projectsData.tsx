@@ -120,7 +120,7 @@ export const PROJECTS: PortfolioProject[] = [
         asset('obsidian_theme_study_session_configuration.png'),
       ],
     },
-    accent: '#6366f1',
+    accent: '#0ea5e9',
     reversed: true,
     caseStudy: {
       problem:
@@ -213,7 +213,7 @@ export const PROJECTS: PortfolioProject[] = [
       video: assetSafe('nasadclaw.mp4'), // upgrades to video if dropped in
       images: [asset('nasadclaw-real-image.png')],
     },
-    accent: '#a855f7',
+    accent: '#e11d48',
     reversed: false,
     caseStudy: {
       problem:

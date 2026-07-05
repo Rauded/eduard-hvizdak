@@ -37,8 +37,13 @@ Icons via **react-icons**. Routing via **react-router-dom**.
   industry-standard (Vercel/Linear/Supabase use it). Do NOT use text-glyph arrows like `→`/`↗`;
   they read as amateurish. Example: `import { LuArrowRight } from 'react-icons/lu'`.
 - **Styling:** component-scoped SCSS files next to each component (`component/component.scss`),
-  BEM-ish naming (`block__element`, `block--modifier`). Brand color is indigo/violet
-  (`#6366f1`, `#818cf8`, `#a5b4fc`, `#c7d2fe`) on a near-black background. Monospace display font.
+  BEM-ish naming (`block__element`, `block--modifier`). Brand color is blue
+  (`#2563eb` in light mode; `#3b82f6`, `#60a5fa`, `#93c5fd`, `#bfdbfe` on the near-black dark
+  mode). Monospace display font. **De-slop rules (2026-07-05, Eduard's request):** no indigo/violet
+  accents, no decorative gradients (buttons and surfaces are flat fills), no glow box-shadows or
+  blurred glow blobs, no colored accent shadows, flat near-black page background (no purple-tinted
+  gradient). Functional blur (header glass, modal backdrops) and loading skeletons are fine.
+  Do not reintroduce the old indigo gradient/glow look.
 - **Resume data** lives in `src/data/resume.json` (typed by `src/components/resume/resumetypes.tsx`).
   Each experience entry can carry a `website` field → company name renders as a Lucide-arrow link
   via `src/components/resume/visualaid.tsx`. A parenthetical in a company label (e.g.
@@ -65,8 +70,8 @@ the agreed final design:
 - **Copy is short and professional.** Title states the invitation by the European Commission to
   discuss the Digital Fairness Act; one supporting line names Commissioner Michael McGrath and the
   Youth Policy Dialogue initiative. Do not pad it back out with extra detail.
-- **CTA is a prominent button, not a flat link.** `.about-highlight__cta` is a filled gradient
-  indigo pill, bold white text, Lucide `LuArrowRight` that slides on hover, lift + glow. A muted
+- **CTA is a prominent button, not a flat link.** `.about-highlight__cta` is a filled solid blue
+  pill, bold white text, Lucide `LuArrowRight` that slides on hover, subtle lift. A muted
   text link "scrolls past"; the button must obviously read as the click target.
 
 ## How Eduard works (preferences)

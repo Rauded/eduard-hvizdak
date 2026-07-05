@@ -10,8 +10,8 @@ const Footer: React.FC = () => {
     <footer className="footer-container">
       <div className="left-align">
         <p>
-          Developed & Designed with <span className="purple-heart">❤️</span> by
-          <a href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer" className="footer-link">Me</a>.
+          Designed and built by{' '}
+          <a href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer" className="footer-link">Eduard Hvizdak</a>.
         </p>
       </div>
       <div className="center-align">

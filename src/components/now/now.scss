@@ -1,18 +1,18 @@
 .now-page {
   // ─── Theme variables (dark default) ──────────────────────────────
-  --bg: transparent; // dark mode lets the AppContainer gradient show through
-  --kicker: #818cf8;
-  --heading: #c7d2fe;
+  --bg: transparent; // dark mode lets the AppContainer background show through
+  --kicker: #60a5fa;
+  --heading: #bfdbfe;
   --text: #fff;
   --text-strong: #f8fafc;
   --text-soft: rgba(248, 250, 252, 0.6);
   --text-dim: rgba(248, 250, 252, 0.4);
   --text-mute: rgba(248, 250, 252, 0.5);
-  --link: #a5b4fc;
-  --link-border: rgba(165, 180, 252, 0.35);
-  --card-bg: linear-gradient(135deg, rgba(99, 102, 241, 0.07) 0%, rgba(168, 85, 247, 0.05) 100%);
-  --card-border: rgba(165, 180, 252, 0.14);
-  --card-border-hover: rgba(165, 180, 252, 0.32);
+  --link: #93c5fd;
+  --link-border: rgba(147, 197, 253, 0.35);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(147, 197, 253, 0.14);
+  --card-border-hover: rgba(147, 197, 253, 0.32);
   --cover-bg: #15101f;
   --cover-border: rgba(255, 255, 255, 0.08);
   --build-bg: rgba(255, 255, 255, 0.03);
@@ -56,7 +56,7 @@
     --text-mute: rgba(30, 41, 59, 0.55);
     --link: #1d4ed8;
     --link-border: rgba(37, 99, 235, 0.35);
-    --card-bg: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(37, 99, 235, 0.03) 100%);
+    --card-bg: rgba(37, 99, 235, 0.04);
     --card-border: rgba(37, 99, 235, 0.18);
     --card-border-hover: rgba(37, 99, 235, 0.38);
     --cover-bg: #eef2ff;
@@ -468,7 +468,7 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
     color: #fff;
-    background: linear-gradient(150deg, #2e51a2 0%, #1b3168 100%);
+    background: #2e51a2;
   }
 
   &:hover &__cover {

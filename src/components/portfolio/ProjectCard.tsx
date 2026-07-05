@@ -64,7 +64,6 @@ const Slideshow: React.FC<{ images: string[]; accent: string }> = ({ images, acc
 // ─── XR Concept card (BookReader) ────────────────────────────────
 const ConceptCard: React.FC<{ accent: string }> = ({ accent }) => (
   <div className="concept-card" style={{ '--concept-accent': accent } as React.CSSProperties}>
-    <div className="concept-card__bg" />
     <div className="concept-card__hud">
       <div className="concept-card__topbar">
         <span className="concept-card__logo">◈ Even Realities G1</span>
@@ -87,7 +86,7 @@ const ConceptCard: React.FC<{ accent: string }> = ({ accent }) => (
         <div className="concept-card__progress-track">
           <div className="concept-card__progress-fill" />
         </div>
-        <span className="concept-card__page">p. 127 / 190 — 67%</span>
+        <span className="concept-card__page">p. 127 / 190 · 67%</span>
       </div>
     </div>
   </div>
@@ -96,7 +95,6 @@ const ConceptCard: React.FC<{ accent: string }> = ({ accent }) => (
 // ─── Branded placeholder (used until a real video/screenshot exists) ──
 const PlaceholderCard: React.FC<{ title: string; accent: string }> = ({ title, accent }) => (
   <div className="media-placeholder" style={{ '--ph-accent': accent } as React.CSSProperties}>
-    <div className="media-placeholder__glow" />
     <span className="media-placeholder__label">{title}</span>
     <span className="media-placeholder__note">Demo coming soon</span>
   </div>

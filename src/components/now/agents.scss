@@ -6,13 +6,13 @@
   // Status colours (shared dark/light; tuned to read on both)
   --agent-run: #34d399;     // green — running
   --agent-idle: #fbbf24;    // amber — idle
-  --agent-done: #818cf8;    // indigo — done
+  --agent-done: #60a5fa;    // indigo — done
   --agent-error: #f87171;   // red — error
 
   &[data-theme='light'] {
     --agent-run: #059669;
     --agent-idle: #d97706;
-    --agent-done: #4f46e5;
+    --agent-done: #2563eb;
     --agent-error: #dc2626;
   }
 }

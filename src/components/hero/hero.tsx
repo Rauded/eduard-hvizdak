@@ -18,17 +18,6 @@ const HeroContainer = styled.section`
     padding-top: 90px;
   }
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(ellipse at 20% 60%, var(--hero-glow, rgba(99, 102, 241, 0.07)) 0%, transparent 55%);
-    pointer-events: none;
-  }
-
   @media (min-width: 768px) {
     flex-direction: row;
   }
@@ -91,7 +80,7 @@ const TerminalWindow = styled.div`
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  background: #1a1a2e;
+  background: #18181b;
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.5),
     0 2px 8px rgba(0, 0, 0, 0.3),
@@ -104,7 +93,7 @@ const TerminalBar = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(180deg, #2d2d3f 0%, #252537 100%);
+  background: #232326;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   position: relative;
 `;
@@ -157,7 +146,7 @@ const TerminalTab = styled.div`
 
 const TerminalBody = styled.div`
   padding: 0;
-  background: #0d0d1a;
+  background: #0f0f12;
   position: relative;
   overflow: hidden;
 `;
@@ -199,7 +188,7 @@ const TerminalStatusBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(180deg, #1e1e30 0%, #1a1a2e 100%);
+  background: #1c1c1f;
   border-top: 1px solid rgba(255, 255, 255, 0.04);
 `;
 
@@ -218,7 +207,6 @@ const StatusDot = styled.span`
   border-radius: 50%;
   background: #4ade80;
   margin-right: 6px;
-  box-shadow: 0 0 4px rgba(74, 222, 128, 0.4);
 `;
 
 const GradientText = styled.h2`
@@ -241,7 +229,7 @@ const blink = keyframes`
 
 const TypewriterText = styled.div`
   font-family: var(--font-mono);
-  color: var(--accent, #a5b4fc);
+  color: var(--accent, #93c5fd);
   font-size: clamp(1.1em, 3vw, 1.75em);
   margin-top: 1em;
   white-space: nowrap;
@@ -252,7 +240,7 @@ const TypewriterText = styled.div`
   &::after {
     content: '_';
     animation: ${blink} 1s infinite;
-    color: var(--accent-strong, #6366f1);
+    color: var(--accent-strong, #3b82f6);
     font-weight: 300;
   }
 `;
@@ -340,7 +328,7 @@ const Hero: React.FC = () => {
               <TrafficDot color="#28c840" />
             </TrafficLights>
             <TerminalTabBar>
-              <TerminalTab>TARS — patrol module</TerminalTab>
+              <TerminalTab>TARS · patrol module</TerminalTab>
             </TerminalTabBar>
           </TerminalBar>
           <TerminalBody>
@@ -353,7 +341,7 @@ const Hero: React.FC = () => {
           </TerminalBody>
           <TerminalStatusBar>
             <StatusText><StatusDot />active</StatusText>
-            <StatusText>patrol module v2.0</StatusText>
+            <StatusText>patrol module</StatusText>
           </TerminalStatusBar>
         </TerminalWindow>
       </RightContainer>

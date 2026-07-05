@@ -49,7 +49,7 @@ export const CHAPTERS: Chapter[] = [
     id: 'even-realities-g1',
     title: 'Even Realities G1',
     category: 'XR glasses',
-    accent: '#a855f7',
+    accent: '#34d399',
     link: 'https://www.evenrealities.com',
     lead: 'Lightweight AR glasses with a subtle heads-up display.',
     body: [

@@ -46,7 +46,7 @@
       background: rgba(37, 99, 235, 0.16);
       color: var(--accent-strong);
       border-color: var(--accent);
-      box-shadow: 0 2px 12px rgba(37, 99, 235, 0.18);
+      
     }
   }
 
@@ -106,7 +106,7 @@
       border: 1px solid var(--border);
       box-shadow: var(--shadow-card);
       &:hover {
-        box-shadow: 0 12px 32px rgba(37, 99, 235, 0.18);
+        box-shadow: var(--shadow-card);
         border-color: var(--accent-ring);
       }
     }
@@ -124,8 +124,7 @@
       box-shadow: 0 14px 40px rgba(22, 22, 26, 0.10);
 
       .about-highlight__cta {
-        background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-        box-shadow: 0 12px 28px rgba(37, 99, 235, 0.42);
+        background: var(--accent-strong);
       }
     }
 
@@ -135,7 +134,7 @@
     &__title { color: var(--text-strong) !important; }
 
     &__cta {
-      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+      background: var(--accent);
       box-shadow: var(--shadow-accent);
     }
   }
@@ -178,7 +177,7 @@
   }
 
   .line-container:before {
-    background: linear-gradient(180deg, var(--accent) 0%, rgba(37, 99, 235, 0.08) 100%);
+    background: var(--border-strong);
   }
   .job-container:before { background: var(--accent); }
 
@@ -188,9 +187,9 @@
   }
 
   .cv-actions__btn--primary {
-    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+    background: var(--accent);
     box-shadow: var(--shadow-accent);
-    &:hover { box-shadow: 0 12px 32px rgba(37, 99, 235, 0.42); }
+    &:hover { background: var(--accent-strong); }
   }
   .cv-actions__btn--ghost {
     background: var(--surface);
@@ -286,9 +285,7 @@
 
   // ─── Contact ────────────────────────────────────────────────────────────
   .contact {
-    background:
-      radial-gradient(120% 120% at 50% 0%, rgba(37, 99, 235, 0.10) 0%, transparent 60%),
-      var(--surface);
+    background: var(--surface);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-card);
 
@@ -306,9 +303,9 @@
     }
 
     &__btn--primary {
-      background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+      background: var(--accent);
       box-shadow: var(--shadow-accent);
-      &:hover { box-shadow: 0 14px 34px rgba(37, 99, 235, 0.42); }
+      &:hover { background: var(--accent-strong); }
     }
     &__btn--ghost {
       background: var(--surface);
