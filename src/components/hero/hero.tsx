@@ -144,24 +144,21 @@ const RightContainer = styled.div`
   }
 `;
 
-// Transparent glass terminal: the halftone wave shows through the window, so
-// the frame is just hairlines and a light blur, and TARS carries the color.
+// Solid white terminal card, humandelta mockup style: opaque so TARS always
+// has a clean backdrop, hairline frame, neutral shadow. TARS carries the ink.
 const TerminalWindow = styled.div`
   width: 90%;
   max-width: 700px;
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.42);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: #ffffff;
   box-shadow: var(--shadow-card, 0 1px 2px rgba(14, 19, 32, 0.05), 0 8px 24px rgba(14, 19, 32, 0.05));
   border: 1px solid var(--border, #e6e9ec);
-  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 
   &:hover {
     transform: translateY(-4px);
-    background: rgba(255, 255, 255, 0.6);
     box-shadow:
       0 14px 40px rgba(14, 19, 32, 0.10),
       0 3px 10px rgba(14, 19, 32, 0.06);
@@ -173,7 +170,7 @@ const TerminalBar = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(246, 246, 246, 0.55);
+  background: var(--surface, #f6f6f6);
   border-bottom: 1px solid var(--border, #e6e9ec);
   position: relative;
 `;
@@ -207,14 +204,14 @@ const TerminalTab = styled.div`
   color: var(--text-faint, #7484a0);
   letter-spacing: 0.04em;
   padding: 4px 16px;
-  background: rgba(255, 255, 255, 0.65);
+  background: #ffffff;
   border-radius: 4px;
   border: 1px solid var(--border, #e6e9ec);
 `;
 
 const TerminalBody = styled.div`
   padding: 0;
-  background: transparent;
+  background: #ffffff;
   position: relative;
   overflow: hidden;
 `;
@@ -227,17 +224,17 @@ const TarsContainer = styled.div`
   align-items: flex-end;
 `;
 
-// On the transparent window TARS carries the color himself: the gray-on-
-// transparency glyphs are remapped to solid brand navy (tested filter chain),
-// deepening slightly on hover.
+// Dark navy-ink glyphs on the white card: brightness(0) flattens the gray
+// glyphs to solid black, then the invert/sepia/hue chain tints them toward
+// the ink end of the navy ramp (#0a1530-ish), so TARS reads crisp and dark.
 const TarsImage = styled.img`
   width: 100%;
   display: block;
-  filter: brightness(0) saturate(100%) invert(14%) sepia(31%) saturate(2274%) hue-rotate(200deg) brightness(93%) contrast(97%);
+  filter: brightness(0) saturate(100%) invert(8%) sepia(34%) saturate(3200%) hue-rotate(210deg) brightness(80%) contrast(105%);
   transition: filter 0.25s ease;
 
   ${TerminalWindow}:hover & {
-    filter: brightness(0) saturate(100%) invert(10%) sepia(35%) saturate(2600%) hue-rotate(202deg) brightness(85%) contrast(100%);
+    filter: brightness(0) saturate(100%) invert(14%) sepia(31%) saturate(2274%) hue-rotate(200deg) brightness(93%) contrast(97%);
   }
 `;
 
@@ -246,7 +243,7 @@ const TerminalStatusBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(246, 246, 246, 0.55);
+  background: var(--surface, #f6f6f6);
   border-top: 1px solid var(--border, #e6e9ec);
 `;
 
