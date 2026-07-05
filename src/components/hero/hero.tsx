@@ -153,6 +153,42 @@ const TerminalBody = styled.div`
   overflow: hidden;
 `;
 
+// Combo variant: the terminal's screen is a scene. Sparse stars in the upper
+// half, the engineering grid rising from the floor TARS patrols.
+const SceneBody = styled(TerminalBody)`
+  background-color: #0a0a10;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 22%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 28% 44%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1px 1px at 37% 12%, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1.5px 1.5px at 52% 30%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 61% 8%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 70% 38%, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(1.5px 1.5px at 83% 18%, rgba(255, 255, 255, 0.65), transparent),
+    radial-gradient(1px 1px at 91% 46%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 6% 52%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 46% 56%, rgba(255, 255, 255, 0.25), transparent);
+  padding-top: 12px;
+
+  /* Grid fades in toward the floor so the sky stays clear for the stars. */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 26px 26px;
+    -webkit-mask-image: linear-gradient(180deg, transparent 32%, #000 100%);
+    mask-image: linear-gradient(180deg, transparent 32%, #000 100%);
+    pointer-events: none;
+  }
+
+  > * {
+    position: relative;
+  }
+`;
+
 // TARS patrol animation inside the terminal
 const patrolAnimation = keyframes`
   0% { transform: translateX(0%) scaleX(-1); }
@@ -336,6 +372,7 @@ const Hero: React.FC = () => {
   const [currentText, setCurrentText] = useState('');
   const tarsVariant = getTarsVariant();
   const isRose = tarsVariant === 'rose';
+  const isCombo = tarsVariant === 'combo';
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
@@ -382,7 +419,7 @@ const Hero: React.FC = () => {
 
   return (
     <HeroContainer id="home">
-      {isRose && <AsciiDitherBackground />}
+      {(isRose || isCombo) && <AsciiDitherBackground />}
       <LeftContainer>
         <Headline>{topLine}</Headline>
         <GradientText>I'm Eduard Hvizdak.</GradientText>
@@ -409,6 +446,32 @@ const Hero: React.FC = () => {
                 />
               </TarsContainer>
             </TerminalBody>
+            <TerminalStatusBar>
+              <StatusText><StatusDot />active</StatusText>
+              <StatusText>patrol module</StatusText>
+            </TerminalStatusBar>
+          </TerminalWindow>
+        )}
+        {isCombo && (
+          <TerminalWindow>
+            <TerminalBar>
+              <TrafficLights>
+                <TrafficDot color="#ff5f57" />
+                <TrafficDot color="#febc2e" />
+                <TrafficDot color="#28c840" />
+              </TrafficLights>
+              <TerminalTabBar>
+                <TerminalTab>TARS · patrol module</TerminalTab>
+              </TerminalTabBar>
+            </TerminalBar>
+            <SceneBody>
+              <TarsContainer>
+                <TarsImage
+                  src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
+                  alt="TARS walking ASCII art"
+                />
+              </TarsContainer>
+            </SceneBody>
             <TerminalStatusBar>
               <StatusText><StatusDot />active</StatusText>
               <StatusText>patrol module</StatusText>

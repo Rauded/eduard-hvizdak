@@ -7,6 +7,8 @@
 //   'grid'     → dark tile with a faint engineering grid fading upward
 //   'space'    → dark tile with a sparse starfield, TARS on a floor line
 //   'rose'     → no TARS: the blue halftone flower bloom fills the hero
+//   'combo'    → everything at once: flower bloom behind the hero, and the
+//                terminal's screen becomes a starfield + grid floor scene
 //
 // HOW TO CHANGE THE DEFAULT for everyone: flip DEFAULT_VARIANT below.
 //
@@ -14,9 +16,9 @@
 // terminal) to any URL. The choice is remembered as you click around;
 // use ?tars=reset to clear it and fall back to the default.
 
-export type TarsVariant = 'terminal' | 'grid' | 'space' | 'rose';
+export type TarsVariant = 'terminal' | 'grid' | 'space' | 'rose' | 'combo';
 
-const VARIANTS: TarsVariant[] = ['terminal', 'grid', 'space', 'rose'];
+const VARIANTS: TarsVariant[] = ['terminal', 'grid', 'space', 'rose', 'combo'];
 
 const DEFAULT_VARIANT: TarsVariant = 'terminal';
 
