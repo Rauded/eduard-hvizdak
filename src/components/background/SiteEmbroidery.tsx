@@ -5,14 +5,18 @@ import { useTheme } from '../theme/ThemeContext';
 // Same CC0 water-lily source as the hero bloom (see AsciiDitherBackground).
 import flowerSrc from '../../assets/hero/flower.jpg';
 
-// Site-wide embroidery: the flower re-rendered as a fine-pitch ASCII glyph
-// field along the viewport's left and right edges, behind every page. The
-// layer is position:fixed, so the same stitched frame stays put while the
-// content scrolls past it: one continuous motif across the whole site.
+// Site-wide embroidery: blooms along the viewport's left and right edges,
+// behind every page, rendered in two layers from the same source photo:
 //
-// It paints at z-index -1 (above the body background, below all content and
-// every section surface) and is masked so the middle of the viewport, where
-// the text columns live, stays completely clear.
+//   1. a fine Bayer-dithered halftone (3px dots, like a risograph print)
+//      that carries the detailed petal gradients, and
+//   2. a sparse ASCII glyph pass over the highlights only, so the bright
+//      petal edges read as embroidered stitches on top of the print.
+//
+// The layer is position:fixed, so the same stitched frame stays put while
+// the content scrolls past it: one continuous motif across the whole site.
+// It paints at z-index -1 (above the html background, below all content)
+// and is masked so the middle of the viewport stays completely clear.
 //
 // The hero owns its own composition, so the layer stays invisible while the
 // hero is on screen and fades in smoothly as it scrolls away (opacity is
@@ -57,7 +61,7 @@ const Canvas = styled.canvas`
   }
 `;
 
-// 8x8 Bayer matrix, normalized to 0..1 thresholds (texture for the ramp).
+// 8x8 Bayer matrix, normalized to 0..1 thresholds.
 const BAYER8 = [
   [0, 32, 8, 40, 2, 34, 10, 42],
   [48, 16, 56, 24, 50, 18, 58, 26],
@@ -69,21 +73,28 @@ const BAYER8 = [
   [63, 31, 55, 23, 61, 29, 53, 21],
 ].map((row) => row.map((v) => (v + 0.5) / 64));
 
-// Long luminance ramp: the "more detailed ASCII" ask. Fine cells plus a
-// 60+ glyph ramp give smooth density gradients instead of chunky blocks.
+// Long luminance ramp for the glyph pass. Only the upper half is ever used
+// (glyphs decorate highlights), but the full ramp keeps indexing simple.
 const RAMP = " .'`^\",:;Il!i><~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
 
+const DITHER_CELL = 3; // px per halftone dot
 const FRAME_MS = 66; // ~15fps; a background shimmer needs no more
 const LUM_FLOOR = 0.06;
+// Glyphs only above this shaped luminance: stitches on the bright petals.
+const GLYPH_FLOOR = 0.48;
 const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.12) * 1.55));
 
-// Blooms anchored on the viewport edges, cropped by them on purpose.
-// cx/cy place the bloom center (at ~0.42/0.42 of the photo) in viewport
-// fractions; h is the bloom height as a fraction of viewport height.
+// Blooms anchored on the viewport edges, cropped by them on purpose. Large
+// blooms carry the motif; small buds cluster around them so each edge reads
+// as a composed spray, not a repeated stamp. cx/cy place the bloom center
+// (at ~0.42/0.42 of the photo) in viewport fractions; h is bloom height as
+// a fraction of viewport height.
 const PLACEMENTS = [
   { cx: -0.02, cy: 0.18, h: 0.52, mirror: true, phase: 0.0 },
+  { cx: 0.045, cy: 0.47, h: 0.19, mirror: true, phase: 1.7 },
   { cx: 0.01, cy: 0.8, h: 0.44, mirror: true, phase: 2.5 },
   { cx: 1.02, cy: 0.42, h: 0.56, mirror: false, phase: 1.3 },
+  { cx: 0.965, cy: 0.1, h: 0.22, mirror: false, phase: 3.1 },
   { cx: 1.0, cy: 0.96, h: 0.4, mirror: false, phase: 3.7 },
 ];
 
@@ -100,15 +111,31 @@ const SiteEmbroidery: React.FC = () => {
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Brand blue, three density tiers, kept faint: this is wallpaper, not art.
+    // Brand blue, kept faint: this is wallpaper, not art. rgba tuples feed
+    // the dither ImageData (base = bloom body, hi = petal highlights); the
+    // css strings paint the glyph stitches.
     const palette =
       theme === 'dark'
-        ? ['rgba(59, 130, 246, 0.22)', 'rgba(96, 165, 250, 0.38)', 'rgba(147, 197, 253, 0.55)']
-        : ['rgba(37, 99, 235, 0.14)', 'rgba(37, 99, 235, 0.28)', 'rgba(37, 99, 235, 0.44)'];
+        ? {
+            base: [96, 165, 250, 48] as const,
+            hi: [147, 197, 253, 125] as const,
+            glyph: ['rgba(147, 197, 253, 0.42)', 'rgba(191, 219, 254, 0.62)'],
+          }
+        : {
+            base: [76, 118, 235, 62] as const,
+            hi: [37, 99, 235, 130] as const,
+            glyph: ['rgba(37, 99, 235, 0.38)', 'rgba(29, 78, 216, 0.52)'],
+          };
 
-    const off = document.createElement('canvas');
-    const offCtx = off.getContext('2d', { willReadFrequently: true });
-    if (!offCtx) return undefined;
+    const offD = document.createElement('canvas'); // dither-resolution sample
+    const offDCtx = offD.getContext('2d', { willReadFrequently: true });
+    const offG = document.createElement('canvas'); // glyph-resolution sample
+    const offGCtx = offG.getContext('2d', { willReadFrequently: true });
+    const dotCanvas = document.createElement('canvas'); // 1px-per-dot buffer
+    const dotCtx = dotCanvas.getContext('2d');
+    const gridCanvas = document.createElement('canvas'); // 1px grid knockout
+    const gridCtx = gridCanvas.getContext('2d');
+    if (!offDCtx || !offGCtx || !dotCtx || !gridCtx) return undefined;
 
     const img = new Image();
     let imgReady = false;
@@ -118,9 +145,12 @@ const SiteEmbroidery: React.FC = () => {
     const applyOpacity = () => {
       canvas.style.opacity = imgReady ? String(Math.min(1, Math.max(0, heroGone))) : '0';
     };
-    let cols = 0;
-    let rows = 0;
-    let cell = 0;
+    let dCols = 0;
+    let dRows = 0;
+    let gCols = 0;
+    let gRows = 0;
+    let gCell = 0;
+    let dots: ImageData | null = null;
     let hash = new Float32Array(0);
     let rafId = 0;
     let running = false;
@@ -131,29 +161,55 @@ const SiteEmbroidery: React.FC = () => {
     const layoutCanvas = () => {
       const w = Math.max(1, window.innerWidth);
       const h = Math.max(1, window.innerHeight);
-      cell = Math.min(12, Math.max(9, Math.round(w / 150)));
-      cols = Math.ceil(w / cell);
-      rows = Math.ceil(h / cell);
-      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      dCols = Math.ceil(w / DITHER_CELL);
+      dRows = Math.ceil(h / DITHER_CELL);
+      gCell = Math.min(13, Math.max(10, Math.round(w / 130)));
+      gCols = Math.ceil(w / gCell);
+      gRows = Math.ceil(h / gCell);
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      off.width = cols;
-      off.height = rows;
-      hash = new Float32Array(cols * rows);
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
+      offD.width = dCols;
+      offD.height = dRows;
+      offG.width = gCols;
+      offG.height = gRows;
+      dotCanvas.width = dCols;
+      dotCanvas.height = dRows;
+      dots = dotCtx.createImageData(dCols, dRows);
+      // Grid mask in device pixels: 1px lines on every dither-cell boundary,
+      // knocked out of the dots so they read as printed halftone.
+      gridCanvas.width = canvas.width;
+      gridCanvas.height = canvas.height;
+      gridCtx.setTransform(1, 0, 0, 1, 0, 0);
+      gridCtx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
+      gridCtx.fillStyle = '#000';
+      const step = DITHER_CELL * dpr;
+      for (let gx = 0; gx <= dCols; gx++) {
+        gridCtx.fillRect(Math.round(gx * step) - 1, 0, 1, gridCanvas.height);
+      }
+      for (let gy = 0; gy <= dRows; gy++) {
+        gridCtx.fillRect(0, Math.round(gy * step) - 1, gridCanvas.width, 1);
+      }
+      // Per-cell deterministic hash (glyph shimmer) so the pattern breathes
+      // instead of flickering with fresh randomness every frame.
+      hash = new Float32Array(gCols * gRows);
+      for (let y = 0; y < gRows; y++) {
+        for (let x = 0; x < gCols; x++) {
           const s = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
-          hash[y * cols + x] = s - Math.floor(s);
+          hash[y * gCols + x] = s - Math.floor(s);
         }
       }
     };
 
-    const drawFrame = (now: number) => {
-      if (!imgReady || cols === 0) return;
-      const t = (now - start) / 1000;
-
-      offCtx.clearRect(0, 0, cols, rows);
+    // Draw every bloom into the given sample canvas at its resolution.
+    const drawBlooms = (
+      target: CanvasRenderingContext2D,
+      cols: number,
+      rows: number,
+      t: number
+    ) => {
+      target.clearRect(0, 0, cols, rows);
       for (const b of PLACEMENTS) {
         const bs = ((rows * b.h) / img.height) * (1 + 0.03 * Math.sin(t * 0.11 + b.phase));
         const dw = img.width * bs;
@@ -161,35 +217,83 @@ const SiteEmbroidery: React.FC = () => {
         const dx = cols * b.cx - dw * 0.42 + Math.sin(t * 0.05 + b.phase);
         const dy = rows * b.cy - dh * 0.42 + Math.cos(t * 0.04 + b.phase);
         if (b.mirror) {
-          offCtx.save();
-          offCtx.translate(dx + dw / 2, 0);
-          offCtx.scale(-1, 1);
-          offCtx.translate(-(dx + dw / 2), 0);
-          offCtx.drawImage(img, dx, dy, dw, dh);
-          offCtx.restore();
+          target.save();
+          target.translate(dx + dw / 2, 0);
+          target.scale(-1, 1);
+          target.translate(-(dx + dw / 2), 0);
+          target.drawImage(img, dx, dy, dw, dh);
+          target.restore();
         } else {
-          offCtx.drawImage(img, dx, dy, dw, dh);
+          target.drawImage(img, dx, dy, dw, dh);
         }
       }
-      const data = offCtx.getImageData(0, 0, cols, rows).data;
+    };
+
+    const drawFrame = (now: number) => {
+      if (!imgReady || dCols === 0 || !dots) return;
+      const t = (now - start) / 1000;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.font = `${cell}px ui-monospace, SFMono-Regular, Menlo, monospace`;
-      ctx.textBaseline = 'top';
-      // The mask hides the middle anyway; skip sampling it entirely.
-      const clearLo = Math.floor(cols * 0.36);
-      const clearHi = Math.ceil(cols * 0.64);
-      const buckets: Array<Array<[string, number, number]>> = [[], [], []];
-      for (let y = 0; y < rows; y++) {
-        for (let x = 0; x < cols; x++) {
-          if (x > clearLo && x < clearHi) continue;
-          const i = y * cols + x;
-          const p = i * 4;
+
+      // ── Layer 1: fine halftone dither (the detailed print) ──
+      drawBlooms(offDCtx, dCols, dRows, t);
+      const dData = offDCtx.getImageData(0, 0, dCols, dRows).data;
+      const px = dots.data;
+      px.fill(0);
+      const [br, bg, bb, ba] = palette.base;
+      const [hr, hg, hb, ha] = palette.hi;
+      const dClearLo = Math.floor(dCols * 0.36);
+      const dClearHi = Math.ceil(dCols * 0.64);
+      for (let y = 0; y < dRows; y++) {
+        const bayerRow = BAYER8[y % 8];
+        for (let x = 0; x < dCols; x++) {
+          if (x > dClearLo && x < dClearHi) continue; // masked center: skip
+          const p = (y * dCols + x) * 4;
           const lum = shape(
-            (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255
+            (0.2126 * dData[p] + 0.7152 * dData[p + 1] + 0.0722 * dData[p + 2]) / 255
           );
           if (lum < LUM_FLOOR) continue;
+          const threshold = bayerRow[x % 8];
+          if (lum <= threshold) continue;
+          if (lum > threshold + 0.5) {
+            px[p] = hr; px[p + 1] = hg; px[p + 2] = hb; px[p + 3] = ha;
+          } else {
+            px[p] = br; px[p + 1] = bg; px[p + 2] = bb; px[p + 3] = ba;
+          }
+        }
+      }
+      dotCtx.putImageData(dots, 0, 0);
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(
+        dotCanvas,
+        0, 0, dCols, dRows,
+        0, 0, dCols * DITHER_CELL, dRows * DITHER_CELL
+      );
+      // Knock the 1px grid out so dots stay discrete (device-pixel space).
+      ctx.save();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.drawImage(gridCanvas, 0, 0);
+      ctx.restore();
+
+      // ── Layer 2: ASCII stitches over the highlights only ──
+      drawBlooms(offGCtx, gCols, gRows, t);
+      const gData = offGCtx.getImageData(0, 0, gCols, gRows).data;
+      ctx.font = `${gCell}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+      ctx.textBaseline = 'top';
+      const gClearLo = Math.floor(gCols * 0.36);
+      const gClearHi = Math.ceil(gCols * 0.64);
+      const buckets: Array<Array<[string, number, number]>> = [[], []];
+      for (let y = 0; y < gRows; y++) {
+        for (let x = 0; x < gCols; x++) {
+          if (x > gClearLo && x < gClearHi) continue;
+          const i = y * gCols + x;
+          const p = i * 4;
+          const lum = shape(
+            (0.2126 * gData[p] + 0.7152 * gData[p + 1] + 0.0722 * gData[p + 2]) / 255
+          );
           const v = lum + 0.04 * Math.sin(t * 1.2 + hash[i] * 6.283);
+          if (v < GLYPH_FLOOR) continue;
           const dith = (BAYER8[y % 8][x % 8] - 0.5) / RAMP.length;
           const idx = Math.min(
             RAMP.length - 1,
@@ -197,13 +301,12 @@ const SiteEmbroidery: React.FC = () => {
           );
           const glyph = RAMP[idx];
           if (glyph === ' ') continue;
-          const bucket = v < 0.35 ? 0 : v < 0.65 ? 1 : 2;
-          buckets[bucket].push([glyph, x * cell, y * cell]);
+          buckets[v < 0.7 ? 0 : 1].push([glyph, x * gCell, y * gCell]);
         }
       }
       buckets.forEach((bucket, bi) => {
         if (!bucket.length) return;
-        ctx.fillStyle = palette[bi];
+        ctx.fillStyle = palette.glyph[bi];
         bucket.forEach(([glyph, gx, gy]) => ctx.fillText(glyph, gx, gy));
       });
     };
