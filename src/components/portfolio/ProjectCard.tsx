@@ -86,7 +86,7 @@ const ConceptCard: React.FC<{ accent: string }> = ({ accent }) => (
         <div className="concept-card__progress-track">
           <div className="concept-card__progress-fill" />
         </div>
-        <span className="concept-card__page">p. 127 / 190 — 67%</span>
+        <span className="concept-card__page">p. 127 / 190, 67%</span>
       </div>
     </div>
   </div>
@@ -205,7 +205,7 @@ const ProjectMedia: React.FC<{ project: PortfolioProject }> = ({ project }) => {
 // The full problem→solution narrative is ALWAYS rendered into the DOM
 // (inside the dialog markup, hidden via CSS when closed) so crawlers and
 // LLM/GEO indexers always get the keywords. The button only reveals the
-// reader for human readers — opening "like a window" on the same page.
+// reader for human readers, opening "like a window" on the same page.
 const CASE_SECTIONS: { key: keyof CaseStudy; heading: string }[] = [
   { key: 'problem', heading: 'The problem' },
   { key: 'motivation', heading: 'Why I built it' },

@@ -4,10 +4,10 @@
 // a terminal-ish activity line and an expandable log + "shipped" chips.
 .now-page {
   // Status colours (shared dark/light; tuned to read on both)
-  --agent-run: #34d399;     // green — running
-  --agent-idle: #fbbf24;    // amber — idle
+  --agent-run: #34d399;     // green: running
+  --agent-idle: #fbbf24;    // amber: idle
   --agent-done: #9ca3af;    // neutral: done
-  --agent-error: #f87171;   // red — error
+  --agent-error: #f87171;   // red: error
 
   &[data-theme='light'] {
     --agent-run: #059669;

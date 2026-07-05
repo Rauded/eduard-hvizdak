@@ -55,7 +55,7 @@ const ScrollToTop: React.FC = () => {
   const { pathname, hash } = useLocation();
   useEffect(() => {
     // Honour in-page anchors (e.g. /#projects from a blog link): scroll to the
-    // target — retrying briefly while the destination section mounts — instead
+    // target (retrying briefly while the destination section mounts) instead
     // of jumping to the top.
     if (hash) {
       let tries = 0;

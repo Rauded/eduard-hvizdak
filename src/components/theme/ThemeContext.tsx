@@ -14,7 +14,7 @@ const ThemeContext = createContext<ThemeContextValue>({
   toggleTheme: () => {},
 });
 
-// Browser-chrome colours (mobile address bar) per theme — kept in sync with the
+// Browser-chrome colours (mobile address bar) per theme, kept in sync with the
 // page so the bar never clashes with the canvas.
 const CHROME_COLOR: Record<SiteTheme, string> = {
   light: '#fafafa',

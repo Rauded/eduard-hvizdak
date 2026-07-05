@@ -12,9 +12,9 @@ import './share.scss';
 // the OG tags change so this page always reflects what gets shared.
 const SHARE = {
   siteName: 'Eduard Hvizdak',
-  title: 'Eduard Hvizdak – AI Engineer & Founder',
+  title: 'Eduard Hvizdak, AI Engineer & Founder',
   description:
-    'Production AI systems (RAG, multi-agent) and real SaaS products — InzerPro, NasadClaw, KouzelníkNaAkci.',
+    'Production AI systems (RAG, multi-agent) and real SaaS products: InzerPro, NasadClaw, KouzelníkNaAkci.',
   url: `${SITE_URL}/`,
   domain: 'eduardhvizdak.com',
   image: DEFAULT_OG_IMAGE,
@@ -94,18 +94,18 @@ const SharePreviewPage: React.FC = () => {
           </p>
           <div className="share-embeds">
             <div className="share-embed">
-              <h3 className="share-embed__label">X / Twitter — live embed (sample)</h3>
+              <h3 className="share-embed__label">X / Twitter: live embed (sample)</h3>
               <Tweet url={SHOWCASE_TWEET} theme="dark" />
             </div>
             <div className="share-embed">
-              <h3 className="share-embed__label">LinkedIn — post embed</h3>
+              <h3 className="share-embed__label">LinkedIn: post embed</h3>
               <LinkedInEmbed
                 src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7475316031021031424"
                 height={1219}
               />
             </div>
             <div className="share-embed">
-              <h3 className="share-embed__label">LinkedIn — post embed (2)</h3>
+              <h3 className="share-embed__label">LinkedIn: post embed (2)</h3>
               <LinkedInEmbed
                 src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7473426243208527872?collapsed=1"
                 height={628}

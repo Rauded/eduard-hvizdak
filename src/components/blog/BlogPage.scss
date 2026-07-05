@@ -1,5 +1,5 @@
 // ═══════════════════════════════════════════════════════════════
-//  Blog — listing feed & Medium-style reading experience
+//  Blog: listing feed & Medium-style reading experience
 // ═══════════════════════════════════════════════════════════════
 
 $ui-font: var(--font-body);
@@ -116,7 +116,7 @@ $ui-font: var(--font-body);
   }
 }
 
-// ─── Featured (first) post — editorial side-by-side hero ────────
+// ─── Featured (first) post: editorial side-by-side hero ────────
 .blog-feature {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
@@ -350,7 +350,7 @@ $ui-font: var(--font-body);
 }
 
 // ═══════════════════════════════════════════════════════════════
-//  Article (post) page — themeable reading surface
+//  Article (post) page: themeable reading surface
 // ═══════════════════════════════════════════════════════════════
 .blog-post {
   --media-shadow: var(--shadow-card);
@@ -544,7 +544,7 @@ $ui-font: var(--font-body);
     }
 
     // Figures stay within the reading column so they keep the page's slim,
-    // consistent measure — framed with a hairline border + soft shadow.
+    // consistent measure, framed with a hairline border + soft shadow.
     .blog-figure {
       width: 100%;
       margin: 2.4em 0;

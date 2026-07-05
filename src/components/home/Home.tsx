@@ -15,7 +15,7 @@ const Home: React.FC = () => (
   <>
     <Seo
       title="Eduard Hvizdak"
-      description="AI engineer and indie founder. I build production AI systems — RAG pipelines, multi-agent tooling — and run real SaaS products (InzerPro, NasadClaw, KouzelníkNaAkci)."
+      description="AI engineer and indie founder. I build production AI systems (RAG pipelines, multi-agent tooling) and run real SaaS products: InzerPro, NasadClaw, KouzelníkNaAkci."
       path="/"
     />
     <Hero />

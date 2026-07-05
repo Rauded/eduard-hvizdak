@@ -5,7 +5,7 @@
 //  assigns the two accent roles on top of that:
 //    • Headings  → --font-display  (flip --font-display to var(--font-serif)
 //                                    in index.css for an editorial serif look)
-//    • Technical → --font-mono     (logo, eyebrows/labels, tags — the bits that
+//    • Technical → --font-mono     (logo, eyebrows/labels, tags: the bits that
 //                                    keep the "engineer" signature)
 //
 //  !important is used deliberately: component SCSS sets font-family in ~30
@@ -34,7 +34,7 @@ h1, h2, h3,
   letter-spacing: -0.025em;
 }
 
-// Technical signature — kept in mono as a tasteful accent, not the whole page.
+// Technical signature: kept in mono as a tasteful accent, not the whole page.
 .logo,
 .about-highlight__eyebrow,
 .contact__eyebrow,

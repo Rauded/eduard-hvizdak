@@ -215,6 +215,6 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Thanks to <strong>YouthFully Yours</strong> for sending me, and to <strong>VšĮ Džiaugsmo slėnis</strong> (<a href="https://www.instagram.com/dziaugsmoslenis/" target="_blank" rel="noopener noreferrer">@dziaugsmoslenis</a>) for putting it all together.</p>
     `,
     footnote:
-      'Bridges, Not Walls – Erasmus+ Youth Exchange · 20–29.04.2026, Luoba, Lithuania<br/>Countries: Lithuania, Ukraine, Slovakia, Romania, Poland, Bulgaria<br/>Funded by the Erasmus+ Programme of the European Union.<br/>#BridgesNotWalls #ErasmusPlus #YouthExchange',
+      'Bridges, Not Walls: Erasmus+ Youth Exchange · 20-29.04.2026, Luoba, Lithuania<br/>Countries: Lithuania, Ukraine, Slovakia, Romania, Poland, Bulgaria<br/>Funded by the Erasmus+ Programme of the European Union.<br/>#BridgesNotWalls #ErasmusPlus #YouthExchange',
   },
 ];

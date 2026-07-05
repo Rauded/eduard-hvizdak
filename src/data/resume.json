@@ -6,10 +6,10 @@
         {
           "title": "BSc Computer Science",
           "company": "@Masaryk University",
-          "dates": "2023 – Expected 2026"
+          "dates": "2023 - expected 2026"
         },
         {
-          "title": "Maturita – Mathematics & Computer Science",
+          "title": "Maturita, Mathematics & Computer Science",
           "company": "@Sobrance Gymnasium",
           "dates": "Graduated 2023"
         }
@@ -22,7 +22,7 @@
           "title": "AI Systems Engineer",
           "company": "@OneBond",
           "website": "https://onebond.tech",
-          "dates": "2025 – 2026",
+          "dates": "2025 - 2026",
           "bulletPoints": [
             "Architected an autonomous multi-agent pipeline for analyzing public government contracts using OCR, scraping, search, fact-verification, and LLM summarization.",
             "Built a Retrieval-Augmented Generation (RAG) system with LangChain, PostgreSQL, and VoyageAI embeddings enabling semantic contract intelligence.",
@@ -33,7 +33,7 @@
           "title": "AI Systems Engineer",
           "company": "@CZS / Masaryk University",
           "website": "https://czs.muni.cz/cs/",
-          "dates": "2025 – Present",
+          "dates": "2025 - present",
           "bulletPoints": [
             "Engineered a multi-stage RAG system combining vector search (OpenSearch), BM25, MMR retrieval, and LLM reranking for university knowledge systems.",
             "Built an asynchronous FastAPI backend with conversation memory, feedback loops, and automated knowledge ingestion pipelines."
@@ -53,7 +53,7 @@
           "title": "Think Tank Member & Programmer",
           "company": "@EDUC Alliance (European Digital University Alliance)",
           "website": "https://www.educalliance.eu",
-          "dates": "2024 – 2025",
+          "dates": "2024 - 2025",
           "bulletPoints": [
             "Developed an AI assistant for a digital campus platform serving 200k+ students across 10 European universities.",
             "Collaborated with partner institutions on AI deployment strategy, governance, and GDPR compliance."
