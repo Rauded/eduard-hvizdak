@@ -8,7 +8,8 @@ import AsciiDitherBackground from './AsciiDitherBackground';
 const HeroContainer = styled.section<{ $dither: boolean }>`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100vh; /* fallback for browsers without dvh */
+  min-height: 100dvh;
   padding-top: 100px;
   background-color: var(--page-bg, #09090b);
   color: var(--text, #fff);
@@ -200,33 +201,6 @@ const TarsImage = styled.img`
   filter: grayscale(20%) contrast(1.1);
 `;
 
-const TerminalStatusBar = styled.div`
-  padding: 4px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  background: #1a1a1d;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-`;
-
-const StatusText = styled.span`
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  color: rgba(255, 255, 255, 0.3);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-`;
-
-const StatusDot = styled.span`
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #4ade80;
-  margin-right: 6px;
-  box-shadow: 0 0 4px rgba(74, 222, 128, 0.4);
-`;
-
 const GradientText = styled.h2`
   color: var(--text-strong, #f8fafc);
   font-size: clamp(2.5em, 8vw, 5em);
@@ -251,6 +225,48 @@ const RoleLine = styled.p`
   font-weight: 400;
   letter-spacing: 0.01em;
   line-height: 1.5;
+`;
+
+const CtaRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 2em;
+  flex-wrap: wrap;
+`;
+
+const PrimaryCta = styled.a`
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill, 999px);
+  background: var(--accent, #2563eb);
+  color: var(--on-accent, #ffffff);
+  font-weight: 600;
+  font-size: 0.95em;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: var(--accent-strong, #1d4ed8);
+    transform: translateY(-1px);
+  }
+`;
+
+const GhostCta = styled.a`
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill, 999px);
+  border: 1px solid var(--border-strong, rgba(255, 255, 255, 0.14));
+  color: var(--text, #e7e7ea);
+  font-weight: 500;
+  font-size: 0.95em;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    border-color: var(--accent-ring, rgba(96, 165, 250, 0.35));
+    transform: translateY(-1px);
+  }
 `;
 
 const topLines = [
@@ -286,6 +302,10 @@ const Hero: React.FC = () => {
         <Headline>{topLine}</Headline>
         <GradientText>I'm Eduard Hvizdak.</GradientText>
         <RoleLine>&gt; {roleLine}</RoleLine>
+        <CtaRow>
+          <PrimaryCta href="#projects">View projects</PrimaryCta>
+          <GhostCta href="mailto:eduardd.hv@gmail.com">Email me</GhostCta>
+        </CtaRow>
       </LeftContainer>
       <RightContainer>
         <TerminalWindow>
@@ -307,9 +327,6 @@ const Hero: React.FC = () => {
               />
             </TarsContainer>
           </TerminalBody>
-          <TerminalStatusBar>
-            <StatusText><StatusDot />active</StatusText>
-          </TerminalStatusBar>
         </TerminalWindow>
       </RightContainer>
     </HeroContainer>
