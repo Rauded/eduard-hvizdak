@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { LuArrowRight } from 'react-icons/lu';
 import HalftoneWave from './HalftoneWave';
@@ -265,7 +265,39 @@ const StatusDot = styled.span`
   margin-right: 6px;
 `;
 
+// REVIEW MODE: rotate through every TARS gif so Eduard can compare them in
+// place. The winner gets hardcoded and this carousel removed.
+const TARS_GIFS = [
+  'ascii_navy_mist',
+  'ascii_monochrome',
+  'ascii_cyberpunk',
+  'ascii_neon_blocks',
+  'ascii_hot_pink',
+  'ascii_electric_yellow',
+  'ascii_matrix',
+  'ascii_matrix_code',
+  'ascii_orange_retro',
+  'ascii_retro_crt',
+];
+const ROTATE_MS = 4000;
+
 const Hero: React.FC = () => {
+  const [gifIndex, setGifIndex] = useState(0);
+
+  useEffect(() => {
+    // Preload so each switch is instant.
+    TARS_GIFS.forEach((name) => {
+      const img = new Image();
+      img.src = `${process.env.PUBLIC_URL}/${name}.gif`;
+    });
+    const id = setInterval(() => {
+      setGifIndex((i) => (i + 1) % TARS_GIFS.length);
+    }, ROTATE_MS);
+    return () => clearInterval(id);
+  }, []);
+
+  const gifName = TARS_GIFS[gifIndex];
+
   return (
     <HeroContainer id="home">
       <WaveLayer>
@@ -295,7 +327,7 @@ const Hero: React.FC = () => {
           <TerminalBody>
             <TarsContainer>
               <TarsImage
-                src={`${process.env.PUBLIC_URL}/ascii_navy_mist.gif`}
+                src={`${process.env.PUBLIC_URL}/${gifName}.gif`}
                 alt="TARS walking ASCII art"
               />
             </TarsContainer>
@@ -305,7 +337,7 @@ const Hero: React.FC = () => {
               <StatusDot />
               active
             </StatusText>
-            <StatusText>patrol module</StatusText>
+            <StatusText>{gifName.replace('ascii_', '').replace(/_/g, ' ')}</StatusText>
           </TerminalStatusBar>
         </TerminalWindow>
       </RightContainer>
