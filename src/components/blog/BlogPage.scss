@@ -335,6 +335,13 @@ $ui-font: var(--font-body);
 }
 
 // ─── Reading-progress bar (article pages) ───────────────────────
+// Driven by a CSS scroll-driven animation (no JS scroll listener). Browsers
+// without animation-timeline support simply never show the bar.
+@keyframes reading-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 .reading-progress {
   position: fixed;
   top: 0;
@@ -345,8 +352,11 @@ $ui-font: var(--font-body);
   transform-origin: left center;
   transform: scaleX(0);
   z-index: 1200;
-  will-change: transform;
-  transition: transform 0.05s linear;
+
+  @supports (animation-timeline: scroll()) {
+    animation: reading-grow linear both;
+    animation-timeline: scroll(root);
+  }
 }
 
 // ═══════════════════════════════════════════════════════════════

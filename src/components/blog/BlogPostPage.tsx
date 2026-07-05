@@ -31,7 +31,6 @@ const BlogPostPage: React.FC = () => {
     getStored<FontPref>(FONT_KEY, 'serif', ['serif', 'sans'])
   );
   const { theme } = useTheme();
-  const [progress, setProgress] = useState(0);
   const [zoomSrc, setZoomSrc] = useState<string | null>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
 
@@ -39,30 +38,8 @@ const BlogPostPage: React.FC = () => {
     window.localStorage.setItem(FONT_KEY, font);
   }, [font]);
 
-  // Reading-progress bar tied to the article body's scroll position.
-  useEffect(() => {
-    let raf = 0;
-    const update = () => {
-      const el = bodyRef.current;
-      if (!el) return;
-      const rect = el.getBoundingClientRect();
-      const distance = rect.height - window.innerHeight;
-      const scrolled = Math.min(Math.max(-rect.top, 0), Math.max(distance, 0));
-      setProgress(distance > 0 ? (scrolled / distance) * 100 : 0);
-    };
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(update);
-    };
-    update();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-    };
-  }, [slug]);
+  // The reading-progress bar is driven entirely by a CSS scroll-driven
+  // animation (see .reading-progress in BlogPage.scss); no scroll listener.
 
   // Esc closes the image lightbox.
   useEffect(() => {
@@ -118,7 +95,7 @@ const BlogPostPage: React.FC = () => {
         type="article"
         jsonLd={blogPostingLd}
       />
-      <div className="reading-progress" style={{ transform: `scaleX(${progress / 100})` }} />
+      <div className="reading-progress" />
 
       <div className="blog-post__inner">
         <div className="blog-post__topbar">

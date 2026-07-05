@@ -24,6 +24,7 @@ const enter = keyframes`
 `;
 
 const LeftContainer = styled.div`
+  box-sizing: border-box;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -50,14 +51,22 @@ const Reveal = styled.div<{ $delay: number }>`
   }
 `;
 
+const Intro = styled.p`
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+  margin: 0 0 1.4em;
+`;
+
 const Title = styled.h1`
   color: var(--text-strong);
-  font-size: clamp(2.4rem, 4.6vw, 3.9rem);
+  font-size: clamp(2rem, 3.2vw, 2.9rem);
   font-weight: 600;
   margin: 0;
   letter-spacing: -0.03em;
-  line-height: 1.06;
-  max-width: 13ch;
+  line-height: 1.1;
+  max-width: 24ch;
 `;
 
 const Subtext = styled.p`
@@ -77,6 +86,7 @@ const CtaRow = styled.div`
 `;
 
 const RightContainer = styled.div`
+  box-sizing: border-box;
   flex: 1;
   display: flex;
   justify-content: center;
@@ -188,10 +198,12 @@ const TarsImage = styled.img`
   filter: grayscale(100%) contrast(1.08);
 `;
 
+const EXPERT_INTRO = 'Eduard Hvizdak, AI engineer in Brno';
+const STUDENT_INTRO = 'Eduard Hvizdak, CS student at Masaryk University';
 const EXPERT_SUBTEXT =
-  'AI engineer in Brno. RAG pipelines, agents, and three SaaS products with paying customers.';
+  'RAG pipelines, AI agents, and three SaaS products with paying customers.';
 const STUDENT_SUBTEXT =
-  'CS student at Masaryk University building RAG pipelines, agents, and SaaS products with paying customers.';
+  'RAG pipelines, AI agents, and SaaS products with paying customers.';
 
 const Hero: React.FC = () => {
   const scrollToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -203,7 +215,8 @@ const Hero: React.FC = () => {
     <HeroContainer id="home">
       <LeftContainer>
         <Reveal $delay={0}>
-          <Title>Eduard Hvizdak builds AI systems that hold up in production.</Title>
+          <Intro>{isExpertMode() ? EXPERT_INTRO : STUDENT_INTRO}</Intro>
+          <Title>I build AI systems that hold up in production.</Title>
         </Reveal>
         <Reveal $delay={90}>
           <Subtext>{isExpertMode() ? EXPERT_SUBTEXT : STUDENT_SUBTEXT}</Subtext>
