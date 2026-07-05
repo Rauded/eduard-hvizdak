@@ -223,6 +223,69 @@ const FloorLine = styled.div`
   }
 `;
 
+// Engineering-grid stage: a dark tile whose grid reads as the floor TARS
+// patrols, fading out toward the top so it stays a backdrop, not a pattern.
+const GridTile = styled.div`
+  position: relative;
+  width: 90%;
+  max-width: 700px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    #0e0e14;
+  background-size: 30px 30px, 30px 30px, auto;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 14px 0 0;
+
+  /* Fade the grid away from the floor so the top of the tile stays calm. */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #0e0e14 0%, rgba(14, 14, 20, 0) 85%);
+    pointer-events: none;
+  }
+
+  > * {
+    position: relative;
+  }
+`;
+
+// Starfield stage: TARS on a floor line under a sparse night sky.
+const SpaceTile = styled.div`
+  width: 90%;
+  max-width: 700px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 22%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1px 1px at 28% 48%, rgba(255, 255, 255, 0.45), transparent),
+    radial-gradient(1px 1px at 37% 14%, rgba(255, 255, 255, 0.55), transparent),
+    radial-gradient(1.5px 1.5px at 52% 34%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 61% 10%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(1px 1px at 70% 42%, rgba(255, 255, 255, 0.35), transparent),
+    radial-gradient(1.5px 1.5px at 83% 20%, rgba(255, 255, 255, 0.65), transparent),
+    radial-gradient(1px 1px at 91% 52%, rgba(255, 255, 255, 0.4), transparent),
+    radial-gradient(1px 1px at 6% 58%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 46% 62%, rgba(255, 255, 255, 0.25), transparent);
+  background-color: #0a0a10;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 2px 8px rgba(0, 0, 0, 0.3);
+  padding: 26px 0 0;
+`;
+
+const SpaceFloor = styled.div`
+  height: 1px;
+  background: rgba(255, 255, 255, 0.22);
+`;
+
 const TerminalStatusBar = styled.div`
   padding: 4px 12px;
   display: flex;
@@ -396,6 +459,27 @@ const Hero: React.FC = () => {
               />
             </TarsContainer>
           </CardTile>
+        )}
+        {tarsVariant === 'grid' && (
+          <GridTile>
+            <TarsContainer>
+              <TarsImage
+                src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
+                alt="TARS walking ASCII art"
+              />
+            </TarsContainer>
+          </GridTile>
+        )}
+        {tarsVariant === 'space' && (
+          <SpaceTile>
+            <TarsContainer>
+              <TarsImage
+                src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
+                alt="TARS walking ASCII art"
+              />
+            </TarsContainer>
+            <SpaceFloor />
+          </SpaceTile>
         )}
         {(tarsVariant === 'bare' || tarsVariant === 'floor') && (
           <BareStage>

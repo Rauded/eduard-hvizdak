@@ -7,6 +7,8 @@
 //   'card'     → a quiet dark tile: same dark focal object, no window chrome
 //   'bare'     → TARS walks directly on the page, no container at all
 //   'floor'    → bare, plus a hairline floor under his feet
+//   'grid'     → dark tile with a faint engineering grid fading upward
+//   'space'    → dark tile with a sparse starfield, TARS on a floor line
 //
 // HOW TO CHANGE THE DEFAULT for everyone: flip DEFAULT_VARIANT below.
 //
@@ -14,9 +16,9 @@
 // terminal) to any URL. The choice is remembered as you click around;
 // use ?tars=reset to clear it and fall back to the default.
 
-export type TarsVariant = 'terminal' | 'card' | 'bare' | 'floor';
+export type TarsVariant = 'terminal' | 'card' | 'bare' | 'floor' | 'grid' | 'space';
 
-const VARIANTS: TarsVariant[] = ['terminal', 'card', 'bare', 'floor'];
+const VARIANTS: TarsVariant[] = ['terminal', 'card', 'bare', 'floor', 'grid', 'space'];
 
 const DEFAULT_VARIANT: TarsVariant = 'terminal';
 
