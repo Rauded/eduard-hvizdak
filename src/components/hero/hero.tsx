@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { LuArrowRight } from 'react-icons/lu';
 import HalftoneWave from './HalftoneWave';
 
 // ════════════════════════════════════════════════════════════════════════════
-// Hero, humandelta experiment version 3.
+// Hero, humandelta experiment.
 //
-// Split layout as on the original site: serif name headline on the left with
-// the CTAs below it, the TARS terminal on the right as the page's one
-// deliberate dark object (the shipped light mode used the same trick). The
-// humandelta halftone dot wave drifts across the whole hero behind both.
+// Split layout: serif name headline on the left with the CTAs below it, and
+// TARS on the right rendered frameless, straight on the page. The gif is a
+// high-detail navy-ink ASCII render regenerated from the original source
+// frames (see ascii_matrix.py in the portfolio root), so it needs no window
+// chrome or filter to sit on the white canvas. The humandelta halftone dot
+// wave drifts across the whole hero behind both.
 // ════════════════════════════════════════════════════════════════════════════
 
 const HeroContainer = styled.section`
@@ -144,160 +146,55 @@ const RightContainer = styled.div`
   }
 `;
 
-// Semi-dark terminal in a muted navy-slate: dark enough that the pale-mist
-// TARS glyphs pop, light enough not to punch a black hole in the light page.
-const TerminalWindow = styled.div`
-  width: 90%;
-  max-width: 700px;
-  position: relative;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #2e4370;
-  box-shadow:
-    0 8px 32px rgba(15, 31, 68, 0.20),
-    0 2px 8px rgba(15, 31, 68, 0.12);
-  border: 1px solid rgba(195, 210, 234, 0.18);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+// Frameless TARS: the high-detail navy-ink render walks directly on the
+// page, no terminal window. A hairline floor grounds him; a mono caption
+// keeps the "patrol module" signature. Hover deepens the ink slightly.
+const TarsStage = styled.div`
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow:
-      0 14px 40px rgba(15, 31, 68, 0.26),
-      0 3px 10px rgba(15, 31, 68, 0.14);
+  &:hover img {
+    filter: brightness(0.82);
   }
 `;
 
-const TerminalBar = styled.div`
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #263a63;
-  border-bottom: 1px solid rgba(10, 21, 48, 0.45);
-  position: relative;
-`;
-
-const TrafficLights = styled.div`
-  display: flex;
-  gap: 7px;
-  align-items: center;
-`;
-
-// Muted navy dots instead of macOS candy colors; quieter, same affordance.
-const TrafficDot = styled.span`
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: rgba(138, 165, 216, 0.35);
-  border: 1px solid rgba(195, 210, 234, 0.3);
-`;
-
-const TerminalTabBar = styled.div`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-`;
-
-const TerminalTab = styled.div`
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: rgba(234, 240, 248, 0.8);
-  letter-spacing: 0.04em;
-  padding: 4px 16px;
-  background: rgba(234, 240, 248, 0.08);
-  border-radius: 4px;
-  border: 1px solid rgba(195, 210, 234, 0.18);
-`;
-
-const TerminalBody = styled.div`
-  padding: 0;
-  background: #2e4370;
-  position: relative;
-  overflow: hidden;
-`;
-
-const TarsContainer = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-`;
-
-// ascii_navy_mist.gif is a real recolor of the monochrome gif (glyphs mapped
-// onto the pale end of the navy ramp), so no CSS filter is needed. Hover
-// nudges the brightness up a touch.
 const TarsImage = styled.img`
   width: 100%;
   display: block;
   transition: filter 0.25s ease;
-
-  ${TerminalWindow}:hover & {
-    filter: brightness(1.12);
-  }
 `;
 
-const TerminalStatusBar = styled.div`
-  padding: 4px 12px;
+const TarsFloor = styled.div`
+  width: 82%;
+  height: 1px;
+  background: var(--border, #e6e9ec);
+  margin-top: -6px;
+`;
+
+const TarsCaption = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  background: #263a63;
-  border-top: 1px solid rgba(195, 210, 234, 0.1);
-`;
-
-const StatusText = styled.span`
+  gap: 8px;
+  margin-top: 14px;
   font-family: var(--font-mono);
-  font-size: 0.55rem;
-  color: rgba(234, 240, 248, 0.5);
-  letter-spacing: 0.06em;
+  font-size: 0.62rem;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
+  color: var(--text-faint, #7484a0);
 `;
 
-const StatusDot = styled.span`
+const CaptionDot = styled.span`
   display: inline-block;
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #8aa5d8;
-  margin-right: 6px;
+  background: var(--status-good, #1f8f4e);
 `;
 
-// REVIEW MODE: rotate through every TARS gif so Eduard can compare them in
-// place. The winner gets hardcoded and this carousel removed.
-const TARS_GIFS = [
-  'ascii_navy_mist',
-  'ascii_monochrome',
-  'ascii_cyberpunk',
-  'ascii_neon_blocks',
-  'ascii_hot_pink',
-  'ascii_electric_yellow',
-  'ascii_matrix',
-  'ascii_matrix_code',
-  'ascii_orange_retro',
-  'ascii_retro_crt',
-];
-const ROTATE_MS = 4000;
-
 const Hero: React.FC = () => {
-  const [gifIndex, setGifIndex] = useState(0);
-
-  useEffect(() => {
-    // Preload so each switch is instant.
-    TARS_GIFS.forEach((name) => {
-      const img = new Image();
-      img.src = `${process.env.PUBLIC_URL}/${name}.gif`;
-    });
-    const id = setInterval(() => {
-      setGifIndex((i) => (i + 1) % TARS_GIFS.length);
-    }, ROTATE_MS);
-    return () => clearInterval(id);
-  }, []);
-
-  const gifName = TARS_GIFS[gifIndex];
-
   return (
     <HeroContainer id="home">
       <WaveLayer>
@@ -313,33 +210,17 @@ const Hero: React.FC = () => {
         </CtaRow>
       </LeftContainer>
       <RightContainer>
-        <TerminalWindow>
-          <TerminalBar>
-            <TrafficLights>
-              <TrafficDot />
-              <TrafficDot />
-              <TrafficDot />
-            </TrafficLights>
-            <TerminalTabBar>
-              <TerminalTab>TARS · patrol module</TerminalTab>
-            </TerminalTabBar>
-          </TerminalBar>
-          <TerminalBody>
-            <TarsContainer>
-              <TarsImage
-                src={`${process.env.PUBLIC_URL}/${gifName}.gif`}
-                alt="TARS walking ASCII art"
-              />
-            </TarsContainer>
-          </TerminalBody>
-          <TerminalStatusBar>
-            <StatusText>
-              <StatusDot />
-              active
-            </StatusText>
-            <StatusText>{gifName.replace('ascii_', '').replace(/_/g, ' ')}</StatusText>
-          </TerminalStatusBar>
-        </TerminalWindow>
+        <TarsStage>
+          <TarsImage
+            src={`${process.env.PUBLIC_URL}/ascii_navy_ink_hd.gif`}
+            alt="TARS walking ASCII art"
+          />
+          <TarsFloor />
+          <TarsCaption>
+            <CaptionDot />
+            TARS · patrol module
+          </TarsCaption>
+        </TarsStage>
       </RightContainer>
     </HeroContainer>
   );
