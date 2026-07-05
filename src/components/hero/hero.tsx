@@ -144,24 +144,26 @@ const RightContainer = styled.div`
   }
 `;
 
-// Solid white terminal card, humandelta mockup style: opaque so TARS always
-// has a clean backdrop, hairline frame, neutral shadow. TARS carries the ink.
+// Semi-dark terminal in a muted navy-slate: dark enough that the pale-mist
+// TARS glyphs pop, light enough not to punch a black hole in the light page.
 const TerminalWindow = styled.div`
   width: 90%;
   max-width: 700px;
   position: relative;
   border-radius: 10px;
   overflow: hidden;
-  background: #ffffff;
-  box-shadow: var(--shadow-card, 0 1px 2px rgba(14, 19, 32, 0.05), 0 8px 24px rgba(14, 19, 32, 0.05));
-  border: 1px solid var(--border, #e6e9ec);
+  background: #2e4370;
+  box-shadow:
+    0 8px 32px rgba(15, 31, 68, 0.20),
+    0 2px 8px rgba(15, 31, 68, 0.12);
+  border: 1px solid rgba(195, 210, 234, 0.18);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
 
   &:hover {
     transform: translateY(-4px);
     box-shadow:
-      0 14px 40px rgba(14, 19, 32, 0.10),
-      0 3px 10px rgba(14, 19, 32, 0.06);
+      0 14px 40px rgba(15, 31, 68, 0.26),
+      0 3px 10px rgba(15, 31, 68, 0.14);
   }
 `;
 
@@ -170,8 +172,8 @@ const TerminalBar = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--surface, #f6f6f6);
-  border-bottom: 1px solid var(--border, #e6e9ec);
+  background: #263a63;
+  border-bottom: 1px solid rgba(10, 21, 48, 0.45);
   position: relative;
 `;
 
@@ -186,8 +188,8 @@ const TrafficDot = styled.span`
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  background: rgba(138, 165, 216, 0.3);
-  border: 1px solid rgba(63, 91, 160, 0.35);
+  background: rgba(138, 165, 216, 0.35);
+  border: 1px solid rgba(195, 210, 234, 0.3);
 `;
 
 const TerminalTabBar = styled.div`
@@ -201,17 +203,17 @@ const TerminalTabBar = styled.div`
 const TerminalTab = styled.div`
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--text-faint, #7484a0);
+  color: rgba(234, 240, 248, 0.8);
   letter-spacing: 0.04em;
   padding: 4px 16px;
-  background: #ffffff;
+  background: rgba(234, 240, 248, 0.08);
   border-radius: 4px;
-  border: 1px solid var(--border, #e6e9ec);
+  border: 1px solid rgba(195, 210, 234, 0.18);
 `;
 
 const TerminalBody = styled.div`
   padding: 0;
-  background: #ffffff;
+  background: #2e4370;
   position: relative;
   overflow: hidden;
 `;
@@ -224,17 +226,16 @@ const TarsContainer = styled.div`
   align-items: flex-end;
 `;
 
-// Dark navy-ink glyphs on the white card: brightness(0) flattens the gray
-// glyphs to solid black, then the invert/sepia/hue chain tints them toward
-// the ink end of the navy ramp (#0a1530-ish), so TARS reads crisp and dark.
+// ascii_navy_mist.gif is a real recolor of the monochrome gif (glyphs mapped
+// onto the pale end of the navy ramp), so no CSS filter is needed. Hover
+// nudges the brightness up a touch.
 const TarsImage = styled.img`
   width: 100%;
   display: block;
-  filter: brightness(0) saturate(100%) invert(8%) sepia(34%) saturate(3200%) hue-rotate(210deg) brightness(80%) contrast(105%);
   transition: filter 0.25s ease;
 
   ${TerminalWindow}:hover & {
-    filter: brightness(0) saturate(100%) invert(14%) sepia(31%) saturate(2274%) hue-rotate(200deg) brightness(93%) contrast(97%);
+    filter: brightness(1.12);
   }
 `;
 
@@ -243,14 +244,14 @@ const TerminalStatusBar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--surface, #f6f6f6);
-  border-top: 1px solid var(--border, #e6e9ec);
+  background: #263a63;
+  border-top: 1px solid rgba(195, 210, 234, 0.1);
 `;
 
 const StatusText = styled.span`
   font-family: var(--font-mono);
   font-size: 0.55rem;
-  color: var(--text-faint, #7484a0);
+  color: rgba(234, 240, 248, 0.5);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 `;
@@ -260,7 +261,7 @@ const StatusDot = styled.span`
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: var(--status-good, #1f8f4e);
+  background: #8aa5d8;
   margin-right: 6px;
 `;
 
@@ -294,7 +295,7 @@ const Hero: React.FC = () => {
           <TerminalBody>
             <TarsContainer>
               <TarsImage
-                src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
+                src={`${process.env.PUBLIC_URL}/ascii_navy_mist.gif`}
                 alt="TARS walking ASCII art"
               />
             </TarsContainer>
