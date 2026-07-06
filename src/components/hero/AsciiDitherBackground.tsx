@@ -33,7 +33,7 @@ interface Props {
 const MASKS = {
   /* the whole hands composition spans the hero, dissolving softly at the
      edges; the Content quiet-zone halo hollows the center for the headline */
-  bloom: 'radial-gradient(84% 88% at 50% 44%, #000 64%, transparent 92%)',
+  bloom: 'radial-gradient(86% 62% at 50% 26%, #000 70%, transparent 94%)',
   /* embroidery: only the side bands show, the center of the hero stays clear */
   edges:
     'linear-gradient(90deg, #000 0%, rgba(0,0,0,0.85) 12%, transparent 38%, transparent 62%, rgba(0,0,0,0.85) 88%, #000 100%)',
@@ -198,12 +198,12 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
         // (the silhouette is the point; never crop the subject). The two
         // hands drift apart and back together on a slow breath, reaching
         // toward the headline that sits in the gap between them.
-        const base = Math.min((cols * 0.96) / img.width, (rows * 0.85) / img.height);
+        const base = Math.min((cols * 0.78) / img.width, (rows * 0.52) / img.height);
         const scale = base * (1.0 + 0.02 * Math.sin(t * 0.12));
         const dw = img.width * scale;
         const dh = img.height * scale;
         const reach = 6 + 4 * Math.sin(t * 0.2); // half-gap between the hands
-        const dy = rows * 0.44 - dh * 0.5 + Math.cos(t * 0.05);
+        const dy = rows * 0.26 - dh * 0.5 + Math.cos(t * 0.05);
         // left half (robot hand) and right half (human hand), split at the
         // source's midpoint so each can drift independently
         const half = img.width / 2;

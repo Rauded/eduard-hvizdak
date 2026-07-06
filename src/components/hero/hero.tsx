@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { LuArrowRight } from 'react-icons/lu';
-import HalftoneWave from './HalftoneWave';
 import AsciiDitherBackground from './AsciiDitherBackground';
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -34,12 +33,6 @@ const HeroContainer = styled.section`
   }
 `;
 
-const WaveLayer = styled.div`
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-`;
-
 const Content = styled.div`
   position: relative;
   z-index: 1;
@@ -49,20 +42,10 @@ const Content = styled.div`
   text-align: center;
   max-width: 760px;
 
-  /* Quiet zone: a soft page-color halo keeps the wave and bloom from ever
-     running through the headline. */
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -22% -18%;
-    background: radial-gradient(
-      ellipse 52% 50% at 50% 46%,
-      var(--page-bg, #ffffff) 0%,
-      var(--page-bg, #ffffff) 34%,
-      transparent 64%
-    );
-    pointer-events: none;
-    z-index: -1;
+  /* The hands own the top band of the hero; the text block sits below them,
+     so neither ever occludes the other. */
+  @media (min-width: 769px) {
+    margin-top: 30vh;
   }
 `;
 
@@ -316,9 +299,6 @@ const Hero: React.FC = () => {
 
   return (
     <HeroContainer id="home">
-      <WaveLayer>
-        <HalftoneWave />
-      </WaveLayer>
       <AsciiDitherBackground />
       <Ruler side="left" />
       <Ruler side="right" />
