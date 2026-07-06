@@ -87,7 +87,7 @@ const LUM_FLOOR = 0.06;
 // Levels curve applied at sample time. A gentle contrast expansion keeps the
 // long backlit gradients (which the fine dither turns into smooth density
 // ramps) while dropping the near-black ground below the floor.
-const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.08) * 1.8));
+const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.06) * 1.9));
 
 const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -148,7 +148,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
       const w = Math.max(1, Math.round(rect.width));
       const h = Math.max(1, Math.round(rect.height));
       const maxCells = MAX_DITHER_CELLS;
-      cell = 5; // round variable-size dots want a coarser, print-like pitch
+      cell = 4; // print pitch; batched Path2D drawing keeps this cheap
       // Bound total work regardless of viewport size.
       while (Math.ceil(w / cell) * Math.ceil(h / cell) > maxCells) cell += 1;
       cols = Math.ceil(w / cell);
@@ -202,18 +202,18 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
         // source, which makes both crops wide-format: the hands can then
         // scale much larger without outgrowing the hero's top band.
         const half = img.width / 2;
-        const bandH = img.height * 0.52;
-        const syL = img.height * 0.16; // robot hand band
-        const syR = img.height * 0.36; // human hand band (sits lower in frame)
-        const targetW = cols * 0.42; // each hand spans ~42% of the hero width
+        const bandH = img.height * 0.42;
+        const syL = img.height * 0.2; // robot hand band
+        const syR = img.height * 0.4; // human hand band (sits lower in frame)
+        const targetW = cols * 0.46; // each hand spans ~46% of the hero width
         const scale = (targetW / half) * (1.0 + 0.015 * Math.sin(t * 0.12));
         const dw = half * scale;
         const dh = bandH * scale;
         const breathe = 3 * Math.sin(t * 0.2); // hands ease toward and apart
-        const dyL = rows * 0.06 + Math.cos(t * 0.05);
+        const dyL = rows * 0.07 + Math.cos(t * 0.05);
         const dxL = cols * 0.03 - breathe;
         offCtx.drawImage(img, 0, syL, half, bandH, dxL, dyL, dw, dh);
-        const dyR = rows * 0.14 - Math.cos(t * 0.05);
+        const dyR = rows * 0.17 - Math.cos(t * 0.05);
         const dxR = cols * 0.97 - dw + breathe;
         offCtx.drawImage(img, half, syR, half, bandH, dxR, dyR, dw, dh);
       } else {
