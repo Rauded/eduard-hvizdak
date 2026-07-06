@@ -76,8 +76,8 @@ const BAYER8 = [
 ].map((row) => row.map((v) => (v + 0.5) / 64));
 
 // Dither cells are ImageData pixels, so the budget is generous: 1440x900 at a
-// 3px pitch is ~144k cells and still one putImageData + one drawImage.
-const MAX_DITHER_CELLS = 220000;
+// 2px pitch is ~324k cells and still one putImageData + one drawImage.
+const MAX_DITHER_CELLS = 420000;
 const FRAME_MS = 50; // ~20fps; the shimmer reads fine well below 60fps
 // Cells darker than this never draw, so the photo's black ground stays truly
 // empty and the bloom keeps a crisp silhouette (the shimmer amplitude cannot
@@ -112,7 +112,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
             hi: [138, 165, 216, 210] as const, // #8aa5d8 at 0.82
           }
         : {
-            base: [63, 91, 160, 165] as const, // #3f5ba0 at 0.65
+            base: [63, 91, 160, 185] as const, // #3f5ba0 at 0.73
             hi: [24, 46, 95, 235] as const, // #182e5f at 0.92
           };
 
@@ -148,7 +148,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
       const w = Math.max(1, Math.round(rect.width));
       const h = Math.max(1, Math.round(rect.height));
       const maxCells = MAX_DITHER_CELLS;
-      cell = w < 768 ? 2 : 3;
+      cell = 5; // round variable-size dots want a coarser, print-like pitch
       // Bound total work regardless of viewport size.
       while (Math.ceil(w / cell) * Math.ceil(h / cell) > maxCells) cell += 1;
       cols = Math.ceil(w / cell);
@@ -242,42 +242,38 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      if (dots) {
-        const px = dots.data;
-        px.fill(0);
-        const aScale = layout === 'edges' ? 0.68 : 1;
-        const [br, bg, bb] = palette.base;
-        const ba = Math.round(palette.base[3] * aScale);
-        const [hr, hg, hb] = palette.hi;
-        const ha = Math.round(palette.hi[3] * aScale);
-        for (let y = 0; y < rows; y++) {
-          const bayerRow = BAYER8[y % 8];
-          for (let x = 0; x < cols; x++) {
-            const i = y * cols + x;
-            const p = i * 4;
-            const lum = shape(
-              (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255
-            );
-            if (lum < LUM_FLOOR) continue;
-            const v = lum + 0.04 * Math.sin(t * 1.4 + hash[i] * 6.283);
-            const threshold = bayerRow[x % 8];
-            if (v <= threshold) continue;
-            if (v > threshold + 0.5) {
-              px[p] = hr; px[p + 1] = hg; px[p + 2] = hb; px[p + 3] = ha;
-            } else {
-              px[p] = br; px[p + 1] = bg; px[p + 2] = bb; px[p + 3] = ba;
-            }
+      // Print-halftone pass: one round navy dot per cell, radius and tone
+      // driven by luminance (bright source areas get bigger, darker dots on
+      // the white page reads inverted, so bright = more ink here where the
+      // subject lives on a black ground). Bayer keeps the dithered edges.
+      const [br, bg, bb] = palette.base;
+      const [hr, hg, hb] = palette.hi;
+      const baseA = palette.base[3] / 255;
+      const hiA = palette.hi[3] / 255;
+      const maxR = cell * 0.42;
+      for (let y = 0; y < rows; y++) {
+        const bayerRow = BAYER8[y % 8];
+        const cy = y * cell + cell / 2;
+        for (let x = 0; x < cols; x++) {
+          const i = y * cols + x;
+          const p = i * 4;
+          const lum = shape(
+            (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255
+          );
+          if (lum < LUM_FLOOR) continue;
+          const v = lum + 0.04 * Math.sin(t * 1.4 + hash[i] * 6.283);
+          const threshold = bayerRow[x % 8];
+          if (v <= threshold * 0.55) continue;
+          const r = 0.7 + Math.min(1, v) * (maxR - 0.7);
+          if (v > threshold + 0.5) {
+            ctx.fillStyle = `rgba(${hr}, ${hg}, ${hb}, ${hiA})`;
+          } else {
+            ctx.fillStyle = `rgba(${br}, ${bg}, ${bb}, ${baseA})`;
           }
+          ctx.beginPath();
+          ctx.arc(x * cell + cell / 2, cy, r, 0, Math.PI * 2);
+          ctx.fill();
         }
-        dotCtx.putImageData(dots, 0, 0);
-        ctx.imageSmoothingEnabled = false;
-        ctx.drawImage(dotCanvas, 0, 0, cols, rows, 0, 0, cols * cell, rows * cell);
-        // Knock the 1px grid out so dots stay discrete (device-pixel space).
-        ctx.save();
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.drawImage(gridCanvas, 0, 0);
-        ctx.restore();
       }
     };
 
