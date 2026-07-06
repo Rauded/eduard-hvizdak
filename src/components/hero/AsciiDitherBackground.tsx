@@ -205,12 +205,12 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
         const bandH = img.height * 0.42;
         const syL = img.height * 0.2; // robot hand band
         const syR = img.height * 0.4; // human hand band (sits lower in frame)
-        const targetW = cols * 0.46; // each hand spans ~46% of the hero width
+        const targetW = cols * 0.5; // each hand spans half the hero width
         const scale = (targetW / half) * (1.0 + 0.015 * Math.sin(t * 0.12));
         const dw = half * scale;
         const dh = bandH * scale;
         const breathe = 3 * Math.sin(t * 0.2); // hands ease toward and apart
-        const dyL = rows * 0.07 + Math.cos(t * 0.05);
+        const dyL = rows * 0.05 + Math.cos(t * 0.05);
         const dxL = cols * 0.03 - breathe;
         offCtx.drawImage(img, 0, syL, half, bandH, dxL, dyL, dw, dh);
         const dyR = rows * 0.17 - Math.cos(t * 0.05);
@@ -256,17 +256,37 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
       const baseA = palette.base[3] / 255;
       const hiA = palette.hi[3] / 255;
       const maxR = cell * 0.42;
+      // Pass 1: per-cell luminance grid (shared by dots and keyline).
+      const lums = new Float32Array(cols * rows);
+      for (let i = 0; i < cols * rows; i++) {
+        const p = i * 4;
+        lums[i] = shape(
+          (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255
+        );
+      }
       const basePath = new Path2D();
       const hiPath = new Path2D();
+      const edgePath = new Path2D();
       for (let y = 0; y < rows; y++) {
         const bayerRow = BAYER8[y % 8];
         const cy = y * cell + cell / 2;
         for (let x = 0; x < cols; x++) {
           const i = y * cols + x;
-          const p = i * 4;
-          const lum = shape(
-            (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255
-          );
+          const lum = lums[i];
+          // Keyline: where the local gradient is strong, lay contour ink.
+          // This is what makes the silhouette and finger shapes readable
+          // through the halftone (print keyline technique).
+          if (x > 0 && x < cols - 1 && y > 0 && y < rows - 1) {
+            const gx = lums[i + 1] - lums[i - 1];
+            const gy = lums[i + cols] - lums[i - cols];
+            if (Math.abs(gx) + Math.abs(gy) > 0.55) {
+              const cx = x * cell + cell / 2;
+              const rr = maxR * 0.9;
+              edgePath.moveTo(cx + rr, cy);
+              edgePath.arc(cx, cy, rr, 0, Math.PI * 2);
+              continue;
+            }
+          }
           if (lum < LUM_FLOOR) continue;
           const v = lum + 0.04 * Math.sin(t * 1.4 + hash[i] * 6.283);
           const threshold = bayerRow[x % 8];
@@ -282,6 +302,9 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
       ctx.fill(basePath);
       ctx.fillStyle = `rgba(${hr}, ${hg}, ${hb}, ${hiA})`;
       ctx.fill(hiPath);
+      // Keyline ink goes on top, in the darkest tone.
+      ctx.fillStyle = 'rgba(15, 31, 68, 0.95)';
+      ctx.fill(edgePath);
     };
 
     const loop = (now: number) => {
