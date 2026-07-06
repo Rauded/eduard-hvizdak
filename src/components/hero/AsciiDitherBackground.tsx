@@ -1,13 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useTheme } from '../theme/ThemeContext';
-// Source photo: "Water lily on black" by ryan baker thefirebaker, Wikimedia
-// Commons, CC0, cropped around the bloom
-// (https://commons.wikimedia.org/wiki/File:Water_lily_on_black_(Unsplash).jpg)
-// Chosen because the whole flower has an iconic, instantly readable
-// silhouette: layered petals radiating from a bright center. Abstract petal
-// macros dither into elegant mush; a full bloom stays a flower.
-import flowerSrc from '../../assets/hero/flower.jpg';
+// Source photo: "Person Reaching Out to a Robot" by Tara Winstead, Pexels
+// (free license, https://www.pexels.com/photo/8386434/), background removed
+// and composited on black. The Creation-of-Adam composition: a human hand and
+// a robotic hand reaching toward each other. Iconic, instantly readable
+// silhouette, and the subject IS the site's pitch (humans working with AI).
+import handsSrc from '../../assets/hero/hands.jpg';
 
 // Hero background: the flower photo is re-rendered live as a fine-grained
 // Bayer-dithered halftone (2 to 3 px dots, like a risograph print) in the
@@ -32,9 +31,9 @@ interface Props {
 // makes the fine dot pitch affordable.
 
 const MASKS = {
-  /* one focal mass: the whole bloom sits in the upper right and dissolves
-     softly at its own edges, well before the headline column */
-  bloom: 'radial-gradient(68% 74% at 79% 38%, #000 55%, transparent 76%)',
+  /* the whole hands composition spans the hero, dissolving softly at the
+     edges; the Content quiet-zone halo hollows the center for the headline */
+  bloom: 'radial-gradient(84% 88% at 50% 44%, #000 64%, transparent 92%)',
   /* embroidery: only the side bands show, the center of the hero stays clear */
   edges:
     'linear-gradient(90deg, #000 0%, rgba(0,0,0,0.85) 12%, transparent 38%, transparent 62%, rgba(0,0,0,0.85) 88%, #000 100%)',
@@ -88,7 +87,7 @@ const LUM_FLOOR = 0.06;
 // Levels curve applied at sample time. A gentle contrast expansion keeps the
 // long backlit gradients (which the fine dither turns into smooth density
 // ramps) while dropping the near-black ground below the floor.
-const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.12) * 1.55));
+const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.08) * 1.8));
 
 const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -113,8 +112,8 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
             hi: [138, 165, 216, 210] as const, // #8aa5d8 at 0.82
           }
         : {
-            base: [63, 91, 160, 120] as const, // #3f5ba0 at 0.47
-            hi: [24, 46, 95, 205] as const, // #182e5f at 0.8
+            base: [63, 91, 160, 165] as const, // #3f5ba0 at 0.65
+            hi: [24, 46, 95, 235] as const, // #182e5f at 0.92
           };
 
     const off = document.createElement('canvas');
@@ -195,17 +194,23 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
 
       offCtx.clearRect(0, 0, cols, rows);
       if (layout === 'bloom') {
-        // Contain the WHOLE bloom, large, in the upper right of the hero (the
-        // silhouette is the point; never crop the flower). The bloom's center
-        // sits at ~(0.42, 0.42) of the cropped photo. Slow breathing scale
-        // plus a slight drift keep it alive.
-        const base = Math.min((cols * 0.62) / img.width, (rows * 0.96) / img.height);
-        const scale = base * (1.0 + 0.035 * Math.sin(t * 0.15));
+        // Contain the WHOLE composition, centered: both hands stay in frame
+        // (the silhouette is the point; never crop the subject). The two
+        // hands drift apart and back together on a slow breath, reaching
+        // toward the headline that sits in the gap between them.
+        const base = Math.min((cols * 0.96) / img.width, (rows * 0.85) / img.height);
+        const scale = base * (1.0 + 0.02 * Math.sin(t * 0.12));
         const dw = img.width * scale;
         const dh = img.height * scale;
-        const dx = cols * 0.79 - dw * 0.42 + 1.5 * Math.sin(t * 0.07);
-        const dy = rows * 0.4 - dh * 0.42 + Math.cos(t * 0.05);
-        offCtx.drawImage(img, dx, dy, dw, dh);
+        const reach = 6 + 4 * Math.sin(t * 0.2); // half-gap between the hands
+        const dy = rows * 0.44 - dh * 0.5 + Math.cos(t * 0.05);
+        // left half (robot hand) and right half (human hand), split at the
+        // source's midpoint so each can drift independently
+        const half = img.width / 2;
+        const dxL = cols * 0.5 - dw * 0.5 - reach;
+        offCtx.drawImage(img, 0, 0, half, img.height, dxL, dy, dw / 2, dh);
+        const dxR = cols * 0.5 + reach;
+        offCtx.drawImage(img, half, 0, half, img.height, dxR, dy, dw / 2, dh);
       } else {
         // Edge embroidery: blooms anchored on the hero's edges, deliberately
         // cropped by them (the mask keeps the hero's center clear). Each one
@@ -301,7 +306,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
       canvas.classList.add('ready');
       startLoop(); // no-op under reduced motion: the single frame above stays
     };
-    img.src = flowerSrc;
+    img.src = handsSrc;
 
     const io = new IntersectionObserver(([entry]) => {
       inView = entry.isIntersecting;
