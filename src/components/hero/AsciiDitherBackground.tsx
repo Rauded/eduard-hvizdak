@@ -78,7 +78,7 @@ const BAYER8 = [
 // Dither cells are ImageData pixels, so the budget is generous: 1440x900 at a
 // 2px pitch is ~324k cells and still one putImageData + one drawImage.
 const MAX_DITHER_CELLS = 420000;
-const FRAME_MS = 50; // ~20fps; the shimmer reads fine well below 60fps
+const FRAME_MS = 66; // ~15fps; the slow breath reads fine and halves the work
 // Cells darker than this never draw, so the photo's black ground stays truly
 // empty and the bloom keeps a crisp silhouette (the shimmer amplitude cannot
 // lift background cells over it).
@@ -198,19 +198,24 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
         // (the silhouette is the point; never crop the subject). The two
         // hands drift apart and back together on a slow breath, reaching
         // toward the headline that sits in the gap between them.
-        const base = Math.min((cols * 0.78) / img.width, (rows * 0.52) / img.height);
-        const scale = base * (1.0 + 0.02 * Math.sin(t * 0.12));
-        const dw = img.width * scale;
-        const dh = img.height * scale;
-        const reach = 6 + 4 * Math.sin(t * 0.2); // half-gap between the hands
-        const dy = rows * 0.26 - dh * 0.5 + Math.cos(t * 0.05);
-        // left half (robot hand) and right half (human hand), split at the
-        // source's midpoint so each can drift independently
+        // Each half is cropped to just its hand's vertical band in the
+        // source, which makes both crops wide-format: the hands can then
+        // scale much larger without outgrowing the hero's top band.
         const half = img.width / 2;
-        const dxL = cols * 0.5 - dw * 0.5 - reach;
-        offCtx.drawImage(img, 0, 0, half, img.height, dxL, dy, dw / 2, dh);
-        const dxR = cols * 0.5 + reach;
-        offCtx.drawImage(img, half, 0, half, img.height, dxR, dy, dw / 2, dh);
+        const bandH = img.height * 0.52;
+        const syL = img.height * 0.16; // robot hand band
+        const syR = img.height * 0.36; // human hand band (sits lower in frame)
+        const targetW = cols * 0.42; // each hand spans ~42% of the hero width
+        const scale = (targetW / half) * (1.0 + 0.015 * Math.sin(t * 0.12));
+        const dw = half * scale;
+        const dh = bandH * scale;
+        const breathe = 3 * Math.sin(t * 0.2); // hands ease toward and apart
+        const dyL = rows * 0.06 + Math.cos(t * 0.05);
+        const dxL = cols * 0.03 - breathe;
+        offCtx.drawImage(img, 0, syL, half, bandH, dxL, dyL, dw, dh);
+        const dyR = rows * 0.14 - Math.cos(t * 0.05);
+        const dxR = cols * 0.97 - dw + breathe;
+        offCtx.drawImage(img, half, syR, half, bandH, dxR, dyR, dw, dh);
       } else {
         // Edge embroidery: blooms anchored on the hero's edges, deliberately
         // cropped by them (the mask keeps the hero's center clear). Each one
@@ -251,6 +256,8 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
       const baseA = palette.base[3] / 255;
       const hiA = palette.hi[3] / 255;
       const maxR = cell * 0.42;
+      const basePath = new Path2D();
+      const hiPath = new Path2D();
       for (let y = 0; y < rows; y++) {
         const bayerRow = BAYER8[y % 8];
         const cy = y * cell + cell / 2;
@@ -265,16 +272,16 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
           const threshold = bayerRow[x % 8];
           if (v <= threshold * 0.55) continue;
           const r = 0.7 + Math.min(1, v) * (maxR - 0.7);
-          if (v > threshold + 0.5) {
-            ctx.fillStyle = `rgba(${hr}, ${hg}, ${hb}, ${hiA})`;
-          } else {
-            ctx.fillStyle = `rgba(${br}, ${bg}, ${bb}, ${baseA})`;
-          }
-          ctx.beginPath();
-          ctx.arc(x * cell + cell / 2, cy, r, 0, Math.PI * 2);
-          ctx.fill();
+          const target = v > threshold + 0.5 ? hiPath : basePath;
+          const cx = x * cell + cell / 2;
+          target.moveTo(cx + r, cy);
+          target.arc(cx, cy, r, 0, Math.PI * 2);
         }
       }
+      ctx.fillStyle = `rgba(${br}, ${bg}, ${bb}, ${baseA})`;
+      ctx.fill(basePath);
+      ctx.fillStyle = `rgba(${hr}, ${hg}, ${hb}, ${hiA})`;
+      ctx.fill(hiPath);
     };
 
     const loop = (now: number) => {
