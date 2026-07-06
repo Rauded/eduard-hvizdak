@@ -119,15 +119,6 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
     const off = document.createElement('canvas');
     const offCtx = off.getContext('2d', { willReadFrequently: true });
     if (!offCtx) return undefined;
-    // Dither dots are written here at 1px per cell, then upscaled.
-    const dotCanvas = document.createElement('canvas');
-    const dotCtx = dotCanvas.getContext('2d');
-    if (!dotCtx) return undefined;
-    // Static 1px grid knocked out of the upscaled dots each frame so they
-    // read as separate printed dots, not merged blocks.
-    const gridCanvas = document.createElement('canvas');
-    const gridCtx = gridCanvas.getContext('2d');
-    if (!gridCtx) return undefined;
 
     const img = new Image();
     let imgReady = false;
@@ -135,7 +126,6 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
     let rows = 0;
     let cell = 0;
     let hash = new Float32Array(0);
-    let dots: ImageData | null = null;
     let rafId = 0;
     let running = false;
     let inView = true;
@@ -159,24 +149,6 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       off.width = cols;
       off.height = rows;
-      {
-        dotCanvas.width = cols;
-        dotCanvas.height = rows;
-        dots = dotCtx.createImageData(cols, rows);
-        // Grid mask in device pixels: opaque 1px lines on every cell boundary.
-        gridCanvas.width = canvas.width;
-        gridCanvas.height = canvas.height;
-        gridCtx.setTransform(1, 0, 0, 1, 0, 0);
-        gridCtx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
-        gridCtx.fillStyle = '#000';
-        const step = cell * dpr;
-        for (let gx = 0; gx <= cols; gx++) {
-          gridCtx.fillRect(Math.round(gx * step) - 1, 0, 1, gridCanvas.height);
-        }
-        for (let gy = 0; gy <= rows; gy++) {
-          gridCtx.fillRect(0, Math.round(gy * step) - 1, gridCanvas.width, 1);
-        }
-      }
       // Per-cell deterministic hash so the shimmer breathes instead of
       // flickering with fresh randomness every frame.
       hash = new Float32Array(cols * rows);
