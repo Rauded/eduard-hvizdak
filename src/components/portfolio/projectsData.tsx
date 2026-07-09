@@ -138,7 +138,7 @@ export const PROJECTS: PortfolioProject[] = [
   {
     id: 'kouzelnici',
     number: '03',
-    title: 'KouzelníkNaAkci.cz',
+    title: 'KouzelnikNaAkci.cz',
     subtitle: 'A directory for Czech & Slovak magicians',
     description:
       'A two-sided marketplace connecting event organisers with professional magicians. Curated performer profiles, Stripe-powered listings, automated email, and 20+ city & occasion landing pages tuned for local search.',

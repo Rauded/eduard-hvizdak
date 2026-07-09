@@ -168,7 +168,7 @@ const StatusRow = styled.div`
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 26px;
+  margin-top: 28px;
 `;
 
 const StatusWing = styled.span<{ $flip?: boolean }>`
@@ -342,14 +342,6 @@ const Hero: React.FC = () => {
         {CORNERS.map((pos) => (
           <CornerTick key={pos} $pos={pos} aria-hidden="true" />
         ))}
-        <StatusRow>
-          <StatusWing aria-hidden="true" />
-          <StatusPill>
-            <StatusDot />
-            Accepting new projects
-          </StatusPill>
-          <StatusWing $flip aria-hidden="true" />
-        </StatusRow>
         <Headline><ScrambleText text="I'm Eduard Hvizdak." /></Headline>
         <CtaRow>
           <PrimaryCta href="#projects">
@@ -359,6 +351,14 @@ const Hero: React.FC = () => {
             Email me <KeyChip $ghost>E</KeyChip>
           </GhostCta>
         </CtaRow>
+        <StatusRow>
+          <StatusWing aria-hidden="true" />
+          <StatusPill>
+            <StatusDot />
+            Accepting new projects
+          </StatusPill>
+          <StatusWing $flip aria-hidden="true" />
+        </StatusRow>
       </Content>
     </HeroContainer>
   );

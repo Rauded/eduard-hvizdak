@@ -16,7 +16,7 @@ interface Props {
   hold?: number;
 }
 
-const ScrambleText: React.FC<Props> = ({ text, className, speed = 38, hold = 2 }) => {
+const ScrambleText: React.FC<Props> = ({ text, className, speed = 38, hold = 10 }) => {
   const [out, setOut] = useState(text);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);

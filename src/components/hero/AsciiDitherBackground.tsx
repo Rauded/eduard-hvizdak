@@ -77,17 +77,19 @@ const BAYER8 = [
 
 // Dither cells are ImageData pixels, so the budget is generous: 1440x900 at a
 // 2px pitch is ~324k cells and still one putImageData + one drawImage.
-const MAX_DITHER_CELLS = 420000;
+// Raised so the fine 2px pitch is never forced coarser on tall viewports.
+const MAX_DITHER_CELLS = 720000;
 const FRAME_MS = 66; // ~15fps; the slow breath reads fine and halves the work
 // Cells darker than this never draw, so the photo's black ground stays truly
 // empty and the bloom keeps a crisp silhouette (the shimmer amplitude cannot
 // lift background cells over it).
 const LUM_FLOOR = 0.06;
 
-// Levels curve applied at sample time. A gentle contrast expansion keeps the
-// long backlit gradients (which the fine dither turns into smooth density
-// ramps) while dropping the near-black ground below the floor.
-const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.06) * 1.9));
+// Levels curve applied at sample time. A firmer contrast expansion separates
+// the mid-tones (knuckles, tendons) from the ground so the fine halftone reads
+// as modelled form, not a flat stipple, while still dropping near-black below
+// the floor.
+const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.08) * 2.15));
 
 const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -138,7 +140,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
       const w = Math.max(1, Math.round(rect.width));
       const h = Math.max(1, Math.round(rect.height));
       const maxCells = MAX_DITHER_CELLS;
-      cell = 4; // print pitch; batched Path2D drawing keeps this cheap
+      cell = 2; // fine print pitch; batched Path2D drawing keeps this cheap
       // Bound total work regardless of viewport size.
       while (Math.ceil(w / cell) * Math.ceil(h / cell) > maxCells) cell += 1;
       cols = Math.ceil(w / cell);
@@ -227,7 +229,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
       const [hr, hg, hb] = palette.hi;
       const baseA = palette.base[3] / 255;
       const hiA = palette.hi[3] / 255;
-      const maxR = cell * 0.42;
+      const maxR = cell * 0.68;
       // Pass 1: per-cell luminance grid (shared by dots and keyline).
       const lums = new Float32Array(cols * rows);
       for (let i = 0; i < cols * rows; i++) {
@@ -251,9 +253,9 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
           if (x > 0 && x < cols - 1 && y > 0 && y < rows - 1) {
             const gx = lums[i + 1] - lums[i - 1];
             const gy = lums[i + cols] - lums[i - cols];
-            if (Math.abs(gx) + Math.abs(gy) > 0.55) {
+            if (Math.abs(gx) + Math.abs(gy) > 0.72) {
               const cx = x * cell + cell / 2;
-              const rr = maxR * 0.9;
+              const rr = maxR * 0.85;
               edgePath.moveTo(cx + rr, cy);
               edgePath.arc(cx, cy, rr, 0, Math.PI * 2);
               continue;
@@ -263,7 +265,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
           const v = lum + 0.04 * Math.sin(t * 1.4 + hash[i] * 6.283);
           const threshold = bayerRow[x % 8];
           if (v <= threshold * 0.55) continue;
-          const r = 0.7 + Math.min(1, v) * (maxR - 0.7);
+          const r = 0.3 + Math.min(1, v) * (maxR - 0.3);
           const target = v > threshold + 0.5 ? hiPath : basePath;
           const cx = x * cell + cell / 2;
           target.moveTo(cx + r, cy);

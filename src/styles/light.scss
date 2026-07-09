@@ -245,8 +245,12 @@
   .job-dates { color: var(--text-faint); }
 
   .bullet-point {
-    color: var(--text-muted);
+    color: color-mix(in srgb, var(--text-muted) 55%, var(--text));
     &:before { color: var(--accent); }
+    .kw {
+      color: var(--accent-text);
+      font-weight: 600;
+    }
   }
 
   .line-container:before {
@@ -292,13 +296,19 @@
     background: var(--surface-sunken);
   }
 
-  // Project media stays a dark focal tile — just soften the shadow for light.
+  // Project media reads as a framed panel on the white page: a defined
+  // navy-tinted hairline plus a soft tinted shadow, so even light-coloured
+  // screenshots do not bleed into the background.
   .pcard__media {
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-card);
+    border: 1px solid var(--border-strong);
+    box-shadow:
+      0 1px 0 rgba(22, 22, 26, 0.04),
+      0 14px 36px rgba(22, 22, 26, 0.12);
     &:hover {
       border-color: var(--accent-ring);
-      box-shadow: 0 20px 48px rgba(22, 22, 26, 0.14);
+      box-shadow:
+        0 1px 0 rgba(22, 22, 26, 0.05),
+        0 22px 52px rgba(22, 22, 26, 0.17);
     }
   }
 

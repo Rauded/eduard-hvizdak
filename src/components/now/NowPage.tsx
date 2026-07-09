@@ -45,7 +45,7 @@ const BUILDING: {
     logo: '/brand/sites/inzerpro.svg',
   },
   {
-    name: 'KouzelníkNaAkci',
+    name: 'KouzelnikNaAkci',
     tagline: 'A marketplace connecting event organisers with magicians across Czechia and Slovakia, and my live sandbox for SEO, GEO, and online-ads experiments.',
     status: 'Live · marketplace + marketing lab',
     href: 'https://www.kouzelniknaakci.cz',

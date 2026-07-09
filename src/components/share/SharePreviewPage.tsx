@@ -14,7 +14,7 @@ const SHARE = {
   siteName: 'Eduard Hvizdak',
   title: 'Eduard Hvizdak – AI Engineer & Founder',
   description:
-    'Production AI systems (RAG, multi-agent) and real SaaS products: InzerPro, NasadClaw, KouzelníkNaAkci.',
+    'Production AI systems (RAG, multi-agent) and real SaaS products: InzerPro, NasadClaw, KouzelnikNaAkci.',
   url: `${SITE_URL}/`,
   domain: 'eduardhvizdak.com',
   image: DEFAULT_OG_IMAGE,
