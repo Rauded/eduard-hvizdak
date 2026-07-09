@@ -7,11 +7,15 @@ const THEME_KEY = 'site-theme';
 type ThemeContextValue = {
   theme: SiteTheme;
   toggleTheme: () => void;
+  // False when the theme is pinned (see THEME_PINNED). The header uses it to
+  // hide the light/dark toggle so there is no dead, no-op button.
+  canToggle: boolean;
 };
 
 const ThemeContext = createContext<ThemeContextValue>({
   theme: 'light',
   toggleTheme: () => {},
+  canToggle: false,
 });
 
 // Browser-chrome colours (mobile address bar) per theme — kept in sync with the
@@ -54,7 +58,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, canToggle: !THEME_PINNED }}>
       {children}
     </ThemeContext.Provider>
   );

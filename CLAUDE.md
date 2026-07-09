@@ -44,17 +44,24 @@ Icons via **react-icons**. Routing via **react-router-dom**.
   blurred glow blobs, no colored accent shadows, flat near-black page background (no purple-tinted
   gradient). Functional blur (header glass, modal backdrops) and loading skeletons are fine.
   Do not reintroduce the old indigo gradient/glow look.
-- **Accent is tokenized (2026-07-05); BLUE is final.** No component hardcodes an accent hex:
-  everything reads the semantic tokens in `src/index.css` (`--accent`, `--accent-strong`,
-  `--accent-text`, `--accent-text-soft`, `--accent-heading`, `--accent-soft`, `--accent-ring`;
-  text tints derive from `--accent` via color-mix). Eduard evaluated emerald/teal/amber/rose
-  presets and chose to stay blue; the presets and `?accent=` switcher were removed. Project
-  cards use the single site accent; only /things keeps per-item colors.
-- **Hero visual variants (2026-07-05).** `?tars=terminal|grid|space|rose` (default terminal,
-  resolved by `src/config/tarsVariant.ts`): TARS in the terminal window, on an engineering-grid
-  tile, on a starfield tile, or replaced by the blue halftone flower bloom
-  (`AsciiDitherBackground.tsx`, dither only; the ASCII-glyph flower mode was tried and rejected).
-  `?canvas=paper` previews a warm beige light-mode canvas (`src/config/canvas.ts`).
+- **Accent is tokenized; NAVY is current (2026-07-09, "humandelta" redesign).** No component
+  hardcodes an accent hex: everything reads the semantic tokens in `src/index.css` (`--accent`
+  `#182e5f`, `--accent-strong`, `--accent-text`, `--accent-text-soft`, `--accent-heading`,
+  `--accent-soft`, `--accent-ring`). The site shipped a deep-navy palette on a clean white canvas
+  (replacing the earlier blue). Fonts: General Sans (body/UI) + Jeju Myeongjo (serif display),
+  loaded in `src/styles/typography.scss`. Project cards use the single site accent; only /things
+  keeps per-item colors.
+- **Light mode only (2026-07-09).** `src/components/theme/ThemeContext.tsx` sets `THEME_PINNED =
+  true`: the site ships light-only because the navy dark palette was never finished. The context
+  exposes `canToggle` (false while pinned) and the header hides the light/dark button so there is
+  no dead toggle. TO RESTORE DARK MODE: build the navy dark tokens in `src/index.css`, set
+  `THEME_PINNED = false`, and the toggle returns automatically.
+- **Hero (2026-07-09).** The "humandelta" hero: a human hand and a robot hand reaching toward
+  each other (Creation-of-Adam), rendered as a navy dithered halftone by
+  `src/components/hero/AsciiDitherBackground.tsx` from `src/assets/hero/hands.jpg`, with the name
+  and CTAs in the gap; `HalftoneWave.tsx` is the companion motion field. The old `?tars=` terminal
+  switcher and the blue flower bloom were retired. The site background embroidery defaults off
+  (`src/config/background.ts` `DEFAULT_BG = 'off'`; compare with `?bg=embroidery`).
 - **Resume data** lives in `src/data/resume.json` (typed by `src/components/resume/resumetypes.tsx`).
   Each experience entry can carry a `website` field → company name renders as a Lucide-arrow link
   via `src/components/resume/visualaid.tsx`. A parenthetical in a company label (e.g.
