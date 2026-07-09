@@ -1,12 +1,13 @@
 import React from 'react';
 import {
-  LuArrowRight, LuMail, LuCalendar, LuWorkflow, LuFileSearch, LuBot, LuServer,
+  LuArrowRight, LuMail, LuCalendar, LuRepeat2, LuFileSearch, LuBot, LuShieldCheck,
   LuCircleCheck,
 } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useTheme } from '../theme/ThemeContext';
 import ContactGradient from '../_21test/ContactGradient';
 import './services.scss';
+import './service-cards-v2.scss';
 // TEST: 21st.dev showcase components (remove these + tags below to revert)
 import ServicesShowcase from '../_21test/ServicesShowcase';
 import AgentPipeline from '../_21test/AgentPipeline';
@@ -26,42 +27,48 @@ import BunGitLogAnimation from '../_bun/BunGitLogAnimation';
 const EMAIL = 'eduardd.hv@gmail.com';
 const BOOKING_URL = process.env.REACT_APP_BOOKING_URL || 'https://cal.com/eduardhv/30min';
 
-// Specific problem → specific outcome. Each card names a real thing I built and
-// the concrete result, not a generic capability.
-// Each card carries its own accent so the grid reads as four distinct
-// services rather than one navy block. Colors stay saturated but grounded.
+// Each card leads with a hard number and a short story, then names the concrete
+// capabilities as tags. Color is used sparingly (icon + the stat), no color bar.
 const SERVICES = [
   {
-    icon: <LuWorkflow />,
-    accent: '#2563eb', // blue: automation
+    icon: <LuRepeat2 />,
+    accent: '#2456d6', // blue: automation
+    stat: '24/7',
+    statLabel: 'runs itself, no babysitting',
     title: 'Kill the copy-paste busywork',
-    outcome: 'Give your team back the hours they lose to repetitive manual work.',
-    example: 'A power seller was deleting and re-posting dozens of classified ads by hand every single day to stay at the top of the category. I replaced the whole grind with a scheduling engine that re-lists automatically, around the clock.',
-    metric: 'Dozens of manual reposts a day → fully automated',
+    outcome: 'Automate the repetitive manual work that eats your team’s hours.',
+    example: 'A power seller re-posted dozens of classified ads by hand every day to stay on top. I replaced the grind with a scheduler that re-lists around the clock.',
+    tags: ['Scheduling engine', 'Auto re-listing', 'Zero manual work'],
   },
   {
     icon: <LuFileSearch />,
-    accent: '#0d9488', // teal: document intelligence
+    accent: '#0f766e', // teal: document intelligence
+    stat: '< 2s',
+    statLabel: 'to a cited answer over millions of docs',
     title: 'Turn document piles into instant answers',
     outcome: 'Ask in plain language, get an answer cited to the exact source.',
-    example: 'For a public-contracts platform I built a retrieval system (vector search + reranking + fact-verification) over millions of government contracts, so staff find the exact clause in seconds instead of digging through PDFs, with a citation every time.',
-    metric: 'Millions of documents · answers in seconds, with sources',
+    example: 'A retrieval system over millions of government contracts, so staff find the exact clause in seconds instead of digging through PDFs.',
+    tags: ['Vector search', 'Reranking', 'Fact-check', 'Citations'],
   },
   {
     icon: <LuBot />,
-    accent: '#d97757', // Anthropic rust: agents
+    accent: '#b45309', // amber: agents
+    stat: '5 steps',
+    statLabel: 'run end to end, unattended',
     title: 'Agents that do the work, not just chat',
     outcome: 'Hand off a whole process: read, research, verify, summarize, act.',
-    example: 'An autonomous multi-agent pipeline running OCR, scraping, search, fact-verification and LLM summarization end to end, categorizing millions of records in parallel with a human in the loop where it counts.',
-    metric: 'OCR → retrieve → verify → summarize, unattended',
+    example: 'An autonomous multi-agent pipeline categorizing millions of records in parallel, with a human in the loop where it counts.',
+    tags: ['OCR', 'Scraping', 'Retrieval', 'Verify', 'Summarize'],
   },
   {
-    icon: <LuServer />,
-    accent: '#1f8f4e', // green: private on-prem
+    icon: <LuShieldCheck />,
+    accent: '#15803d', // green: private on-prem
+    stat: '0',
+    statLabel: 'sensitive data leaves your building',
     title: 'Private AI that never leaves your business',
     outcome: 'The leverage of AI without shipping sensitive data to someone else’s cloud.',
-    example: 'For Czech and Slovak firms I deploy AI assistants on dedicated hardware installed on-site: GDPR-friendly, InfoSec-hardened and fully managed, so a non-technical team gets value from day one without babysitting it.',
-    metric: 'On-premise · GDPR · fully managed',
+    example: 'AI assistants on dedicated on-site hardware for Czech and Slovak firms: GDPR-friendly, hardened, fully managed from day one.',
+    tags: ['On-prem', 'GDPR', 'InfoSec-hardened', 'Fully managed'],
   },
 ];
 
@@ -139,15 +146,23 @@ const ServicesPage: React.FC = () => {
         <div className="services-grid">
           {SERVICES.map((s, i) => (
             <Reveal key={s.title} delay={i * 90}>
-              <article className="services-card" style={{ borderTop: `3px solid ${s.accent}` }}>
-                <span
-                  className="services-card__icon"
-                  style={{ color: s.accent, background: `color-mix(in srgb, ${s.accent} 14%, transparent)` }}
-                >{s.icon}</span>
+              <article
+                className="services-card services-card--v2"
+                style={{ '--card-accent': s.accent } as React.CSSProperties}
+              >
+                <div className="svc-top">
+                  <span className="services-card__icon">{s.icon}</span>
+                  <div className="svc-stat">
+                    <div className="svc-stat__value">{s.stat}</div>
+                    <div className="svc-stat__label">{s.statLabel}</div>
+                  </div>
+                </div>
                 <h3 className="services-card__title">{s.title}</h3>
-                <p className="services-card__outcome" style={{ color: s.accent }}>{s.outcome}</p>
+                <p className="services-card__outcome">{s.outcome}</p>
                 <p className="services-card__body">{s.example}</p>
-                <p className="services-card__metric">{s.metric}</p>
+                <div className="svc-tags">
+                  {s.tags.map((t) => <span className="svc-tag" key={t}>{t}</span>)}
+                </div>
               </article>
             </Reveal>
           ))}
