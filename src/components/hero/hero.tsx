@@ -1,7 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { LuArrowRight } from 'react-icons/lu';
 import AsciiDitherBackground from './AsciiDitherBackground';
+import HandsShader from './HandsShader';
+
+// Hero hands renderer: the WebGL halftone shader by default, the 2D canvas
+// dither as a fallback/comparison. Flip live with ?hands=dither / ?hands=shader.
+const readHandsMode = (): boolean => {
+  if (typeof window === 'undefined') return true;
+  const q = new URLSearchParams(window.location.search).get('hands');
+  if (q === 'dither') return false;
+  if (q === 'shader') return true;
+  return true;
+};
 
 // ════════════════════════════════════════════════════════════════════════════
 // Hero, humandelta experiment. Centered serif headline and CTAs over the
@@ -318,6 +329,13 @@ const scrollToId = (id: string) => {
 };
 
 const Hero: React.FC = () => {
+  // Resolve the hands renderer after mount so the prerendered HTML and the
+  // first client render agree (both start with the shader).
+  const [shaderHands, setShaderHands] = useState(true);
+  useEffect(() => {
+    setShaderHands(readHandsMode());
+  }, []);
+
   // Working single-key shortcuts for the CTA chips: P scrolls to projects,
   // E to contact. Ignored while typing or when a modifier is held.
   useEffect(() => {
@@ -334,7 +352,7 @@ const Hero: React.FC = () => {
 
   return (
     <HeroContainer id="home">
-      <AsciiDitherBackground />
+      {shaderHands ? <HandsShader /> : <AsciiDitherBackground />}
       <Ruler side="left" />
       <Ruler side="right" />
       <Content>
