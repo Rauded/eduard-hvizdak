@@ -3,15 +3,20 @@ import styled, { keyframes } from 'styled-components';
 import { LuArrowRight } from 'react-icons/lu';
 import AsciiDitherBackground from './AsciiDitherBackground';
 import HandsShader from './HandsShader';
+import PaperHands from './PaperHands';
 
-// Hero hands renderer: the WebGL halftone shader by default, the 2D canvas
-// dither as a fallback/comparison. Flip live with ?hands=dither / ?hands=shader.
-const readHandsMode = (): boolean => {
-  if (typeof window === 'undefined') return true;
+// Hero hands renderer, chosen live via ?hands=:
+//   shader (default)  the hand-rolled WebGL halftone (HandsShader)
+//   dither            the 2D canvas halftone (AsciiDitherBackground)
+//   paper             Paper Shaders HalftoneDots
+//   paperdither       Paper Shaders ImageDithering
+type HandsMode = 'shader' | 'dither' | 'paper' | 'paperdither';
+
+const readHandsMode = (): HandsMode => {
+  if (typeof window === 'undefined') return 'shader';
   const q = new URLSearchParams(window.location.search).get('hands');
-  if (q === 'dither') return false;
-  if (q === 'shader') return true;
-  return true;
+  if (q === 'dither' || q === 'paper' || q === 'paperdither') return q;
+  return 'shader';
 };
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -331,9 +336,9 @@ const scrollToId = (id: string) => {
 const Hero: React.FC = () => {
   // Resolve the hands renderer after mount so the prerendered HTML and the
   // first client render agree (both start with the shader).
-  const [shaderHands, setShaderHands] = useState(true);
+  const [handsMode, setHandsMode] = useState<HandsMode>('shader');
   useEffect(() => {
-    setShaderHands(readHandsMode());
+    setHandsMode(readHandsMode());
   }, []);
 
   // Working single-key shortcuts for the CTA chips: P scrolls to projects,
@@ -352,7 +357,10 @@ const Hero: React.FC = () => {
 
   return (
     <HeroContainer id="home">
-      {shaderHands ? <HandsShader /> : <AsciiDitherBackground />}
+      {handsMode === 'shader' && <HandsShader />}
+      {handsMode === 'dither' && <AsciiDitherBackground />}
+      {handsMode === 'paper' && <PaperHands variant="halftone" />}
+      {handsMode === 'paperdither' && <PaperHands variant="dither" />}
       <Ruler side="left" />
       <Ruler side="right" />
       <Content>
