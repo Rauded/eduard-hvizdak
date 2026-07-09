@@ -83,10 +83,12 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-top: 18px;
-    padding-top: 16px;
+    margin-top: auto; // pin to the bottom so tag rows align across cards
+    padding-top: 18px;
     border-top: 1px solid var(--rule, var(--border));
   }
+  // give the top row + tags room when a card is stretched to match its neighbor
+  .services-card__body { margin-bottom: 4px; }
   .svc-tag {
     font-family: var(--font-mono);
     font-size: 0.72rem;
