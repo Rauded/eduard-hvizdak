@@ -69,6 +69,9 @@ async function main() {
   for (const job of jobs) {
     const page = await browser.newPage();
     await page.setViewport({ width: 1512, height: 1000, deviceScaleFactor: 2 });
+    // Freeze CSS animations (reduced motion) so transformed WebGL layers do not
+    // capture black in headless SwiftShader; motion still runs on real browsers.
+    await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }]);
     try {
       await page.goto(`http://127.0.0.1:${PORT}/?${job.q}`, {
         waitUntil: 'domcontentloaded', timeout: 30000,

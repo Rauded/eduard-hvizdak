@@ -31,6 +31,9 @@ export interface HeroVariant {
   // Full-bleed band (arms connect to the screen edges) + subtle motion
   fullBleed?: boolean;
   speed?: number;
+  // Slow scale breathe, animated via Paper's own scale uniform (not a CSS
+  // transform, which renders the WebGL layer black).
+  breathe?: boolean;
 }
 
 const NAVY = '#182e5f';
@@ -134,10 +137,10 @@ export const HERO_VARIANTS: HeroVariant[] = [
     colorHighlight: HI, ditherType: '8x8', size: 1.2, colorSteps: 6, fit: 'cover', scale: 1.15, offsetY: 0.12,
   },
   {
-    id: 19, label: 'Light halftone (for combined)', note: 'Lighter mid-navy transparent halftone, full-bleed (arms reach the edges), animated grain shimmer, sits above the texture base.',
+    id: 19, label: 'Light halftone (for combined)', note: 'Lighter mid-navy transparent halftone, full-bleed (arms reach the edges), natural aspect so nothing crops, slow scale breathe. Sits above the texture base.',
     renderer: 'halftone', bandMaxWidth: 1300, colorBack: '#ffffff00', colorFront: '#33528d',
     grid: 'hex', dotType: 'gooey', size: 0.5, radius: 1.2, contrast: 0.85,
-    fit: 'cover', fullBleed: true, offsetY: 0.06, speed: 0.4, grainOverlay: 0.16,
+    fit: 'contain', fullBleed: true, breathe: true,
   },
 ];
 

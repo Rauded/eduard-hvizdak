@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { HalftoneDots, ImageDithering } from '@paper-design/shaders-react';
 import handsSrc from '../../assets/hero/hands.jpg';
 import { HeroVariant, getVariant, DEFAULT_VARIANT } from './heroVariants';
@@ -7,9 +7,30 @@ import { HeroVariant, getVariant, DEFAULT_VARIANT } from './heroVariants';
 // Paper Shaders (paper.design, MIT) rendering the hands photo as a GPU halftone
 // or ordered-dither in the site navy. The treatment comes from a variant preset
 // (heroVariants.ts), selected via ?variant=. Desktop-only. The full-bleed band
-// lets the arms reach the screen edges; the motion is the shader's own grain
-// shimmer (driven by `speed`), transform-free so it composites cleanly, and off
-// under reduced motion per the paper-design skill.
+// lets the arms reach the screen edges. Motion is a slow CSS scale breathe
+// (Paper's image filters are otherwise static); it is off under reduced motion.
+
+// Very slow scale breathe: the whole composition eases in and out a hair.
+const breathe = keyframes`
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+`;
+
+const Breathe = styled.div<{ $animate: boolean }>`
+  width: 100%;
+  height: 100%;
+  transform-origin: center 42%;
+  ${(p) =>
+    p.$animate
+      ? css`
+          animation: ${breathe} 11s ease-in-out infinite;
+        `
+      : ''}
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`;
 
 const Band = styled.div<{ $maxWidth: number; $fullBleed: boolean }>`
   position: absolute;
@@ -23,7 +44,9 @@ const Band = styled.div<{ $maxWidth: number; $fullBleed: boolean }>`
     left: 0;
     right: 0;
     width: 100%;
-    height: 54vh;
+    /* Matches the source strip so 'contain' fills edge-to-edge with no
+       letterbox and no crop; the soft black margins fade the arms out. */
+    aspect-ratio: 2.85 / 1;
   `
       : `
     top: 24px;
@@ -33,7 +56,7 @@ const Band = styled.div<{ $maxWidth: number; $fullBleed: boolean }>`
     aspect-ratio: 3.1 / 1;
   `}
 
-  & > div,
+  & div,
   & canvas {
     width: 100% !important;
     height: 100% !important;
@@ -72,39 +95,41 @@ const PaperHands: React.FC<Props> = ({ variant = DEFAULT_VARIANT }) => {
   } as const;
   return (
     <Band $maxWidth={v.bandMaxWidth} $fullBleed={!!v.fullBleed} aria-hidden="true">
-      {v.renderer === 'halftone' ? (
-        <HalftoneDots
-          width="100%"
-          height="100%"
-          image={handsSrc}
-          colorBack={v.colorBack}
-          colorFront={v.colorFront}
-          originalColors={false}
-          inverted
-          grid={v.grid}
-          type={v.dotType}
-          size={v.size}
-          radius={v.radius}
-          contrast={v.contrast}
-          grainOverlay={v.grainOverlay ?? 0}
-          {...sizing}
-        />
-      ) : (
-        <ImageDithering
-          width="100%"
-          height="100%"
-          image={handsSrc}
-          colorBack={v.colorBack}
-          colorFront={v.colorFront}
-          colorHighlight={v.colorHighlight}
-          originalColors={false}
-          inverted={false}
-          type={v.ditherType}
-          size={v.size}
-          colorSteps={v.colorSteps}
-          {...sizing}
-        />
-      )}
+      <Breathe $animate={!!v.breathe && !reduce}>
+        {v.renderer === 'halftone' ? (
+          <HalftoneDots
+            width="100%"
+            height="100%"
+            image={handsSrc}
+            colorBack={v.colorBack}
+            colorFront={v.colorFront}
+            originalColors={false}
+            inverted
+            grid={v.grid}
+            type={v.dotType}
+            size={v.size}
+            radius={v.radius}
+            contrast={v.contrast}
+            grainOverlay={v.grainOverlay ?? 0}
+            {...sizing}
+          />
+        ) : (
+          <ImageDithering
+            width="100%"
+            height="100%"
+            image={handsSrc}
+            colorBack={v.colorBack}
+            colorFront={v.colorFront}
+            colorHighlight={v.colorHighlight}
+            originalColors={false}
+            inverted={false}
+            type={v.ditherType}
+            size={v.size}
+            colorSteps={v.colorSteps}
+            {...sizing}
+          />
+        )}
+      </Breathe>
     </Band>
   );
 };
