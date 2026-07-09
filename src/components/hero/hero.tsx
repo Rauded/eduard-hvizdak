@@ -246,7 +246,7 @@ const StatusPill = styled.span`
   border: 1px solid var(--border, #e6e9ec);
   background: #ffffff;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--text-muted, #3e4b66);

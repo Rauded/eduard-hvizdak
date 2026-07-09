@@ -23,7 +23,7 @@ const Row = styled.div`
 
 const Index = styled.span`
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   color: var(--accent-text, #182e5f);
@@ -32,7 +32,7 @@ const Index = styled.span`
 
 const Label = styled.span`
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.7rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   white-space: nowrap;

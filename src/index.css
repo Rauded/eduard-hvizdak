@@ -295,7 +295,9 @@ html[data-theme] body *::after {
   --text: #0e1320;
   --text-strong: #0a1530;
   --text-muted: #3e4b66;
-  --text-faint: #7484a0;
+  /* Darkened from #7484a0 (3.8:1, failed WCAG AA) to ~5:1 so faint secondary
+     copy (dates, subtitles, captions) is comfortably readable on white. */
+  --text-faint: #5f6e8b;
   --border: #e6e9ec;
   --border-strong: color-mix(in srgb, color-mix(in srgb, #182e5f 12%, #d8d8d8) 70%, transparent);
   --accent: #182e5f;
@@ -332,7 +334,8 @@ html[data-theme] body *::after {
   --text: #1d1a13;
   --text-strong: #12100a;
   --text-muted: rgba(29, 26, 19, 0.68);
-  --text-faint: rgba(29, 26, 19, 0.47);
+  /* Raised from 0.47 so faint copy stays readable on the warm canvas. */
+  --text-faint: rgba(29, 26, 19, 0.62);
   --border: rgba(29, 26, 19, 0.11);
   --border-strong: rgba(29, 26, 19, 0.18);
   --shadow-card: 0 1px 2px rgba(29, 26, 19, 0.05), 0 10px 30px rgba(29, 26, 19, 0.07);
