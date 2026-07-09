@@ -116,9 +116,13 @@ const ServicesPage: React.FC = () => {
           production. Scoped, built and delivered end to end.
         </p>
         <div className="services-hero__cta">
-          <a className="services-btn services-btn--primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+          <a className="services-btn services-btn--primary svc-free-btn" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+            <span className="svc-free-btn__shine" aria-hidden="true" />
             <LuCalendar aria-hidden="true" />
-            Book a free consultation
+            <span className="svc-free-btn__labels">
+              <span className="svc-free-btn__main">Book a free consultation</span>
+              <span className="svc-free-btn__sub">Zdarma a nezávazné, no obligation</span>
+            </span>
             <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
           </a>
           <a className="services-btn services-btn--ghost" href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>
@@ -126,22 +130,6 @@ const ServicesPage: React.FC = () => {
             Email me
           </a>
         </div>
-        <p
-          className="services-hero__note"
-          style={{
-            marginTop: '14px',
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.8rem',
-            letterSpacing: '0.01em',
-            color: 'var(--text-faint, #7484a0)',
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-          }}
-        >
-          <LuCircleCheck aria-hidden="true" style={{ width: '1.05em', height: '1.05em', color: 'var(--status-good, #1f8f4e)' }} />
-          Free and no obligation. A 30 minute call to find out if I can help.
-        </p>
       </header>
 
       {/* Signature band: the one bold, unmissable moment. */}
