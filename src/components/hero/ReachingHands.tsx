@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { HalftoneDots } from '@paper-design/shaders-react';
-import handsSrc from '../../assets/hero/hands.jpg';
+import handsSrc from '../../assets/hero/hands-clean.jpg';
 
 // The combined hero's hands, animated to reach toward each other. Both halves
 // render the SAME full halftone (so they align perfectly), each clipped to its
