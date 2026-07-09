@@ -1,0 +1,49 @@
+.bun-callout {
+  padding: 18px 22px;
+  border-radius: 8px;
+  font-size: 0.93em;
+  line-height: 1.6;
+
+  &--default {
+    background: #1a1b23;
+    border: 1px solid #282a36;
+    color: #d1d5db;
+
+    .bun-callout__title {
+      color: #f4f4f6;
+    }
+  }
+
+  &--warning {
+    background: rgba(251, 191, 36, 0.08);
+    border: 1px solid rgba(251, 191, 36, 0.2);
+    color: #fde68a;
+
+    .bun-callout__title {
+      color: #fbbf24;
+    }
+  }
+
+  &--success {
+    background: rgba(52, 211, 153, 0.08);
+    border: 1px solid rgba(52, 211, 153, 0.2);
+    color: #a7f3d0;
+
+    .bun-callout__title {
+      color: #34d399;
+    }
+  }
+
+  &__title {
+    font-size: 0.85em;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  &__body {
+    & > *:first-child { margin-top: 0; }
+    & > *:last-child { margin-bottom: 0; }
+  }
+}

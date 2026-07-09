@@ -10,8 +10,9 @@ import About from '../about/about.tsx';
 import Resume from '../resume/resume.tsx';
 // @ts-ignore
 import Projects from '../projects/projects.tsx';
-// @ts-ignore
-import Contact from '../contact/contact.tsx';
+// TEST: 21st.dev component ports (delete this block + restore <Contact/> to revert)
+import TechMarquee from '../_21test/TechMarquee';
+import ContactGradient from '../_21test/ContactGradient';
 
 const Home: React.FC = () => (
   <>
@@ -21,6 +22,8 @@ const Home: React.FC = () => (
       path="/"
     />
     <Hero />
+    {/* TEST: 21st.dev tech marquee */}
+    <TechMarquee />
     <SectionMarker index="01" label="About" />
     <About />
     <SectionMarker index="02" label="Experience" />
@@ -28,7 +31,8 @@ const Home: React.FC = () => (
     <SectionMarker index="03" label="Projects" />
     <Projects />
     <SectionMarker index="04" label="Contact" />
-    <Contact />
+    {/* TEST: Contact combined with the animated gradient band */}
+    <ContactGradient />
     <TileWordmark />
   </>
 );

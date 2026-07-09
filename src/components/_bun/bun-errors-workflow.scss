@@ -1,0 +1,29 @@
+.wq-flow {
+  @media (min-width: 1024px) {
+    flex-direction: row !important;
+    align-items: flex-start !important;
+  }
+}
+
+.wq-file {
+  @media (min-width: 1024px) {
+    width: 15rem !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+.wq-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.wq-btn:hover:not(:disabled) {
+  border-color: #6b7280 !important;
+  color: #fff !important;
+}
+
+@media (max-width: 640px) {
+  .wq-flow > div:nth-child(2) > div:nth-child(2) {
+    grid-template-columns: 1fr !important;
+  }
+}

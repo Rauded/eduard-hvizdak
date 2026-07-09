@@ -1,0 +1,87 @@
+// TEST: 21st.dev orbiting-circles, on the Services token system.
+.orbit-stack {
+  margin: 64px auto 0;
+  max-width: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(28px, 6vw, 64px);
+  font-family: var(--font-body);
+
+  @media (max-width: 720px) { grid-template-columns: 1fr; }
+
+  &__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-size: 0.78rem;
+    font-family: var(--font-mono);
+    color: var(--accent, var(--accent-text));
+    margin: 0 0 12px;
+  }
+  &__title {
+    font-family: var(--font-display, var(--font-serif));
+    font-size: clamp(1.3rem, 2.6vw, 1.7rem);
+    line-height: 1.15;
+    color: var(--heading, var(--accent-heading));
+    margin: 0 0 12px;
+  }
+  &__lead { color: var(--text-soft, var(--text-muted)); line-height: 1.65; margin: 0; max-width: 46ch; }
+}
+
+.orbit-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  max-width: 380px;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+}
+
+.orbit-core {
+  position: absolute;
+  z-index: 3;
+  width: 74px;
+  height: 74px;
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  background: var(--accent-strong, var(--accent)); // matches agent core + signal band
+  color: #fff;
+  box-shadow: var(--shadow, 0 10px 26px rgba(18, 20, 28, 0.10));
+  svg { width: 32px; height: 32px; }
+}
+
+.orbit {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px dashed var(--card-border, var(--border-strong));
+
+  &--inner { width: 184px; height: 184px; animation: orbit-spin 26s linear infinite; }
+  &--outer { width: 336px; height: 336px; animation: orbit-spin 46s linear infinite reverse; }
+
+  &__item { position: absolute; display: grid; place-items: center; }
+
+  &__counter {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--card-bg, var(--surface));
+    border: 1px solid var(--card-border, var(--border));
+    color: var(--accent, var(--accent-text));
+    animation: orbit-spin 26s linear infinite reverse;
+    svg { width: 20px; height: 20px; }
+    &--rev { animation: orbit-spin 46s linear infinite; }
+  }
+}
+
+@keyframes orbit-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .orbit--inner, .orbit--outer, .orbit__counter { animation: none; }
+}

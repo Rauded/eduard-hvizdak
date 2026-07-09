@@ -1,0 +1,62 @@
+// TEST: 21st.dev logo-marquee ported to the navy tokens. Slowed to 55s.
+.tech-marquee {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px clamp(24px, 6vw, 100px) 48px;
+  font-family: var(--font-mono);
+
+  &__eyebrow {
+    text-align: center;
+    letter-spacing: 0.02em;
+    font-size: 0.82rem;
+    color: var(--text-faint);
+    margin: 0 0 20px;
+  }
+
+  &__viewport {
+    overflow: hidden;
+    // vertical padding gives the hover lift room so items are not clipped at the top
+    padding: 10px 0;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  &__track {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: max-content;
+    animation: tech-marquee-scroll 55s linear infinite;
+  }
+
+  &__viewport:hover &__track { animation-play-state: paused; }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+
+    &:hover { color: var(--accent-text); border-color: var(--accent-ring); transform: translateY(-2px); }
+  }
+
+  &__icon { width: 20px; height: 20px; color: var(--accent); }
+}
+
+@keyframes tech-marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech-marquee__track { animation: none; flex-wrap: wrap; justify-content: center; width: 100%; }
+}
