@@ -48,14 +48,47 @@ function sendJson(res, status, obj) {
   res.end(JSON.stringify(obj));
 }
 
+// CSRF guard. The dev server listens on localhost, but any site you visit while
+// `npm start` is running could POST here cross-origin and (ab)use /__edit or
+// /__publish. Browsers always attach an Origin (and usually Referer) header to
+// cross-origin POSTs, so we require the request to come from this same dev
+// server: a loopback host that matches host:port exactly. A missing header (no
+// legit browser POST lacks one) or any other origin is rejected.
+function isTrustedOrigin(req) {
+  const host = req.headers.host; // e.g. localhost:3000
+  const source = req.headers.origin || req.headers.referer;
+  if (!host || !source) return false;
+  let u;
+  try {
+    u = new URL(source);
+  } catch (err) {
+    return false;
+  }
+  const loopback = ['localhost', '127.0.0.1', '[::1]', '::1'];
+  if (!loopback.includes(u.hostname)) return false;
+  return u.host === host; // hostname:port must match the dev server exactly
+}
+
 // Resolve a source path from React's _debugSource.fileName (usually absolute)
-// down to a real file inside src/. Rejects anything that escapes src/.
+// down to a real file inside src/. Rejects anything that escapes src/, including
+// via a symlink under src/ that points outside it (realpath is re-checked).
 function resolveSourceFile(file) {
   if (!file || typeof file !== 'string') return null;
   const abs = path.isAbsolute(file) ? path.resolve(file) : path.resolve(REPO_ROOT, file);
   if (abs !== SRC_ROOT && !abs.startsWith(SRC_ROOT + path.sep)) return null;
   if (!fs.existsSync(abs) || !fs.statSync(abs).isFile()) return null;
-  return abs;
+  // Follow symlinks and re-check: the real target must still be inside src/, so
+  // a symlink placed under src/ cannot redirect a write outside the tree.
+  let real;
+  let realSrc;
+  try {
+    real = fs.realpathSync(abs);
+    realSrc = fs.realpathSync(SRC_ROOT);
+  } catch (err) {
+    return null;
+  }
+  if (real !== realSrc && !real.startsWith(realSrc + path.sep)) return null;
+  return real;
 }
 
 // Count occurrences of a substring across a set of line strings.
@@ -76,6 +109,9 @@ function countOccurrences(lines, needle) {
 }
 
 async function handleEdit(req, res) {
+  if (!isTrustedOrigin(req)) {
+    return sendJson(res, 403, { ok: false, error: 'blocked: cross-origin request' });
+  }
   let body;
   try {
     body = await readJsonBody(req);
@@ -154,6 +190,9 @@ async function handleEdit(req, res) {
 }
 
 function handlePublish(req, res) {
+  if (!isTrustedOrigin(req)) {
+    return sendJson(res, 403, { ok: false, error: 'blocked: cross-origin request' });
+  }
   const run = (args) =>
     new Promise((resolve, reject) => {
       execFile('git', args, { cwd: REPO_ROOT }, (err, stdout, stderr) => {
