@@ -12,17 +12,28 @@ import flowerSrc from '../../assets/hero/flower.jpg';
 // Hero background: the flower photo is re-rendered live as a fine-grained
 // Bayer-dithered halftone (2 to 3 px dots, like a risograph print) in the
 // brand blue, with a slow bloom of the source and a gentle shimmer of the
-// pattern. Ported from the experiment/hero-dither branch (dither mode only;
-// the ASCII glyph mode was tried and dropped).
+// pattern. Ported from the experiment/hero-dither branch.
+//
+// Two layers (the "humanist collage" look, after Anthropic / digitlartifacts /
+// enigmatriz on X, 2026-07): a fine dither for the body of the bloom, plus a
+// sparse ASCII-glyph pass over the brightest petal highlights only, so the
+// flower reads half printed-halftone, half typographic. The glyph layer stays
+// deliberately restrained (highlights only, coarse pitch); an earlier attempt
+// to render the WHOLE flower as glyphs was rejected as mush.
 //
 // Two layouts:
-//   'bloom' (?tars=rose)  → one large bloom, upper right
-//   'edges' (?tars=edges) → smaller blooms cropped by the hero's edges, like
-//     embroidery growing in from the sides; masked so the center stays clear
-//     and drawn at reduced alpha so text and the terminal keep contrast.
+//   'bloom' (default) is one large bloom, upper right, with the glyph highlights
+//   'edges' is smaller blooms cropped by the hero's edges, like embroidery
+//     growing in from the sides; masked so the center stays clear and drawn at
+//     reduced alpha so text and the terminal keep contrast. No glyph layer
+//     there (the side bands stay quiet).
 
 interface Props {
   layout?: 'bloom' | 'edges';
+  // The ASCII-glyph highlight pass. On by default for 'bloom', ignored for
+  // 'edges'. Kept as a prop so it is easy to A/B or disable if it ever reads
+  // busy.
+  glyphs?: boolean;
 }
 //
 // The dither renderer writes one cell per ImageData pixel at grid resolution
@@ -90,7 +101,18 @@ const LUM_FLOOR = 0.06;
 // ramps) while dropping the near-black ground below the floor.
 const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.12) * 1.55));
 
-const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
+// ── ASCII highlight layer ──────────────────────────────────────────────────
+// Luminance ramp for the glyph pass. Only the bright end is ever indexed
+// (glyphs decorate petal highlights), but the full ramp keeps indexing simple.
+const RAMP = " .'`^\",:;Il!i><~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+// Glyph cell is a multiple of the dither cell, so the type reads as sparse
+// stitches over the fine dots rather than competing with them.
+const GLYPH_CELL_MULT = 4;
+// Only cells this bright get a glyph: the point is highlights, not coverage.
+// This keeps the fillText count in the low thousands even on a wide viewport.
+const GLYPH_FLOOR = 0.5;
+
+const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom', glyphs = true }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
 
@@ -102,18 +124,24 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
     if (!ctx) return undefined;
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // The glyph highlight layer only makes sense on the single focal bloom.
+    const useGlyphs = glyphs && layout === 'bloom';
 
     // Brand-blue palette per theme: rgba tuples feed the dither's ImageData
     // directly (base tone for the body of the bloom, hi for petal highlights).
+    // glyph[0]/glyph[1] are css strings for the two brightness buckets of the
+    // ASCII layer, kept low-alpha so the type reads as texture, not a caption.
     const palette =
       theme === 'dark'
         ? {
             base: [96, 165, 250, 82] as const, // #60a5fa at 0.32
             hi: [147, 197, 253, 210] as const, // #93c5fd at 0.82
+            glyph: ['rgba(147, 197, 253, 0.30)', 'rgba(191, 219, 254, 0.52)'] as const,
           }
         : {
             base: [76, 118, 235, 120] as const, // soft blue at 0.47
             hi: [37, 99, 235, 205] as const, // #2563eb at 0.8
+            glyph: ['rgba(37, 99, 235, 0.34)', 'rgba(29, 78, 216, 0.5)'] as const,
           };
 
     const off = document.createElement('canvas');
@@ -128,6 +156,11 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
     const gridCanvas = document.createElement('canvas');
     const gridCtx = gridCanvas.getContext('2d');
     if (!gridCtx) return undefined;
+    // Glyph-resolution sample: the same bloom drawn at the coarse glyph grid so
+    // the ASCII highlights track the dither exactly.
+    const offG = document.createElement('canvas');
+    const offGCtx = offG.getContext('2d', { willReadFrequently: true });
+    if (!offGCtx) return undefined;
 
     const img = new Image();
     let imgReady = false;
@@ -135,6 +168,11 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
     let rows = 0;
     let cell = 0;
     let hash = new Float32Array(0);
+    // Coarse glyph grid, derived from the dither cell.
+    let gCols = 0;
+    let gRows = 0;
+    let gCell = 0;
+    let gHash = new Float32Array(0);
     let dots: ImageData | null = null;
     let rafId = 0;
     let running = false;
@@ -186,25 +224,40 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
           hash[y * cols + x] = s - Math.floor(s);
         }
       }
+
+      if (useGlyphs) {
+        gCell = cell * GLYPH_CELL_MULT;
+        gCols = Math.ceil(w / gCell);
+        gRows = Math.ceil(h / gCell);
+        offG.width = gCols;
+        offG.height = gRows;
+        gHash = new Float32Array(gCols * gRows);
+        for (let y = 0; y < gRows; y++) {
+          for (let x = 0; x < gCols; x++) {
+            const s = Math.sin(x * 71.9 + y * 197.3) * 43758.5453;
+            gHash[y * gCols + x] = s - Math.floor(s);
+          }
+        }
+      }
     };
 
-    const drawFrame = (now: number) => {
-      if (!imgReady || cols === 0) return;
-      const t = (now - start) / 1000;
-
-      offCtx.clearRect(0, 0, cols, rows);
+    // Draw the source bloom(s) into an arbitrary-resolution grid (gc x gr) so
+    // the fine dither and the coarse glyph pass share one placement. All
+    // offsets are expressed relative to the grid, so both resolutions line up.
+    const paintScene = (c: CanvasRenderingContext2D, gc: number, gr: number, t: number) => {
+      c.clearRect(0, 0, gc, gr);
       if (layout === 'bloom') {
         // Contain the WHOLE bloom, large, in the upper right of the hero (the
         // silhouette is the point; never crop the flower). The bloom's center
         // sits at ~(0.42, 0.42) of the cropped photo. Slow breathing scale
         // plus a slight drift keep it alive.
-        const base = Math.min((cols * 0.62) / img.width, (rows * 0.96) / img.height);
+        const base = Math.min((gc * 0.62) / img.width, (gr * 0.96) / img.height);
         const scale = base * (1.0 + 0.035 * Math.sin(t * 0.15));
         const dw = img.width * scale;
         const dh = img.height * scale;
-        const dx = cols * 0.79 - dw * 0.42 + 1.5 * Math.sin(t * 0.07);
-        const dy = rows * 0.4 - dh * 0.42 + Math.cos(t * 0.05);
-        offCtx.drawImage(img, dx, dy, dw, dh);
+        const dx = gc * 0.79 - dw * 0.42 + 1.5 * Math.sin(t * 0.07);
+        const dy = gr * 0.4 - dh * 0.42 + Math.cos(t * 0.05);
+        c.drawImage(img, dx, dy, dw, dh);
       } else {
         // Edge embroidery: blooms anchored on the hero's edges, deliberately
         // cropped by them (the mask keeps the hero's center clear). Each one
@@ -215,23 +268,30 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
           { cx: 1.02, cy: 0.92, h: 0.4, mirror: false, phase: 4.2 },
         ];
         for (const b of placements) {
-          const bs = ((rows * b.h) / img.height) * (1 + 0.03 * Math.sin(t * 0.13 + b.phase));
+          const bs = ((gr * b.h) / img.height) * (1 + 0.03 * Math.sin(t * 0.13 + b.phase));
           const dw = img.width * bs;
           const dh = img.height * bs;
-          const dx = cols * b.cx - dw * 0.42 + Math.sin(t * 0.06 + b.phase);
-          const dy = rows * b.cy - dh * 0.42 + Math.cos(t * 0.05 + b.phase);
+          const dx = gc * b.cx - dw * 0.42 + Math.sin(t * 0.06 + b.phase);
+          const dy = gr * b.cy - dh * 0.42 + Math.cos(t * 0.05 + b.phase);
           if (b.mirror) {
-            offCtx.save();
-            offCtx.translate(dx + dw / 2, 0);
-            offCtx.scale(-1, 1);
-            offCtx.translate(-(dx + dw / 2), 0);
-            offCtx.drawImage(img, dx, dy, dw, dh);
-            offCtx.restore();
+            c.save();
+            c.translate(dx + dw / 2, 0);
+            c.scale(-1, 1);
+            c.translate(-(dx + dw / 2), 0);
+            c.drawImage(img, dx, dy, dw, dh);
+            c.restore();
           } else {
-            offCtx.drawImage(img, dx, dy, dw, dh);
+            c.drawImage(img, dx, dy, dw, dh);
           }
         }
       }
+    };
+
+    const drawFrame = (now: number) => {
+      if (!imgReady || cols === 0) return;
+      const t = (now - start) / 1000;
+
+      paintScene(offCtx, cols, rows, t);
       const data = offCtx.getImageData(0, 0, cols, rows).data;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -272,6 +332,43 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
         ctx.globalCompositeOperation = 'destination-out';
         ctx.drawImage(gridCanvas, 0, 0);
         ctx.restore();
+      }
+
+      // ── Layer 2: sparse ASCII glyphs over the brightest petal highlights ──
+      // Same bloom, sampled at the coarse glyph grid; only cells above
+      // GLYPH_FLOOR draw, bucketed by brightness into two alphas and painted in
+      // as few fillStyle switches as possible.
+      if (useGlyphs && gCols > 0) {
+        paintScene(offGCtx, gCols, gRows, t);
+        const gData = offGCtx.getImageData(0, 0, gCols, gRows).data;
+        // Canvas ctx.font takes no CSS vars; use a literal monospace stack.
+        ctx.font = `${gCell}px ui-monospace, SFMono-Regular, Menlo, monospace`;
+        ctx.textBaseline = 'top';
+        const buckets: Array<Array<[string, number, number]>> = [[], []];
+        for (let y = 0; y < gRows; y++) {
+          for (let x = 0; x < gCols; x++) {
+            const i = y * gCols + x;
+            const p = i * 4;
+            const lum = shape(
+              (0.2126 * gData[p] + 0.7152 * gData[p + 1] + 0.0722 * gData[p + 2]) / 255
+            );
+            const v = lum + 0.04 * Math.sin(t * 1.2 + gHash[i] * 6.283);
+            if (v < GLYPH_FLOOR) continue;
+            const dith = (BAYER8[y % 8][x % 8] - 0.5) / RAMP.length;
+            const idx = Math.min(
+              RAMP.length - 1,
+              Math.max(0, Math.floor((v + dith) * RAMP.length))
+            );
+            const glyph = RAMP[idx];
+            if (glyph === ' ') continue;
+            buckets[v < 0.78 ? 0 : 1].push([glyph, x * gCell, y * gCell]);
+          }
+        }
+        buckets.forEach((bucket, bi) => {
+          if (!bucket.length) return;
+          ctx.fillStyle = palette.glyph[bi];
+          bucket.forEach(([glyph, gx, gy]) => ctx.fillText(glyph, gx, gy));
+        });
       }
     };
 
@@ -333,7 +430,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
       document.removeEventListener('visibilitychange', onVisibility);
       if (resizeTimer) clearTimeout(resizeTimer);
     };
-  }, [theme, layout]);
+  }, [theme, layout, glyphs]);
 
   return <BgCanvas ref={canvasRef} $layout={layout} aria-hidden="true" />;
 };

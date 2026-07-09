@@ -50,11 +50,16 @@ Icons via **react-icons**. Routing via **react-router-dom**.
   text tints derive from `--accent` via color-mix). Eduard evaluated emerald/teal/amber/rose
   presets and chose to stay blue; the presets and `?accent=` switcher were removed. Project
   cards use the single site accent; only /things keeps per-item colors.
-- **Hero visual variants (2026-07-05).** `?tars=terminal|grid|space|rose` (default terminal,
-  resolved by `src/config/tarsVariant.ts`): TARS in the terminal window, on an engineering-grid
-  tile, on a starfield tile, or replaced by the blue halftone flower bloom
-  (`AsciiDitherBackground.tsx`, dither only; the ASCII-glyph flower mode was tried and rejected).
-  `?canvas=paper` previews a warm beige light-mode canvas (`src/config/canvas.ts`).
+- **Hero (2026-07-09).** One shipped hero: the blue halftone flower bloom
+  (`AsciiDitherBackground.tsx`) behind the graphite terminal, a static role line (mono, `>`
+  prefix, expert/student framing) and two CTAs (View projects / Email me). The bloom is a
+  two-layer "humanist collage": a fine Bayer dither for the body plus a sparse ASCII-glyph pass
+  over the brightest petal highlights only (an all-glyph flower was tried and rejected as mush).
+  Gated by the `heroDither` feature flag (default ON); `?hero=off` renders the hero without the
+  canvas as an escape hatch, `?hero=reset` clears the override. The old `?tars=` switcher and the
+  grid/space/combo/edges variants were retired; `AsciiDitherBackground` still accepts a
+  `layout="edges"` prop and a `glyphs` prop for reuse. `?canvas=paper` previews a warm beige
+  light-mode canvas (`src/config/canvas.ts`).
 - **Resume data** lives in `src/data/resume.json` (typed by `src/components/resume/resumetypes.tsx`).
   Each experience entry can carry a `website` field → company name renders as a Lucide-arrow link
   via `src/components/resume/visualaid.tsx`. A parenthetical in a company label (e.g.

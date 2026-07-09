@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { isExpertMode } from '../../config/positioning';
-import { getTarsVariant } from '../../config/tarsVariant';
+import { isFeatureOn } from '../../config/features';
 import AsciiDitherBackground from './AsciiDitherBackground';
 
 // Main container for the hero section
-const HeroContainer = styled.section`
+const HeroContainer = styled.section<{ $dither: boolean }>`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100vh; /* fallback for browsers without dvh */
+  min-height: 100dvh;
   padding-top: 100px;
+  background-color: var(--page-bg, #09090b);
   color: var(--text, #fff);
   overflow: hidden;
   font-family: var(--font-body);
@@ -17,6 +19,19 @@ const HeroContainer = styled.section`
 
   @media (max-width: 768px) {
     padding-top: 90px;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at 20% 60%, var(--hero-glow, rgba(59, 130, 246, 0.07)) 0%, transparent 55%);
+    pointer-events: none;
+    /* the dither canvas replaces the glow; two soft layers read as mud */
+    opacity: ${(p) => (p.$dither ? 0 : 1)};
   }
 
   @media (min-width: 768px) {
@@ -66,6 +81,7 @@ const RightContainer = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 1;
   min-height: 40vh;
 
   @media (min-width: 768px) {
@@ -74,18 +90,16 @@ const RightContainer = styled.div`
   }
 `;
 
-// Terminal window — realistic macOS-style
+// Terminal window, macOS-style but in neutral graphite: a real terminal is
+// not purple.
 const TerminalWindow = styled.div`
   width: 90%;
   max-width: 700px;
   position: relative;
-  border-radius: 10px;
+  border-radius: var(--radius-md, 14px);
   overflow: hidden;
-  background: #18181b;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 2px 8px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: #17171a;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.08);
 `;
 
@@ -94,7 +108,7 @@ const TerminalBar = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #232326;
+  background: #202024;
   border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   position: relative;
 `;
@@ -141,51 +155,15 @@ const TerminalTab = styled.div`
   letter-spacing: 0.04em;
   padding: 4px 16px;
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
+  border-radius: var(--radius-sm, 8px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 `;
 
 const TerminalBody = styled.div`
   padding: 0;
-  background: #0f0f12;
+  background: #0f0f11;
   position: relative;
   overflow: hidden;
-`;
-
-// Combo variant: the terminal's screen is a scene. Sparse stars in the upper
-// half, the engineering grid rising from the floor TARS patrols.
-const SceneBody = styled(TerminalBody)`
-  background-color: #0a0a10;
-  background-image:
-    radial-gradient(1.5px 1.5px at 12% 22%, rgba(255, 255, 255, 0.7), transparent),
-    radial-gradient(1px 1px at 28% 44%, rgba(255, 255, 255, 0.45), transparent),
-    radial-gradient(1px 1px at 37% 12%, rgba(255, 255, 255, 0.55), transparent),
-    radial-gradient(1.5px 1.5px at 52% 30%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1px 1px at 61% 8%, rgba(255, 255, 255, 0.6), transparent),
-    radial-gradient(1px 1px at 70% 38%, rgba(255, 255, 255, 0.35), transparent),
-    radial-gradient(1.5px 1.5px at 83% 18%, rgba(255, 255, 255, 0.65), transparent),
-    radial-gradient(1px 1px at 91% 46%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1px 1px at 6% 52%, rgba(255, 255, 255, 0.3), transparent),
-    radial-gradient(1px 1px at 46% 56%, rgba(255, 255, 255, 0.25), transparent);
-  padding-top: 12px;
-
-  /* Grid fades in toward the floor so the sky stays clear for the stars. */
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 26px 26px;
-    -webkit-mask-image: linear-gradient(180deg, transparent 32%, #000 100%);
-    mask-image: linear-gradient(180deg, transparent 32%, #000 100%);
-    pointer-events: none;
-  }
-
-  > * {
-    position: relative;
-  }
 `;
 
 // TARS patrol animation inside the terminal
@@ -210,104 +188,17 @@ const TarsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  animation: ${patrolAnimation} 24s linear infinite;
-  will-change: transform;
+
+  @media (prefers-reduced-motion: no-preference) {
+    animation: ${patrolAnimation} 24s linear infinite;
+    will-change: transform;
+  }
 `;
 
 const TarsImage = styled.img`
   width: 100%;
   display: block;
   filter: grayscale(20%) contrast(1.1);
-`;
-
-
-// Engineering-grid stage: a dark tile whose grid reads as the floor TARS
-// patrols, fading out toward the top so it stays a backdrop, not a pattern.
-const GridTile = styled.div`
-  position: relative;
-  width: 90%;
-  max-width: 700px;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    #0e0e14;
-  background-size: 30px 30px, 30px 30px, auto;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 2px 8px rgba(0, 0, 0, 0.3);
-  padding: 14px 0 0;
-
-  /* Fade the grid away from the floor so the top of the tile stays calm. */
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, #0e0e14 0%, rgba(14, 14, 20, 0) 85%);
-    pointer-events: none;
-  }
-
-  > * {
-    position: relative;
-  }
-`;
-
-// Starfield stage: TARS on a floor line under a sparse night sky.
-const SpaceTile = styled.div`
-  width: 90%;
-  max-width: 700px;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background-image:
-    radial-gradient(1.5px 1.5px at 12% 22%, rgba(255, 255, 255, 0.7), transparent),
-    radial-gradient(1px 1px at 28% 48%, rgba(255, 255, 255, 0.45), transparent),
-    radial-gradient(1px 1px at 37% 14%, rgba(255, 255, 255, 0.55), transparent),
-    radial-gradient(1.5px 1.5px at 52% 34%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1px 1px at 61% 10%, rgba(255, 255, 255, 0.6), transparent),
-    radial-gradient(1px 1px at 70% 42%, rgba(255, 255, 255, 0.35), transparent),
-    radial-gradient(1.5px 1.5px at 83% 20%, rgba(255, 255, 255, 0.65), transparent),
-    radial-gradient(1px 1px at 91% 52%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1px 1px at 6% 58%, rgba(255, 255, 255, 0.3), transparent),
-    radial-gradient(1px 1px at 46% 62%, rgba(255, 255, 255, 0.25), transparent);
-  background-color: #0a0a10;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 2px 8px rgba(0, 0, 0, 0.3);
-  padding: 26px 0 0;
-`;
-
-const SpaceFloor = styled.div`
-  height: 1px;
-  background: rgba(255, 255, 255, 0.22);
-`;
-
-const TerminalStatusBar = styled.div`
-  padding: 4px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #1c1c1f;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-`;
-
-const StatusText = styled.span`
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  color: rgba(255, 255, 255, 0.3);
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-`;
-
-const StatusDot = styled.span`
-  display: inline-block;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #4ade80;
-  margin-right: 6px;
 `;
 
 const GradientText = styled.h2`
@@ -323,26 +214,58 @@ const GradientText = styled.h2`
   }
 `;
 
-const blink = keyframes`
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-`;
-
-const TypewriterText = styled.div`
+// One static line instead of the old typewriter carousel: a fixed claim reads
+// senior, a cycling animation reads template. Mono keeps the terminal
+// signature; the > prefix stays.
+const RoleLine = styled.p`
   font-family: var(--font-mono);
   color: var(--accent-text, #60a5fa);
-  font-size: clamp(1.1em, 3vw, 1.75em);
-  margin-top: 1em;
-  white-space: nowrap;
-  overflow: hidden;
+  font-size: clamp(1.05em, 2.4vw, 1.4em);
+  margin: 1em 0 0;
   font-weight: 400;
   letter-spacing: 0.01em;
+  line-height: 1.5;
+`;
 
-  &::after {
-    content: '_';
-    animation: ${blink} 1s infinite;
-    color: var(--accent, #3b82f6);
-    font-weight: 300;
+const CtaRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 2em;
+  flex-wrap: wrap;
+`;
+
+const PrimaryCta = styled.a`
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill, 999px);
+  background: var(--accent, #2563eb);
+  color: var(--on-accent, #ffffff);
+  font-weight: 600;
+  font-size: 0.95em;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    background: var(--accent-strong, #1d4ed8);
+    transform: translateY(-1px);
+  }
+`;
+
+const GhostCta = styled.a`
+  display: inline-block;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill, 999px);
+  border: 1px solid var(--border-strong, rgba(255, 255, 255, 0.14));
+  color: var(--text, #e7e7ea);
+  font-weight: 500;
+  font-size: 0.95em;
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    border-color: var(--accent-ring, rgba(96, 165, 250, 0.35));
+    transform: translateY(-1px);
   }
 `;
 
@@ -351,137 +274,61 @@ const topLines = [
   "Hey! Thanks for dropping by.",
 ];
 
-// Expert mode drops the "CS Student" line (and swaps in a consulting-facing
-// title) so the rotating role never leads with a student framing. See
-// src/config/positioning.ts.
-const typewriterTexts = [
-  "AI Developer @ OneBond",
-  "AI Developer @ CZS / Masaryk University",
-  "AI Developer @ iGalileo",
-  "Think Tank @ EDUC Alliance",
-  isExpertMode() ? "AI Consultant & Automation Engineer" : "CS Student @ Masaryk University",
-  "Python & LangChain Developer",
-  "Building AI agents & RAG pipelines",
-  "Hackathon Fanatic",
-  "AI Enthusiast"
-];
+// Expert mode leads with the consulting-facing framing; student mode keeps
+// the honest university line. See src/config/positioning.ts.
+const roleLine = isExpertMode()
+  ? "AI engineer. I build agents, RAG systems, and products people pay for."
+  : "CS student at Masaryk University, building AI agents and RAG systems.";
 
 const Hero: React.FC = () => {
   const [topLine, setTopLine] = useState('');
-  const [currentText, setCurrentText] = useState('');
-  const tarsVariant = getTarsVariant();
-  const isRose = tarsVariant === 'rose';
-  const isCombo = tarsVariant === 'combo';
-  const isEdges = tarsVariant === 'edges';
+  // Resolved in an effect (not during render) so the prerendered HTML never
+  // differs from the first client render; the canvas fades in a frame later.
+  const [dither, setDither] = useState(false);
 
-  // One terminal, two screens: the flat body, or the starfield+grid scene.
-  const renderTerminal = (scene: boolean) => {
-    const Body = scene ? SceneBody : TerminalBody;
-    return (
-      <TerminalWindow>
-        <TerminalBar>
-          <TrafficLights>
-            <TrafficDot color="#ff5f57" />
-            <TrafficDot color="#febc2e" />
-            <TrafficDot color="#28c840" />
-          </TrafficLights>
-          <TerminalTabBar>
-            <TerminalTab>TARS · patrol module</TerminalTab>
-          </TerminalTabBar>
-        </TerminalBar>
-        <Body>
-          <TarsContainer>
-            <TarsImage
-              src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
-              alt="TARS walking ASCII art"
-            />
-          </TarsContainer>
-        </Body>
-        <TerminalStatusBar>
-          <StatusText><StatusDot />active</StatusText>
-          <StatusText>patrol module</StatusText>
-        </TerminalStatusBar>
-      </TerminalWindow>
-    );
-  };
+  useEffect(() => {
+    setDither(isFeatureOn('heroDither'));
+  }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     setTopLine(topLines[Math.floor(Math.random() * topLines.length)]);
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    let isMounted = true;
-    let timeoutId: NodeJS.Timeout;
-
-    let i = 0;
-    let textPos = 0;
-    let currentString = typewriterTexts[i];
-    const speed = 100;
-    const deleteSpeed = 50;
-    const waitTime = 2000;
-
-    function type() {
-      if (!isMounted) return;
-      setCurrentText(currentString.substring(0, textPos));
-      if (textPos++ === currentString.length) {
-        timeoutId = setTimeout(() => deleteText(), waitTime);
-      } else {
-        timeoutId = setTimeout(type, speed);
-      }
-    }
-
-    function deleteText() {
-      if (!isMounted) return;
-      setCurrentText(currentString.substring(0, textPos));
-      if (textPos-- === 0) {
-        i = (i + 1) % typewriterTexts.length;
-        currentString = typewriterTexts[i];
-        timeoutId = setTimeout(type, speed);
-      } else {
-        timeoutId = setTimeout(deleteText, deleteSpeed);
-      }
-    }
-
-    type();
-    return () => { isMounted = false; clearTimeout(timeoutId); };
-  }, []);
-
   return (
-    <HeroContainer id="home">
-      {(isRose || isCombo) && <AsciiDitherBackground />}
-      {isEdges && <AsciiDitherBackground layout="edges" />}
+    <HeroContainer id="home" $dither={dither}>
+      {dither && <AsciiDitherBackground />}
       <LeftContainer>
         <Headline>{topLine}</Headline>
         <GradientText>I'm Eduard Hvizdak.</GradientText>
-        <TypewriterText>&gt; {currentText}</TypewriterText>
+        <RoleLine>&gt; {roleLine}</RoleLine>
+        <CtaRow>
+          <PrimaryCta href="#projects">View projects</PrimaryCta>
+          <GhostCta href="mailto:eduardd.hv@gmail.com">Email me</GhostCta>
+        </CtaRow>
       </LeftContainer>
-      {!isRose && <RightContainer>
-        {(tarsVariant === 'terminal' || isEdges) && renderTerminal(false)}
-        {isCombo && renderTerminal(true)}
-        {tarsVariant === 'grid' && (
-          <GridTile>
+      <RightContainer>
+        <TerminalWindow>
+          <TerminalBar>
+            <TrafficLights>
+              <TrafficDot color="#ff5f57" />
+              <TrafficDot color="#febc2e" />
+              <TrafficDot color="#28c840" />
+            </TrafficLights>
+            <TerminalTabBar>
+              <TerminalTab>tars@eduard:~</TerminalTab>
+            </TerminalTabBar>
+          </TerminalBar>
+          <TerminalBody>
             <TarsContainer>
               <TarsImage
                 src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
                 alt="TARS walking ASCII art"
               />
             </TarsContainer>
-          </GridTile>
-        )}
-        {tarsVariant === 'space' && (
-          <SpaceTile>
-            <TarsContainer>
-              <TarsImage
-                src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
-                alt="TARS walking ASCII art"
-              />
-            </TarsContainer>
-            <SpaceFloor />
-          </SpaceTile>
-        )}
-      </RightContainer>}
+          </TerminalBody>
+        </TerminalWindow>
+      </RightContainer>
     </HeroContainer>
   );
 };

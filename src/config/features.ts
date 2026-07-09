@@ -5,24 +5,31 @@
 //   local scraper (scripts/scrape-tweets.mjs) into public/latest-tweets.json.
 //   Kept OFF until the scraper has been set up and we are happy with it.
 //
-// HOW TO SHIP IT to everyone: flip DEFAULTS.latestTweets to true below (one
-//   line), commit, push. Vercel redeploys.
+// heroDither: the animated dither + ASCII-halftone flower behind the hero
+//   (src/components/hero/AsciiDitherBackground.tsx). ON by default: it is the
+//   shipped hero background. ?hero=off renders the hero without the canvas
+//   (headline, role line, CTAs and terminal still show) as an escape hatch.
 //
-// HOW TO PREVIEW IT LIVE without redeploying: add ?tweets=on to any URL, e.g.
-//   eduardhvizdak.com/now?tweets=on . The choice is remembered as you
-//   click around. Use ?tweets=off to hide it again, or ?tweets=reset to clear
-//   the override and fall back to the default.
+// HOW TO SHIP a flag to everyone: flip its DEFAULTS entry below (one line),
+//   commit, push. Vercel redeploys.
+//
+// HOW TO PREVIEW LIVE without redeploying: add ?<param>=on to any URL, e.g.
+//   eduardhvizdak.com/now?tweets=on or eduardhvizdak.com/?hero=off . The
+//   choice is remembered as you click around. Use ?<param>=off to flip it, or
+//   ?<param>=reset to clear the override and fall back to the default.
 
-export type FeatureFlag = 'latestTweets';
+export type FeatureFlag = 'latestTweets' | 'heroDither';
 
 const DEFAULTS: Record<FeatureFlag, boolean> = {
   latestTweets: false,
+  heroDither: true,
 };
 
 // URL query param that overrides each flag, plus the localStorage key it is
 // remembered under. Keeps the query names short and readable.
 const PARAM: Record<FeatureFlag, string> = {
   latestTweets: 'tweets',
+  heroDither: 'hero',
 };
 
 // Resolve a flag: URL query wins (on/off, and is remembered), then the last
