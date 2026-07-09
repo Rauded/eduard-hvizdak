@@ -30,11 +30,10 @@ const PHONE = '+421950774038';
 const PHONE_DISPLAY = '+421 950 774 038';
 
 // Each card leads with a hard number and a short story, then names the concrete
-// capabilities as tags. Color is used sparingly (icon + the stat), no color bar.
+// capabilities as tags. One navy accent across all cards (see service-cards-v2).
 const SERVICES = [
   {
     icon: <LuRepeat2 />,
-    accent: '#2456d6', // blue: automation
     stat: '24/7',
     statLabel: 'runs itself, no babysitting',
     title: 'Kill the copy-paste busywork',
@@ -44,7 +43,6 @@ const SERVICES = [
   },
   {
     icon: <LuFileSearch />,
-    accent: '#0f766e', // teal: document intelligence
     stat: '< 2s',
     statLabel: 'to a cited answer over millions of docs',
     title: 'Turn document piles into instant answers',
@@ -54,7 +52,6 @@ const SERVICES = [
   },
   {
     icon: <LuBot />,
-    accent: '#b45309', // amber: agents
     stat: '5 steps',
     statLabel: 'run end to end, unattended',
     title: 'Agents that do the work, not just chat',
@@ -64,7 +61,6 @@ const SERVICES = [
   },
   {
     icon: <LuShieldCheck />,
-    accent: '#15803d', // green: private on-prem
     stat: '0',
     statLabel: 'sensitive data leaves your building',
     title: 'Private AI that never leaves your business',
@@ -153,10 +149,7 @@ const ServicesPage: React.FC = () => {
         <div className="services-grid">
           {SERVICES.map((s, i) => (
             <Reveal key={s.title} delay={i * 90}>
-              <article
-                className="services-card services-card--v2"
-                style={{ '--card-accent': s.accent } as React.CSSProperties}
-              >
+              <article className="services-card services-card--v2">
                 <div className="svc-top">
                   <span className="services-card__icon">{s.icon}</span>
                   <div className="svc-stat">

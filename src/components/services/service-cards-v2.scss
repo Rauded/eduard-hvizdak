@@ -1,13 +1,13 @@
-// Redesigned "What I do" cards. Isolated from services.scss on purpose so this
-// never collides with the site-wide type refactor. Color is used sparingly
-// (icon glyph + the big stat number only); no colored top bar, no colored body
-// text. Each card sets --card-accent inline.
+// Redesigned "What I do" cards. Isolated from services.scss so it never collides
+// with the site-wide type refactor. ONE accent for the whole page (deep navy),
+// used identically on every card: icon glyph, the headline number, and the
+// capability chips. No per-card colors, no colored top bar, no colored body.
 
 .services-card--v2 {
   // Quiet hairline border all round, no colored bar on top.
   border: 1px solid var(--card-border);
   border-radius: 16px;
-  padding: 26px 26px 24px;
+  padding: 28px 28px 26px;
   display: flex;
   flex-direction: column;
 
@@ -17,16 +17,16 @@
     align-items: flex-start;
     justify-content: space-between;
     gap: 16px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
   }
 
   .services-card__icon {
-    width: 46px;
-    height: 46px;
+    width: 48px;
+    height: 48px;
     margin: 0;
-    border-radius: 12px;
-    color: var(--card-accent);
-    background: color-mix(in srgb, var(--card-accent) 12%, transparent);
+    border-radius: 13px;
+    color: var(--accent);
+    background: var(--accent-soft);
     svg { width: 1.5em; height: 1.5em; stroke-width: 2; }
   }
 
@@ -35,16 +35,16 @@
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 2px;
-    padding-top: 2px;
+    gap: 3px;
+    padding-top: 1px;
   }
   .svc-stat__value {
     font-family: var(--font-mono);
-    font-size: 1.9rem;
+    font-size: 2.15rem;
     font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.01em;
-    color: var(--card-accent);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--accent-heading);
     font-feature-settings: 'tnum';
   }
   .svc-stat__label {
@@ -54,31 +54,31 @@
     max-width: 17ch;
   }
 
-  // Bigger, more legible text than the old cards.
+  // Serif title matches the rest of the page; bigger, legible body.
   .services-card__title {
     font-family: var(--font-display);
-    font-size: 1.36rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.18;
     letter-spacing: -0.01em;
-    color: var(--heading, var(--accent-heading));
-    margin: 0 0 8px;
+    color: var(--accent-heading);
+    margin: 0 0 9px;
   }
   .services-card__outcome {
-    font-size: 1.04rem;
+    font-size: 1.05rem;
     font-weight: 600;
     line-height: 1.45;
-    color: var(--text, var(--text-strong)); // dark, not accent colored
+    color: var(--text, var(--text-strong)); // dark, not colored
     margin: 0 0 12px;
   }
   .services-card__body {
     font-size: 0.98rem;
     line-height: 1.6;
     color: var(--text-mute, var(--text-faint));
-    margin: 0;
+    margin: 0 0 4px;
   }
 
-  // Functionality tags: concrete capabilities, mono chips in the card accent.
+  // Capability chips: mono, quiet navy-tinted, identical on every card.
   .svc-tags {
     display: flex;
     flex-wrap: wrap;
@@ -87,17 +87,15 @@
     padding-top: 18px;
     border-top: 1px solid var(--rule, var(--border));
   }
-  // give the top row + tags room when a card is stretched to match its neighbor
-  .services-card__body { margin-bottom: 4px; }
   .svc-tag {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     letter-spacing: 0.01em;
     padding: 4px 10px;
     border-radius: 999px;
-    color: var(--card-accent);
-    background: color-mix(in srgb, var(--card-accent) 8%, transparent);
-    border: 1px solid color-mix(in srgb, var(--card-accent) 22%, transparent);
+    color: var(--accent-text, var(--accent));
+    background: color-mix(in srgb, var(--accent) 6%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
     white-space: nowrap;
   }
 }
