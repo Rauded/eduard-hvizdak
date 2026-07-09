@@ -39,6 +39,12 @@ interface Props {
 
 const PaperHands: React.FC<Props> = ({ variant = DEFAULT_VARIANT }) => {
   const v: HeroVariant = getVariant(variant);
+  const sizing = {
+    fit: v.fit ?? 'contain',
+    scale: v.scale ?? 1,
+    offsetX: v.offsetX ?? 0,
+    offsetY: v.offsetY ?? 0,
+  } as const;
   return (
     <Band $maxWidth={v.bandMaxWidth} aria-hidden="true">
       {v.renderer === 'halftone' ? (
@@ -56,7 +62,7 @@ const PaperHands: React.FC<Props> = ({ variant = DEFAULT_VARIANT }) => {
           radius={v.radius}
           contrast={v.contrast}
           grainOverlay={v.grainOverlay ?? 0}
-          fit="contain"
+          {...sizing}
         />
       ) : (
         <ImageDithering
@@ -71,7 +77,7 @@ const PaperHands: React.FC<Props> = ({ variant = DEFAULT_VARIANT }) => {
           type={v.ditherType}
           size={v.size}
           colorSteps={v.colorSteps}
-          fit="contain"
+          {...sizing}
         />
       )}
     </Band>

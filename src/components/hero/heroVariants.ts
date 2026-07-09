@@ -23,6 +23,11 @@ export interface HeroVariant {
   radius?: number;
   contrast?: number;
   grainOverlay?: number;
+  // Paper sizing system (compose in-shader instead of cropping/CSS)
+  fit?: 'contain' | 'cover' | 'none';
+  scale?: number;
+  offsetX?: number;
+  offsetY?: number;
 }
 
 const NAVY = '#182e5f';
@@ -101,6 +106,29 @@ export const HERO_VARIANTS: HeroVariant[] = [
     id: 14, label: 'Halftone with grain', note: 'Hex dots plus film grain: printed-paper texture.',
     renderer: 'halftone', bandMaxWidth: 1300, colorBack: '#ffffff', colorFront: NAVY,
     grid: 'hex', dotType: 'gooey', size: 0.5, radius: 1.2, contrast: 0.5, grainOverlay: 0.35,
+  },
+
+  // ── Corrected technique proof: transparent background (no box) + Paper's own
+  // sizing (scale/offset/fit) instead of CSS cropping. ──────────────────────
+  {
+    id: 15, label: 'Fine dither, transparent bg', note: 'Same fine dither but colorBack transparent: navy hands render on the page with NO box.',
+    renderer: 'dither', bandMaxWidth: 1300, colorBack: '#ffffff00', colorFront: NAVY,
+    colorHighlight: HI, ditherType: '8x8', size: 1.3, colorSteps: 6, fit: 'contain',
+  },
+  {
+    id: 16, label: '2-tone, transparent bg', note: 'Bold 2-tone graphic on a transparent ground.',
+    renderer: 'dither', bandMaxWidth: 1300, colorBack: '#ffffff00', colorFront: NAVY,
+    colorHighlight: NAVY, ditherType: '8x8', size: 1.3, colorSteps: 2, fit: 'contain',
+  },
+  {
+    id: 17, label: 'Halftone hi-contrast, transparent', note: 'Round-dot halftone, high contrast, transparent ground: clean navy dots, no box.',
+    renderer: 'halftone', bandMaxWidth: 1300, colorBack: '#ffffff00', colorFront: NAVY,
+    grid: 'hex', dotType: 'gooey', size: 0.5, radius: 1.2, contrast: 0.85, fit: 'contain',
+  },
+  {
+    id: 18, label: 'Transparent + Paper zoom', note: 'Transparent bg plus Paper sizing (cover, scale 1.15, nudged up): composed in-shader, bigger.',
+    renderer: 'dither', bandMaxWidth: 1500, colorBack: '#ffffff00', colorFront: NAVY,
+    colorHighlight: HI, ditherType: '8x8', size: 1.2, colorSteps: 6, fit: 'cover', scale: 1.15, offsetY: 0.12,
   },
 ];
 

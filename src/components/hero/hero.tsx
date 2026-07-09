@@ -4,27 +4,32 @@ import { LuArrowRight } from 'react-icons/lu';
 import AsciiDitherBackground from './AsciiDitherBackground';
 import HandsShader from './HandsShader';
 import PaperHands from './PaperHands';
-import { DEFAULT_VARIANT } from './heroVariants';
+import HeroBackdrop, { BackdropConcept } from './HeroBackdrop';
 
-// Hero hands renderer. ?variant=N selects a Paper Shaders preset (see
-// heroVariants.ts) for the design-review loop. Otherwise ?hands= picks the
-// renderer family: paper (halftone) / shader (WebGL) / dither (2D canvas);
-// the default is the Paper dither preset.
-type HeroRender =
-  | { kind: 'paper'; variant: number }
-  | { kind: 'shader' }
-  | { kind: 'dither2d' };
+// Hero concept, chosen via ?hero= (for the concept-exploration review):
+//   editorial (default) type only, no backdrop
+//   mesh / grain / ditherbg   subtle Paper Shaders backdrop behind the type
+//   hands                the parked dithered-hands hero (kept, not deleted)
+// The hands concept keeps its own controls: ?variant=N picks a heroVariants
+// preset, ?hands=shader|dither|paper picks the renderer family. Best hands
+// preset is 17 (transparent-bg halftone).
+type HeroState =
+  | { concept: 'hands'; hands: { kind: 'paper'; variant: number } | { kind: 'shader' } | { kind: 'dither2d' } }
+  | { concept: 'editorial' | BackdropConcept };
 
-const readHeroRender = (): HeroRender => {
-  if (typeof window === 'undefined') return { kind: 'paper', variant: DEFAULT_VARIANT };
+const readHero = (): HeroState => {
+  if (typeof window === 'undefined') return { concept: 'editorial' };
   const q = new URLSearchParams(window.location.search);
   const variant = q.get('variant');
-  if (variant && /^\d+$/.test(variant)) return { kind: 'paper', variant: parseInt(variant, 10) };
+  if (variant && /^\d+$/.test(variant)) return { concept: 'hands', hands: { kind: 'paper', variant: parseInt(variant, 10) } };
   const hands = q.get('hands');
-  if (hands === 'shader') return { kind: 'shader' };
-  if (hands === 'dither') return { kind: 'dither2d' };
-  if (hands === 'paper') return { kind: 'paper', variant: 9 };
-  return { kind: 'paper', variant: DEFAULT_VARIANT };
+  if (hands === 'shader') return { concept: 'hands', hands: { kind: 'shader' } };
+  if (hands === 'dither') return { concept: 'hands', hands: { kind: 'dither2d' } };
+  if (hands === 'paper') return { concept: 'hands', hands: { kind: 'paper', variant: 9 } };
+  const hero = q.get('hero');
+  if (hero === 'hands') return { concept: 'hands', hands: { kind: 'paper', variant: 17 } };
+  if (hero === 'mesh' || hero === 'grain' || hero === 'ditherbg' || hero === 'editorial') return { concept: hero };
+  return { concept: 'editorial' };
 };
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -57,7 +62,7 @@ const HeroContainer = styled.section`
   }
 `;
 
-const Content = styled.div`
+const Content = styled.div<{ $handsOffset: boolean }>`
   position: relative;
   z-index: 1;
   display: flex;
@@ -66,10 +71,10 @@ const Content = styled.div`
   text-align: center;
   max-width: 760px;
 
-  /* The hands own the top band of the hero; the text block sits well below
-     them, so neither ever occludes the other. */
+  /* With the hands concept the type sits below the top-band artwork; every
+     other concept centres the type in the hero. */
   @media (min-width: 769px) {
-    margin-top: 44vh;
+    margin-top: ${(p) => (p.$handsOffset ? '44vh' : '0')};
   }
 `;
 
@@ -342,11 +347,11 @@ const scrollToId = (id: string) => {
 };
 
 const Hero: React.FC = () => {
-  // Resolve the hands renderer at first render so each ?variant= mounts the
-  // Paper shader with the right preset from the start (the shader library
-  // memoizes on colour props, so a post-mount switch between same-colour
-  // presets would be skipped). The no-param default matches the prerender.
-  const [render] = useState<HeroRender>(() => readHeroRender());
+  // Resolve the hero concept at first render (the shader library memoizes on
+  // colour props, so a post-mount switch would be skipped). The no-param
+  // default is 'editorial', which matches the prerender.
+  const [hero] = useState<HeroState>(() => readHero());
+  const isHands = hero.concept === 'hands';
 
   // Working single-key shortcuts for the CTA chips: P scrolls to projects,
   // E to contact. Ignored while typing or when a modifier is held.
@@ -364,12 +369,17 @@ const Hero: React.FC = () => {
 
   return (
     <HeroContainer id="home">
-      {render.kind === 'paper' && <PaperHands key={render.variant} variant={render.variant} />}
-      {render.kind === 'shader' && <HandsShader />}
-      {render.kind === 'dither2d' && <AsciiDitherBackground />}
+      {isHands && hero.concept === 'hands' && hero.hands.kind === 'paper' && (
+        <PaperHands key={hero.hands.variant} variant={hero.hands.variant} />
+      )}
+      {isHands && hero.concept === 'hands' && hero.hands.kind === 'shader' && <HandsShader />}
+      {isHands && hero.concept === 'hands' && hero.hands.kind === 'dither2d' && <AsciiDitherBackground />}
+      {(hero.concept === 'mesh' || hero.concept === 'grain' || hero.concept === 'ditherbg') && (
+        <HeroBackdrop concept={hero.concept} />
+      )}
       <Ruler side="left" />
       <Ruler side="right" />
-      <Content>
+      <Content $handsOffset={isHands}>
         {CORNERS.map((pos) => (
           <CornerTick key={pos} $pos={pos} aria-hidden="true" />
         ))}

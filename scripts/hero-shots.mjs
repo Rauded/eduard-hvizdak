@@ -13,6 +13,10 @@ const BUILD = path.resolve(__dirname, '..', 'build');
 const PORT = 45690;
 const OUT = process.argv[2] || path.resolve(__dirname, '..', 'hero-shots');
 const COUNT = parseInt(process.argv[3] || '14', 10);
+const START = parseInt(process.argv[4] || '1', 10);
+// Optional named mode: node hero-shots.mjs OUT 0 0 hero editorial,mesh,grain
+const PARAM = process.argv[5] || 'variant';
+const VALUES = process.argv[6] ? process.argv[6].split(',') : null;
 
 const TYPES = {
   '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
@@ -55,20 +59,27 @@ async function main() {
     ],
   });
 
-  for (let i = 1; i <= COUNT; i++) {
+  const jobs = VALUES
+    ? VALUES.map((v) => ({ q: `${PARAM}=${v}`, name: `${PARAM}-${v}` }))
+    : Array.from({ length: COUNT - START + 1 }, (_, k) => {
+        const i = START + k;
+        return { q: `variant=${i}`, name: `variant-${String(i).padStart(2, '0')}` };
+      });
+
+  for (const job of jobs) {
     const page = await browser.newPage();
     await page.setViewport({ width: 1512, height: 1000, deviceScaleFactor: 2 });
     try {
-      await page.goto(`http://127.0.0.1:${PORT}/?variant=${i}`, {
+      await page.goto(`http://127.0.0.1:${PORT}/?${job.q}`, {
         waitUntil: 'domcontentloaded', timeout: 30000,
       });
       await page.evaluate(() => (document.fonts ? document.fonts.ready : Promise.resolve())).catch(() => {});
       await sleep(7000);
-      const out = path.join(OUT, `variant-${String(i).padStart(2, '0')}.png`);
+      const out = path.join(OUT, `${job.name}.png`);
       await page.screenshot({ path: out, clip: { x: 0, y: 0, width: 1512, height: 1000 } });
-      console.log('[shots] variant', i, 'saved', path.basename(out));
+      console.log('[shots] saved', path.basename(out));
     } catch (e) {
-      console.warn('[shots] variant', i, 'FAILED:', e.message);
+      console.warn('[shots]', job.name, 'FAILED:', e.message);
     }
     await page.close();
   }
