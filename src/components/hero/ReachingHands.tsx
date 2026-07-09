@@ -1,15 +1,14 @@
 import React from 'react';
 import styled, { keyframes, css } from 'styled-components';
-import { HalftoneDots } from '@paper-design/shaders-react';
-import handsSrc from '../../assets/hero/hands-clean.jpg';
+import handsSrc from '../../assets/hero/hands-dither.png';
 
-// The combined hero's hands, animated to reach toward each other. Both halves
-// render the SAME full halftone (so they align perfectly), each clipped to its
-// side; the two clip layers then slide toward the centre and back, so the
-// fingertips almost touch and part, with a gentle breathe. Motion is CSS only
-// (the Paper shader is static, speed 0) so it stays cheap; off under reduced
-// motion. Full-bleed so the arms reach the screen edges; the source has soft
-// black margins so nothing hard-cuts. Desktop-only.
+// The combined hero's hands, animated to reach toward each other. The artwork is
+// a pre-baked navy ordered-dither with a fully transparent background (no live
+// shader), so there is categorically no background box or seam behind the hands.
+// Both halves show the SAME full image, each clipped to its side, then slide
+// toward the centre and back so the fingertips almost touch, with a gentle
+// breathe. Motion is CSS only; off under reduced motion. Full-bleed so the arms
+// reach the screen edges. Desktop-only.
 
 // Left hand eases toward the centre (to the right) and breathes; right mirrors.
 const reachRight = keyframes`
@@ -65,38 +64,25 @@ const FullWrap = styled.div<{ $side: 'left' | 'right' }>`
   width: ${(100 / 52) * 100}%;
   ${(p) => p.$side}: 0;
 
-  & div,
-  & canvas {
-    width: 100% !important;
-    height: 100% !important;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    display: block;
   }
 `;
-
-const dots = () => (
-  <HalftoneDots
-    width="100%"
-    height="100%"
-    image={handsSrc}
-    colorBack="#ffffff00"
-    colorFront="#33528d"
-    originalColors={false}
-    inverted
-    grid="hex"
-    type="gooey"
-    size={0.5}
-    radius={1.2}
-    contrast={0.85}
-    fit="contain"
-  />
-);
 
 const ReachingHands: React.FC<{ animate?: boolean }> = ({ animate = true }) => (
   <Band aria-hidden="true">
     <Half $side="left" $animate={animate}>
-      <FullWrap $side="left">{dots()}</FullWrap>
+      <FullWrap $side="left">
+        <img src={handsSrc} alt="" />
+      </FullWrap>
     </Half>
     <Half $side="right" $animate={animate}>
-      <FullWrap $side="right">{dots()}</FullWrap>
+      <FullWrap $side="right">
+        <img src={handsSrc} alt="" />
+      </FullWrap>
     </Half>
   </Band>
 );
