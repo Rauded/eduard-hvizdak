@@ -15,8 +15,8 @@ import './EditOverlay.scss';
 
 interface EditingState {
   node: Text;
-  file: string;
-  line: number;
+  file: string | null; // React's source hint, when available
+  line: number | null;
   original: string; // trimmed text sent to the server as oldText
   rect: DOMRect;
 }
@@ -115,11 +115,10 @@ const EditOverlay: React.FC = () => {
       const raw = tn?.nodeValue || '';
       if (!tn || !raw.trim()) return;
 
+      // React's source hint is optional: blog/project/things/resume copy lives in
+      // data files that React doesn't credit, so the server also does a whole-tree
+      // search by the text itself. A null hint is fine here.
       const loc = getSourceLoc(tn);
-      if (!loc) {
-        flash({ kind: 'warn', msg: "Couldn't locate this text's source. Edit it in the file." });
-        return;
-      }
       // We're taking over this click.
       e.preventDefault();
       e.stopPropagation();
@@ -127,8 +126,8 @@ const EditOverlay: React.FC = () => {
       const original = raw.trim();
       setEditing({
         node: tn,
-        file: loc.fileName,
-        line: loc.lineNumber,
+        file: loc ? loc.fileName : null,
+        line: loc ? loc.lineNumber : null,
         original,
         rect: (tn.parentElement || document.body).getBoundingClientRect(),
       });
@@ -181,9 +180,10 @@ const EditOverlay: React.FC = () => {
         flash({ kind: 'ok', msg: 'Saved to source.' });
         cancel();
       } else if (data.reason === 'ambiguous') {
-        flash({ kind: 'warn', msg: `This text appears ${data.count}x nearby. Edit it in the file.` });
+        const where = Array.isArray(data.files) && data.files.length ? ` (in ${data.files.join(', ')})` : '';
+        flash({ kind: 'warn', msg: `This exact text appears ${data.count}x${where}. Make it more unique or edit in the file.` });
       } else if (data.reason === 'not-found') {
-        flash({ kind: 'warn', msg: "Couldn't match the original in the file. Edit it manually." });
+        flash({ kind: 'warn', msg: "Couldn't match this text in the source (it may be built from variables). Edit it in the file." });
       } else {
         flash({ kind: 'err', msg: data.error || 'Save failed.' });
       }

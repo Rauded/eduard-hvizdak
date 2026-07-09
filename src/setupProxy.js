@@ -108,6 +108,93 @@ function countOccurrences(lines, needle) {
   return { total, hits };
 }
 
+// Text-bearing source files we're willing to search/edit. Data-driven copy lives
+// in .ts/.tsx/.json (blog.ts, projectsData.tsx, thingsData.ts, resume.json).
+const TEXT_EXT = new Set(['.tsx', '.ts', '.jsx', '.js', '.json', '.md', '.mdx', '.html', '.txt']);
+const SKIP_DIRS = new Set(['node_modules', '.git']);
+
+// Recursively list every text-bearing file under a directory.
+function walkSrc(dir, out) {
+  let names;
+  try {
+    names = fs.readdirSync(dir);
+  } catch (err) {
+    return out;
+  }
+  for (const name of names) {
+    if (name.startsWith('.') || SKIP_DIRS.has(name)) continue;
+    const full = path.join(dir, name);
+    let stat;
+    try {
+      stat = fs.statSync(full);
+    } catch (err) {
+      continue;
+    }
+    if (stat.isDirectory()) walkSrc(full, out);
+    else if (TEXT_EXT.has(path.extname(name))) out.push(full);
+  }
+  return out;
+}
+
+// All occurrences of `needle` in one file. Returns [{ abs, line, col }] (0-based line).
+function occurrencesInFile(abs, needle) {
+  let lines;
+  try {
+    lines = fs.readFileSync(abs, 'utf8').split('\n');
+  } catch (err) {
+    return [];
+  }
+  const { hits } = countOccurrences(lines, needle);
+  return hits.map((h) => ({ abs, line: h.line, col: h.col }));
+}
+
+// Make `text` safe to drop into the source at a spot preceded by `charBefore`.
+// A text node in the DOM maps to source that sits either right after a string
+// delimiter (', ", `) or right after a tag/JSX `>`. We escape accordingly so a
+// newline, quote, or angle bracket the user types can never break the file.
+function escapeForContext(charBefore, text) {
+  const clean = text.replace(/\r/g, '');
+  if (charBefore === "'" || charBefore === '"' || charBefore === '`') {
+    // Inside a string / template / JSX attribute literal delimited by charBefore.
+    let out = clean.replace(/\\/g, '\\\\');
+    if (charBefore === '`') {
+      out = out.replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
+      // Raw newlines are legal inside template literals, leave them.
+    } else {
+      out = out.split(charBefore).join('\\' + charBefore).replace(/\n/g, '\\n');
+    }
+    return out;
+  }
+  // JSX / HTML text content: escape markup-significant characters to entities,
+  // which render as the literal character in both JSX and injected HTML.
+  return clean
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\{/g, '&#123;')
+    .replace(/\}/g, '&#125;');
+}
+
+// Replace oldText at abs:line(0-based):col with newText. Re-reads so the write
+// is applied to the current file bytes, and escapes newText for the surrounding
+// source context (quoted string vs JSX/HTML text) so edits stay syntactically
+// valid no matter what the user typed.
+function applyReplacement(abs, line, col, oldText, newText) {
+  const lines = fs.readFileSync(abs, 'utf8').split('\n');
+  const target = lines[line];
+  // Last non-space char before the match tells us the surrounding context.
+  const before = lines.slice(0, line).join('\n') + '\n' + target.slice(0, col);
+  const m = before.match(/(\S)[ \t]*$/);
+  const charBefore = m ? m[1] : '';
+  const safe = escapeForContext(charBefore, newText);
+  lines[line] = target.slice(0, col) + safe + target.slice(col + oldText.length);
+  fs.writeFileSync(abs, lines.join('\n'), 'utf8');
+}
+
+function replyOk(res, abs, line) {
+  return sendJson(res, 200, { ok: true, file: path.relative(REPO_ROOT, abs), line: line + 1 });
+}
+
 async function handleEdit(req, res) {
   if (!isTrustedOrigin(req)) {
     return sendJson(res, 403, { ok: false, error: 'blocked: cross-origin request' });
@@ -130,62 +217,60 @@ async function handleEdit(req, res) {
     return sendJson(res, 400, { ok: false, error: 'oldText is empty' });
   }
 
+  // `file` is React's _debugSource hint. It may be null (no hint) or point at the
+  // component that *rendered* the text rather than the file the string lives in:
+  // most blog/project/things/resume copy comes from data files (blog.ts,
+  // projectsData.tsx, thingsData.ts, resume.json) and blog bodies are injected as
+  // raw HTML, so React credits the component, not the data. We use the hint to
+  // pin the exact spot when it works, and fall back to a whole-tree search when
+  // it doesn't.
   const abs = resolveSourceFile(file);
-  if (!abs) {
-    return sendJson(res, 400, { ok: false, error: 'file is not inside src/ or does not exist' });
+  const reportedLine = Number.isInteger(line) ? line - 1 : null; // _debugSource is 1-based
+
+  // 1) Hint file actually contains the text: pin it there.
+  if (abs) {
+    const occ = occurrencesInFile(abs, oldText);
+    if (occ.length === 1) {
+      applyReplacement(abs, occ[0].line, occ[0].col, oldText, newText);
+      return replyOk(res, abs, occ[0].line);
+    }
+    if (occ.length > 1 && reportedLine != null) {
+      // Multiple copies in the file; the reported line disambiguates.
+      const near = occ.filter((o) => Math.abs(o.line - reportedLine) <= LINE_WINDOW);
+      if (near.length === 1) {
+        applyReplacement(near[0].abs, near[0].line, near[0].col, oldText, newText);
+        return replyOk(res, near[0].abs, near[0].line);
+      }
+    }
+    // Not (uniquely) here: fall through to the whole-tree search.
   }
 
-  const source = fs.readFileSync(abs, 'utf8');
-  const lines = source.split('\n');
-
-  // Prefer a match inside the window React pointed us at; if the reported line
-  // is missing/out of range, fall back to searching the whole file.
-  const reported = Number.isInteger(line) ? line - 1 : -1; // _debugSource is 1-based
-  let start = 0;
-  let end = lines.length;
-  if (reported >= 0) {
-    start = Math.max(0, reported - LINE_WINDOW);
-    end = Math.min(lines.length, reported + LINE_WINDOW + 1);
+  // 2) Whole src/ tree search: find where the string uniquely lives.
+  const files = walkSrc(SRC_ROOT, []);
+  const all = [];
+  for (const f of files) {
+    for (const o of occurrencesInFile(f, oldText)) all.push(o);
+    if (all.length > 12) break; // enough to know it's ambiguous
   }
 
-  let window = lines.slice(start, end);
-  let { total, hits } = countOccurrences(window, oldText);
-
-  // Nothing in the window: widen to the whole file before giving up.
-  if (total === 0 && (start > 0 || end < lines.length)) {
-    start = 0;
-    end = lines.length;
-    window = lines;
-    ({ total, hits } = countOccurrences(window, oldText));
-  }
-
-  if (total === 0) {
+  if (all.length === 0) {
     return sendJson(res, 409, {
       ok: false,
       reason: 'not-found',
-      error: 'could not find the original text in the source file',
+      error: 'could not find this exact text in any source file',
     });
   }
-  if (total > 1) {
-    return sendJson(res, 409, {
-      ok: false,
-      reason: 'ambiguous',
-      count: total,
-      error: 'the original text appears multiple times near this spot; edit it in the file',
-    });
+  if (all.length === 1) {
+    applyReplacement(all[0].abs, all[0].line, all[0].col, oldText, newText);
+    return replyOk(res, all[0].abs, all[0].line);
   }
-
-  // Exactly one occurrence: replace it in place.
-  const hit = hits[0];
-  const absLine = start + hit.line;
-  const target = lines[absLine];
-  lines[absLine] = target.slice(0, hit.col) + newText + target.slice(hit.col + oldText.length);
-
-  fs.writeFileSync(abs, lines.join('\n'), 'utf8');
-  return sendJson(res, 200, {
-    ok: true,
-    file: path.relative(REPO_ROOT, abs),
-    line: absLine + 1,
+  const whichFiles = [...new Set(all.map((o) => path.relative(REPO_ROOT, o.abs)))];
+  return sendJson(res, 409, {
+    ok: false,
+    reason: 'ambiguous',
+    count: all.length,
+    files: whichFiles.slice(0, 5),
+    error: 'this exact text appears in more than one place; edit it in the file',
   });
 }
 

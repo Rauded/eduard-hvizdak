@@ -57,7 +57,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'digital-fairness-act-youth-dialogue',
-    title: 'Talking the Digital Fairness Act with Commissioner McGrath',
+    title: 'Invited by the European Commission to discuss the Digital Fairness Act With EU Commissioner Michael McGrath',
     date: '2026-06-25',
     category: 'Tech & Policy',
     pinned: true,
