@@ -99,8 +99,8 @@ const HeroBackdrop: React.FC<Props> = ({ concept, faint = false }) => {
           shape="wave"
           type="8x8"
           size={faint ? 3 : 2}
-          speed={faint ? 0 : anim(0.12)}
-          frame={faint ? 400 : frame}
+          speed={anim(faint ? 0.16 : 0.12)}
+          frame={frame}
         />
       )}
     </Full>
