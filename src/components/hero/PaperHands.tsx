@@ -17,7 +17,7 @@ const Band = styled.div<{ $maxWidth: number }>`
   transform: translateX(-50%);
   width: min(96%, ${(p) => p.$maxWidth}px);
   aspect-ratio: 3.1 / 1;
-  z-index: 0;
+  z-index: 1;
   pointer-events: none;
   -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
   mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);

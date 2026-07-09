@@ -66,7 +66,7 @@ const HeroContainer = styled.section`
 
 const Content = styled.div<{ $handsOffset: boolean }>`
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -384,7 +384,7 @@ const Hero: React.FC = () => {
       {hero.concept === 'combined' && (
         <>
           <HeroBackdrop concept="ditherbg" faint />
-          <PaperHands variant={17} />
+          <PaperHands variant={19} />
         </>
       )}
       <Ruler side="left" />

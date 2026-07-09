@@ -130,6 +130,11 @@ export const HERO_VARIANTS: HeroVariant[] = [
     renderer: 'dither', bandMaxWidth: 1500, colorBack: '#ffffff00', colorFront: NAVY,
     colorHighlight: HI, ditherType: '8x8', size: 1.2, colorSteps: 6, fit: 'cover', scale: 1.15, offsetY: 0.12,
   },
+  {
+    id: 19, label: 'Light halftone (for combined)', note: 'Clean transparent halftone in a lighter mid-navy, to sit above the texture base.',
+    renderer: 'halftone', bandMaxWidth: 1300, colorBack: '#ffffff00', colorFront: '#33528d',
+    grid: 'hex', dotType: 'gooey', size: 0.5, radius: 1.2, contrast: 0.85, fit: 'contain',
+  },
 ];
 
 export const DEFAULT_VARIANT = 1;

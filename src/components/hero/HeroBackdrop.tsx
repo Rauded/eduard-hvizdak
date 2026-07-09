@@ -30,7 +30,7 @@ const Full = styled.div<{ $faint: boolean }>`
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  opacity: ${(p) => (p.$faint ? 0.55 : 1)};
+  opacity: ${(p) => (p.$faint ? 0.7 : 1)};
 
   & > div,
   & canvas {
@@ -38,16 +38,16 @@ const Full = styled.div<{ $faint: boolean }>`
     height: 100% !important;
   }
 
-  /* Faint mode grounds the hero from the BOTTOM only, staying out of the
-     headline zone so the name sits on clean white; full mode fades softly at
-     the bottom edge. */
+  /* Faint mode is the FULL-BLEED base layer (a light dither texture across the
+     whole hero), softly fading at the very top and bottom edges so it never
+     hard-edges; full mode fades at the bottom edge. */
   -webkit-mask-image: ${(p) =>
     p.$faint
-      ? 'linear-gradient(180deg, transparent 52%, #000 85%, #000 100%)'
+      ? 'linear-gradient(180deg, transparent 0%, #000 14%, #000 90%, transparent 100%)'
       : 'linear-gradient(180deg, #000 0%, #000 72%, transparent 100%)'};
   mask-image: ${(p) =>
     p.$faint
-      ? 'linear-gradient(180deg, transparent 52%, #000 85%, #000 100%)'
+      ? 'linear-gradient(180deg, transparent 0%, #000 14%, #000 90%, transparent 100%)'
       : 'linear-gradient(180deg, #000 0%, #000 72%, transparent 100%)'};
 
   @media (max-width: 768px) {
