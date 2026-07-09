@@ -27,6 +27,7 @@ const ROUTES = [
   '/now',
   '/things',
   '/services',
+  '/styleguide',
   '/blog/newsmatics-hackathon',
   '/blog/digital-fairness-act-youth-dialogue',
   '/blog/zero-to-done',

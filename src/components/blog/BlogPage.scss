@@ -16,7 +16,7 @@ $ui-font: var(--font-body);
   gap: 8px;
   color: var(--text-soft, #{$text-dim});
   text-decoration: none;
-  font-size: 0.78em;
+  font-size: var(--text-small);
   letter-spacing: 0.07em;
   transition: color 0.2s ease;
   font-family: $ui-font;
@@ -36,10 +36,10 @@ $ui-font: var(--font-body);
 }
 
 .blog-chip {
-  font-size: 0.68em;
-  letter-spacing: 0.16em;
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: var(--weight-label);
   color: var(--text-soft, #{$text-dim});
   font-family: $ui-font;
   white-space: nowrap;
@@ -117,24 +117,25 @@ $ui-font: var(--font-body);
   }
 
   &__eyebrow {
-    font-size: 0.72em;
-    letter-spacing: 0.22em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--text-soft);
     margin: 0 0 16px;
   }
 
   &__title {
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-size: var(--text-h1);
+    font-weight: var(--weight-heading);
+    letter-spacing: var(--tracking-heading);
     margin: 0 0 12px;
-    line-height: 1.1;
+    line-height: var(--leading-heading);
     color: var(--text-strong);
   }
 
   &__subtitle {
-    font-size: 0.9em;
+    font-size: var(--text-small);
     color: var(--text-soft);
     margin: 0 0 52px;
     letter-spacing: 0.02em;
@@ -196,9 +197,9 @@ $ui-font: var(--font-body);
     display: inline-flex;
     align-items: center;
     gap: 5px;
-    font-size: 0.66em;
-    font-weight: 700;
-    letter-spacing: 0.13em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--accent);
 
@@ -208,24 +209,24 @@ $ui-font: var(--font-body);
   }
 
   &__date {
-    font-size: 0.72em;
+    font-size: var(--text-caption);
     color: var(--text-soft);
     letter-spacing: 0.04em;
   }
 
   &__title {
-    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.22;
+    font-size: var(--text-h2);
+    font-weight: var(--weight-heading);
+    letter-spacing: var(--tracking-heading);
+    line-height: var(--leading-heading);
     margin: 0 0 14px;
     color: var(--text-strong);
   }
 
   &__excerpt {
-    font-size: 0.88em;
+    font-size: var(--text-small);
     color: var(--text-soft);
-    line-height: 1.65;
+    line-height: var(--leading-body);
     margin: 0 0 22px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -237,8 +238,8 @@ $ui-font: var(--font-body);
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.8em;
-    font-weight: 600;
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
     letter-spacing: 0.03em;
     color: var(--accent);
     transition: gap 0.2s ease;
@@ -302,25 +303,25 @@ $ui-font: var(--font-body);
   }
 
   &__date {
-    font-size: 0.72em;
+    font-size: var(--text-caption);
     color: var(--text-soft);
     letter-spacing: 0.04em;
   }
 
   &__title {
-    font-size: 1.18em;
-    font-weight: 600;
+    font-size: var(--text-h4);
+    font-weight: var(--weight-heading);
     color: var(--text-strong);
     margin: 0 0 8px;
-    letter-spacing: -0.01em;
-    line-height: 1.35;
+    letter-spacing: var(--tracking-heading);
+    line-height: var(--leading-tight);
     transition: color 0.2s ease;
   }
 
   &__excerpt {
-    font-size: 0.82em;
+    font-size: var(--text-small);
     color: var(--text-soft);
-    line-height: 1.6;
+    line-height: var(--leading-body);
     margin: 0;
     max-width: 60ch;
     display: -webkit-box;
@@ -444,20 +445,20 @@ $ui-font: var(--font-body);
   // ── Header ──
   &__category {
     display: inline-block;
-    font-size: 0.72em;
-    letter-spacing: 0.18em;
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: var(--weight-label);
     color: var(--text-soft);
     margin-bottom: 18px;
   }
 
   &__title {
     font-family: var(--read-font);
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
+    font-size: var(--text-h1);
+    font-weight: var(--weight-heading);
+    letter-spacing: var(--tracking-heading);
+    line-height: var(--leading-heading);
     margin: 0 0 28px;
     color: var(--text-strong);
   }
@@ -488,14 +489,14 @@ $ui-font: var(--font-body);
   }
 
   &__author {
-    font-size: 0.86em;
-    font-weight: 600;
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
     color: var(--text-strong);
     letter-spacing: 0.01em;
   }
 
   &__sub {
-    font-size: 0.74em;
+    font-size: var(--text-caption);
     color: var(--text-soft);
     letter-spacing: 0.04em;
   }
@@ -640,7 +641,7 @@ $ui-font: var(--font-body);
     figcaption {
       margin: 1.05em auto 0;
       max-width: 92%;
-      font-size: 0.76em;
+      font-size: var(--text-caption);
       line-height: 1.55;
       color: var(--text-soft);
       text-align: center;
@@ -705,7 +706,7 @@ $ui-font: var(--font-body);
   padding-top: 28px;
   border-top: 1px solid var(--border);
   font-family: $ui-font;
-  font-size: 0.78em;
+  font-size: var(--text-small);
   line-height: 1.75;
   color: var(--text-soft);
   letter-spacing: 0.01em;
@@ -747,23 +748,24 @@ $ui-font: var(--font-body);
   }
 
   &__label {
-    font-size: 0.66em;
-    letter-spacing: 0.16em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--text-soft);
     margin-bottom: 6px;
   }
 
   &__name {
-    font-size: 1.05em;
-    font-weight: 600;
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
     color: var(--text-strong);
     margin-bottom: 8px;
   }
 
   &__bio {
-    font-size: 0.82em;
-    line-height: 1.65;
+    font-size: var(--text-small);
+    line-height: var(--leading-body);
     color: var(--text-soft);
     margin: 0 0 14px;
     max-width: 52ch;
@@ -774,7 +776,7 @@ $ui-font: var(--font-body);
     gap: 18px;
 
     a {
-      font-size: 0.76em;
+      font-size: var(--text-small);
       letter-spacing: 0.05em;
       color: var(--accent);
       text-decoration: none;
@@ -799,8 +801,9 @@ $ui-font: var(--font-body);
   border-top: 1px solid var(--border);
 
   &__heading {
-    font-size: 0.78em;
-    letter-spacing: 0.14em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--text-soft);
     margin: 0 0 24px;
@@ -862,24 +865,24 @@ $ui-font: var(--font-body);
   }
 
   &__category {
-    font-size: 0.62em;
-    letter-spacing: 0.15em;
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    font-weight: 600;
+    font-weight: var(--weight-label);
     color: var(--text-soft);
   }
 
   &__title {
-    font-size: 0.98em;
-    font-weight: 600;
+    font-size: var(--text-h5);
+    font-weight: var(--weight-medium);
     color: var(--text-strong);
-    line-height: 1.35;
-    letter-spacing: -0.01em;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-heading);
     transition: opacity 0.2s ease;
   }
 
   &__meta {
-    font-size: 0.7em;
+    font-size: var(--text-caption);
     color: var(--text-soft);
     letter-spacing: 0.04em;
     margin-top: auto;

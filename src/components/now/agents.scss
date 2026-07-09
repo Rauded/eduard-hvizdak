@@ -38,9 +38,9 @@
     margin-left: 12px;
     padding: 3px 10px;
     border-radius: 999px;
-    font-size: 0.62em;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--text-dim);
     background: rgba(120, 120, 140, 0.12);
@@ -66,8 +66,8 @@
   }
 
   &__lead {
-    font-size: 0.92em;
-    line-height: 1.6;
+    font-size: var(--text-small);
+    line-height: var(--leading-body);
     color: var(--text-soft);
     max-width: 64ch;
     margin: 0 0 20px;
@@ -136,18 +136,18 @@
   }
 
   &__name {
-    font-size: 0.98em;
-    font-weight: 700;
+    font-size: var(--text-h5);
+    font-weight: var(--weight-heading);
     color: var(--text-strong);
-    letter-spacing: -0.01em;
+    letter-spacing: var(--tracking-heading);
   }
 
   &__model {
     display: inline-flex;
     align-items: center;
     gap: 4px;
-    font-size: 0.64em;
-    font-weight: 600;
+    font-size: var(--text-label);
+    font-weight: var(--weight-medium);
     letter-spacing: 0.02em;
     padding: 2px 7px;
     border-radius: 6px;
@@ -165,9 +165,9 @@
 
   &__state {
     margin-left: auto;
-    font-size: 0.66em;
-    font-weight: 700;
-    letter-spacing: 0.1em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--accent, var(--agent-done));
   }
@@ -175,8 +175,8 @@
   // ── body ──
   &__task {
     margin: 12px 0 0;
-    font-size: 0.84em;
-    line-height: 1.5;
+    font-size: var(--text-small);
+    line-height: var(--leading-body);
     color: var(--text-soft);
   }
 
@@ -189,7 +189,7 @@
     border-radius: 9px;
     background: rgba(0, 0, 0, 0.28);
     border: 1px solid var(--card-border);
-    font-size: 0.76em;
+    font-size: var(--text-caption);
     line-height: 1.45;
   }
 
@@ -217,7 +217,7 @@
     flex-wrap: wrap;
     gap: 7px 14px;
     margin-top: 13px;
-    font-size: 0.72em;
+    font-size: var(--text-caption);
     color: var(--text-dim);
   }
 
@@ -238,7 +238,7 @@
     padding: 3px 8px;
     border-radius: 7px;
     font: inherit;
-    font-size: 1em;
+    font-size: var(--text-body);
     color: var(--link);
     background: transparent;
     border: 1px solid var(--link-border);
@@ -270,7 +270,7 @@
   &__feeditem {
     display: flex;
     gap: 7px;
-    font-size: 0.76em;
+    font-size: var(--text-caption);
     line-height: 1.45;
     color: var(--text-soft);
   }
@@ -281,9 +281,9 @@
 
   &__shipped-label {
     display: block;
-    font-size: 0.64em;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--text-dim);
     margin-bottom: 8px;
@@ -296,7 +296,7 @@
   }
 
   &__chip {
-    font-size: 0.72em;
+    font-size: var(--text-caption);
     padding: 4px 10px;
     border-radius: 999px;
     color: var(--text-soft);

@@ -43,8 +43,8 @@
 }
 
 .logo {
-  font-size: clamp(0.95em, 2vw, 1.25em);
-  font-weight: 700;
+  font-size: var(--text-h4);
+  font-weight: var(--weight-heading);
   letter-spacing: 1.5px;
   color: #f8fafc;
   text-decoration: none;
@@ -89,12 +89,12 @@
   margin-left: 32px;
   color: rgba(248, 250, 252, 0.55);
   text-decoration: none;
-  font-size: clamp(0.85em, 1.3vw, 0.95em);
+  font-size: var(--text-small);
   transition: color 0.2s ease;
   font-family: var(--font-body);
   position: relative;
   z-index: 1;
-  font-weight: 500;
+  font-weight: var(--weight-medium);
   letter-spacing: 0.04em;
 
   &:hover {
@@ -150,11 +150,11 @@
   background: color-mix(in srgb, var(--accent) 8%, transparent);
   color: var(--accent-text-soft);
   text-decoration: none;
-  font-size: clamp(0.85em, 1.3vw, 0.95em);
+  font-size: var(--text-small);
   transition: all 0.2s ease;
   font-family: var(--font-body);
   border-radius: 8px;
-  font-weight: 500;
+  font-weight: var(--weight-medium);
   letter-spacing: 0.04em;
   position: relative;
   z-index: 1;

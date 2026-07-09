@@ -16,7 +16,7 @@
   gap: 8px;
   color: rgba(248, 250, 252, 0.4);
   text-decoration: none;
-  font-size: 0.78em;
+  font-size: var(--text-small);
   letter-spacing: 0.07em;
   transition: color 0.2s ease;
   margin-bottom: 40px;
@@ -50,24 +50,24 @@
   }
 
   &__eyebrow {
-    font-size: 0.72em;
-    letter-spacing: 0.22em;
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: rgba(248, 250, 252, 0.35);
     margin: 0 0 16px;
   }
 
   &__title {
-    font-size: clamp(3em, 8vw, 7em);
-    font-weight: 700;
-    line-height: 1;
+    font-size: var(--text-display);
+    font-weight: var(--weight-display);
+    line-height: var(--leading-display);
     margin: 0 0 28px;
-    letter-spacing: -0.03em;
+    letter-spacing: var(--tracking-display);
     color: var(--accent-text-soft);
   }
 
   &__tagline {
-    font-size: clamp(0.88em, 1.6vw, 1.05em);
+    font-size: var(--text-body);
     color: rgba(248, 250, 252, 0.55);
     line-height: 1.75;
     margin: 0 0 20px;
@@ -79,7 +79,7 @@
     align-items: center;
     flex-wrap: wrap;
     gap: 10px;
-    font-size: 0.74em;
+    font-size: var(--text-caption);
     color: rgba(248, 250, 252, 0.25);
     letter-spacing: 0.06em;
   }
@@ -180,16 +180,17 @@
 
   &__label {
     position: relative;
-    font-size: clamp(1.2em, 2.4vw, 1.9em);
-    font-weight: 700;
-    letter-spacing: -0.01em;
+    font-size: var(--text-h2);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
     color: #f8fafc;
   }
 
   &__note {
     position: relative;
-    font-size: 0.72em;
-    letter-spacing: 0.16em;
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: rgba(248, 250, 252, 0.45);
   }
@@ -282,8 +283,8 @@
 
   &__logo {
     color: #67e8f9;
-    font-weight: 600;
-    font-size: 0.88em;
+    font-weight: var(--weight-heading);
+    font-size: var(--text-small);
     letter-spacing: 0.05em;
     flex: 1;
   }
@@ -293,7 +294,7 @@
     align-items: center;
     gap: 5px;
     color: rgba(103, 232, 249, 0.5);
-    font-size: 0.78em;
+    font-size: var(--text-caption);
   }
 
   &__dot {
@@ -306,7 +307,7 @@
 
   &__battery {
     color: rgba(103, 232, 249, 0.4);
-    font-size: 0.78em;
+    font-size: var(--text-caption);
     letter-spacing: 0.02em;
   }
 
@@ -315,16 +316,16 @@
   }
 
   &__chapter {
-    font-size: 0.72em;
-    letter-spacing: 0.18em;
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: rgba(103, 232, 249, 0.45);
     margin: 0 0 4px;
   }
 
   &__booktitle {
-    font-size: 1em;
-    font-weight: 600;
+    font-size: var(--text-h5);
+    font-weight: var(--weight-heading);
     color: #e0f7fa;
     margin: 0 0 14px;
     letter-spacing: 0.02em;
@@ -337,7 +338,7 @@
   }
 
   &__line {
-    font-size: 0.82em;
+    font-size: var(--text-small);
     color: rgba(224, 247, 250, 0.7);
     line-height: 1.9;
     margin: 0;
@@ -372,7 +373,7 @@
   }
 
   &__page {
-    font-size: 0.72em;
+    font-size: var(--text-caption);
     color: rgba(103, 232, 249, 0.4);
     white-space: nowrap;
     letter-spacing: 0.04em;
@@ -414,11 +415,11 @@
 }
 
 .pcard__title {
-  font-size: clamp(2em, 4vw, 3.2em);
-  font-weight: 700;
-  line-height: 1.08;
+  font-size: var(--text-h1);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-heading);
   margin: 0 0 14px;
-  letter-spacing: -0.025em;
+  letter-spacing: var(--tracking-display);
   position: relative;
   // Consistent high-contrast title across every card (no more raw, saturated
   // per-project colour on the heading itself — that read garish/sloppy).
@@ -438,15 +439,15 @@
 }
 
 .pcard__subtitle {
-  font-size: 0.77em;
+  font-size: var(--text-label);
   color: rgba(248, 250, 252, 0.4);
   margin: 0 0 22px;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
 }
 
 .pcard__description {
-  font-size: clamp(0.8em, 1.2vw, 0.88em);
+  font-size: var(--text-small);
   color: rgba(248, 250, 252, 0.62);
   line-height: 1.85;
   margin: 0 0 28px;
@@ -463,8 +464,8 @@
 }
 
 .pcard__tag {
-  font-size: 0.68em;
-  letter-spacing: 0.06em;
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
   padding: 4px 10px;
   border-radius: 4px;
   border: 1px solid rgba(255, 255, 255, 0.09);
@@ -485,9 +486,9 @@
   gap: 8px;
   padding: 10px 20px;
   border-radius: 10px;
-  font-size: 0.78em;
+  font-size: var(--text-small);
   font-family: var(--font-mono);
-  font-weight: 600;
+  font-weight: var(--weight-heading);
   letter-spacing: 0.04em;
   text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease,
@@ -556,9 +557,9 @@
   border: none;
   cursor: pointer;
   font-family: var(--font-mono);
-  font-size: 0.76em;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  font-size: var(--text-label);
+  font-weight: var(--weight-label);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--accent-text);
   transition: gap 0.2s ease, opacity 0.2s ease;
@@ -678,25 +679,25 @@
   }
 
   &__eyebrow {
-    font-size: 0.7em;
-    font-weight: 700;
-    letter-spacing: 0.2em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--accent-text);
   }
 
   &__title {
-    font-size: clamp(1.8em, 4vw, 2.6em);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 1.05;
+    font-size: var(--text-h1);
+    font-weight: var(--weight-heading);
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-display);
     color: #f5f7fb;
     margin: 9px 0 6px;
   }
 
   &__subtitle {
-    font-size: 0.78em;
-    letter-spacing: 0.08em;
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: rgba(248, 250, 252, 0.4);
     margin: 0;
@@ -710,16 +711,16 @@
 
   &__h {
     margin: 0 0 8px;
-    font-size: 0.74em;
-    font-weight: 700;
-    letter-spacing: 0.12em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: var(--accent-text);
   }
 
   &__p {
     margin: 0;
-    font-size: 0.95em;
+    font-size: var(--text-body);
     line-height: 1.75;
     color: rgba(248, 250, 252, 0.74);
 

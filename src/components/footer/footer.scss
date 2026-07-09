@@ -47,7 +47,7 @@
     text-decoration-color: color-mix(in srgb, var(--accent-text-soft) 30%, transparent);
     margin-left: 5px;
     transition: color 0.2s ease;
-    font-weight: 600;
+    font-weight: var(--weight-medium);
 
     &:hover {
       color: var(--accent-heading);
@@ -59,7 +59,7 @@
     display: inline-block;
     margin-top: 4px;
     color: rgba(248, 250, 252, 0.5);
-    font-size: 0.9em;
+    font-size: var(--text-small);
     text-decoration: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.14);
     transition: color 0.2s ease, border-color 0.2s ease;
@@ -96,7 +96,7 @@
   p {
     margin: 0;
     color: rgba(248, 250, 252, 0.4);
-    font-size: clamp(0.8em, 1.1vw, 0.9em);
+    font-size: var(--text-small);
     position: relative;
     z-index: 1;
   }

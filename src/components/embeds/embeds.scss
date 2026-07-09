@@ -12,7 +12,7 @@
     border-radius: 12px;
     color: var(--accent-text-soft);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: var(--text-small);
 
     &:hover {
       border-color: var(--accent-text-soft);
@@ -48,15 +48,15 @@
   }
 
   &__title {
-    font-size: 0.95rem;
-    font-weight: 600;
+    font-size: var(--text-h5);
+    font-weight: var(--weight-medium);
     color: rgba(248, 250, 252, 0.85);
     margin: 0;
   }
 
   &__hint {
-    font-size: 0.78rem;
-    line-height: 1.5;
+    font-size: var(--text-small);
+    line-height: var(--leading-body);
     margin: 0;
     max-width: 36ch;
   }

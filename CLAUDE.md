@@ -48,9 +48,19 @@ Icons via **react-icons**. Routing via **react-router-dom**.
   hardcodes an accent hex: everything reads the semantic tokens in `src/index.css` (`--accent`
   `#182e5f`, `--accent-strong`, `--accent-text`, `--accent-text-soft`, `--accent-heading`,
   `--accent-soft`, `--accent-ring`). The site shipped a deep-navy palette on a clean white canvas
-  (replacing the earlier blue). Fonts: General Sans (body/UI) + Jeju Myeongjo (serif display),
-  loaded in `src/styles/typography.scss`. Project cards use the single site accent; only /things
+  (replacing the earlier blue). Project cards use the single site accent; only /things
   keeps per-item colors.
+- **Typography: Geist-led type system (2026-07-09).** Geist Sans is the body + heading face,
+  Geist Mono the technical/label face, Geist Pixel a sparing display accent (`.pixel-accent`:
+  wordmark / one hero word / big numerals only). The display face is SWITCHABLE back to the Jeju
+  Myeongjo serif: default `geist`, preview live with `?type=serif` on any URL, `?type=reset` to
+  clear, flip `DEFAULT_TYPE` in `src/config/typeface.ts` to change the default for everyone.
+  The centralized type SCALE (sizes/weights/line-heights/tracking) lives in
+  `src/styles/typescale.scss` as `--text-*` / `--weight-*` / `--leading-*` / `--tracking-*` tokens
+  with matching `.t-*` classes; `src/styles/typography.scss` assigns font-FAMILY only (with
+  `!important`). Components should compose the tokens, never hardcode font sizes. Full reference in
+  `STYLEGUIDE.md` and the live `/styleguide` page (reads computed values back for QA). Blog reading
+  keeps Source Serif 4 / Inter; General Sans is a body fallback (and the body face in serif mode).
 - **Light mode only (2026-07-09).** `src/components/theme/ThemeContext.tsx` sets `THEME_PINNED =
   true`: the site ships light-only because the navy dark palette was never finished. The context
   exposes `canToggle` (false while pinned) and the header hides the light/dark button so there is

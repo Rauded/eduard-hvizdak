@@ -25,23 +25,25 @@ $ui: var(--font-body);
   }
 
   &__eyebrow {
-    font-size: 0.72rem;
-    letter-spacing: 0.2em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: $dim;
     margin: 0 0 14px;
   }
 
   &__title {
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-size: var(--text-h1);
+    font-weight: var(--weight-heading);
+    letter-spacing: var(--tracking-heading);
+    line-height: var(--leading-heading);
     margin: 0 0 14px;
   }
 
   &__subtitle {
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: var(--text-small);
+    line-height: var(--leading-body);
     color: $mid;
     max-width: 60ch;
     margin: 0;
@@ -58,7 +60,7 @@ $ui: var(--font-body);
   gap: 8px;
   color: $dim;
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: var(--text-small);
   letter-spacing: 0.04em;
   transition: color 0.2s ease;
 
@@ -75,14 +77,14 @@ $ui: var(--font-body);
   margin-top: 56px;
 
   &__title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
+    font-size: var(--text-h5);
+    font-weight: var(--weight-medium);
+    letter-spacing: var(--tracking-heading);
     margin: 0 0 8px;
   }
 
   &__note {
-    font-size: 0.85rem;
+    font-size: var(--text-small);
     color: $dim;
     margin: 0 0 24px;
     max-width: 64ch;
@@ -109,15 +111,15 @@ $ui: var(--font-body);
   }
 
   dt {
-    font-size: 0.75rem;
+    font-size: var(--text-caption);
     letter-spacing: 0.04em;
     color: $dim;
-    font-family: ui-monospace, Menlo, monospace;
+    font-family: var(--font-mono);
   }
 
   dd {
     margin: 0;
-    font-size: 0.85rem;
+    font-size: var(--text-small);
     color: $mid;
     word-break: break-word;
 
@@ -140,7 +142,7 @@ $ui: var(--font-body);
   &__cap {
     display: block;
     margin-top: 8px;
-    font-size: 0.75rem;
+    font-size: var(--text-caption);
     color: $dim;
   }
 }
@@ -159,9 +161,9 @@ $ui: var(--font-body);
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+    letter-spacing: var(--tracking-label);
     text-transform: uppercase;
     color: $dim;
     margin-bottom: 12px;
@@ -383,8 +385,8 @@ $ui: var(--font-body);
 
 .share-embed {
   &__label {
-    font-size: 0.78rem;
-    font-weight: 600;
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
     letter-spacing: 0.04em;
     color: $mid;
     margin: 0 0 16px;

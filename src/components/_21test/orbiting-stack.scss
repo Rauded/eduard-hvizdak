@@ -12,20 +12,22 @@
 
   &__eyebrow {
     text-transform: uppercase;
-    letter-spacing: 0.18em;
-    font-size: 0.78rem;
+    letter-spacing: var(--tracking-label);
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
     font-family: var(--font-mono);
     color: var(--accent, var(--accent-text));
     margin: 0 0 12px;
   }
   &__title {
     font-family: var(--font-display, var(--font-serif));
-    font-size: clamp(1.3rem, 2.6vw, 1.7rem);
-    line-height: 1.15;
+    font-size: var(--text-h3);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-tight);
     color: var(--heading, var(--accent-heading));
     margin: 0 0 12px;
   }
-  &__lead { color: var(--text-soft, var(--text-muted)); line-height: 1.65; margin: 0; max-width: 46ch; }
+  &__lead { color: var(--text-soft, var(--text-muted)); line-height: var(--leading-body); margin: 0; max-width: 46ch; }
 }
 
 .orbit-stage {

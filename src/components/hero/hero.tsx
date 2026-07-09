@@ -82,10 +82,12 @@ const Content = styled.div<{ $handsOffset: boolean }>`
 `;
 
 // Full serif headline, humandelta style (their h1 is the serif face, navy).
+// Follows the switchable display face (Geist by default, Jeju under
+// ?type=serif) instead of pinning the serif, so the hero tracks the site.
 const Headline = styled.h1`
-  font-family: var(--font-serif) !important;
+  font-family: var(--font-display) !important;
   font-size: clamp(2.8em, 6.5vw, 4.8em);
-  font-weight: 400;
+  font-weight: var(--weight-display, 600);
   color: var(--accent, #182e5f);
   margin: 0 0 0.5em;
   letter-spacing: -0.01em;

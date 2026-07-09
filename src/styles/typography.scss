@@ -1,16 +1,19 @@
 // ════════════════════════════════════════════════════════════════════════════
 //  Typography roles layer.
 //
-//  The bulk of the site now reads in --font-body (a clean sans). This layer
-//  assigns the two accent roles on top of that:
-//    • Headings  → --font-display  (flip --font-display to var(--font-serif)
-//                                    in index.css for an editorial serif look)
-//    • Technical → --font-mono     (logo, eyebrows/labels, tags — the bits that
+//  The bulk of the site reads in --font-body (Geist Sans). This layer assigns
+//  the accent roles on top of that:
+//    • Headings  → --font-display  (Geist by default; ?type=serif / DEFAULT_TYPE
+//                                    swaps every heading to the Jeju serif)
+//    • Technical → --font-mono     (logo, eyebrows/labels, tags: the bits that
 //                                    keep the "engineer" signature)
+//    • Pixel     → --font-pixel    (.pixel-accent: wordmark, one hero accent,
+//                                    big numerals; never body or normal headings)
 //
 //  !important is used deliberately: component SCSS sets font-family in ~30
 //  scattered places, and this central layer must win regardless of their
 //  specificity. It only ever touches font-family, so it can't break layout.
+//  Size/weight/tracking now come from the tokens in typescale.scss.
 // ════════════════════════════════════════════════════════════════════════════
 
 h1, h2, h3,
@@ -30,9 +33,9 @@ h1, h2, h3,
 .things-hero__title,
 .things-card__name {
   font-family: var(--font-display) !important;
-  letter-spacing: -0.01em;
-  // Jeju Myeongjo ships one weight; anything bolder is faux-bold and smears.
-  font-weight: 400;
+  letter-spacing: var(--tracking-heading);
+  // Token-driven: 600 for Geist, capped to 400 in serif mode (see typescale).
+  font-weight: var(--weight-heading);
 }
 
 // Serif accent: exactly one word inside a display headline gets the Jeju
@@ -44,7 +47,16 @@ h1, h2, h3,
   color: var(--accent-text, inherit);
 }
 
-// Technical signature — kept in mono as a tasteful accent, not the whole page.
+// Pixel display accent: Geist Pixel, used sparingly. Reach for it on the
+// wordmark, a single hero accent word, or big section numerals. Never body text
+// or ordinary headings.
+.pixel-accent {
+  font-family: var(--font-pixel) !important;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+// Technical signature: kept in mono as a tasteful accent, not the whole page.
 .logo,
 .about-highlight__eyebrow,
 .contact__eyebrow,

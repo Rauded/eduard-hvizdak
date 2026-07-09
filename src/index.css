@@ -177,8 +177,8 @@
   font-style: normal;
   font-display: swap;
 }
-/* Geist Sans variable, kept available as an alternate body face (not wired in
-   by default; General Sans stays --font-sans). */
+/* Geist Sans variable: the primary body + heading face (drives --font-body and
+   the default --font-display). General Sans stays as a fallback below. */
 @font-face {
   font-family: 'Geist';
   src: url('./fonts/Geist/Geist-Variable.woff2') format('woff2-variations');
@@ -186,25 +186,52 @@
   font-style: normal;
   font-display: swap;
 }
+/* Geist Pixel (Vercel, OFL): the pixel display face. Used SPARINGLY via
+   --font-pixel / .pixel-accent (wordmark, one hero accent, big numerals).
+   Square is the classic legible pixel shape; the other four shapes ship in the
+   geist-font repo if a different texture is ever wanted. Never on body text. */
+@font-face {
+  font-family: 'Geist Pixel';
+  src: url('./fonts/Geist/GeistPixel-Square.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* ─── Typography system ─────────────────────────────────────────────────────
-   Three roles, swappable in one place. --font-mono keeps the technical
-   signature on the terminal / code / typewriter; --font-display drives the big
-   headings; --font-body is the clean sans everything else reads in.
-   Humandelta experiment: General Sans everywhere, Jeju Myeongjo reserved for
-   the serif accent role (one italic word in a headline, nothing more). Blog
-   prose keeps Source Serif 4 via --font-serif-reading. */
+   Roles, swappable in one place. Geist leads: --font-body and (by default)
+   --font-display are Geist Sans; --font-mono is the technical signature; the
+   Jeju serif and Geist Pixel are accent faces. The type SCALE (sizes, weights,
+   line-heights, tracking) lives in src/styles/typescale.scss; this block only
+   assigns families. Blog prose keeps Source Serif 4 via --font-serif-reading.
+
+   Display face is SWITCHABLE: default = Geist, alternate = the Jeju serif.
+   Flip the default in src/config/typeface.ts (DEFAULT_TYPE), or preview live
+   with ?type=serif on any URL. The html[data-type='serif'] rule below is the
+   whole revert; everything downstream reads --font-display. */
 :root {
-  --font-sans: 'General Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-geist: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-serif: 'Jeju Myeongjo', Georgia, Cambria, 'Times New Roman', serif;
   --font-serif-reading: 'Source Serif 4', Georgia, Cambria, 'Times New Roman', serif;
   /* Geist Mono is the technical signature now; RobotoMono stays a fallback and
      a one-line revert target. */
   --font-mono: 'Geist Mono', 'RobotoMono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* Pixel display face, used sparingly. Falls back to Geist Mono. */
+  --font-pixel: 'Geist Pixel', 'Geist Mono', ui-monospace, monospace;
 
+  /* DEFAULT look: Jeju serif display headings over a General Sans body (the
+     humandelta look). The attribute-less default is the serif so prerendered
+     pages paint it with no flash. Geist is opt-in below. */
+  --font-sans: 'General Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-body: var(--font-sans);
-  /* humandelta sets every display heading in the serif face. */
   --font-display: var(--font-serif);
+}
+
+/* Geist mode: opt in via ?type=geist, or set DEFAULT_TYPE='geist' in
+   src/config/typeface.ts. Geist Sans drives both body and headings. */
+html[data-type='geist'] {
+  --font-sans: var(--font-geist);
+  --font-display: var(--font-geist);
 }
 
 /* ─── Accent system (dark-mode defaults) ─────────────────────────────────────
@@ -283,6 +310,7 @@ html[data-theme] body *::after {
   --status-good-surface: #eef6f0;
   --status-warn: #c47d1a;
   --status-bad: #c0392b;
+  --claude: #d97757;
   --shadow-card: 0 1px 2px rgba(14, 19, 32, 0.05), 0 8px 24px rgba(14, 19, 32, 0.05);
   --shadow-accent: 0 1px 2px rgba(14, 19, 32, 0.10);
   --container-px: 64px;

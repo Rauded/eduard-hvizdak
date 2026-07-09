@@ -6,9 +6,13 @@ import posthog from 'posthog-js';
 import { analyticsEnabled } from './analytics';
 import { ThemeProvider } from './components/theme/ThemeContext';
 import { applyCanvasPreset } from './config/canvas';
+import { applyTypePreset } from './config/typeface';
 import { getBackgroundPreset } from './config/background';
 // @ts-ignore
 import SiteEmbroidery from './components/background/SiteEmbroidery.tsx';
+// Type scale (sizes/weights/tracking) loads before the family layer so the
+// !important font-family assignments in typography.scss always win.
+import './styles/typescale.scss';
 import './styles/typography.scss';
 import './styles/light.scss';
 
@@ -31,6 +35,15 @@ import ServicesPage from './components/services/ServicesPage.tsx';
 import ThingsPage from './components/things/ThingsPage.tsx';
 // @ts-ignore
 import SharePreviewPage from './components/share/SharePreviewPage.tsx';
+// @ts-ignore
+import StyleguidePage from './components/styleguide/StyleguidePage.tsx';
+
+// Dev-only inline text editor. The dynamic require + NODE_ENV guard keeps it out
+// of the production bundle entirely (see src/devEditor/ and src/setupProxy.js).
+const EditOverlay =
+  process.env.NODE_ENV === 'development'
+    ? (require('./devEditor/EditOverlay').default as React.FC)
+    : null;
 
 // The page color itself lives on <body> (see index.css), theme-driven via
 // `data-theme` on <html>. The container stays transparent so the fixed
@@ -89,8 +102,8 @@ const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 );
 
 const App: React.FC = () => {
-  // Resolve the ?canvas= preview (remembered preset) once on mount.
-  useEffect(() => { applyCanvasPreset(); }, []);
+  // Resolve the ?canvas= and ?type= previews (remembered presets) once on mount.
+  useEffect(() => { applyCanvasPreset(); applyTypePreset(); }, []);
   return (
     <HelmetProvider>
       <ThemeProvider>
@@ -105,7 +118,9 @@ const App: React.FC = () => {
             <Route path="/services" element={<Shell><ServicesPage /></Shell>} />
             <Route path="/things" element={<Shell><ThingsPage /></Shell>} />
             <Route path="/share-preview" element={<Shell><SharePreviewPage /></Shell>} />
+            <Route path="/styleguide" element={<Shell><StyleguidePage /></Shell>} />
           </Routes>
+          {EditOverlay && <EditOverlay />}
         </Router>
       </ThemeProvider>
     </HelmetProvider>

@@ -10,14 +10,15 @@
   font-family: var(--font-body);
 
   .resume-title {
-    font-size: clamp(2em, 5vw, 2.8em);
+    font-size: var(--text-h1);
     text-align: left;
     margin: 0 0 30px 0;
     padding: 0;
     width: 100%;
     color: var(--accent-heading);
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-weight: var(--weight-heading);
+    letter-spacing: var(--tracking-heading);
+    line-height: var(--leading-heading);
   }
 
   .content-wrapper {
@@ -84,8 +85,8 @@
     padding: 11px 20px;
     border-radius: 10px;
     font-family: var(--font-body);
-    font-size: 0.9em;
-    font-weight: 600;
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
     letter-spacing: 0.01em;
     text-decoration: none;
     cursor: pointer;
@@ -139,12 +140,13 @@
 }
 
 .section-title {
-  font-size: clamp(1.8em, 4vw, 2.5em);
+  font-size: var(--text-h1);
   margin-bottom: 24px;
   position: relative;
   color: var(--accent-heading);
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-weight: var(--weight-heading);
+  letter-spacing: var(--tracking-heading);
+  line-height: var(--leading-heading);
 }
 
 .line-container {
@@ -177,11 +179,12 @@
 }
 
 .job-title {
-  font-size: 1.4em;
+  font-size: var(--text-h3);
   margin: 10px 0;
   position: relative;
   color: #f8fafc;
-  font-weight: 600;
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-tight);
 }
 
 .company {
@@ -197,8 +200,8 @@
 
 .company__sub {
   display: block;
-  font-size: 1em;
-  font-weight: 500;
+  font-size: var(--text-body);
+  font-weight: var(--weight-medium);
   letter-spacing: 0.01em;
   color: color-mix(in srgb, var(--accent-text-soft) 55%, transparent);
 }
@@ -237,7 +240,7 @@ a.company--link {
 }
 
 .job-dates {
-  font-size: 0.9em;
+  font-size: var(--text-small);
   color: rgba(248, 250, 252, 0.4);
   margin: 4px 0 10px 0;
   letter-spacing: 0.02em;
@@ -247,9 +250,9 @@ a.company--link {
   list-style-type: none;
   position: relative;
   padding-left: 20px;
-  font-size: 0.95em;
+  font-size: var(--text-small);
   color: rgba(248, 250, 252, 0.65);
-  line-height: 1.65;
+  line-height: var(--leading-body);
   margin-bottom: 4px;
 
   &:before {

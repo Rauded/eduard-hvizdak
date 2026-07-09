@@ -1,7 +1,7 @@
 // TEST: combined "See it run" showcase for the Services page.
 // Uses the Services token system so it matches the surrounding cards.
 .sx-run {
-  &__lead { color: var(--text-soft, var(--text-muted)); margin: 0 0 28px; line-height: 1.6; max-width: 620px; }
+  &__lead { color: var(--text-soft, var(--text-muted)); margin: 0 0 28px; line-height: var(--leading-body); max-width: 620px; }
 
   &__grid {
     display: grid;
@@ -42,7 +42,7 @@
     gap: 12px;
     padding: 11px 12px;
     border-radius: 8px;
-    font-size: 0.88rem;
+    font-size: var(--text-small);
     color: rgba(255, 255, 255, 0.45);
     transition: background 0.3s ease, color 0.3s ease;
     &.is-done { color: rgba(255, 255, 255, 0.92); }
@@ -85,7 +85,7 @@
     line-height: 1;
     letter-spacing: -0.02em;
   }
-  &__label { margin-top: 8px; font-size: 0.82rem; color: var(--text-soft, var(--text-muted)); line-height: 1.5; }
+  &__label { margin-top: 8px; font-size: var(--text-small); color: var(--text-soft, var(--text-muted)); line-height: 1.5; }
 }
 
 .sx-spin { animation: sx-spin 0.9s linear infinite; }
