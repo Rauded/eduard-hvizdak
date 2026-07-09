@@ -22,11 +22,9 @@ const SVG_W = 700;
 const greenThresh = 2;
 
 function statusColor(s: number): string {
-  // passed (all shards green) -> good status; shard failures -> bad status;
-  // no-data / pending -> muted text for readability on white.
-  if (s >= greenThresh) return 'var(--status-good)';
-  if (s === 1) return 'var(--status-bad)';
-  return 'var(--text-muted)';
+  if (s >= greenThresh) return '#22c55e';
+  if (s === 1) return '#ef4444';
+  return '#9ca3af';
 }
 
 function cellHeight(s: number): number {
@@ -169,25 +167,25 @@ const BunBuildKite: React.FC = () => {
 
   return (
     <section ref={rootRef} id="CjqwJxRIQY" className="not-prose" style={{
-      overflowAnchor: 'none', overflow: 'hidden', borderTop: '1px solid var(--border)',
-      borderBottom: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text)',
+      overflowAnchor: 'none', overflow: 'hidden', borderTop: '1px solid #1f2937',
+      borderBottom: '1px solid #1f2937', background: '#0b0c10', color: '#d1d5db',
     }}>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '4px 16px', padding: '20px 28px 4px' }}>
         <span style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 12 }}>
-          <span style={{ borderRadius: 999, border: '1px solid var(--accent-ring)', background: 'var(--accent-soft)', padding: '2px 10px', fontFamily: 'var(--font-mono)', fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--accent)' }}>&#10039; claude code &middot; dynamic workflow</span>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--text-muted)' }}>buildkite &middot; the race to green, by platform</span>
+          <span style={{ borderRadius: 999, border: '1px solid rgba(217,119,87,0.4)', padding: '2px 10px', fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: '#e8946f' }}>&#10039; claude code &middot; dynamic workflow</span>
+          <span style={{ fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: '#6b7280' }}>buildkite &middot; the race to green, by platform</span>
         </span>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontVariantNumeric: 'tabular-nums', color: 'var(--text-muted)' }}>Windows finished last &middot; May 11, 6:23 AM PDT</span>
+        <span style={{ fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 13, fontVariantNumeric: 'tabular-nums', color: '#9ca3af' }}>Windows finished last &middot; May 11, 6:23 AM PDT</span>
       </div>
 
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: '12px 32px', padding: '12px 28px 16px' }}>
         <div>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 30, fontWeight: 700, fontVariantNumeric: 'tabular-nums', color: (() => {
+          <span style={{ fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 30, fontWeight: 700, fontVariantNumeric: 'tabular-nums', color: (() => {
             let g = 0;
             for (let li = 0; li < LANE_HIST.length; li++) {
               if (getCurrentStatus(LANE_HIST[li], cut) >= greenThresh) g++;
             }
-            return g >= LANE_HIST.length ? 'var(--status-good)' : 'var(--status-good)';
+            return g >= LANE_HIST.length ? '#22c55e' : '#22c55e';
           })() }}>{(() => {
             let g = 0;
             for (let li = 0; li < LANE_HIST.length; li++) {
@@ -195,18 +193,18 @@ const BunBuildKite: React.FC = () => {
             }
             return g;
           })()} / {LANE_HIST.length}</span>
-          <span style={{ fontSize: 16, fontWeight: 400, color: 'var(--text-muted)', marginLeft: 8 }}>platforms green</span>
+          <span style={{ fontSize: 16, fontWeight: 400, color: '#6b7280', marginLeft: 8 }}>platforms green</span>
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '8px 16px' }}>
-          <button type="button" onClick={play} className="bun-bk__replay" style={{ cursor: 'pointer', borderRadius: 6, border: '1px solid var(--border)', background: '#fff', padding: '6px 14px', fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--text)' }}>&#9654; replay the race</button>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontVariantNumeric: 'tabular-nums', color: done ? 'var(--status-good)' : 'var(--text-muted)', minWidth: '40ch' }}>{buildLabel}</span>
+          <button type="button" onClick={play} style={{ cursor: 'pointer', borderRadius: 6, border: '1px solid #374151', background: 'rgba(31,41,55,0.6)', padding: '6px 14px', fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 13, color: '#e5e7eb' }}>&#9654; replay the race</button>
+          <span style={{ fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 13, fontVariantNumeric: 'tabular-nums', color: done ? '#22c55e' : '#6b7280', minWidth: '40ch' }}>{buildLabel}</span>
         </div>
       </div>
 
       <div style={{ position: 'relative', padding: '0 28px 20px' }}>
         <div ref={headRef} className="cr-headbar" style={{
           position: 'absolute', left: '-10px',
-          top: 0, width: 2, background: 'var(--accent)',
+          top: 0, width: 2, background: '#fbf0df',
           opacity: done ? '0' : '0.85', pointerEvents: 'none', zIndex: 10,
           transition: done ? 'opacity 0.3s' : '',
         }} />
@@ -215,7 +213,7 @@ const BunBuildKite: React.FC = () => {
           <span style={{ width: '10.5rem', flexShrink: 0 }} />
           <svg viewBox={`0 0 ${SVG_W} 18`} style={{ minWidth: 0, flex: 1 }} preserveAspectRatio="none">
             {weekLabels.slice(1).map((wl, i) => (
-              <text key={i} x={wl.x} y={13} fontSize={11.5} fill="var(--text-muted)" textAnchor="middle">{wl.label}</text>
+              <text key={i} x={wl.x} y={13} fontSize={11.5} fill="#6b7280" textAnchor="middle">{wl.label}</text>
             ))}
           </svg>
         </div>
@@ -225,12 +223,12 @@ const BunBuildKite: React.FC = () => {
           const isGreen = cur >= greenThresh;
           return (
             <div key={li} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '3px 0' }}>
-              <span style={{ width: '10.5rem', flexShrink: 0, fontFamily: 'var(--font-mono)', fontSize: 12, color: statusColor(cur), whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', textAlign: 'right' }}>
-                {PLATFORM_NAMES[li]}<span style={{ color: 'var(--text-faint)' }}>{SHARD_LABELS[li]}</span>
+              <span style={{ width: '10.5rem', flexShrink: 0, fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 12, color: statusColor(cur), whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', textAlign: 'right' }}>
+                {PLATFORM_NAMES[li]}<span style={{ color: '#4b5563' }}>{SHARD_LABELS[li]}</span>
               </span>
               <svg viewBox={`0 0 ${SVG_W} 22`} style={{ minWidth: 0, flex: 1 }} preserveAspectRatio="none"
                 ref={(el) => { laneSvgsRef.current[li] = el; }}>
-                <line x1="0" y1="11" x2={SVG_W} y2="11" stroke="var(--border)" />
+                <line x1="0" y1="11" x2={SVG_W} y2="11" stroke="#1c2029" />
                 {hist.map(([ts, s], hi) => {
                   const x = ((ts - T0) / (T1 - T0)) * SVG_W;
                   const w = isFinalBuild(ts) ? 8.2 : 3.7;
@@ -240,7 +238,7 @@ const BunBuildKite: React.FC = () => {
                   const sty = !done && ts > cut ? { opacity: 0.1 } : {};
                   return (
                     <rect key={hi} x={x} y={y} width={w} height={h} rx={1.5} fill={fill}
-                      stroke={isFinalBuild(ts) && isGreen ? 'var(--status-good)' : 'none'}
+                      stroke={isFinalBuild(ts) && isGreen ? '#86efac' : 'none'}
                       strokeWidth={isFinalBuild(ts) && isGreen ? 1 : 0}
                       data-t={ts} style={sty}
                     >
@@ -249,7 +247,7 @@ const BunBuildKite: React.FC = () => {
                   );
                 })}
               </svg>
-              <span style={{ width: 20, flexShrink: 0, textAlign: 'center', fontFamily: 'var(--font-mono)', fontSize: 13, color: isGreen ? 'var(--status-good)' : 'var(--text-faint)', opacity: isGreen ? 1 : 0.3, transition: 'opacity 0.5s' }}>
+              <span style={{ width: 20, flexShrink: 0, textAlign: 'center', fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 13, color: isGreen ? '#22c55e' : '#4b5563', opacity: isGreen ? 1 : 0.3, transition: 'opacity 0.5s' }}>
                 {isGreen ? '\u2713' : ''}
               </span>
             </div>
@@ -257,7 +255,7 @@ const BunBuildKite: React.FC = () => {
         })}
       </div>
 
-      <div style={{ borderTop: '1px solid var(--border)', padding: '12px 28px', fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--status-good)', transition: 'opacity 0.5s', opacity: done ? 1 : 0 }}>
+      <div style={{ borderTop: '1px solid rgba(31,41,55,0.8)', padding: '12px 28px', fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 12, color: '#22c55e', transition: 'opacity 0.5s', opacity: done ? 1 : 0 }}>
         &#10003; all {LANE_HIST.length} platforms green &middot; build #54202 &#8594; merged
       </div>
     </section>

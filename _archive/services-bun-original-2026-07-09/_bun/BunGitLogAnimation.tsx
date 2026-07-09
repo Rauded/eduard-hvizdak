@@ -122,51 +122,51 @@ const BunGitLogAnimation: React.FC = () => {
   // Bars rendered from pre-extracted SVG rects (src/data/gitlogBars.ts)
 
   return (
-    <section id="njZKzxzFYy" ref={rootRef} style={{ overflowAnchor: 'none', overflow: 'hidden', borderColor: 'var(--border)', borderTopWidth: 1, borderBottomWidth: 1, backgroundColor: 'var(--surface)', color: 'var(--text)', boxShadow: 'var(--shadow-card)' }} className="not-prose -mx-4 my-12 sm:mx-0 sm:rounded-2xl sm:border lg:-mx-8 xl:-mx-24">
+    <section id="njZKzxzFYy" ref={rootRef} style={{ overflowAnchor: 'none', overflow: 'hidden', borderColor: '#1f2937', borderTopWidth: 1, borderBottomWidth: 1, backgroundColor: '#0b0c10', color: '#d1d5db' }} className="not-prose -mx-4 my-12 sm:mx-0 sm:rounded-2xl sm:border lg:-mx-8 xl:-mx-24">
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '4px 16px', padding: '20px 28px 4px' }}>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--text-muted)' }}>git log \u00b7 claude/phase-a-port</span>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontVariantNumeric: 'tabular-nums', color: 'var(--text-muted)' }}>peak: 58 commits in one minute</span>
+        <span style={{ fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: '#6b7280' }}>git log \u00b7 claude/phase-a-port</span>
+        <span style={{ fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 13, fontVariantNumeric: 'tabular-nums', color: '#9ca3af' }}>peak: 58 commits in one minute</span>
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: '12px 32px', padding: '12px 28px 20px' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px 32px' }}>
           <div style={{ minWidth: '4.5ch' }}>
-            <div className="r-commits" style={{ fontFamily: 'var(--font-mono)', fontSize: 30, fontWeight: 700, fontVariantNumeric: 'tabular-nums', color: 'var(--text-strong)' }}>0</div>
-            <div style={{ marginTop: 4, fontFamily: 'var(--font-mono)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)' }}>commits</div>
+            <div className="r-commits" style={{ fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 30, fontWeight: 700, fontVariantNumeric: 'tabular-nums', color: 'white' }}>0</div>
+            <div style={{ marginTop: 4, fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#6b7280' }}>commits</div>
           </div>
           <div>
-            <div className="r-lines" style={{ fontFamily: 'var(--font-mono)', fontSize: 30, fontWeight: 700, fontVariantNumeric: 'tabular-nums', color: 'var(--accent)' }}>+0</div>
-            <div style={{ marginTop: 4, fontFamily: 'var(--font-mono)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)' }}>lines written, rewrites included</div>
+            <div className="r-lines" style={{ fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 30, fontWeight: 700, fontVariantNumeric: 'tabular-nums', color: '#f472b6' }}>+0</div>
+            <div style={{ marginTop: 4, fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: '#6b7280' }}>lines written, rewrites included</div>
           </div>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 8 }}>
-          <button type="button" className="r-btn" style={{ cursor: 'pointer', borderRadius: 6, border: '1px solid var(--border)', backgroundColor: '#fff', padding: '6px 12px', fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--text)' }}>{'\u25B6'} replay 11 days in 30s</button>
-          <span className="r-clock" style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontVariantNumeric: 'tabular-nums', color: 'var(--text-strong)' }}>Mon, May 4, 7:05 AM PDT</span>
+          <button type="button" className="r-btn" style={{ cursor: 'pointer', borderRadius: 6, border: '1px solid #374151', backgroundColor: 'rgba(31,41,55,0.6)', padding: '6px 12px', fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 13, color: '#e5e7eb' }}>{'\u25B6'} replay 11 days in 30s</button>
+          <span className="r-clock" style={{ fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 13, fontVariantNumeric: 'tabular-nums', color: '#fbf0df' }}>Mon, May 4, 7:05 AM PDT</span>
         </div>
       </div>
       <div style={{ padding: '0 28px' }}>
         <svg viewBox="0 0 760 130" style={{ width: '100%' }} role="img" aria-label="Commits over the 11 days, colored by new code vs deletion">
           <g dangerouslySetInnerHTML={{ __html: barRectsHtml }} />
           <g>
-            <line x1="4" y1="0" x2="4" y2="110" stroke="var(--text-faint)" strokeDasharray="3 3"></line>
-            <text x="9" y="125" fontSize="11.5" fill="var(--text-muted)" textAnchor="start" className="hidden sm:inline">first 100-file draft batch</text>
+            <line x1="4" y1="0" x2="4" y2="110" stroke="#6b7280" strokeDasharray="3 3"></line>
+            <text x="9" y="125" fontSize="11.5" fill="#9ca3af" textAnchor="start" className="hidden sm:inline">first 100-file draft batch</text>
           </g>
           <g>
-            <line x1="338.96" y1="0" x2="338.96" y2="110" stroke="var(--text-faint)" strokeDasharray="3 3"></line>
-            <text x="338.96" y="125" fontSize="11.5" fill="var(--text-muted)" textAnchor="middle" className="hidden sm:inline">PR #30412 opened</text>
+            <line x1="338.96" y1="0" x2="338.96" y2="110" stroke="#6b7280" strokeDasharray="3 3"></line>
+            <text x="338.96" y="125" fontSize="11.5" fill="#9ca3af" textAnchor="middle" className="hidden sm:inline">PR #30412 opened</text>
           </g>
           <g>
-            <line x1="756" y1="0" x2="756" y2="110" stroke="var(--text-faint)" strokeDasharray="3 3"></line>
-            <text x="751" y="125" fontSize="11.5" fill="var(--text-muted)" textAnchor="end" className="hidden sm:inline">merged</text>
+            <line x1="756" y1="0" x2="756" y2="110" stroke="#6b7280" strokeDasharray="3 3"></line>
+            <text x="751" y="125" fontSize="11.5" fill="#9ca3af" textAnchor="end" className="hidden sm:inline">merged</text>
           </g>
-          <line x1="0" y1="0" x2="0" y2="110" stroke="var(--accent)" strokeWidth="2" className="r-playhead"></line>
+          <line x1="0" y1="0" x2="0" y2="110" stroke="#ffffff" strokeWidth="2" className="r-playhead"></line>
         </svg>
       </div>
-      <div style={{ margin: '12px 28px 20px', borderRadius: 8, border: '1px solid var(--border)', backgroundColor: 'var(--surface-sunken)', padding: '12px 16px', fontFamily: 'var(--font-mono)', fontSize: 12, lineHeight: 1.25 }}>
+      <div style={{ margin: '12px 28px 20px', borderRadius: 8, border: '1px solid #1f2937', backgroundColor: 'rgba(0,0,0,0.4)', padding: '12px 16px', fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 12, lineHeight: 1.25 }}>
         {[0, 1, 2].map((ri) => (
-          <div key={ri} className="r-log" style={{ display: 'flex', height: 20, alignItems: 'baseline', gap: 12, color: ri === 2 ? 'var(--text-strong)' : 'var(--text-muted)' }}>
+          <div key={ri} className="r-log" style={{ display: 'flex', height: 20, alignItems: 'baseline', gap: 12, color: ri === 2 ? '#e5e7eb' : '#6b7280' }}>
             <span className="r-log-s" style={{ minWidth: 0, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{'\u00A0'}</span>
-            <span className="r-log-i" style={{ flexShrink: 0, color: 'var(--accent)' }}></span>
-            <span className="r-log-d" style={{ flexShrink: 0, width: 56, textAlign: 'right', color: 'var(--text-muted)' }}></span>
+            <span className="r-log-i" style={{ flexShrink: 0, color: '#4ade80' }}></span>
+            <span className="r-log-d" style={{ flexShrink: 0, width: 56, textAlign: 'right', color: '#f87171' }}></span>
           </div>
         ))}
       </div>

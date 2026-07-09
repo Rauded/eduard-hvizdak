@@ -1,9 +1,9 @@
 .bun-heatmap {
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text-muted);
+  border: 1px solid #282a36;
+  background: #0b0c10;
+  color: #d1d5db;
 
   &__head {
     display: flex;
@@ -15,11 +15,11 @@
   }
 
   &__meta {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', 'RobotoMono', monospace;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.18em;
-    color: var(--text-muted);
+    color: #6b7280;
   }
 
   &__stats {
@@ -32,11 +32,11 @@
   }
 
   &__total {
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', 'RobotoMono', monospace;
     font-size: clamp(1.3em, 3vw, 1.8em);
     font-weight: 700;
     font-feature-settings: 'tnum';
-    color: var(--text-strong);
+    color: #fff;
   }
 
   &__peak {
@@ -44,9 +44,9 @@
     align-items: center;
     gap: 8px;
     padding-bottom: 4px;
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', 'RobotoMono', monospace;
     font-size: 11px;
-    color: var(--text-muted);
+    color: #6b7280;
   }
 
   &__gradient {
@@ -54,8 +54,7 @@
     width: 96px;
     height: 10px;
     border-radius: 2px;
-    // Functional data legend: navy intensity ramp (light = few commits, deep navy = many)
-    background: linear-gradient(to right, var(--surface-sunken), #b9c6e0, #6f86b8, #34507f, var(--accent));
+    background: linear-gradient(to right, rgb(86,37,138), rgb(134,36,159), rgb(191,34,135), rgb(242,93,93), rgb(252,166,63), rgb(253,224,71));
 
     &--wide {
       width: 140px;
@@ -79,9 +78,9 @@
     align-items: center;
     gap: 8px;
     padding: 8px 28px 24px;
-    font-family: var(--font-mono);
+    font-family: 'JetBrains Mono', 'RobotoMono', monospace;
     font-size: 11px;
-    color: var(--text-muted);
+    color: #6b7280;
   }
 
   &__foot-label {

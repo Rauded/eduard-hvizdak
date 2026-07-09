@@ -1,20 +1,17 @@
 .services {
-  // ─── Local aliases, all pointing at the global tokens in src/index.css ──
-  // The site is light-only (dark pinned off), so there is no dark block here.
-  // Every value references a differently-named global token so /services can
-  // never drift from the rest of the site.
-  --bg: transparent; // body paints the page color; stay clear for SiteEmbroidery
-  --accent: var(--accent-text);           // deep navy, the one accent
-  --accent-strong: var(--accent-heading); // darker navy for headings/emphasis
-  --heading: var(--accent-heading);
-  --text: var(--text-strong);
-  --text-soft: var(--text-muted);
-  --text-mute: var(--text-faint);
-  --card-bg: var(--surface);
-  --card-border: var(--border);
-  --card-border-hover: var(--accent-ring);
-  --rule: var(--border);
-  --shadow: var(--shadow-card);
+  // ─── Theme variables (dark default) ──────────────────────────────
+  --bg: transparent;
+  --accent: var(--accent-text);
+  --accent-strong: var(--accent-text-soft);
+  --heading: #f4f4f6;
+  --text: #e5e7eb;
+  --text-soft: rgba(248, 250, 252, 0.68);
+  --text-mute: rgba(248, 250, 252, 0.5);
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-border-hover: rgba(255, 255, 255, 0.22);
+  --rule: rgba(255, 255, 255, 0.09);
+  --shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
 
   position: relative;
   isolation: isolate;
@@ -32,6 +29,23 @@
     background: var(--bg);
     z-index: -1;
     pointer-events: none;
+  }
+
+  &[data-theme='light'] {
+    --bg: transparent; // body paints the page color; stay clear for SiteEmbroidery
+    // Undo the dark-mode shadowing above: on light, the page accent is the
+    // global light accent (inherited computed values, so presets still apply).
+    --accent: var(--accent-text-soft);
+    --accent-strong: var(--accent-text);
+    --heading: #0b0b0f;
+    --text: #1f2937;
+    --text-soft: rgba(30, 41, 59, 0.72);
+    --text-mute: rgba(30, 41, 59, 0.55);
+    --card-bg: #ffffff;
+    --card-border: rgba(15, 23, 42, 0.1);
+    --card-border-hover: color-mix(in srgb, var(--accent) 40%, transparent);
+    --rule: rgba(15, 23, 42, 0.1);
+    --shadow: 0 14px 32px rgba(22, 22, 26, 0.10);
   }
 }
 
@@ -364,45 +378,5 @@
 
       &:hover { color: var(--accent); border-bottom-color: var(--accent); }
     }
-  }
-}
-
-// ─── How I work (process visualizations) ────────────────────────────
-// Section intro + consistent spacing/heading for each embedded demo.
-.services-how {
-  &__eyebrow {
-    display: inline-block;
-    font-family: var(--font-mono);
-    font-size: 0.78em;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin: 0 0 14px;
-  }
-
-  &__lead {
-    font-size: clamp(1em, 1.5vw, 1.1em);
-    line-height: 1.65;
-    color: var(--text-soft);
-    max-width: 62ch;
-    margin: 0 0 8px;
-  }
-
-  &__item {
-    margin-top: 72px;
-
-    // The BunSectionHeading inside each item is left-aligned to match the
-    // rest of the page rather than centered.
-    .bun-section-heading {
-      margin-left: 0;
-      text-align: left;
-      max-width: 62ch;
-
-      &__sub { margin-left: 0; margin-right: 0; }
-    }
-  }
-
-  &__stage {
-    margin-top: 28px;
   }
 }

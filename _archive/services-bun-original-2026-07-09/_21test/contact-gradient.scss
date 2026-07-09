@@ -1,0 +1,104 @@
+// TEST: Contact content on the animated navy gradient (combined component).
+.contactg {
+  // contained rounded card, same footprint as the original contact section
+  width: 92%;
+  max-width: 760px;
+  margin: 40px auto;
+  padding: 48px 40px;
+  border-radius: 24px;
+  overflow: hidden;
+  text-align: center;
+  color: #fff;
+  background: linear-gradient(
+    120deg,
+    var(--accent-strong),
+    var(--accent),
+    var(--accent-text-soft),
+    var(--accent),
+    var(--accent-strong)
+  );
+  background-size: 300% 300%;
+  animation: contactg-pan 16s ease infinite;
+
+  &__inner { max-width: 640px; margin: 0 auto; }
+
+  &__eyebrow {
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-mono);
+    margin: 0 0 12px;
+  }
+
+  &__title {
+    font-family: var(--font-display, var(--font-serif));
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+  }
+
+  &__lead {
+    font-size: clamp(0.95rem, 1.7vw, 1.1rem);
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.88);
+    max-width: 54ch;
+    margin: 0 auto 30px;
+  }
+
+  &__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 13px 26px;
+    border-radius: 999px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    svg { width: 1.1em; height: 1.1em; transition: transform 0.18s ease; }
+    &:hover { transform: translateY(-2px); }
+
+    &--primary { background: #fff; color: var(--accent-strong); }
+    &--primary:hover .contactg__btn-arrow { transform: translateX(3px); }
+
+    &--ghost {
+      background: transparent;
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.45);
+    }
+    &--ghost:hover { border-color: #fff; background: rgba(255, 255, 255, 0.08); }
+  }
+
+  &__direct {
+    margin: 24px 0 0;
+    font-size: 0.86rem;
+    color: rgba(255, 255, 255, 0.72);
+    a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
+  }
+
+  &__socials {
+    display: flex;
+    justify-content: center;
+    gap: 22px;
+    margin-top: 22px;
+    a { color: rgba(255, 255, 255, 0.75); transition: color 0.18s ease, transform 0.18s ease; }
+    a:hover { color: #fff; transform: translateY(-2px); }
+    svg { width: 22px; height: 22px; }
+  }
+}
+
+@keyframes contactg-pan {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contactg { animation: none; background-position: 0% 50%; }
+}

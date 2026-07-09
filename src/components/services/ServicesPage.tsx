@@ -12,10 +12,9 @@ import AgentPipeline from '../_21test/AgentPipeline';
 import OrbitingStack from '../_21test/OrbitingStack';
 import Reveal from '../_21test/Reveal';
 
-// Bun.com inspired animated components
-import BunBenchmarkBars from '../_bun/BunBenchmarkBars';
-import BunTweetMarquee from '../_bun/BunTweetMarquee';
-import BunCallout from '../_bun/BunCallout';
+// Process visualizations: how I run large, AI-assisted engineering work.
+// Restyled onto the site's navy/light palette and framed honestly as method,
+// not as claims about a specific client project.
 import BunSectionHeading from '../_bun/BunSectionHeading';
 import BunAdversarialReview from '../_bun/BunAdversarialReview';
 import BunCommitsHeatmapDefault from '../_bun/BunCommitsHeatmap';
@@ -173,6 +172,104 @@ const ServicesPage: React.FC = () => {
         </ol>
       </section>
 
+      {/*
+        ================================================================
+        HOW I WORK: process visualizations.
+        Honest framing: these replay a real, public large-scale AI-assisted
+        engineering effort (the Bun runtime's Rust migration) as a concrete
+        illustration of the methods I use: parallel agents, adversarial
+        review, and shipping to green. They are examples of technique, not
+        claims about a specific client engagement.
+        ================================================================
+      */}
+      <section className="services-block services-how" aria-labelledby="how-i-work" style={{ marginTop: '104px' }}>
+        <Reveal>
+          <p className="services-how__eyebrow">Under the hood</p>
+          <h2 className="services-block__title" id="how-i-work">How I actually build</h2>
+          <p className="services-how__lead">
+            AI does not ship production software on its own. These are live visualizations of a
+            real, large-scale AI-assisted engineering effort, shown as an example of how I run the
+            work: many agents in parallel, an adversarial reviewer hunting every bug, and nothing
+            merged until it is green everywhere.
+          </p>
+        </Reveal>
+
+        {/* Adversarial review: implementer writes, reviewer refutes */}
+        <div className="services-how__item">
+          <Reveal>
+            <BunSectionHeading
+              accent="var(--accent)"
+              subtitle="One agent writes the code, a second agent is told to break it. This is how I keep AI-generated code honest before it ever reaches you."
+            >
+              Adversarial review
+            </BunSectionHeading>
+          </Reveal>
+          <div className="services-how__stage">
+            <Reveal><BunAdversarialReview /></Reveal>
+          </div>
+        </div>
+
+        {/* Errors to fixes: parallel agents across worktrees */}
+        <div className="services-how__item">
+          <Reveal>
+            <BunSectionHeading
+              accent="var(--accent)"
+              subtitle="Thousands of compiler errors split across many agents and worktrees, then cleared in batches. This is how I parallelize a migration that would take one person months."
+            >
+              Errors, cleared in parallel
+            </BunSectionHeading>
+          </Reveal>
+          <div className="services-how__stage">
+            <Reveal><BunErrorsWorkflow /></Reveal>
+          </div>
+        </div>
+
+        {/* CI race to green */}
+        <div className="services-how__item">
+          <Reveal>
+            <BunSectionHeading
+              accent="var(--accent)"
+              subtitle="Every change raced to green across every platform before it ships. Nothing goes live on a red build."
+            >
+              Shipped only when it is green
+            </BunSectionHeading>
+          </Reveal>
+          <div className="services-how__stage">
+            <Reveal><BunBuildKite /></Reveal>
+          </div>
+        </div>
+
+        {/* Commit intensity heatmap */}
+        <div className="services-how__item">
+          <Reveal>
+            <BunSectionHeading
+              accent="var(--accent)"
+              subtitle="Commit activity by hour across the sprint: what steady, high-throughput delivery actually looks like."
+            >
+              Delivery, hour by hour
+            </BunSectionHeading>
+          </Reveal>
+          <div className="services-how__stage">
+            <Reveal><BunCommitsHeatmapDefault /></Reveal>
+          </div>
+        </div>
+
+        {/* Git log replay */}
+        <div className="services-how__item">
+          <Reveal>
+            <BunSectionHeading
+              accent="var(--accent)"
+              subtitle="The whole effort replayed commit by commit: the scale of change behind a single shipped result."
+            >
+              The full history, replayed
+            </BunSectionHeading>
+          </Reveal>
+          <div className="services-how__stage">
+            <Reveal><BunGitLogAnimation /></Reveal>
+          </div>
+        </div>
+      </section>
+
       <section className="services-cta">
         <h2 className="services-cta__title">Have a problem worth solving?</h2>
         <p className="services-cta__lead">
@@ -193,187 +290,6 @@ const ServicesPage: React.FC = () => {
         <p className="services-cta__direct">
           Or email me directly at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
         </p>
-      </section>
-
-      {/*
-        ================================================================
-        BUN.COM INSPIRED COMPONENTS (appended for review & integration)
-        Extracted from https://bun.com/blog/bun-in-rust and bun.com
-        homepage. Each section is self-contained and can be removed,
-        reordered, or restyled independently.
-        ================================================================
-      */}
-
-      {/* --- 1. Section heading with drop shadow (bun.com "Learn more") --- */}
-      <section className="services-block" style={{ marginTop: '100px' }}>
-        <BunSectionHeading
-          accent="var(--accent)"
-          subtitle="Inspired by bun.com's pink drop-shadow section headings"
-        >
-          Metrics that matter
-        </BunSectionHeading>
-      </section>
-
-      {/* --- 2. Animated benchmark bars (bun.com bench-list) --- */}
-      <Reveal>
-        <BunBenchmarkBars
-          title="Benchmarks (animated counter bars from bun.com)"
-          items={[
-            { label: 'Projects delivered', value: 24, unit: '', description: 'Production AI systems shipped end to end' },
-            { label: 'Avg. time to first deploy', value: 14, unit: ' days', description: 'From discovery call to live in production' },
-            { label: 'User satisfaction', value: 97, unit: '%', description: 'Surveyed across all delivered projects' },
-            { label: 'Lines of code written', value: 850, unit: 'k', description: 'TypeScript, Python, Rust across all projects' },
-          ]}
-        />
-      </Reveal>
-
-      {/* --- 3. Callout block (bun.com blog callout style) --- */}
-      <Reveal>
-        <BunCallout title="Why this matters" variant="default">
-          <p>
-            Like bun.com's callout blocks, this section draws attention to key information
-            with a subtle dark background, bordered inset. Use variants for different
-            emphasis levels.
-          </p>
-        </BunCallout>
-      </Reveal>
-
-      <Reveal>
-        <BunCallout title="Tip" variant="warning">
-          <p>Warning variant for tips and cautions that need attention.</p>
-        </BunCallout>
-      </Reveal>
-
-      <Reveal>
-        <BunCallout title="Verified" variant="success">
-          <p>Success variant for confirmations and positive signals.</p>
-        </BunCallout>
-      </Reveal>
-
-      {/* --- 4. Tweet marquee (bun.com "Developers love Bun" infinite scroll) --- */}
-      <section className="services-block" style={{ marginTop: '80px' }}>
-        <Reveal>
-          <BunSectionHeading
-            accent="var(--accent)"
-            subtitle="Infinite scrolling tweet cards from bun.com's homepage"
-          >
-            What clients say
-          </BunSectionHeading>
-        </Reveal>
-
-        <div style={{ marginTop: '40px' }}>
-          <Reveal>
-            <BunTweetMarquee
-              speeds={[35, 45, 55]}
-              rows={[
-                [
-                  { author: 'Sarah Chen', handle: '@sarahchen', text: 'Eduard built our entire AI pipeline in 3 weeks. Been running in production for 6 months without a single incident.', date: 'Mar 12' },
-                  { author: 'Marcus Webb', handle: '@marcuswebb', text: 'The document retrieval system saved our compliance team about 40 hours a week. Worth every penny.', date: 'Feb 28' },
-                  { author: 'Petra Novak', handle: '@petranovak', text: 'On-premise AI that actually works. No data leaves our building and the team loves how easy it is to use.', date: 'Jan 15' },
-                  { author: 'James Liu', handle: '@jamesliu', text: 'We went from manual reposts to full automation. Our classified ads run 24/7 without anyone touching them.', date: 'Dec 3' },
-                  { author: 'Anna Kowalski', handle: '@annakowalski', text: 'The multi-agent pipeline categorizes millions of records while we sleep. Game changer for our operations.', date: 'Nov 20' },
-                ],
-                [
-                  { author: 'Tomaz Skoda', handle: '@tomazskoda', text: 'Fixed price, clear scope, delivered on time. That is rare in this space and Eduard nails it every time.', date: 'Oct 8' },
-                  { author: 'Elena Rossi', handle: '@elenarossi', text: 'Our AI assistant serves 200k+ students across 10 universities. Eduard made it look easy.', date: 'Sep 22' },
-                  { author: 'David Park', handle: '@davidpark', text: 'RAG with actual citations. No hallucinations, every answer links back to the source document.', date: 'Aug 14' },
-                  { author: 'Lucie Horakova', handle: '@luciehorakova', text: 'From discovery to deployment in 2 weeks. The handover was seamless and my team runs it independently now.', date: 'Jul 30' },
-                  { author: 'Alex Turner', handle: '@alexturner', text: 'The scheduling engine eliminated hundreds of hours of manual work per month. ROI was immediate.', date: 'Jun 12' },
-                ],
-                [
-                  { author: 'Milan Cermak', handle: '@milancermak', text: 'GDPR-compliant AI on dedicated hardware. Exactly what a regulated Czech firm needs.', date: 'May 5' },
-                  { author: 'Sophie Lambert', handle: '@sophielambert', text: 'Eduard builds like his name is on the line. You do not get that from an agency.', date: 'Apr 18' },
-                  { author: 'Radek Fischer', handle: '@radekfischer', text: 'One person, end to end. No handoffs, no account managers, just great software delivered fast.', date: 'Mar 2' },
-                  { author: 'Nina Bergstrom', handle: '@ninabergstrom', text: 'Stripe billing, scheduled jobs, auth, rate limits. The unglamorous stuff is handled so we do not worry.', date: 'Feb 10' },
-                  { author: 'Omar Hassan', handle: '@omarhassan', text: 'The fixed-price model removed all the risk. We knew exactly what we were getting and what it cost.', date: 'Jan 8' },
-                ],
-              ]}
-            />
-          </Reveal>
-        </div>
-      </section>
-
-      {/*
-        ================================================================
-        BUN.COM BLOG DATA VISUALIZATION COMPONENTS
-        Extracted from https://bun.com/blog/bun-in-rust - data-driven
-        workflow visualizations from the Bun rewrite saga.
-        ================================================================
-      */}
-
-      {/* --- 5. Adversarial Review (implementer vs adversarial reviewer chat) --- */}
-      <section className="services-block" style={{ marginTop: '100px' }}>
-        <Reveal>
-          <BunSectionHeading
-            accent="var(--accent)"
-            subtitle="Two Claude agents: implementer writes code, adversarial reviewer finds the bugs"
-          >
-            Adversarial Review
-          </BunSectionHeading>
-        </Reveal>
-        <div style={{ marginTop: '32px' }}>
-          <Reveal><BunAdversarialReview /></Reveal>
-        </div>
-      </section>
-
-      {/* --- 6. Commits per hour heatmap (SVG calendar heatmap) --- */}
-      <section className="services-block" style={{ marginTop: '80px' }}>
-        <Reveal>
-          <BunSectionHeading
-            accent="var(--accent)"
-            subtitle="11 days x 24 hours of commit activity, bucketed by hour"
-          >
-            Commits Per Hour
-          </BunSectionHeading>
-        </Reveal>
-        <div style={{ marginTop: '32px' }}>
-          <Reveal><BunCommitsHeatmapDefault /></Reveal>
-        </div>
-      </section>
-
-      {/* --- 7. Errors Animation (~16,000 errors, 64 claudes, 4 worktrees) --- */}
-      <section className="services-block" style={{ marginTop: '80px' }}>
-        <Reveal>
-          <BunSectionHeading
-            accent="var(--accent)"
-            subtitle="~16,000 compiler errors divided among 64 Claudes across 4 worktrees"
-          >
-            Phase D: Errors &rarr; Fixes
-          </BunSectionHeading>
-        </Reveal>
-        <div style={{ marginTop: '32px' }}>
-          <Reveal><BunErrorsWorkflow /></Reveal>
-        </div>
-      </section>
-
-      {/* --- 8. BuildKite CI (race to green across 6 platforms) --- */}
-      <section className="services-block" style={{ marginTop: '80px' }}>
-        <Reveal>
-          <BunSectionHeading
-            accent="var(--accent)"
-            subtitle="6 platforms racing to green across 135 CI builds"
-          >
-            BuildKite: The Race to Green
-          </BunSectionHeading>
-        </Reveal>
-        <div style={{ marginTop: '32px' }}>
-          <Reveal><BunBuildKite /></Reveal>
-        </div>
-      </section>
-
-      {/* --- 9. Git Log Animation (commit timeline playback) --- */}
-      <section className="services-block" style={{ marginTop: '80px' }}>
-        <Reveal>
-          <BunSectionHeading
-            accent="var(--accent)"
-            subtitle="6,502 commits, 1,780,453 lines, replayed"
-          >
-            Git Log Animation
-          </BunSectionHeading>
-        </Reveal>
-        <div style={{ marginTop: '32px' }}>
-          <Reveal><BunGitLogAnimation /></Reveal>
-        </div>
       </section>
     </div>
   );

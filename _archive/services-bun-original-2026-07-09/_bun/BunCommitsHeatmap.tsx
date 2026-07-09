@@ -5,21 +5,6 @@ const CELLS = [{"x":52,"y":24,"fill":"#16181f"},{"x":73,"y":24,"fill":"#16181f"}
 
 const DATES = ['May 4','May 5','May 6','May 7','May 8','May 9','May 10','May 11','May 12','May 13','May 14'];
 
-// Single hue navy intensity ramp: few commits = light, many commits = deep navy.
-// Computed at render time from the commit count so the baked purple/red/yellow
-// fills in CELLS are ignored. Empty cells (no n) fall back to the sunken surface.
-function cellFill(n?: number): string {
-  if (!n || n <= 0) return 'var(--surface-sunken)';
-  // n ranges roughly 1..700, use a log scale to 0..1
-  const t = Math.min(1, Math.log10(n + 1) / Math.log10(700));
-  // interpolate light navy toward deep navy (#182e5f)
-  const stops = [[233,238,246],[150,170,205],[95,124,175],[46,71,120],[24,46,95]];
-  const i = Math.min(stops.length - 2, Math.floor(t * (stops.length - 1)));
-  const f = t * (stops.length - 1) - i;
-  const c = stops[i].map((a, k) => Math.round(a + (stops[i+1][k]-a)*f));
-  return `rgb(${c[0]},${c[1]},${c[2]})`;
-}
-
 const BunCommitsHeatmap: React.FC = () => {
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -66,31 +51,30 @@ const BunCommitsHeatmap: React.FC = () => {
   }, []);
 
   return (
-    <section id="NYyVvNQXXG" ref={rootRef} style={{ overflowAnchor: 'none', overflow: 'hidden', borderColor: 'var(--border)', borderTopWidth: 1, borderBottomWidth: 1, backgroundColor: 'var(--surface)', color: 'var(--text-muted)' }} className="not-prose -mx-4 my-12 sm:mx-0 sm:rounded-2xl sm:border lg:-mx-8 xl:-mx-24">
+    <section id="NYyVvNQXXG" ref={rootRef} style={{ overflowAnchor: 'none', overflow: 'hidden', borderColor: '#1f2937', borderTopWidth: 1, borderBottomWidth: 1, backgroundColor: '#0b0c10', color: '#d1d5db' }} className="not-prose -mx-4 my-12 sm:mx-0 sm:rounded-2xl sm:border lg:-mx-8 xl:-mx-24">
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '4px 16px', padding: '20px 28px 4px' }}>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--text-muted)' }}>11 days x 24 hours · PDT</span>
+        <span style={{ fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: '#6b7280' }}>11 days x 24 hours · PDT</span>
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between', gap: '8px 24px', padding: '8px 28px 8px' }}>
-        <div className="pc-count" style={{ fontFamily: 'var(--font-mono)', fontSize: 30, fontWeight: 700, fontVariantNumeric: 'tabular-nums', color: 'var(--text-strong)' }}>6,502 commits</div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingBottom: 4, fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)' }}>
+        <div className="pc-count" style={{ fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 30, fontWeight: 700, fontVariantNumeric: 'tabular-nums', color: 'white' }}>6,502 commits</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingBottom: 4, fontFamily: 'ui-monospace,SFMono-Regular,monospace', fontSize: 11, color: '#6b7280' }}>
           <span>1</span>
-          <span style={{ display: 'inline-block', height: 10, width: 96, borderRadius: 2, background: 'linear-gradient(to right, var(--surface-sunken), #b9c6e0, #6f86b8, #34507f, var(--accent))' }}></span>
+          <span style={{ display: 'inline-block', height: 10, width: 96, borderRadius: 2, background: 'linear-gradient(to right, rgb(86,37,138), rgb(147,34,154), rgb(212,54,121), rgb(245,113,81), rgb(252,166,63), rgb(253,224,71))' }}></span>
           <span>695 commits/hour</span>
         </div>
       </div>
       <div style={{ padding: '0 28px 20px' }}>
         <svg viewBox="0 0 556 257" style={{ width: '100%' }} role="img" aria-label="Commits per hour across the 11 days of the rewrite">
-          <text x="52" y="15" fontSize="12" fill="var(--text-muted)">12am</text>
-          <text x="178" y="15" fontSize="12" fill="var(--text-muted)">6am</text>
-          <text x="304" y="15" fontSize="12" fill="var(--text-muted)">12pm</text>
-          <text x="430" y="15" fontSize="12" fill="var(--text-muted)">6pm</text>
+          <text x="52" y="15" fontSize="12" fill="#6b7280">12am</text>
+          <text x="178" y="15" fontSize="12" fill="#6b7280">6am</text>
+          <text x="304" y="15" fontSize="12" fill="#6b7280">12pm</text>
+          <text x="430" y="15" fontSize="12" fill="#6b7280">6pm</text>
           {[0,1,2,3,4,5,6,7,8,9,10].map(row => (
             <g key={row}>
-              <text x="44" y={38 + row * 21} fontSize="12" textAnchor="end" fill="var(--text-muted)">{DATES[row]}</text>
+              <text x="44" y={38 + row * 21} fontSize="12" textAnchor="end" fill="#6b7280">{DATES[row]}</text>
               {CELLS.filter(c => c.y === 24 + row * 21).map((cell, ci) => (
                 <rect key={ci} x={cell.x} y={cell.y} width="19" height="19" rx="4"
-                  fill={cellFill(('n' in cell ? cell.n : undefined) as number | undefined)}
-                  stroke="var(--border)" strokeWidth="0.5"
+                  fill={cell.fill}
                   {...('t' in cell ? { 'data-t': cell.t, 'data-n': cell.n } : {})}>
                   {'t' in cell ? (
                     <title>{(() => {
@@ -109,7 +93,7 @@ const BunCommitsHeatmap: React.FC = () => {
           ))}
         </svg>
       </div>
-      <div style={{ borderTop: '1px solid var(--border)', padding: '12px 28px', fontSize: 12, lineHeight: 1.625, fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
+      <div style={{ borderTop: '1px solid rgba(31,41,55,0.8)', padding: '12px 28px', fontSize: 12, lineHeight: 1.625, color: '#6b7280' }}>
         Every commit on the port branch (merges excluded), bucketed by hour. Peak hour: 695 commits.
       </div>
     </section>

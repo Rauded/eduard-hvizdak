@@ -10,12 +10,8 @@ const SUBJECTS: [number, string][] = JSON.parse('[[0,"phase-d(src/runtime/shell)
 const EVENTS: [number, number][] = JSON.parse('[[0,0],[9000,0],[20000,0],[35000,0],[44000,0],[50000,0],[391000,3],[474000,23],[606000,9],[609000,24],[750000,8],[771000,25],[835000,16],[924000,8],[1001000,9],[1071000,26],[1073000,27],[1074000,28],[1134000,7],[1297000,29],[1312000,30],[1349000,31],[1412000,10],[1468000,17],[1502000,18],[1539000,32],[1663000,17],[1685000,10],[1737000,33],[1743000,8],[1744000,9],[1745000,11],[1748000,12],[1751000,13],[1759000,16],[1761000,7],[1767000,10],[1777000,14],[1784000,11],[1828000,18],[1882000,7],[1917000,13],[2012000,4],[2041000,5],[2046000,2],[2047000,4],[2064000,15],[2069000,19],[2073000,4],[2077000,6],[2082000,4],[2089000,19],[2139000,2],[2155000,2],[2165000,4],[2227000,4],[2297000,2],[2302000,4],[2326000,4],[2334000,6],[2341000,6],[2343000,6],[2371000,15],[2399000,4],[2447000,4],[2455000,15],[2461000,5],[2518000,2],[2564000,2],[2598000,6],[2686000,3],[2767000,3],[2789000,3],[2790000,3],[2795000,3],[2807000,5],[2827000,3],[2829000,3],[2841000,3],[2865000,3],[2891000,3],[2907000,3],[2911000,3],[2922000,3],[2939000,2],[2956000,3],[2965000,3],[2981000,3],[2984000,3],[2986000,3],[2995000,3],[3000000,3],[3027000,34],[3029000,3],[3031000,35],[3034000,3],[3036000,3],[3037000,11],[3040000,36],[3042000,3],[3043000,3],[3046000,20],[3050000,3],[3053000,20],[3053000,3],[3056000,6],[3056000,14],[3057000,3],[3062000,14],[3069000,3],[3073000,3],[3078000,3],[3083000,37],[3089000,21],[3089000,3],[3096000,3],[3098000,3],[3106000,3],[3116000,7],[3126000,3],[3232000,7],[3244000,3],[3257000,3],[3265000,6],[4935000,22],[5057000,38],[5679000,8],[5690000,13],[5738000,7],[5821000,32],[5856000,5],[5885000,22],[5952000,39],[6145000,12],[6163000,21],[6211000,5],[6261000,5],[6666000,12]]');
 
 const LANE_TOTALS = [1162,252,67,40,10,7,7,6,4,3,3,3,3,3,3,3,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1];
-// Navy intensity ramp: pale navy -> mid navy -> completed green, so stage
-// progression reads as "getting done".
-const STAGES = ['var(--accent-ring)', 'color-mix(in srgb, var(--accent) 55%, #fff)', 'var(--status-good)'];
-// All crate bars use the single site accent (navy).
-const CRATE_NAMES = ["bun_runtime","bun_bundler","bun_sql","bun_js_parser","bun_css","bun_http","bun_interchange","bun_sys","bun_core","bun_string","bun_logger","bun_uws_sys","bun_alloc","bun_collections","bun_ptr","bun_sourcemap","bun_safety","bun_glob","bun_dotenv","bun_router","bun_uws","bun_io","bun_ini","bun_lolhtml_sys","bun_test_runner","bun_cares_sys","bun_url","bun_picohttp","bun_clap","bun_boringssl","bun_watcher","bun_analytics","bun_libarchive","bun_paths","bun_aio","bun_options_types","bun_zlib","bun_crash_handler","bun_js_printer","bun_resolver","bun_http_jsc","bun_install"];
-const CRATES: [string, string][] = CRATE_NAMES.map((name) => [name, 'var(--accent)']);
+const STAGES = ['#fbbf24', '#a78bfa', '#4ade80'];
+const CRATES: [string, string][] = [["bun_runtime","#f472b6"],["bun_bundler","#fb923c"],["bun_sql","#f87171"],["bun_js_parser","#34d399"],["bun_css","#38bdf8"],["bun_http","#fbbf24"],["bun_interchange","#a78bfa"],["bun_sys","#22d3ee"],["bun_core","#a3e635"],["bun_string","#fb7185"],["bun_logger","#2dd4bf"],["bun_uws_sys","#c084fc"],["bun_alloc","#f472b6"],["bun_collections","#fb923c"],["bun_ptr","#f87171"],["bun_sourcemap","#34d399"],["bun_safety","#38bdf8"],["bun_glob","#fbbf24"],["bun_dotenv","#a78bfa"],["bun_router","#22d3ee"],["bun_uws","#a3e635"],["bun_io","#fb7185"],["bun_ini","#2dd4bf"],["bun_lolhtml_sys","#c084fc"],["bun_test_runner","#f472b6"],["bun_cares_sys","#fb923c"],["bun_url","#f87171"],["bun_picohttp","#34d399"],["bun_clap","#38bdf8"],["bun_boringssl","#fbbf24"],["bun_watcher","#a78bfa"],["bun_analytics","#22d3ee"],["bun_libarchive","#a3e635"],["bun_paths","#fb7185"],["bun_aio","#2dd4bf"],["bun_options_types","#c084fc"],["bun_zlib","#f472b6"],["bun_crash_handler","#fb923c"],["bun_js_printer","#f87171"],["bun_resolver","#34d399"],["bun_http_jsc","#38bdf8"],["bun_install","#fbbf24"]];
 const LAST = 'phase-d: final link dedup \u2192 BINARY';
 const t0 = 1778053205000;
 const MAXV = 10;
@@ -122,10 +118,10 @@ const BunErrorsWorkflow: React.FC = () => {
       const d = document.createElement('div');
       d.className = 'truncate';
       const a = document.createElement('span');
-      a.style.cssText = fixedLine ? 'color:var(--status-good);font-weight:700' : 'color:var(--text-strong);font-weight:700';
+      a.style.cssText = fixedLine ? 'color:#4ade80;font-weight:700' : 'color:#f87171;font-weight:700';
       a.textContent = fixedLine ? '\u2713 ' + code : code;
       const b = document.createElement('span');
-      b.style.color = fixedLine ? 'var(--text-faint)' : 'var(--text-muted)';
+      b.style.color = fixedLine ? '#4b5563' : '#9ca3af';
       b.textContent = msg;
       d.append(a, b);
       return d;
@@ -168,7 +164,7 @@ const BunErrorsWorkflow: React.FC = () => {
         const k = hi - (logEls.length - 1 - j);
         if (k >= 0 && k < SUBJECTS.length) {
           logEls[j].textContent = '\u00b7 ' + SUBJECTS[k][1];
-          (logEls[j] as HTMLElement).style.color = j === logEls.length - 1 ? 'var(--text-strong)' : 'var(--text-muted)';
+          (logEls[j] as HTMLElement).style.color = j === logEls.length - 1 ? '#fbf0df' : '#6b7280';
         } else {
           logEls[j].textContent = '\u00a0';
         }
@@ -186,10 +182,9 @@ const BunErrorsWorkflow: React.FC = () => {
       return [r.left - fr.left + r.width / 2, r.top - fr.top + r.height / 2];
     }
 
-    function glowCell(c: HTMLElement, _color: string, ms: number) {
-      // No colored glow on a light canvas: emphasis is opacity only.
+    function glowCell(c: HTMLElement, color: string, ms: number) {
       c.style.opacity = '1';
-      c.style.boxShadow = 'none';
+      c.style.boxShadow = '0 0 9px ' + color;
       later(ms, () => {
         if (playing) {
           c.style.opacity = '0.22';
@@ -200,7 +195,7 @@ const BunErrorsWorkflow: React.FC = () => {
 
     const chips: HTMLElement[] = pipes.map(() => {
       const chip = document.createElement('span');
-      chip.style.cssText = 'position:absolute;width:10px;height:10px;border-radius:50%;background:var(--accent);opacity:0;pointer-events:none;transition:transform 350ms cubic-bezier(0.4,0,0.3,1),opacity 150ms';
+      chip.style.cssText = 'position:absolute;width:10px;height:10px;border-radius:50%;background:#fbbf24;opacity:0;pointer-events:none;transition:transform 350ms cubic-bezier(0.4,0,0.3,1),opacity 150ms';
       flow.appendChild(chip);
       return chip;
     });
@@ -225,14 +220,14 @@ const BunErrorsWorkflow: React.FC = () => {
         showRow(l, l < MAXV);
       }
       visCount = MAXV;
-      if (errsEl) { errsEl.textContent = '0'; errsEl.style.color = 'var(--status-good)'; }
+      if (errsEl) { errsEl.textContent = '0'; errsEl.style.color = '#4ade80'; }
       if (commitsEl) commitsEl.textContent = num(TOTAL) + ' fix commits';
       if (clockEl) clockEl.textContent = 'Wed, May 6, 12:42 PM PDT';
       linesBoxEl.textContent = '';
       for (let i = 0; i < 11; i++) linesBoxEl.appendChild(mkLine(i, true));
       if (logEls.length >= 3) {
         logEls[logEls.length - 1].textContent = '\u00b7 ' + LAST;
-        (logEls[logEls.length - 1] as HTMLElement).style.color = 'var(--text-strong)';
+        (logEls[logEls.length - 1] as HTMLElement).style.color = '#fbf0df';
       }
     }
 
@@ -353,16 +348,16 @@ const BunErrorsWorkflow: React.FC = () => {
   return (
     <section ref={rootRef} id="kNEWvTWBCT" style={{
       overflowAnchor: 'none', borderRadius: '16px', overflow: 'hidden',
-      border: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text)',
-      boxShadow: 'var(--shadow-card)', position: 'relative',
+      border: '1px solid #1f2937', background: '#0b0c10', color: '#d1d5db',
+      position: 'relative',
     }}>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '4px 16px', padding: '20px 28px 4px' }}>
         <span style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '4px 12px' }}>
           <span style={{
-            borderRadius: '999px', border: '1px solid var(--border)', padding: '2px 10px',
-            fontFamily: 'var(--font-mono)', fontSize: '9px',
+            borderRadius: '999px', border: '1px solid #d9775766', padding: '2px 10px',
+            fontFamily: "'JetBrains Mono','RobotoMono',monospace", fontSize: '9px',
             fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em',
-            color: 'var(--accent-text)',
+            color: '#e8946f',
           }}>&#10039; claude code &middot; dynamic workflow</span>
         </span>
       </div>
@@ -371,20 +366,20 @@ const BunErrorsWorkflow: React.FC = () => {
         display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between',
         gap: '12px 32px', padding: '12px 28px 16px',
       }}>
-        <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'clamp(1.5em,4vw,2.2em)', fontWeight: 700, fontFeatureSettings: "'tnum'", color: 'var(--text-strong)' }}>
+        <div style={{ fontFamily: "'JetBrains Mono','RobotoMono',monospace", fontSize: 'clamp(1.5em,4vw,2.2em)', fontWeight: 700, fontFeatureSettings: "'tnum'", color: '#fff' }}>
           <span className="wq-errs" style={{ display: 'inline-block', minWidth: '7ch', transition: 'color 0.4s' }}>&#8776;{num(TOTAL)}</span>
-          <span style={{ fontSize: '0.6em', fontWeight: 400, color: 'var(--text-muted)' }}> errors left</span>
+          <span style={{ fontSize: '0.6em', fontWeight: 400, color: '#6b7280' }}> errors left</span>
         </div>
         <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '16px' }}>
           <button type="button" className="wq-btn" onClick={play} style={{
-            cursor: 'pointer', borderRadius: '6px', border: '1px solid var(--border)',
-            background: '#fff', padding: '6px 14px',
-            fontFamily: 'var(--font-mono)', fontSize: '13px',
-            color: 'var(--text)',
+            cursor: 'pointer', borderRadius: '6px', border: '1px solid #374151',
+            background: 'rgba(31,41,55,0.6)', padding: '6px 14px',
+            fontFamily: "'JetBrains Mono','RobotoMono',monospace", fontSize: '13px',
+            color: '#e5e7eb',
           }}>&#9654; replay phase D</button>
           <span className="wq-clock" style={{
-            width: '27ch', fontFamily: 'var(--font-mono)',
-            fontSize: '13px', fontFeatureSettings: "'tnum'", color: 'var(--text-strong)',
+            width: '27ch', fontFamily: "'JetBrains Mono','RobotoMono',monospace",
+            fontSize: '13px', fontFeatureSettings: "'tnum'", color: '#fbf0df',
           }}>{clockFmt.format(new Date(t0)) + ' PDT'}</span>
         </div>
       </div>
@@ -394,16 +389,16 @@ const BunErrorsWorkflow: React.FC = () => {
         position: 'relative',
       }}>
         <div className="wq-file" style={{
-          minWidth: 0, borderRadius: '8px', border: '1px solid var(--border)',
-          background: '#fff', fontFamily: 'var(--font-mono)',
+          minWidth: 0, borderRadius: '8px', border: '1px solid #374151',
+          background: 'rgba(0,0,0,0.4)', fontFamily: "'JetBrains Mono','RobotoMono',monospace",
         }}>
           <div style={{
             display: 'flex', alignItems: 'baseline', justifyContent: 'space-between',
-            gap: '12px', padding: '8px 12px', borderBottom: '1px solid var(--border)',
-            fontSize: '11px', color: 'var(--text-muted)',
+            gap: '12px', padding: '8px 12px', borderBottom: '1px solid #374151',
+            fontSize: '11px', color: '#9ca3af',
           }}>
             <span>errors.txt</span>
-            <span className="wq-commits" style={{ whiteSpace: 'nowrap', color: 'var(--text-muted)' }}>0 fix commits</span>
+            <span className="wq-commits" style={{ whiteSpace: 'nowrap', color: '#9ca3af' }}>0 fix commits</span>
           </div>
           <div className="wq-file-lines" style={{
             height: '252px', overflow: 'hidden', padding: '8px 12px',
@@ -411,8 +406,8 @@ const BunErrorsWorkflow: React.FC = () => {
           }}>
             {FILE_LINES.slice(0, 11).map(([level, msg], i) => (
               <div key={i} className="truncate">
-                <span style={{ color: 'var(--text-strong)', fontWeight: 700 }}>{level}</span>
-                <span style={{ color: 'var(--text-muted)' }}>{msg}</span>
+                <span style={{ color: '#f87171', fontWeight: 700 }}>{level}</span>
+                <span style={{ color: '#9ca3af' }}>{msg}</span>
               </div>
             ))}
           </div>
@@ -420,18 +415,18 @@ const BunErrorsWorkflow: React.FC = () => {
 
         <div className="min-w-0 flex-1">
           <div style={{
-            marginBottom: '8px', fontFamily: 'var(--font-mono)',
-            fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--text-muted)',
+            marginBottom: '8px', fontFamily: "'JetBrains Mono','RobotoMono',monospace",
+            fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#6b7280',
           }}>divvied up &middot; 64 claudes</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
             {worktrees.map((wt) => (
               <div key={wt} style={{
-                borderRadius: '8px', border: '1px solid var(--border)',
-                background: '#fff', padding: '8px 10px',
+                borderRadius: '8px', border: '1px solid #374151',
+                background: 'rgba(0,0,0,0.3)', padding: '8px 10px',
               }}>
                 <div style={{
-                  marginBottom: '6px', fontFamily: 'var(--font-mono)',
-                  fontSize: '10px', color: 'var(--text-muted)', whiteSpace: 'nowrap',
+                  marginBottom: '6px', fontFamily: "'JetBrains Mono','RobotoMono',monospace",
+                  fontSize: '10px', color: '#4b5563', whiteSpace: 'nowrap',
                 }}>worktree {wt}</div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                   {[0, 1, 2, 3].map((pi) => (
@@ -441,7 +436,7 @@ const BunErrorsWorkflow: React.FC = () => {
                         borderRadius: '3px', backgroundColor: STAGES[0], opacity: 0.4,
                         transition: 'opacity 0.3s', boxShadow: 'none',
                       }} />
-                      <span style={{ fontSize: '9px', lineHeight: 1, color: 'var(--text-faint)' }}>&#8594;</span>
+                      <span style={{ fontSize: '9px', lineHeight: 1, color: '#374151' }}>&#8594;</span>
                       <span className="wq-cell" data-s="1" style={{
                         display: 'inline-block', width: '12px', height: '12px',
                         borderRadius: '3px', backgroundColor: STAGES[1], opacity: 0.4,
@@ -452,7 +447,7 @@ const BunErrorsWorkflow: React.FC = () => {
                         borderRadius: '3px', backgroundColor: STAGES[1], opacity: 0.4,
                         transition: 'opacity 0.3s', boxShadow: 'none',
                       }} />
-                      <span style={{ fontSize: '9px', lineHeight: 1, color: 'var(--text-faint)' }}>&#8594;</span>
+                      <span style={{ fontSize: '9px', lineHeight: 1, color: '#374151' }}>&#8594;</span>
                       <span className="wq-cell" data-s="2" style={{
                         display: 'inline-block', width: '12px', height: '12px',
                         borderRadius: '3px', backgroundColor: STAGES[2], opacity: 0.4,
@@ -466,8 +461,8 @@ const BunErrorsWorkflow: React.FC = () => {
           </div>
           <div style={{
             marginTop: '8px', display: 'flex', flexWrap: 'wrap', alignItems: 'center',
-            gap: '4px 12px', fontFamily: 'var(--font-mono)',
-            fontSize: '10px', color: 'var(--text-muted)',
+            gap: '4px 12px', fontFamily: "'JetBrains Mono','RobotoMono',monospace",
+            fontSize: '10px', color: '#6b7280',
           }}>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
               <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '2px', backgroundColor: STAGES[0] }} />1 fixes
@@ -483,23 +478,23 @@ const BunErrorsWorkflow: React.FC = () => {
 
         <div style={{ width: '100%', minWidth: 0 }}>
           <div style={{
-            marginBottom: '8px', fontFamily: 'var(--font-mono)',
-            fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--text-muted)',
+            marginBottom: '8px', fontFamily: "'JetBrains Mono','RobotoMono',monospace",
+            fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.18em', color: '#6b7280',
           }}>by crate</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
             {CRATES.map(([name, color], i) => (
               <div key={name} className="wq-row" style={{
                 display: 'none', alignItems: 'center', gap: '10px',
-                fontFamily: 'var(--font-mono)', fontSize: '11.5px',
+                fontFamily: "'JetBrains Mono','RobotoMono',monospace", fontSize: '11.5px',
                 height: '20px',
               }}>
                 <span style={{
                   width: '6.5rem', textAlign: 'right', overflow: 'hidden',
-                  textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: 'var(--text)',
+                  textOverflow: 'ellipsis', whiteSpace: 'nowrap', color: '#d1d5db',
                 }}>{name}</span>
                 <span style={{
                   height: '11px', flex: 1, overflow: 'hidden', borderRadius: '2px',
-                  background: 'var(--surface-sunken)',
+                  background: 'rgba(31,41,55,0.6)',
                 }}>
                   <span className="wq-fill" style={{
                     display: 'block', height: '100%', borderRadius: '2px',
@@ -507,7 +502,7 @@ const BunErrorsWorkflow: React.FC = () => {
                   }} />
                 </span>
                 <span style={{
-                  width: '44px', textAlign: 'right', fontFeatureSettings: "'tnum'", color: 'var(--text-muted)',
+                  width: '44px', textAlign: 'right', fontFeatureSettings: "'tnum'", color: '#9ca3af',
                 }}>
                   <span className="wq-fixed">0</span>
                 </span>
@@ -518,17 +513,17 @@ const BunErrorsWorkflow: React.FC = () => {
       </div>
 
       <div style={{
-        borderRadius: '8px', border: '1px solid var(--border)', background: 'var(--surface-sunken)',
+        borderRadius: '8px', border: '1px solid #374151', background: 'rgba(0,0,0,0.4)',
         padding: '12px 16px', margin: '0 28px 20px',
-        fontFamily: 'var(--font-mono)', fontSize: '12px', lineHeight: '1.25',
+        fontFamily: "'JetBrains Mono','RobotoMono',monospace", fontSize: '12px', lineHeight: '1.25',
       }}>
-        <div className="wq-log" style={{ height: '20px', overflow: 'hidden', color: 'var(--text-muted)' }}>
+        <div className="wq-log" style={{ height: '20px', overflow: 'hidden', color: '#6b7280' }}>
           &nbsp;
         </div>
-        <div className="wq-log" style={{ height: '20px', overflow: 'hidden', color: 'var(--text-muted)' }}>
+        <div className="wq-log" style={{ height: '20px', overflow: 'hidden', color: '#6b7280' }}>
           &nbsp;
         </div>
-        <div className="wq-log" style={{ height: '20px', overflow: 'hidden', color: 'var(--text-strong)' }}>
+        <div className="wq-log" style={{ height: '20px', overflow: 'hidden', color: '#fbf0df' }}>
           &nbsp;
         </div>
       </div>
