@@ -426,7 +426,8 @@
       text-decoration-color: var(--accent-ring);
       &:hover { color: var(--accent); text-decoration-color: var(--accent); }
     }
-    .footer-email {
+    .footer-email,
+    .footer-phone {
       color: var(--text-muted);
       border-bottom-color: var(--border-strong);
       &:hover { color: var(--accent); border-bottom-color: var(--accent); }
