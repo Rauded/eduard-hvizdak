@@ -15,11 +15,11 @@ const Band = styled.div`
   top: 0;
   left: 0;
   right: 0;
-  height: min(58vh, 44vw);
+  height: min(62vh, 50vw);
   z-index: 0;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 92%);
-  mask-image: linear-gradient(180deg, #000 0%, #000 62%, transparent 92%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 60%, transparent 88%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 60%, transparent 88%);
 
   /* Paper renders a <div><canvas> that we let fill the band. */
   & > div,
@@ -67,9 +67,9 @@ const PaperHands: React.FC<Props> = ({ variant }) => (
         originalColors={false}
         inverted={false}
         type="8x8"
-        size={2}
-        colorSteps={3}
-        fit="contain"
+        size={1.3}
+        colorSteps={4}
+        fit="cover"
       />
     )}
   </Band>

@@ -6,17 +6,17 @@ import HandsShader from './HandsShader';
 import PaperHands from './PaperHands';
 
 // Hero hands renderer, chosen live via ?hands=:
-//   shader (default)  the hand-rolled WebGL halftone (HandsShader)
-//   dither            the 2D canvas halftone (AsciiDitherBackground)
-//   paper             Paper Shaders HalftoneDots
-//   paperdither       Paper Shaders ImageDithering
+//   paperdither (default) Paper Shaders ImageDithering
+//   paper                 Paper Shaders HalftoneDots
+//   shader                the hand-rolled WebGL halftone (HandsShader)
+//   dither                the 2D canvas halftone (AsciiDitherBackground)
 type HandsMode = 'shader' | 'dither' | 'paper' | 'paperdither';
 
 const readHandsMode = (): HandsMode => {
-  if (typeof window === 'undefined') return 'shader';
+  if (typeof window === 'undefined') return 'paperdither';
   const q = new URLSearchParams(window.location.search).get('hands');
-  if (q === 'dither' || q === 'paper' || q === 'paperdither') return q;
-  return 'shader';
+  if (q === 'dither' || q === 'paper' || q === 'shader') return q;
+  return 'paperdither';
 };
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -61,7 +61,7 @@ const Content = styled.div`
   /* The hands own the top band of the hero; the text block sits well below
      them, so neither ever occludes the other. */
   @media (min-width: 769px) {
-    margin-top: 34vh;
+    margin-top: 38vh;
   }
 `;
 
@@ -335,8 +335,8 @@ const scrollToId = (id: string) => {
 
 const Hero: React.FC = () => {
   // Resolve the hands renderer after mount so the prerendered HTML and the
-  // first client render agree (both start with the shader).
-  const [handsMode, setHandsMode] = useState<HandsMode>('shader');
+  // first client render agree (both start with the Paper dither).
+  const [handsMode, setHandsMode] = useState<HandsMode>('paperdither');
   useEffect(() => {
     setHandsMode(readHandsMode());
   }, []);

@@ -41,7 +41,6 @@ precision highp float;
 uniform sampler2D uTex;
 uniform vec2 uRes;      // canvas size in device px
 uniform float uTime;
-uniform vec2 uMouse;    // device px, or (-1,-1) when absent
 uniform float uImgAspect; // img height / width
 uniform float uDpr;
 
@@ -65,13 +64,6 @@ void main() {
   vec3 texc = texture2D(uTex, vec2(samp.x, 1.0 - samp.y)).rgb;
   float L = luma(texc);
   float tone = clamp((L - 0.08) * 2.15, 0.0, 1.0);
-
-  // Cursor light: lift tone in a soft blob so dots swell toward the pointer.
-  if (uMouse.x >= 0.0) {
-    float reach = uRes.y * 0.26;
-    float infl = smoothstep(reach, 0.0, distance(px, uMouse));
-    tone = clamp(tone + 0.55 * infl, 0.0, 1.0);
-  }
 
   if (tone < 0.04) discard;
 
@@ -141,7 +133,6 @@ const HandsShader: React.FC = () => {
     const uTex = gl.getUniformLocation(prog, 'uTex');
     const uRes = gl.getUniformLocation(prog, 'uRes');
     const uTime = gl.getUniformLocation(prog, 'uTime');
-    const uMouse = gl.getUniformLocation(prog, 'uMouse');
     const uImgAspect = gl.getUniformLocation(prog, 'uImgAspect');
     const uDpr = gl.getUniformLocation(prog, 'uDpr');
 
@@ -171,7 +162,6 @@ const HandsShader: React.FC = () => {
     img.src = handsSrc;
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const mouse = { x: -1, y: -1 };
     let rafId = 0;
     let running = false;
     let inView = true;
@@ -197,7 +187,6 @@ const HandsShader: React.FC = () => {
       gl.bindTexture(gl.TEXTURE_2D, tex);
       gl.uniform2f(uRes, canvas.width, canvas.height);
       gl.uniform1f(uTime, reduced ? 0 : t);
-      gl.uniform2f(uMouse, mouse.x, mouse.y);
       gl.uniform1f(uImgAspect, imgAspect);
       gl.uniform1f(uDpr, dpr);
       gl.clearColor(0, 0, 0, 0);
@@ -221,26 +210,6 @@ const HandsShader: React.FC = () => {
       running = false;
       cancelAnimationFrame(rafId);
     };
-
-    const onMove = (e: PointerEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      if (x >= -60 && y >= -60 && x <= rect.width + 60 && y <= rect.height + 60) {
-        mouse.x = x * dpr;
-        mouse.y = y * dpr;
-        if (reduced) draw(performance.now());
-      } else {
-        mouse.x = -1;
-        mouse.y = -1;
-      }
-    };
-    const onLeave = () => {
-      mouse.x = -1;
-      mouse.y = -1;
-    };
-    window.addEventListener('pointermove', onMove, { passive: true });
-    window.addEventListener('pointerleave', onLeave);
 
     const io = new IntersectionObserver(([entry]) => {
       inView = entry.isIntersecting;
@@ -270,8 +239,6 @@ const HandsShader: React.FC = () => {
       img.onload = null;
       io.disconnect();
       ro.disconnect();
-      window.removeEventListener('pointermove', onMove);
-      window.removeEventListener('pointerleave', onLeave);
       document.removeEventListener('visibilitychange', onVis);
       if (resizeTimer) clearTimeout(resizeTimer);
       gl.deleteProgram(prog);
