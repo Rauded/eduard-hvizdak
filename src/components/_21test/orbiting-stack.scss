@@ -73,7 +73,8 @@
     border-radius: 12px;
     background: var(--card-bg, var(--surface));
     border: 1px solid var(--card-border, var(--border));
-    color: var(--accent, var(--accent-text));
+    // no color override here: each icon carries its own brand color inline,
+    // so the chips render each logo in its real brand hue on the white chip.
     animation: orbit-spin 26s linear infinite reverse;
     svg { width: 20px; height: 20px; }
     &--rev { animation: orbit-spin 46s linear infinite; }

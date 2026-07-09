@@ -174,7 +174,7 @@ const BunBuildKite: React.FC = () => {
     }}>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '4px 16px', padding: '20px 28px 4px' }}>
         <span style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 12 }}>
-          <span style={{ borderRadius: 999, border: '1px solid var(--accent-ring)', background: 'var(--accent-soft)', padding: '2px 10px', fontFamily: 'var(--font-mono)', fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--accent)' }}>&#10039; claude code &middot; dynamic workflow</span>
+          <span style={{ borderRadius: 999, border: '1px solid var(--accent-ring)', background: 'var(--accent-soft)', padding: '2px 10px', fontFamily: 'var(--font-mono)', fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>&#10039; <span style={{ color: 'var(--claude)' }}>claude code</span> &middot; dynamic workflow</span>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--text-muted)' }}>buildkite &middot; the race to green, by platform</span>
         </span>
         <span style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontVariantNumeric: 'tabular-nums', color: 'var(--text-muted)' }}>Windows finished last &middot; May 11, 6:23 AM PDT</span>

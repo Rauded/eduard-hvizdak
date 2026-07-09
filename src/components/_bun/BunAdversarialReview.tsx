@@ -193,7 +193,7 @@ const BunAdversarialReview: React.FC = () => {
     }}>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '4px 16px', padding: '20px 28px 4px' }}>
         <span style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 12 }}>
-          <span style={{ borderRadius: 999, border: '1px solid var(--accent-ring)', padding: '2px 10px', fontFamily: 'var(--font-mono)', fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--accent)' }}>&#10039; claude code &middot; dynamic workflow</span>
+          <span style={{ borderRadius: 999, border: '1px solid var(--accent-ring)', padding: '2px 10px', fontFamily: 'var(--font-mono)', fontSize: 9, fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em', color: 'var(--text-muted)' }}>&#10039; <span style={{ color: 'var(--claude)' }}>claude code</span> &middot; dynamic workflow</span>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--text-muted)' }}>adversarial review</span>
         </span>
         <span style={{ fontFamily: 'var(--font-mono)', fontSize: 13, fontVariantNumeric: 'tabular-nums', color: 'var(--status-good)' }}>3 of the many bugs adversarial review caught before merge</span>
@@ -207,16 +207,16 @@ const BunAdversarialReview: React.FC = () => {
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, padding: '0 28px 12px' }}>
         <div style={{ minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24, borderRadius: '50%', fontSize: 13, flexShrink: 0, background: 'var(--accent-soft)', color: 'var(--accent)' }}>&#10039;</span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 700, color: 'var(--text-strong)' }}>claude</span>
+            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24, borderRadius: '50%', fontSize: 13, flexShrink: 0, background: 'color-mix(in srgb, var(--claude) 16%, #fff)', color: 'var(--claude)' }}>&#10039;</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 700, color: 'var(--claude)' }}>claude</span>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)' }}>implementer</span>
           </div>
           <div style={{ marginTop: 4, fontSize: 11.5, lineHeight: 1.3, color: 'var(--text-muted)' }}>its context: the .zig original, the port plan, its own reasoning</div>
         </div>
         <div style={{ minWidth: 0, textAlign: 'right' }}>
           <div style={{ display: 'flex', flexDirection: 'row-reverse', alignItems: 'center', gap: 8 }}>
-            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24, borderRadius: '50%', fontSize: 13, flexShrink: 0, background: 'var(--accent)', color: '#fff' }}>&#10039;</span>
-            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 700, color: 'var(--text-strong)' }}>claude</span>
+            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24, borderRadius: '50%', fontSize: 13, flexShrink: 0, background: 'var(--claude)', color: '#fff' }}>&#10039;</span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: 12, fontWeight: 700, color: 'var(--claude)' }}>claude</span>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--status-bad)' }}>adversarial reviewer</span>
           </div>
           <div style={{ marginTop: 4, fontSize: 11.5, lineHeight: 1.3, color: 'var(--text-muted)' }}>its context: only the diff. told to assume the code is wrong.</div>

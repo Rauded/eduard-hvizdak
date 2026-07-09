@@ -10,9 +10,10 @@ const SUBJECTS: [number, string][] = JSON.parse('[[0,"phase-d(src/runtime/shell)
 const EVENTS: [number, number][] = JSON.parse('[[0,0],[9000,0],[20000,0],[35000,0],[44000,0],[50000,0],[391000,3],[474000,23],[606000,9],[609000,24],[750000,8],[771000,25],[835000,16],[924000,8],[1001000,9],[1071000,26],[1073000,27],[1074000,28],[1134000,7],[1297000,29],[1312000,30],[1349000,31],[1412000,10],[1468000,17],[1502000,18],[1539000,32],[1663000,17],[1685000,10],[1737000,33],[1743000,8],[1744000,9],[1745000,11],[1748000,12],[1751000,13],[1759000,16],[1761000,7],[1767000,10],[1777000,14],[1784000,11],[1828000,18],[1882000,7],[1917000,13],[2012000,4],[2041000,5],[2046000,2],[2047000,4],[2064000,15],[2069000,19],[2073000,4],[2077000,6],[2082000,4],[2089000,19],[2139000,2],[2155000,2],[2165000,4],[2227000,4],[2297000,2],[2302000,4],[2326000,4],[2334000,6],[2341000,6],[2343000,6],[2371000,15],[2399000,4],[2447000,4],[2455000,15],[2461000,5],[2518000,2],[2564000,2],[2598000,6],[2686000,3],[2767000,3],[2789000,3],[2790000,3],[2795000,3],[2807000,5],[2827000,3],[2829000,3],[2841000,3],[2865000,3],[2891000,3],[2907000,3],[2911000,3],[2922000,3],[2939000,2],[2956000,3],[2965000,3],[2981000,3],[2984000,3],[2986000,3],[2995000,3],[3000000,3],[3027000,34],[3029000,3],[3031000,35],[3034000,3],[3036000,3],[3037000,11],[3040000,36],[3042000,3],[3043000,3],[3046000,20],[3050000,3],[3053000,20],[3053000,3],[3056000,6],[3056000,14],[3057000,3],[3062000,14],[3069000,3],[3073000,3],[3078000,3],[3083000,37],[3089000,21],[3089000,3],[3096000,3],[3098000,3],[3106000,3],[3116000,7],[3126000,3],[3232000,7],[3244000,3],[3257000,3],[3265000,6],[4935000,22],[5057000,38],[5679000,8],[5690000,13],[5738000,7],[5821000,32],[5856000,5],[5885000,22],[5952000,39],[6145000,12],[6163000,21],[6211000,5],[6261000,5],[6666000,12]]');
 
 const LANE_TOTALS = [1162,252,67,40,10,7,7,6,4,3,3,3,3,3,3,3,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1];
-// Navy intensity ramp: pale navy -> mid navy -> completed green, so stage
-// progression reads as "getting done".
-const STAGES = ['var(--accent-ring)', 'color-mix(in srgb, var(--accent) 55%, #fff)', 'var(--status-good)'];
+// Three distinct stage colors mapped to the pipeline meaning:
+// fix (navy) -> review (Claude orange) -> apply (green), so each stage reads
+// as its own step rather than an indistinct tint.
+const STAGES = ['var(--accent)', 'var(--claude)', 'var(--status-good)'];
 // All crate bars use the single site accent (navy).
 const CRATE_NAMES = ["bun_runtime","bun_bundler","bun_sql","bun_js_parser","bun_css","bun_http","bun_interchange","bun_sys","bun_core","bun_string","bun_logger","bun_uws_sys","bun_alloc","bun_collections","bun_ptr","bun_sourcemap","bun_safety","bun_glob","bun_dotenv","bun_router","bun_uws","bun_io","bun_ini","bun_lolhtml_sys","bun_test_runner","bun_cares_sys","bun_url","bun_picohttp","bun_clap","bun_boringssl","bun_watcher","bun_analytics","bun_libarchive","bun_paths","bun_aio","bun_options_types","bun_zlib","bun_crash_handler","bun_js_printer","bun_resolver","bun_http_jsc","bun_install"];
 const CRATES: [string, string][] = CRATE_NAMES.map((name) => [name, 'var(--accent)']);
@@ -212,7 +213,7 @@ const BunErrorsWorkflow: React.FC = () => {
       for (const chip of chips) chip.style.opacity = '0';
       for (const cs of cells) {
         for (const c of cs) {
-          c.style.opacity = '0.4';
+          c.style.opacity = '0.55';
           c.style.boxShadow = 'none';
         }
       }
@@ -362,14 +363,14 @@ const BunErrorsWorkflow: React.FC = () => {
             borderRadius: '999px', border: '1px solid var(--border)', padding: '2px 10px',
             fontFamily: 'var(--font-mono)', fontSize: '9px',
             fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.14em',
-            color: 'var(--accent-text)',
-          }}>&#10039; claude code &middot; dynamic workflow</span>
+            color: 'var(--text-muted)',
+          }}>&#10039; <span style={{ color: 'var(--claude)' }}>claude code</span> &middot; dynamic workflow</span>
         </span>
       </div>
 
       <div style={{
         display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', justifyContent: 'space-between',
-        gap: '12px 32px', padding: '12px 28px 16px',
+        gap: '12px 32px', padding: '12px 28px 4px',
       }}>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: 'clamp(1.5em,4vw,2.2em)', fontWeight: 700, fontFeatureSettings: "'tnum'", color: 'var(--text-strong)' }}>
           <span className="wq-errs" style={{ display: 'inline-block', minWidth: '7ch', transition: 'color 0.4s' }}>&#8776;{num(TOTAL)}</span>
@@ -389,10 +390,23 @@ const BunErrorsWorkflow: React.FC = () => {
         </div>
       </div>
 
+      <div style={{
+        padding: '0 28px 16px', maxWidth: '68ch',
+        fontFamily: 'var(--font-mono)', fontSize: '11.5px', lineHeight: 1.6,
+        color: 'var(--text-muted)',
+      }}>
+        Thousands of compiler errors, split across parallel agents in 4 worktrees, then fixed, reviewed, and applied, crate by crate.
+      </div>
+
       <div className="wq-flow" style={{
-        display: 'flex', flexDirection: 'column', gap: '20px', padding: '0 28px 16px',
+        display: 'flex', flexDirection: 'column', gap: '28px', padding: '4px 28px 20px',
         position: 'relative',
       }}>
+        <div className="wq-file-col" style={{ minWidth: 0 }}>
+        <div style={{
+          marginBottom: '8px', fontFamily: 'var(--font-mono)',
+          fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--text-muted)',
+        }}>1 &middot; errors</div>
         <div className="wq-file" style={{
           minWidth: 0, borderRadius: '8px', border: '1px solid var(--border)',
           background: '#fff', fontFamily: 'var(--font-mono)',
@@ -417,45 +431,46 @@ const BunErrorsWorkflow: React.FC = () => {
             ))}
           </div>
         </div>
+        </div>
 
         <div className="min-w-0 flex-1">
           <div style={{
             marginBottom: '8px', fontFamily: 'var(--font-mono)',
             fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--text-muted)',
-          }}>divvied up &middot; 64 claudes</div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+          }}>2 &middot; divvied up &middot; <span style={{ color: 'var(--claude)' }}>64 claudes</span></div>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
             {worktrees.map((wt) => (
               <div key={wt} style={{
                 borderRadius: '8px', border: '1px solid var(--border)',
-                background: '#fff', padding: '8px 10px',
+                background: '#fff', padding: '10px 12px',
               }}>
                 <div style={{
                   marginBottom: '6px', fontFamily: 'var(--font-mono)',
                   fontSize: '10px', color: 'var(--text-muted)', whiteSpace: 'nowrap',
                 }}>worktree {wt}</div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '9px' }}>
                   {[0, 1, 2, 3].map((pi) => (
-                    <div key={pi} className="wq-pipe" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <div key={pi} className="wq-pipe" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       <span className="wq-cell" data-s="0" style={{
                         display: 'inline-block', width: '12px', height: '12px',
-                        borderRadius: '3px', backgroundColor: STAGES[0], opacity: 0.4,
+                        borderRadius: '3px', backgroundColor: STAGES[0], opacity: 0.55,
                         transition: 'opacity 0.3s', boxShadow: 'none',
                       }} />
                       <span style={{ fontSize: '9px', lineHeight: 1, color: 'var(--text-faint)' }}>&#8594;</span>
                       <span className="wq-cell" data-s="1" style={{
                         display: 'inline-block', width: '12px', height: '12px',
-                        borderRadius: '3px', backgroundColor: STAGES[1], opacity: 0.4,
+                        borderRadius: '3px', backgroundColor: STAGES[1], opacity: 0.55,
                         transition: 'opacity 0.3s', boxShadow: 'none',
                       }} />
                       <span className="wq-cell" data-s="1" style={{
                         display: 'inline-block', width: '12px', height: '12px',
-                        borderRadius: '3px', backgroundColor: STAGES[1], opacity: 0.4,
+                        borderRadius: '3px', backgroundColor: STAGES[1], opacity: 0.55,
                         transition: 'opacity 0.3s', boxShadow: 'none',
                       }} />
                       <span style={{ fontSize: '9px', lineHeight: 1, color: 'var(--text-faint)' }}>&#8594;</span>
                       <span className="wq-cell" data-s="2" style={{
                         display: 'inline-block', width: '12px', height: '12px',
-                        borderRadius: '3px', backgroundColor: STAGES[2], opacity: 0.4,
+                        borderRadius: '3px', backgroundColor: STAGES[2], opacity: 0.55,
                         transition: 'opacity 0.3s', boxShadow: 'none',
                       }} />
                     </div>
@@ -469,14 +484,14 @@ const BunErrorsWorkflow: React.FC = () => {
             gap: '4px 12px', fontFamily: 'var(--font-mono)',
             fontSize: '10px', color: 'var(--text-muted)',
           }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-              <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '2px', backgroundColor: STAGES[0] }} />1 fixes
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+              <span style={{ display: 'inline-block', width: '9px', height: '9px', borderRadius: '2px', backgroundColor: STAGES[0] }} />Fix
             </span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-              <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '2px', backgroundColor: STAGES[1] }} />2 review
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+              <span style={{ display: 'inline-block', width: '9px', height: '9px', borderRadius: '2px', backgroundColor: STAGES[1] }} />Review
             </span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-              <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '2px', backgroundColor: STAGES[2] }} />1 applies
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+              <span style={{ display: 'inline-block', width: '9px', height: '9px', borderRadius: '2px', backgroundColor: STAGES[2] }} />Apply
             </span>
           </div>
         </div>
@@ -485,7 +500,7 @@ const BunErrorsWorkflow: React.FC = () => {
           <div style={{
             marginBottom: '8px', fontFamily: 'var(--font-mono)',
             fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.18em', color: 'var(--text-muted)',
-          }}>by crate</div>
+          }}>3 &middot; by crate</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
             {CRATES.map(([name, color], i) => (
               <div key={name} className="wq-row" style={{

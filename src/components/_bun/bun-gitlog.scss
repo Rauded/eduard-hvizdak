@@ -131,7 +131,7 @@
   &__bar-added {
     height: 100%;
     border-radius: 2px;
-    background: var(--accent);
+    background: var(--status-good);
     transition: width 0.3s ease;
     min-width: 2px;
   }
@@ -139,7 +139,7 @@
   &__bar-removed {
     height: 100%;
     border-radius: 2px;
-    background: var(--text-faint);
+    background: var(--status-bad);
     transition: width 0.3s ease;
     min-width: 2px;
   }
@@ -194,13 +194,13 @@
   }
 
   &__commit-added {
-    color: var(--accent);
+    color: var(--status-good);
     font-weight: 600;
     font-feature-settings: 'tnum';
   }
 
   &__commit-removed {
-    color: var(--text-muted);
+    color: var(--status-bad);
     font-weight: 600;
     font-feature-settings: 'tnum';
   }

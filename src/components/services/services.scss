@@ -15,6 +15,8 @@
   --card-border-hover: var(--accent-ring);
   --rule: var(--border);
   --shadow: var(--shadow-card);
+  // Anthropic rust, used ONLY to color "Claude" references in the demos.
+  --claude: #d97757;
 
   position: relative;
   isolation: isolate;
@@ -323,48 +325,12 @@
   }
 }
 
-// ─── Closing CTA ────────────────────────────────────────────────────
-.services-cta {
-  margin-top: 72px;
-  padding: 44px 36px;
-  border-radius: 20px;
-  text-align: center;
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
+// The closing CTA now uses the shared <Contact /> component (see ServicesPage).
 
-  &__title {
-    font-family: var(--font-display);
-    font-size: clamp(1.4em, 3vw, 2em);
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--heading);
-    margin: 0 0 12px;
-  }
-
-  &__lead {
-    font-size: 1em;
-    line-height: 1.6;
-    color: var(--text-soft);
-    max-width: 52ch;
-    margin: 0 auto 26px;
-  }
-
-  .services-hero__cta { justify-content: center; }
-
-  &__direct {
-    margin: 22px 0 0;
-    font-size: 0.9em;
-    color: var(--text-mute);
-
-    a {
-      color: var(--accent-strong);
-      text-decoration: none;
-      border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
-      transition: color 0.18s ease, border-color 0.18s ease;
-
-      &:hover { color: var(--accent); border-bottom-color: var(--accent); }
-    }
-  }
+// ─── Claude references (Anthropic rust accent) ──────────────────────
+.services-claude {
+  color: var(--claude);
+  font-weight: 700;
 }
 
 // ─── How I work (process visualizations) ────────────────────────────

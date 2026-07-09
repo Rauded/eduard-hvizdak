@@ -8,12 +8,28 @@ import {
 
 // ── TEST: 21st.dev "Orbiting Circles" (magicui) ported to SCSS ──────────────
 // Integration icons orbit a central AI core in two concentric rings.
-const INNER = [SiOpenai, SiLangchain, SiPython, SiFastapi];
-const OUTER = [SiPostgresql, SiSupabase, SiStripe, SiVercel, SiOpenai, SiPython];
+// Each brand renders in its official color: Simple Icons draw as currentColor,
+// so we set color inline per icon rather than forcing one accent for all.
+type OrbitIcon = { Icon: React.ComponentType<any>; color: string };
 
-function ring(icons: React.ComponentType<any>[], radius: number, reverse = false) {
+const INNER: OrbitIcon[] = [
+  { Icon: SiOpenai, color: '#412991' },
+  { Icon: SiLangchain, color: '#1C3C3C' },
+  { Icon: SiPython, color: '#3776AB' },
+  { Icon: SiFastapi, color: '#009688' },
+];
+const OUTER: OrbitIcon[] = [
+  { Icon: SiPostgresql, color: '#4169E1' },
+  { Icon: SiSupabase, color: '#3FCF8E' },
+  { Icon: SiStripe, color: '#635BFF' },
+  { Icon: SiVercel, color: '#000000' },
+  { Icon: SiOpenai, color: '#412991' },
+  { Icon: SiPython, color: '#3776AB' },
+];
+
+function ring(icons: OrbitIcon[], radius: number, reverse = false) {
   const step = 360 / icons.length;
-  return icons.map((Icon, i) => {
+  return icons.map(({ Icon, color }, i) => {
     const angle = step * i;
     return (
       <span
@@ -22,7 +38,7 @@ function ring(icons: React.ComponentType<any>[], radius: number, reverse = false
         style={{ transform: `rotate(${angle}deg) translateX(${radius}px) rotate(-${angle}deg)` }}
       >
         <span className={reverse ? 'orbit__counter orbit__counter--rev' : 'orbit__counter'}>
-          <Icon aria-hidden />
+          <Icon aria-hidden style={{ color }} />
         </span>
       </span>
     );

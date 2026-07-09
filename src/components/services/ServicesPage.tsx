@@ -5,6 +5,7 @@ import {
 } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useTheme } from '../theme/ThemeContext';
+import Contact from '../contact/contact';
 import './services.scss';
 // TEST: 21st.dev showcase components (remove these + tags below to revert)
 import ServicesShowcase from '../_21test/ServicesShowcase';
@@ -83,6 +84,7 @@ const ServicesPage: React.FC = () => {
   const { theme } = useTheme();
 
   return (
+    <>
     <div className="services" data-theme={theme}>
       <Seo
         title="AI Consulting & Automation"
@@ -270,28 +272,11 @@ const ServicesPage: React.FC = () => {
         </div>
       </section>
 
-      <section className="services-cta">
-        <h2 className="services-cta__title">Have a problem worth solving?</h2>
-        <p className="services-cta__lead">
-          Tell me what is slowing your team down. If I can help, I will say so, and if I am not the
-          right fit, I will tell you that too.
-        </p>
-        <div className="services-hero__cta">
-          <a className="services-btn services-btn--primary" href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>
-            <LuMail aria-hidden="true" />
-            Email me
-            <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
-          </a>
-          <a className="services-btn services-btn--ghost" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-            <LuCalendar aria-hidden="true" />
-            Book a 30-min call
-          </a>
-        </div>
-        <p className="services-cta__direct">
-          Or email me directly at <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
-        </p>
-      </section>
     </div>
+
+    {/* The single, shared contact block, identical to the home page. */}
+    <Contact />
+    </>
   );
 };
 

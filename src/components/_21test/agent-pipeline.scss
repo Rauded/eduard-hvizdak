@@ -55,12 +55,14 @@
   &__wire { stroke: var(--card-border, var(--border-strong)); stroke-width: 1.5; fill: none; }
 
   &__comet {
-    stroke: var(--accent, var(--accent-text));
-    stroke-width: 2.5;
+    // Bright GitHub green so the traveling pulse reads instantly on the
+    // white stage (the navy version blended into the wire).
+    stroke: #2ea44f;
+    stroke-width: 3.5;
     fill: none;
     stroke-linecap: round;
-    stroke-dasharray: 14 86;
-    animation: agent-comet 3.4s linear infinite;
+    stroke-dasharray: 20 80;
+    animation: agent-comet 3s linear infinite;
   }
 
   &__col {
