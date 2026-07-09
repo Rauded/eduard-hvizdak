@@ -112,7 +112,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: 'zero-to-done',
-    title: 'Zero to Done: Pitching InzerPro at a Startup-Build Hackathon',
+    title: 'Zero to Done: Pitching InzerPro at a Startup Hackathon',
     date: '2026-06-08',
     category: 'Hackathons & Builds',
     excerpt:
