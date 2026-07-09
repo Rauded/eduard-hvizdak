@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  LuArrowRight, LuMail, LuCalendar, LuRepeat2, LuFileSearch, LuBot, LuShieldCheck,
+  LuArrowRight, LuMail, LuPhone, LuCalendar, LuRepeat2, LuFileSearch, LuBot, LuShieldCheck,
   LuCircleCheck,
 } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
@@ -26,6 +26,8 @@ import BunGitLogAnimation from '../_bun/BunGitLogAnimation';
 
 const EMAIL = 'eduardd.hv@gmail.com';
 const BOOKING_URL = process.env.REACT_APP_BOOKING_URL || 'https://cal.com/eduardhv/30min';
+const PHONE = '+421950774038';
+const PHONE_DISPLAY = '+421 950 774 038';
 
 // Each card leads with a hard number and a short story, then names the concrete
 // capabilities as tags. Color is used sparingly (icon + the stat), no color bar.
@@ -125,6 +127,10 @@ const ServicesPage: React.FC = () => {
           <a className="services-btn services-btn--ghost" href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>
             <LuMail aria-hidden="true" />
             Email me
+          </a>
+          <a className="services-btn services-btn--ghost" href={`tel:${PHONE}`}>
+            <LuPhone aria-hidden="true" />
+            Call {PHONE_DISPLAY}
           </a>
         </div>
       </header>
