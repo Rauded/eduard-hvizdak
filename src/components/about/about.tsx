@@ -5,6 +5,7 @@ import "./about.scss";
 import myPhoto from "../../assets/about/picture_of_me.jpeg";
 import myPhotoWebP from "../../assets/about/picture_of_me.webp";
 import { isExpertMode } from "../../config/positioning";
+import PixelReveal from "../../effects/PixelReveal";
 
 const About: React.FC = () => {
   const expert = isExpertMode();
@@ -32,10 +33,12 @@ const About: React.FC = () => {
           </p>
         </div>
         <div className="about-photo">
-          <picture>
-            <source srcSet={myPhotoWebP} type="image/webp" />
-            <img src={myPhoto} alt="Eduard Hvizdak" className="profile-photo" loading="lazy" />
-          </picture>
+          <PixelReveal className="profile-photo-wrap">
+            <picture>
+              <source srcSet={myPhotoWebP} type="image/webp" />
+              <img src={myPhoto} alt="Eduard Hvizdak" className="profile-photo" loading="lazy" />
+            </picture>
+          </PixelReveal>
         </div>
       </section>
 

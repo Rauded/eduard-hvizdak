@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { LuArrowRight } from 'react-icons/lu';
 import AsciiDitherBackground from './AsciiDitherBackground';
+import ScrambleText from '../../effects/ScrambleText';
 
 // ════════════════════════════════════════════════════════════════════════════
 // Hero, humandelta experiment. Centered serif headline and CTAs over the
@@ -192,7 +193,18 @@ const StatusWing = styled.span<{ $flip?: boolean }>`
   }
 `;
 
+// A slow sheen travels across the pill: a narrow band of light that sweeps and
+// then rests, rather than a constant gradient (keeps within the no-decorative-
+// gradient rule; the pill fill stays flat white, this is a moving highlight).
+const sheen = keyframes`
+  0%   { transform: translateX(-120%); }
+  55%  { transform: translateX(220%); }
+  100% { transform: translateX(220%); }
+`;
+
 const StatusPill = styled.span`
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -206,6 +218,30 @@ const StatusPill = styled.span`
   text-transform: uppercase;
   color: var(--text-muted, #3e4b66);
   white-space: nowrap;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 40%;
+    background: linear-gradient(
+      100deg,
+      transparent,
+      color-mix(in srgb, var(--accent, #182e5f) 14%, transparent),
+      transparent
+    );
+    transform: translateX(-120%);
+    animation: ${sheen} 5.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &::after {
+      display: none;
+    }
+  }
 `;
 
 const StatusDot = styled.span`
@@ -314,7 +350,7 @@ const Hero: React.FC = () => {
           </StatusPill>
           <StatusWing $flip aria-hidden="true" />
         </StatusRow>
-        <Headline>I'm Eduard Hvizdak.</Headline>
+        <Headline><ScrambleText text="I'm Eduard Hvizdak." /></Headline>
         <CtaRow>
           <PrimaryCta href="#projects">
             View projects <LuArrowRight /> <KeyChip>P</KeyChip>
