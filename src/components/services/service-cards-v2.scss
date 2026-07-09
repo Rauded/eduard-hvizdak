@@ -102,34 +102,20 @@
   }
 }
 
-// ─── Hero "free consultation" CTA: bigger, two-line, with a light sweep ──────
+// ─── Hero "free consultation" CTA: bigger, single line, with a light sweep ───
+// Center the hero CTA row so this button sits in the middle.
+.services-hero__cta { justify-content: center; }
+
 .svc-free-btn {
   position: relative;
   overflow: hidden;
-  padding: 15px 30px;
+  padding: 16px 32px;
   border-radius: 14px;
-  gap: 13px;
+  gap: 11px;
   align-items: center;
-
-  &__labels {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    line-height: 1.15;
-  }
-  &__main {
-    font-size: 1.06rem;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-  }
-  &__sub {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    margin-top: 3px;
-    opacity: 0.82;
-  }
+  font-size: 1.06rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 
   // The moving highlight. A translucent white band sweeps across on a loop.
   &__shine {

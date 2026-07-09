@@ -119,10 +119,7 @@ const ServicesPage: React.FC = () => {
           <a className="services-btn services-btn--primary svc-free-btn" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
             <span className="svc-free-btn__shine" aria-hidden="true" />
             <LuCalendar aria-hidden="true" />
-            <span className="svc-free-btn__labels">
-              <span className="svc-free-btn__main">Book a free consultation</span>
-              <span className="svc-free-btn__sub">Zdarma a nezávazné, no obligation</span>
-            </span>
+            Free, no-obligation consultation
             <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
           </a>
           <a className="services-btn services-btn--ghost" href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>
