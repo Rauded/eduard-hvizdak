@@ -382,12 +382,7 @@ const Hero: React.FC = () => {
       {(hero.concept === 'mesh' || hero.concept === 'grain' || hero.concept === 'ditherbg') && (
         <HeroBackdrop concept={hero.concept} />
       )}
-      {hero.concept === 'combined' && (
-        <>
-          <HeroBackdrop concept="ditherbg" faint />
-          <ReachingHands />
-        </>
-      )}
+      {hero.concept === 'combined' && <ReachingHands />}
       <Ruler side="left" />
       <Ruler side="right" />
       <Content $handsOffset={handsOffset}>
