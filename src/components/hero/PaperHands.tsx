@@ -18,7 +18,7 @@ const Band = styled.div`
   /* Match the cropped hands strip (3.1:1) so contain fills the band with the
      whole composition: both hands complete, nothing cut at the top, and a
      comfortable margin from the screen edges. */
-  width: min(94%, 1120px);
+  width: min(96%, 1300px);
   aspect-ratio: 3.1 / 1;
   z-index: 0;
   pointer-events: none;
@@ -51,11 +51,12 @@ const PaperHands: React.FC<Props> = ({ variant }) => (
         colorBack="#ffffff"
         colorFront="#182e5f"
         originalColors={false}
+        inverted
         grid="hex"
         type="gooey"
         size={0.5}
         radius={1.2}
-        contrast={0.45}
+        contrast={0.5}
         grainMixer={0.15}
         grainOverlay={0.12}
         fit="contain"
