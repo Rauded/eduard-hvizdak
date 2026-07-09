@@ -18,15 +18,17 @@ function edgePath(from: Pt, to: Pt): string {
   return `M ${from.x},${from.y} C ${mx},${from.y} ${mx},${to.y} ${to.x},${to.y}`;
 }
 
+// Per-node accent colors so the diagram reads as distinct inputs and outputs
+// instead of a wall of navy.
 const SOURCES = [
-  { icon: LuFileText, label: 'Documents' },
-  { icon: LuDatabase, label: 'Your database' },
-  { icon: LuGlobe, label: 'Web & APIs' },
+  { icon: LuFileText, label: 'Documents', color: '#2563eb' },
+  { icon: LuDatabase, label: 'Your database', color: '#d97757' },
+  { icon: LuGlobe, label: 'Web & APIs', color: '#1f8f4e' },
 ];
 const OUTPUTS = [
-  { icon: LuFileCheck2, label: 'Cited answers' },
-  { icon: LuMailCheck, label: 'Actions & email' },
-  { icon: LuZap, label: 'Triggers' },
+  { icon: LuFileCheck2, label: 'Cited answers', color: '#0d9488' },
+  { icon: LuMailCheck, label: 'Actions & email', color: '#7c3aed' },
+  { icon: LuZap, label: 'Triggers', color: '#eab308' },
 ];
 
 const AgentPipeline: React.FC = () => {
@@ -90,7 +92,7 @@ const AgentPipeline: React.FC = () => {
             const Icon = s.icon;
             return (
               <div className="agent-node" key={s.label} ref={(el) => { srcRefs.current[i] = el; }}>
-                <Icon aria-hidden />
+                <Icon aria-hidden style={{ color: s.color }} />
                 <span>{s.label}</span>
               </div>
             );
@@ -111,7 +113,7 @@ const AgentPipeline: React.FC = () => {
             const Icon = s.icon;
             return (
               <div className="agent-node" key={s.label} ref={(el) => { outRefs.current[i] = el; }}>
-                <Icon aria-hidden />
+                <Icon aria-hidden style={{ color: s.color }} />
                 <span>{s.label}</span>
               </div>
             );

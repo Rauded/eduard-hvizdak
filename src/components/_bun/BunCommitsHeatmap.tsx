@@ -12,8 +12,8 @@ function cellFill(n?: number): string {
   if (!n || n <= 0) return 'var(--surface-sunken)';
   // n ranges roughly 1..700, use a log scale to 0..1
   const t = Math.min(1, Math.log10(n + 1) / Math.log10(700));
-  // interpolate light navy toward deep navy (#182e5f)
-  const stops = [[233,238,246],[150,170,205],[95,124,175],[46,71,120],[24,46,95]];
+  // GitHub-style green contribution ramp (light -> deep green)
+  const stops = [[214,240,215],[155,233,168],[64,196,99],[48,161,78],[33,110,57]];
   const i = Math.min(stops.length - 2, Math.floor(t * (stops.length - 1)));
   const f = t * (stops.length - 1) - i;
   const c = stops[i].map((a, k) => Math.round(a + (stops[i+1][k]-a)*f));
@@ -74,7 +74,7 @@ const BunCommitsHeatmap: React.FC = () => {
         <div className="pc-count" style={{ fontFamily: 'var(--font-mono)', fontSize: 30, fontWeight: 700, fontVariantNumeric: 'tabular-nums', color: 'var(--text-strong)' }}>6,502 commits</div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 8, paddingBottom: 4, fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)' }}>
           <span>1</span>
-          <span style={{ display: 'inline-block', height: 10, width: 96, borderRadius: 2, background: 'linear-gradient(to right, var(--surface-sunken), #b9c6e0, #6f86b8, #34507f, var(--accent))' }}></span>
+          <span style={{ display: 'inline-block', height: 10, width: 96, borderRadius: 2, background: 'linear-gradient(to right, var(--surface-sunken), #9be9a8, #40c463, #30a14e, #216e39)' }}></span>
           <span>695 commits/hour</span>
         </div>
       </div>

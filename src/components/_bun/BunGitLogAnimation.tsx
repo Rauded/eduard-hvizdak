@@ -129,10 +129,10 @@ const BunGitLogAnimation: React.FC = () => {
       </div>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '6px 18px', padding: '4px 28px 0' }}>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)' }}>
-          <span aria-hidden="true" style={{ width: 10, height: 10, borderRadius: 2, backgroundColor: 'var(--status-good)' }} />lines added
+          <span aria-hidden="true" style={{ width: 10, height: 10, borderRadius: 2, backgroundColor: '#f472b6' }} />lines added
         </span>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text-muted)' }}>
-          <span aria-hidden="true" style={{ width: 10, height: 10, borderRadius: 2, backgroundColor: 'var(--status-bad)' }} />lines removed
+          <span aria-hidden="true" style={{ width: 10, height: 10, borderRadius: 2, backgroundColor: '#22d3ee' }} />lines removed
         </span>
       </div>
       <div style={{ padding: '4px 28px 0', fontFamily: 'var(--font-mono)', fontSize: 11, lineHeight: 1.4, color: 'var(--text-muted)' }}>
@@ -145,7 +145,7 @@ const BunGitLogAnimation: React.FC = () => {
             <div style={{ marginTop: 4, fontFamily: 'var(--font-mono)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)' }}>commits</div>
           </div>
           <div>
-            <div className="r-lines" style={{ fontFamily: 'var(--font-mono)', fontSize: 30, fontWeight: 700, fontVariantNumeric: 'tabular-nums', color: 'var(--status-good)' }}>+0</div>
+            <div className="r-lines" style={{ fontFamily: 'var(--font-mono)', fontSize: 30, fontWeight: 700, fontVariantNumeric: 'tabular-nums', color: '#f472b6' }}>+0</div>
             <div style={{ marginTop: 4, fontFamily: 'var(--font-mono)', fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.1em', color: 'var(--text-muted)' }}>lines written, rewrites included</div>
           </div>
         </div>
@@ -176,8 +176,8 @@ const BunGitLogAnimation: React.FC = () => {
         {[0, 1, 2].map((ri) => (
           <div key={ri} className="r-log" style={{ display: 'flex', height: 20, alignItems: 'baseline', gap: 12, color: ri === 2 ? 'var(--text-strong)' : 'var(--text-muted)' }}>
             <span className="r-log-s" style={{ minWidth: 0, flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{'\u00A0'}</span>
-            <span className="r-log-i" style={{ flexShrink: 0, color: 'var(--status-good)' }}></span>
-            <span className="r-log-d" style={{ flexShrink: 0, width: 56, textAlign: 'right', color: 'var(--status-bad)' }}></span>
+            <span className="r-log-i" style={{ flexShrink: 0, color: '#f472b6' }}></span>
+            <span className="r-log-d" style={{ flexShrink: 0, width: 56, textAlign: 'right', color: '#22d3ee' }}></span>
           </div>
         ))}
       </div>

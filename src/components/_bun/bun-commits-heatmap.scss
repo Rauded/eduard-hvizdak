@@ -54,8 +54,8 @@
     width: 96px;
     height: 10px;
     border-radius: 2px;
-    // Functional data legend: navy intensity ramp (light = few commits, deep navy = many)
-    background: linear-gradient(to right, var(--surface-sunken), #b9c6e0, #6f86b8, #34507f, var(--accent));
+    // Functional data legend: GitHub-style green ramp (light = few commits, deep green = many)
+    background: linear-gradient(to right, var(--surface-sunken), #9be9a8, #40c463, #30a14e, #216e39);
 
     &--wide {
       width: 140px;

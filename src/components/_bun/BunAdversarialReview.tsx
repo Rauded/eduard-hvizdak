@@ -188,8 +188,10 @@ const BunAdversarialReview: React.FC = () => {
 
   return (
     <section ref={rootRef} id="rZQUQqMfyk" className="not-prose" style={{
-      overflowAnchor: 'none', overflow: 'hidden', borderTop: '1px solid var(--border)',
-      borderBottom: '1px solid var(--border)', background: 'var(--surface)', color: 'var(--text)',
+      overflowAnchor: 'none', overflow: 'hidden', borderTop: '1px solid var(--border-strong)',
+      // Slightly darker cool grey (not a full dark terminal), so the white
+      // code bubbles pop and the panel stands apart from the page.
+      borderBottom: '1px solid var(--border-strong)', background: '#e5e9ef', color: 'var(--text)',
     }}>
       <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'space-between', gap: '4px 16px', padding: '20px 28px 4px' }}>
         <span style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 12 }}>

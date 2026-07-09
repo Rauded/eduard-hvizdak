@@ -5,7 +5,7 @@ import {
 } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useTheme } from '../theme/ThemeContext';
-import Contact from '../contact/contact';
+import ContactGradient from '../_21test/ContactGradient';
 import './services.scss';
 // TEST: 21st.dev showcase components (remove these + tags below to revert)
 import ServicesShowcase from '../_21test/ServicesShowcase';
@@ -28,9 +28,12 @@ const BOOKING_URL = process.env.REACT_APP_BOOKING_URL || 'https://cal.com/eduard
 
 // Specific problem → specific outcome. Each card names a real thing I built and
 // the concrete result, not a generic capability.
+// Each card carries its own accent so the grid reads as four distinct
+// services rather than one navy block. Colors stay saturated but grounded.
 const SERVICES = [
   {
     icon: <LuWorkflow />,
+    accent: '#2563eb', // blue: automation
     title: 'Kill the copy-paste busywork',
     outcome: 'Give your team back the hours they lose to repetitive manual work.',
     example: 'A power seller was deleting and re-posting dozens of classified ads by hand every single day to stay at the top of the category. I replaced the whole grind with a scheduling engine that re-lists automatically, around the clock.',
@@ -38,6 +41,7 @@ const SERVICES = [
   },
   {
     icon: <LuFileSearch />,
+    accent: '#0d9488', // teal: document intelligence
     title: 'Turn document piles into instant answers',
     outcome: 'Ask in plain language, get an answer cited to the exact source.',
     example: 'For a public-contracts platform I built a retrieval system (vector search + reranking + fact-verification) over millions of government contracts, so staff find the exact clause in seconds instead of digging through PDFs, with a citation every time.',
@@ -45,6 +49,7 @@ const SERVICES = [
   },
   {
     icon: <LuBot />,
+    accent: '#d97757', // Anthropic rust: agents
     title: 'Agents that do the work, not just chat',
     outcome: 'Hand off a whole process: read, research, verify, summarize, act.',
     example: 'An autonomous multi-agent pipeline running OCR, scraping, search, fact-verification and LLM summarization end to end, categorizing millions of records in parallel with a human in the loop where it counts.',
@@ -52,6 +57,7 @@ const SERVICES = [
   },
   {
     icon: <LuServer />,
+    accent: '#1f8f4e', // green: private on-prem
     title: 'Private AI that never leaves your building',
     outcome: 'The leverage of AI without shipping sensitive data to someone else’s cloud.',
     example: 'For Czech and Slovak firms I deploy AI assistants on dedicated hardware installed on-site: GDPR-friendly, InfoSec-hardened and fully managed, so a non-technical team gets value from day one without babysitting it.',
@@ -133,10 +139,13 @@ const ServicesPage: React.FC = () => {
         <div className="services-grid">
           {SERVICES.map((s, i) => (
             <Reveal key={s.title} delay={i * 90}>
-              <article className="services-card">
-                <span className="services-card__icon">{s.icon}</span>
+              <article className="services-card" style={{ borderTop: `3px solid ${s.accent}` }}>
+                <span
+                  className="services-card__icon"
+                  style={{ color: s.accent, background: `color-mix(in srgb, ${s.accent} 14%, transparent)` }}
+                >{s.icon}</span>
                 <h3 className="services-card__title">{s.title}</h3>
-                <p className="services-card__outcome">{s.outcome}</p>
+                <p className="services-card__outcome" style={{ color: s.accent }}>{s.outcome}</p>
                 <p className="services-card__body">{s.example}</p>
                 <p className="services-card__metric">{s.metric}</p>
               </article>
@@ -274,8 +283,8 @@ const ServicesPage: React.FC = () => {
 
     </div>
 
-    {/* The single, shared contact block, identical to the home page. */}
-    <Contact />
+    {/* The single, shared contact block, identical to the home page bottom. */}
+    <ContactGradient />
     </>
   );
 };
