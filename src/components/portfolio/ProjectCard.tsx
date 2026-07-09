@@ -266,7 +266,7 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
         aria-haspopup="dialog"
       >
         <LuBookOpen aria-hidden="true" />
-        Read the full story
+        Project details
       </button>
       {dialog}
     </>
