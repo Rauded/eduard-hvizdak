@@ -39,6 +39,53 @@ const About: React.FC = () => {
         </div>
       </section>
 
+      {/* Toolkit index + meta grid: hairline-ruled list (Nomenclature style),
+          a ghosted section word (oliver_gareis), and a mono label/value grid.
+          All patterns from the Design & UI bookmarks. */}
+      <section className="about-index">
+        <span className="about-index__ghost" aria-hidden="true">TOOLKIT</span>
+        <span className="about-index__rail" aria-hidden="true">PYTHON · LLMS · RETRIEVAL</span>
+
+        <div className="about-index__body">
+          <h3 className="about-index__title">
+            Toolkit<sup>1</sup>
+          </h3>
+
+          <ul className="about-index__list">
+            <li><span className="k">Python</span><span className="v">primary language</span></li>
+            <li><span className="k">LangChain</span><span className="v">agent &amp; RAG orchestration</span></li>
+            <li><span className="k">FastAPI</span><span className="v">async backends</span></li>
+            <li><span className="k">Vector search</span><span className="v">retrieval infrastructure</span></li>
+            <li><span className="k">Multi-agent</span><span className="v">tool-using pipelines</span></li>
+            <li><span className="k">Embeddings</span><span className="v">document intelligence</span></li>
+            <li><span className="k">TypeScript</span><span className="v">product front ends</span></li>
+            <li><span className="k">Postgres</span><span className="v">structured data</span></li>
+          </ul>
+
+          <dl className="about-index__meta">
+            <div>
+              <dt>Focus</dt>
+              <dd>Agentic AI, RAG, document intelligence</dd>
+            </div>
+            <div>
+              <dt>Stack</dt>
+              <dd>Python · FastAPI · LangChain · Postgres</dd>
+            </div>
+            <div>
+              <dt>Based</dt>
+              <dd>Brno, Czechia &middot; Masaryk University</dd>
+            </div>
+            <div>
+              <dt>Elsewhere</dt>
+              <dd>
+                <a href="https://github.com/Rauded" target="_blank" rel="noreferrer">GitHub</a>,{' '}
+                <a href="https://x.com/AdraHaeman" target="_blank" rel="noreferrer">X</a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
       <Link to="/blog/digital-fairness-act-youth-dialogue" className="about-highlight">
         <div className="about-highlight__media">
           <img

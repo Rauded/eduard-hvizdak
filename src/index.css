@@ -167,6 +167,26 @@
   font-display: swap;
 }
 
+/* ── Geist Mono (Vercel, OFL): the technical signature face ──────────────
+   Variable weight; drives --font-mono below (logo, eyebrows, labels, tags,
+   ruler measurements). To revert to RobotoMono, point --font-mono back at it. */
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('./fonts/Geist/GeistMono-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+/* Geist Sans variable, kept available as an alternate body face (not wired in
+   by default; General Sans stays --font-sans). */
+@font-face {
+  font-family: 'Geist';
+  src: url('./fonts/Geist/Geist-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ─── Typography system ─────────────────────────────────────────────────────
    Three roles, swappable in one place. --font-mono keeps the technical
    signature on the terminal / code / typewriter; --font-display drives the big
@@ -178,7 +198,9 @@
   --font-sans: 'General Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-serif: 'Jeju Myeongjo', Georgia, Cambria, 'Times New Roman', serif;
   --font-serif-reading: 'Source Serif 4', Georgia, Cambria, 'Times New Roman', serif;
-  --font-mono: 'RobotoMono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  /* Geist Mono is the technical signature now; RobotoMono stays a fallback and
+     a one-line revert target. */
+  --font-mono: 'Geist Mono', 'RobotoMono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --font-body: var(--font-sans);
   /* humandelta sets every display heading in the serif face. */

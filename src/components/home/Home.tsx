@@ -1,5 +1,6 @@
 import React from 'react';
 import Seo from '../../seo/Seo';
+import SectionMarker from '../common/SectionMarker';
 // @ts-ignore
 import Hero from '../hero/hero.tsx';
 // @ts-ignore
@@ -19,9 +20,13 @@ const Home: React.FC = () => (
       path="/"
     />
     <Hero />
+    <SectionMarker index="01" label="About" />
     <About />
+    <SectionMarker index="02" label="Experience" />
     <Resume />
+    <SectionMarker index="03" label="Projects" />
     <Projects />
+    <SectionMarker index="04" label="Contact" />
     <Contact />
   </>
 );
