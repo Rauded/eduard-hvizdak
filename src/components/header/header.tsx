@@ -57,13 +57,13 @@ const Header: React.FC = () => {
           <FaUser />
           About
         </a>
-        <a href="#projects" className="nav-link" onClick={(e) => goToSection(e, 'projects')}>
-          <FaCode />
-          Projects
-        </a>
         <a href="#resume" className="nav-link" onClick={(e) => goToSection(e, 'resume')}>
           <FaFileAlt />
           Resume
+        </a>
+        <a href="#projects" className="nav-link" onClick={(e) => goToSection(e, 'projects')}>
+          <FaCode />
+          Projects
         </a>
         <Link
           to="/services"
