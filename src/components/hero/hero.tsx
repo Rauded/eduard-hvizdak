@@ -4,19 +4,27 @@ import { LuArrowRight } from 'react-icons/lu';
 import AsciiDitherBackground from './AsciiDitherBackground';
 import HandsShader from './HandsShader';
 import PaperHands from './PaperHands';
+import { DEFAULT_VARIANT } from './heroVariants';
 
-// Hero hands renderer, chosen live via ?hands=:
-//   paperdither (default) Paper Shaders ImageDithering
-//   paper                 Paper Shaders HalftoneDots
-//   shader                the hand-rolled WebGL halftone (HandsShader)
-//   dither                the 2D canvas halftone (AsciiDitherBackground)
-type HandsMode = 'shader' | 'dither' | 'paper' | 'paperdither';
+// Hero hands renderer. ?variant=N selects a Paper Shaders preset (see
+// heroVariants.ts) for the design-review loop. Otherwise ?hands= picks the
+// renderer family: paper (halftone) / shader (WebGL) / dither (2D canvas);
+// the default is the Paper dither preset.
+type HeroRender =
+  | { kind: 'paper'; variant: number }
+  | { kind: 'shader' }
+  | { kind: 'dither2d' };
 
-const readHandsMode = (): HandsMode => {
-  if (typeof window === 'undefined') return 'paperdither';
-  const q = new URLSearchParams(window.location.search).get('hands');
-  if (q === 'dither' || q === 'paper' || q === 'shader') return q;
-  return 'paperdither';
+const readHeroRender = (): HeroRender => {
+  if (typeof window === 'undefined') return { kind: 'paper', variant: DEFAULT_VARIANT };
+  const q = new URLSearchParams(window.location.search);
+  const variant = q.get('variant');
+  if (variant && /^\d+$/.test(variant)) return { kind: 'paper', variant: parseInt(variant, 10) };
+  const hands = q.get('hands');
+  if (hands === 'shader') return { kind: 'shader' };
+  if (hands === 'dither') return { kind: 'dither2d' };
+  if (hands === 'paper') return { kind: 'paper', variant: 9 };
+  return { kind: 'paper', variant: DEFAULT_VARIANT };
 };
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -334,12 +342,11 @@ const scrollToId = (id: string) => {
 };
 
 const Hero: React.FC = () => {
-  // Resolve the hands renderer after mount so the prerendered HTML and the
-  // first client render agree (both start with the Paper dither).
-  const [handsMode, setHandsMode] = useState<HandsMode>('paperdither');
-  useEffect(() => {
-    setHandsMode(readHandsMode());
-  }, []);
+  // Resolve the hands renderer at first render so each ?variant= mounts the
+  // Paper shader with the right preset from the start (the shader library
+  // memoizes on colour props, so a post-mount switch between same-colour
+  // presets would be skipped). The no-param default matches the prerender.
+  const [render] = useState<HeroRender>(() => readHeroRender());
 
   // Working single-key shortcuts for the CTA chips: P scrolls to projects,
   // E to contact. Ignored while typing or when a modifier is held.
@@ -357,10 +364,9 @@ const Hero: React.FC = () => {
 
   return (
     <HeroContainer id="home">
-      {handsMode === 'shader' && <HandsShader />}
-      {handsMode === 'dither' && <AsciiDitherBackground />}
-      {handsMode === 'paper' && <PaperHands variant="halftone" />}
-      {handsMode === 'paperdither' && <PaperHands variant="dither" />}
+      {render.kind === 'paper' && <PaperHands key={render.variant} variant={render.variant} />}
+      {render.kind === 'shader' && <HandsShader />}
+      {render.kind === 'dither2d' && <AsciiDitherBackground />}
       <Ruler side="left" />
       <Ruler side="right" />
       <Content>

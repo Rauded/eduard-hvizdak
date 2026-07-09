@@ -2,30 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import { HalftoneDots, ImageDithering } from '@paper-design/shaders-react';
 import handsSrc from '../../assets/hero/hands.jpg';
+import { HeroVariant, getVariant, DEFAULT_VARIANT } from './heroVariants';
 
 // Paper Shaders (paper.design, MIT) rendering the hands photo as a GPU halftone
-// or ordered-dither in the site navy. Two variants, compared against the
-// hand-rolled shader / 2D dither via ?hands= in hero.tsx. The image is on a
-// black ground, so low luminance maps to the page white (colorBack) and the
-// hands render in navy (colorFront). Confined to the top band with a soft
-// bottom fade so it never overlays the headline; desktop-only.
+// or ordered-dither in the site navy. The exact treatment comes from a variant
+// preset (see heroVariants.ts), selected via ?variant= for the design-review
+// loop. Confined to a top band matching the cropped hands strip (3.1:1) so the
+// whole composition shows with nothing cut; desktop-only.
 
-const Band = styled.div`
+const Band = styled.div<{ $maxWidth: number }>`
   position: absolute;
   top: 24px;
   left: 50%;
   transform: translateX(-50%);
-  /* Match the cropped hands strip (3.1:1) so contain fills the band with the
-     whole composition: both hands complete, nothing cut at the top, and a
-     comfortable margin from the screen edges. */
-  width: min(96%, 1300px);
+  width: min(96%, ${(p) => p.$maxWidth}px);
   aspect-ratio: 3.1 / 1;
   z-index: 0;
   pointer-events: none;
   -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
   mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
 
-  /* Paper renders a <div><canvas> that we let fill the band. */
   & > div,
   & canvas {
     width: 100% !important;
@@ -38,46 +34,48 @@ const Band = styled.div`
 `;
 
 interface Props {
-  variant: 'halftone' | 'dither';
+  variant?: number;
 }
 
-const PaperHands: React.FC<Props> = ({ variant }) => (
-  <Band aria-hidden="true">
-    {variant === 'halftone' ? (
-      <HalftoneDots
-        width="100%"
-        height="100%"
-        image={handsSrc}
-        colorBack="#ffffff"
-        colorFront="#182e5f"
-        originalColors={false}
-        inverted
-        grid="hex"
-        type="gooey"
-        size={0.5}
-        radius={1.2}
-        contrast={0.5}
-        grainMixer={0.15}
-        grainOverlay={0.12}
-        fit="contain"
-      />
-    ) : (
-      <ImageDithering
-        width="100%"
-        height="100%"
-        image={handsSrc}
-        colorBack="#ffffff"
-        colorFront="#182e5f"
-        colorHighlight="#8aa5d8"
-        originalColors={false}
-        inverted={false}
-        type="8x8"
-        size={1.3}
-        colorSteps={6}
-        fit="contain"
-      />
-    )}
-  </Band>
-);
+const PaperHands: React.FC<Props> = ({ variant = DEFAULT_VARIANT }) => {
+  const v: HeroVariant = getVariant(variant);
+  return (
+    <Band $maxWidth={v.bandMaxWidth} aria-hidden="true">
+      {v.renderer === 'halftone' ? (
+        <HalftoneDots
+          width="100%"
+          height="100%"
+          image={handsSrc}
+          colorBack={v.colorBack}
+          colorFront={v.colorFront}
+          originalColors={false}
+          inverted
+          grid={v.grid}
+          type={v.dotType}
+          size={v.size}
+          radius={v.radius}
+          contrast={v.contrast}
+          grainOverlay={v.grainOverlay ?? 0}
+          fit="contain"
+        />
+      ) : (
+        <ImageDithering
+          width="100%"
+          height="100%"
+          image={handsSrc}
+          colorBack={v.colorBack}
+          colorFront={v.colorFront}
+          colorHighlight={v.colorHighlight}
+          originalColors={false}
+          inverted={false}
+          type={v.ditherType}
+          size={v.size}
+          colorSteps={v.colorSteps}
+          fit="contain"
+        />
+      )}
+    </Band>
+  );
+};
 
 export default PaperHands;
