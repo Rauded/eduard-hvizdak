@@ -7,7 +7,7 @@ import './header.scss';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
+  const { theme, toggleTheme, canToggle } = useTheme();
   const location = useLocation();
   const navigate = useNavigate();
   const isBlog = location.pathname.startsWith('/blog');
@@ -89,14 +89,16 @@ const Header: React.FC = () => {
           <FaRegClock />
           Now
         </Link>
-        <button
-          type="button"
-          className="site-theme-toggle"
-          onClick={toggleTheme}
-          aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-        >
-          {theme === 'dark' ? <LuSun /> : <LuMoon />}
-        </button>
+        {canToggle && (
+          <button
+            type="button"
+            className="site-theme-toggle"
+            onClick={toggleTheme}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            {theme === 'dark' ? <LuSun /> : <LuMoon />}
+          </button>
+        )}
       </nav>
     </header>
   );

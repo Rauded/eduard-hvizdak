@@ -142,17 +142,46 @@
   font-display: swap;
 }
 
+/* ── General Sans (variable): humandelta experiment body/display sans ───── */
+@font-face {
+  font-family: 'General Sans';
+  src: url('./fonts/GeneralSans/GeneralSans-Variable.woff2') format('woff2');
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'General Sans';
+  src: url('./fonts/GeneralSans/GeneralSans-VariableItalic.woff2') format('woff2');
+  font-weight: 200 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ── Jeju Myeongjo: serif accent, single display words only ─────────────── */
+@font-face {
+  font-family: 'Jeju Myeongjo';
+  src: url('./fonts/JejuMyeongjo/JejuMyeongjo-Regular-latin.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ─── Typography system ─────────────────────────────────────────────────────
    Three roles, swappable in one place. --font-mono keeps the technical
    signature on the terminal / code / typewriter; --font-display drives the big
-   headings (flip it to var(--font-serif) for an editorial look); --font-body is
-   the clean sans everything else reads in. */
+   headings; --font-body is the clean sans everything else reads in.
+   Humandelta experiment: General Sans everywhere, Jeju Myeongjo reserved for
+   the serif accent role (one italic word in a headline, nothing more). Blog
+   prose keeps Source Serif 4 via --font-serif-reading. */
 :root {
-  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-serif: 'Source Serif 4', Georgia, Cambria, 'Times New Roman', serif;
+  --font-sans: 'General Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Jeju Myeongjo', Georgia, Cambria, 'Times New Roman', serif;
+  --font-serif-reading: 'Source Serif 4', Georgia, Cambria, 'Times New Roman', serif;
   --font-mono: 'RobotoMono', ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --font-body: var(--font-sans);
+  /* humandelta sets every display heading in the serif face. */
   --font-display: var(--font-serif);
 }
 
@@ -162,11 +191,13 @@
    canvas are derived from --accent with color-mix, so switching the accent
    means changing at most two values here. Light mode overrides below. */
 :root {
-  --accent: #3b82f6;        /* fills: buttons, bars, markers */
-  --accent-strong: #2563eb; /* hover/darker fill */
-  --accent-text: color-mix(in srgb, var(--accent) 72%, #fff);      /* links, eyebrows */
-  --accent-text-soft: color-mix(in srgb, var(--accent) 52%, #fff); /* softer accent text */
-  --accent-heading: color-mix(in srgb, var(--accent) 30%, #fff);   /* big headings */
+  /* Humandelta experiment: deep navy ramp. Dark mode is pinned off in this
+     branch but the tokens stay coherent so unpinning does not break. */
+  --accent: #3f5ba0;        /* fills: buttons, bars, markers (navy-mid, readable on dark) */
+  --accent-strong: #243f7c; /* hover/darker fill */
+  --accent-text: #8aa5d8;      /* links, eyebrows (navy-pale) */
+  --accent-text-soft: #5c7bc0; /* softer accent text (navy-sky) */
+  --accent-heading: #c3d2ea;   /* big headings (navy-mist) */
   --accent-soft: color-mix(in srgb, var(--accent) 10%, transparent);
   --accent-ring: color-mix(in srgb, var(--accent) 30%, transparent);
 }
@@ -184,7 +215,7 @@ html, body {
    paints at z-index -1, which is above the root background but below body's
    own background. Body must stay transparent for the layer to show. */
 html {
-  background-color: #09090b;
+  background-color: #141416;
 }
 
 /* Ease the whole page across a theme toggle instead of a hard snap. Scoped to
@@ -207,23 +238,37 @@ html[data-theme] body *::after {
    in styles/light.scss. Dark mode leaves these unset so the original look — the
    near-black gradient — falls through unchanged. */
 :root[data-theme='light'] {
-  --page-bg: #fafaf8;
-  --surface: #ffffff;
-  --surface-sunken: #f3f3ef;
-  --text: #16161a;
-  --text-strong: #0b0b0f;
-  --text-muted: rgba(22, 22, 26, 0.66);
-  --text-faint: rgba(22, 22, 26, 0.45);
-  --border: rgba(22, 22, 26, 0.10);
-  --border-strong: rgba(22, 22, 26, 0.16);
-  --accent: #2563eb;
-  --accent-strong: #1d4ed8;
+  /* Humandelta palette: pure white canvas, #f6f6f6 raised surfaces, slate ink
+     text, one deep navy accent. Borders are quiet hairlines, shadows neutral. */
+  --page-bg: #ffffff;
+  --surface: #f6f6f6;
+  --surface-sunken: #eef0f2;
+  --text: #0e1320;
+  --text-strong: #0a1530;
+  --text-muted: #3e4b66;
+  --text-faint: #7484a0;
+  --border: #e6e9ec;
+  --border-strong: color-mix(in srgb, color-mix(in srgb, #182e5f 12%, #d8d8d8) 70%, transparent);
+  --accent: #182e5f;
+  --accent-strong: #0f1f44;
   /* On a light canvas, accent text runs darker, not lighter. */
-  --accent-text: var(--accent-strong);
-  --accent-text-soft: var(--accent);
-  --accent-heading: var(--accent-strong);
-  --shadow-card: 0 1px 2px rgba(22, 22, 26, 0.05), 0 10px 30px rgba(22, 22, 26, 0.06);
-  --shadow-accent: 0 1px 2px rgba(22, 22, 26, 0.12);
+  --accent-text: #182e5f;
+  --accent-text-soft: #3f5ba0;
+  --accent-heading: #0f1f44;
+  --accent-soft: #eaf0f8;
+  --accent-ring: #c3d2ea;
+  --status-good: #1f8f4e;
+  --status-good-surface: #eef6f0;
+  --status-warn: #c47d1a;
+  --status-bad: #c0392b;
+  --shadow-card: 0 1px 2px rgba(14, 19, 32, 0.05), 0 8px 24px rgba(14, 19, 32, 0.05);
+  --shadow-accent: 0 1px 2px rgba(14, 19, 32, 0.10);
+  --container-px: 64px;
+}
+@media (max-width: 768px) {
+  :root[data-theme='light'] {
+    --container-px: 24px;
+  }
 }
 
 /* ─── Canvas presets (light mode only) ──────────────────────────────────────

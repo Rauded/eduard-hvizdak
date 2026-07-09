@@ -1,13 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { useTheme } from '../theme/ThemeContext';
-// Source photo: "Water lily on black" by ryan baker thefirebaker, Wikimedia
-// Commons, CC0, cropped around the bloom
-// (https://commons.wikimedia.org/wiki/File:Water_lily_on_black_(Unsplash).jpg)
-// Chosen because the whole flower has an iconic, instantly readable
-// silhouette: layered petals radiating from a bright center. Abstract petal
-// macros dither into elegant mush; a full bloom stays a flower.
-import flowerSrc from '../../assets/hero/flower.jpg';
+// Source photo: "Person Reaching Out to a Robot" by Tara Winstead, Pexels
+// (free license, https://www.pexels.com/photo/8386434/), background removed
+// and composited on black. The Creation-of-Adam composition: a human hand and
+// a robotic hand reaching toward each other. Iconic, instantly readable
+// silhouette, and the subject IS the site's pitch (humans working with AI).
+import handsSrc from '../../assets/hero/hands.jpg';
 
 // Hero background: the flower photo is re-rendered live as a fine-grained
 // Bayer-dithered halftone (2 to 3 px dots, like a risograph print) in the
@@ -32,9 +31,9 @@ interface Props {
 // makes the fine dot pitch affordable.
 
 const MASKS = {
-  /* one focal mass: the whole bloom sits in the upper right and dissolves
-     softly at its own edges, well before the headline column */
-  bloom: 'radial-gradient(68% 74% at 79% 38%, #000 55%, transparent 76%)',
+  /* the whole hands composition spans the hero, dissolving softly at the
+     edges; the Content quiet-zone halo hollows the center for the headline */
+  bloom: 'radial-gradient(86% 62% at 50% 26%, #000 70%, transparent 94%)',
   /* embroidery: only the side bands show, the center of the hero stays clear */
   edges:
     'linear-gradient(90deg, #000 0%, rgba(0,0,0,0.85) 12%, transparent 38%, transparent 62%, rgba(0,0,0,0.85) 88%, #000 100%)',
@@ -77,9 +76,9 @@ const BAYER8 = [
 ].map((row) => row.map((v) => (v + 0.5) / 64));
 
 // Dither cells are ImageData pixels, so the budget is generous: 1440x900 at a
-// 3px pitch is ~144k cells and still one putImageData + one drawImage.
-const MAX_DITHER_CELLS = 220000;
-const FRAME_MS = 50; // ~20fps; the shimmer reads fine well below 60fps
+// 2px pitch is ~324k cells and still one putImageData + one drawImage.
+const MAX_DITHER_CELLS = 420000;
+const FRAME_MS = 66; // ~15fps; the slow breath reads fine and halves the work
 // Cells darker than this never draw, so the photo's black ground stays truly
 // empty and the bloom keeps a crisp silhouette (the shimmer amplitude cannot
 // lift background cells over it).
@@ -88,7 +87,7 @@ const LUM_FLOOR = 0.06;
 // Levels curve applied at sample time. A gentle contrast expansion keeps the
 // long backlit gradients (which the fine dither turns into smooth density
 // ramps) while dropping the near-black ground below the floor.
-const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.12) * 1.55));
+const shape = (lum: number) => Math.min(1, Math.max(0, (lum - 0.06) * 1.9));
 
 const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -103,31 +102,23 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Brand-blue palette per theme: rgba tuples feed the dither's ImageData
-    // directly (base tone for the body of the bloom, hi for petal highlights).
+    // Navy palette for the humandelta experiment: rgba tuples feed the
+    // dither's ImageData directly (base tone for the body of the bloom, hi
+    // for petal highlights). Retinted from the original brand blue.
     const palette =
       theme === 'dark'
         ? {
-            base: [96, 165, 250, 82] as const, // #60a5fa at 0.32
-            hi: [147, 197, 253, 210] as const, // #93c5fd at 0.82
+            base: [92, 123, 192, 82] as const, // #5c7bc0 at 0.32
+            hi: [138, 165, 216, 210] as const, // #8aa5d8 at 0.82
           }
         : {
-            base: [76, 118, 235, 120] as const, // soft blue at 0.47
-            hi: [37, 99, 235, 205] as const, // #2563eb at 0.8
+            base: [63, 91, 160, 185] as const, // #3f5ba0 at 0.73
+            hi: [24, 46, 95, 235] as const, // #182e5f at 0.92
           };
 
     const off = document.createElement('canvas');
     const offCtx = off.getContext('2d', { willReadFrequently: true });
     if (!offCtx) return undefined;
-    // Dither dots are written here at 1px per cell, then upscaled.
-    const dotCanvas = document.createElement('canvas');
-    const dotCtx = dotCanvas.getContext('2d');
-    if (!dotCtx) return undefined;
-    // Static 1px grid knocked out of the upscaled dots each frame so they
-    // read as separate printed dots, not merged blocks.
-    const gridCanvas = document.createElement('canvas');
-    const gridCtx = gridCanvas.getContext('2d');
-    if (!gridCtx) return undefined;
 
     const img = new Image();
     let imgReady = false;
@@ -135,7 +126,6 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
     let rows = 0;
     let cell = 0;
     let hash = new Float32Array(0);
-    let dots: ImageData | null = null;
     let rafId = 0;
     let running = false;
     let inView = true;
@@ -148,7 +138,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
       const w = Math.max(1, Math.round(rect.width));
       const h = Math.max(1, Math.round(rect.height));
       const maxCells = MAX_DITHER_CELLS;
-      cell = w < 768 ? 2 : 3;
+      cell = 4; // print pitch; batched Path2D drawing keeps this cheap
       // Bound total work regardless of viewport size.
       while (Math.ceil(w / cell) * Math.ceil(h / cell) > maxCells) cell += 1;
       cols = Math.ceil(w / cell);
@@ -159,24 +149,6 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       off.width = cols;
       off.height = rows;
-      {
-        dotCanvas.width = cols;
-        dotCanvas.height = rows;
-        dots = dotCtx.createImageData(cols, rows);
-        // Grid mask in device pixels: opaque 1px lines on every cell boundary.
-        gridCanvas.width = canvas.width;
-        gridCanvas.height = canvas.height;
-        gridCtx.setTransform(1, 0, 0, 1, 0, 0);
-        gridCtx.clearRect(0, 0, gridCanvas.width, gridCanvas.height);
-        gridCtx.fillStyle = '#000';
-        const step = cell * dpr;
-        for (let gx = 0; gx <= cols; gx++) {
-          gridCtx.fillRect(Math.round(gx * step) - 1, 0, 1, gridCanvas.height);
-        }
-        for (let gy = 0; gy <= rows; gy++) {
-          gridCtx.fillRect(0, Math.round(gy * step) - 1, gridCanvas.width, 1);
-        }
-      }
       // Per-cell deterministic hash so the shimmer breathes instead of
       // flickering with fresh randomness every frame.
       hash = new Float32Array(cols * rows);
@@ -194,17 +166,28 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
 
       offCtx.clearRect(0, 0, cols, rows);
       if (layout === 'bloom') {
-        // Contain the WHOLE bloom, large, in the upper right of the hero (the
-        // silhouette is the point; never crop the flower). The bloom's center
-        // sits at ~(0.42, 0.42) of the cropped photo. Slow breathing scale
-        // plus a slight drift keep it alive.
-        const base = Math.min((cols * 0.62) / img.width, (rows * 0.96) / img.height);
-        const scale = base * (1.0 + 0.035 * Math.sin(t * 0.15));
-        const dw = img.width * scale;
-        const dh = img.height * scale;
-        const dx = cols * 0.79 - dw * 0.42 + 1.5 * Math.sin(t * 0.07);
-        const dy = rows * 0.4 - dh * 0.42 + Math.cos(t * 0.05);
-        offCtx.drawImage(img, dx, dy, dw, dh);
+        // Contain the WHOLE composition, centered: both hands stay in frame
+        // (the silhouette is the point; never crop the subject). The two
+        // hands drift apart and back together on a slow breath, reaching
+        // toward the headline that sits in the gap between them.
+        // Each half is cropped to just its hand's vertical band in the
+        // source, which makes both crops wide-format: the hands can then
+        // scale much larger without outgrowing the hero's top band.
+        const half = img.width / 2;
+        const bandH = img.height * 0.42;
+        const syL = img.height * 0.2; // robot hand band
+        const syR = img.height * 0.4; // human hand band (sits lower in frame)
+        const targetW = cols * 0.5; // each hand spans half the hero width
+        const scale = (targetW / half) * (1.0 + 0.015 * Math.sin(t * 0.12));
+        const dw = half * scale;
+        const dh = bandH * scale;
+        const breathe = 3 * Math.sin(t * 0.2); // hands ease toward and apart
+        const dyL = rows * 0.05 + Math.cos(t * 0.05);
+        const dxL = cols * 0.03 - breathe;
+        offCtx.drawImage(img, 0, syL, half, bandH, dxL, dyL, dw, dh);
+        const dyR = rows * 0.17 - Math.cos(t * 0.05);
+        const dxR = cols * 0.97 - dw + breathe;
+        offCtx.drawImage(img, half, syR, half, bandH, dxR, dyR, dw, dh);
       } else {
         // Edge embroidery: blooms anchored on the hero's edges, deliberately
         // cropped by them (the mask keeps the hero's center clear). Each one
@@ -236,43 +219,64 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      if (dots) {
-        const px = dots.data;
-        px.fill(0);
-        const aScale = layout === 'edges' ? 0.68 : 1;
-        const [br, bg, bb] = palette.base;
-        const ba = Math.round(palette.base[3] * aScale);
-        const [hr, hg, hb] = palette.hi;
-        const ha = Math.round(palette.hi[3] * aScale);
-        for (let y = 0; y < rows; y++) {
-          const bayerRow = BAYER8[y % 8];
-          for (let x = 0; x < cols; x++) {
-            const i = y * cols + x;
-            const p = i * 4;
-            const lum = shape(
-              (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255
-            );
-            if (lum < LUM_FLOOR) continue;
-            const v = lum + 0.04 * Math.sin(t * 1.4 + hash[i] * 6.283);
-            const threshold = bayerRow[x % 8];
-            if (v <= threshold) continue;
-            if (v > threshold + 0.5) {
-              px[p] = hr; px[p + 1] = hg; px[p + 2] = hb; px[p + 3] = ha;
-            } else {
-              px[p] = br; px[p + 1] = bg; px[p + 2] = bb; px[p + 3] = ba;
+      // Print-halftone pass: one round navy dot per cell, radius and tone
+      // driven by luminance (bright source areas get bigger, darker dots on
+      // the white page reads inverted, so bright = more ink here where the
+      // subject lives on a black ground). Bayer keeps the dithered edges.
+      const [br, bg, bb] = palette.base;
+      const [hr, hg, hb] = palette.hi;
+      const baseA = palette.base[3] / 255;
+      const hiA = palette.hi[3] / 255;
+      const maxR = cell * 0.42;
+      // Pass 1: per-cell luminance grid (shared by dots and keyline).
+      const lums = new Float32Array(cols * rows);
+      for (let i = 0; i < cols * rows; i++) {
+        const p = i * 4;
+        lums[i] = shape(
+          (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255
+        );
+      }
+      const basePath = new Path2D();
+      const hiPath = new Path2D();
+      const edgePath = new Path2D();
+      for (let y = 0; y < rows; y++) {
+        const bayerRow = BAYER8[y % 8];
+        const cy = y * cell + cell / 2;
+        for (let x = 0; x < cols; x++) {
+          const i = y * cols + x;
+          const lum = lums[i];
+          // Keyline: where the local gradient is strong, lay contour ink.
+          // This is what makes the silhouette and finger shapes readable
+          // through the halftone (print keyline technique).
+          if (x > 0 && x < cols - 1 && y > 0 && y < rows - 1) {
+            const gx = lums[i + 1] - lums[i - 1];
+            const gy = lums[i + cols] - lums[i - cols];
+            if (Math.abs(gx) + Math.abs(gy) > 0.55) {
+              const cx = x * cell + cell / 2;
+              const rr = maxR * 0.9;
+              edgePath.moveTo(cx + rr, cy);
+              edgePath.arc(cx, cy, rr, 0, Math.PI * 2);
+              continue;
             }
           }
+          if (lum < LUM_FLOOR) continue;
+          const v = lum + 0.04 * Math.sin(t * 1.4 + hash[i] * 6.283);
+          const threshold = bayerRow[x % 8];
+          if (v <= threshold * 0.55) continue;
+          const r = 0.7 + Math.min(1, v) * (maxR - 0.7);
+          const target = v > threshold + 0.5 ? hiPath : basePath;
+          const cx = x * cell + cell / 2;
+          target.moveTo(cx + r, cy);
+          target.arc(cx, cy, r, 0, Math.PI * 2);
         }
-        dotCtx.putImageData(dots, 0, 0);
-        ctx.imageSmoothingEnabled = false;
-        ctx.drawImage(dotCanvas, 0, 0, cols, rows, 0, 0, cols * cell, rows * cell);
-        // Knock the 1px grid out so dots stay discrete (device-pixel space).
-        ctx.save();
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.drawImage(gridCanvas, 0, 0);
-        ctx.restore();
       }
+      ctx.fillStyle = `rgba(${br}, ${bg}, ${bb}, ${baseA})`;
+      ctx.fill(basePath);
+      ctx.fillStyle = `rgba(${hr}, ${hg}, ${hb}, ${hiA})`;
+      ctx.fill(hiPath);
+      // Keyline ink goes on top, in the darkest tone.
+      ctx.fillStyle = 'rgba(15, 31, 68, 0.95)';
+      ctx.fill(edgePath);
     };
 
     const loop = (now: number) => {
@@ -300,7 +304,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
       canvas.classList.add('ready');
       startLoop(); // no-op under reduced motion: the single frame above stays
     };
-    img.src = flowerSrc;
+    img.src = handsSrc;
 
     const io = new IntersectionObserver(([entry]) => {
       inView = entry.isIntersecting;

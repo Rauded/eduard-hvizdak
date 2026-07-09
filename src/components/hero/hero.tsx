@@ -1,487 +1,329 @@
-import React, { useEffect, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { isExpertMode } from '../../config/positioning';
-import { getTarsVariant } from '../../config/tarsVariant';
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { LuArrowRight } from 'react-icons/lu';
 import AsciiDitherBackground from './AsciiDitherBackground';
 
-// Main container for the hero section
+// ════════════════════════════════════════════════════════════════════════════
+// Hero, humandelta experiment. Centered serif headline and CTAs over the
+// full-bleed animated halftone wave, blueprint frame details from Eduard's
+// design bookmarks, and a hairline browser mockup below the CTAs playing the
+// real InzerPro showcase video (the bookmark-hero product-card pattern; also
+// how humandelta presents its own dashcards). TARS and the flower bloom were
+// both tried here and cut.
+// ════════════════════════════════════════════════════════════════════════════
+
 const HeroContainer = styled.section`
+  position: relative;
+  min-height: 88vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  padding-top: 100px;
-  color: var(--text, #fff);
+  align-items: center;
+  justify-content: center;
+  padding: 120px var(--container-px, 64px) 80px;
+  box-sizing: border-box;
+  color: var(--text, #0e1320);
   overflow: hidden;
   font-family: var(--font-body);
-  position: relative;
+  border-bottom: 1px solid var(--border, #e6e9ec);
+  background: var(--page-bg, #ffffff);
 
   @media (max-width: 768px) {
-    padding-top: 90px;
-  }
-
-  @media (min-width: 768px) {
-    flex-direction: row;
+    padding: 110px var(--container-px, 24px) 64px;
+    min-height: 80vh;
   }
 `;
 
-const LeftContainer = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 40px;
-  text-align: left;
-  margin-top: -10%;
+const Content = styled.div`
   position: relative;
   z-index: 1;
-
-  @media (max-width: 768px) {
-    padding: 24px;
-    margin-top: 0;
-  }
-
-  @media (min-width: 768px) {
-    flex: 0 0 40%;
-    padding: 60px 40px;
-  }
-`;
-
-const Headline = styled.h1`
-  font-size: 1.25em;
-  font-weight: 400;
-  color: var(--text-muted, rgba(255, 255, 255, 0.7));
-  margin-bottom: 1.5em;
-  letter-spacing: 0.05em;
-  line-height: 1.6;
-  transition: color 0.3s ease;
-
-  @media (min-width: 768px) {
-    font-size: 1.5em;
-  }
-`;
-
-const RightContainer = styled.div`
-  flex: 1;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  position: relative;
-  min-height: 40vh;
+  text-align: center;
+  max-width: 760px;
 
-  @media (min-width: 768px) {
-    flex: 0 0 60%;
-    min-height: auto;
+  /* The hands own the top band of the hero; the text block sits below them,
+     so neither ever occludes the other. */
+  @media (min-width: 769px) {
+    margin-top: 24vh;
   }
 `;
 
-// Terminal window — realistic macOS-style
-const TerminalWindow = styled.div`
-  width: 90%;
-  max-width: 700px;
-  position: relative;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #18181b;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 2px 8px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+// Full serif headline, humandelta style (their h1 is the serif face, navy).
+const Headline = styled.h1`
+  font-family: var(--font-serif) !important;
+  font-size: clamp(2.8em, 6.5vw, 4.8em);
+  font-weight: 400;
+  color: var(--accent, #182e5f);
+  margin: 0 0 0.5em;
+  letter-spacing: -0.01em;
+  line-height: 1.12;
 `;
 
-const TerminalBar = styled.div`
-  padding: 10px 16px;
+const CtaRow = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+`;
+
+const PrimaryCta = styled.a`
+  display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #232326;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-  position: relative;
+  padding: 12px 26px;
+  border-radius: 999px;
+  background: var(--accent, #182e5f);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.95em;
+  text-decoration: none;
+  transition: background 0.2s ease;
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:hover {
+    background: var(--accent-strong, #0f1f44);
+    svg {
+      transform: translateX(3px);
+    }
+  }
 `;
 
-const TrafficLights = styled.div`
-  display: flex;
-  gap: 7px;
+const GhostCta = styled.a`
+  display: inline-flex;
   align-items: center;
+  padding: 12px 26px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid var(--border, #e6e9ec);
+  color: var(--accent-text, #182e5f);
+  font-weight: 500;
+  font-size: 0.95em;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+
+  &:hover {
+    border-color: var(--accent-ring, #c3d2ea);
+    background: var(--accent-soft, #eaf0f8);
+  }
 `;
 
-const TrafficDot = styled.span<{ color: string }>`
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: ${props => props.color};
-  box-shadow: inset 0 -1px 2px rgba(0, 0, 0, 0.2);
+// ── Blueprint frame (from Eduard's design bookmarks: hero pages framed like
+// a design canvas, with faint ruler rails and measurement ticks) ────────────
+const RulerRail = styled.div<{ $side: 'left' | 'right' }>`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  ${(p) => p.$side}: calc(var(--container-px, 64px) / 2);
+  width: 1px;
+  background: var(--border, #e6e9ec);
+  z-index: 0;
+  pointer-events: none;
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+
+const RulerTick = styled.span<{ $top: number }>`
+  position: absolute;
+  top: ${(p) => p.$top}%;
+  left: -3px;
+  width: 7px;
+  height: 1px;
+  background: var(--border, #e6e9ec);
+`;
+
+const RulerLabel = styled.span<{ $top: number }>`
+  position: absolute;
+  top: calc(${(p) => p.$top}% - 4px);
+  left: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.06em;
+  color: color-mix(in srgb, var(--text-faint, #7484a0) 55%, transparent);
+`;
+
+const TICKS = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+
+const Ruler: React.FC<{ side: 'left' | 'right' }> = ({ side }) => (
+  <RulerRail $side={side} aria-hidden="true">
+    {TICKS.map((t) => (
+      <React.Fragment key={t}>
+        <RulerTick $top={t} />
+        {side === 'left' && t % 20 === 10 && <RulerLabel $top={t}>{t * 8}</RulerLabel>}
+      </React.Fragment>
+    ))}
+  </RulerRail>
+);
+
+// Status pill framed by hairline wings with square end caps (Barqen hero
+// pattern from the bookmarks). The one green dot on the page.
+const StatusRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+`;
+
+const StatusWing = styled.span<{ $flip?: boolean }>`
   position: relative;
+  width: 72px;
+  height: 1px;
+  background: var(--border, #e6e9ec);
 
   &::after {
     content: '';
     position: absolute;
-    top: 2px;
-    left: 3px;
+    top: -2px;
+    ${(p) => (p.$flip ? 'right' : 'left')}: 0;
     width: 5px;
-    height: 3px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.15);
+    height: 5px;
+    background: var(--page-bg, #ffffff);
+    border: 1px solid var(--border, #e6e9ec);
+  }
+
+  @media (max-width: 768px) {
+    width: 36px;
   }
 `;
 
-const TerminalTabBar = styled.div`
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
+const StatusPill = styled.span`
+  display: inline-flex;
   align-items: center;
-  gap: 0;
-`;
-
-const TerminalTab = styled.div`
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border, #e6e9ec);
+  background: #ffffff;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.6);
-  letter-spacing: 0.04em;
-  padding: 4px 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-`;
-
-const TerminalBody = styled.div`
-  padding: 0;
-  background: #0f0f12;
-  position: relative;
-  overflow: hidden;
-`;
-
-// Combo variant: the terminal's screen is a scene. Sparse stars in the upper
-// half, the engineering grid rising from the floor TARS patrols.
-const SceneBody = styled(TerminalBody)`
-  background-color: #0a0a10;
-  background-image:
-    radial-gradient(1.5px 1.5px at 12% 22%, rgba(255, 255, 255, 0.7), transparent),
-    radial-gradient(1px 1px at 28% 44%, rgba(255, 255, 255, 0.45), transparent),
-    radial-gradient(1px 1px at 37% 12%, rgba(255, 255, 255, 0.55), transparent),
-    radial-gradient(1.5px 1.5px at 52% 30%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1px 1px at 61% 8%, rgba(255, 255, 255, 0.6), transparent),
-    radial-gradient(1px 1px at 70% 38%, rgba(255, 255, 255, 0.35), transparent),
-    radial-gradient(1.5px 1.5px at 83% 18%, rgba(255, 255, 255, 0.65), transparent),
-    radial-gradient(1px 1px at 91% 46%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1px 1px at 6% 52%, rgba(255, 255, 255, 0.3), transparent),
-    radial-gradient(1px 1px at 46% 56%, rgba(255, 255, 255, 0.25), transparent);
-  padding-top: 12px;
-
-  /* Grid fades in toward the floor so the sky stays clear for the stars. */
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 26px 26px;
-    -webkit-mask-image: linear-gradient(180deg, transparent 32%, #000 100%);
-    mask-image: linear-gradient(180deg, transparent 32%, #000 100%);
-    pointer-events: none;
-  }
-
-  > * {
-    position: relative;
-  }
-`;
-
-// TARS patrol animation inside the terminal
-const patrolAnimation = keyframes`
-  0% { transform: translateX(0%) scaleX(-1); }
-  2.5% { transform: translateX(0%) scaleX(-1); }
-  22.5% { transform: translateX(-12%) scaleX(-1); }
-  27.5% { transform: translateX(-12%) scaleX(-1); }
-  27.6% { transform: translateX(-12%) scaleX(1); }
-  32.5% { transform: translateX(-12%) scaleX(1); }
-  72.5% { transform: translateX(12%) scaleX(1); }
-  77.5% { transform: translateX(12%) scaleX(1); }
-  77.6% { transform: translateX(12%) scaleX(-1); }
-  82.5% { transform: translateX(12%) scaleX(-1); }
-  97.5% { transform: translateX(0%) scaleX(-1); }
-  100% { transform: translateX(0%) scaleX(-1); }
-`;
-
-const TarsContainer = styled.div`
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  animation: ${patrolAnimation} 24s linear infinite;
-  will-change: transform;
-`;
-
-const TarsImage = styled.img`
-  width: 100%;
-  display: block;
-  filter: grayscale(20%) contrast(1.1);
-`;
-
-
-// Engineering-grid stage: a dark tile whose grid reads as the floor TARS
-// patrols, fading out toward the top so it stays a backdrop, not a pattern.
-const GridTile = styled.div`
-  position: relative;
-  width: 90%;
-  max-width: 700px;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-    #0e0e14;
-  background-size: 30px 30px, 30px 30px, auto;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 2px 8px rgba(0, 0, 0, 0.3);
-  padding: 14px 0 0;
-
-  /* Fade the grid away from the floor so the top of the tile stays calm. */
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, #0e0e14 0%, rgba(14, 14, 20, 0) 85%);
-    pointer-events: none;
-  }
-
-  > * {
-    position: relative;
-  }
-`;
-
-// Starfield stage: TARS on a floor line under a sparse night sky.
-const SpaceTile = styled.div`
-  width: 90%;
-  max-width: 700px;
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background-image:
-    radial-gradient(1.5px 1.5px at 12% 22%, rgba(255, 255, 255, 0.7), transparent),
-    radial-gradient(1px 1px at 28% 48%, rgba(255, 255, 255, 0.45), transparent),
-    radial-gradient(1px 1px at 37% 14%, rgba(255, 255, 255, 0.55), transparent),
-    radial-gradient(1.5px 1.5px at 52% 34%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1px 1px at 61% 10%, rgba(255, 255, 255, 0.6), transparent),
-    radial-gradient(1px 1px at 70% 42%, rgba(255, 255, 255, 0.35), transparent),
-    radial-gradient(1.5px 1.5px at 83% 20%, rgba(255, 255, 255, 0.65), transparent),
-    radial-gradient(1px 1px at 91% 52%, rgba(255, 255, 255, 0.4), transparent),
-    radial-gradient(1px 1px at 6% 58%, rgba(255, 255, 255, 0.3), transparent),
-    radial-gradient(1px 1px at 46% 62%, rgba(255, 255, 255, 0.25), transparent);
-  background-color: #0a0a10;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.5),
-    0 2px 8px rgba(0, 0, 0, 0.3);
-  padding: 26px 0 0;
-`;
-
-const SpaceFloor = styled.div`
-  height: 1px;
-  background: rgba(255, 255, 255, 0.22);
-`;
-
-const TerminalStatusBar = styled.div`
-  padding: 4px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #1c1c1f;
-  border-top: 1px solid rgba(255, 255, 255, 0.04);
-`;
-
-const StatusText = styled.span`
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  color: rgba(255, 255, 255, 0.3);
-  letter-spacing: 0.06em;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--text-muted, #3e4b66);
+  white-space: nowrap;
 `;
 
 const StatusDot = styled.span`
-  display: inline-block;
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background: #4ade80;
-  margin-right: 6px;
+  background: var(--status-good, #1f8f4e);
 `;
 
-const GradientText = styled.h2`
-  color: var(--text-strong, #f8fafc);
-  font-size: clamp(2.5em, 8vw, 5em);
-  font-weight: 700;
-  margin: 0.3em 0;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
-
-  @media (min-width: 768px) {
-    font-size: clamp(3.5em, 6vw, 5.5em);
-  }
-`;
-
-const blink = keyframes`
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-`;
-
-const TypewriterText = styled.div`
+// Keyboard-shortcut chips inside the CTAs (bookmark pattern; the keys work).
+const KeyChip = styled.span<{ $ghost?: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 5px;
   font-family: var(--font-mono);
-  color: var(--accent-text, #60a5fa);
-  font-size: clamp(1.1em, 3vw, 1.75em);
-  margin-top: 1em;
-  white-space: nowrap;
-  overflow: hidden;
-  font-weight: 400;
-  letter-spacing: 0.01em;
+  font-size: 0.62rem;
+  font-weight: 500;
+  border: 1px solid ${(p) => (p.$ghost ? 'var(--border, #e6e9ec)' : 'rgba(255, 255, 255, 0.3)')};
+  background: ${(p) => (p.$ghost ? 'var(--surface, #f6f6f6)' : 'rgba(255, 255, 255, 0.14)')};
+  color: ${(p) => (p.$ghost ? 'var(--text-faint, #7484a0)' : 'rgba(255, 255, 255, 0.9)')};
+  margin-left: 4px;
 
-  &::after {
-    content: '_';
-    animation: ${blink} 1s infinite;
-    color: var(--accent, #3b82f6);
-    font-weight: 300;
+  /* No keyboard on touch layouts; the chip would just be noise. */
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
-const topLines = [
-  "Ahoj! Vitaj na mojom portfóliu.",
-  "Hey! Thanks for dropping by.",
+// Figma-style corner ticks marking the content zone (blueprint frame).
+const CornerTick = styled.span<{ $pos: string }>`
+  position: absolute;
+  width: 11px;
+  height: 11px;
+  pointer-events: none;
+  color: var(--border, #e6e9ec);
+  ${(p) => p.$pos};
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    background: currentColor;
+  }
+  &::before {
+    left: 5px;
+    top: 0;
+    width: 1px;
+    height: 11px;
+  }
+  &::after {
+    left: 0;
+    top: 5px;
+    width: 11px;
+    height: 1px;
+  }
+
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
+
+const CORNERS = [
+  'top: -26px; left: -34px;',
+  'top: -26px; right: -34px;',
+  'bottom: -26px; left: -34px;',
+  'bottom: -26px; right: -34px;',
 ];
 
-// Expert mode drops the "CS Student" line (and swaps in a consulting-facing
-// title) so the rotating role never leads with a student framing. See
-// src/config/positioning.ts.
-const typewriterTexts = [
-  "AI Developer @ OneBond",
-  "AI Developer @ CZS / Masaryk University",
-  "AI Developer @ iGalileo",
-  "Think Tank @ EDUC Alliance",
-  isExpertMode() ? "AI Consultant & Automation Engineer" : "CS Student @ Masaryk University",
-  "Python & LangChain Developer",
-  "Building AI agents & RAG pipelines",
-  "Hackathon Fanatic",
-  "AI Enthusiast"
-];
+const scrollToId = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+};
 
 const Hero: React.FC = () => {
-  const [topLine, setTopLine] = useState('');
-  const [currentText, setCurrentText] = useState('');
-  const tarsVariant = getTarsVariant();
-  const isRose = tarsVariant === 'rose';
-  const isCombo = tarsVariant === 'combo';
-  const isEdges = tarsVariant === 'edges';
-
-  // One terminal, two screens: the flat body, or the starfield+grid scene.
-  const renderTerminal = (scene: boolean) => {
-    const Body = scene ? SceneBody : TerminalBody;
-    return (
-      <TerminalWindow>
-        <TerminalBar>
-          <TrafficLights>
-            <TrafficDot color="#ff5f57" />
-            <TrafficDot color="#febc2e" />
-            <TrafficDot color="#28c840" />
-          </TrafficLights>
-          <TerminalTabBar>
-            <TerminalTab>TARS · patrol module</TerminalTab>
-          </TerminalTabBar>
-        </TerminalBar>
-        <Body>
-          <TarsContainer>
-            <TarsImage
-              src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
-              alt="TARS walking ASCII art"
-            />
-          </TarsContainer>
-        </Body>
-        <TerminalStatusBar>
-          <StatusText><StatusDot />active</StatusText>
-          <StatusText>patrol module</StatusText>
-        </TerminalStatusBar>
-      </TerminalWindow>
-    );
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // Working single-key shortcuts for the CTA chips: P scrolls to projects,
+  // E to contact. Ignored while typing or when a modifier is held.
   useEffect(() => {
-    setTopLine(topLines[Math.floor(Math.random() * topLines.length)]);
-  }, []);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => {
-    let isMounted = true;
-    let timeoutId: NodeJS.Timeout;
-
-    let i = 0;
-    let textPos = 0;
-    let currentString = typewriterTexts[i];
-    const speed = 100;
-    const deleteSpeed = 50;
-    const waitTime = 2000;
-
-    function type() {
-      if (!isMounted) return;
-      setCurrentText(currentString.substring(0, textPos));
-      if (textPos++ === currentString.length) {
-        timeoutId = setTimeout(() => deleteText(), waitTime);
-      } else {
-        timeoutId = setTimeout(type, speed);
-      }
-    }
-
-    function deleteText() {
-      if (!isMounted) return;
-      setCurrentText(currentString.substring(0, textPos));
-      if (textPos-- === 0) {
-        i = (i + 1) % typewriterTexts.length;
-        currentString = typewriterTexts[i];
-        timeoutId = setTimeout(type, speed);
-      } else {
-        timeoutId = setTimeout(deleteText, deleteSpeed);
-      }
-    }
-
-    type();
-    return () => { isMounted = false; clearTimeout(timeoutId); };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+      if (e.key === 'p' || e.key === 'P') scrollToId('projects');
+      if (e.key === 'e' || e.key === 'E') scrollToId('contact');
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
   }, []);
 
   return (
     <HeroContainer id="home">
-      {(isRose || isCombo) && <AsciiDitherBackground />}
-      {isEdges && <AsciiDitherBackground layout="edges" />}
-      <LeftContainer>
-        <Headline>{topLine}</Headline>
-        <GradientText>I'm Eduard Hvizdak.</GradientText>
-        <TypewriterText>&gt; {currentText}</TypewriterText>
-      </LeftContainer>
-      {!isRose && <RightContainer>
-        {(tarsVariant === 'terminal' || isEdges) && renderTerminal(false)}
-        {isCombo && renderTerminal(true)}
-        {tarsVariant === 'grid' && (
-          <GridTile>
-            <TarsContainer>
-              <TarsImage
-                src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
-                alt="TARS walking ASCII art"
-              />
-            </TarsContainer>
-          </GridTile>
-        )}
-        {tarsVariant === 'space' && (
-          <SpaceTile>
-            <TarsContainer>
-              <TarsImage
-                src={`${process.env.PUBLIC_URL}/ascii_monochrome.gif`}
-                alt="TARS walking ASCII art"
-              />
-            </TarsContainer>
-            <SpaceFloor />
-          </SpaceTile>
-        )}
-      </RightContainer>}
+      <AsciiDitherBackground />
+      <Ruler side="left" />
+      <Ruler side="right" />
+      <Content>
+        {CORNERS.map((pos) => (
+          <CornerTick key={pos} $pos={pos} aria-hidden="true" />
+        ))}
+        <StatusRow>
+          <StatusWing aria-hidden="true" />
+          <StatusPill>
+            <StatusDot />
+            Accepting new projects
+          </StatusPill>
+          <StatusWing $flip aria-hidden="true" />
+        </StatusRow>
+        <Headline>I'm Eduard Hvizdak.</Headline>
+        <CtaRow>
+          <PrimaryCta href="#projects">
+            View projects <LuArrowRight /> <KeyChip>P</KeyChip>
+          </PrimaryCta>
+          <GhostCta href="#contact">
+            Email me <KeyChip $ghost>E</KeyChip>
+          </GhostCta>
+        </CtaRow>
+      </Content>
     </HeroContainer>
   );
 };
