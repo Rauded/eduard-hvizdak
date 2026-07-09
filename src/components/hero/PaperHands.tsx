@@ -12,14 +12,18 @@ import handsSrc from '../../assets/hero/hands.jpg';
 
 const Band = styled.div`
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: min(62vh, 50vw);
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* Match the cropped hands strip (3.1:1) so contain fills the band with the
+     whole composition: both hands complete, nothing cut at the top, and a
+     comfortable margin from the screen edges. */
+  width: min(94%, 1120px);
+  aspect-ratio: 3.1 / 1;
   z-index: 0;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 60%, transparent 88%);
-  mask-image: linear-gradient(180deg, #000 0%, #000 60%, transparent 88%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0%, #000 70%, transparent 100%);
 
   /* Paper renders a <div><canvas> that we let fill the band. */
   & > div,
@@ -69,7 +73,7 @@ const PaperHands: React.FC<Props> = ({ variant }) => (
         type="8x8"
         size={1.3}
         colorSteps={6}
-        fit="cover"
+        fit="contain"
       />
     )}
   </Band>

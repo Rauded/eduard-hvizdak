@@ -61,7 +61,7 @@ const Content = styled.div`
   /* The hands own the top band of the hero; the text block sits well below
      them, so neither ever occludes the other. */
   @media (min-width: 769px) {
-    margin-top: 38vh;
+    margin-top: 42vh;
   }
 `;
 
