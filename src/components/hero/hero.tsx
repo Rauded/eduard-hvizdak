@@ -4,6 +4,7 @@ import { LuArrowRight } from 'react-icons/lu';
 import AsciiDitherBackground from './AsciiDitherBackground';
 import HandsShader from './HandsShader';
 import PaperHands from './PaperHands';
+import ReachingHands from './ReachingHands';
 import HeroBackdrop, { BackdropConcept } from './HeroBackdrop';
 
 // Hero concept, chosen via ?hero= (for the concept-exploration review):
@@ -384,7 +385,7 @@ const Hero: React.FC = () => {
       {hero.concept === 'combined' && (
         <>
           <HeroBackdrop concept="ditherbg" faint />
-          <PaperHands variant={19} />
+          <ReachingHands />
         </>
       )}
       <Ruler side="left" />
