@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { LuArrowRight } from 'react-icons/lu';
 import AsciiDitherBackground from './AsciiDitherBackground';
-import ScrambleText from '../../effects/ScrambleText';
 
 // ════════════════════════════════════════════════════════════════════════════
 // Hero, humandelta experiment. Centered serif headline and CTAs over the
@@ -43,10 +42,10 @@ const Content = styled.div`
   text-align: center;
   max-width: 760px;
 
-  /* The hands own the top band of the hero; the text block sits below them,
-     so neither ever occludes the other. */
+  /* The hands own the top band of the hero; the text block sits well below
+     them, so neither ever occludes the other. */
   @media (min-width: 769px) {
-    margin-top: 24vh;
+    margin-top: 34vh;
   }
 `;
 
@@ -342,7 +341,7 @@ const Hero: React.FC = () => {
         {CORNERS.map((pos) => (
           <CornerTick key={pos} $pos={pos} aria-hidden="true" />
         ))}
-        <Headline><ScrambleText text="I'm Eduard Hvizdak." /></Headline>
+        <Headline>I'm Eduard Hvizdak.</Headline>
         <CtaRow>
           <PrimaryCta href="#projects">
             View projects <LuArrowRight /> <KeyChip>P</KeyChip>

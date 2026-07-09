@@ -234,7 +234,12 @@
   .section-title { color: var(--accent); }
   .job-title { color: var(--text-strong); }
 
-  .company { color: var(--accent-strong); }
+  // Company name gets a clearer mid-navy so it reads as a coloured accent
+  // against the near-black job title, not just another dark word.
+  .company {
+    color: #3f5ba0;
+    font-weight: 700;
+  }
   .company__sub { color: var(--text-faint); }
   a.company--link:hover,
   a.company--link:focus-visible {
@@ -300,15 +305,15 @@
   // navy-tinted hairline plus a soft tinted shadow, so even light-coloured
   // screenshots do not bleed into the background.
   .pcard__media {
-    border: 1px solid var(--border-strong);
+    border: 2px solid color-mix(in srgb, var(--accent) 22%, var(--border-strong));
     box-shadow:
-      0 1px 0 rgba(22, 22, 26, 0.04),
-      0 14px 36px rgba(22, 22, 26, 0.12);
+      0 1px 0 rgba(22, 22, 26, 0.05),
+      0 16px 40px rgba(22, 22, 26, 0.14);
     &:hover {
-      border-color: var(--accent-ring);
+      border-color: var(--accent);
       box-shadow:
-        0 1px 0 rgba(22, 22, 26, 0.05),
-        0 22px 52px rgba(22, 22, 26, 0.17);
+        0 1px 0 rgba(22, 22, 26, 0.06),
+        0 24px 56px rgba(22, 22, 26, 0.18);
     }
   }
 

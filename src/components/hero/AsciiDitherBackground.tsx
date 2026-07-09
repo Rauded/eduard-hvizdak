@@ -31,9 +31,9 @@ interface Props {
 // makes the fine dot pitch affordable.
 
 const MASKS = {
-  /* the whole hands composition spans the hero, dissolving softly at the
-     edges; the Content quiet-zone halo hollows the center for the headline */
-  bloom: 'radial-gradient(86% 62% at 50% 26%, #000 70%, transparent 94%)',
+  /* the hands sit in the top band and fade out well above the headline zone,
+     so the dither never overlays the text below */
+  bloom: 'radial-gradient(82% 46% at 50% 18%, #000 62%, transparent 90%)',
   /* embroidery: only the side bands show, the center of the hero stays clear */
   edges:
     'linear-gradient(90deg, #000 0%, rgba(0,0,0,0.85) 12%, transparent 38%, transparent 62%, rgba(0,0,0,0.85) 88%, #000 100%)',
@@ -179,15 +179,15 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
         const bandH = img.height * 0.42;
         const syL = img.height * 0.2; // robot hand band
         const syR = img.height * 0.4; // human hand band (sits lower in frame)
-        const targetW = cols * 0.5; // each hand spans half the hero width
+        const targetW = cols * 0.46; // each hand spans ~46% of the hero width
         const scale = (targetW / half) * (1.0 + 0.015 * Math.sin(t * 0.12));
         const dw = half * scale;
         const dh = bandH * scale;
         const breathe = 3 * Math.sin(t * 0.2); // hands ease toward and apart
-        const dyL = rows * 0.05 + Math.cos(t * 0.05);
+        const dyL = rows * 0.02 + Math.cos(t * 0.05);
         const dxL = cols * 0.03 - breathe;
         offCtx.drawImage(img, 0, syL, half, bandH, dxL, dyL, dw, dh);
-        const dyR = rows * 0.17 - Math.cos(t * 0.05);
+        const dyR = rows * 0.11 - Math.cos(t * 0.05);
         const dxR = cols * 0.97 - dw + breathe;
         offCtx.drawImage(img, half, syR, half, bandH, dxR, dyR, dw, dh);
       } else {
@@ -238,6 +238,7 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
           (0.2126 * data[p] + 0.7152 * data[p + 1] + 0.0722 * data[p + 2]) / 255
         );
       }
+      const deepPath = new Path2D();
       const basePath = new Path2D();
       const hiPath = new Path2D();
       const edgePath = new Path2D();
@@ -266,12 +267,19 @@ const AsciiDitherBackground: React.FC<Props> = ({ layout = 'bloom' }) => {
           const threshold = bayerRow[x % 8];
           if (v <= threshold * 0.55) continue;
           const r = 0.3 + Math.min(1, v) * (maxR - 0.3);
-          const target = v > threshold + 0.5 ? hiPath : basePath;
+          // Three tone tiers plus the keyline give the hands real modelling:
+          // bright highlights, mid body, and a deeper navy in the dimmer
+          // (shadowed) subject areas.
+          const target =
+            v > threshold + 0.5 ? hiPath : v > threshold + 0.2 ? basePath : deepPath;
           const cx = x * cell + cell / 2;
           target.moveTo(cx + r, cy);
           target.arc(cx, cy, r, 0, Math.PI * 2);
         }
       }
+      // Deep shadow tone first (under the mid and highlight dots).
+      ctx.fillStyle = `rgba(20, 36, 78, ${baseA})`;
+      ctx.fill(deepPath);
       ctx.fillStyle = `rgba(${br}, ${bg}, ${bb}, ${baseA})`;
       ctx.fill(basePath);
       ctx.fillStyle = `rgba(${hr}, ${hg}, ${hb}, ${hiA})`;
