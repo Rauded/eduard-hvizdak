@@ -15,10 +15,10 @@ import HeroBackdrop, { BackdropConcept } from './HeroBackdrop';
 // preset is 17 (transparent-bg halftone).
 type HeroState =
   | { concept: 'hands'; hands: { kind: 'paper'; variant: number } | { kind: 'shader' } | { kind: 'dither2d' } }
-  | { concept: 'editorial' | BackdropConcept };
+  | { concept: 'editorial' | BackdropConcept | 'combined' };
 
 const readHero = (): HeroState => {
-  if (typeof window === 'undefined') return { concept: 'editorial' };
+  if (typeof window === 'undefined') return { concept: 'combined' };
   const q = new URLSearchParams(window.location.search);
   const variant = q.get('variant');
   if (variant && /^\d+$/.test(variant)) return { concept: 'hands', hands: { kind: 'paper', variant: parseInt(variant, 10) } };
@@ -28,8 +28,10 @@ const readHero = (): HeroState => {
   if (hands === 'paper') return { concept: 'hands', hands: { kind: 'paper', variant: 9 } };
   const hero = q.get('hero');
   if (hero === 'hands') return { concept: 'hands', hands: { kind: 'paper', variant: 17 } };
-  if (hero === 'mesh' || hero === 'grain' || hero === 'ditherbg' || hero === 'editorial') return { concept: hero };
-  return { concept: 'editorial' };
+  if (hero === 'mesh' || hero === 'grain' || hero === 'ditherbg' || hero === 'editorial' || hero === 'combined') {
+    return { concept: hero };
+  }
+  return { concept: 'combined' };
 };
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -351,7 +353,9 @@ const Hero: React.FC = () => {
   // colour props, so a post-mount switch would be skipped). The no-param
   // default is 'editorial', which matches the prerender.
   const [hero] = useState<HeroState>(() => readHero());
-  const isHands = hero.concept === 'hands';
+  // Both the hands concept and the combined concept put artwork in the top
+  // band, so the text block sits below it.
+  const handsOffset = hero.concept === 'hands' || hero.concept === 'combined';
 
   // Working single-key shortcuts for the CTA chips: P scrolls to projects,
   // E to contact. Ignored while typing or when a modifier is held.
@@ -369,17 +373,23 @@ const Hero: React.FC = () => {
 
   return (
     <HeroContainer id="home">
-      {isHands && hero.concept === 'hands' && hero.hands.kind === 'paper' && (
+      {hero.concept === 'hands' && hero.hands.kind === 'paper' && (
         <PaperHands key={hero.hands.variant} variant={hero.hands.variant} />
       )}
-      {isHands && hero.concept === 'hands' && hero.hands.kind === 'shader' && <HandsShader />}
-      {isHands && hero.concept === 'hands' && hero.hands.kind === 'dither2d' && <AsciiDitherBackground />}
+      {hero.concept === 'hands' && hero.hands.kind === 'shader' && <HandsShader />}
+      {hero.concept === 'hands' && hero.hands.kind === 'dither2d' && <AsciiDitherBackground />}
       {(hero.concept === 'mesh' || hero.concept === 'grain' || hero.concept === 'ditherbg') && (
         <HeroBackdrop concept={hero.concept} />
       )}
+      {hero.concept === 'combined' && (
+        <>
+          <HeroBackdrop concept="ditherbg" faint />
+          <PaperHands variant={17} />
+        </>
+      )}
       <Ruler side="left" />
       <Ruler side="right" />
-      <Content $handsOffset={isHands}>
+      <Content $handsOffset={handsOffset}>
         {CORNERS.map((pos) => (
           <CornerTick key={pos} $pos={pos} aria-hidden="true" />
         ))}
