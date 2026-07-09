@@ -58,7 +58,7 @@ const SERVICES = [
   {
     icon: <LuServer />,
     accent: '#1f8f4e', // green: private on-prem
-    title: 'Private AI that never leaves your building',
+    title: 'Private AI that never leaves your business',
     outcome: 'The leverage of AI without shipping sensitive data to someone else’s cloud.',
     example: 'For Czech and Slovak firms I deploy AI assistants on dedicated hardware installed on-site: GDPR-friendly, InfoSec-hardened and fully managed, so a non-technical team gets value from day one without babysitting it.',
     metric: 'On-premise · GDPR · fully managed',
