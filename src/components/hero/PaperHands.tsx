@@ -68,7 +68,7 @@ const PaperHands: React.FC<Props> = ({ variant }) => (
         inverted={false}
         type="8x8"
         size={1.3}
-        colorSteps={4}
+        colorSteps={6}
         fit="cover"
       />
     )}
