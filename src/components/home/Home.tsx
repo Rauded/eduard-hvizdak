@@ -1,6 +1,7 @@
 import React from 'react';
 import Seo from '../../seo/Seo';
 import SectionMarker from '../common/SectionMarker';
+import TileWordmark from '../../effects/tile-field/TileField';
 // @ts-ignore
 import Hero from '../hero/hero.tsx';
 // @ts-ignore
@@ -28,6 +29,7 @@ const Home: React.FC = () => (
     <Projects />
     <SectionMarker index="04" label="Contact" />
     <Contact />
+    <TileWordmark />
   </>
 );
 
