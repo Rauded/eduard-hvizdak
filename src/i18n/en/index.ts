@@ -9,6 +9,9 @@ import common from './common';
 import seo from './seo';
 import footer from './footer';
 import contact from './contact';
+import hero from './hero';
+import home from './home';
+import about from './about';
 
 export const en = {
   header,
@@ -16,6 +19,9 @@ export const en = {
   seo,
   footer,
   contact,
+  hero,
+  home,
+  about,
 };
 
 export type Dict = typeof en;

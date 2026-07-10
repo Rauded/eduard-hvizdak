@@ -6,6 +6,7 @@ import HandsShader from './HandsShader';
 import PaperHands from './PaperHands';
 import ReachingHands from './ReachingHands';
 import HeroBackdrop, { BackdropConcept } from './HeroBackdrop';
+import { useT } from '../../i18n';
 
 // Hero concept, chosen via ?hero= (for the concept-exploration review):
 //   editorial (default) type only, no backdrop
@@ -356,6 +357,7 @@ const Hero: React.FC = () => {
   // colour props, so a post-mount switch would be skipped). The no-param
   // default is 'editorial', which matches the prerender.
   const [hero] = useState<HeroState>(() => readHero());
+  const t = useT('hero');
   // Both the hands concept and the combined concept put artwork in the top
   // band, so the text block sits below it.
   const handsOffset = hero.concept === 'hands' || hero.concept === 'combined';
@@ -396,20 +398,20 @@ const Hero: React.FC = () => {
         {CORNERS.map((pos) => (
           <CornerTick key={pos} $pos={pos} aria-hidden="true" />
         ))}
-        <Headline>I'm Eduard Hvizdak.</Headline>
+        <Headline>{t.name}</Headline>
         <CtaRow>
           <PrimaryCta href="#projects">
-            View projects <LuArrowRight /> <KeyChip>P</KeyChip>
+            {t.viewProjects} <LuArrowRight /> <KeyChip>P</KeyChip>
           </PrimaryCta>
           <GhostCta href="#contact">
-            Email me <KeyChip $ghost>E</KeyChip>
+            {t.emailMe} <KeyChip $ghost>E</KeyChip>
           </GhostCta>
         </CtaRow>
         <StatusRow>
           <StatusWing aria-hidden="true" />
           <StatusPill>
             <StatusDot />
-            Accepting new projects
+            {t.accepting}
           </StatusPill>
           <StatusWing $flip aria-hidden="true" />
         </StatusRow>

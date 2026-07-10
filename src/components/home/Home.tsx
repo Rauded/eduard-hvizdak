@@ -13,8 +13,11 @@ import Projects from '../projects/projects.tsx';
 // TEST: 21st.dev component ports (delete this block + restore <Contact/> to revert)
 import TechMarquee from '../_21test/TechMarquee';
 import ContactGradient from '../_21test/ContactGradient';
+import { useT } from '../../i18n';
 
-const Home: React.FC = () => (
+const Home: React.FC = () => {
+  const t = useT('home');
+  return (
   <>
     <Seo
       title="Eduard Hvizdak"
@@ -24,17 +27,18 @@ const Home: React.FC = () => (
     <Hero />
     {/* TEST: 21st.dev tech marquee */}
     <TechMarquee />
-    <SectionMarker index="01" label="About" />
+    <SectionMarker index="01" label={t.sections.about} />
     <About />
-    <SectionMarker index="02" label="Experience" />
+    <SectionMarker index="02" label={t.sections.experience} />
     <Resume />
-    <SectionMarker index="03" label="Projects" />
+    <SectionMarker index="03" label={t.sections.projects} />
     <Projects />
-    <SectionMarker index="04" label="Contact" />
+    <SectionMarker index="04" label={t.sections.contact} />
     {/* TEST: Contact combined with the animated gradient band */}
     <ContactGradient />
     <TileWordmark />
   </>
-);
+  );
+};
 
 export default Home;

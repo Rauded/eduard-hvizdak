@@ -8,6 +8,9 @@ import common from './common';
 import seo from './seo';
 import footer from './footer';
 import contact from './contact';
+import hero from './hero';
+import home from './home';
+import about from './about';
 
 export const sk: DeepPartial<Dict> = {
   header,
@@ -15,4 +18,7 @@ export const sk: DeepPartial<Dict> = {
   seo,
   footer,
   contact,
+  hero,
+  home,
+  about,
 };
