@@ -234,6 +234,18 @@ html[data-type='geist'] {
   --font-display: var(--font-geist);
 }
 
+/* Non-English serif headings: Jeju Myeongjo is a Korean Ming face with no
+   accented Latin glyphs, so Slovak/Czech serif headings would fall back
+   mid-word (e.g. the "u" in "Skusenosti" swapping fonts for "ú"). Drive the
+   serif display face with Source Serif 4 for those languages instead, keeping
+   Jeju for English. Source Serif 4 is already loaded (blog reading serif) and
+   covers full Latin Extended. Body text is General Sans, which already covers
+   Slovak, so only the serif display face needs this. */
+html[lang='sk'],
+html[lang='cs'] {
+  --font-serif: 'Source Serif 4', Georgia, Cambria, 'Times New Roman', serif;
+}
+
 /* ─── Accent system (dark-mode defaults) ─────────────────────────────────────
    ONE accent drives the whole site. Every component reads these tokens; no
    component hardcodes an accent hex. Tints for text/headings on the dark
