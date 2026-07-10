@@ -29,8 +29,8 @@ const BOOKING_URL = process.env.REACT_APP_BOOKING_URL || 'https://cal.com/eduard
 const PHONE = '+421950774038';
 const PHONE_DISPLAY = '+421 950 774 038';
 
-// Each card leads with a hard number and a short story, then names the concrete
-// capabilities as tags. One navy accent across all cards (see service-cards-v2).
+// One card per service: a headline number, the service name, and a single line.
+// Kept deliberately short. One navy accent across all cards (see service-cards-v2).
 const SERVICES = [
   {
     icon: <LuRepeat2 />,
@@ -38,8 +38,6 @@ const SERVICES = [
     statLabel: 'runs itself, no babysitting',
     title: 'Kill the copy-paste busywork',
     outcome: 'Automate the repetitive manual work that eats your team’s hours.',
-    example: 'A power seller re-posted dozens of classified ads by hand every day to stay on top. I replaced the grind with a scheduler that re-lists around the clock.',
-    tags: ['Scheduling engine', 'Auto re-listing', 'Zero manual work'],
   },
   {
     icon: <LuFileSearch />,
@@ -47,8 +45,6 @@ const SERVICES = [
     statLabel: 'to a cited answer over millions of docs',
     title: 'Turn document piles into instant answers',
     outcome: 'Ask in plain language, get an answer cited to the exact source.',
-    example: 'A retrieval system over millions of government contracts, so staff find the exact clause in seconds instead of digging through PDFs.',
-    tags: ['Vector search', 'Reranking', 'Fact-check', 'Citations'],
   },
   {
     icon: <LuBot />,
@@ -56,8 +52,6 @@ const SERVICES = [
     statLabel: 'run end to end, unattended',
     title: 'Agents that do the work, not just chat',
     outcome: 'Hand off a whole process: read, research, verify, summarize, act.',
-    example: 'An autonomous multi-agent pipeline categorizing millions of records in parallel, with a human in the loop where it counts.',
-    tags: ['OCR', 'Scraping', 'Retrieval', 'Verify', 'Summarize'],
   },
   {
     icon: <LuShieldCheck />,
@@ -65,8 +59,6 @@ const SERVICES = [
     statLabel: 'sensitive data leaves your building',
     title: 'Private AI that never leaves your business',
     outcome: 'The leverage of AI without shipping sensitive data to someone else’s cloud.',
-    example: 'AI assistants on dedicated on-site hardware for Czech and Slovak firms: GDPR-friendly, hardened, fully managed from day one.',
-    tags: ['On-prem', 'GDPR', 'InfoSec-hardened', 'Fully managed'],
   },
 ];
 
@@ -159,10 +151,6 @@ const ServicesPage: React.FC = () => {
                 </div>
                 <h3 className="services-card__title">{s.title}</h3>
                 <p className="services-card__outcome">{s.outcome}</p>
-                <p className="services-card__body">{s.example}</p>
-                <div className="svc-tags">
-                  {s.tags.map((t) => <span className="svc-tag" key={t}>{t}</span>)}
-                </div>
               </article>
             </Reveal>
           ))}
