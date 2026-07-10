@@ -1,5 +1,16 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useLocale } from '../i18n/LocaleContext';
+import { Locale } from '../config/locale';
+
+// og:locale advertises the language the page is currently rendered in. The
+// in-place toggle does not create alternate URLs, so there is no hreflang set;
+// this just keeps the social-preview locale honest for human visitors.
+const OG_LOCALE: Record<Locale, string> = {
+  en: 'en_US',
+  sk: 'sk_SK',
+  cs: 'cs_CZ',
+};
 
 // Canonical base. Swap this single constant when a custom domain lands.
 export const SITE_URL = 'https://eduardhvizdak.com';
@@ -23,17 +34,20 @@ const abs = (img?: string) =>
   !img ? DEFAULT_OG_IMAGE : img.startsWith('http') ? img : `${SITE_URL}${img}`;
 
 const Seo: React.FC<SeoProps> = ({ title, description, path, image, type = 'website', jsonLd, noindex }) => {
+  const { locale } = useLocale();
   const url = `${SITE_URL}${path}`;
   const t = fullTitle(title);
   const img = abs(image);
   return (
     <Helmet>
+      <html lang={locale} />
       <title>{t}</title>
       <meta name="description" content={description} />
       {noindex && <meta name="robots" content="noindex, nofollow" />}
       {noindex && <meta name="googlebot" content="noindex, nofollow" />}
       <link rel="canonical" href={url} />
       <meta property="og:type" content={type} />
+      <meta property="og:locale" content={OG_LOCALE[locale]} />
       <meta property="og:site_name" content="Eduard Hvizdak" />
       <meta property="og:title" content={t} />
       <meta property="og:description" content={description} />

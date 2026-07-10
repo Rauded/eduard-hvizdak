@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useParams, Navigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import { BLOG_POSTS } from '../../data/blog';
+import { BLOG_POSTS, localizeBlogPost } from '../../data/blog';
 import Seo, { SITE_URL, PERSON_ID } from '../../seo/Seo';
 import { formatDate, getThumbnail, readingTime } from './blogUtils';
 import { useTheme } from '../theme/ThemeContext';
+import { useT } from '../../i18n';
+import { useLocale } from '../../i18n/LocaleContext';
 import './BlogPage.scss';
 
 type FontPref = 'serif' | 'sans';
@@ -21,11 +23,12 @@ function getStored<T extends string>(key: string, fallback: T, allowed: readonly
   return v && allowed.includes(v) ? v : fallback;
 }
 
-const FONT_LABELS: Record<FontPref, string> = { serif: 'Serif', sans: 'Sans' };
-
 const BlogPostPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  const t = useT('blog');
+  const { locale } = useLocale();
+  const rawPost = BLOG_POSTS.find((p) => p.slug === slug);
+  const FONT_LABELS: Record<FontPref, string> = { serif: t.fontSerif, sans: t.fontSans };
 
   const [font, setFont] = useState<FontPref>(() =>
     getStored<FontPref>(FONT_KEY, 'serif', ['serif', 'sans'])
@@ -83,15 +86,18 @@ const BlogPostPage: React.FC = () => {
     }
   }, []);
 
-  if (!post) {
+  if (!rawPost) {
     return <Navigate to="/blog" replace />;
   }
 
+  const post = localizeBlogPost(rawPost, locale);
   const minutes = readingTime(post.content);
-  const sameCategory = BLOG_POSTS.filter(
+  // Group related posts on the localized list so category equality still holds.
+  const localizedPosts = BLOG_POSTS.map((p) => localizeBlogPost(p, locale));
+  const sameCategory = localizedPosts.filter(
     (p) => p.slug !== post.slug && p.category === post.category
   );
-  const others = BLOG_POSTS.filter(
+  const others = localizedPosts.filter(
     (p) => p.slug !== post.slug && p.category !== post.category
   );
   const related = [...sameCategory, ...others].slice(0, 3);
@@ -124,10 +130,10 @@ const BlogPostPage: React.FC = () => {
         <div className="blog-post__topbar">
           <Link to="/blog" className="blog-back">
             <FaArrowLeft />
-            All posts
+            {t.allPosts}
           </Link>
           <div className="reading-controls">
-            <div className="reading-controls__fonts" role="group" aria-label="Reading font">
+            <div className="reading-controls__fonts" role="group" aria-label={t.readingFontAria}>
               {(['serif', 'sans'] as FontPref[]).map((f) => (
                 <button
                   key={f}
@@ -151,7 +157,7 @@ const BlogPostPage: React.FC = () => {
           <div className="blog-post__byline-meta">
             <span className="blog-post__author">Eduard Hvizdak</span>
             <span className="blog-post__sub">
-              {formatDate(post.date)} · {minutes} min read
+              {formatDate(post.date, locale)} · {minutes} {t.minRead}
             </span>
           </div>
         </div>
@@ -170,12 +176,9 @@ const BlogPostPage: React.FC = () => {
         <aside className="author-card">
           <img className="author-card__avatar" src={AVATAR} alt="Eduard Hvizdak" loading="lazy" />
           <div className="author-card__info">
-            <span className="author-card__label">Written by</span>
+            <span className="author-card__label">{t.writtenBy}</span>
             <span className="author-card__name">Eduard Hvizdak</span>
-            <p className="author-card__bio">
-              AI engineer and founder. I build SaaS and AI products, compete at hackathons, and
-              write about what I learn along the way.
-            </p>
+            <p className="author-card__bio">{t.authorBio}</p>
             <div className="author-card__links">
               <a href={GITHUB} target="_blank" rel="noopener noreferrer">GitHub</a>
               <a href={LINKEDIN} target="_blank" rel="noopener noreferrer">LinkedIn</a>
@@ -185,7 +188,7 @@ const BlogPostPage: React.FC = () => {
 
         {related.length > 0 && (
           <section className="related">
-            <h2 className="related__heading">More from the blog</h2>
+            <h2 className="related__heading">{t.moreFromBlog}</h2>
             <div className="related__grid">
               {related.map((p) => {
                 const thumb = getThumbnail(p);
@@ -198,7 +201,7 @@ const BlogPostPage: React.FC = () => {
                       <span className="related__category">{p.category}</span>
                       <span className="related__title">{p.title}</span>
                       <span className="related__meta">
-                        {formatDate(p.date)} · {readingTime(p.content)} min read
+                        {formatDate(p.date, locale)} · {readingTime(p.content)} {t.minRead}
                       </span>
                     </div>
                   </Link>
@@ -214,7 +217,7 @@ const BlogPostPage: React.FC = () => {
           className="lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label="Image preview"
+          aria-label={t.imagePreview}
           onClick={() => setZoomSrc(null)}
         >
           <img src={zoomSrc} alt="" />

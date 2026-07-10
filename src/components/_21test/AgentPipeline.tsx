@@ -4,6 +4,7 @@ import {
   LuFileText, LuDatabase, LuGlobe, LuBrainCircuit,
   LuMailCheck, LuFileCheck2, LuZap,
 } from 'react-icons/lu';
+import { useT } from '../../i18n';
 
 // ── TEST: 21st.dev "Animated Beam" (magicui) reimagined as an AI-agent ───────
 // orchestration diagram. Sources feed a central agent core, which fans out to
@@ -20,18 +21,20 @@ function edgePath(from: Pt, to: Pt): string {
 
 // Per-node accent colors so the diagram reads as distinct inputs and outputs
 // instead of a wall of navy.
+// Icons + colors only; labels come from the i18n dict, zipped by index.
 const SOURCES = [
-  { icon: LuFileText, label: 'Documents', color: '#2563eb' },
-  { icon: LuDatabase, label: 'Your database', color: '#d97757' },
-  { icon: LuGlobe, label: 'Web & APIs', color: '#1f8f4e' },
+  { icon: LuFileText, color: '#2563eb' },
+  { icon: LuDatabase, color: '#d97757' },
+  { icon: LuGlobe, color: '#1f8f4e' },
 ];
 const OUTPUTS = [
-  { icon: LuFileCheck2, label: 'Cited answers', color: '#0d9488' },
-  { icon: LuMailCheck, label: 'Actions & email', color: '#7c3aed' },
-  { icon: LuZap, label: 'Triggers', color: '#eab308' },
+  { icon: LuFileCheck2, color: '#0d9488' },
+  { icon: LuMailCheck, color: '#7c3aed' },
+  { icon: LuZap, color: '#eab308' },
 ];
 
 const AgentPipeline: React.FC = () => {
+  const t = useT('agentPipeline');
   const wrap = useRef<HTMLDivElement>(null);
   const core = useRef<HTMLDivElement>(null);
   const srcRefs = useRef<(HTMLDivElement | null)[]>([]);
@@ -67,13 +70,12 @@ const AgentPipeline: React.FC = () => {
   }, [measure]);
 
   return (
-    <section className="agent-pipe" aria-label="How an AI agent pipeline works">
+    <section className="agent-pipe" aria-label={t.ariaSection}>
       <div className="agent-pipe__head">
-        <p className="agent-pipe__eyebrow">AI automation</p>
-        <h2 className="agent-pipe__title">One agent, wired to everything you use</h2>
+        <p className="agent-pipe__eyebrow">{t.eyebrow}</p>
+        <h2 className="agent-pipe__title">{t.title}</h2>
         <p className="agent-pipe__lead">
-          Your sources flow into an orchestrated agent that reasons over them and takes action, with a
-          human in the loop where it matters.
+          {t.lead}
         </p>
       </div>
 
@@ -91,9 +93,9 @@ const AgentPipeline: React.FC = () => {
           {SOURCES.map((s, i) => {
             const Icon = s.icon;
             return (
-              <div className="agent-node" key={s.label} ref={(el) => { srcRefs.current[i] = el; }}>
+              <div className="agent-node" key={t.sources[i]} ref={(el) => { srcRefs.current[i] = el; }}>
                 <Icon aria-hidden style={{ color: s.color }} />
-                <span>{s.label}</span>
+                <span>{t.sources[i]}</span>
               </div>
             );
           })}
@@ -103,8 +105,8 @@ const AgentPipeline: React.FC = () => {
           <div className="agent-core" ref={core}>
             <span className="agent-core__pulse" aria-hidden />
             <LuBrainCircuit aria-hidden />
-            <strong>AI Agent</strong>
-            <em>reason · plan · act</em>
+            <strong>{t.coreLabel}</strong>
+            <em>{t.coreSub}</em>
           </div>
         </div>
 
@@ -112,9 +114,9 @@ const AgentPipeline: React.FC = () => {
           {OUTPUTS.map((s, i) => {
             const Icon = s.icon;
             return (
-              <div className="agent-node" key={s.label} ref={(el) => { outRefs.current[i] = el; }}>
+              <div className="agent-node" key={t.outputs[i]} ref={(el) => { outRefs.current[i] = el; }}>
                 <Icon aria-hidden style={{ color: s.color }} />
-                <span>{s.label}</span>
+                <span>{t.outputs[i]}</span>
               </div>
             );
           })}

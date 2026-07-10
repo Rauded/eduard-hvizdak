@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { LuCpu, LuChevronDown, LuActivity } from 'react-icons/lu';
+import { useT } from '../../i18n';
 import './agents.scss';
 
 // ─── Agents data contract ────────────────────────────────────────────
@@ -35,13 +36,6 @@ interface AgentsData {
 const AGENTS_ENABLED =
   process.env.REACT_APP_SHOW_AGENTS === 'true' || false;
 
-const STATUS_LABEL: Record<AgentStatus, string> = {
-  running: 'Running',
-  idle: 'Idle',
-  done: 'Done',
-  error: 'Error',
-};
-
 // Pick a provider tint from the model id so each model gets its own badge
 // colour without a hand-maintained lookup table.
 function providerOf(model: string): { label: string; key: string } {
@@ -71,11 +65,18 @@ function elapsed(from: string, now: number): string {
 }
 
 const AgentCard: React.FC<{ agent: Agent; now: number }> = ({ agent, now }) => {
+  const t = useT('now');
   const [open, setOpen] = useState(false);
   const prov = providerOf(agent.model);
   const live = agent.status === 'running';
   const hasDetail = (agent.log?.length || 0) > 1 || (agent.shipped?.length || 0) > 0;
   const headLine = agent.log?.[0];
+  const statusLabel: Record<AgentStatus, string> = {
+    running: t.agents.statusRunning,
+    idle: t.agents.statusIdle,
+    done: t.agents.statusDone,
+    error: t.agents.statusError,
+  };
 
   return (
     <div className={`agent-card agent-card--${agent.status}`}>
@@ -85,13 +86,13 @@ const AgentCard: React.FC<{ agent: Agent; now: number }> = ({ agent, now }) => {
         <span className={`agent-card__model agent-card__model--${prov.key}`} title={`${prov.label} · ${agent.model}`}>
           <LuCpu /> {agent.model}
         </span>
-        <span className="agent-card__state">{STATUS_LABEL[agent.status]}</span>
+        <span className="agent-card__state">{statusLabel[agent.status]}</span>
       </div>
 
       <p className="agent-card__task">{agent.task}</p>
 
       {headLine && (
-        <div className="agent-card__live" aria-label="latest activity">
+        <div className="agent-card__live" aria-label={t.agents.activityAria}>
           <span className="agent-card__prompt">›</span>
           <span className={`agent-card__logline${live ? ' agent-card__logline--blink' : ''}`}>{headLine}</span>
         </div>
@@ -101,14 +102,14 @@ const AgentCard: React.FC<{ agent: Agent; now: number }> = ({ agent, now }) => {
         {agent.startedAt && (
           <span className="agent-card__metric">
             <LuActivity />
-            {live ? `up ${elapsed(agent.startedAt, now)}` : agent.status === 'idle' ? 'sleeping' : 'last run'}
+            {live ? `${t.agents.up} ${elapsed(agent.startedAt, now)}` : agent.status === 'idle' ? t.agents.sleeping : t.agents.lastRun}
           </span>
         )}
         {agent.tasksDone !== null && agent.tasksDone !== undefined && (
-          <span className="agent-card__metric">{fmtNum(agent.tasksDone)} tasks done</span>
+          <span className="agent-card__metric">{fmtNum(agent.tasksDone)} {t.agents.tasksDone}</span>
         )}
         {agent.tokensToday !== null && agent.tokensToday !== undefined && (
-          <span className="agent-card__metric">{fmtNum(agent.tokensToday)} tok today</span>
+          <span className="agent-card__metric">{fmtNum(agent.tokensToday)} {t.agents.tokToday}</span>
         )}
         {hasDetail && (
           <button
@@ -117,7 +118,7 @@ const AgentCard: React.FC<{ agent: Agent; now: number }> = ({ agent, now }) => {
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
           >
-            log <LuChevronDown />
+            {t.agents.log} <LuChevronDown />
           </button>
         )}
       </div>
@@ -133,7 +134,7 @@ const AgentCard: React.FC<{ agent: Agent; now: number }> = ({ agent, now }) => {
           )}
           {(agent.shipped?.length || 0) > 0 && (
             <div className="agent-card__shipped">
-              <span className="agent-card__shipped-label">Shipped</span>
+              <span className="agent-card__shipped-label">{t.agents.shipped}</span>
               <div className="agent-card__chips">
                 {agent.shipped!.map((s, i) => (
                   <span className="agent-card__chip" key={i}>{s}</span>
@@ -159,6 +160,7 @@ const AgentSkeleton: React.FC = () => (
 );
 
 const AgentsRunning: React.FC = () => {
+  const t = useT('now');
   const [data, setData] = useState<AgentsData | null>(null);
   const [now, setNow] = useState<number>(() => Date.now());
 
@@ -187,24 +189,21 @@ const AgentsRunning: React.FC = () => {
   const liveCount = agents.filter((a) => a.status === 'running').length;
 
   return (
-    <section className="now-agents" aria-label="My AI agents running">
+    <section className="now-agents" aria-label={t.agents.sectionAria}>
       <div className="now-media__head">
         <h2 className="now-media__title">
-          <LuCpu className="now-icon" /> Agents running
+          <LuCpu className="now-icon" /> {t.agents.title}
           {data && (
             <span className={`now-agents__live${liveCount > 0 ? ' now-agents__live--on' : ''}`}>
               <span className="now-agents__livedot" aria-hidden="true" />
-              {liveCount > 0 ? `${liveCount} live` : 'idle'}
+              {liveCount > 0 ? `${liveCount} ${t.agents.live}` : t.agents.idle}
             </span>
           )}
         </h2>
-        <span className="now-media__auto">Autonomous · self-running</span>
+        <span className="now-media__auto">{t.agents.auto}</span>
       </div>
 
-      <p className="now-agents__lead">
-        A live look at the AI agents I have running in the background — what each one is working on
-        right now, the model behind it, and what it's already shipped.
-      </p>
+      <p className="now-agents__lead">{t.agents.lead}</p>
 
       <div className="now-agents__grid">
         {data === null

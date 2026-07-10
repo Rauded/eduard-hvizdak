@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { LuBookOpen, LuArrowUpRight, LuGithub, LuX } from 'react-icons/lu';
-import { PortfolioProject, CaseStudy } from './projectsData';
+import { PortfolioProject, CaseStudy, localizeProject } from './projectsData';
+// @ts-ignore: the `projects` namespace is registered centrally by the parent.
+import { useT } from '../../i18n';
+import { useLocale } from '../../i18n/LocaleContext';
 
 // ─── Scroll-reveal hook ──────────────────────────────────────────
 export function useReveal(threshold = 0.12) {
@@ -92,12 +95,15 @@ const ConceptCard: React.FC = () => (
 );
 
 // ─── Branded placeholder (used until a real video/screenshot exists) ──
-const PlaceholderCard: React.FC<{ title: string }> = ({ title }) => (
-  <div className="media-placeholder">
-    <span className="media-placeholder__label">{title}</span>
-    <span className="media-placeholder__note">Demo coming soon</span>
-  </div>
-);
+const PlaceholderCard: React.FC<{ title: string }> = ({ title }) => {
+  const t = useT('projects');
+  return (
+    <div className="media-placeholder">
+      <span className="media-placeholder__label">{title}</span>
+      <span className="media-placeholder__note">{t.demoSoon}</span>
+    </div>
+  );
+};
 
 // ─── Link icon ───────────────────────────────────────────────────
 // Shows the destination site's own favicon when one is provided, falling
@@ -176,15 +182,19 @@ const ProjectMedia: React.FC<{ project: PortfolioProject }> = ({ project }) => {
 // (inside the dialog markup, hidden via CSS when closed) so crawlers and
 // LLM/GEO indexers always get the keywords. The button only reveals the
 // reader for human readers — opening "like a window" on the same page.
-const CASE_SECTIONS: { key: keyof CaseStudy; heading: string }[] = [
-  { key: 'problem', heading: 'The problem' },
-  { key: 'motivation', heading: 'Why I built it' },
-  { key: 'challenges', heading: 'What I ran into' },
-  { key: 'solution', heading: 'How it got solved' },
-  { key: 'story', heading: 'Where it happened' },
+// Order + which CaseStudy field each section renders. The visible heading text
+// is looked up from the `projects` dictionary (t.caseSections[key]) inside the
+// component so it localizes with the active language.
+const CASE_SECTIONS: { key: keyof CaseStudy }[] = [
+  { key: 'problem' },
+  { key: 'motivation' },
+  { key: 'challenges' },
+  { key: 'solution' },
+  { key: 'story' },
 ];
 
 const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) => {
+  const t = useT('projects');
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const cs = project.caseStudy;
@@ -223,13 +233,13 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
           type="button"
           className="case-modal__close"
           onClick={() => setOpen(false)}
-          aria-label="Close case study"
+          aria-label={t.closeCaseStudy}
         >
           <LuX aria-hidden="true" />
         </button>
 
         <header className="case-modal__head">
-          <span className="case-modal__eyebrow">Case study</span>
+          <span className="case-modal__eyebrow">{t.caseStudyEyebrow}</span>
           <h2 className="case-modal__title" id={titleId}>{project.title}</h2>
           <p className="case-modal__subtitle">{project.subtitle}</p>
         </header>
@@ -239,10 +249,10 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
         </div>
 
         <div className="case-modal__body">
-          {CASE_SECTIONS.map(({ key, heading }) =>
+          {CASE_SECTIONS.map(({ key }) =>
             cs[key] ? (
               <section className="case-modal__section" key={key}>
-                <h3 className="case-modal__h">{heading}</h3>
+                <h3 className="case-modal__h">{t.caseSections[key]}</h3>
                 <p
                   className="case-modal__p"
                   dangerouslySetInnerHTML={{ __html: cs[key] as string }}
@@ -266,7 +276,7 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
         aria-haspopup="dialog"
       >
         <LuBookOpen aria-hidden="true" />
-        Project details
+        {t.projectDetails}
       </button>
       {dialog}
     </>
@@ -274,8 +284,10 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
 };
 
 // ─── Single project card ─────────────────────────────────────────
-export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project }) => {
+export const ProjectCard: React.FC<{ project: PortfolioProject }> = ({ project: rawProject }) => {
   const { ref, visible } = useReveal();
+  const { locale } = useLocale();
+  const project = localizeProject(rawProject, locale);
 
   return (
     <article

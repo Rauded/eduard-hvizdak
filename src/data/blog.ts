@@ -8,6 +8,12 @@ export interface BlogPost {
   content: string; // HTML string
   pinned?: boolean; // surfaced as the featured post on the blog feed
   footnote?: string; // event/credits dateline, rendered consistently after the article
+  // Slovak translations. Applied by localizeBlogPost() when locale === 'sk'.
+  title_sk?: string;
+  excerpt_sk?: string;
+  category_sk?: string;
+  content_sk?: string;
+  footnote_sk?: string;
 }
 
 export const BLOG_POSTS: BlogPost[] = [
@@ -54,6 +60,45 @@ export const BLOG_POSTS: BlogPost[] = [
     `,
     footnote:
       'Newsmatics Hackathon · Brno, Czech Republic · 27-28 February 2026<br/>Team MOGGERS · Project: Newsmatics Globe · <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">newsmatics.com</a>',
+    title_sk: 'Newsmatics Hackathon',
+    category_sk: 'Hackathony a projekty',
+    excerpt_sk:
+      'Strávil som víkend hackovaním s tímom MOGGERS na projekte Newsmatics Globe, čo je pipeline, ktorý ťahá lokality z novinových článkov a zakresľuje ich na interaktívny 3D glóbus. Takto ten víkend prebehol.',
+    content_sk: `
+      <p>V dňoch <strong>27. až 28. februára 2026</strong> som sa zúčastnil <strong><a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathonu</a></strong> v Brne s mojím tímom <strong>MOGGERS</strong>. Postavili sme <strong>Newsmatics Globe</strong>, geolokačný pipeline: pomocou NLP ťahá názvy miest z novinových článkov, páruje ich s databázou GeoNames a zakresľuje ich na interaktívny 3D glóbus. Je tam časová os, ktorou môžeš posúvať a sledovať, ako sa udalosti šíria po mape. Ak chceš detaily o samotnom projekte, nájdeš ich medzi <a href="/#projects">projektmi na mojej domovskej stránke</a> (hľadaj <strong>Newsmatics Globe</strong>).</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/newsmatics/group.jpg" alt="Skupinová fotka všetkých účastníkov Newsmatics Hackathonu" class="blog-img" />
+        <figcaption>Všetci, ktorí sa zúčastnili Newsmatics Hackathonu.</figcaption>
+      </figure>
+
+      <h2>Ako sme to stavali</h2>
+      <p>Väčšina víkendu vyzerala presne takto: otvorené notebooky, priveľa kávy, prechádzali sme pipeline kúsok po kúsku. Prácu sme si rozdelili na tri časti, jeden z nás robil na NLP extrakcii, druhý na párovaní s GeoNames a tretí na frontendovom glóbuse. Druhá polovica akcie bola hlavne o zošívaní všetkého dokopy a ladení časovej osi.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/newsmatics/working.jpg" alt="Práca na hackathone, programovanie na notebookoch s kolegom z tímu" class="blog-img" />
+      </figure>
+
+      <h2>Tím MOGGERS</h2>
+      <p>Súťažili sme ako <strong>MOGGERS</strong>, traja, každý mal na starosti inú časť stacku. Keď sme glóbus prezentovali porote a časová os bežala naživo, v tej chvíli všetko, čo sme cez víkend postavili, konečne zapadlo do jedného dema.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/newsmatics/team.jpg" alt="Portrét tímu MOGGERS na Newsmatics Hackathone" class="blog-img" />
+      </figure>
+
+      <h2>Vyhlásenie výsledkov</h2>
+      <p>Akcia sa zavŕšila vyhlásením výsledkov a certifikátmi pre tímy. Stáť tam hore s organizátormi a ostatnými účastníkmi bol skvelý spôsob, ako uzavrieť náročných pár dní.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/newsmatics/awards.jpg" alt="Vyhlásenie výsledkov na Newsmatics Hackathone, účastníci držia certifikáty" class="blog-img" />
+      </figure>
+
+      <h2>Na záver</h2>
+      <p>Hackathony sú stále môj obľúbený spôsob, ako niečo postaviť. Dostaneš tesný termín, reálny problém a malý tím, ktorý to musí rýchlo vyriešiť. Newsmatics Globe začal ako víkendový projekt práve tu a vyrástol z neho jeden z výsledkov, na ktoré som najviac hrdý. Ďakujem <strong>Newsmatics</strong> za zorganizovanie. Ich oficiálne zhrnutie nájdeš na <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">stránke Newsmatics Hackathon 2026</a>.</p>
+      <p>Chceš technické detaily? Zájdi na <a href="/#projects">projekty na mojej domovskej stránke</a> a nájdi <strong>Newsmatics Globe</strong>.</p>
+    `,
+    footnote_sk:
+      'Newsmatics Hackathon · Brno, Česká republika · 27. až 28. februára 2026<br/>Tím MOGGERS · Projekt: Newsmatics Globe · <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">newsmatics.com</a>',
   },
   {
     slug: 'digital-fairness-act-youth-dialogue',
@@ -109,6 +154,56 @@ export const BLOG_POSTS: BlogPost[] = [
     `,
     footnote:
       'Youth Policy Dialogue: Digital Fairness Act · Ljubljana, Slovenia<br/>With European Commissioner Michael McGrath · European Commission',
+    title_sk:
+      'Európska komisia ma pozvala diskutovať o Digital Fairness Act s eurokomisárom Michaelom McGrathom',
+    category_sk: 'Tech a politika',
+    excerpt_sk:
+      'Zapojil som sa do Youth Policy Dialogue Európskej komisie v Ľubľane s eurokomisárom Michaelom McGrathom, kde sme rozoberali, čo by pripravovaný Digital Fairness Act mal reálne robiť s klamlivým dizajnom, cenotvorbou a digitálnymi zmluvami.',
+    content_sk: `
+      <p>Zúčastnil som sa <strong>Youth Policy Dialogue Európskej komisie</strong> v <strong>Ľubľane</strong> a sadol si s <strong>eurokomisárom Michaelom McGrathom</strong>, aby sme sa rozprávali o <strong>Digital Fairness Act</strong>, pripravovanej snahe EÚ upratať to, ako online služby zaobchádzajú s ľuďmi. Najviac mi utkvelo, že rozhovor o pravidlách prebiehal <em>s</em> ľuďmi, ktorých majú chrániť, nielen o nich.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/digital-fairness/youth-policy-dialogue.png" alt="Youth Policy Dialogue o Digital Fairness Act s komisárom Michaelom McGrathom v Ľubľane" class="blog-img" />
+      </figure>
+
+      <figure class="blog-figure">
+        <img src="/blog/digital-fairness/df-03.jpg" alt="Otvorené Q&amp;A s panelom počas dialógu o Digital Fairness Act, komisár McGrath počúva" class="blog-img" />
+        <figcaption>Otvorené Q&amp;A s panelom, komisár McGrath počúva vpravo.</figcaption>
+      </figure>
+
+      <h2>Na čom sme pracovali</h2>
+      <p>Namiesto abstraktných téz sme zmapovali konkrétne požiadavky naprieč <strong>cenotvorbou, marketingovými praktikami a digitálnymi zmluvami</strong>. Opakovalo sa pár tém. Zakázať <strong>klamlivé praktiky a temné vzory (dark patterns)</strong>. Nastaviť <strong>štandardizované požiadavky</strong>, aby ľudia naozaj rozumeli, s čím súhlasia. A uvádzať ceny v <strong>reálnej mene</strong> namiesto systémov herných tokenov v aplikáciách, ktoré majú skryť, koľko v skutočnosti míňaš.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/digital-fairness/df-05.jpg" alt="Pracovná skupina mapuje klamlivý dizajn a dark patterns pre Digital Fairness Act" class="blog-img" />
+        <figcaption>V našej pracovnej skupine, s tabuľou "Dark Patterns" na stole a princípmi Digital Fairness v ruke.</figcaption>
+      </figure>
+
+      <figure class="blog-figure">
+        <video class="blog-video" controls preload="metadata" playsinline poster="/blog/digital-fairness/df-wetalk-poster.jpg">
+          <source src="/blog/digital-fairness/df-wetalk.mp4" type="video/mp4" />
+        </video>
+        <figcaption>Pár momentov z dňa: okrúhle stoly, rozhovory bokom, otvorená diskusia.</figcaption>
+      </figure>
+
+      <h2>Prečo na tom záleží</h2>
+      <p>Veľká časť moderného webu je postavená tak, aby ťa postrkovala a tlačila do vecí: manipulatívne predvolené nastavenia, falošná naliehavosť, predplatné, ktoré spustíš jedným klikom a na zrušenie potrebuješ ticket na podporu. Vyvíjam softvér, takže veľa premýšľam o tom, kde je hranica medzi dobrým dizajnom a dizajnom, ktorý ľudí len zneužíva. Že sa o tejto hranici môžem hádať s človekom, ktorý reálne tvorí legislatívu, som tento rok nečakal.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/digital-fairness/df-02.jpg" alt="Eduard Hvizdák počúva počas jednej zo sekcií Youth Policy Dialogue" class="blog-img" />
+        <figcaption>Počúvam počas jednej zo sekcií.</figcaption>
+      </figure>
+
+      <h2>Na záver</h2>
+      <p>Odchádzal som s presvedčením, že hlas mladých v digitálnej politike nie je len formalita pre odškrtnutie políčka. Ľudia, ktorí vyrástli vo vnútri týchto systémov, väčšinou odhalia manipuláciu najrýchlejšie. Ďakujem <strong>Európskej komisii</strong> a komisárovi <strong>Michaelovi McGrathovi</strong>, že naozaj počúvali.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/digital-fairness/df-01.jpg" alt="Skupinová fotka mladých účastníkov s komisárom Michaelom McGrathom v Ľubľane" class="blog-img" />
+        <figcaption>Celá skupina mladých účastníkov s komisárom Michaelom McGrathom v Ľubľane.</figcaption>
+      </figure>
+    `,
+    footnote_sk:
+      'Youth Policy Dialogue: Digital Fairness Act · Ľubľana, Slovinsko<br/>S eurokomisárom Michaelom McGrathom · Európska komisia',
   },
   {
     slug: 'zero-to-done',
@@ -173,6 +268,65 @@ export const BLOG_POSTS: BlogPost[] = [
     `,
     footnote:
       'Zero to Done · Brno, Czech Republic · Created by Petr Sochora (angel investor, mime digital)<br/>Hosted at mime digital · Founder and CEO Michal Mervart · Project: InzerPro · <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>',
+    title_sk: 'Zero to Done: Ako som prezentoval InzerPro na startupovom hackathone',
+    category_sk: 'Hackathony a projekty',
+    excerpt_sk:
+      'Víkend v Brne na Zero to Done, startupovom hackathone, ktorý vytvoril anjelský investor Petr Sochora a hostila ho mime digital, jedna z najrýchlejšie rastúcich e-commerce agentúr v Česku. Cieľom nebolo demo, ale reálne MVP, za ktoré by ľudia zaplatili. Priniesol som InzerPro a prešiel som ho so zakladateľom a CEO mime digital Michalom Mervartom.',
+    content_sk: `
+      <p>Strávil som víkend v Brne na <strong>Zero to Done</strong> a je to jedna z najlepších akcií, akých som sa zúčastnil. Bol to <strong>úplne prvý ročník</strong>, ktorý dal dokopy <strong><a href="https://www.linkedin.com/in/petr-sochora/" target="_blank" rel="noopener noreferrer">Petr Sochora</a></strong>, anjelský investor a finančný a akvizičný partner v <a href="https://www.mimedigital.cz/" target="_blank" rel="noopener noreferrer">mime digital</a>, ktorý celé podujatie viedol priamo z kancelárie mime digital v centre Brna. mime digital je jedna z <strong>najrýchlejšie rastúcich e-commerce agentúr v Česku</strong>: Shoptet Premium partner, jedna z len štyroch certifikovaných Shopify agentúr v krajine a viac než <strong>800 e-shopov</strong> postavených 40-členným tímom pod vedením zakladateľa a CEO <strong><a href="https://cz.linkedin.com/in/michalmervart" target="_blank" rel="noopener noreferrer">Michala Mervarta</a></strong>. Premisa je priamo na banneri, <em>Máš nápad, ale nevíš kde začít?</em> (Máš nápad, ale nevieš, kde začať?), a odpoveď, ktorú ti dajú, je priama: postav reálne MVP za jediný víkend. Nájdeš ho na <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/zero-to-done/fireside.jpg" alt="Fireside rozhovor na pódiu na Zero to Done, publikum sleduje" class="blog-img" />
+        <figcaption>Jeden z fireside rozhovorov. Veľa hodnoty bolo práve v týchto sekciách a v zakladateľoch a investoroch, ktorí ich viedli.</figcaption>
+      </figure>
+
+      <h2>Iný druh hackathonu</h2>
+      <p>Čím vynikal, je to, že to <strong>nebol hackathon pre zábavu</strong>. Bola to <strong>akcia na stavbu startupu</strong>. Latka nebola "vypustiť super demo", ale "postaviť niečo, za čo by ľudia naozaj zaplatili". Cez víkend sa od teba čakalo, že pôjdeš hovoriť so zákazníkmi, otestuješ produkt s reálnymi používateľmi a ukážeš, že existuje reálny dopyt. V miestnosti boli investori, takže nešlo o víťazstvo v hlasovaní publika. Šlo o to, s ktorými tímami sa oplatí pracovať aj po skončení víkendu. To zmenilo, ako si trávil každú hodinu.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/zero-to-done/demo-day.jpg" alt="Celá miestnosť pokope na gaučoch sleduje, ako tímy prezentujú" class="blog-img" />
+        <figcaption>Čas na pitch, celá miestnosť vrátane mentorov a investorov sleduje, ako tímy prezentujú.</figcaption>
+      </figure>
+
+      <h2>Priniesol som InzerPro</h2>
+      <p>Priniesol som <strong>InzerPro</strong>, môj produkt na automatizáciu inzerátov, a víkend som využil tak, ako to akcia chcela: rozhovormi s potenciálnymi zákazníkmi, testovaním a brúsením pitchu namiesto pridávania funkcií. Vrcholom bolo, keď som si sadol s <strong>Michalom Mervartom</strong>, zakladateľom a CEO mime digital, a prešiel som s ním produkt riadok po riadku. Pracovať na niečom, na čom mi už záleží, v miestnosti plnej ľudí, ktorí robia to isté, to celé pospájalo.</p>
+
+      <figure class="blog-figure">
+        <video class="blog-video" autoplay muted loop playsinline preload="metadata" poster="/blog/zero-to-done/build-montage-poster.jpg">
+          <source src="/blog/zero-to-done/build-montage.mp4" type="video/mp4" />
+        </video>
+        <figcaption>Rozoberám InzerPro s <strong>Michalom Mervartom</strong>, zakladateľom a CEO mime digital.</figcaption>
+      </figure>
+
+      <h2>Vysoká kvalita, od začiatku do konca</h2>
+      <p>Najviac ma prekvapilo, aké dobré to celé bolo, prevedenie aj ľudia. Organizácia bola precízna, program dobre premyslený a okolo mňa vznikalo veľa <strong>naozaj pôsobivých projektov</strong>. Od <strong>Petra Sochoru</strong> a ostatných mentorov som odišiel s kopou <strong>konkrétnych rád</strong>: cenu stavaj na hodnote, nie na nákladoch; ukázať produkt 20 ľuďom je viac než pridať 20 funkcií; "skvelý nápad!" neznamená nič, kým niekto naozaj nezaplatí; pivot nie je zlyhanie. Taká spätná väzba, akú dostaneš len od ľudí, ktorí naozaj niečo postavili a predali.</p>
+
+      <h2>Mimo programu</h2>
+      <p>Kancelária mala strešnú terasu a práve tam sa odohrala väčšina prestávok. Niektoré z lepších rozhovorov víkendu boli hore na slnku, ďalej od notebookov.</p>
+
+      <figure class="blog-figure">
+        <video class="blog-video blog-video--portrait" autoplay muted loop playsinline preload="metadata" poster="/blog/zero-to-done/rooftop-poster.jpg">
+          <source src="/blog/zero-to-done/rooftop.mp4" type="video/mp4" />
+        </video>
+        <figcaption>Výhľad zo strechy mime digital na Brno.</figcaption>
+      </figure>
+
+      <h2>Na záver</h2>
+      <p>Veľká vďaka <strong>Petrovi Sochorovi</strong> za vytvorenie Zero to Done a <strong>Michalovi Mervartovi</strong> a celému tímu <strong>mime digital</strong> za hostenie a za to, že hneď pri prvom ročníku nastavili latku takto vysoko. Akcie, ktoré ťa tlačia k reálnym zákazníkom namiesto dema, sú vzácne a táto to trafila presne. Bez váhania by som išiel znova.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/zero-to-done/group.jpg" alt="Celá skupina Zero to Done pózuje na streche" class="blog-img" />
+      </figure>
+
+      <figure class="blog-figure">
+        <img src="/blog/zero-to-done/group-celebrate.jpg" alt="Tá istá skupina Zero to Done na streche so zdvihnutými rukami" class="blog-img" />
+        <figcaption>Celá skupina na streche, po jednom spoločnom víkende.</figcaption>
+      </figure>
+
+      <p>Zaujíma ťa produkt, ktorý som priniesol? Zájdi na <a href="/#projects">projekty na mojej domovskej stránke</a> a hľadaj <strong>InzerPro</strong>.</p>
+    `,
+    footnote_sk:
+      'Zero to Done · Brno, Česká republika · Vytvoril Petr Sochora (anjelský investor, mime digital)<br/>Hostila mime digital · Zakladateľ a CEO Michal Mervart · Projekt: InzerPro · <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>',
   },
   {
     slug: 'erasmus-bridges-not-walls',
@@ -216,5 +370,55 @@ export const BLOG_POSTS: BlogPost[] = [
     `,
     footnote:
       'Bridges, Not Walls – Erasmus+ Youth Exchange · 20–29.04.2026, Luoba, Lithuania<br/>Countries: Lithuania, Ukraine, Slovakia, Romania, Poland, Bulgaria<br/>Funded by the Erasmus+ Programme of the European Union.<br/>#BridgesNotWalls #ErasmusPlus #YouthExchange',
+    title_sk: 'Skúsenosť z Erasmus+ Bridges, Not Walls',
+    category_sk: 'Život a cestovanie',
+    excerpt_sk:
+      'Zúčastnili sme sa mládežníckej výmeny Erasmus+ Bridges not Walls v Litve, týždňa neformálneho vzdelávania, kultúrnych večerov a ľudského prepojenia naprieč šiestimi východoeurópskymi krajinami.',
+    content_sk: `
+      <p>Od <strong>20. do 29. apríla 2026</strong> som sa zúčastnil <strong>Bridges, Not Walls</strong>, mládežníckej výmeny Erasmus+ v <strong>Luobe, Litva</strong>. Dostal som sa tam cez moju organizáciu <strong>YouthFully Yours</strong> a samotný projekt dala dokopy <strong>VšĮ Džiaugsmo slėnis</strong>. Celé to bolo o tom naučiť sa lepšie spájať s ľuďmi naprieč rôznymi kultúrami a prostrediami a budovať empatiu veľmi prakticky. O deväť dní neskôr môžem povedať, že to fungovalo.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/erasmus/photo2.jpg" alt="Celá skupina účastníkov Erasmus+ drží vlajku Erasmus+" class="blog-img" />
+      </figure>
+
+      <h2>Ako to prebiehalo</h2>
+      <p>Týždeň fungoval na neformálnom vzdelávaní, čo v praxi znamenalo, že každá krajina pripravila aktivitu a odviedla ju pre všetkých ostatných. Takže jeden deň si učil, ďalší si sa učil z workshopu niekoho iného. Témy siahali od <strong>aktívneho počúvania</strong> a identity až po sociálne siete a konflikt. Každá sekcia mala praktickú časť, takže si naozaj musel použiť to, čo si sa učil, nielen sedieť a počúvať. Ten formát výrazne ovplyvnil, koľko som si z toho odniesol.</p>
+
+      <h2>Krajiny</h2>
+      <p>Zapojených bolo šesť krajín: <strong>Slovensko, Poľsko, Bulharsko, Ukrajina, Rumunsko a Litva</strong>. Všetky východoeurópske, čo niekto môže vnímať ako obmedzenie, ale pre mňa to bolo skôr plus. Bolo dosť spoločného, aby sme sa rýchlo spojili, a zároveň dosť rozdielov medzi jednotlivými krajinami, vďaka ktorým bol každý rozhovor zaujímavý. Vrátil som sa s oveľa väčším prehľadom o nich všetkých.</p>
+
+      <h2>Miesto</h2>
+      <p>Bývali sme na mieste na litovskom vidieku, ktoré slúži aj ako svadobné miesto. Neďaleko umelé jazero, veľa otvoreného priestoru, dobré izby. Po dlhých dňoch workshopov bolo príjemné len tak si vyjsť von na prechádzku. Niektoré z najlepších rozhovorov toho týždňa sa odohrali večer v okolí miesta.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/erasmus/photo3.jpg" alt="Skupinová fotka pri západe slnka na mieste v Litve" class="blog-img" />
+      </figure>
+
+      <h2>Kultúrne večery</h2>
+      <p>Kultúrne večery boli moja obľúbená časť. Každá krajina dostala večer, aby predviedla svoju kultúru cez jedlo, hudbu, tanec a čokoľvek ďalšie, čo chcela priniesť. Miestnosť mala počas tých večerov vždy iný nádych.</p>
+      <p>Na <strong>slovenský kultúrny večer</strong> sme chceli ísť za rámec toho očividného a ukázať, aké Slovensko naozaj je. Uvarili sme tradičné jedlo, spravili sme pálenie <em>Moreny</em>, zatancovali ľudový tanec a spievali. Vidieť ľudí z Ukrajiny, Rumunska či Bulharska úprimne zvedavých na naše tradície bolo niečo, čo som nečakal, že ma tak zasiahne.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/erasmus/photo1.jpg" alt="Slovenský tím pripravuje jedlo na kultúrny večer" class="blog-img" />
+      </figure>
+
+      <h2>Na záver</h2>
+      <p>Z Litvy som sa vrátil s iným pohľadom na pár vecí. Nie dramaticky, len tým tichým spôsobom, keď si uvedomíš, že o niečom premýšľaš trochu inak než predtým. Spoznal som ľudí, s ktorými chcem zostať v kontakte, a mohol som podeliť sa o kúsok slovenskej kultúry s ľuďmi, ktorí sa s ňou nikdy predtým nestretli. Už len to celý výlet stálo za to.</p>
+      <p>Ďakujem <strong>YouthFully Yours</strong>, že ma vyslali, a <strong>VšĮ Džiaugsmo slėnis</strong> (<a href="https://www.instagram.com/dziaugsmoslenis/" target="_blank" rel="noopener noreferrer">@dziaugsmoslenis</a>) za to, že to celé dali dokopy.</p>
+    `,
+    footnote_sk:
+      'Bridges, Not Walls, mládežnícka výmena Erasmus+ · 20. - 29. 4. 2026, Luoba, Litva<br/>Krajiny: Litva, Ukrajina, Slovensko, Rumunsko, Poľsko, Bulharsko<br/>Financované z programu Erasmus+ Európskej únie.<br/>#BridgesNotWalls #ErasmusPlus #YouthExchange',
   },
 ];
+
+export function localizeBlogPost(p: BlogPost, locale: 'en' | 'sk' | 'cs'): BlogPost {
+  if (locale !== 'sk') return p; // cs falls back to en for now
+  return {
+    ...p,
+    title: p.title_sk ?? p.title,
+    excerpt: p.excerpt_sk ?? p.excerpt,
+    category: p.category_sk ?? p.category,
+    content: p.content_sk ?? p.content,
+    footnote: p.footnote_sk ?? p.footnote,
+  };
+}

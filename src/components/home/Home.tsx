@@ -17,11 +17,12 @@ import { useT } from '../../i18n';
 
 const Home: React.FC = () => {
   const t = useT('home');
+  const seo = useT('seo');
   return (
   <>
     <Seo
       title="Eduard Hvizdak"
-      description="AI engineer and indie founder. I build production AI systems (RAG pipelines, multi-agent tooling) and run real SaaS products: InzerPro, NasadClaw, KouzelnikNaAkci."
+      description={seo.homeDescription}
       path="/"
     />
     <Hero />

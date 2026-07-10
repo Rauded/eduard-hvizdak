@@ -7,6 +7,9 @@ import AgentsRunning from './AgentsRunning';
 import LinkedInEmbed from '../embeds/LinkedInEmbed';
 import Tweet from '../embeds/Tweet';
 import { useTheme } from '../theme/ThemeContext';
+import { useT } from '../../i18n';
+import { useLocale } from '../../i18n/LocaleContext';
+import { Locale } from '../../config/locale';
 import { isExpertMode } from '../../config/positioning';
 import { isFeatureOn } from '../../config/features';
 import '../embeds/embeds.scss';
@@ -22,39 +25,36 @@ const LINKEDIN_POSTS: { src: string; height: number }[] = [
 // whole "Favourite posts on X" section hides itself (guarded by length > 0).
 const FAVOURITE_TWEETS: string[] = [];
 
-// Hand-maintained "last updated" stamp for the /now header. Bump this whenever
-// you meaningfully rewrite the "Right now" copy below; a real /now page proves
-// it's alive by showing when it was last touched. Location is static.
-const LAST_UPDATED = 'July 2026';
-const LOCATION = 'Brno, Czech Republic';
+// The hand-maintained "last updated" stamp and location live in the
+// `now.foot` dictionary (foot.lastUpdated / foot.location) so they localize.
+// Bump foot.lastUpdated in en/now.ts + sk/now.ts whenever you rewrite the
+// "Right now" copy below; a real /now page proves it's alive by showing when
+// it was last touched.
 
 // Products I'm actively running (hand-maintained, one honest line each). These
-// lead above the auto-synced reading/watching feeds.
+// lead above the auto-synced reading/watching feeds. Tagline + status live in
+// the `now.building.<tKey>` dictionary so they translate with the page.
 const BUILDING: {
   name: string;
-  tagline: string;
-  status: string;
+  tKey: 'inzerpro' | 'kouzelnik' | 'nasadclaw';
   href: string;
   logo: string;
 }[] = [
   {
     name: 'InzerPro',
-    tagline: 'A cross-listing and automation platform for Czech and Slovak second-hand marketplaces.',
-    status: 'Live · paying customers',
+    tKey: 'inzerpro',
     href: 'https://www.inzerpro.cz',
     logo: '/brand/sites/inzerpro.svg',
   },
   {
     name: 'KouzelnikNaAkci',
-    tagline: 'A marketplace connecting event organisers with magicians across Czechia and Slovakia, and my live sandbox for SEO, GEO, and online-ads experiments.',
-    status: 'Live · marketplace + marketing lab',
+    tKey: 'kouzelnik',
     href: 'https://www.kouzelniknaakci.cz',
     logo: '/brand/sites/kouzelniknaakci.svg',
   },
   {
     name: 'NasadClaw',
-    tagline: 'A front-end brochure site for my AI consulting, automation, and deployment work, where people can read up and get in touch.',
-    status: 'Live · services site',
+    tKey: 'nasadclaw',
     href: 'https://www.nasadclaw.cz',
     logo: '/brand/sites/nasadclaw.png',
   },
@@ -124,22 +124,39 @@ function toWeeks(days: ContribDay[]): (ContribDay | null)[][] {
   return weeks;
 }
 
+// Map the active site locale to a BCP-47 tag for Intl date/number formatting.
+// English renders British month/number conventions; sk/cs use their own.
+const intlTag = (locale: Locale): string => (locale === 'en' ? 'en-GB' : locale);
+
+// Slovak contribution nouns for the tooltip use one/few/many plural forms; the
+// caller passes the resolved dictionary so both language and grammar localize.
+type GithubCopy = {
+  onDate: string;
+  contribOne: string;
+  contribFew: string;
+  contribMany: string;
+};
+function contribNoun(count: number, g: GithubCopy): string {
+  if (count === 1) return g.contribOne;
+  if (count >= 2 && count <= 4) return g.contribFew;
+  return g.contribMany;
+}
+
 // Human-readable label for a contribution day, e.g. "3 contributions on Jun 14, 2025".
-function contribLabel(day: ContribDay): string {
+function contribLabel(day: ContribDay, locale: Locale, g: GithubCopy): string {
   const [y, m, d] = day.date.split('-').map(Number);
-  const date = new Date(y, m - 1, d).toLocaleDateString('en-US', {
+  const date = new Date(y, m - 1, d).toLocaleDateString(intlTag(locale), {
     month: 'short', day: 'numeric', year: 'numeric',
   });
-  const noun = day.count === 1 ? 'contribution' : 'contributions';
-  return `${day.count} ${noun} on ${date}`;
+  return `${day.count} ${contribNoun(day.count, g)} ${g.onDate} ${date}`;
 }
 
 const fmt = (v: number | null, suffix = ''): string =>
   v === null || v === undefined ? '-' : `${v}${suffix}`;
 
 // Short form for big counts, e.g. 128432 becomes "128K".
-const compact = (n: number): string =>
-  new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 }).format(n);
+const compact = (n: number, locale: Locale): string =>
+  new Intl.NumberFormat(intlTag(locale), { notation: 'compact', maximumFractionDigits: 1 }).format(n);
 
 // Live local time in Brno (Europe/Prague); home base even when I'm travelling.
 // Prague runs CET (UTC+1) in winter, CEST (UTC+2) in summer, so derive the label
@@ -188,10 +205,12 @@ const MediaSkeleton: React.FC<{ mark: React.ReactNode; title: string; auto: stri
   </section>
 );
 
-const GitHubSkeleton: React.FC = () => (
+const GitHubSkeleton: React.FC = () => {
+  const t = useT('now');
+  return (
   <section className="now-github" aria-hidden="true">
     <div className="now-media__head">
-      <h2 className="now-media__title"><FaGithub className="now-icon" /> On GitHub</h2>
+      <h2 className="now-media__title"><FaGithub className="now-icon" /> {t.github.title}</h2>
       <span className="now-media__auto">@Rauded</span>
     </div>
     <p className="now-github__count"><span className="now-skel now-skel--line now-skel--count" /></p>
@@ -207,12 +226,15 @@ const GitHubSkeleton: React.FC = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
-const YouTubeSkeleton: React.FC = () => (
+const YouTubeSkeleton: React.FC = () => {
+  const t = useT('now');
+  return (
   <section className="now-media now-yt" aria-hidden="true">
     <div className="now-media__head">
-      <h2 className="now-media__title"><FaYoutube className="now-icon now-icon--yt" /> Latest video</h2>
+      <h2 className="now-media__title"><FaYoutube className="now-icon now-icon--yt" /> {t.media.videoTitle}</h2>
       <span className="now-media__auto">@eduardhvizdak</span>
     </div>
     <div className="now-ytcard">
@@ -220,10 +242,13 @@ const YouTubeSkeleton: React.FC = () => (
       <span className="now-skel now-skel--line now-skel--yt" />
     </div>
   </section>
-);
+  );
+};
 
 const NowPage: React.FC = () => {
   const { theme } = useTheme();
+  const t = useT('now');
+  const { locale } = useLocale();
   // null = still loading (render a skeleton); [] = loaded but empty (hide the
   // section); [...] = loaded with data. This lets the page reserve layout up
   // front so content swaps in place instead of popping in and shifting things.
@@ -289,11 +314,11 @@ const NowPage: React.FC = () => {
   const weeks = gh ? toWeeks(gh.contributions || []) : [];
 
   const stats = [
-    { key: 'focus', icon: <LuBrain />, label: 'Focused this week', value: fmt(data?.focusHoursWeek ?? null, 'h') },
-    { key: 'pomo', icon: <LuTimer />, label: 'Pomodoros logged', value: fmt(data?.pomodorosTotal ?? null) },
-    { key: 'streak', icon: <LuFlame />, label: 'Focus streak', value: fmt(data?.focusStreakDays ?? null, ' days') },
-    { key: 'screen', icon: <LuMonitorSmartphone />, label: 'Screen time / week', value: fmt(data?.screenTimeHoursWeek ?? null, 'h') },
-    { key: 'zap', icon: <LuZap />, label: 'Times caught slacking', value: fmt(data?.caughtSlackingWeek ?? null) },
+    { key: 'focus', icon: <LuBrain />, label: t.stats.focus, value: fmt(data?.focusHoursWeek ?? null, 'h') },
+    { key: 'pomo', icon: <LuTimer />, label: t.stats.pomodoros, value: fmt(data?.pomodorosTotal ?? null) },
+    { key: 'streak', icon: <LuFlame />, label: t.stats.streak, value: fmt(data?.focusStreakDays ?? null, t.stats.daysSuffix) },
+    { key: 'screen', icon: <LuMonitorSmartphone />, label: t.stats.screen, value: fmt(data?.screenTimeHoursWeek ?? null, 'h') },
+    { key: 'zap', icon: <LuZap />, label: t.stats.slacking, value: fmt(data?.caughtSlackingWeek ?? null) },
   ];
   // Only show the stats block once the dashboard has actually synced data.
   const hasStats = !!data && [
@@ -304,61 +329,59 @@ const NowPage: React.FC = () => {
   return (
     <div className="now-page" id="now" data-theme={theme}>
       <Seo
-        title="Now"
-        description="What Eduard Hvizdak is focused on right now: current projects, plus what he's reading and watching."
+        title={t.seo.title}
+        description={t.seo.description}
         path="/now"
       />
       <header className="now-hero">
-        <span className="now-hero__kicker">/now</span>
-        <h1 className="now-hero__title">What I'm doing now</h1>
+        <span className="now-hero__kicker">{t.hero.kicker}</span>
+        <h1 className="now-hero__title">{t.hero.title}</h1>
       </header>
 
-      <section className="now-focus" aria-label="What I'm focused on right now">
+      <section className="now-focus" aria-label={t.focus.aria}>
         <p className="now-focus__lead">
           {isExpertMode() ? (
-            <>I'm an <strong>AI engineer</strong>, and most of my time goes into building </>
+            <>{t.focus.expertA}<strong>{t.focus.expertRole}</strong>{t.focus.expertB}</>
           ) : (
             <>
-              I'm wrapping up my <strong>BSc in Computer Science</strong> at Masaryk University and
-              working as an <strong>AI engineer</strong>. Most of my time goes into building{' '}
+              {t.focus.studentA}<strong>{t.focus.studentBsc}</strong>{t.focus.studentB}
+              <strong>{t.focus.studentRole}</strong>{t.focus.studentC}
             </>
           )}
-          <strong>AI agents and agentic systems</strong>: automations, multi-agent orchestration, and
-          the wiring that keeps them running. I've also had a go at running a few SaaS products of my
-          own, and the one still going is{' '}
-          <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">InzerPro</a>. On
-          the side, more of an extra than a main job, I do AI consultations plus automation and AI
-          implementation work, just me, no company behind it.
+          <strong>{t.focus.agentsBold}</strong>{t.focus.mid}
+          <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">InzerPro</a>
+          {t.focus.outro}
         </p>
       </section>
 
       <section className="now-building">
         <div className="now-media__head">
-          <h2 className="now-media__title"><LuWrench className="now-icon" /> Currently building</h2>
+          <h2 className="now-media__title"><LuWrench className="now-icon" /> {t.building.title}</h2>
         </div>
         <div className="now-building__grid">
           {BUILDING.map((p) => {
             const s = seo?.find((x) => p.href.includes(x.domain));
+            const copy = t.building[p.tKey];
             return (
               <a className="now-build" key={p.name} href={p.href} target="_blank" rel="noopener noreferrer">
                 <div className="now-build__top">
                   <span className="now-build__logo">
-                    <img src={p.logo} alt={`${p.name} logo`} loading="lazy" />
+                    <img src={p.logo} alt={`${p.name} ${t.building.logoAlt}`} loading="lazy" />
                   </span>
                   <span className="now-build__name">{p.name}</span>
                   <LuArrowUpRight className="now-build__arrow" />
                 </div>
-                <p className="now-build__tag">{p.tagline}</p>
+                <p className="now-build__tag">{copy.tagline}</p>
                 <div className="now-build__foot">
                   <span className="now-build__status">
-                    <span className="now-build__dot" aria-hidden="true" />{p.status}
+                    <span className="now-build__dot" aria-hidden="true" />{copy.status}
                   </span>
                   {s && s.impressions > 0 && (
                     <span
                       className="now-build__metric"
-                      title={`${s.impressions.toLocaleString()} Google Search impressions in the last 28 days`}
+                      title={`${s.impressions.toLocaleString(intlTag(locale))} ${t.building.impressionsTitle}`}
                     >
-                      <LuTrendingUp /> {compact(s.impressions)} search impressions / 28d
+                      <LuTrendingUp /> {compact(s.impressions, locale)} {t.building.impressionsShort}
                     </span>
                   )}
                 </div>
@@ -375,17 +398,17 @@ const NowPage: React.FC = () => {
       ) : gh && (gh.total !== null || weeks.length > 0) ? (
         <section className="now-github">
           <div className="now-media__head">
-            <h2 className="now-media__title"><FaGithub className="now-icon" /> On GitHub</h2>
+            <h2 className="now-media__title"><FaGithub className="now-icon" /> {t.github.title}</h2>
             <a className="now-media__auto" href="https://github.com/Rauded" target="_blank" rel="noopener noreferrer">@Rauded</a>
           </div>
           {gh.total !== null && (
             <p className="now-github__count">
-              <strong>{gh.total.toLocaleString()}</strong> contributions in the last year
+              <strong>{gh.total.toLocaleString(intlTag(locale))}</strong> {t.github.countSuffix}
             </p>
           )}
           {weeks.length > 0 && (
             <div className="now-github__scroll">
-              <div className="now-github__graph" role="img" aria-label={`${gh.total ?? ''} GitHub contributions in the last year`}>
+              <div className="now-github__graph" role="img" aria-label={`${gh.total ?? ''} ${t.github.aria}`}>
                 {weeks.map((week, wi) => (
                   <div className="now-github__week" key={wi}>
                     {week.map((day, di) =>
@@ -394,8 +417,8 @@ const NowPage: React.FC = () => {
                           className="now-github__day"
                           key={di}
                           data-level={day.level}
-                          onMouseEnter={(e) => setTip({ x: e.clientX, y: e.clientY, text: contribLabel(day) })}
-                          onMouseMove={(e) => setTip({ x: e.clientX, y: e.clientY, text: contribLabel(day) })}
+                          onMouseEnter={(e) => setTip({ x: e.clientX, y: e.clientY, text: contribLabel(day, locale, t.github) })}
+                          onMouseMove={(e) => setTip({ x: e.clientX, y: e.clientY, text: contribLabel(day, locale, t.github) })}
                           onMouseLeave={() => setTip(null)}
                         />
                       ) : (
@@ -415,7 +438,7 @@ const NowPage: React.FC = () => {
       ) : null}
 
       {hasStats && (
-        <section className="now-stats" aria-label="Live focus stats from my dashboard">
+        <section className="now-stats" aria-label={t.stats.aria}>
           {stats.map((s) => (
             <div className="now-stat" key={s.key}>
               <span className="now-stat__icon">{s.icon}</span>
@@ -427,12 +450,12 @@ const NowPage: React.FC = () => {
       )}
 
       {books === null ? (
-        <MediaSkeleton mark={<GoodreadsMark />} title="Reading now" auto="Auto-synced from Goodreads" count={4} />
+        <MediaSkeleton mark={<GoodreadsMark />} title={t.media.readingTitle} auto={t.media.readingAuto} count={4} />
       ) : books.length > 0 ? (
         <section className="now-media">
           <div className="now-media__head">
-            <h2 className="now-media__title"><GoodreadsMark /> Reading now</h2>
-            <span className="now-media__auto">Auto-synced from Goodreads</span>
+            <h2 className="now-media__title"><GoodreadsMark /> {t.media.readingTitle}</h2>
+            <span className="now-media__auto">{t.media.readingAuto}</span>
           </div>
           <div className="now-media__grid">
             {books.map((b, i) => (
@@ -447,12 +470,12 @@ const NowPage: React.FC = () => {
       ) : null}
 
       {films === null ? (
-        <MediaSkeleton mark={<LetterboxdMark />} title="Recently watched" auto="Auto-synced from Letterboxd" />
+        <MediaSkeleton mark={<LetterboxdMark />} title={t.media.watchedTitle} auto={t.media.watchedAuto} />
       ) : films.length > 0 ? (
         <section className="now-media">
           <div className="now-media__head">
-            <h2 className="now-media__title"><LetterboxdMark /> Recently watched</h2>
-            <span className="now-media__auto">Auto-synced from Letterboxd</span>
+            <h2 className="now-media__title"><LetterboxdMark /> {t.media.watchedTitle}</h2>
+            <span className="now-media__auto">{t.media.watchedAuto}</span>
           </div>
           <div className="now-media__grid">
             {films.map((f, i) => (
@@ -469,12 +492,12 @@ const NowPage: React.FC = () => {
       ) : null}
 
       {anime === null ? (
-        <MediaSkeleton mark={<MalMark />} title="Recently watched anime" auto="Auto-synced from MyAnimeList" />
+        <MediaSkeleton mark={<MalMark />} title={t.media.animeTitle} auto={t.media.animeAuto} />
       ) : anime.length > 0 ? (
         <section className="now-media">
           <div className="now-media__head">
-            <h2 className="now-media__title"><MalMark /> Recently watched anime</h2>
-            <a className="now-media__auto" href="https://myanimelist.net/profile/rauded" target="_blank" rel="noopener noreferrer">Auto-synced from MyAnimeList</a>
+            <h2 className="now-media__title"><MalMark /> {t.media.animeTitle}</h2>
+            <a className="now-media__auto" href="https://myanimelist.net/profile/rauded" target="_blank" rel="noopener noreferrer">{t.media.animeAuto}</a>
           </div>
           <div className="now-media__grid">
             {anime.map((a, i) => (
@@ -499,7 +522,7 @@ const NowPage: React.FC = () => {
       ) : videos.length > 0 ? (
         <section className="now-media now-yt">
           <div className="now-media__head">
-            <h2 className="now-media__title"><FaYoutube className="now-icon now-icon--yt" /> Latest video</h2>
+            <h2 className="now-media__title"><FaYoutube className="now-icon now-icon--yt" /> {t.media.videoTitle}</h2>
             <a className="now-media__auto" href="https://www.youtube.com/@eduardhvizdak" target="_blank" rel="noopener noreferrer">@eduardhvizdak</a>
           </div>
           <a className="now-ytcard" href={videos[0].url} target="_blank" rel="noopener noreferrer" title={videos[0].title}>
@@ -520,7 +543,7 @@ const NowPage: React.FC = () => {
             <span className="now-ytcard__body">
               <span className="now-ytcard__title">{videos[0].title}</span>
               {typeof videos[0].views === 'number' && (
-                <span className="now-ytcard__views">{videos[0].views.toLocaleString()} views</span>
+                <span className="now-ytcard__views">{videos[0].views.toLocaleString(intlTag(locale))} {t.media.views}</span>
               )}
             </span>
           </a>
@@ -530,7 +553,7 @@ const NowPage: React.FC = () => {
       {LINKEDIN_POSTS.length > 0 && (
         <section className="now-media now-linkedin">
           <div className="now-media__head">
-            <h2 className="now-media__title"><FaLinkedinIn className="now-icon now-icon--li" /> Latest from LinkedIn</h2>
+            <h2 className="now-media__title"><FaLinkedinIn className="now-icon now-icon--li" /> {t.media.linkedinTitle}</h2>
             <a className="now-media__auto" href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer">@eduard-hvizdak</a>
           </div>
           <div className="now-embeds">
@@ -544,7 +567,7 @@ const NowPage: React.FC = () => {
       {isFeatureOn('latestTweets') && latestTweets && latestTweets.length > 0 && (
         <section className="now-media now-tweets">
           <div className="now-media__head">
-            <h2 className="now-media__title"><FaXTwitter className="now-icon" /> Latest posts on X</h2>
+            <h2 className="now-media__title"><FaXTwitter className="now-icon" /> {t.media.tweetsTitle}</h2>
             <a className="now-media__auto" href="https://x.com/EduardHvizdak" target="_blank" rel="noopener noreferrer">@EduardHvizdak</a>
           </div>
           <div className="now-embeds">
@@ -558,8 +581,8 @@ const NowPage: React.FC = () => {
       {FAVOURITE_TWEETS.length > 0 && (
         <section className="now-media now-tweets">
           <div className="now-media__head">
-            <h2 className="now-media__title"><FaXTwitter className="now-icon" /> Favourite posts on X</h2>
-            <a className="now-media__auto" href="https://twitter.com/" target="_blank" rel="noopener noreferrer">on X</a>
+            <h2 className="now-media__title"><FaXTwitter className="now-icon" /> {t.media.favTweetsTitle}</h2>
+            <a className="now-media__auto" href="https://twitter.com/" target="_blank" rel="noopener noreferrer">{t.media.favTweetsAuto}</a>
           </div>
           <div className="now-embeds">
             {FAVOURITE_TWEETS.map((url) => (
@@ -570,11 +593,11 @@ const NowPage: React.FC = () => {
       )}
 
       <footer className="now-metafoot">
-        <span className="now-hero__loc"><LuMapPin /> {LOCATION}</span>
+        <span className="now-hero__loc"><LuMapPin /> {t.foot.location}</span>
         <span className="now-hero__mdot" aria-hidden="true" />
-        <span className="now-hero__loc" title="My local time in Brno"><LuClock /> {brnoClock(clock)}</span>
+        <span className="now-hero__loc" title={t.foot.clockTip}><LuClock /> {brnoClock(clock)}</span>
         <span className="now-hero__mdot" aria-hidden="true" />
-        <span className="now-hero__updated">Updated {LAST_UPDATED}</span>
+        <span className="now-hero__updated">{t.foot.updated} {t.foot.lastUpdated}</span>
       </footer>
     </div>
   );

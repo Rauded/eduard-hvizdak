@@ -2,18 +2,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import { LuArrowRight, LuPin } from 'react-icons/lu';
-import { BLOG_POSTS } from '../../data/blog';
+import { BLOG_POSTS, localizeBlogPost } from '../../data/blog';
 import { CHAPTERS } from '../things/thingsData';
 import Seo from '../../seo/Seo';
 import { formatDate, getThumbnail, readingTime } from './blogUtils';
 import { useTheme } from '../theme/ThemeContext';
+import { useT } from '../../i18n';
+import { useLocale } from '../../i18n/LocaleContext';
 import './BlogPage.scss';
 
 const BlogListingPage: React.FC = () => {
   const { theme } = useTheme();
+  const t = useT('blog');
+  const { locale } = useLocale();
 
   // Newest first, but a pinned post is always surfaced as the featured hero.
-  const byDate = [...BLOG_POSTS].sort((a, b) => b.date.localeCompare(a.date));
+  // Localize each post so its category/title/excerpt match the active language;
+  // grouping/equality still holds because all posts share the localized strings.
+  const byDate = [...BLOG_POSTS]
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .map((p) => localizeBlogPost(p, locale));
   const featured = byDate.find((p) => p.pinned) ?? byDate[0];
   const rest = byDate.filter((p) => p.slug !== featured?.slug);
   const featuredThumb = featured ? getThumbnail(featured) : null;
@@ -21,20 +29,20 @@ const BlogListingPage: React.FC = () => {
   return (
     <div className="blog-listing" data-theme={theme}>
       <Seo
-        title="Blog"
-        description="Writing by Eduard Hvizdak: thoughts on AI engineering, building SaaS, hackathons, and life."
+        title={t.seoTitle}
+        description={t.seoDescription}
         path="/blog"
       />
       <div className="blog-listing__inner">
         <div className="blog-listing__topbar">
           <Link to="/" className="blog-back">
             <FaArrowLeft />
-            Back home
+            {t.backHome}
           </Link>
         </div>
-        <p className="blog-listing__eyebrow">Writing</p>
-        <h1 className="blog-listing__title">Blog</h1>
-        <p className="blog-listing__subtitle">Thoughts, experiences, and reflections.</p>
+        <p className="blog-listing__eyebrow">{t.eyebrow}</p>
+        <h1 className="blog-listing__title">{t.title}</h1>
+        <p className="blog-listing__subtitle">{t.subtitle}</p>
 
         {featured && (
           <Link to={`/blog/${featured.slug}`} className="blog-feature">
@@ -48,18 +56,18 @@ const BlogListingPage: React.FC = () => {
                 {featured.pinned && (
                   <span className="blog-feature__pin">
                     <LuPin />
-                    Pinned
+                    {t.pinned}
                   </span>
                 )}
                 <span className="blog-chip">{featured.category}</span>
                 <span className="blog-feature__date">
-                  {formatDate(featured.date)} · {readingTime(featured.content)} min read
+                  {formatDate(featured.date, locale)} · {readingTime(featured.content)} {t.minRead}
                 </span>
               </div>
               <h2 className="blog-feature__title">{featured.title}</h2>
               <p className="blog-feature__excerpt">{featured.excerpt}</p>
               <span className="blog-feature__more">
-                Read article <LuArrowRight />
+                {t.readArticle} <LuArrowRight />
               </span>
             </div>
           </Link>
@@ -74,7 +82,7 @@ const BlogListingPage: React.FC = () => {
                   <div className="blog-row__meta">
                     <span className="blog-chip">{post.category}</span>
                     <span className="blog-row__date">
-                      {formatDate(post.date)} · {readingTime(post.content)} min read
+                      {formatDate(post.date, locale)} · {readingTime(post.content)} {t.minRead}
                     </span>
                   </div>
                   <h2 className="blog-row__title">{post.title}</h2>
@@ -94,14 +102,11 @@ const BlogListingPage: React.FC = () => {
           <Link to="/things" className="blog-row">
             <div className="blog-row__body">
               <div className="blog-row__meta">
-                <span className="blog-chip">Tech</span>
-                <span className="blog-row__date">{CHAPTERS.length} chapters · ongoing</span>
+                <span className="blog-chip">{t.techChip}</span>
+                <span className="blog-row__date">{CHAPTERS.length} {t.chaptersOngoing}</span>
               </div>
-              <h2 className="blog-row__title">Tech I love</h2>
-              <p className="blog-row__excerpt">
-                The gear I actually use every day, with my own notes, photos and clips on what I like,
-                what I do not, and why it matters to me.
-              </p>
+              <h2 className="blog-row__title">{t.techTitle}</h2>
+              <p className="blog-row__excerpt">{t.techExcerpt}</p>
             </div>
           </Link>
         </div>

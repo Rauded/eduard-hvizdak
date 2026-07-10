@@ -4,6 +4,8 @@
 // prerender (the in-place toggle does not create alternate URLs).
 const seo = {
   ogLocale: 'en_US',
+  homeDescription:
+    'AI engineer and indie founder. I build production AI systems (RAG pipelines, multi-agent tooling) and run real SaaS products: InzerPro, NasadClaw, KouzelnikNaAkci.',
 };
 
 export default seo;

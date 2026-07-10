@@ -1,13 +1,11 @@
 import React from 'react';
 import { LuArrowUpRight } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
+import { useT } from '../../i18n';
+import { useLocale } from '../../i18n/LocaleContext';
 import { useTheme } from '../theme/ThemeContext';
-import { CHAPTERS, Chapter, Media } from './thingsData';
+import { CHAPTERS, Chapter, Media, localizeChapter } from './thingsData';
 import './things.scss';
-
-// A living page: I add to it whenever something earns a permanent spot in my
-// setup. Bump this when you meaningfully update the list.
-const LAST_UPDATED = 'July 2026';
 
 const Figure: React.FC<{ m: Media }> = ({ m }) => (
   <figure className="chapter-figure">
@@ -22,7 +20,10 @@ const Figure: React.FC<{ m: Media }> = ({ m }) => (
   </figure>
 );
 
-const ChapterSection: React.FC<{ c: Chapter; index: number }> = ({ c, index }) => {
+const ChapterSection: React.FC<{ c: Chapter; index: number }> = ({ c: rawC, index }) => {
+  const t = useT('things');
+  const { locale } = useLocale();
+  const c = localizeChapter(rawC, locale);
   const style = { '--accent': c.accent } as React.CSSProperties;
   return (
     <section className="chapter" id={c.id} style={style}>
@@ -49,7 +50,7 @@ const ChapterSection: React.FC<{ c: Chapter; index: number }> = ({ c, index }) =
 
       {c.link && (
         <a className="chapter__link" href={c.link} target="_blank" rel="noopener noreferrer">
-          Have a look <LuArrowUpRight aria-hidden="true" />
+          {t.haveALook} <LuArrowUpRight aria-hidden="true" />
         </a>
       )}
     </section>
@@ -58,27 +59,20 @@ const ChapterSection: React.FC<{ c: Chapter; index: number }> = ({ c, index }) =
 
 const ThingsPage: React.FC = () => {
   const { theme } = useTheme();
+  const t = useT('things');
 
   return (
     <article className="things-page" data-theme={theme}>
-      <Seo
-        title="Tech I love"
-        description="A living, chaptered write-up of the tech Eduard Hvizdak loves and uses every day: MacBook Pro M4 Pro, Even Realities G1 AR glasses, Kindle, e-ink readers, AirPods Pro 3, Pavlok and more."
-        path="/things"
-      />
+      <Seo title={t.seoTitle} description={t.seoDescription} path="/things" />
 
       <header className="things-hero">
-        <span className="things-hero__kicker">Updated {LAST_UPDATED}</span>
-        <h1 className="things-hero__title">Tech I love</h1>
-        <p className="things-hero__lead">
-          The gear I actually use every day, one piece at a time. What it is like to live with, what
-          I like and what I do not, and why it earns a permanent spot in my setup. With photos and
-          clips to go with it.
-        </p>
+        <span className="things-hero__kicker">{t.updated}</span>
+        <h1 className="things-hero__title">{t.heroTitle}</h1>
+        <p className="things-hero__lead">{t.heroLead}</p>
       </header>
 
-      <nav className="things-index" aria-label="Chapters">
-        <span className="things-index__label">Chapters</span>
+      <nav className="things-index" aria-label={t.chapters}>
+        <span className="things-index__label">{t.chapters}</span>
         <ol className="things-index__list">
           {CHAPTERS.map((c, i) => (
             <li key={c.id}>
