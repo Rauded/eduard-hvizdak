@@ -15,13 +15,14 @@ interface SeoProps {
   image?: string; // absolute, or root-relative ("/blog/x.jpg")
   type?: 'website' | 'article';
   jsonLd?: object | object[];
+  noindex?: boolean; // unlisted pages: keep out of search + AI crawlers
 }
 
 const fullTitle = (t: string) => (t === 'Eduard Hvizdak' ? t : `${t} · Eduard Hvizdak`);
 const abs = (img?: string) =>
   !img ? DEFAULT_OG_IMAGE : img.startsWith('http') ? img : `${SITE_URL}${img}`;
 
-const Seo: React.FC<SeoProps> = ({ title, description, path, image, type = 'website', jsonLd }) => {
+const Seo: React.FC<SeoProps> = ({ title, description, path, image, type = 'website', jsonLd, noindex }) => {
   const url = `${SITE_URL}${path}`;
   const t = fullTitle(title);
   const img = abs(image);
@@ -29,6 +30,8 @@ const Seo: React.FC<SeoProps> = ({ title, description, path, image, type = 'webs
     <Helmet>
       <title>{t}</title>
       <meta name="description" content={description} />
+      {noindex && <meta name="robots" content="noindex, nofollow" />}
+      {noindex && <meta name="googlebot" content="noindex, nofollow" />}
       <link rel="canonical" href={url} />
       <meta property="og:type" content={type} />
       <meta property="og:site_name" content="Eduard Hvizdak" />

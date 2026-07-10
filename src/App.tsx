@@ -31,6 +31,9 @@ import BlogPostPage from './components/blog/BlogPostPage.tsx';
 import NowPage from './components/now/NowPage.tsx';
 // @ts-ignore
 import ServicesPage from './components/services/ServicesPage.tsx';
+// Unlisted proposal page: reachable only by direct link, noindex, not in nav or prerender.
+// @ts-ignore
+import AiEmployeePage from './components/services/AiEmployeePage.tsx';
 // @ts-ignore
 import ThingsPage from './components/things/ThingsPage.tsx';
 // @ts-ignore
@@ -116,6 +119,7 @@ const App: React.FC = () => {
             <Route path="/blog/:slug" element={<Shell><BlogPostPage /></Shell>} />
             <Route path="/now" element={<Shell><NowPage /></Shell>} />
             <Route path="/services" element={<Shell><ServicesPage /></Shell>} />
+            <Route path="/services/ai-employee" element={<Shell><AiEmployeePage /></Shell>} />
             <Route path="/things" element={<Shell><ThingsPage /></Shell>} />
             <Route path="/share-preview" element={<Shell><SharePreviewPage /></Shell>} />
             <Route path="/styleguide" element={<Shell><StyleguidePage /></Shell>} />

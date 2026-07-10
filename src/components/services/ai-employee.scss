@@ -1,0 +1,293 @@
+// Styles for the unlisted /services/ai-employee proposal page.
+// All rules are scoped under .services so they inherit the local token aliases
+// declared in services.scss (--accent, --surface, --card-bg, --rule, etc.).
+// No hardcoded hex, no gradients/glow (site de-slop rules).
+
+.services {
+  // Muted lead paragraph used under several section titles.
+  .aie-lead-muted {
+    max-width: 640px;
+    margin: -8px 0 8px;
+    color: var(--text-soft);
+    font-size: var(--text-lead);
+    line-height: var(--leading-lead);
+  }
+
+  // ─── Capability cards: no stat row, just icon + title + body ─────────
+  .aie-cap {
+    .services-card__icon { margin-bottom: 14px; }
+  }
+
+  // ─── Connectors band ────────────────────────────────────────────────
+  .aie-connectors {
+    margin: 76px 0;
+    text-align: center;
+
+    &__kicker {
+      font-family: var(--font-mono);
+      font-size: var(--text-label);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+    }
+
+    &__grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    &__note {
+      max-width: 520px;
+      margin: 22px auto 0;
+      color: var(--text-mute);
+      font-size: var(--text-small);
+      line-height: 1.5;
+    }
+  }
+
+  .aie-connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 18px 10px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+
+    &__icon {
+      display: inline-flex;
+      font-size: 1.4rem;
+      color: var(--accent);
+    }
+
+    &__label {
+      font-size: var(--text-caption);
+      color: var(--text-soft);
+    }
+  }
+
+  // ─── Two-column grids reused for security cards ──────────────────────
+  .aie-grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .aie-secure-card {
+    display: flex;
+    gap: 16px;
+    padding: 22px;
+    height: 100%;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+
+    &__icon {
+      flex: 0 0 auto;
+      display: inline-flex;
+      font-size: 1.4rem;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+
+    &__title {
+      font-size: var(--text-h5);
+      font-weight: var(--weight-heading);
+      color: var(--heading);
+      margin: 0 0 6px;
+    }
+
+    &__body {
+      font-size: var(--text-small);
+      line-height: 1.55;
+      color: var(--text-soft);
+      margin: 0;
+    }
+  }
+
+  // ─── Process steps: add a duration chip next to each title ───────────
+  .aie-step-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .aie-step-dur {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 2px 8px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  // ─── Pricing tiers ───────────────────────────────────────────────────
+  .aie-tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    align-items: stretch;
+  }
+
+  .aie-tier {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 26px 22px 24px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+
+    &--featured {
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 1px var(--accent);
+    }
+
+    &__ribbon {
+      position: absolute;
+      top: -11px;
+      left: 22px;
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--accent-text-strong, #fff);
+      background: var(--accent);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    &__tag {
+      font-family: var(--font-mono);
+      font-size: var(--text-caption);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-mute);
+      margin-bottom: 10px;
+    }
+
+    &__name {
+      font-size: var(--text-h4);
+      font-weight: var(--weight-heading);
+      color: var(--heading);
+      margin: 0 0 12px;
+    }
+
+    &__price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    &__amount {
+      font-size: var(--text-h3);
+      font-weight: var(--weight-heading);
+      color: var(--accent);
+      letter-spacing: -0.01em;
+    }
+
+    &__pricenote {
+      font-size: var(--text-caption);
+      color: var(--text-mute);
+    }
+
+    &__dur {
+      font-size: var(--text-small);
+      color: var(--text-mute);
+      margin: 4px 0 14px;
+    }
+
+    &__blurb {
+      font-size: var(--text-small);
+      line-height: 1.55;
+      color: var(--text-soft);
+      margin: 0 0 18px;
+    }
+
+    &__features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+
+      li {
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        font-size: var(--text-small);
+        line-height: 1.4;
+
+        svg { flex: 0 0 auto; margin-top: 2px; }
+
+        &.is-on { color: var(--text); svg { color: var(--accent); } }
+        &.is-off { color: var(--text-mute); svg { color: var(--text-mute); } }
+      }
+    }
+
+    &__cta {
+      margin-top: auto;
+      justify-content: center;
+      width: 100%;
+    }
+  }
+
+  // ─── FAQ ─────────────────────────────────────────────────────────────
+  .aie-faq {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 720px;
+  }
+
+  .aie-faq__item {
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    background: var(--card-bg);
+    padding: 4px 18px;
+
+    &[open] { border-color: var(--accent-ring); }
+  }
+
+  .aie-faq__q {
+    cursor: pointer;
+    list-style: none;
+    padding: 14px 0;
+    font-size: var(--text-h5);
+    font-weight: var(--weight-heading);
+    color: var(--heading);
+
+    &::-webkit-details-marker { display: none; }
+    &::after {
+      content: '+';
+      float: right;
+      color: var(--accent);
+      font-weight: 400;
+    }
+  }
+
+  .aie-faq__item[open] .aie-faq__q::after { content: '\2013'; } // en dash glyph as minus, data not prose
+
+  .aie-faq__a {
+    margin: 0;
+    padding: 0 0 16px;
+    font-size: var(--text-small);
+    line-height: 1.6;
+    color: var(--text-soft);
+  }
+
+  // ─── Responsive ──────────────────────────────────────────────────────
+  @media (max-width: 820px) {
+    .aie-tiers { grid-template-columns: 1fr; }
+    .aie-grid-2 { grid-template-columns: 1fr; }
+    .aie-connectors__grid { grid-template-columns: repeat(3, 1fr); }
+  }
+}
