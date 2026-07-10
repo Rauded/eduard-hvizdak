@@ -27,23 +27,6 @@ const Stage = styled.div`
   }
 `;
 
-const Caption = styled.span`
-  position: absolute;
-  left: var(--container-px, 64px);
-  bottom: 18px;
-  z-index: 1;
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-faint, #7484a0);
-  pointer-events: none;
-
-  @media (max-width: 640px) {
-    left: var(--container-px, 24px);
-  }
-`;
-
 // Fallback wordmark for small screens / reduced motion, where the canvas is
 // hidden: the name still reads.
 const Fallback = styled.span`
@@ -72,7 +55,7 @@ const TileWordmark: React.FC = () => {
     try {
       field = new TileField(stage);
     } catch {
-      return undefined; // e.g. no 2d context; the fallback caption remains
+      return undefined; // e.g. no 2d context; the small-screen fallback remains
     }
     const instance = field;
 
@@ -101,7 +84,6 @@ const TileWordmark: React.FC = () => {
     <Band aria-label="Eduard Hvizdak">
       <Stage ref={stageRef} aria-hidden="true" />
       <Fallback aria-hidden="true">Eduard</Fallback>
-      <Caption>Eduard Hvizdak</Caption>
     </Band>
   );
 };
