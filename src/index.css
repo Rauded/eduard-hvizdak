@@ -111,6 +111,21 @@
   font-style: italic;
   font-display: swap;
 }
+/* Size-adjusted Source Serif 4 for non-English serif HEADINGS only. Jeju
+   Myeongjo (the English serif display) has abnormally tall Latin glyphs
+   (cap-height ~0.79em, to harmonise with Korean), so plain Source Serif 4
+   (cap-height ~0.67em) rendered Slovak headings visibly smaller at the same
+   font-size. size-adjust:120% scales the outlines up so the caps sit at parity
+   with Jeju and the headings stop looking shrunken. Same file, only the size
+   descriptor differs; body/blog reading still use the unscaled 'Source Serif 4'. */
+@font-face {
+  font-family: 'Source Serif 4 Display';
+  src: url('./fonts/SourceSerif4/SourceSerif4.ttf') format('truetype');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 120%;
+}
 
 /* ── Inter — article reading sans (also used elsewhere in the UI) ── */
 @font-face {
@@ -243,7 +258,7 @@ html[data-type='geist'] {
    Slovak, so only the serif display face needs this. */
 html[lang='sk'],
 html[lang='cs'] {
-  --font-serif: 'Source Serif 4', Georgia, Cambria, 'Times New Roman', serif;
+  --font-serif: 'Source Serif 4 Display', 'Source Serif 4', Georgia, Cambria, 'Times New Roman', serif;
 }
 
 /* ─── Accent system (dark-mode defaults) ─────────────────────────────────────
