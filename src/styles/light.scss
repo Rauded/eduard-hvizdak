@@ -141,6 +141,22 @@
     display: none;
   }
 
+  // ─── Language switcher (light) ──────────────────────────────────────────
+  // Hairline pill on the white bar; active segment is the solid navy accent.
+  .lang-switcher {
+    border-color: var(--border);
+    background: transparent;
+
+    &__option {
+      color: var(--text-muted);
+      &:hover { color: var(--text-strong); }
+      &--active {
+        background: var(--accent);
+        color: #ffffff;
+      }
+    }
+  }
+
   // ─── About ──────────────────────────────────────────────────────────────
   .about-container {
     color: var(--text);

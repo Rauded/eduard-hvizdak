@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import posthog from 'posthog-js';
 import { analyticsEnabled } from './analytics';
 import { ThemeProvider } from './components/theme/ThemeContext';
+import { LocaleProvider } from './i18n/LocaleContext';
 import { applyCanvasPreset } from './config/canvas';
 import { applyTypePreset } from './config/typeface';
 import { getBackgroundPreset } from './config/background';
@@ -110,6 +111,7 @@ const App: React.FC = () => {
   return (
     <HelmetProvider>
       <ThemeProvider>
+        <LocaleProvider>
         <Router>
           <ScrollToTop />
           <PostHogPageview />
@@ -126,6 +128,7 @@ const App: React.FC = () => {
           </Routes>
           {EditOverlay && <EditOverlay />}
         </Router>
+        </LocaleProvider>
       </ThemeProvider>
     </HelmetProvider>
   );

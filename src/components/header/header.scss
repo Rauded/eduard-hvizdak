@@ -188,6 +188,55 @@
   z-index: 1002;
 }
 
+// Language switcher: compact segmented [EN | SK | CZ] control at the end of the
+// nav. Base (dark header) styling; the light theme retints it in light.scss.
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 24px;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.04);
+  position: relative;
+  z-index: 1;
+
+  &__option {
+    appearance: none;
+    border: none;
+    background: transparent;
+    color: rgba(248, 250, 252, 0.6);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: var(--weight-medium);
+    letter-spacing: 0.06em;
+    padding: 5px 9px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+
+    &:hover {
+      color: #f8fafc;
+    }
+
+    &--active {
+      background: var(--accent);
+      color: var(--accent-text, #fff);
+    }
+  }
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-top: 8px;
+
+    &__option {
+      padding: 9px 14px;
+      font-size: 0.9rem;
+    }
+  }
+}
+
 // Site light/dark toggle — sits at the end of the nav. Base (dark) styling; the
 // light theme retints it via styles/light.scss.
 .site-theme-toggle {

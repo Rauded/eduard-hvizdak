@@ -3,11 +3,14 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaPen, FaRegClock, FaBriefcase } from 'react-icons/fa';
 import { LuSun, LuMoon } from 'react-icons/lu';
 import { useTheme } from '../theme/ThemeContext';
+import { useT } from '../../i18n';
+import LanguageSwitcher from './LanguageSwitcher';
 import './header.scss';
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, toggleTheme, canToggle } = useTheme();
+  const t = useT('header');
   const location = useLocation();
   const navigate = useNavigate();
   const isBlog = location.pathname.startsWith('/blog');
@@ -51,19 +54,19 @@ const Header: React.FC = () => {
       <nav className={`nav ${isOpen ? 'open' : ''}`}>
         <a href="#home" className="nav-link" onClick={(e) => goToSection(e, 'home')}>
           <FaHome />
-          Home
+          {t.nav.home}
         </a>
         <a href="#about" className="nav-link" onClick={(e) => goToSection(e, 'about')}>
           <FaUser />
-          About
+          {t.nav.about}
         </a>
         <a href="#resume" className="nav-link" onClick={(e) => goToSection(e, 'resume')}>
           <FaFileAlt />
-          Resume
+          {t.nav.resume}
         </a>
         <a href="#projects" className="nav-link" onClick={(e) => goToSection(e, 'projects')}>
           <FaCode />
-          Projects
+          {t.nav.projects}
         </a>
         <Link
           to="/services"
@@ -71,7 +74,7 @@ const Header: React.FC = () => {
           onClick={() => setIsOpen(false)}
         >
           <FaBriefcase />
-          Services
+          {t.nav.services}
         </Link>
         <Link
           to="/blog"
@@ -79,7 +82,7 @@ const Header: React.FC = () => {
           onClick={() => setIsOpen(false)}
         >
           <FaPen />
-          Blog
+          {t.nav.blog}
         </Link>
         <Link
           to="/now"
@@ -87,8 +90,9 @@ const Header: React.FC = () => {
           onClick={() => setIsOpen(false)}
         >
           <FaRegClock />
-          Now
+          {t.nav.now}
         </Link>
+        <LanguageSwitcher />
         {canToggle && (
           <button
             type="button"
