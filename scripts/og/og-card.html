@@ -73,14 +73,16 @@
 
       /* ── Dither backdrop (Paper Shaders, faint), masked top+bottom like the
          hero's HeroBackdrop faint layer, opacity 0.7. ── */
+      /* Dither lives in the top half (behind the hands) and fades out before the
+         text zone, so the wordmark sits on clean white and stays legible. */
       .dither {
         position: absolute;
         inset: 0;
         z-index: 0;
         overflow: hidden;
-        opacity: 0.7;
-        -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 90%, transparent 100%);
-        mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 90%, transparent 100%);
+        opacity: 0.62;
+        -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 42%, transparent 64%);
+        mask-image: linear-gradient(180deg, transparent 0%, #000 12%, #000 42%, transparent 64%);
       }
       .dither > div, .dither canvas { width: 100% !important; height: 100% !important; }
 
@@ -125,21 +127,23 @@
         display: flex; flex-direction: column; align-items: center; text-align: center;
       }
 
+      /* Deep navy (darker than the mid-navy hands) so the name is the strongest
+         value on the card and reads as distinct, not blended. */
       .wordmark {
         font-family: var(--font-display);
         font-weight: 400;
         font-size: 116px;
         line-height: 1.02;
         letter-spacing: -0.015em;
-        color: var(--accent);
+        color: #0c1836;
       }
       .role {
         margin-top: 18px;
         font-family: var(--font-body);
-        font-weight: 500;
+        font-weight: 600;
         font-size: 40px;
         letter-spacing: 0.01em;
-        color: var(--text-muted);
+        color: #2a3a5c;
       }
 
       .status-row { display: flex; align-items: center; gap: 20px; margin-top: 30px; }
