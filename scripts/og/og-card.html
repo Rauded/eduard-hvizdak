@@ -105,33 +105,45 @@
       .corner.br { bottom: 60px; right: 84px; }
 
       /* ── Reaching-hands halftone band, full-bleed at the top (hero art) ── */
-      /* Nudged up so the lower (right) hand clears the wordmark; the left hand
-         just runs off the top edge, which reads fine. */
-      .band { position: absolute; top: -54px; left: 0; right: 0; width: 100%; aspect-ratio: 2.85 / 1; z-index: 1; }
+      /* Uncropped (top: 0): the hands span nearly the whole image height, so any
+         upward shift clips the arm/robot hand. Sized to 84% width and centred so
+         the whole composition shows and the lower-right hand clears the enlarged
+         wordmark below. */
+      .band {
+        position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+        width: 84%; aspect-ratio: 2.85 / 1; z-index: 1;
+      }
       .band img { width: 100%; height: 100%; object-fit: fill; display: block; }
 
-      /* ── Content ── */
-      .content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
+      /* ── Content: positioned in the lower-middle so the enlarged type fills
+         the frame instead of floating small at the bottom. ── */
+      .content {
+        position: absolute;
+        left: 0; right: 0;
+        bottom: 58px;
+        z-index: 2;
+        display: flex; flex-direction: column; align-items: center; text-align: center;
+      }
 
       .wordmark {
         font-family: var(--font-display);
         font-weight: 400;
-        font-size: 96px;
-        line-height: 1.08;
-        letter-spacing: -0.01em;
+        font-size: 116px;
+        line-height: 1.02;
+        letter-spacing: -0.015em;
         color: var(--accent);
       }
       .role {
-        margin-top: 16px;
+        margin-top: 18px;
         font-family: var(--font-body);
         font-weight: 500;
-        font-size: 29px;
+        font-size: 40px;
         letter-spacing: 0.01em;
         color: var(--text-muted);
       }
 
-      .status-row { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
-      .wing { position: relative; width: 84px; height: 1px; background: var(--border); }
+      .status-row { display: flex; align-items: center; gap: 20px; margin-top: 30px; }
+      .wing { position: relative; width: 104px; height: 1px; background: var(--border); }
       .wing::after {
         content: ''; position: absolute; top: -2px; width: 5px; height: 5px;
         background: var(--page-bg); border: 1px solid var(--border);
@@ -139,16 +151,16 @@
       .wing.left::after { left: 0; }
       .wing.right::after { right: 0; }
       .pill {
-        display: inline-flex; align-items: center; gap: 10px; padding: 9px 18px;
+        display: inline-flex; align-items: center; gap: 12px; padding: 12px 24px;
         border-radius: 999px; border: 1px solid var(--border); background: #ffffff;
-        font-family: var(--font-mono); font-size: 15px; letter-spacing: 0.1em;
+        font-family: var(--font-mono); font-size: 20px; letter-spacing: 0.1em;
         text-transform: uppercase; color: var(--text-muted);
       }
-      .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--status-good); }
+      .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--status-good); }
 
       .url {
-        position: absolute; bottom: 34px; left: 0; right: 0; text-align: center;
-        font-family: var(--font-mono); font-size: 17px; letter-spacing: 0.08em;
+        position: absolute; bottom: 22px; left: 0; right: 0; text-align: center;
+        font-family: var(--font-mono); font-size: 21px; letter-spacing: 0.08em;
         color: var(--text-faint); z-index: 2;
       }
     </style>
