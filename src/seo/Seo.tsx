@@ -3,7 +3,8 @@ import { Helmet } from 'react-helmet-async';
 
 // Canonical base. Swap this single constant when a custom domain lands.
 export const SITE_URL = 'https://eduardhvizdak.com';
-export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png`;
+// ?v=2 busts social-scraper caches after the hero-matched card refresh (2026-07).
+export const DEFAULT_OG_IMAGE = `${SITE_URL}/og-image.png?v=2`;
 // Stable @id so blog-post authors resolve to one Person entity (see index.html).
 export const PERSON_ID = `${SITE_URL}/#person`;
 

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Real Paper Shaders Dithering, same package the hero uses, pulled from
+         esm.sh so this card renders standalone. Frozen frame (speed 0) matches
+         the hero's reduced-motion still. -->
+    <script type="importmap">
+      {
+        "imports": {
+          "react": "https://esm.sh/react@18.3.1",
+          "react-dom": "https://esm.sh/react-dom@18.3.1",
+          "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+          "react/jsx-runtime": "https://esm.sh/react@18.3.1/jsx-runtime",
+          "@paper-design/shaders-react": "https://esm.sh/@paper-design/shaders-react@0.0.77?deps=react@18.3.1,react-dom@18.3.1"
+        }
+      }
+    </script>
+    <style>
+      /* Fonts and tokens mirror the live hero (src/components/hero/hero.tsx +
+         src/index.css light theme, DEFAULT_TYPE = serif). FONT_DIR is replaced
+         with an absolute file:// path by scripts/og/render-og.js. */
+      @font-face {
+        font-family: 'Jeju Myeongjo';
+        src: url('FONT_DIR/JejuMyeongjo/JejuMyeongjo-Regular-latin.woff2') format('woff2');
+        font-weight: 400;
+        font-display: block;
+      }
+      @font-face {
+        font-family: 'General Sans';
+        src: url('FONT_DIR/GeneralSans/GeneralSans-Variable.woff2') format('woff2');
+        font-weight: 200 700;
+        font-display: block;
+      }
+      @font-face {
+        font-family: 'Geist Mono';
+        src: url('FONT_DIR/Geist/GeistMono-Variable.woff2') format('woff2');
+        font-weight: 100 900;
+        font-display: block;
+      }
+
+      :root {
+        --page-bg: #ffffff;
+        --text: #0e1320;
+        --text-muted: #3e4b66;
+        --text-faint: #7484a0;
+        --border: #e6e9ec;
+        --accent: #182e5f;
+        --status-good: #1f8f4e;
+        --font-display: 'Jeju Myeongjo', Georgia, serif;
+        --font-body: 'General Sans', system-ui, sans-serif;
+        --font-mono: 'Geist Mono', ui-monospace, monospace;
+      }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { width: 1200px; height: 630px; }
+
+      .card {
+        position: relative;
+        width: 1200px;
+        height: 630px;
+        background: var(--page-bg);
+        color: var(--text);
+        font-family: var(--font-body);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        padding: 0 96px 84px;
+        border: 1px solid var(--border);
+      }
+
+      /* ── Dither backdrop (Paper Shaders, faint), masked top+bottom like the
+         hero's HeroBackdrop faint layer, opacity 0.7. ── */
+      .dither {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        overflow: hidden;
+        opacity: 0.7;
+        -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 90%, transparent 100%);
+        mask-image: linear-gradient(180deg, transparent 0%, #000 14%, #000 90%, transparent 100%);
+      }
+      .dither > div, .dither canvas { width: 100% !important; height: 100% !important; }
+
+      /* ── Blueprint frame: hairline ruler rails + mono tick labels (hero) ── */
+      .rail { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--border); z-index: 1; }
+      .rail.left { left: 48px; }
+      .rail.right { right: 48px; }
+      .tick { position: absolute; left: -3px; width: 7px; height: 1px; background: var(--border); }
+      .tick-label {
+        position: absolute; left: 10px; transform: translateY(-4px);
+        font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.06em;
+        color: color-mix(in srgb, var(--text-faint) 55%, transparent);
+      }
+
+      .corner { position: absolute; width: 13px; height: 13px; color: var(--border); z-index: 1; }
+      .corner::before, .corner::after { content: ''; position: absolute; background: currentColor; }
+      .corner::before { left: 6px; top: 0; width: 1px; height: 13px; }
+      .corner::after { left: 0; top: 6px; width: 13px; height: 1px; }
+      .corner.tl { top: 84px; left: 84px; }
+      .corner.tr { top: 84px; right: 84px; }
+      .corner.bl { bottom: 60px; left: 84px; }
+      .corner.br { bottom: 60px; right: 84px; }
+
+      /* ── Reaching-hands halftone band, full-bleed at the top (hero art) ── */
+      /* Nudged up so the lower (right) hand clears the wordmark; the left hand
+         just runs off the top edge, which reads fine. */
+      .band { position: absolute; top: -54px; left: 0; right: 0; width: 100%; aspect-ratio: 2.85 / 1; z-index: 1; }
+      .band img { width: 100%; height: 100%; object-fit: fill; display: block; }
+
+      /* ── Content ── */
+      .content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+      .wordmark {
+        font-family: var(--font-display);
+        font-weight: 400;
+        font-size: 96px;
+        line-height: 1.08;
+        letter-spacing: -0.01em;
+        color: var(--accent);
+      }
+      .role {
+        margin-top: 16px;
+        font-family: var(--font-body);
+        font-weight: 500;
+        font-size: 29px;
+        letter-spacing: 0.01em;
+        color: var(--text-muted);
+      }
+
+      .status-row { display: flex; align-items: center; gap: 16px; margin-top: 40px; }
+      .wing { position: relative; width: 84px; height: 1px; background: var(--border); }
+      .wing::after {
+        content: ''; position: absolute; top: -2px; width: 5px; height: 5px;
+        background: var(--page-bg); border: 1px solid var(--border);
+      }
+      .wing.left::after { left: 0; }
+      .wing.right::after { right: 0; }
+      .pill {
+        display: inline-flex; align-items: center; gap: 10px; padding: 9px 18px;
+        border-radius: 999px; border: 1px solid var(--border); background: #ffffff;
+        font-family: var(--font-mono); font-size: 15px; letter-spacing: 0.1em;
+        text-transform: uppercase; color: var(--text-muted);
+      }
+      .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--status-good); }
+
+      .url {
+        position: absolute; bottom: 34px; left: 0; right: 0; text-align: center;
+        font-family: var(--font-mono); font-size: 17px; letter-spacing: 0.08em;
+        color: var(--text-faint); z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="dither" id="dither"></div>
+      <div class="band"><img src="hands-dither.png" alt="" /></div>
+
+      <div class="rail left" id="rail-left"></div>
+      <div class="rail right" id="rail-right"></div>
+
+      <span class="corner tl"></span>
+      <span class="corner tr"></span>
+      <span class="corner bl"></span>
+      <span class="corner br"></span>
+
+      <div class="content">
+        <div class="wordmark">Eduard Hvizdak</div>
+        <div class="role">AI Engineer &amp; Founder</div>
+        <div class="status-row">
+          <span class="wing left"></span>
+          <span class="pill"><span class="dot"></span>Accepting new projects</span>
+          <span class="wing right"></span>
+        </div>
+      </div>
+
+      <div class="url">www.eduardhvizdak.com</div>
+    </div>
+
+    <script>
+      // Ruler ticks every 10%, mono labels at 30/50/70 (hero blueprint rails).
+      const ticks = [10, 20, 30, 40, 50, 60, 70, 80, 90];
+      for (const rail of [document.getElementById('rail-left'), document.getElementById('rail-right')]) {
+        const isLeft = rail.classList.contains('left');
+        for (const t of ticks) {
+          const tick = document.createElement('span');
+          tick.className = 'tick';
+          tick.style.top = t + '%';
+          rail.appendChild(tick);
+          if (isLeft && t % 20 === 10) {
+            const label = document.createElement('span');
+            label.className = 'tick-label';
+            label.style.top = t + '%';
+            label.textContent = String(t * 8);
+            rail.appendChild(label);
+          }
+        }
+      }
+    </script>
+
+    <script type="module">
+      import React from 'react';
+      import { createRoot } from 'react-dom/client';
+      import { Dithering } from '@paper-design/shaders-react';
+
+      // Same config as HeroBackdrop concept="ditherbg" faint, frozen frame.
+      const el = React.createElement(Dithering, {
+        width: '100%',
+        height: '100%',
+        colorBack: '#ffffff',
+        colorFront: '#dbe4f4',
+        shape: 'wave',
+        type: '8x8',
+        size: 3,
+        speed: 0,
+        frame: 900,
+      });
+      createRoot(document.getElementById('dither')).render(el);
+
+      // Signal the renderer once the shader canvas has actually painted.
+      const ready = () => {
+        const c = document.querySelector('#dither canvas');
+        if (c && c.width > 0) { window.__ditherReady = true; }
+        else { requestAnimationFrame(ready); }
+      };
+      requestAnimationFrame(ready);
+    </script>
+  </body>
+</html>
