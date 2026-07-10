@@ -8,7 +8,7 @@ import { SerifPreset, SERIF_PRESETS, getSerifPreset, setSerifPreset } from '../.
 // language to confirm headings no longer shift.
 
 const LABELS: Record<SerifPreset, string> = {
-  jeju: 'Jeju (EN only)',
+  jeju: 'Jeju (extended)',
   source: 'Source Serif',
   playfair: 'Playfair',
 };

@@ -197,10 +197,17 @@
   font-display: swap;
 }
 
-/* ── Jeju Myeongjo: serif accent, single display words only ─────────────── */
+/* ── Jeju Myeongjo (extended): serif display face ────────────────────────
+   The original web subset had no accented Latin, so Slovak/Czech headings fell
+   back to another serif. This subset is Jeju EXTENDED: the Czech/Slovak accented
+   letters (a-acute, c-caron, r-caron, u-ring, o-circumflex, and the rest) were
+   composed from Jeju's own base letters plus Jeju's own accent marks (built with
+   FontForge, see scripts/font notes), so headings render in real Jeju in all
+   three languages. The internal font family is renamed "Jeju Myeongjo Ext" for
+   OFL reserved-name compliance; this @font-face alias stays 'Jeju Myeongjo'. */
 @font-face {
   font-family: 'Jeju Myeongjo';
-  src: url('./fonts/JejuMyeongjo/JejuMyeongjo-Regular-latin.woff2') format('woff2');
+  src: url('./fonts/JejuMyeongjo/JejuMyeongjo-Regular-latinext.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -280,10 +287,9 @@ html[data-type='geist'] {
    Jeju for English. Source Serif 4 is already loaded (blog reading serif) and
    covers full Latin Extended. Body text is General Sans, which already covers
    Slovak, so only the serif display face needs this. */
-html[lang='sk'],
-html[lang='cs'] {
-  --font-serif: 'Source Serif 4 Display', 'Source Serif 4', Georgia, Cambria, 'Times New Roman', serif;
-}
+/* Slovak/Czech no longer need a different serif: the extended Jeju above covers
+   their accented letters, so every language renders headings in Jeju and there
+   is no font change (or size shift) when switching language. */
 
 /* TEMPORARY serif preview (src/config/serifPreview.ts + SerifPreviewSwitcher).
    Forces ONE serif for ALL languages so headings do not change font when you
@@ -431,7 +437,9 @@ code {
   padding: 10px 16px;
   border-radius: 8px;
   background: var(--accent);
-  color: var(--accent-text, #fff);
+  /* white on the navy accent: --accent-text is navy-on-light and would be
+     invisible here (same value as --accent in the pinned light theme). */
+  color: #fff;
   text-decoration: none;
   font-weight: 600;
   transition: top 0.2s ease;
