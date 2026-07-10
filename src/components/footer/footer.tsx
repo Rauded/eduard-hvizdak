@@ -2,17 +2,19 @@ import React from 'react';
 import './footer.scss';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
+import { useT } from '../../i18n';
 
 const EMAIL = 'eduardd.hv@gmail.com';
 const PHONE = '+421950774038';
 const PHONE_DISPLAY = '+421 950 774 038';
 
 const Footer: React.FC = () => {
+  const t = useT('footer');
   return (
     <footer className="footer-container">
       <div className="left-align">
         <p>
-          Designed and built by{' '}
+          {t.builtBy}{' '}
           <a href="https://www.linkedin.com/in/eduard-hvizdak" target="_blank" rel="noopener noreferrer" className="footer-link">Eduard Hvizdak</a>.
         </p>
       </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { LuMail, LuCalendar, LuPhone, LuArrowRight } from 'react-icons/lu';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
+import { useT } from '../../i18n';
 import './contact.scss';
 
 // Booking link (Cal.com). Override with REACT_APP_BOOKING_URL in Vercel.
@@ -11,19 +12,20 @@ const EMAIL = 'eduardd.hv@gmail.com';
 const PHONE = '+421950774038';
 const PHONE_DISPLAY = '+421 950 774 038';
 
-const Contact: React.FC = () => (
+const Contact: React.FC = () => {
+  const t = useT('contact');
+  return (
   <section className="contact" id="contact">
     <div className="contact__inner">
-      <p className="contact__eyebrow">Get in touch</p>
-      <h2 className="contact__title">Let's work together</h2>
+      <p className="contact__eyebrow">{t.eyebrow}</p>
+      <h2 className="contact__title">{t.title}</h2>
       <p className="contact__lead">
-        Building something with AI, need a product shipped, or just want to talk shop? I'm always up
-        for an interesting problem.
+        {t.lead}
       </p>
       <div className="contact__actions">
         <a className="contact__btn contact__btn--primary" href={`mailto:${EMAIL}`}>
           <LuMail aria-hidden="true" />
-          Email me
+          {t.emailMe}
           <LuArrowRight className="contact__btn-arrow" aria-hidden="true" />
         </a>
         {BOOKING_URL && (
@@ -34,16 +36,16 @@ const Contact: React.FC = () => (
             rel="noopener noreferrer"
           >
             <LuCalendar aria-hidden="true" />
-            Book 30 min
+            {t.book}
           </a>
         )}
         <a className="contact__btn contact__btn--ghost" href={`tel:${PHONE}`}>
           <LuPhone aria-hidden="true" />
-          Call me
+          {t.callMe}
         </a>
       </div>
       <p className="contact__direct">
-        Email <a href={`mailto:${EMAIL}`}>{EMAIL}</a> or call{' '}
+        {t.directEmail} <a href={`mailto:${EMAIL}`}>{EMAIL}</a> {t.directOr}{' '}
         <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a>
       </p>
       <div className="contact__socials">
@@ -59,6 +61,7 @@ const Contact: React.FC = () => (
       </div>
     </div>
   </section>
-);
+  );
+};
 
 export default Contact;

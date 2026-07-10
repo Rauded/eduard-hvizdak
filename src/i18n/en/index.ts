@@ -7,11 +7,15 @@
 import header from './header';
 import common from './common';
 import seo from './seo';
+import footer from './footer';
+import contact from './contact';
 
 export const en = {
   header,
   common,
   seo,
+  footer,
+  contact,
 };
 
 export type Dict = typeof en;

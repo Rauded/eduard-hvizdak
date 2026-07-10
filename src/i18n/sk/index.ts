@@ -6,9 +6,13 @@ import { DeepPartial } from '../types';
 import header from './header';
 import common from './common';
 import seo from './seo';
+import footer from './footer';
+import contact from './contact';
 
 export const sk: DeepPartial<Dict> = {
   header,
   common,
   seo,
+  footer,
+  contact,
 };
