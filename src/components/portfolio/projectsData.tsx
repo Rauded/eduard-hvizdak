@@ -90,6 +90,7 @@ export const PROJECTS: PortfolioProject[] = [
     media: {
       type: 'video',
       video: assetSafe('inzerpro.mp4'),
+      poster: asset('inzerpro-poster.jpg'),
     },
     accent: '#3b82f6',
     reversed: false,
@@ -219,6 +220,7 @@ export const PROJECTS: PortfolioProject[] = [
     media: {
       type: 'video',
       video: assetSafe('kouzelnici.mp4'),
+      poster: asset('kouzelnici-poster.jpg'),
     },
     accent: '#ec4899',
     reversed: false,

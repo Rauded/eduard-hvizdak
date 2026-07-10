@@ -67,7 +67,7 @@
         color: var(--accent-text-soft);
         text-decoration: underline;
         text-decoration-color: color-mix(in srgb, var(--accent-text-soft) 35%, transparent);
-        transition: all 0.2s ease;
+        transition: color 0.2s ease, text-decoration-color 0.2s ease;
 
         &:visited {
           color: var(--accent-text-soft);
@@ -302,8 +302,12 @@
         color: #f8fafc;
 
         &:focus {
-          outline: none;
           border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--accent);
+          outline-offset: 2px;
         }
       }
 

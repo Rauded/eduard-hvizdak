@@ -22,6 +22,10 @@ export const LocaleProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   useEffect(() => {
     saveLocale(locale);
+    // Keep the document language in sync so screen readers apply the right
+    // pronunciation rules (Helmet also sets this on pages that render <Seo>,
+    // this guarantees it for any view and on every switch).
+    document.documentElement.lang = locale;
   }, [locale]);
 
   const setLocale = (next: Locale) => setLocaleState(next);

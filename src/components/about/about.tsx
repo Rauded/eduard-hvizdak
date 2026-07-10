@@ -34,7 +34,7 @@ const About: React.FC = () => {
         <div className="about-photo">
           <picture>
             <source srcSet={myPhotoWebP} type="image/webp" />
-            <img src={myPhoto} alt="Eduard Hvizdak" className="profile-photo" loading="lazy" />
+            <img src={myPhoto} alt="Eduard Hvizdak" className="profile-photo" loading="lazy" width={1200} height={1599} />
           </picture>
         </div>
       </section>
@@ -45,6 +45,8 @@ const About: React.FC = () => {
             src="/blog/digital-fairness/youth-policy-dialogue.png"
             alt="Youth Policy Dialogue on the Digital Fairness Act with Commissioner Michael McGrath in Ljubljana"
             loading="lazy"
+            width={872}
+            height={826}
           />
         </div>
         <div className="about-highlight__text">

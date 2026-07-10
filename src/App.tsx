@@ -8,7 +8,10 @@ import { ThemeProvider } from './components/theme/ThemeContext';
 import { LocaleProvider } from './i18n/LocaleContext';
 import { applyCanvasPreset } from './config/canvas';
 import { applyTypePreset } from './config/typeface';
+import { applySerifPreset } from './config/serifPreview';
 import { getBackgroundPreset } from './config/background';
+// @ts-ignore
+import SerifPreviewSwitcher from './components/common/SerifPreviewSwitcher.tsx';
 // @ts-ignore
 import SiteEmbroidery from './components/background/SiteEmbroidery.tsx';
 // Type scale (sizes/weights/tracking) loads before the family layer so the
@@ -104,16 +107,18 @@ const ScrollToTop: React.FC = () => {
 // context, so the header, footer, home, and sub-pages all stay in sync.
 const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <AppContainer>
+    <a className="skip-link" href="#main-content">Skip to content</a>
     {getBackgroundPreset() === 'embroidery' && <SiteEmbroidery />}
     <Header />
-    {children}
+    <main id="main-content">{children}</main>
     <Footer />
+    <SerifPreviewSwitcher />
   </AppContainer>
 );
 
 const App: React.FC = () => {
   // Resolve the ?canvas= and ?type= previews (remembered presets) once on mount.
-  useEffect(() => { applyCanvasPreset(); applyTypePreset(); }, []);
+  useEffect(() => { applyCanvasPreset(); applyTypePreset(); applySerifPreset(); }, []);
   return (
     <HelmetProvider>
       <ThemeProvider>
@@ -121,17 +126,20 @@ const App: React.FC = () => {
         <Router>
           <ScrollToTop />
           <PostHogPageview />
-          <Routes>
-            <Route path="/" element={<Shell><Home /></Shell>} />
-            <Route path="/blog" element={<Shell><BlogListingPage /></Shell>} />
-            <Route path="/blog/:slug" element={<Shell><BlogPostPage /></Shell>} />
-            <Route path="/now" element={<Shell><NowPage /></Shell>} />
-            <Route path="/services" element={<Shell><ServicesPage /></Shell>} />
-            <Route path="/services/ai-employee" element={<Shell><AiEmployeePage /></Shell>} />
-            <Route path="/things" element={<Shell><ThingsPage /></Shell>} />
-            <Route path="/share-preview" element={<Shell><SharePreviewPage /></Shell>} />
-            <Route path="/styleguide" element={<Shell><StyleguidePage /></Shell>} />
-          </Routes>
+          <Suspense fallback={null}>
+            <Routes>
+              <Route path="/" element={<Shell><Home /></Shell>} />
+              <Route path="/blog" element={<Shell><BlogListingPage /></Shell>} />
+              <Route path="/blog/:slug" element={<Shell><BlogPostPage /></Shell>} />
+              <Route path="/now" element={<Shell><NowPage /></Shell>} />
+              <Route path="/services" element={<Shell><ServicesPage /></Shell>} />
+              <Route path="/services/ai-employee" element={<Shell><AiEmployeePage /></Shell>} />
+              <Route path="/things" element={<Shell><ThingsPage /></Shell>} />
+              <Route path="/share-preview" element={<Shell><SharePreviewPage /></Shell>} />
+              <Route path="/styleguide" element={<Shell><StyleguidePage /></Shell>} />
+              <Route path="*" element={<Shell><NotFound /></Shell>} />
+            </Routes>
+          </Suspense>
           {EditOverlay && <EditOverlay />}
         </Router>
         </LocaleProvider>

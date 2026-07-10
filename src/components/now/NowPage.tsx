@@ -410,7 +410,9 @@ const NowPage: React.FC = () => {
             <div className="now-github__scroll">
               <div className="now-github__graph" role="img" aria-label={`${gh.total ?? ''} ${t.github.aria}`}>
                 {weeks.map((week, wi) => (
-                  <div className="now-github__week" key={wi}>
+                  // The graph wrapper carries role="img" + aria-label as the
+                  // accessible representation; the mouse-only cells are decorative.
+                  <div className="now-github__week" key={wi} aria-hidden="true">
                     {week.map((day, di) =>
                       day ? (
                         <span

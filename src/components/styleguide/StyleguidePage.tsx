@@ -19,8 +19,10 @@ type Step = {
 
 // The scale steps, in visual order. Names match STYLEGUIDE.md and the tokens.
 const STEPS: Step[] = [
-  { cls: 't-display', tag: 'h1', name: 'Display', token: '--text-display', sample: 'Eduard builds things' },
-  { cls: 't-h1', tag: 'h1', name: 'Heading 1', token: '--text-h1', sample: 'Section headline' },
+  // tag kept semantic-neutral (p): this is a visual specimen, and the page's real
+  // heading is the single <h1> below. Two more h1s here would be a heading-order bug.
+  { cls: 't-display', tag: 'p', name: 'Display', token: '--text-display', sample: 'Eduard builds things' },
+  { cls: 't-h1', tag: 'p', name: 'Heading 1', token: '--text-h1', sample: 'Section headline' },
   { cls: 't-h2', tag: 'h2', name: 'Heading 2', token: '--text-h2', sample: 'Subsection headline' },
   { cls: 't-h3', tag: 'h3', name: 'Heading 3', token: '--text-h3', sample: 'Card title' },
   { cls: 't-h4', tag: 'h4', name: 'Heading 4', token: '--text-h4', sample: 'Minor heading' },
@@ -78,11 +80,12 @@ const StyleguidePage: React.FC = () => {
   }, [measure]);
 
   return (
-    <main className="styleguide" ref={rootRef}>
+    <div className="styleguide" ref={rootRef}>
       <Seo
         title="Style guide"
         description="The typography system for eduardhvizdak.com: the Geist-led type scale, font roles, and usage rules."
         path="/styleguide"
+        noindex
       />
 
       <header className="styleguide__head">
@@ -155,7 +158,7 @@ const StyleguidePage: React.FC = () => {
           </p>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

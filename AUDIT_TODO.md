@@ -12,6 +12,27 @@ All paths are under `tjklint.github.io/`.
 
 ---
 
+## STATUS after implementation (2026-07-11)
+
+DONE and build-verified (CI=false npm run build, 11/11 prerendered):
+A1 (video preload/IO/gate + re-encode 36MB->12MB), A2 (route code-splitting,
+main chunk -63KB gzip), A3 (PNGs 10.6MB->3.9MB via resize), A4 (fonts removed),
+B1, B2, B3, B4, B5, B6, B7, B9, B10, B11, B12, B13, B14, B15, B17,
+C1 (verified single meta set per page), C2 (404 route + noindex snapshot),
+C3, C4, C6 (code parts: h1->h2, sitemap lastmod).
+
+NO ACTION NEEDED:
+B8 (documented first-party decision), B16 (already fixed earlier via --text-faint
+token #5f6e8b ~5:1).
+
+BLOCKED ON USER / EXTERNAL (cannot complete autonomously):
+A5 (PostHog product decision), C5 (Slovak path-locales project + decision),
+C6-www (307->308 is Vercel dashboard domain config, not repo code),
+C7 (Wikidata Q-item, needs your account), C8/C9/C10 (content writing + GSC data).
+GSC query export still needed from you to prioritize C7-C10.
+
+---
+
 ## A. Performance (web-perf audit)
 
 Baseline (Lighthouse 13.4, mobile, cold load): Performance 41/100, LCP 14.1s,

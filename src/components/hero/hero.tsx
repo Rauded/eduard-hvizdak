@@ -367,7 +367,10 @@ const Hero: React.FC = () => {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey) return;
-      const tag = (e.target as HTMLElement | null)?.tagName;
+      if (e.repeat) return;
+      const el = e.target as HTMLElement | null;
+      if (el?.isContentEditable) return;
+      const tag = el?.tagName;
       if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
       if (e.key === 'p' || e.key === 'P') scrollToId('projects');
       if (e.key === 'e' || e.key === 'E') scrollToId('contact');

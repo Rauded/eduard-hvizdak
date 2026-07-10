@@ -83,7 +83,7 @@
     a {
       color: rgba(248, 250, 252, 0.4);
       font-size: clamp(1.3em, 2vw, 1.6em);
-      transition: all 0.2s ease;
+      transition: color 0.2s ease, transform 0.2s ease;
       position: relative;
       z-index: 1;
 

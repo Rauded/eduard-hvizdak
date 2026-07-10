@@ -370,6 +370,7 @@
     line-height: var(--leading-heading);
     color: var(--text-strong);
     letter-spacing: var(--tracking-heading);
+    font-variant-numeric: tabular-nums;
   }
 
   &__label {
@@ -602,6 +603,7 @@
     strong {
       color: var(--text-strong);
       font-weight: var(--weight-heading);
+      font-variant-numeric: tabular-nums;
     }
   }
 

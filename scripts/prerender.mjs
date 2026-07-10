@@ -28,6 +28,7 @@ const ROUTES = [
   '/things',
   '/services',
   '/styleguide',
+  '/404',
   '/blog/newsmatics-hackathon',
   '/blog/digital-fairness-act-youth-dialogue',
   '/blog/zero-to-done',
@@ -108,8 +109,15 @@ async function main() {
       // domcontentloaded (not networkidle) because autoplay videos + the PDF
       // viewer keep the network busy forever; we instead wait for React to mount.
       await page.goto(`http://127.0.0.1:${PORT}${route}`, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      // Sub-pages are React.lazy chunks rendered inside a <Suspense fallback={null}>,
+      // so #root has children (the header) before the page content exists. Wait for
+      // <main id="main-content"> to actually fill, otherwise we would bake empty
+      // inner pages and lose all their indexable text.
       await page.waitForFunction(
-        () => { const r = document.getElementById('root'); return r && r.children.length > 0; },
+        () => {
+          const m = document.getElementById('main-content');
+          return m && m.children.length > 0;
+        },
         { timeout: 20000 }
       );
       // Trigger scroll-reveal IntersectionObservers, then return to top.

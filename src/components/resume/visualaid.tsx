@@ -60,7 +60,7 @@ const highlight = (text: string): React.ReactNode[] =>
 const VisualAid: React.FC<{ section: ResumeSection }> = ({ section }) => {
   return (
     <div className="section-container">
-      <h1 className="section-title">{section.title}</h1>
+      <h2 className="section-title">{section.title}</h2>
       <div className="line-container">
         {section.entries.map((entry) => {
           const { name, sub } = splitCompany(entry.company);
