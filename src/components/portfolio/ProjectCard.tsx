@@ -30,22 +30,40 @@ export function useReveal(threshold = 0.12) {
   return { ref, visible };
 }
 
+// Honour the user's reduced-motion setting for any auto-playing media.
+const prefersReducedMotion = () =>
+  typeof window !== 'undefined' &&
+  window.matchMedia &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 // ─── Slideshow ───────────────────────────────────────────────────
 const Slideshow: React.FC<{ images: string[] }> = ({ images }) => {
   const [current, setCurrent] = useState(0);
+  const [paused, setPaused] = useState(false);
 
+  // Auto-advance, but stop while hovered/focused and skip it entirely under
+  // reduced-motion (the dots still let a reader page through manually).
   useEffect(() => {
+    if (paused || prefersReducedMotion()) return;
     const t = setInterval(() => setCurrent(c => (c + 1) % images.length), 3400);
     return () => clearInterval(t);
-  }, [images.length]);
+  }, [images.length, paused]);
 
   return (
-    <div className="slideshow">
+    <div
+      className="slideshow"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onFocusCapture={() => setPaused(true)}
+      onBlurCapture={() => setPaused(false)}
+    >
       {images.map((src, i) => (
         <img
           key={i}
           src={src}
           alt=""
+          loading="lazy"
+          decoding="async"
           className={`slideshow__slide ${i === current ? 'slideshow__slide--active' : ''}`}
         />
       ))}
@@ -53,7 +71,9 @@ const Slideshow: React.FC<{ images: string[] }> = ({ images }) => {
         {images.map((_, i) => (
           <button
             key={i}
+            type="button"
             aria-label={`Slide ${i + 1}`}
+            aria-current={i === current}
             className={`slideshow__dot ${i === current ? 'slideshow__dot--active' : ''}`}
             onClick={() => setCurrent(i)}
           />
@@ -132,17 +152,31 @@ const LinkIcon: React.FC<{ link: PortfolioProject['links'][number] }> = ({ link 
 const ProjectMedia: React.FC<{ project: PortfolioProject }> = ({ project }) => {
   const { media } = project;
 
-  // React does not reliably reflect the `muted` prop to the DOM property, and
-  // browsers block autoplay on any video that isn't actually muted. That is what
-  // left the case-study reader showing a black box. Force it on via a ref and
-  // kick off playback so the clip plays everywhere, including inside the modal.
+  // Play only while the clip is actually on screen, and never eagerly fetch it.
+  // Previously every card AND the always-mounted case-study modal force-played
+  // its <video> on mount, so each preview downloaded twice and decoded for the
+  // whole page lifetime (LCP ~14s, ~45MB). With preload="none" nothing is
+  // fetched until an IntersectionObserver says the clip is in view; offscreen
+  // clips pause. Reduced-motion users get a static poster and no playback.
   const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const v = videoRef.current;
-    if (!v) return;
+    if (!v || !media.video) return;
     v.muted = true;
-    const p = v.play();
-    if (p) p.catch(() => {});
+    if (prefersReducedMotion()) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          const p = v.play();
+          if (p) p.catch(() => {});
+        } else {
+          v.pause();
+        }
+      },
+      { threshold: 0.25 }
+    );
+    obs.observe(v);
+    return () => obs.disconnect();
   }, [media.video]);
 
   // A real video file always wins, whatever the declared type. This is
@@ -154,7 +188,7 @@ const ProjectMedia: React.FC<{ project: PortfolioProject }> = ({ project }) => {
         className="pcard__video"
         src={media.video}
         poster={media.poster || (media.images && media.images[0])}
-        autoPlay
+        preload="none"
         muted
         loop
         playsInline
@@ -166,7 +200,15 @@ const ProjectMedia: React.FC<{ project: PortfolioProject }> = ({ project }) => {
     case 'slideshow':
       return <Slideshow images={media.images!} />;
     case 'image':
-      return <img className="pcard__img" src={media.images![0]} alt={project.title} />;
+      return (
+        <img
+          className="pcard__img"
+          src={media.images![0]}
+          alt={project.title}
+          loading="lazy"
+          decoding="async"
+        />
+      );
     case 'concept':
       return <ConceptCard />;
     case 'placeholder':
@@ -197,18 +239,43 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
   const t = useT('projects');
   const [open, setOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
   const cs = project.caseStudy;
 
-  // Lock body scroll + wire Esc while the reader is open; restore focus on close.
+  // Lock body scroll while the reader is open; wire Esc to close and trap Tab
+  // inside the dialog so keyboard focus can't wander onto the page behind the
+  // overlay. Move focus to the close button on open and restore it on close.
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === 'Escape') {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== 'Tab') return;
+      const panel = panelRef.current;
+      if (!panel) return;
+      const focusable = panel.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener('keydown', onKey);
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     const trigger = triggerRef.current;
+    // Focus the close button once the panel is revealed.
+    closeRef.current?.focus();
     return () => {
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = prevOverflow;
@@ -228,12 +295,13 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
       aria-hidden={!open}
     >
       <div className="case-modal__backdrop" onClick={() => setOpen(false)} />
-      <div className="case-modal__panel" role="dialog" aria-modal="true" aria-labelledby={titleId}>
+      <div className="case-modal__panel" role="dialog" aria-modal="true" aria-labelledby={titleId} ref={panelRef}>
         <button
           type="button"
           className="case-modal__close"
           onClick={() => setOpen(false)}
           aria-label={t.closeCaseStudy}
+          ref={closeRef}
         >
           <LuX aria-hidden="true" />
         </button>
@@ -244,8 +312,11 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
           <p className="case-modal__subtitle">{project.subtitle}</p>
         </header>
 
+        {/* Media is mounted only while the reader is open, so the hidden modal
+            no longer downloads and decodes a second copy of every clip. The
+            text sections below stay always-mounted for crawlers/GEO. */}
         <div className="case-modal__media">
-          <ProjectMedia project={project} />
+          {open && <ProjectMedia project={project} />}
         </div>
 
         <div className="case-modal__body">

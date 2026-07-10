@@ -54,6 +54,8 @@ const Seo: React.FC<SeoProps> = ({ title, description, path, image, type = 'webs
       <meta property="og:url" content={url} />
       <meta property="og:image" content={img} />
       <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@EduardHvizdak" />
+      <meta name="twitter:creator" content="@EduardHvizdak" />
       <meta name="twitter:title" content={t} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={img} />

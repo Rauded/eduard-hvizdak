@@ -1,0 +1,65 @@
+{
+  "sections": [
+    {
+      "title": "Vzdělání",
+      "entries": [
+        {
+          "title": "Bakalář informatiky",
+          "company": "@Masarykova univerzita",
+          "dates": "2023 - očekáváno 2026"
+        },
+        {
+          "title": "Maturita: matematika a informatika",
+          "company": "@Gymnázium Sobrance",
+          "dates": "Ukončeno 2023"
+        }
+      ]
+    },
+    {
+      "title": "Zkušenosti",
+      "entries": [
+        {
+          "title": "Inženýr AI systémů",
+          "company": "@OneBond",
+          "website": "https://onebond.tech",
+          "dates": "2025 - 2026",
+          "bulletPoints": [
+            "Navrhl jsem autonomní víceagentový pipeline na analýzu veřejných státních zakázek s využitím OCR, scrapingu, vyhledávání, ověřování faktů a sumarizace přes LLM.",
+            "Postavil jsem systém Retrieval-Augmented Generation (RAG) s LangChain, PostgreSQL a embeddingy VoyageAI pro sémantickou analýzu smluv.",
+            "Implementoval jsem distribuované embedding pipeline a asynchronní fronty úloh na paralelní kategorizaci milionů smluv."
+          ]
+        },
+        {
+          "title": "Inženýr AI systémů",
+          "company": "@CZS / Masarykova univerzita",
+          "website": "https://czs.muni.cz/cs/",
+          "dates": "2025 - současnost",
+          "bulletPoints": [
+            "Vytvořil jsem vícestupňový RAG systém, který spojuje vektorové vyhledávání (OpenSearch), BM25, MMR vyhledávání a přeřazování přes LLM pro univerzitní znalostní systémy.",
+            "Postavil jsem asynchronní FastAPI backend s pamětí konverzace, zpětnovazebními smyčkami a automatizovanými pipeline na příjem znalostí."
+          ]
+        },
+        {
+          "title": "AI vývojář",
+          "company": "@iGalileo",
+          "website": "https://www.igalileo.cz/",
+          "dates": "2025",
+          "bulletPoints": [
+            "Vyvinul jsem AI znalostní asistenty pro české a slovenské samosprávy s využitím LangChain a vektorového vyhledávání (PGVector).",
+            "Implementoval jsem automatizaci formulářů poháněnou AI, která doplňuje strukturovaná data z interních obecních datasetů."
+          ]
+        },
+        {
+          "title": "Člen think tanku a programátor",
+          "company": "@EDUC Alliance (Evropská aliance digitálních univerzit)",
+          "website": "https://www.educalliance.eu",
+          "dates": "2024 - 2025",
+          "bulletPoints": [
+            "Vyvinul jsem AI asistenta pro platformu digitálního kampusu, která slouží přes 200 000 studentům na 10 evropských univerzitách.",
+            "Spolupracoval jsem s partnerskými institucemi na strategii nasazení AI, jeho řízení a souladu s GDPR."
+          ]
+        }
+      ]
+    }
+  ]
+}

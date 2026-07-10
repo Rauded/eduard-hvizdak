@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
@@ -18,29 +18,35 @@ import './styles/typography.scss';
 import './styles/light.scss';
 
 
+// Header, Footer and Home are on the homepage critical path, so they stay eager.
 // @ts-ignore
 import Header from './components/header/header.tsx';
 // @ts-ignore
 import Footer from './components/footer/footer.tsx';
 // @ts-ignore
 import Home from './components/home/Home.tsx';
+
+// Every sub-page is route-split so it is not in the homepage bundle. This is the
+// main lever against the single ~1MB main chunk the perf audit flagged.
 // @ts-ignore
-import BlogListingPage from './components/blog/BlogListingPage.tsx';
+const BlogListingPage = lazy(() => import('./components/blog/BlogListingPage.tsx'));
 // @ts-ignore
-import BlogPostPage from './components/blog/BlogPostPage.tsx';
+const BlogPostPage = lazy(() => import('./components/blog/BlogPostPage.tsx'));
 // @ts-ignore
-import NowPage from './components/now/NowPage.tsx';
+const NowPage = lazy(() => import('./components/now/NowPage.tsx'));
 // @ts-ignore
-import ServicesPage from './components/services/ServicesPage.tsx';
+const ServicesPage = lazy(() => import('./components/services/ServicesPage.tsx'));
 // Unlisted proposal page: reachable only by direct link, noindex, not in nav or prerender.
 // @ts-ignore
-import AiEmployeePage from './components/services/AiEmployeePage.tsx';
+const AiEmployeePage = lazy(() => import('./components/services/AiEmployeePage.tsx'));
 // @ts-ignore
-import ThingsPage from './components/things/ThingsPage.tsx';
+const ThingsPage = lazy(() => import('./components/things/ThingsPage.tsx'));
 // @ts-ignore
-import SharePreviewPage from './components/share/SharePreviewPage.tsx';
+const SharePreviewPage = lazy(() => import('./components/share/SharePreviewPage.tsx'));
 // @ts-ignore
-import StyleguidePage from './components/styleguide/StyleguidePage.tsx';
+const StyleguidePage = lazy(() => import('./components/styleguide/StyleguidePage.tsx'));
+// @ts-ignore
+const NotFound = lazy(() => import('./components/notfound/NotFound.tsx'));
 
 // Dev-only inline text editor. The dynamic require + NODE_ENV guard keeps it out
 // of the production bundle entirely (see src/devEditor/ and src/setupProxy.js).

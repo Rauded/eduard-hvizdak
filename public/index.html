@@ -21,31 +21,12 @@
         } catch (e) {}
       })();
     </script>
-    <meta
-      name="description"
-      content="Eduard Hvizdak – AI engineer and indie founder. Production AI systems (RAG, multi-agent) and real SaaS products."
-    />
-
-    <!-- Sitemap. NOTE: no static <link rel="canonical"> here on purpose — this one
-         index.html serves every route, so a hardcoded canonical would be wrong on
-         inner pages. react-helmet-async sets the correct per-page canonical. -->
+    <!-- NOTE: description, canonical, Open Graph and Twitter tags are NOT set
+         statically here. This one index.html serves every route, so any static
+         tag would be wrong (and duplicated) on inner pages. react-helmet-async
+         (src/seo/Seo.tsx) sets the correct per-page description/canonical/OG/
+         Twitter, and the prerender bakes them into each route's snapshot. -->
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-
-    <!-- Open Graph / social card (homepage default; per-page tags set via react-helmet-async) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Eduard Hvizdak" />
-    <meta property="og:title" content="Eduard Hvizdak – AI Engineer & Founder" />
-    <meta property="og:description" content="Production AI systems (RAG, multi-agent) and real SaaS products — InzerPro, NasadClaw, KouzelníkNaAkci." />
-    <meta property="og:url" content="https://eduardhvizdak.com/" />
-    <meta property="og:image" content="https://eduardhvizdak.com/og-image.png?v=2" />
-
-    <!-- Twitter card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@EduardHvizdak" />
-    <meta name="twitter:creator" content="@EduardHvizdak" />
-    <meta name="twitter:title" content="Eduard Hvizdak – AI Engineer & Founder" />
-    <meta name="twitter:description" content="Production AI systems (RAG, multi-agent) and real SaaS products — InzerPro, NasadClaw, KouzelníkNaAkci." />
-    <meta name="twitter:image" content="https://eduardhvizdak.com/og-image.png?v=2" />
 
     <!--
       Knowledge-Graph / entity schema (JSON-LD @graph).
@@ -186,10 +167,8 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>Eduard Hvizdak</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts are self-hosted (Geist woff2); no external Google Fonts request.
+         The old JetBrains Mono <link> was render-blocking and unused. -->
   </head>
   <body>
     <noscript>

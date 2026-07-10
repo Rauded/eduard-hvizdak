@@ -74,8 +74,17 @@
     flex-direction: column;
     justify-content: center;
     overflow-y: auto;
-    transition: right 0.3s ease-in-out;
+    // Hidden off-canvas menu must leave the tab order, otherwise a keyboard
+    // user tabs through every off-screen link. visibility flips after the
+    // slide-out finishes; it flips on instantly when opening.
+    visibility: hidden;
+    transition: right 0.3s ease-in-out, visibility 0s linear 0.3s;
     z-index: 999;
+
+    &.open {
+      visibility: visible;
+      transition: right 0.3s ease-in-out, visibility 0s;
+    }
   }
 
   &.open {
@@ -130,6 +139,12 @@
 .hamburger {
   display: none;
   cursor: pointer;
+  // Button reset so the semantic <button> looks identical to the old div.
+  background: none;
+  border: 0;
+  padding: 0;
+  -webkit-appearance: none;
+  appearance: none;
 
   @media (max-width: 768px) {
     display: block;
@@ -151,7 +166,7 @@
   color: var(--accent-text-soft);
   text-decoration: none;
   font-size: var(--text-small);
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
   font-family: var(--font-body);
   border-radius: 8px;
   font-weight: var(--weight-medium);

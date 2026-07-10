@@ -219,30 +219,42 @@
 
   &__dots {
     position: absolute;
-    bottom: 14px;
+    bottom: 8px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 6px;
+    gap: 0;
     z-index: 10;
   }
 
+  // The visible dot stays 6px but the button carries a 24px tap target so it
+  // clears the minimum touch/hit-area guideline.
   &__dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
-    background: rgba(255, 255, 255, 0.25);
+    background: none;
     cursor: pointer;
     padding: 0;
-    transition: background 0.3s ease, transform 0.2s ease;
 
-    &--active {
+    &::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    &--active::before {
       transform: scale(1.4);
       background: var(--accent);
     }
 
-    &:hover {
+    &:hover::before {
       background: rgba(255, 255, 255, 0.5);
     }
   }

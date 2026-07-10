@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaPen, FaRegClock, FaBriefcase } from 'react-icons/fa';
 import { LuSun, LuMoon } from 'react-icons/lu';
@@ -25,12 +25,24 @@ const Header: React.FC = () => {
       const el = document.getElementById(target);
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
+        // Reflect the active section in the URL without triggering a navigation.
+        window.history.replaceState(null, '', `#${target}`);
       } else if (tries++ < 25) {
         setTimeout(tick, 40);
       }
     };
     tick();
   };
+
+  // Close the mobile menu on Escape while it is open.
+  useEffect(() => {
+    if (!isOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setIsOpen(false);
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [isOpen]);
 
   // Works from any route: if we're not on the homepage, route there first,
   // then scroll to the requested section.
@@ -48,10 +60,17 @@ const Header: React.FC = () => {
       <a href="#home" className="logo" onClick={(e) => goToSection(e, 'home')}>
         Eduard Hvizdak
       </a>
-      <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
+      <button
+        type="button"
+        className="hamburger"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={isOpen}
+        aria-controls="site-nav"
+      >
         {isOpen ? <FaTimes size={30} className="close-icon" /> : <FaBars size={30} />}
-      </div>
-      <nav className={`nav ${isOpen ? 'open' : ''}`}>
+      </button>
+      <nav id="site-nav" className={`nav ${isOpen ? 'open' : ''}`}>
         <a href="#home" className="nav-link" onClick={(e) => goToSection(e, 'home')}>
           <FaHome />
           {t.nav.home}

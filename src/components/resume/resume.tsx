@@ -2,6 +2,7 @@ import { LuDownload, LuExternalLink } from 'react-icons/lu';
 import { ResumeData } from './resumetypes';
 import resumeData from '../../data/resume.json';
 import resumeDataSk from '../../data/resume.sk.json';
+import resumeDataCs from '../../data/resume.cs.json';
 import './resume.scss';
 import VisualAid from './visualaid';
 import cvPdf from '../../assets/resume/EduardHvizdakCV.pdf';
@@ -11,10 +12,11 @@ import { useT } from '../../i18n';
 const Resume: React.FC = () => {
   const { locale } = useLocale();
   const t = useT('resume');
-  // English is the canonical section order; Slovak mirrors it index-for-index.
-  // Czech has no resume translation yet, so it falls back to English.
+  // English is the canonical section order; Slovak and Czech mirror it
+  // index-for-index.
   const enData: ResumeData = resumeData;
-  const data: ResumeData = locale === 'sk' ? resumeDataSk : resumeData;
+  const data: ResumeData =
+    locale === 'cs' ? resumeDataCs : locale === 'sk' ? resumeDataSk : resumeData;
 
   return (
     <div className="resume-container" id="resume">
