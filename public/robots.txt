@@ -4,9 +4,10 @@
 
 User-agent: *
 Allow: /
-# Internal-only / unlisted pages (not for indexing)
+# Private pages: blocked from crawling entirely.
+# (/styleguide is intentionally NOT here: it ships a prerendered noindex tag, and
+#  a Disallow would stop Google from ever seeing that tag to de-index it.)
 Disallow: /share-preview
-Disallow: /styleguide
 Disallow: /services/ai-employee
 
 # Search engines

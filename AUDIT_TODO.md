@@ -25,6 +25,20 @@ NO ACTION NEEDED:
 B8 (documented first-party decision), B16 (already fixed earlier via --text-faint
 token #5f6e8b ~5:1).
 
+REVIEW-FOUND ITEMS (two Fable review passes, empirical Puppeteer probes):
+Fixed: soft-404 now serves /404 noindex (vercel.json), duplicate case-modal
+portals stripped before hydrate, lazy-route teardown fixed (preload chunk before
+hydrate), invisible skip link (white on navy), modal focus-trap body escape,
+robots.txt vs noindex conflict.
+OPEN (architectural, needs a decision): React #418/#423 hydration warnings fire
+on every route. Root cause: the prerender writes a DOM snapshot with no React SSR
+Suspense markers, so hydrateRoot cannot hydrate the <Suspense> boundary that the
+A2 code-splitting introduced; React recovers by client-rendering the root. Also a
+pre-existing homepage Paper-shader canvas-size mismatch. Content + SEO unaffected,
+no visible teardown. Proper fix = streaming SSR in scripts/prerender.mjs, or drop
+code-splitting, or render the hero shader client-only + scope Suspense off Home.
+All carry visual/behaviour risk on the live hero; deferred for a user decision.
+
 BLOCKED ON USER / EXTERNAL (cannot complete autonomously):
 A5 (PostHog product decision), C5 (Slovak path-locales project + decision),
 C6-www (307->308 is Vercel dashboard domain config, not repo code),

@@ -3,6 +3,6 @@
     { "source": "/portfolio", "destination": "/#projects", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/((?!api).*)", "destination": "/index.html" }
+    { "source": "/((?!api).*)", "destination": "/404/index.html" }
   ]
 }

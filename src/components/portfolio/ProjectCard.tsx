@@ -262,7 +262,12 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
       if (focusable.length === 0) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
+      // If focus has escaped the panel (e.g. onto <body> after clicking inert
+      // text), pull it back in instead of letting Tab walk the page behind.
+      if (!panel.contains(document.activeElement)) {
+        e.preventDefault();
+        (e.shiftKey ? last : first).focus();
+      } else if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
         last.focus();
       } else if (!e.shiftKey && document.activeElement === last) {
