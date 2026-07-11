@@ -3,6 +3,8 @@
     { "source": "/portfolio", "destination": "/#projects", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/sk/((?!api).*)", "destination": "/sk/404/index.html" },
+    { "source": "/cs/((?!api).*)", "destination": "/cs/404/index.html" },
     { "source": "/((?!api).*)", "destination": "/404/index.html" }
   ]
 }

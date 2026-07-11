@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { LuArrowLeft } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
+import LocaleLink from '../common/LocaleLink';
 import './notfound.scss';
 
 // Catch-all route. The SPA rewrite still returns HTTP 200 for unknown paths
@@ -21,10 +21,10 @@ const NotFound: React.FC = () => (
       <p className="notfound__text">
         The page you were looking for isn't here. It may have moved or never existed.
       </p>
-      <Link to="/" className="notfound__cta">
+      <LocaleLink to="/" className="notfound__cta">
         <LuArrowLeft aria-hidden="true" />
         Back to home
-      </Link>
+      </LocaleLink>
     </section>
   </>
 );

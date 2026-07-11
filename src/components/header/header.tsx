@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaPen, FaRegClock, FaBriefcase } from 'react-icons/fa';
 import { LuSun, LuMoon } from 'react-icons/lu';
 import { useTheme } from '../theme/ThemeContext';
 import { useT } from '../../i18n';
+import { useLocale } from '../../i18n/LocaleContext';
+import { localizedPath, stripLocale } from '../../config/locale';
+import LocaleLink from '../common/LocaleLink';
 import LanguageSwitcher from './LanguageSwitcher';
 import './header.scss';
 
@@ -11,11 +14,15 @@ const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, toggleTheme, canToggle } = useTheme();
   const t = useT('header');
+  const { locale } = useLocale();
   const location = useLocation();
   const navigate = useNavigate();
-  const isBlog = location.pathname.startsWith('/blog');
-  const isNow = location.pathname.startsWith('/now');
-  const isServices = location.pathname.startsWith('/services');
+  // Route matching works on the locale-less path so /sk/blog still marks "blog".
+  const barePath = stripLocale(location.pathname);
+  const isBlog = barePath.startsWith('/blog');
+  const isNow = barePath.startsWith('/now');
+  const isServices = barePath.startsWith('/services');
+  const homePath = localizedPath('/', locale);
 
   // Scroll to an in-page section, retrying briefly so it also works right
   // after navigating home from another route (the section needs to mount).
@@ -49,8 +56,8 @@ const Header: React.FC = () => {
   const goToSection = (e: React.MouseEvent<HTMLAnchorElement>, target: string) => {
     e.preventDefault();
     setIsOpen(false);
-    if (location.pathname !== '/') {
-      navigate('/');
+    if (location.pathname !== homePath) {
+      navigate(homePath);
     }
     scrollToSection(target);
   };
@@ -87,30 +94,30 @@ const Header: React.FC = () => {
           <FaCode />
           {t.nav.projects}
         </a>
-        <Link
+        <LocaleLink
           to="/services"
           className={`nav-link ${isServices ? 'nav-link--active' : ''}`}
           onClick={() => setIsOpen(false)}
         >
           <FaBriefcase />
           {t.nav.services}
-        </Link>
-        <Link
+        </LocaleLink>
+        <LocaleLink
           to="/blog"
           className={`nav-link ${isBlog ? 'nav-link--active' : ''}`}
           onClick={() => setIsOpen(false)}
         >
           <FaPen />
           {t.nav.blog}
-        </Link>
-        <Link
+        </LocaleLink>
+        <LocaleLink
           to="/now"
           className={`nav-link ${isNow ? 'nav-link--active' : ''}`}
           onClick={() => setIsOpen(false)}
         >
           <FaRegClock />
           {t.nav.now}
-        </Link>
+        </LocaleLink>
         <LanguageSwitcher />
         {canToggle && (
           <button

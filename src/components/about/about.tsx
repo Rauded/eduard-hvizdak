@@ -1,7 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { LuArrowRight } from "react-icons/lu";
 import "./about.scss";
+import LocaleLink from "../common/LocaleLink";
 import myPhoto from "../../assets/about/picture_of_me.jpeg";
 import myPhotoWebP from "../../assets/about/picture_of_me.webp";
 import { isExpertMode } from "../../config/positioning";
@@ -39,7 +39,7 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      <Link to="/blog/digital-fairness-act-youth-dialogue" className="about-highlight">
+      <LocaleLink to="/blog/digital-fairness-act-youth-dialogue" className="about-highlight">
         <div className="about-highlight__media">
           <img
             src="/blog/digital-fairness/youth-policy-dialogue.png"
@@ -64,7 +64,7 @@ const About: React.FC = () => {
             <LuArrowRight className="about-highlight__cta-icon" aria-hidden="true" />
           </span>
         </div>
-      </Link>
+      </LocaleLink>
     </div>
   );
 };

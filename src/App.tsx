@@ -1,11 +1,12 @@
 import React, { useEffect, Suspense, lazy } from 'react';
 import styled from 'styled-components';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import posthog from 'posthog-js';
 import { analyticsEnabled } from './analytics';
 import { ThemeProvider } from './components/theme/ThemeContext';
 import { LocaleProvider } from './i18n/LocaleContext';
+import { isLocale, localizedPath, stripLocale, saveLocale } from './config/locale';
 import { applyCanvasPreset } from './config/canvas';
 import { applyTypePreset } from './config/typeface';
 import { applySerifPreset } from './config/serifPreview';
@@ -102,6 +103,33 @@ const ScrollToTop: React.FC = () => {
   return null;
 };
 
+// Back-compat for the old query-param locale scheme. ?lang=sk on any URL
+// redirects (replace) to the /sk path equivalent so old shared links keep
+// working; ?lang=reset clears the remembered preference. Mounted inside Router.
+const LegacyLangRedirect: React.FC = () => {
+  const { pathname, search, hash } = useLocation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const params = new URLSearchParams(search);
+    const lang = params.get('lang');
+    if (!lang) return;
+    if (lang === 'reset') {
+      try { localStorage.removeItem('site-locale'); } catch { /* private mode */ }
+      params.delete('lang');
+      const q = params.toString();
+      navigate(pathname + (q ? `?${q}` : '') + hash, { replace: true });
+      return;
+    }
+    if (isLocale(lang)) {
+      saveLocale(lang);
+      params.delete('lang');
+      const q = params.toString();
+      navigate(localizedPath(stripLocale(pathname), lang) + (q ? `?${q}` : '') + hash, { replace: true });
+    }
+  }, [pathname, search, hash, navigate]);
+  return null;
+};
+
 // One shell for every route: the shared Header (with the single site-wide theme
 // toggle) and Footer wrap the page. Theme is owned by ThemeProvider and read via
 // context, so the header, footer, home, and sub-pages all stay in sync.
@@ -116,33 +144,47 @@ const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </AppContainer>
 );
 
+// The page routes as RELATIVE children, reused under each locale branch (/, /sk,
+// /cs). English keeps its exact root URLs; the /sk and /cs branches render the
+// same pages with the locale derived from the path prefix. A function (not a
+// shared element) so each branch gets its own fresh route descriptors.
+const pageRoutes = () => (
+  <>
+    <Route index element={<Shell><Home /></Shell>} />
+    <Route path="blog" element={<Shell><BlogListingPage /></Shell>} />
+    <Route path="blog/:slug" element={<Shell><BlogPostPage /></Shell>} />
+    <Route path="now" element={<Shell><NowPage /></Shell>} />
+    <Route path="services" element={<Shell><ServicesPage /></Shell>} />
+    <Route path="services/ai-employee" element={<Shell><AiEmployeePage /></Shell>} />
+    <Route path="things" element={<Shell><ThingsPage /></Shell>} />
+    <Route path="share-preview" element={<Shell><SharePreviewPage /></Shell>} />
+    <Route path="styleguide" element={<Shell><StyleguidePage /></Shell>} />
+    <Route path="*" element={<Shell><NotFound /></Shell>} />
+  </>
+);
+
 const App: React.FC = () => {
   // Resolve the ?canvas= and ?type= previews (remembered presets) once on mount.
   useEffect(() => { applyCanvasPreset(); applyTypePreset(); applySerifPreset(); }, []);
   return (
     <HelmetProvider>
       <ThemeProvider>
-        <LocaleProvider>
         <Router>
-          <ScrollToTop />
-          <PostHogPageview />
-          <Suspense fallback={null}>
-            <Routes>
-              <Route path="/" element={<Shell><Home /></Shell>} />
-              <Route path="/blog" element={<Shell><BlogListingPage /></Shell>} />
-              <Route path="/blog/:slug" element={<Shell><BlogPostPage /></Shell>} />
-              <Route path="/now" element={<Shell><NowPage /></Shell>} />
-              <Route path="/services" element={<Shell><ServicesPage /></Shell>} />
-              <Route path="/services/ai-employee" element={<Shell><AiEmployeePage /></Shell>} />
-              <Route path="/things" element={<Shell><ThingsPage /></Shell>} />
-              <Route path="/share-preview" element={<Shell><SharePreviewPage /></Shell>} />
-              <Route path="/styleguide" element={<Shell><StyleguidePage /></Shell>} />
-              <Route path="*" element={<Shell><NotFound /></Shell>} />
-            </Routes>
-          </Suspense>
-          {EditOverlay && <EditOverlay />}
+          {/* LocaleProvider is INSIDE Router so it can derive locale from the path. */}
+          <LocaleProvider>
+            <ScrollToTop />
+            <LegacyLangRedirect />
+            <PostHogPageview />
+            <Suspense fallback={null}>
+              <Routes>
+                <Route path="/">{pageRoutes()}</Route>
+                <Route path="/sk">{pageRoutes()}</Route>
+                <Route path="/cs">{pageRoutes()}</Route>
+              </Routes>
+            </Suspense>
+            {EditOverlay && <EditOverlay />}
+          </LocaleProvider>
         </Router>
-        </LocaleProvider>
       </ThemeProvider>
     </HelmetProvider>
   );

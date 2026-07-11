@@ -35,6 +35,19 @@ const ROUTES = [
   '/blog/erasmus-bridges-not-walls',
 ];
 
+// Bake every route in all three locales. English stays at the root; sk/cs get
+// their path prefix (mirrors localizedPath() in src/config/locale.ts). The
+// path-derived LocaleContext renders the right language from the URL alone, so
+// no extra signalling is needed here beyond visiting the prefixed path.
+const LOCALES = ['en', 'sk', 'cs'];
+const ALL_ROUTES = LOCALES.flatMap((l) =>
+  ROUTES.map((r) => (l === 'en' ? r : `/${l}${r === '/' ? '' : r}`))
+);
+const expectedLang = (route) => {
+  const seg = route.split('/')[1];
+  return seg === 'sk' || seg === 'cs' ? seg : 'en';
+};
+
 const TYPES = {
   '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css',
   '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png',
@@ -93,7 +106,7 @@ async function main() {
   }
 
   let ok = 0;
-  for (const route of ROUTES) {
+  for (const route of ALL_ROUTES) {
     const page = await browser.newPage();
     try {
       await page.setViewport({ width: 1280, height: 1600 });
@@ -131,6 +144,13 @@ async function main() {
       await new Promise((r) => setTimeout(r, 300));
 
       const html = await page.evaluate(() => '<!DOCTYPE html>\n' + document.documentElement.outerHTML);
+      // Cheap insurance: make sure a /sk or /cs route actually baked in that
+      // language (path-derived locale), not English.
+      const bakedLang = await page.evaluate(() => document.documentElement.lang);
+      const want = expectedLang(route);
+      if (bakedLang !== want) {
+        console.warn(`[prerender] WARNING ${route}: baked lang="${bakedLang}", expected "${want}"`);
+      }
       const outPath = route === '/'
         ? path.join(BUILD, 'index.html')
         : path.join(BUILD, route, 'index.html');
@@ -147,7 +167,7 @@ async function main() {
 
   await browser.close();
   server.close();
-  console.log(`[prerender] done — ${ok}/${ROUTES.length} routes prerendered`);
+  console.log(`[prerender] done: ${ok}/${ALL_ROUTES.length} routes prerendered`);
 }
 
 main().catch((e) => {

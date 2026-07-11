@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useLocale } from '../i18n/LocaleContext';
-import { Locale } from '../config/locale';
+import { Locale, localizedPath } from '../config/locale';
 
 // og:locale advertises the language the page is currently rendered in. The
 // in-place toggle does not create alternate URLs, so there is no hreflang set;
@@ -35,9 +35,22 @@ const abs = (img?: string) =>
 
 const Seo: React.FC<SeoProps> = ({ title, description, path, image, type = 'website', jsonLd, noindex }) => {
   const { locale } = useLocale();
-  const url = `${SITE_URL}${path}`;
+  // Canonical + og:url are per-locale: English stays at the root path (unchanged),
+  // Slovak/Czech get their /sk and /cs prefix. Exactly one canonical per page.
+  const url = `${SITE_URL}${localizedPath(path, locale)}`;
   const t = fullTitle(title);
   const img = abs(image);
+  // hreflang alternates tie the three locale URLs of a page together. The set is
+  // identical on all three variants, satisfying reciprocity by construction.
+  // Skipped for noindex pages (they should not advertise alternates).
+  const alternates: { hreflang: string; href: string }[] = noindex
+    ? []
+    : [
+        { hreflang: 'en', href: `${SITE_URL}${localizedPath(path, 'en')}` },
+        { hreflang: 'sk', href: `${SITE_URL}${localizedPath(path, 'sk')}` },
+        { hreflang: 'cs', href: `${SITE_URL}${localizedPath(path, 'cs')}` },
+        { hreflang: 'x-default', href: `${SITE_URL}${localizedPath(path, 'en')}` },
+      ];
   return (
     <Helmet>
       <html lang={locale} />
@@ -46,6 +59,9 @@ const Seo: React.FC<SeoProps> = ({ title, description, path, image, type = 'webs
       {noindex && <meta name="robots" content="noindex, nofollow" />}
       {noindex && <meta name="googlebot" content="noindex, nofollow" />}
       <link rel="canonical" href={url} />
+      {alternates.map((a) => (
+        <link key={a.hreflang} rel="alternate" hrefLang={a.hreflang} href={a.href} />
+      ))}
       <meta property="og:type" content={type} />
       <meta property="og:locale" content={OG_LOCALE[locale]} />
       <meta property="og:site_name" content="Eduard Hvizdak" />

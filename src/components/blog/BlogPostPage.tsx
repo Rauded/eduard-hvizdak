@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Link, useParams, Navigate } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
+import LocaleLink, { useLocalizedPath } from '../common/LocaleLink';
 import { FaArrowLeft } from 'react-icons/fa';
 import { BLOG_POSTS, localizeBlogPost } from '../../data/blog';
 import Seo, { SITE_URL, PERSON_ID } from '../../seo/Seo';
@@ -86,8 +87,10 @@ const BlogPostPage: React.FC = () => {
     }
   }, []);
 
+  const localizedPath = useLocalizedPath();
+
   if (!rawPost) {
-    return <Navigate to="/blog" replace />;
+    return <Navigate to={localizedPath('/blog')} replace />;
   }
 
   const post = localizeBlogPost(rawPost, locale);
@@ -128,10 +131,10 @@ const BlogPostPage: React.FC = () => {
 
       <div className="blog-post__inner">
         <div className="blog-post__topbar">
-          <Link to="/blog" className="blog-back">
+          <LocaleLink to="/blog" className="blog-back">
             <FaArrowLeft />
             {t.allPosts}
-          </Link>
+          </LocaleLink>
           <div className="reading-controls">
             <div className="reading-controls__fonts" role="group" aria-label={t.readingFontAria}>
               {(['serif', 'sans'] as FontPref[]).map((f) => (
@@ -193,7 +196,7 @@ const BlogPostPage: React.FC = () => {
               {related.map((p) => {
                 const thumb = getThumbnail(p);
                 return (
-                  <Link key={p.slug} to={`/blog/${p.slug}`} className="related__card">
+                  <LocaleLink key={p.slug} to={`/blog/${p.slug}`} className="related__card">
                     <div className="related__thumb">
                       {thumb && <img src={thumb} alt={p.title} loading="lazy" />}
                     </div>
@@ -204,7 +207,7 @@ const BlogPostPage: React.FC = () => {
                         {formatDate(p.date, locale)} · {readingTime(p.content)} {t.minRead}
                       </span>
                     </div>
-                  </Link>
+                  </LocaleLink>
                 );
               })}
             </div>

@@ -26,8 +26,39 @@ export const DEFAULT_LOCALE: Locale = 'en';
 
 const STORAGE_KEY = 'site-locale';
 
-function isLocale(v: string | null): v is Locale {
+export function isLocale(v: string | null | undefined): v is Locale {
   return v === 'en' || v === 'sk' || v === 'cs';
+}
+
+// ── Path-based locale (the crawlable source of truth) ────────────────────────
+// English lives at the site root (unprefixed, unchanged URLs). Slovak and Czech
+// live under /sk and /cs. The path segment IS the locale code, so hreflang and
+// <html lang> derive from it with no mapping layer.
+
+// Which locale a pathname belongs to: '/sk' or '/sk/...' -> 'sk', same for cs.
+export function getLocaleFromPath(pathname: string): Locale {
+  const seg = pathname.split('/')[1];
+  return isLocale(seg) && seg !== 'en' ? seg : 'en';
+}
+
+// Remove the locale prefix, returning the canonical English-shaped path.
+// '/sk/blog' -> '/blog', '/sk' -> '/', English paths pass through unchanged.
+export function stripLocale(pathname: string): string {
+  const seg = pathname.split('/')[1];
+  if (seg === 'sk' || seg === 'cs') {
+    const rest = pathname.slice(seg.length + 1); // drop '/sk'
+    return rest === '' ? '/' : rest;
+  }
+  return pathname || '/';
+}
+
+// Add the locale prefix to a locale-less path. This is the ONE helper every link,
+// canonical, hreflang, sitemap entry, and prerender route goes through, so all
+// prefixed URLs are generated identically (reciprocity by construction).
+// en -> unchanged; sk/cs -> '/sk' + path (home is '/sk', not '/sk/').
+export function localizedPath(path: string, locale: Locale): string {
+  if (locale === 'en') return path;
+  return path === '/' ? `/${locale}` : `/${locale}${path}`;
 }
 
 // Resolve the active locale. Guarded so it is safe during prerender / SSR where

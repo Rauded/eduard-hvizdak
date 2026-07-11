@@ -119,7 +119,7 @@ export const PROJECTS: PortfolioProject[] = [
       solution:
         'Postavil jsem automatizační engine na <strong>Deno</strong>, který zvládá automatické obnovování, naplánované opětovné přidávání a hromadné inzerování napříč více účty prodejců. Podpírá ho <strong>Supabase</strong> pro autentizaci, data v Postgresu a úložiště, <strong>Stripe</strong> pro předplatné a rychlý <strong>React</strong> dashboard na správu inzerátů a čtení analytiky výkonu. <strong>PostHog</strong> sleduje používání produktu, takže přesně vidím, které funkce drží zákazníky. Výsledek automaticky drží inzeráty prodejce zaparkované nahoře: dřina s obnovováním, celá na autopilotu.',
       story:
-        'Z toho, co vzniklo o víkendu na hackathonu, je dnes skutečný <strong>byznys vedle práce s platícími zákazníky</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Později jsem ho znovu odprezentoval na <a href="/blog/zero-to-done">hackathonu Zero to Done</a> v Brně, kde celá pointa byla získat skutečné zákazníky, ne jen vypustit ukázku.',
+        'Z toho, co vzniklo o víkendu na hackathonu, je dnes skutečný <strong>byznys vedle práce s platícími zákazníky</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Později jsem ho znovu odprezentoval na <a href="/cs/blog/zero-to-done">hackathonu Zero to Done</a> v Brně, kde celá pointa byla získat skutečné zákazníky, ne jen vypustit ukázku.',
     },
     subtitle_sk: 'SaaS, ktorý prevádzkujem popri práci',
     description_sk:
@@ -134,7 +134,7 @@ export const PROJECTS: PortfolioProject[] = [
       solution:
         'Postavil som automatizačný engine na <strong>Deno</strong>, ktorý zvláda automatické obnovovanie, naplánované opätovné pridávanie a hromadné inzerovanie naprieč viacerými účtami predajcov. Podopiera ho <strong>Supabase</strong> pre autentifikáciu, dáta v Postgrese a úložisko, <strong>Stripe</strong> pre predplatné a rýchly <strong>React</strong> dashboard na správu inzerátov a čítanie analytiky výkonu. <strong>PostHog</strong> sleduje používanie produktu, takže presne vidím, ktoré funkcie držia zákazníkov. Výsledok automaticky drží inzeráty predajcu zaparkované na vrchu: drina s obnovovaním, celá na autopilote.',
       story:
-        'Z toho, čo vzniklo cez víkend na hackathone, je dnes skutočný <strong>biznis popri práci s platiacimi zákazníkmi</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Neskôr som ho znova odprezentoval na <a href="/blog/zero-to-done">hackathone Zero to Done</a> v Brne, kde celá pointa bola získať skutočných zákazníkov, nielen vypustiť ukážku.',
+        'Z toho, čo vzniklo cez víkend na hackathone, je dnes skutočný <strong>biznis popri práci s platiacimi zákazníkmi</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Neskôr som ho znova odprezentoval na <a href="/sk/blog/zero-to-done">hackathone Zero to Done</a> v Brne, kde celá pointa bola získať skutočných zákazníkov, nielen vypustiť ukážku.',
     },
   },
   {
@@ -311,7 +311,7 @@ export const PROJECTS: PortfolioProject[] = [
       solution:
         'Postavili jsme linku v <strong>Pythonu</strong> pomocí <strong>LangChain</strong> a <strong>NLP</strong> na vytahování míst z článků, spárovali jsme je se souřadnicemi přes rejstřík <strong>GeoNames</strong> a všechno jsme zobrazili na interaktivním 3D globusu s <strong>Globe.gl</strong> v <strong>JavaScriptu</strong>. Posuvník časové osy vám dá sledovat, jak se události odvíjejí po celém světě v reálném čase, a mění surové zprávy v prozkoumatelnou <strong>datovou vizualizaci</strong>.',
       story:
-        'Newsmatics Globe je jeden z projektů, na které jsem nejpyšnější. Celý víkendový zápis si přečtěte v <a href="/blog/newsmatics-hackathon">mém příběhu z hackathonu Newsmatics</a>.',
+        'Newsmatics Globe je jeden z projektů, na které jsem nejpyšnější. Celý víkendový zápis si přečtěte v <a href="/cs/blog/newsmatics-hackathon">mém příběhu z hackathonu Newsmatics</a>.',
     },
     subtitle_sk: 'Správy ako geografia',
     description_sk:
@@ -326,7 +326,7 @@ export const PROJECTS: PortfolioProject[] = [
       solution:
         'Postavili sme linku v <strong>Pythone</strong> pomocou <strong>LangChain</strong> a <strong>NLP</strong> na vyťahovanie miest z článkov, spárovali sme ich so súradnicami cez register <strong>GeoNames</strong> a všetko sme zobrazili na interaktívnom 3D glóbuse s <strong>Globe.gl</strong> v <strong>JavaScripte</strong>. Posuvník časovej osi vám dá sledovať, ako sa udalosti odvíjajú po celom svete v reálnom čase, a mení surové správy na preskúmateľnú <strong>dátovú vizualizáciu</strong>.',
       story:
-        'Newsmatics Globe je jeden z projektov, na ktoré som najhrdší. Celý víkendový zápis si prečítajte v <a href="/blog/newsmatics-hackathon">mojom príbehu z hackathonu Newsmatics</a>.',
+        'Newsmatics Globe je jeden z projektov, na ktoré som najhrdší. Celý víkendový zápis si prečítajte v <a href="/sk/blog/newsmatics-hackathon">mojom príbehu z hackathonu Newsmatics</a>.',
     },
   },
   {

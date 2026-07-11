@@ -1,15 +1,19 @@
 import React from 'react';
-import { LOCALES, Locale } from '../../config/locale';
+import { Link, useLocation } from 'react-router-dom';
+import { LOCALES, Locale, localizedPath, stripLocale, saveLocale } from '../../config/locale';
 import { useLocale } from '../../i18n/LocaleContext';
 import { useT } from '../../i18n';
 
 // Compact segmented control [EN | SK | CZ] that flips the whole site language.
-// Buttons (not links): the URL does not change, only the active locale. Lives at
-// the end of the nav, in the slot the theme toggle used to occupy.
+// Real <Link>s now (not buttons): each points at the SAME page under the other
+// locale prefix, so they are crawlable alternate links and work without JS. The
+// onClick just remembers the preference; the navigation is the href.
 const SHORT: Record<Locale, string> = { en: 'EN', sk: 'SK', cs: 'CZ' };
 
 const LanguageSwitcher: React.FC = () => {
-  const { locale, setLocale } = useLocale();
+  const { locale } = useLocale();
+  const { pathname, search, hash } = useLocation();
+  const bare = stripLocale(pathname);
   const t = useT('header');
   const fullName: Record<Locale, string> = {
     en: t.language.en,
@@ -22,18 +26,18 @@ const LanguageSwitcher: React.FC = () => {
       {LOCALES.map((code) => {
         const active = code === locale;
         return (
-          <button
+          <Link
             key={code}
-            type="button"
+            to={localizedPath(bare, code) + search + hash}
             lang={code}
             className={`lang-switcher__option ${active ? 'lang-switcher__option--active' : ''}`}
-            aria-pressed={active}
+            aria-current={active ? 'true' : undefined}
             aria-label={fullName[code]}
             title={fullName[code]}
-            onClick={() => setLocale(code)}
+            onClick={() => saveLocale(code)}
           >
             {SHORT[code]}
-          </button>
+          </Link>
         );
       })}
     </div>

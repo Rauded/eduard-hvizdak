@@ -8,7 +8,11 @@ Allow: /
 # (/styleguide is intentionally NOT here: it ships a prerendered noindex tag, and
 #  a Disallow would stop Google from ever seeing that tag to de-index it.)
 Disallow: /share-preview
+Disallow: /sk/share-preview
+Disallow: /cs/share-preview
 Disallow: /services/ai-employee
+Disallow: /sk/services/ai-employee
+Disallow: /cs/services/ai-employee
 
 # Search engines
 User-agent: Googlebot

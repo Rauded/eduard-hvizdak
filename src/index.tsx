@@ -6,6 +6,7 @@ import './index.css';
 import App from './App.tsx';
 import reportWebVitals from './reportWebVitals';
 import { POSTHOG_KEY, POSTHOG_HOST, analyticsEnabled } from './analytics';
+import { stripLocale } from './config/locale';
 
 // Pageviews are captured manually on route change (see App.tsx).
 if (analyticsEnabled) {
@@ -61,7 +62,9 @@ if (rootEl.hasChildNodes()) {
   // which would leave two copies (and duplicate element ids). Drop the baked
   // copies before hydrating so React re-creates a single fresh set.
   document.querySelectorAll('body > .case-modal').forEach((n) => n.remove());
-  preloadRouteChunk(window.location.pathname).finally(() => {
+  // Strip the /sk or /cs prefix so localized routes warm the right chunk (a
+  // /sk/blog load must preload the blog chunk, not fall through to NotFound).
+  preloadRouteChunk(stripLocale(window.location.pathname)).finally(() => {
     ReactDOM.hydrateRoot(rootEl, app);
   });
 } else {

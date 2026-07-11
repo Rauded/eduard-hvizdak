@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import LocaleLink from '../common/LocaleLink';
 import { FaArrowLeft } from 'react-icons/fa';
 import Seo, { SITE_URL, DEFAULT_OG_IMAGE } from '../../seo/Seo';
 import SharePreviewCard, { SharePlatform } from './SharePreviewCard';
@@ -34,10 +34,10 @@ const SharePreviewPage: React.FC = () => {
         path="/share-preview"
       />
       <div className="share-preview__inner">
-        <Link to="/" className="share-back">
+        <LocaleLink to="/" className="share-back">
           <FaArrowLeft />
           Back home
-        </Link>
+        </LocaleLink>
 
         <header className="share-preview__head">
           <p className="share-preview__eyebrow">Internal · Share Preview</p>
