@@ -1,4 +1,11 @@
 const services = {
+  featured: {
+    eyebrow: 'Novinka',
+    title: 'AI zamestnanec pre celú firmu',
+    body: 'Jeden agent napojený na všetky nástroje firmy, s ktorým sa tím len rozpráva. K dispozícii je živá interaktívna ukážka.',
+    cta: 'Pozrieť AI zamestnanca',
+  },
+
   seoTitle: 'AI konzultácie a automatizácia',
   seoDescription:
     'AI konzultácie a automatizácia pre tímy: automatizácia procesov, spracovanie dokumentov a RAG, AI agenti a súkromné nasadenie on-premise. Od návrhu cez vývoj až po odovzdanie realizuje Eduard Hvižďák.',

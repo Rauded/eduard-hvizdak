@@ -1,6 +1,13 @@
 // Services page copy. Arrays (signals, services, steps) are zipped by index
 // against icon/stat data that stays in the component.
 const services = {
+  featured: {
+    eyebrow: 'Flagship',
+    title: 'An AI employee for your whole company',
+    body: 'One agent connected to all your tools that your team just chats with. See the live, interactive demo.',
+    cta: 'See the AI Employee',
+  },
+
   seoTitle: 'AI Consulting & Automation',
   seoDescription:
     'AI consulting and automation for teams: workflow automation, document intelligence and RAG, AI agents, and private on-premise deployment. Scoped, built, and shipped end to end by Eduard Hvizdak.',

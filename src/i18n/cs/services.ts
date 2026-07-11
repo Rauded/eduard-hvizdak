@@ -1,6 +1,13 @@
 // Services page copy. Arrays (signals, services, steps) are zipped by index
 // against icon/stat data that stays in the component.
 const services = {
+  featured: {
+    eyebrow: 'Novinka',
+    title: 'AI zaměstnanec pro celou firmu',
+    body: 'Jeden agent napojený na všechny nástroje firmy, se kterým si tým jen píše. K dispozici je živá interaktivní ukázka.',
+    cta: 'Zobrazit AI zaměstnance',
+  },
+
   seoTitle: 'AI konzultace a automatizace',
   seoDescription:
     'AI konzultace a automatizace pro týmy: automatizace procesů, porozumění dokumentům a RAG, AI agenti a privátní on-premise nasazení. Eduard Hvižďák vše nadefinuje, postaví a dodá od začátku do konce.',

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   LuArrowRight, LuMail, LuPhone, LuCalendar, LuRepeat2, LuFileSearch, LuBot, LuShieldCheck,
   LuCircleCheck,
@@ -9,6 +10,7 @@ import { useTheme } from '../theme/ThemeContext';
 import ContactGradient from '../_21test/ContactGradient';
 import './services.scss';
 import './service-cards-v2.scss';
+import './services-featured.scss';
 // TEST: 21st.dev showcase components (remove these + tags below to revert)
 import ServicesShowcase from '../_21test/ServicesShowcase';
 import AgentPipeline from '../_21test/AgentPipeline';
@@ -76,6 +78,18 @@ const ServicesPage: React.FC = () => {
           </a>
         </div>
       </header>
+
+      {/* Featured: links to the (unlisted) AI Employee page with the live demo. */}
+      <Reveal className="services-block" as="section">
+        <Link to="/services/ai-employee" className="svc-featured">
+          <div>
+            <span className="svc-featured__eyebrow">{t.featured.eyebrow}</span>
+            <h2 className="svc-featured__title">{t.featured.title}</h2>
+            <p className="svc-featured__text">{t.featured.body}</p>
+          </div>
+          <span className="svc-featured__cta">{t.featured.cta} <LuArrowRight aria-hidden="true" /></span>
+        </Link>
+      </Reveal>
 
       {/* Signature band: the one bold, unmissable moment. */}
       <Reveal className="services-signal" as="section">

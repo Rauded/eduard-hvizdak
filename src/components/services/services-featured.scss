@@ -1,0 +1,73 @@
+// Featured banner on the main /services page that links to the (unlisted)
+// /services/ai-employee page. Uses the site's navy accent tokens, flat fill,
+// standard card shadow on hover (de-slop rules: no gradients, no glow).
+.services {
+  .svc-featured {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    text-decoration: none;
+    color: inherit;
+    padding: 24px 28px;
+    border-radius: 16px;
+    border: 1px solid var(--accent-ring);
+    background: var(--accent-soft);
+    transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+  .svc-featured:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-card);
+  }
+  .svc-featured:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .svc-featured__eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .svc-featured__title {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-heading);
+    color: var(--accent-heading);
+    margin: 0 0 6px;
+  }
+  .svc-featured__text {
+    font-size: var(--text-body);
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 60ch;
+  }
+  .svc-featured__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .svc-featured__cta svg {
+    transition: transform 0.15s ease;
+  }
+  .svc-featured:hover .svc-featured__cta svg {
+    transform: translateX(3px);
+  }
+
+  @media (max-width: 640px) {
+    .svc-featured {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}
