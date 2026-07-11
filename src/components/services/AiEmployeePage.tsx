@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  LuArrowRight, LuMail, LuPhone, LuCalendar, LuMessageSquare, LuSearch, LuFileText,
+  LuArrowRight, LuMessageSquare, LuSearch, LuFileText,
   LuBell, LuShieldCheck, LuScrollText, LuUserCheck, LuServer, LuCircleCheck, LuMinus,
   LuSlack, LuGithub, LuDatabase, LuMail as LuMailbox, LuFolder, LuTable, LuTicket, LuCalendarClock,
 } from 'react-icons/lu';
@@ -73,20 +73,16 @@ const AiEmployeePage: React.FC = () => {
             {t.hero.lead}
           </p>
           <div className="services-hero__cta">
-            <a className="services-btn services-btn--primary svc-free-btn" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-              <span className="svc-free-btn__shine" aria-hidden="true" />
-              <LuCalendar aria-hidden="true" />
+            <a className="services-btn services-btn--primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
               {t.hero.book}
               <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
             </a>
-            <a className="services-btn services-btn--ghost" href={`mailto:${EMAIL}?subject=AI%20Employee%20enquiry`}>
-              <LuMail aria-hidden="true" />
-              {t.hero.email}
-            </a>
-            <a className="services-btn services-btn--ghost" href={`tel:${PHONE}`}>
-              <LuPhone aria-hidden="true" />
-              {t.hero.call} {PHONE_DISPLAY}
-            </a>
+            <p className="services-hero__alt">
+              {t.hero.altPrefix}{' '}
+              <a href={`mailto:${EMAIL}?subject=AI%20Employee%20enquiry`}>{EMAIL}</a>
+              {' '}{t.hero.altOr}{' '}
+              <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a>
+            </p>
           </div>
         </header>
 

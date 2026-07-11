@@ -1,17 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  LuArrowRight, LuMail, LuPhone, LuCalendar, LuRepeat2, LuFileSearch, LuBot, LuShieldCheck,
+  LuArrowRight, LuRepeat2, LuFileSearch, LuBot, LuShieldCheck,
   LuCircleCheck,
 } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
 import { useTheme } from '../theme/ThemeContext';
 import ContactGradient from '../_21test/ContactGradient';
+import SectionMarker from '../common/SectionMarker';
 import './services.scss';
 import './service-cards-v2.scss';
 import './services-featured.scss';
-// TEST: 21st.dev showcase components (remove these + tags below to revert)
+// 21st.dev showcase components, curated under the "In action" section below.
 import ServicesShowcase from '../_21test/ServicesShowcase';
 import AgentPipeline from '../_21test/AgentPipeline';
 import OrbitingStack from '../_21test/OrbitingStack';
@@ -62,22 +63,32 @@ const ServicesPage: React.FC = () => {
           {t.heroLead}
         </p>
         <div className="services-hero__cta">
-          <a className="services-btn services-btn--primary svc-free-btn" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-            <span className="svc-free-btn__shine" aria-hidden="true" />
-            <LuCalendar aria-hidden="true" />
+          <a className="services-btn services-btn--primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
             {t.ctaConsult}
             <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
           </a>
-          <a className="services-btn services-btn--ghost" href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>
-            <LuMail aria-hidden="true" />
-            {t.ctaEmail}
-          </a>
-          <a className="services-btn services-btn--ghost" href={`tel:${PHONE}`}>
-            <LuPhone aria-hidden="true" />
-            {t.ctaCall} {PHONE_DISPLAY}
-          </a>
+          <p className="services-hero__alt">
+            {t.ctaAltPrefix}{' '}
+            <a href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>{EMAIL}</a>
+            {' '}{t.ctaAltOr}{' '}
+            <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a>
+          </p>
         </div>
       </header>
+
+      {/* Proof strip: quiet, ruled, typographic. The hero button stays the
+          boldest element on the page. */}
+      <Reveal className="services-stats" as="section">
+        <p className="services-stats__kicker">{t.signalKicker}</p>
+        <div className="services-stats__grid">
+          {t.signals.map((s) => (
+            <div className="services-stats__item" key={s.label}>
+              <div className="services-stats__value">{s.value}</div>
+              <div className="services-stats__label">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </Reveal>
 
       {/* Featured: links to the (unlisted) AI Employee page with the live demo. */}
       <Reveal className="services-block" as="section">
@@ -91,19 +102,7 @@ const ServicesPage: React.FC = () => {
         </Link>
       </Reveal>
 
-      {/* Signature band: the one bold, unmissable moment. */}
-      <Reveal className="services-signal" as="section">
-        <p className="services-signal__kicker">{t.signalKicker}</p>
-        <div className="services-signal__grid">
-          {t.signals.map((s) => (
-            <div className="services-signal__item" key={s.label}>
-              <div className="services-signal__value">{s.value}</div>
-              <div className="services-signal__label">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </Reveal>
-
+      <div className="services-marker"><SectionMarker index="01" label={t.sectionServices} /></div>
       <section className="services-block" aria-labelledby="what-i-do">
         <Reveal><h2 className="services-block__title" id="what-i-do">{t.whatIDo}</h2></Reveal>
         <div className="services-grid">
@@ -125,11 +124,19 @@ const ServicesPage: React.FC = () => {
         </div>
       </section>
 
-      {/* TEST: 21st.dev showcase trio (agent diagram, run demo, integrations) */}
-      <Reveal><AgentPipeline /></Reveal>
-      <Reveal><ServicesShowcase /></Reveal>
-      <Reveal><OrbitingStack /></Reveal>
+      {/* Curated demos: agent diagram, run demo, integrations stack. */}
+      <div className="services-marker"><SectionMarker index="02" label={t.sectionDemo} /></div>
+      <section className="services-block services-demo" aria-labelledby="in-action">
+        <Reveal>
+          <h2 className="services-block__title" id="in-action">{t.demoTitle}</h2>
+          <p className="services-demo__lead">{t.demoLead}</p>
+        </Reveal>
+        <div className="services-demo__stage"><Reveal><AgentPipeline /></Reveal></div>
+        <div className="services-demo__stage"><Reveal><ServicesShowcase /></Reveal></div>
+        <div className="services-demo__stage"><Reveal><OrbitingStack /></Reveal></div>
+      </section>
 
+      <div className="services-marker"><SectionMarker index="03" label={t.sectionWhyMe} /></div>
       <section className="services-block" aria-labelledby="why-me">
         <Reveal><h2 className="services-block__title" id="why-me">{t.whyMe}</h2></Reveal>
         <ul className="services-proof">
@@ -139,6 +146,7 @@ const ServicesPage: React.FC = () => {
         </ul>
       </section>
 
+      <div className="services-marker"><SectionMarker index="04" label={t.sectionProcess} /></div>
       <section className="services-block" aria-labelledby="how-it-works">
         <Reveal><h2 className="services-block__title" id="how-it-works">{t.howItWorks}</h2></Reveal>
         <ol className="services-steps">
@@ -164,7 +172,8 @@ const ServicesPage: React.FC = () => {
         claims about a specific client engagement.
         ================================================================
       */}
-      <section className="services-block services-how" aria-labelledby="how-i-work" style={{ marginTop: '104px' }}>
+      <div className="services-marker"><SectionMarker index="05" label={t.sectionMethod} /></div>
+      <section className="services-block services-how" aria-labelledby="how-i-work">
         <Reveal>
           <p className="services-how__eyebrow">{t.howEyebrow}</p>
           <h2 className="services-block__title" id="how-i-work">{t.howTitle}</h2>
@@ -248,6 +257,21 @@ const ServicesPage: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* One repeat of the single primary CTA before the shared contact block. */}
+      <Reveal className="services-cta-repeat" as="section">
+        <h2 className="services-cta-repeat__title">{t.ctaRepeatTitle}</h2>
+        <a className="services-btn services-btn--primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+          {t.ctaConsult}
+          <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
+        </a>
+        <p className="services-hero__alt">
+          {t.ctaAltPrefix}{' '}
+          <a href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>{EMAIL}</a>
+          {' '}{t.ctaAltOr}{' '}
+          <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a>
+        </p>
+      </Reveal>
 
     </div>
 

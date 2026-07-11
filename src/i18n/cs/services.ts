@@ -16,9 +16,20 @@ const services = {
   heroTitle: 'Stavím AI systémy, které se samy zaplatí.',
   heroLead:
     'Pomáhám týmům nasadit AI na reálné problémy: automatizuju ruční práci, která je zdržuje, dělám z jejich dokumentů něco, v čem se dá vyhledávat, a nasazuju systémy, které spolehlivě běží v produkci. Nadefinuju, postavím a dodám od začátku do konce.',
-  ctaConsult: 'Nezávazná konzultace zdarma',
-  ctaEmail: 'Napište mi',
-  ctaCall: 'Zavolejte',
+  ctaConsult: 'Rezervovat konzultaci zdarma',
+  ctaAltPrefix: 'Radši píšete? Napište mi na',
+  ctaAltOr: 'nebo zavolejte na',
+  ctaRepeatTitle: 'Máte proces, který by měl běžet sám?',
+
+  sectionServices: 'Služby',
+  sectionDemo: 'Naživo',
+  sectionWhyMe: 'Proč já',
+  sectionProcess: 'Postup',
+  sectionMethod: 'Metoda',
+
+  demoTitle: 'Podívejte se naživo',
+  demoLead:
+    'Živé interaktivní ukázky systémů, které stavím: pipeline agentů, běh fungujícího asistenta a nástroje, na které se napojuje.',
 
   signalKicker: 'Dodáno, v produkci, ve velkém',
   signals: [

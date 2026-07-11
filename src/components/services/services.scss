@@ -72,8 +72,28 @@
 
   &__cta {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 14px;
+  }
+
+  // Secondary contact routes, demoted from buttons to one quiet text line.
+  &__alt {
+    margin: 0;
+    font-size: var(--text-small);
+    line-height: var(--leading-body);
+    color: var(--text-soft);
+
+    a {
+      color: var(--accent-strong);
+      font-weight: var(--weight-medium);
+      text-decoration: underline;
+      text-decoration-color: var(--accent-ring);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.18s ease;
+
+      &:hover { text-decoration-color: var(--accent); }
+    }
   }
 }
 
@@ -82,8 +102,8 @@
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  padding: 13px 24px;
-  border-radius: 12px;
+  padding: 13px 26px;
+  border-radius: 999px; // pills, matching the Home CTAs and ContactGradient
   font-size: var(--text-small);
   font-weight: var(--weight-medium);
   letter-spacing: 0.01em;
@@ -114,6 +134,20 @@
 
     &:hover { border-color: var(--accent); }
   }
+}
+
+// ─── Section markers (shared SectionMarker, same rhythm as Home) ────
+// The marker's own Row is built for the full-width page container; inside
+// the 900px services column we zero its container vars so the rule spans
+// the column exactly.
+.services-marker {
+  margin-top: 40px;
+  --container-max: none;
+  --container-px: 0;
+
+  // The marker already carries generous top padding; tighten the section
+  // that follows so the marker and its heading read as one unit.
+  + .services-block { margin-top: 16px; }
 }
 
 // ─── Content blocks ─────────────────────────────────────────────────
@@ -164,7 +198,7 @@
     justify-content: center;
     width: 44px;
     height: 44px;
-    border-radius: 11px;
+    border-radius: 10px;
     margin-bottom: 16px;
     color: var(--accent);
     background: color-mix(in srgb, var(--accent) 12%, transparent);
@@ -207,21 +241,22 @@
   }
 }
 
-// ─── Signature band (the one bold, unmissable moment) ───────────────
-.services-signal {
-  margin-top: 64px;
-  padding: clamp(32px, 5vw, 48px);
-  border-radius: 20px;
-  background: var(--accent-strong); // deep navy, high contrast on the page
-  color: #fff;
+// ─── Proof strip (quiet, ruled, typographic) ────────────────────────
+// Stats read as editorial confidence, not as a widget: hairline rules top
+// and bottom, navy numerals, muted labels. No filled surface.
+.services-stats {
+  margin-top: 56px;
+  padding: 26px 0 30px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
 
   &__kicker {
     font-family: var(--font-mono);
     font-size: var(--text-label);
     letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.66);
-    margin: 0 0 24px;
+    color: var(--text-mute);
+    margin: 0 0 20px;
   }
 
   &__grid {
@@ -229,28 +264,28 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 28px;
 
-    @media (max-width: 680px) { grid-template-columns: 1fr; gap: 24px; }
+    @media (max-width: 680px) { grid-template-columns: 1fr; gap: 22px; }
   }
 
   &__item {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
 
   &__value {
     font-family: var(--font-display);
-    font-size: var(--text-h1);
+    font-size: var(--text-h2);
     font-weight: var(--weight-heading);
-    line-height: var(--leading-display);
+    line-height: var(--leading-heading);
     letter-spacing: var(--tracking-heading);
-    color: #fff;
+    color: var(--accent-strong);
   }
 
   &__label {
     font-size: var(--text-small);
     line-height: var(--leading-body);
-    color: rgba(255, 255, 255, 0.82);
+    color: var(--text-soft);
     max-width: 30ch;
   }
 }
@@ -372,4 +407,42 @@
   &__stage {
     margin-top: 28px;
   }
+}
+
+// ─── In action (curated 21st.dev demos) ─────────────────────────────
+.services-demo {
+  &__lead {
+    font-size: var(--text-lead);
+    line-height: var(--leading-body);
+    color: var(--text-soft);
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  &__stage {
+    margin-top: 48px;
+  }
+}
+
+// ─── Repeated CTA (one reuse of the hero action, before the contact block) ──
+.services-cta-repeat {
+  margin-top: 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+    color: var(--heading);
+    margin: 0;
+    max-width: 26ch;
+  }
+
+  .services-hero__alt { margin-top: -4px; }
 }

@@ -2,9 +2,11 @@ import React from 'react';
 import './orbiting-stack.scss';
 import { LuBrainCircuit } from 'react-icons/lu';
 import {
-  SiOpenai, SiPython, SiPostgresql, SiSupabase, SiStripe,
+  SiPython, SiPostgresql, SiSupabase, SiStripe,
   SiLangchain, SiFastapi, SiVercel,
 } from 'react-icons/si';
+// SiOpenai was removed from simple-icons; the Remix set still carries it.
+import { RiOpenaiFill } from 'react-icons/ri';
 import { useT } from '../../i18n';
 
 // ── TEST: 21st.dev "Orbiting Circles" (magicui) ported to SCSS ──────────────
@@ -14,7 +16,7 @@ import { useT } from '../../i18n';
 type OrbitIcon = { Icon: React.ComponentType<any>; color: string };
 
 const INNER: OrbitIcon[] = [
-  { Icon: SiOpenai, color: '#412991' },
+  { Icon: RiOpenaiFill, color: '#412991' },
   { Icon: SiLangchain, color: '#1C3C3C' },
   { Icon: SiPython, color: '#3776AB' },
   { Icon: SiFastapi, color: '#009688' },
@@ -24,7 +26,7 @@ const OUTER: OrbitIcon[] = [
   { Icon: SiSupabase, color: '#3FCF8E' },
   { Icon: SiStripe, color: '#635BFF' },
   { Icon: SiVercel, color: '#000000' },
-  { Icon: SiOpenai, color: '#412991' },
+  { Icon: RiOpenaiFill, color: '#412991' },
   { Icon: SiPython, color: '#3776AB' },
 ];
 

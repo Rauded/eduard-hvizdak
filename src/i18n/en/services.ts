@@ -16,9 +16,20 @@ const services = {
   heroTitle: 'I ship AI systems that pay for themselves.',
   heroLead:
     'I help teams put AI to work on real problems: automating the manual work that slows them down, making their documents answerable, and deploying systems that run reliably in production. Scoped, built and delivered end to end.',
-  ctaConsult: 'Free, no-obligation consultation',
-  ctaEmail: 'Email me',
-  ctaCall: 'Call',
+  ctaConsult: 'Book a free consultation',
+  ctaAltPrefix: 'Prefer writing? Reach me at',
+  ctaAltOr: 'or call',
+  ctaRepeatTitle: 'Have a process that should run itself?',
+
+  sectionServices: 'Services',
+  sectionDemo: 'In action',
+  sectionWhyMe: 'Why me',
+  sectionProcess: 'Process',
+  sectionMethod: 'Method',
+
+  demoTitle: 'See it in action',
+  demoLead:
+    'Live, interactive demos of the systems I build: an agent pipeline, a working assistant run, and the stack it plugs into.',
 
   signalKicker: 'Shipped, in production, at scale',
   signals: [
