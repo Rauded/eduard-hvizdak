@@ -58,7 +58,9 @@ const Seo: React.FC<SeoProps> = ({ title, description, path, image, type = 'webs
       <meta name="description" content={description} />
       {noindex && <meta name="robots" content="noindex, nofollow" />}
       {noindex && <meta name="googlebot" content="noindex, nofollow" />}
-      <link rel="canonical" href={url} />
+      {/* No canonical on noindex pages: some (e.g. /sk/404) are served via a 200
+          rewrite at a different URL, so a canonical would be a mixed signal. */}
+      {!noindex && <link rel="canonical" href={url} />}
       {alternates.map((a) => (
         <link key={a.hreflang} rel="alternate" hrefLang={a.hreflang} href={a.href} />
       ))}

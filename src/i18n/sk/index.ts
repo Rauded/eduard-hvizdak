@@ -22,6 +22,7 @@ import contactBand from './contactBand';
 import orbitStack from './orbitStack';
 import projects from './projects';
 import blog from './blog';
+import notfound from './notfound';
 
 export const sk: DeepPartial<Dict> = {
   header,
@@ -43,4 +44,5 @@ export const sk: DeepPartial<Dict> = {
   orbitStack,
   projects,
   blog,
+  notfound,
 };

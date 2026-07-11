@@ -23,6 +23,7 @@ import contactBand from './contactBand';
 import orbitStack from './orbitStack';
 import projects from './projects';
 import blog from './blog';
+import notfound from './notfound';
 
 export const en = {
   header,
@@ -44,6 +45,7 @@ export const en = {
   orbitStack,
   projects,
   blog,
+  notfound,
 };
 
 export type Dict = typeof en;

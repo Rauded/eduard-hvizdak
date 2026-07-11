@@ -105,16 +105,20 @@ const BlogPostPage: React.FC = () => {
   );
   const related = [...sameCategory, ...others].slice(0, 3);
 
+  // url / mainEntityOfPage must match the page's per-locale canonical, so the
+  // Slovak/Czech article's structured data points at its own URL, not the English one.
+  const postUrl = `${SITE_URL}${localizedPath(`/blog/${post.slug}`)}`;
   const blogPostingLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
     datePublished: post.date,
     description: post.excerpt,
+    inLanguage: locale,
     ...(post.thumbnail ? { image: `${SITE_URL}${post.thumbnail}` } : {}),
-    url: `${SITE_URL}/blog/${post.slug}`,
+    url: postUrl,
     author: { '@type': 'Person', '@id': PERSON_ID, name: 'Eduard Hvizdak' },
-    mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+    mainEntityOfPage: postUrl,
   };
 
   return (

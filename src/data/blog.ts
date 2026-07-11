@@ -71,7 +71,7 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt_sk:
       'Strávil som víkend hackovaním s tímom MOGGERS na projekte Newsmatics Globe, čo je pipeline, ktorý ťahá lokality z novinových článkov a zakresľuje ich na interaktívny 3D glóbus. Takto ten víkend prebehol.',
     content_sk: `
-      <p>V dňoch <strong>27. až 28. februára 2026</strong> som sa zúčastnil <strong><a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathonu</a></strong> v Brne s mojím tímom <strong>MOGGERS</strong>. Postavili sme <strong>Newsmatics Globe</strong>, geolokačný pipeline: pomocou NLP ťahá názvy miest z novinových článkov, páruje ich s databázou GeoNames a zakresľuje ich na interaktívny 3D glóbus. Je tam časová os, ktorou môžeš posúvať a sledovať, ako sa udalosti šíria po mape. Ak chceš detaily o samotnom projekte, nájdeš ich medzi <a href="/#projects">projektmi na mojej domovskej stránke</a> (hľadaj <strong>Newsmatics Globe</strong>).</p>
+      <p>V dňoch <strong>27. až 28. februára 2026</strong> som sa zúčastnil <strong><a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathonu</a></strong> v Brne s mojím tímom <strong>MOGGERS</strong>. Postavili sme <strong>Newsmatics Globe</strong>, geolokačný pipeline: pomocou NLP ťahá názvy miest z novinových článkov, páruje ich s databázou GeoNames a zakresľuje ich na interaktívny 3D glóbus. Je tam časová os, ktorou môžeš posúvať a sledovať, ako sa udalosti šíria po mape. Ak chceš detaily o samotnom projekte, nájdeš ich medzi <a href="/sk/#projects">projektmi na mojej domovskej stránke</a> (hľadaj <strong>Newsmatics Globe</strong>).</p>
 
       <figure class="blog-figure">
         <img src="/blog/newsmatics/group.jpg" alt="Skupinová fotka všetkých účastníkov Newsmatics Hackathonu" class="blog-img" />
@@ -101,7 +101,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
       <h2>Na záver</h2>
       <p>Hackathony sú stále môj obľúbený spôsob, ako niečo postaviť. Dostaneš tesný termín, reálny problém a malý tím, ktorý to musí rýchlo vyriešiť. Newsmatics Globe začal ako víkendový projekt práve tu a vyrástol z neho jeden z výsledkov, na ktoré som najviac hrdý. Ďakujem <strong>Newsmatics</strong> za zorganizovanie. Ich oficiálne zhrnutie nájdeš na <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">stránke Newsmatics Hackathon 2026</a>.</p>
-      <p>Chceš technické detaily? Zájdi na <a href="/#projects">projekty na mojej domovskej stránke</a> a nájdi <strong>Newsmatics Globe</strong>.</p>
+      <p>Chceš technické detaily? Zájdi na <a href="/sk/#projects">projekty na mojej domovskej stránke</a> a nájdi <strong>Newsmatics Globe</strong>.</p>
     `,
     footnote_sk:
       'Newsmatics Hackathon · Brno, Česká republika · 27. až 28. februára 2026<br/>Tím MOGGERS · Projekt: Newsmatics Globe · <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">newsmatics.com</a>',
@@ -110,7 +110,7 @@ export const BLOG_POSTS: BlogPost[] = [
     excerpt_cs:
       'Strávil jsem víkend hackováním s týmem MOGGERS na projektu Newsmatics Globe, což je pipeline, který tahá lokality z novinových článků a zakresluje je na interaktivní 3D glóbus. Takhle ten víkend proběhl.',
     content_cs: `
-      <p>Ve dnech <strong>27. až 28. února 2026</strong> jsem se zúčastnil <strong><a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathonu</a></strong> v Brně se svým týmem <strong>MOGGERS</strong>. Postavili jsme <strong>Newsmatics Globe</strong>, geolokační pipeline: pomocí NLP tahá názvy míst z novinových článků, páruje je s databází GeoNames a zakresluje je na interaktivní 3D glóbus. Je tam časová osa, kterou můžeš posouvat a sledovat, jak se události šíří po mapě. Pokud chceš detaily o samotném projektu, najdeš je mezi <a href="/#projects">projekty na mé domovské stránce</a> (hledej <strong>Newsmatics Globe</strong>).</p>
+      <p>Ve dnech <strong>27. až 28. února 2026</strong> jsem se zúčastnil <strong><a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">Newsmatics Hackathonu</a></strong> v Brně se svým týmem <strong>MOGGERS</strong>. Postavili jsme <strong>Newsmatics Globe</strong>, geolokační pipeline: pomocí NLP tahá názvy míst z novinových článků, páruje je s databází GeoNames a zakresluje je na interaktivní 3D glóbus. Je tam časová osa, kterou můžeš posouvat a sledovat, jak se události šíří po mapě. Pokud chceš detaily o samotném projektu, najdeš je mezi <a href="/cs/#projects">projekty na mé domovské stránce</a> (hledej <strong>Newsmatics Globe</strong>).</p>
 
       <figure class="blog-figure">
         <img src="/blog/newsmatics/group.jpg" alt="Skupinová fotka všech účastníků Newsmatics Hackathonu" class="blog-img" />
@@ -140,7 +140,7 @@ export const BLOG_POSTS: BlogPost[] = [
 
       <h2>Na závěr</h2>
       <p>Hackathony jsou pořád můj oblíbený způsob, jak něco postavit. Dostaneš těsný termín, reálný problém a malý tým, který to musí rychle vyřešit. Newsmatics Globe začal jako víkendový projekt právě tady a vyrostl z něj jeden z výsledků, na které jsem nejvíc hrdý. Děkuji <strong>Newsmatics</strong> za zorganizování. Jejich oficiální shrnutí najdeš na <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">stránce Newsmatics Hackathon 2026</a>.</p>
-      <p>Chceš technické detaily? Zajdi na <a href="/#projects">projekty na mé domovské stránce</a> a najdi <strong>Newsmatics Globe</strong>.</p>
+      <p>Chceš technické detaily? Zajdi na <a href="/cs/#projects">projekty na mé domovské stránce</a> a najdi <strong>Newsmatics Globe</strong>.</p>
     `,
     footnote_cs:
       'Newsmatics Hackathon · Brno, Česká republika · 27. až 28. února 2026<br/>Tým MOGGERS · Projekt: Newsmatics Globe · <a href="https://www.newsmatics.com/news-index/hackathon-2026" target="_blank" rel="noopener noreferrer">newsmatics.com</a>',
@@ -418,7 +418,7 @@ export const BLOG_POSTS: BlogPost[] = [
         <figcaption>Celá skupina na streche, po jednom spoločnom víkende.</figcaption>
       </figure>
 
-      <p>Zaujíma ťa produkt, ktorý som priniesol? Zájdi na <a href="/#projects">projekty na mojej domovskej stránke</a> a hľadaj <strong>InzerPro</strong>.</p>
+      <p>Zaujíma ťa produkt, ktorý som priniesol? Zájdi na <a href="/sk/#projects">projekty na mojej domovskej stránke</a> a hľadaj <strong>InzerPro</strong>.</p>
     `,
     footnote_sk:
       'Zero to Done · Brno, Česká republika · Vytvoril Petr Sochora (anjelský investor, mime digital)<br/>Hostila mime digital · Zakladateľ a CEO Michal Mervart · Projekt: InzerPro · <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>',
@@ -477,7 +477,7 @@ export const BLOG_POSTS: BlogPost[] = [
         <figcaption>Celá skupina na střeše, po jednom společném víkendu.</figcaption>
       </figure>
 
-      <p>Zajímá tě produkt, který jsem přinesl? Zajdi na <a href="/#projects">projekty na mé domovské stránce</a> a hledej <strong>InzerPro</strong>.</p>
+      <p>Zajímá tě produkt, který jsem přinesl? Zajdi na <a href="/cs/#projects">projekty na mé domovské stránce</a> a hledej <strong>InzerPro</strong>.</p>
     `,
     footnote_cs:
       'Zero to Done · Brno, Česká republika · Vytvořil Petr Sochora (andělský investor, mime digital)<br/>Hostila mime digital · Zakladatel a CEO Michal Mervart · Projekt: InzerPro · <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>',
