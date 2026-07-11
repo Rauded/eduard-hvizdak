@@ -111,45 +111,6 @@
   font-style: italic;
   font-display: swap;
 }
-/* Size-adjusted Source Serif 4 for non-English serif HEADINGS only. Jeju
-   Myeongjo (the English serif display) has abnormally tall Latin glyphs
-   (cap-height ~0.79em, to harmonise with Korean), so plain Source Serif 4
-   (cap-height ~0.67em) rendered Slovak headings visibly smaller at the same
-   font-size. size-adjust:120% scales the outlines up so the caps sit at parity
-   with Jeju and the headings stop looking shrunken. Same file, only the size
-   descriptor differs; body/blog reading still use the unscaled 'Source Serif 4'. */
-@font-face {
-  font-family: 'Source Serif 4 Display';
-  src: url('./fonts/SourceSerif4/SourceSerif4.ttf') format('truetype');
-  font-weight: 200 900;
-  font-style: normal;
-  font-display: swap;
-  size-adjust: 120%;
-}
-/* Playfair Display (OFL), PREVIEW option only. A high-contrast Didone serif
-   closer to Jeju's elegant look that also covers full Latin Extended (all Czech,
-   and Slovak except o-circumflex / a-umlaut, which fall back). Variable weight;
-   size-adjust ~112% brings its caps to parity with Jeju. Used by the temporary
-   serif-preview switch; safe to delete this plus the Playfair font files once a
-   serif is chosen. */
-@font-face {
-  font-family: 'Playfair Display';
-  src: url('./fonts/PlayfairDisplay/PlayfairDisplay-latin.woff2') format('woff2');
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
-  size-adjust: 112%;
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Playfair Display';
-  src: url('./fonts/PlayfairDisplay/PlayfairDisplay-latin-ext.woff2') format('woff2');
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
-  size-adjust: 112%;
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
 
 /* ── Inter — article reading sans (also used elsewhere in the UI) ── */
 @font-face {
@@ -280,29 +241,10 @@ html[data-type='geist'] {
   --font-display: var(--font-geist);
 }
 
-/* Non-English serif headings: Jeju Myeongjo is a Korean Ming face with no
-   accented Latin glyphs, so Slovak/Czech serif headings would fall back
-   mid-word (e.g. the "u" in "Skusenosti" swapping fonts for "ú"). Drive the
-   serif display face with Source Serif 4 for those languages instead, keeping
-   Jeju for English. Source Serif 4 is already loaded (blog reading serif) and
-   covers full Latin Extended. Body text is General Sans, which already covers
-   Slovak, so only the serif display face needs this. */
-/* Slovak/Czech no longer need a different serif: the extended Jeju above covers
-   their accented letters, so every language renders headings in Jeju and there
-   is no font change (or size shift) when switching language. */
-
-/* TEMPORARY serif preview (src/config/serifPreview.ts + SerifPreviewSwitcher).
-   Forces ONE serif for ALL languages so headings do not change font when you
-   switch language. Placed after the lang rule so it also overrides sk/cs (same
-   specificity, later rule wins). No attribute = the shipped default ('jeju':
-   English Jeju, Slovak/Czech Source Serif). Remove this block, the switcher, the
-   config, and the Playfair @font-face + files to lock a final choice. */
-html[data-serif='source'] {
-  --font-serif: 'Source Serif 4 Display', 'Source Serif 4', Georgia, Cambria, 'Times New Roman', serif;
-}
-html[data-serif='playfair'] {
-  --font-serif: 'Playfair Display', 'Source Serif 4 Display', Georgia, Cambria, serif;
-}
+/* The extended Jeju (--font-serif above) covers Czech/Slovak accented letters,
+   so every language renders serif headings in Jeju: no font change or size shift
+   on language switch. (The old Source-Serif fallback and the throwaway serif
+   preview switch were removed once Jeju was locked in.) */
 
 /* ─── Accent system (dark-mode defaults) ─────────────────────────────────────
    ONE accent drives the whole site. Every component reads these tokens; no

@@ -9,10 +9,7 @@ import { LocaleProvider } from './i18n/LocaleContext';
 import { isLocale, localizedPath, stripLocale, saveLocale } from './config/locale';
 import { applyCanvasPreset } from './config/canvas';
 import { applyTypePreset } from './config/typeface';
-import { applySerifPreset } from './config/serifPreview';
 import { getBackgroundPreset } from './config/background';
-// @ts-ignore
-import SerifPreviewSwitcher from './components/common/SerifPreviewSwitcher.tsx';
 // @ts-ignore
 import SiteEmbroidery from './components/background/SiteEmbroidery.tsx';
 // Type scale (sizes/weights/tracking) loads before the family layer so the
@@ -140,7 +137,6 @@ const Shell: React.FC<{ children: React.ReactNode }> = ({ children }) => (
     <Header />
     <main id="main-content">{children}</main>
     <Footer />
-    <SerifPreviewSwitcher />
   </AppContainer>
 );
 
@@ -165,7 +161,7 @@ const pageRoutes = () => (
 
 const App: React.FC = () => {
   // Resolve the ?canvas= and ?type= previews (remembered presets) once on mount.
-  useEffect(() => { applyCanvasPreset(); applyTypePreset(); applySerifPreset(); }, []);
+  useEffect(() => { applyCanvasPreset(); applyTypePreset(); }, []);
   return (
     <HelmetProvider>
       <ThemeProvider>
