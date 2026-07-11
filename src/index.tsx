@@ -13,6 +13,10 @@ if (analyticsEnabled) {
     api_host: POSTHOG_HOST,
     capture_pageview: false,
     person_profiles: 'identified_only',
+    // Marketing site does not use session replay; disabling it drops the
+    // recorder payload (~part of the ~99KB of PostHog extras the perf audit
+    // flagged). Flip back to false to re-enable replays.
+    disable_session_recording: true,
   });
 }
 
