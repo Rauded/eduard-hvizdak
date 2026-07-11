@@ -13,6 +13,22 @@
     line-height: var(--leading-lead);
   }
 
+  // Back link at the top of the page (returns to /services).
+  .aie-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-bottom: 16px;
+    transition: color 0.15s ease;
+  }
+  .aie-back:hover { color: var(--accent); }
+  .aie-back svg { transition: transform 0.15s ease; }
+  .aie-back:hover svg { transform: translateX(-2px); }
+
   // Live demo embed: a full-bleed dark app window sitting on the light page.
   // Breaks out of the 900px content column so the demo is wide enough (>940px)
   // for its own activity pane to stay visible.

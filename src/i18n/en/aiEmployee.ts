@@ -2,6 +2,7 @@
 // featured/number metadata stay in the component; every visible string lives
 // here. Lists are arrays so a locale override replaces them wholesale.
 const aiEmployee = {
+  back: 'Back to services',
   seo: {
     title: 'An AI Employee for Your Whole Company',
     description:

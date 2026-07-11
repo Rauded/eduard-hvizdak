@@ -1,4 +1,5 @@
 const aiEmployee = {
+  back: 'Späť na služby',
   seo: {
     title: 'AI zamestnanec pre celú vašu firmu',
     description:

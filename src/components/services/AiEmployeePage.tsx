@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
+  LuArrowLeft,
   LuArrowRight, LuMail, LuPhone, LuCalendar, LuMessageSquare, LuSearch, LuFileText,
   LuBell, LuShieldCheck, LuScrollText, LuUserCheck, LuServer, LuCircleCheck, LuMinus,
   LuSlack, LuGithub, LuDatabase, LuMail as LuMailbox, LuFolder, LuTable, LuTicket, LuCalendarClock,
@@ -65,6 +67,7 @@ const AiEmployeePage: React.FC = () => {
         />
 
         <header className="services-hero aie-hero">
+          <Link to="/services" className="aie-back"><LuArrowLeft aria-hidden="true" /> {t.back}</Link>
           <span className="services-hero__eyebrow">{t.hero.eyebrow}</span>
           <h1 className="services-hero__title">
             {t.hero.title}
