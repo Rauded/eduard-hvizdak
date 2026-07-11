@@ -90,6 +90,17 @@ const AiEmployeePage: React.FC = () => {
           </div>
         </header>
 
+        {/* Live interactive demo (self-contained, canned playback) */}
+        <Reveal className="aie-demo" as="section" aria-label="Interactive demo">
+          <div className="aie-demo-frame">
+            <div className="aie-demo-bar">
+              <span className="d r" /><span className="d y" /><span className="d g" />
+              <span className="aie-demo-title">AI Employee</span>
+            </div>
+            <iframe src="/ai-employee-demo.html" title="AI Employee demo" loading="lazy" />
+          </div>
+        </Reveal>
+
         {/* What it does */}
         <section className="services-block" aria-labelledby="aie-what">
           <Reveal><h2 className="services-block__title" id="aie-what">{t.what.title}</h2></Reveal>
