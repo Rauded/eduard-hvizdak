@@ -1,16 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  LuArrowRight, LuRepeat2, LuFileSearch, LuBot, LuShieldCheck,
-  LuCircleCheck,
-} from 'react-icons/lu';
+import { LuArrowRight, LuPlus, LuCircleCheck } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
 import { useTheme } from '../theme/ThemeContext';
 import ContactGradient from '../_21test/ContactGradient';
 import SectionMarker from '../common/SectionMarker';
 import './services.scss';
-import './service-cards-v2.scss';
 import './services-featured.scss';
 // 21st.dev showcase components, curated under the "In action" section below.
 import ServicesShowcase from '../_21test/ServicesShowcase';
@@ -33,17 +29,22 @@ const BOOKING_URL = process.env.REACT_APP_BOOKING_URL || 'https://cal.com/eduard
 const PHONE = '+421950774038';
 const PHONE_DISPLAY = '+421 950 774 038';
 
-// One card per service: a headline number, the service name, and a single line.
-// Icons only; the copy (stat, label, title, outcome) comes from the i18n dict
-// and is zipped by index. One navy accent across all cards (see service-cards-v2).
-const SERVICE_ICONS = [<LuRepeat2 />, <LuFileSearch />, <LuBot />, <LuShieldCheck />];
-
 // Step numbers stay here; the titles/bodies come from the dict.
 const STEP_NUMBERS = ['01', '02', '03', '04'];
 
 const ServicesPage: React.FC = () => {
   const { theme } = useTheme();
   const t = useT('services');
+  // Accordion state for the services index; the first row starts open so the
+  // pattern is discoverable. Opening a row does not close the others.
+  const [openRows, setOpenRows] = useState<Set<number>>(() => new Set([0]));
+  const toggleRow = (i: number) => {
+    setOpenRows((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) { next.delete(i); } else { next.add(i); }
+      return next;
+    });
+  };
 
   return (
     <>
@@ -106,23 +107,41 @@ const ServicesPage: React.FC = () => {
       <div className="services-marker"><SectionMarker index="01" label={t.sectionServices} /></div>
       <section className="services-block" aria-labelledby="what-i-do">
         <Reveal><h2 className="services-block__title" id="what-i-do">{t.whatIDo}</h2></Reveal>
-        <div className="services-grid">
-          {t.services.map((s, i) => (
-            <Reveal key={s.title} delay={i * 90}>
-              <article className="services-card services-card--v2">
-                <div className="svc-top">
-                  <span className="services-card__icon">{SERVICE_ICONS[i]}</span>
-                  <div className="svc-stat">
-                    <div className="svc-stat__value">{s.stat}</div>
-                    <div className="svc-stat__label">{s.statLabel}</div>
+        <ul className="services-index">
+          {t.services.map((s, i) => {
+            const open = openRows.has(i);
+            const panelId = `svc-panel-${i}`;
+            return (
+              <Reveal as="li" className="services-index__row" key={s.question} delay={i * 70}>
+                <button
+                  type="button"
+                  className="services-index__head"
+                  aria-expanded={open}
+                  aria-controls={panelId}
+                  onClick={() => toggleRow(i)}
+                >
+                  <span className="services-index__n">{STEP_NUMBERS[i]}</span>
+                  <span className="services-index__q">{s.question}</span>
+                  <LuPlus className="services-index__mark" aria-hidden="true" />
+                </button>
+                <div id={panelId} className="services-index__panel" data-open={open ? 'true' : 'false'}>
+                  <div className="services-index__panel-inner">
+                    <p className="services-index__outcome">{s.outcome}</p>
+                    <p className="services-index__deliverables">
+                      <span className="services-index__deliverables-label">{t.youGet}</span>
+                      {s.deliverables.map((d, j) => (
+                        <span className="services-index__deliverable" key={d}>
+                          {j > 0 && <span className="services-index__dot" aria-hidden="true">·</span>}
+                          {d}
+                        </span>
+                      ))}
+                    </p>
                   </div>
                 </div>
-                <h3 className="services-card__title">{s.title}</h3>
-                <p className="services-card__outcome">{s.outcome}</p>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+              </Reveal>
+            );
+          })}
+        </ul>
       </section>
 
       {/* Curated demos: agent diagram, run demo, integrations stack. */}

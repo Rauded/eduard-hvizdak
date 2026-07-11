@@ -39,30 +39,31 @@ const services = {
   ],
 
   whatIDo: 'Co dělám',
+  youGet: 'Dostanete',
   services: [
     {
-      stat: '24/7',
-      statLabel: 'běží samo, není třeba hlídat',
-      title: 'Konec otravného kopírování dat',
-      outcome: 'Automatizuju opakovanou ruční práci, která vašemu týmu ukusuje hodiny.',
+      question: 'Pořád každé ráno kopírujete data mezi nástroji?',
+      outcome:
+        'Zautomatizuju celou rutinu od začátku do konce, aby běžela bez dohledu a člověka zavolala, jen když je ho opravdu potřeba.',
+      deliverables: ['rozbor procesu', 'postavená a nasazená pipeline', 'upozornění při chybě', 'předávací dokumentace'],
     },
     {
-      stat: '< 2 s',
-      statLabel: 'k odpovědi se zdrojem napříč miliony dokumentů',
-      title: 'Z hromad dokumentů okamžité odpovědi',
-      outcome: 'Zeptejte se běžnou řečí, dostanete odpověď s odkazem na přesný zdroj.',
+      question: 'Deset let dokumentů a nikdo v nich nic nenajde?',
+      outcome:
+        'Zeptáte se běžnou řečí a dostanete odpověď s citací přesného zdroje, napříč vším, co jste kdy uložili.',
+      deliverables: ['vyhledávání nad všemi dokumenty', 'odpovědi s citacemi', 'sada testů přesnosti'],
     },
     {
-      stat: '5 kroků',
-      statLabel: 'proběhne od začátku do konce bez dohledu',
-      title: 'Agenti, kteří práci udělají, ne jen konverzují',
-      outcome: 'Předejte celý proces: přečti, prozkoumej, ověř, shrň, jednej.',
+      question: 'Topíte se v práci, kterou by agent stihl přes noc?',
+      outcome:
+        'Předáte celý proces, ne chatovací okno: agent čte, zkoumá, ověřuje a jedná, a svou práci umí doložit.',
+      deliverables: ['agentní workflow na míru', 'mantinely a logy', 'kontrola člověkem'],
     },
     {
-      stat: '0',
-      statLabel: 'citlivých dat neopustí vaši budovu',
-      title: 'Privátní AI, která nikdy neopustí vaši firmu',
-      outcome: 'Síla AI bez toho, abyste posílali citlivá data do cizího cloudu.',
+      question: 'Nesmíte posílat data do cloudu?',
+      outcome:
+        'Stejná síla na vašem vlastním hardwaru: privátní modely, řízení přístupů a nic citlivého neopustí budovu.',
+      deliverables: ['on-prem nasazení', 'auditní logy', 'žádný odtok dat'],
     },
   ],
 
