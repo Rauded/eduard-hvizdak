@@ -124,6 +124,7 @@
       .profile-photo {
         width: 100%;
         max-width: 500px;
+        height: auto; /* the width/height attrs (CLS) otherwise pin height to 1599px and defeat the aspect-ratio */
         aspect-ratio: 3 / 4;
         object-fit: cover;
         border-radius: 12px;
