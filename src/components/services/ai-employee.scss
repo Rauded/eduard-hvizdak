@@ -15,14 +15,15 @@
 
   // Back link at the top of the page (returns to /services).
   .aie-back {
-    display: inline-flex;
+    display: flex;
+    width: fit-content;
     align-items: center;
     gap: 6px;
     font-family: var(--font-mono);
     font-size: var(--text-small);
     color: var(--text-muted);
     text-decoration: none;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     transition: color 0.15s ease;
   }
   .aie-back:hover { color: var(--accent); }
@@ -287,6 +288,10 @@
       margin-top: auto;
       justify-content: center;
       width: 100%;
+      box-sizing: border-box;
+      max-width: 100%;
+      white-space: normal;
+      text-align: center;
     }
   }
 
