@@ -14,9 +14,20 @@ const services = {
   heroTitle: 'Staviam AI systémy, ktoré sa zaplatia samy.',
   heroLead:
     'Pomáham tímom nasadiť AI na reálne problémy: automatizujem manuálnu prácu, ktorá ich spomaľuje, sprístupňujem odpovede z ich dokumentov a nasadzujem systémy, ktoré spoľahlivo bežia v produkcii. Od návrhu cez vývoj až po odovzdanie.',
-  ctaConsult: 'Bezplatná nezáväzná konzultácia',
-  ctaEmail: 'Napíšte mi',
-  ctaCall: 'Zavolajte',
+  ctaConsult: 'Rezervovať bezplatnú konzultáciu',
+  ctaAltPrefix: 'Radšej píšete? Napíšte mi na',
+  ctaAltOr: 'alebo zavolajte na',
+  ctaRepeatTitle: 'Máte proces, ktorý by mal bežať sám?',
+
+  sectionServices: 'Služby',
+  sectionDemo: 'Naživo',
+  sectionWhyMe: 'Prečo ja',
+  sectionProcess: 'Postup',
+  sectionMethod: 'Metóda',
+
+  demoTitle: 'Pozrite si to naživo',
+  demoLead:
+    'Živé interaktívne ukážky systémov, ktoré staviam: pipeline agentov, beh fungujúceho asistenta a nástroje, na ktoré sa napája.',
 
   signalKicker: 'Nasadené, v produkcii, vo veľkom rozsahu',
   signals: [
@@ -26,30 +37,31 @@ const services = {
   ],
 
   whatIDo: 'Čo robím',
+  youGet: 'Dostanete',
   services: [
     {
-      stat: '24/7',
-      statLabel: 'beží samo, bez dozoru',
-      title: 'Koniec s prácou typu kopírovať a vložiť',
-      outcome: 'Zautomatizujem opakovanú manuálnu prácu, ktorá požiera hodiny vášho tímu.',
+      question: 'Ešte stále každé ráno kopírujete dáta medzi nástrojmi?',
+      outcome:
+        'Zautomatizujem celú rutinu od začiatku po koniec, aby bežala bez dozoru a človeka zavolala len vtedy, keď ho naozaj treba.',
+      deliverables: ['rozbor procesu', 'postavená a nasadená pipeline', 'notifikácie pri chybe', 'odovzdávacia dokumentácia'],
     },
     {
-      stat: '< 2 s',
-      statLabel: 'k citovanej odpovedi z miliónov dokumentov',
-      title: 'Z kôp dokumentov okamžité odpovede',
-      outcome: 'Spýtate sa v bežnom jazyku a dostanete odpoveď s citáciou presného zdroja.',
+      question: 'Desať rokov dokumentov a nikto v nich nič nenájde?',
+      outcome:
+        'Spýtate sa bežným jazykom a dostanete odpoveď s citáciou presného zdroja, naprieč všetkým, čo ste kedy uložili.',
+      deliverables: ['vyhľadávanie nad všetkými dokumentmi', 'odpovede s citáciami', 'sada testov presnosti'],
     },
     {
-      stat: '5 krokov',
-      statLabel: 'prebehne od začiatku po koniec, bez dozoru',
-      title: 'Agenti, ktorí prácu urobia, nielen odpovedajú',
-      outcome: 'Odovzdáte celý proces: prečítať, preskúmať, overiť, zhrnúť, konať.',
+      question: 'Topíte sa v práci, ktorú by agent stihol cez noc?',
+      outcome:
+        'Odovzdáte celý proces, nie chatovacie okno: agent číta, skúma, overuje a koná, a svoju prácu vie ukázať.',
+      deliverables: ['agentový workflow na mieru', 'mantinely a logy', 'kontrola človekom'],
     },
     {
-      stat: '0',
-      statLabel: 'citlivých dát neopustí vašu firmu',
-      title: 'Súkromná AI, ktorá nikdy neopustí vašu firmu',
-      outcome: 'Sila AI bez toho, aby ste citlivé dáta posielali do cudzieho cloudu.',
+      question: 'Nesmiete posielať dáta do cloudu?',
+      outcome:
+        'Rovnaká sila na vašom vlastnom hardvéri: súkromné modely, riadenie prístupov a nič citlivé neopustí budovu.',
+      deliverables: ['on-prem nasadenie', 'auditné logy', 'žiadny odtok dát'],
     },
   ],
 

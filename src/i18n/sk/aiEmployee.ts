@@ -11,8 +11,8 @@ const aiEmployee = {
     lead:
       'Nie ďalší chatbot prilepený na jednu aplikáciu. Jeden agent, s ktorým sa celý váš tím rozpráva v Slacku aj na webe, prepojený s nástrojmi, ktoré už používate. Vyšetruje naprieč všetkými, vytvára hotovú prácu a robí to v rámci bezpečnostného modelu, ktorý vaše IT môže schváliť.',
     book: 'Dohodnúť si úvodný hovor',
-    email: 'Napíšte mi',
-    call: 'Zavolajte',
+    altPrefix: 'Radšej píšete? Napíšte mi na',
+    altOr: 'alebo zavolajte na',
   },
   what: {
     title: 'Čo naozaj robí',

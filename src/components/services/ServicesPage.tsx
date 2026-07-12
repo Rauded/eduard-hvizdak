@@ -1,17 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  LuArrowRight, LuMail, LuPhone, LuCalendar, LuRepeat2, LuFileSearch, LuBot, LuShieldCheck,
-  LuCircleCheck,
-} from 'react-icons/lu';
+import { LuArrowRight, LuPlus, LuCircleCheck } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
 import { useTheme } from '../theme/ThemeContext';
-import ContactGradient from '../_21test/ContactGradient';
+import SectionMarker from '../common/SectionMarker';
 import './services.scss';
-import './service-cards-v2.scss';
 import './services-featured.scss';
-// TEST: 21st.dev showcase components (remove these + tags below to revert)
+// 21st.dev showcase components, curated under the "In action" section below.
 import ServicesShowcase from '../_21test/ServicesShowcase';
 import AgentPipeline from '../_21test/AgentPipeline';
 import OrbitingStack from '../_21test/OrbitingStack';
@@ -32,17 +28,22 @@ const BOOKING_URL = process.env.REACT_APP_BOOKING_URL || 'https://cal.com/eduard
 const PHONE = '+421950774038';
 const PHONE_DISPLAY = '+421 950 774 038';
 
-// One card per service: a headline number, the service name, and a single line.
-// Icons only; the copy (stat, label, title, outcome) comes from the i18n dict
-// and is zipped by index. One navy accent across all cards (see service-cards-v2).
-const SERVICE_ICONS = [<LuRepeat2 />, <LuFileSearch />, <LuBot />, <LuShieldCheck />];
-
 // Step numbers stay here; the titles/bodies come from the dict.
 const STEP_NUMBERS = ['01', '02', '03', '04'];
 
 const ServicesPage: React.FC = () => {
   const { theme } = useTheme();
   const t = useT('services');
+  // Accordion state for the services index; the first row starts open so the
+  // pattern is discoverable. Opening a row does not close the others.
+  const [openRows, setOpenRows] = useState<Set<number>>(() => new Set([0]));
+  const toggleRow = (i: number) => {
+    setOpenRows((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) { next.delete(i); } else { next.add(i); }
+      return next;
+    });
+  };
 
   return (
     <>
@@ -61,23 +62,34 @@ const ServicesPage: React.FC = () => {
         <p className="services-hero__lead">
           {t.heroLead}
         </p>
-        <div className="services-hero__cta">
-          <a className="services-btn services-btn--primary svc-free-btn" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-            <span className="svc-free-btn__shine" aria-hidden="true" />
-            <LuCalendar aria-hidden="true" />
+        <div className="services-cta-repeat services-cta-repeat--hero">
+          <h2 className="services-cta-repeat__title">{t.ctaRepeatTitle}</h2>
+          <a className="services-btn services-btn--primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
             {t.ctaConsult}
             <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
           </a>
-          <a className="services-btn services-btn--ghost" href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>
-            <LuMail aria-hidden="true" />
-            {t.ctaEmail}
-          </a>
-          <a className="services-btn services-btn--ghost" href={`tel:${PHONE}`}>
-            <LuPhone aria-hidden="true" />
-            {t.ctaCall} {PHONE_DISPLAY}
-          </a>
+          <p className="services-hero__alt">
+            {t.ctaAltPrefix}{' '}
+            <a href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>{EMAIL}</a>
+            {' '}{t.ctaAltOr}{' '}
+            <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a>
+          </p>
         </div>
       </header>
+
+      {/* Proof strip: quiet, ruled, typographic. The hero button stays the
+          boldest element on the page. */}
+      <Reveal className="services-stats" as="section">
+        <p className="services-stats__kicker">{t.signalKicker}</p>
+        <div className="services-stats__grid">
+          {t.signals.map((s) => (
+            <div className="services-stats__item" key={s.label}>
+              <div className="services-stats__value">{s.value}</div>
+              <div className="services-stats__label">{s.label}</div>
+            </div>
+          ))}
+        </div>
+      </Reveal>
 
       {/* Featured: links to the (unlisted) AI Employee page with the live demo. */}
       <Reveal className="services-block" as="section">
@@ -91,45 +103,59 @@ const ServicesPage: React.FC = () => {
         </Link>
       </Reveal>
 
-      {/* Signature band: the one bold, unmissable moment. */}
-      <Reveal className="services-signal" as="section">
-        <p className="services-signal__kicker">{t.signalKicker}</p>
-        <div className="services-signal__grid">
-          {t.signals.map((s) => (
-            <div className="services-signal__item" key={s.label}>
-              <div className="services-signal__value">{s.value}</div>
-              <div className="services-signal__label">{s.label}</div>
-            </div>
-          ))}
-        </div>
-      </Reveal>
-
+      <div className="services-marker"><SectionMarker index="01" label={t.sectionServices} /></div>
       <section className="services-block" aria-labelledby="what-i-do">
         <Reveal><h2 className="services-block__title" id="what-i-do">{t.whatIDo}</h2></Reveal>
-        <div className="services-grid">
-          {t.services.map((s, i) => (
-            <Reveal key={s.title} delay={i * 90}>
-              <article className="services-card services-card--v2">
-                <div className="svc-top">
-                  <span className="services-card__icon">{SERVICE_ICONS[i]}</span>
-                  <div className="svc-stat">
-                    <div className="svc-stat__value">{s.stat}</div>
-                    <div className="svc-stat__label">{s.statLabel}</div>
+        <ul className="services-index">
+          {t.services.map((s, i) => {
+            const open = openRows.has(i);
+            const panelId = `svc-panel-${i}`;
+            return (
+              <Reveal as="li" className="services-index__row" key={s.question} delay={i * 70}>
+                <button
+                  type="button"
+                  className="services-index__head"
+                  aria-expanded={open}
+                  aria-controls={panelId}
+                  onClick={() => toggleRow(i)}
+                >
+                  <span className="services-index__n">{STEP_NUMBERS[i]}</span>
+                  <span className="services-index__q">{s.question}</span>
+                  <LuPlus className="services-index__mark" aria-hidden="true" />
+                </button>
+                <div id={panelId} className="services-index__panel" data-open={open ? 'true' : 'false'}>
+                  <div className="services-index__panel-inner">
+                    <p className="services-index__outcome">{s.outcome}</p>
+                    <p className="services-index__deliverables">
+                      <span className="services-index__deliverables-label">{t.youGet}</span>
+                      {s.deliverables.map((d, j) => (
+                        <span className="services-index__deliverable" key={d}>
+                          {j > 0 && <span className="services-index__dot" aria-hidden="true">·</span>}
+                          {d}
+                        </span>
+                      ))}
+                    </p>
                   </div>
                 </div>
-                <h3 className="services-card__title">{s.title}</h3>
-                <p className="services-card__outcome">{s.outcome}</p>
-              </article>
-            </Reveal>
-          ))}
-        </div>
+              </Reveal>
+            );
+          })}
+        </ul>
       </section>
 
-      {/* TEST: 21st.dev showcase trio (agent diagram, run demo, integrations) */}
-      <Reveal><AgentPipeline /></Reveal>
-      <Reveal><ServicesShowcase /></Reveal>
-      <Reveal><OrbitingStack /></Reveal>
+      {/* Curated demos: agent diagram, run demo, integrations stack. */}
+      <div className="services-marker"><SectionMarker index="02" label={t.sectionDemo} /></div>
+      <section className="services-block services-demo" aria-labelledby="in-action">
+        <Reveal>
+          <h2 className="services-block__title" id="in-action">{t.demoTitle}</h2>
+          <p className="services-demo__lead">{t.demoLead}</p>
+        </Reveal>
+        <div className="services-demo__stage"><Reveal><AgentPipeline /></Reveal></div>
+        <div className="services-demo__stage"><Reveal><ServicesShowcase /></Reveal></div>
+        <div className="services-demo__stage"><Reveal><OrbitingStack /></Reveal></div>
+      </section>
 
+      <div className="services-marker"><SectionMarker index="03" label={t.sectionWhyMe} /></div>
       <section className="services-block" aria-labelledby="why-me">
         <Reveal><h2 className="services-block__title" id="why-me">{t.whyMe}</h2></Reveal>
         <ul className="services-proof">
@@ -139,6 +165,7 @@ const ServicesPage: React.FC = () => {
         </ul>
       </section>
 
+      <div className="services-marker"><SectionMarker index="04" label={t.sectionProcess} /></div>
       <section className="services-block" aria-labelledby="how-it-works">
         <Reveal><h2 className="services-block__title" id="how-it-works">{t.howItWorks}</h2></Reveal>
         <ol className="services-steps">
@@ -164,7 +191,8 @@ const ServicesPage: React.FC = () => {
         claims about a specific client engagement.
         ================================================================
       */}
-      <section className="services-block services-how" aria-labelledby="how-i-work" style={{ marginTop: '104px' }}>
+      <div className="services-marker"><SectionMarker index="05" label={t.sectionMethod} /></div>
+      <section className="services-block services-how" aria-labelledby="how-i-work">
         <Reveal>
           <p className="services-how__eyebrow">{t.howEyebrow}</p>
           <h2 className="services-block__title" id="how-i-work">{t.howTitle}</h2>
@@ -249,10 +277,22 @@ const ServicesPage: React.FC = () => {
         </div>
       </section>
 
-    </div>
+      {/* Closing CTA: the same block as the hero, and nothing after it. */}
+      <Reveal className="services-cta-repeat" as="section">
+        <h2 className="services-cta-repeat__title">{t.ctaRepeatTitle}</h2>
+        <a className="services-btn services-btn--primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+          {t.ctaConsult}
+          <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
+        </a>
+        <p className="services-hero__alt">
+          {t.ctaAltPrefix}{' '}
+          <a href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>{EMAIL}</a>
+          {' '}{t.ctaAltOr}{' '}
+          <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a>
+        </p>
+      </Reveal>
 
-    {/* The single, shared contact block, identical to the home page bottom. */}
-    <ContactGradient />
+    </div>
     </>
   );
 };
