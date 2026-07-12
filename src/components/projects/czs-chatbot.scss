@@ -70,6 +70,13 @@ $mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace)
     color: var(--accent-text-soft);
   }
 
+  &-clientlogo {
+    display: block;
+    height: 34px;
+    width: auto;
+    margin-bottom: 1.1rem;
+  }
+
   &-meta {
     display: flex;
     flex-wrap: wrap;

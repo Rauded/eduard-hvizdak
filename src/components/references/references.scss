@@ -1,0 +1,152 @@
+// Hidden references / clients page. Navy tokens, flat surfaces, light theme.
+$mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace);
+
+.refs {
+  color: var(--text-strong);
+  max-width: 1040px;
+  margin-inline: auto;
+  padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 5vw, 2.5rem) clamp(3rem, 8vw, 5rem);
+
+  &-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: $mono;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+    text-decoration: none;
+    margin-bottom: 1.25rem;
+    svg { width: 0.9em; height: 0.9em; }
+    &:hover { color: var(--accent-text-soft); }
+  }
+
+  &-eyebrow {
+    display: block;
+    font-family: $mono;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-text-soft);
+  }
+
+  &-title {
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    margin: 0.5rem 0 0;
+  }
+
+  &-subtitle {
+    margin: 1rem 0 0;
+    max-width: 52ch;
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+
+  &-grid {
+    list-style: none;
+    margin: clamp(2rem, 5vw, 3rem) 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: clamp(0.9rem, 2vw, 1.25rem);
+  }
+
+  &-card {
+    &__link {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      height: 100%;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+      &:hover {
+        border-color: var(--accent-ring, #c3d2ea);
+        transform: translateY(-2px);
+      }
+    }
+  }
+
+  &-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 72px;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    img {
+      max-height: 52px;
+      max-width: 78%;
+      width: auto;
+      object-fit: contain;
+      object-position: left center;
+    }
+  }
+
+  &-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+  }
+
+  &-name {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  &-badge {
+    font-family: $mono;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 0.12rem 0.45rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+  }
+
+  &-role {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+  }
+
+  &-dates {
+    font-family: $mono;
+    font-size: 0.74rem;
+    color: var(--text-faint);
+  }
+
+  &-visit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: $mono;
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent-text-soft);
+    svg { width: 1em; height: 1em; transition: transform 0.15s ease; }
+  }
+  &-card__link:hover &-visit svg { transform: translate(2px, -2px); }
+}
+
+@media (max-width: 640px) {
+  .refs-grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .refs-card__link, .refs-visit svg { transition: none; }
+}

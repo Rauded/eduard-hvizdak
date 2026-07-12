@@ -37,6 +37,7 @@ function preloadRouteChunk(pathname: string): Promise<unknown> {
   if (pathname === '/services/ai-employee') return import('./components/services/AiEmployeePage');
   if (pathname === '/things') return import('./components/things/ThingsPage');
   if (pathname === '/projects/czs-muni-chatbot') return import('./components/projects/CzsChatbotPage');
+  if (pathname === '/references') return import('./components/references/ReferencesPage');
   if (pathname === '/share-preview') return import('./components/share/SharePreviewPage');
   if (pathname === '/styleguide') return import('./components/styleguide/StyleguidePage');
   if (pathname === '/') return Promise.resolve(); // Home is eager

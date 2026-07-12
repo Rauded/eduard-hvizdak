@@ -76,6 +76,7 @@ const CzsChatbotPage: React.FC = () => {
       {/* ── Hero ─────────────────────────────────────────────── */}
       <header className="czs-hero">
         <Link to="/services" className="czs-back"><LuArrowLeft aria-hidden="true" /> {t.back}</Link>
+        <img className="czs-clientlogo" src="/brand/clients/masaryk-university.png" alt="Masaryk University" width="130" height="61" />
         <span className="czs-eyebrow">{t.hero.eyebrow}</span>
         <h1 className="czs-hero__title">{t.hero.title}</h1>
         <p className="czs-hero__lead">{t.hero.lead}</p>

@@ -25,6 +25,7 @@ import projects from './projects';
 import blog from './blog';
 import notfound from './notfound';
 import czsChatbot from './czsChatbot';
+import references from './references';
 
 export const en = {
   header,
@@ -48,6 +49,7 @@ export const en = {
   blog,
   notfound,
   czsChatbot,
+  references,
 };
 
 export type Dict = typeof en;
