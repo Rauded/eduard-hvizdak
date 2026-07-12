@@ -9,7 +9,7 @@ const czsChatbot = {
   seo: {
     title: 'AI assistant for Masaryk University (CZS), case study',
     description:
-      'Bilingual, source-cited AI assistant live on Masaryk University\'s study-abroad pages. 15,362 graded evaluation runs, roughly 90 percent accuracy, hallucinations near 1 percent, one 8 GB server.',
+      'Bilingual, source-cited AI assistant live on Masaryk University\'s study-abroad pages. 15,362 graded evaluation runs, roughly 90 percent accuracy, hallucinations near 1 percent.',
   },
   hero: {
     eyebrow: 'Case study · Masaryk University, CZS',
@@ -22,7 +22,7 @@ const czsChatbot = {
     book: 'Book an intro call',
     email: 'Email me',
     meta: [
-      { k: 'Client', v: 'Masaryk University, CZS' },
+      { k: 'For', v: 'Masaryk University, CZS' },
       { k: 'Role', v: 'Solo engineer, design to production' },
       { k: 'Status', v: 'Live on czs.muni.cz' },
     ],
@@ -32,7 +32,6 @@ const czsChatbot = {
     { value: '~90%', label: 'measured answer accuracy' },
     { value: '~1%', label: 'measured hallucination rate' },
     { value: '778', label: 'source pages monitored' },
-    { value: '1', label: '8 GB server runs everything' },
   ],
   problem: {
     title: '778 sources, one inbox.',
@@ -79,7 +78,7 @@ const czsChatbot = {
     freshnessLabel: 'Freshness loop',
     freshness: 'A change monitor watches all <strong>778 sources</strong>. Any change fires a <strong>webhook</strong> that re-indexes just that page, and a <strong>daily job</strong> sweeps the rest, so the bot never goes stale.',
     stackLabel: 'Stack',
-    stack: ['Python', 'FastAPI', 'OpenSearch', 'Voyage AI', 'DeepSeek via CERIT', 'PostHog', 'nginx', 'Hetzner'],
+    stack: ['Python', 'FastAPI', 'OpenSearch', 'Voyage AI', 'DeepSeek via CERIT', 'PostHog', 'nginx'],
   },
   evaluation: {
     title: 'Measured, not vibes',
@@ -167,24 +166,14 @@ const czsChatbot = {
           'Candidate FAQs mined from real conversations; nothing enters without human approval.',
       },
     ],
-    closer: 'The AI drafts, humans decide; the client gets the controls, not a support contract.',
-  },
-  cost: {
-    title: 'Enterprise-grade retrieval, hobby-server bill',
-    body: [
-      'Everything runs on <strong>one 8 GB server</strong>; generation rides <strong>CERIT</strong> at <strong>near-zero marginal cost</strong>, with a RAM upgrade and OpenAI failover already designed.',
-    ],
-    cards: [
-      { k: 'Compute', v: 'One 8 GB VPS runs retrieval, dashboards, eval' },
-      { k: 'Generation', v: 'CERIT academic infrastructure, near-zero marginal cost' },
-      { k: 'Scale path', v: 'RAM upgrade and OpenAI failover designed' },
-    ],
+    note: 'The screens shown here are illustrative mockups with invented example data; the real dashboards live behind a staff login.',
+    closer: 'The AI drafts, humans decide; CZS gets the controls, not a support contract.',
   },
   privacy: {
     title: 'Private by default',
     body: [
-      'No account, <strong>no personal data collected</strong>. Conversations are logged for quality review with <strong>IP addresses hashed</strong>.',
-      'Everything runs on the <strong>university\'s own server</strong>, not a third-party service, and the bot reads only CZS\'s public pages.',
+      'No account, <strong>no personal data collected</strong>. Conversations are logged for quality review.',
+      'Everything runs on a <strong>dedicated server for the university</strong>, not a shared third-party AI service, and the bot reads only CZS\'s public pages.',
     ],
   },
   cta: {
@@ -194,7 +183,7 @@ const czsChatbot = {
       'If users keep asking questions your site already answers, I build the assistant that closes the gap and the measurement proving it works.',
     book: 'Book an intro call',
     email: 'Email me',
-    outcome: 'An assistant your team controls, numbers to show your boss, one small server.',
+    outcome: 'An assistant your team controls, with the numbers to prove it works.',
   },
 };
 

@@ -40,8 +40,8 @@ const now = {
     },
     kouzelnik: {
       tagline:
-        'Marketplace, který spojuje pořadatele akcí s kouzelníky po Česku a Slovensku, a zároveň moje živá pískoviště pro experimenty s SEO, GEO a online reklamou.',
-      status: 'Živě · marketplace + marketingová laboratoř',
+        'Marketplace, který spojuje pořadatele akcí s kouzelníky po Česku a Slovensku. Zároveň místo, kde si na skutečném produktu brousím SEO a online marketing.',
+      status: 'Živě · roste',
     },
     nasadclaw: {
       tagline:

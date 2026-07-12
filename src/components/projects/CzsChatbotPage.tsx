@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   LuArrowLeft, LuArrowRight, LuCalendar, LuMail, LuExternalLink,
-  LuThumbsUp, LuThumbsDown, LuServer, LuRefreshCw,
+  LuThumbsUp, LuThumbsDown, LuRefreshCw,
 } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
@@ -316,6 +316,7 @@ const CzsChatbotPage: React.FC = () => {
       <section className="czs-block czs-dashband">
         <Reveal><span className="czs-kicker">07 / Operations</span><h2 className="czs-block__title">{t.dashboards.title}</h2></Reveal>
         <Reveal><p className="czs-prose czs-prose--lead" dangerouslySetInnerHTML={{ __html: t.dashboards.intro }} /></Reveal>
+        <Reveal><p className="czs-caption">{t.dashboards.note}</p></Reveal>
         <div className="czs-dash">
           {/* Conversation Database (full width) */}
           <Reveal className="czs-dashcard czs-dashcard--wide">
@@ -430,23 +431,6 @@ const CzsChatbotPage: React.FC = () => {
         <Reveal><span className="czs-kicker">08 / Privacy</span><h2 className="czs-block__title">{t.privacy.title}</h2></Reveal>
         <div className="czs-prose">
           {t.privacy.body.map((p, i) => <Reveal key={i}><p dangerouslySetInnerHTML={{ __html: p }} /></Reveal>)}
-        </div>
-      </section>
-
-      {/* ── Cost ─────────────────────────────────────────────── */}
-      <section className="czs-block czs-block--tint">
-        <Reveal><span className="czs-kicker">09 / Cost</span><h2 className="czs-block__title">{t.cost.title}</h2></Reveal>
-        <div className="czs-prose">
-          {t.cost.body.map((p, i) => <Reveal key={i}><p dangerouslySetInnerHTML={{ __html: p }} /></Reveal>)}
-        </div>
-        <div className="czs-costcards">
-          {t.cost.cards.map(c => (
-            <Reveal className="czs-costcard" key={c.k}>
-              <LuServer aria-hidden="true" />
-              <span className="czs-costcard__k">{c.k}</span>
-              <span className="czs-costcard__v">{c.v}</span>
-            </Reveal>
-          ))}
         </div>
       </section>
 
