@@ -609,8 +609,9 @@ $mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace)
   // Left-anchored reading measure
   &-prose { max-width: 44rem; }
 
-  // Emphasis: bold key terms and numbers stand out against the muted prose.
-  strong { color: var(--text-strong); font-weight: 600; }
+  // Emphasis: key terms stand out mainly by a darker ink, with only a slight
+  // weight bump, so it reads as highlighted rather than heavily bold.
+  strong { color: var(--text-strong); font-weight: 500; }
 
   // Problem section: real example question chips + a stat line
   &-qchips {

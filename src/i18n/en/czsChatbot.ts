@@ -13,9 +13,9 @@ const czsChatbot = {
   },
   hero: {
     eyebrow: 'Case study · Masaryk University, CZS',
-    title: '300 scattered pages. One assistant that cites its sources.',
+    title: 'The answers were on the site. Staff answered by hand anyway.',
     lead:
-      'A bilingual assistant answers study-abroad questions on <strong>Masaryk University\'s official site</strong>, grounded in the university\'s own pages, <strong>every answer cited</strong>.',
+      'An assistant that answers study-abroad questions on Masaryk University\'s official site, grounded in the university\'s own pages, every answer cited.',
     live: 'See it live on the Erasmus page',
     liveUrl: 'https://czs.muni.cz/cs/student-mu/studijni-pobyty/erasmus-evropa',
     figureCaption: 'The production widget on the official CZS site, not a prototype.',
