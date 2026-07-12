@@ -2,7 +2,7 @@ const contact = {
   eyebrow: 'Ozvěte se',
   title: 'Pojďme spolupracovat',
   lead:
-    'Stavíte něco s AI, potřebujete dotáhnout produkt, nebo si jen chcete popovídat o oboru? Zajímavý problém si nikdy nenechám ujít.',
+    'Napište mi, co váš tým pořád dělá ručně. Za 30 minut poznám, jestli to může běžet samo.',
   emailMe: 'Napište mi',
   book: 'Rezervovat 30 min',
   callMe: 'Zavolejte mi',

@@ -4,7 +4,7 @@
 // `_sk` variant fields on the project data in projectsData.tsx.
 const projects = {
   heading: 'Projects',
-  intro: 'Apps, tools, and experiments built to solve real problems.',
+  intro: 'Shipped products, hackathon builds, and tools I use myself.',
   demoSoon: 'Demo coming soon',
   caseStudyEyebrow: 'Case study',
   closeCaseStudy: 'Close case study',

@@ -1,24 +1,24 @@
+// About section, Slovak. Same segment keys as en/about.ts, jamny-style rules:
+// čísla namiesto prídavných mien, krátke vety, žiadna vata.
 const about = {
   title: 'O mne',
-  greeting: 'Zdravím! Volám sa',
-  introExpert:
-    'Som AI inžinier a sústredím sa na stavbu reálnych systémov poháňaných veľkými jazykovými modelmi.',
+  greeting: 'Som',
+  introExpert: 'Staviam AI systémy, ktoré bežia v produkcii.',
   introStudent:
-    'Študujem informatiku na Masarykovej univerzite a ako AI vývojár staviam reálne systémy poháňané veľkými jazykovými modelmi.',
-  recentPrefix: 'V ostatnom čase pracujem na AI infraštruktúre pre',
+    'Študujem informatiku na Masarykovej univerzite a staviam AI systémy, ktoré bežia v produkcii.',
+  recentPrefix: 'Ten posledný je',
   recentSpan:
-    'spracovanie dokumentov, viacagentové pipeline a znalostné systémy s rozšíreným vyhľadávaním',
-  interestsPrefix:
-    'Moje záujmy sa menia podľa problémov, ktoré práve skúmam, no v poslednom čase ma zvlášť ťahá k',
+    'asistent s citovanými zdrojmi, ktorý odpovedá na otázky o štúdiu v zahraničí na oficiálnom webe Masarykovej univerzity',
+  interestsPrefix: 'Funguje a viem to doložiť:',
   interestsSpan:
-    'agentickým AI systémom, architektúram vyhľadávania a rozsiahlej analýze dokumentov',
-  interestsSuffix: 's modernými embedding modelmi a vektorovým vyhľadávaním.',
-  skillsPrefix:
-    'Ovládam širokú škálu technológií a pevne verím, že k problému treba vybrať správny nástroj, nie sa upnúť na jeden framework či stack. Baví ma navrhovať systémy, kde jazykové modely spolupracujú s vyhľadávacími nástrojmi, štruktúrovanými dátami a externými nástrojmi pri riešení zložitých úloh. Veľká časť mojej práce je stavba',
-  skillsSpan: 'FastAPI backendov, asynchrónnych pipeline a infraštruktúry pre vektorové vyhľadávanie',
-  skillsSuffix: 'vďaka ktorej AI systémy fungujú spoľahlivo aj vo veľkom rozsahu.',
+    '15 362 ohodnotených evaluačných behov, presnosť okolo 90 percent, halucinácie okolo 1 percenta',
+  interestsSuffix: 'merané nepretržite, nie raz pred spustením.',
+  skillsPrefix: 'Popri tom prevádzkujem',
+  skillsSpan: 'tri produkty s platiacimi zákazníkmi',
+  skillsSuffix:
+    '(InzerPro, NasadClaw, KouzelnikNaAkci). Naplánované úlohy, platby cez Stripe, obnova po neúspešnej platbe: aj tá nudná časť je moja.',
   outside:
-    'Mimo programovania ma väčšinou nájdete pri knihe, pri skúšaní nových technológií a občas pri prezeraní Twitteru.',
+    'Mimo práce: knihy, nové nástroje a viac Twitteru, než by som rád priznal.',
   highlightEyebrow: 'Nedávny míľnik',
   highlightTitlePrefix: 'Pozvanie od',
   highlightTitleSpan: 'Európskej komisie',

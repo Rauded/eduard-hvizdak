@@ -3,7 +3,7 @@ const contactBand = {
   eyebrow: 'Ozvěte se',
   title: 'Pojďme spolupracovat',
   lead:
-    'Máte proces, který stojí za automatizaci, dokumenty, ve kterých se má dát vyhledávat, nebo produkt, který potřebuje dotáhnout? Napište mi, co váš tým zdržuje.',
+    'Napište mi, co váš tým pořád dělá ručně. Za 30 minut poznám, jestli to může běžet samo.',
   emailMe: 'Napište mi',
   book: 'Rezervovat 30 minut',
   directPrefix: 'Nebo mi napište přímo na',

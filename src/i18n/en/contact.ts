@@ -2,7 +2,7 @@ const contact = {
   eyebrow: 'Get in touch',
   title: "Let's work together",
   lead:
-    "Building something with AI, need a product shipped, or just want to talk shop? I'm always up for an interesting problem.",
+    "Tell me what your team still does by hand. 30 minutes is enough to tell whether it can run itself.",
   emailMe: 'Email me',
   book: 'Book 30 min',
   callMe: 'Call me',

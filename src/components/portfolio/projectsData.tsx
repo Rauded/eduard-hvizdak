@@ -117,7 +117,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'InzerPro',
     subtitle: 'A SaaS I run on the side',
     description:
-      'Auto-renewal, bulk posting, and analytics for power sellers on the Bazoš.cz / Bazoš.sk classifieds. It keeps dozens of listings at the top automatically: the relisting grind power sellers used to do by hand. Born from a hackathon, now a side business with paying customers.',
+      'Keeps power sellers\' listings at the top of Bazoš.cz and Bazoš.sk: scheduled re-posting, bulk upload, analytics. Bazoš has no public API, so the engine drives the live site. Hackathon build turned side business with paying customers.',
     tags: ['React', 'Supabase', 'Stripe', 'Deno', 'PostHog', 'SaaS', 'Hackathon'],
     links: [
       { label: 'www.inzerpro.cz', url: 'https://www.inzerpro.cz', type: 'demo', favicon: '/brand/sites/inzerpro.svg' },
@@ -143,7 +143,7 @@ export const PROJECTS: PortfolioProject[] = [
     },
     subtitle_cs: 'SaaS, který provozuji vedle práce',
     description_cs:
-      'Automatické obnovování, hromadné přidávání inzerátů a analytika pro velké prodejce na inzertních portálech Bazoš.cz a Bazoš.sk. Automaticky drží desítky inzerátů nahoře: přesně ta dřina s opětovným přidáváním, kterou velcí prodejci dřív dělali ručně. Vzniklo na hackathonu, dnes je to byznys vedle práce s platícími zákazníky.',
+      'Drží inzeráty velkých prodejců nahoře na Bazoš.cz a Bazoš.sk: naplánované přidávání, hromadný upload, analytika. Bazoš nemá veřejné API, engine řídí živý web. Z hackathonu je dnes byznys vedle práce s platícími zákazníky.',
     caseStudy_cs: {
       problem:
         'Velcí prodejci na inzertních portálech <strong>Bazoš.cz</strong> a <strong>Bazoš.sk</strong> žijí a padají s pozicí inzerátu. Na Bazoši se dá vyšplhat zpátky na vrchol kategorie jedině tak, že inzerát smažete a přidáte ho znovu, takže prodejci s velkým objemem ručně <strong>znovu přidávali desítky inzerátů každý jediný den</strong>. Nekonečná dřina kopírování, mazání a opětovného přidávání, která spolykala hodiny a konkurence je stejně přes noc zasypala.',
@@ -158,7 +158,7 @@ export const PROJECTS: PortfolioProject[] = [
     },
     subtitle_sk: 'SaaS, ktorý prevádzkujem popri práci',
     description_sk:
-      'Automatické obnovovanie, hromadné pridávanie inzerátov a analytika pre veľkých predajcov na inzertných portáloch Bazoš.cz a Bazoš.sk. Automaticky drží desiatky inzerátov na vrchu: presne tá drina s opätovným pridávaním, ktorú veľkí predajcovia predtým robili ručne. Vzniklo na hackathone, dnes je to popri práci biznis s platiacimi zákazníkmi.',
+      'Drží inzeráty veľkých predajcov na vrchu Bazoš.cz a Bazoš.sk: naplánované pridávanie, hromadný upload, analytika. Bazoš nemá verejné API, engine riadi živý web. Z hackathonu je dnes popri práci biznis s platiacimi zákazníkmi.',
     caseStudy_sk: {
       problem:
         'Veľkí predajcovia na inzertných portáloch <strong>Bazoš.cz</strong> a <strong>Bazoš.sk</strong> žijú a padajú s pozíciou inzerátu. Na Bazoši sa dá vyšplhať späť na vrch kategórie jedine tak, že inzerát zmažete a pridáte nanovo, takže predajcovia s veľkým objemom ručne <strong>opätovne pridávali desiatky inzerátov každý jeden deň</strong>. Nekonečná drina kopírovania, mazania a pridávania, ktorá zožrala hodiny a konkurencia ich aj tak cez noc zasypala.',
@@ -178,7 +178,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'StudyExe',
     subtitle: 'Deep work for ADHD brains',
     description:
-      'Real-time eye tracking alerts you after 5 seconds of looking away. Full screen lock eliminates every distraction. AI-scored recall sessions measure what you actually retained, not just how long you stared at a screen.',
+      'Webcam eye tracking flags you 5 seconds after your gaze drifts. Full-screen lock removes every distraction. AI-scored recall tests measure what stuck, not minutes stared.',
     tags: ['Python', 'OpenAI API', 'Eye Tracking', 'Tkinter', 'Desktop App', 'AI'],
     links: [
       { label: 'GitHub', url: 'https://github.com/Rauded', type: 'github' },
@@ -212,7 +212,7 @@ export const PROJECTS: PortfolioProject[] = [
     },
     subtitle_cs: 'Hluboká práce pro mozky s ADHD',
     description_cs:
-      'Sledování očí v reálném čase vás upozorní po 5 sekundách, kdy se díváte jinam. Uzamčení celé obrazovky odstraní každé vyrušení. Sezení s vybavováním z paměti, která hodnotí AI, měří, co jste si opravdu zapamatovali, ne jen jak dlouho jste zírali do obrazovky.',
+      'Sledování očí přes webkameru vás upozorní 5 sekund po odvedení pohledu. Zámek celé obrazovky odstraní každé vyrušení. Testy vybavování hodnocené AI měří, co se uchytilo, ne odzírané minuty.',
     caseStudy_cs: {
       problem:
         'Většina studijních aplikací měří špatnou věc: <strong>čas u obrazovky</strong>, ne učení. Pro mozek s <strong>ADHD</strong> může otevřená učebnice a bloudící pohled vypadat stejně jako "studium", přitom dovnitř ve skutečnosti nic nejde. Skutečné problémy jsou tichý únik pozornosti a úplná absence jakéhokoli poctivého signálu o tom, <strong>kolik jste si opravdu zapamatovali</strong>.',
@@ -227,7 +227,7 @@ export const PROJECTS: PortfolioProject[] = [
     },
     subtitle_sk: 'Hlboká práca pre mozgy s ADHD',
     description_sk:
-      'Sledovanie očí v reálnom čase vás upozorní po 5 sekundách odvrátenia pohľadu. Uzamknutie celej obrazovky odstráni každé vyrušenie. Sedenia s vybavovaním z pamäte hodnotené AI merajú, čo ste si naozaj zapamätali, nie len ako dlho ste civeli do obrazovky.',
+      'Sledovanie očí cez webkameru vás upozorní 5 sekúnd po odvedení pohľadu. Zámok celej obrazovky odstráni každé vyrušenie. Testy vybavovania hodnotené AI merajú, čo sa uchytilo, nie odsedené minúty.',
     caseStudy_sk: {
       problem:
         'Väčšina študijných aplikácií meria nesprávnu vec: <strong>čas pred obrazovkou</strong>, nie učenie. Pre mozog s <strong>ADHD</strong> môže otvorená učebnica a blúdiaci pohľad vyzerať rovnako ako "štúdium", pričom v skutočnosti dovnútra nič nejde. Skutočné problémy sú tichý únik pozornosti a úplná absencia akéhokoľvek úprimného signálu o tom, <strong>koľko ste si naozaj zapamätali</strong>.',
@@ -247,7 +247,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'KouzelnikNaAkci.cz',
     subtitle: 'A directory for Czech & Slovak magicians',
     description:
-      'A two-sided marketplace connecting event organisers with professional magicians. Curated performer profiles, Stripe-powered listings, automated email, and 20+ city & occasion landing pages tuned for local search.',
+      'Two-sided marketplace for hiring magicians in Czechia and Slovakia. Curated profiles, Stripe listings, automated email, 20+ city and occasion landing pages built for local search.',
     tags: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Vercel'],
     links: [
       { label: 'www.kouzelniknaakci.cz', url: 'https://www.kouzelniknaakci.cz', type: 'demo', favicon: '/brand/sites/kouzelniknaakci.svg' },
@@ -273,7 +273,7 @@ export const PROJECTS: PortfolioProject[] = [
     },
     subtitle_cs: 'Katalog českých a slovenských kouzelníků',
     description_cs:
-      'Oboustranné tržiště, které spojuje organizátory akcí s profesionálními kouzelníky. Vybrané profily vystupujících, placené inzeráty přes Stripe, automatizované e-maily a 20+ vstupních stránek pro města a příležitosti vyladěných na lokální vyhledávání.',
+      'Oboustranné tržiště pro objednání kouzelníka v Česku a na Slovensku. Vybrané profily, inzeráty přes Stripe, automatizované e-maily, 20+ vstupních stránek pro města a příležitosti stavěných na lokální vyhledávání.',
     caseStudy_cs: {
       problem:
         'Pokud si v Česku nebo na Slovensku potřebujete <strong>objednat profesionálního kouzelníka</strong> na svatbu, oslavu narozenin, firemní akci nebo dětskou párty, nebylo kde hledat. Vystupující byli roztroušení po zastaralých osobních stránkách a facebookových profilech a organizátoři akcí neměli centrální, důvěryhodné místo, kde je porovnat a najmout: klasický roztříštěný lokální trh.',
@@ -288,7 +288,7 @@ export const PROJECTS: PortfolioProject[] = [
     },
     subtitle_sk: 'Katalóg pre českých a slovenských kúzelníkov',
     description_sk:
-      'Obojstranné trhovisko, ktoré spája organizátorov akcií s profesionálnymi kúzelníkmi. Vybrané profily účinkujúcich, platené inzeráty cez Stripe, automatizované e-maily a 20+ vstupných stránok pre mestá a príležitosti vyladených na lokálne vyhľadávanie.',
+      'Obojstranné trhovisko na objednanie kúzelníka v Česku a na Slovensku. Vybrané profily, inzeráty cez Stripe, automatizované e-maily, 20+ vstupných stránok pre mestá a príležitosti stavaných na lokálne vyhľadávanie.',
     caseStudy_sk: {
       problem:
         'Ak si v Česku alebo na Slovensku potrebujete <strong>objednať profesionálneho kúzelníka</strong> na svadbu, oslavu narodenín, firemnú akciu alebo detskú párty, nebolo kde hľadať. Účinkujúci boli roztrúsení po zastaraných osobných stránkach a facebookových profiloch a organizátori akcií nemali centrálne, dôveryhodné miesto, kde ich porovnať a najať: klasický roztrieštený lokálny trh.',
@@ -308,7 +308,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'Newsmatics Globe',
     subtitle: 'News as geography',
     description:
-      'A geolocation pipeline that extracts locations from news articles via NLP, matches them against the GeoNames database, and visualises them on an interactive 3D globe. Timeline playback lets you watch events unfold across the world in real time.',
+      'Extracts place names from news articles with NLP, resolves them against GeoNames, and plots them on an interactive 3D globe. Timeline playback replays world events. Built in one hackathon weekend.',
     tags: ['Python', 'JavaScript', 'Globe.gl', 'LangChain', 'NLP', 'Data Viz', 'Hackathon'],
     links: [
       { label: 'GitHub', url: 'https://github.com/Rauded', type: 'github' },
@@ -335,7 +335,7 @@ export const PROJECTS: PortfolioProject[] = [
     },
     subtitle_cs: 'Zprávy jako geografie',
     description_cs:
-      'Geolokalizační linka, která pomocí NLP vytahuje místa z novinových článků, páruje je s databází GeoNames a zobrazuje je na interaktivním 3D globusu. Přehrávání časové osy vám dá sledovat, jak se události odvíjejí po celém světě v reálném čase.',
+      'Pomocí NLP vytahuje místa z novinových článků, páruje je s databází GeoNames a vykresluje na interaktivním 3D globusu. Časová osa přehrává světové události. Postaveno za jeden hackathonový víkend.',
     caseStudy_cs: {
       problem:
         'Zprávy vám řeknou, <strong>co</strong> se stalo, ale ztěžují vnímání toho, <strong>kde</strong> a <strong>kdy</strong> se to stalo. Tisíce článků denně zmiňují místa, jenže tahle geografie je uzamčená uvnitř čistého textu; nebyl jednoduchý způsob, jak sledovat, jak se globální události rozsvěcejí na mapě v čase.',
@@ -350,7 +350,7 @@ export const PROJECTS: PortfolioProject[] = [
     },
     subtitle_sk: 'Správy ako geografia',
     description_sk:
-      'Geolokalizačná linka, ktorá pomocou NLP vyťahuje miesta z novinových článkov, páruje ich s databázou GeoNames a zobrazuje na interaktívnom 3D glóbuse. Prehrávanie časovej osi vám dá sledovať, ako sa udalosti odvíjajú po celom svete v reálnom čase.',
+      'Pomocou NLP vyťahuje miesta z novinových článkov, páruje ich s databázou GeoNames a vykresľuje na interaktívnom 3D glóbuse. Časová os prehráva svetové udalosti. Postavené za jeden hackathonový víkend.',
     caseStudy_sk: {
       problem:
         'Správy vám povedia, <strong>čo</strong> sa stalo, ale sťažujú vnímanie toho, <strong>kde</strong> a <strong>kedy</strong> sa to stalo. Tisíce článkov denne spomínajú miesta, no táto geografia je uzamknutá vnútri čistého textu; nebol jednoduchý spôsob, ako sledovať, ako sa globálne udalosti rozsvecujú na mape v čase.',
@@ -370,7 +370,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'NasadClaw',
     subtitle: 'AI infrastructure for Czech & Slovak enterprises',
     description:
-      "Professional deployment of the OpenClaw AI assistant for business teams. Physical installation on dedicated hardware at the client's office, full InfoSec hardening, and ongoing maintenance, so teams get leverage from day one without a new software project to manage.",
+      "OpenClaw AI assistant deployed for business teams: installed on dedicated hardware in the client's office, InfoSec hardened, maintained. No data leaves the building.",
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'PostHog', 'B2B', 'SaaS'],
     links: [
       { label: 'www.nasadclaw.cz', url: 'https://www.nasadclaw.cz', type: 'demo', favicon: '/brand/sites/nasadclaw.png' },
@@ -396,7 +396,7 @@ export const PROJECTS: PortfolioProject[] = [
     },
     subtitle_cs: 'AI infrastruktura pro české a slovenské firmy',
     description_cs:
-      'Profesionální nasazení AI asistenta OpenClaw pro firemní týmy. Fyzická instalace na vyhrazeném hardwaru v kanceláři klienta, plné zabezpečení z pohledu InfoSec a průběžná údržba, takže týmy získají páku od prvního dne bez nového softwarového projektu, který je potřeba spravovat.',
+      'AI asistent OpenClaw nasazený pro firemní týmy: instalace na vyhrazeném hardwaru v kanceláři klienta, zabezpečení z pohledu InfoSec, průběžná údržba. Žádná data neopouštějí budovu.',
     caseStudy_cs: {
       problem:
         'Většina <strong>malých a středních firem</strong> v Česku a na Slovensku ví, že <strong>AI</strong> by jejich týmům mohla dát skutečnou páku, ale reálně nedokážou rozjet nový softwarový projekt, aby ji získali, a mnohé jsou právem nervózní z <strong>ochrany dat</strong> a posílání citlivých firemních údajů do cizího cloudu.',
@@ -411,7 +411,7 @@ export const PROJECTS: PortfolioProject[] = [
     },
     subtitle_sk: 'AI infraštruktúra pre české a slovenské firmy',
     description_sk:
-      'Profesionálne nasadenie AI asistenta OpenClaw pre firemné tímy. Fyzická inštalácia na vyhradenom hardvéri v kancelárii klienta, plné zabezpečenie z pohľadu InfoSec a priebežná údržba, takže tímy získajú páku od prvého dňa bez nového softvérového projektu, ktorý treba spravovať.',
+      'AI asistent OpenClaw nasadený pre firemné tímy: inštalácia na vyhradenom hardvéri v kancelárii klienta, zabezpečenie z pohľadu InfoSec, priebežná údržba. Žiadne dáta neopúšťajú budovu.',
     caseStudy_sk: {
       problem:
         'Väčšina <strong>malých a stredných firiem</strong> v Česku a na Slovensku vie, že <strong>AI</strong> by ich tímom mohla dať skutočnú páku, ale reálne nedokážu rozbehnúť nový softvérový projekt, aby ju získali, a mnohé sú právom nervózne z <strong>ochrany dát</strong> a posielania citlivých firemných údajov do cudzieho cloudu.',
@@ -431,7 +431,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'PsycheTab',
     subtitle: 'Your browser, your aesthetic',
     description:
-      'A Chrome extension that replaces the new tab page with rotating collage wallpapers assembled from your own image library. Drag, resize, rotate, and layer each piece. Every byte lives locally in IndexedDB: no cloud, no tracking, ever.',
+      'Chrome extension that turns the new tab page into rotating collages from your own image library. Drag, resize, rotate, layer. Everything stays in IndexedDB: no cloud, no tracking.',
     tags: ['JavaScript', 'Manifest V3', 'LocalForage', 'IndexedDB', 'Chrome Extension'],
     links: [
       { label: 'Chrome Web Store', url: 'https://chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao', type: 'demo', favicon: '/brand/sites/psychetab.jpg' },
@@ -458,7 +458,7 @@ export const PROJECTS: PortfolioProject[] = [
     },
     subtitle_cs: 'Váš prohlížeč, vaše estetika',
     description_cs:
-      'Rozšíření do Chromu, které nahradí stránku nové karty rotujícími kolážovými tapetami poskládanými z vaší vlastní knihovny obrázků. Každý kousek posunete, zvětšíte, otočíte a navrstvíte. Každý bajt žije lokálně v IndexedDB: žádný cloud, žádné sledování, nikdy.',
+      'Rozšíření do Chromu, které promění novou kartu v rotující koláže z vaší vlastní knihovny obrázků. Posunout, zvětšit, otočit, navrstvit. Všechno zůstává v IndexedDB: žádný cloud, žádné sledování.',
     caseStudy_cs: {
       problem:
         'Novou kartu prohlížeče otevíráte mnohokrát denně a zíráte na tu samou generickou, bezduchou výchozí <strong>stránku nové karty</strong>. Nebyl jednoduchý způsob, jak si tuhle chvíli udělat <em>vlastní</em> s vlastními obrázky, a personalizační rozšíření, která existují, obvykle chtějí nahrát vaše fotky do svého cloudu a sledovat vás.',
@@ -473,7 +473,7 @@ export const PROJECTS: PortfolioProject[] = [
     },
     subtitle_sk: 'Váš prehliadač, vaša estetika',
     description_sk:
-      'Rozšírenie do Chrome, ktoré nahradí stránku novej karty rotujúcimi kolážovými tapetami poskladanými z vašej vlastnej knižnice obrázkov. Každý kúsok potiahnete, zmeníte mu veľkosť, otočíte ho a navrstvíte. Každý bajt žije lokálne v IndexedDB: žiadny cloud, žiadne sledovanie, nikdy.',
+      'Rozšírenie do Chrome, ktoré premení novú kartu na rotujúce koláže z vašej vlastnej knižnice obrázkov. Potiahnuť, zväčšiť, otočiť, navrstviť. Všetko zostáva v IndexedDB: žiadny cloud, žiadne sledovanie.',
     caseStudy_sk: {
       problem:
         'Novú kartu prehliadača otvárate desiatky ráz denne a civíte na tú istú generickú, bezduchú predvolenú <strong>stránku novej karty</strong>. Nebol jednoduchý spôsob, ako si túto chvíľu spraviť <em>vlastnou</em> s vlastnými obrázkami, a personalizačné rozšírenia, ktoré existujú, obvykle chcú nahrať vaše fotky do svojho cloudu a sledovať vás.',

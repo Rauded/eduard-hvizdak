@@ -1,26 +1,26 @@
 // About section. The prose is broken into segments so the inline highlighted
 // spans (purple-text) and the expert/student positioning branch stay intact.
+// Copy follows jamny-style: numbers instead of adjectives, short declaratives,
+// no filler. Keep it tight; do not pad it back out.
 const about = {
   title: 'About Me',
-  greeting: 'Hello! My name is',
-  introExpert:
-    "I'm an AI engineer focused on building real-world systems powered by large language models.",
+  greeting: "I'm",
+  introExpert: 'I build AI systems that run in production.',
   introStudent:
-    "I'm a computer science student at Masaryk University and AI developer focused on building real-world systems powered by large language models.",
-  recentPrefix: "Most recently, I've been working on AI infrastructure for",
+    'I study computer science at Masaryk University and build AI systems that run in production.',
+  recentPrefix: 'The latest one is',
   recentSpan:
-    'document intelligence, multi-agent pipelines, and retrieval-augmented knowledge systems',
-  interestsPrefix:
-    "My interests evolve with the problems I'm exploring, but lately I've been especially focused on",
+    "a source-cited assistant answering study-abroad questions on Masaryk University's official site",
+  interestsPrefix: 'It works and I can prove it:',
   interestsSpan:
-    'agentic AI systems, retrieval architectures, and large-scale document analysis',
-  interestsSuffix: 'using modern embedding models and vector search.',
-  skillsPrefix:
-    'My skillset spans a wide range of technologies, and I believe strongly in choosing the right tool for the problem rather than locking into a single framework or stack. I enjoy designing systems where language models interact with retrieval engines, structured data, and external tools to solve complex tasks. Much of my work involves building',
-  skillsSpan: 'FastAPI backends, asynchronous pipelines, and vector search infrastructure',
-  skillsSuffix: 'that allows AI systems to operate reliably at scale.',
+    '15,362 graded evaluation runs, roughly 90 percent accuracy, hallucinations near 1 percent',
+  interestsSuffix: 'graded around the clock, not once before launch.',
+  skillsPrefix: 'On the side I run',
+  skillsSpan: 'three products with paying customers',
+  skillsSuffix:
+    '(InzerPro, NasadClaw, KouzelnikNaAkci). Scheduled jobs, Stripe billing, failed-payment recovery: the unglamorous parts are mine too.',
   outside:
-    "Outside of programming, you'll usually find me reading, experimenting with new technologies and occasionally scrolling Twitter.",
+    "Outside work: books, new tools, and more Twitter than I'd like to admit.",
   highlightEyebrow: 'Recent Highlight',
   highlightTitlePrefix: 'Invited by the',
   highlightTitleSpan: 'European Commission',

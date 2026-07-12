@@ -3,7 +3,7 @@ const contactBand = {
   eyebrow: 'Get in touch',
   title: "Let's work together",
   lead:
-    'Have a workflow worth automating, documents worth making answerable, or a product that needs shipping? Tell me what is slowing your team down.',
+    'Tell me what your team still does by hand. 30 minutes is enough to tell whether it can run itself.',
   emailMe: 'Email me',
   book: 'Book 30 min',
   directPrefix: 'Or email me directly at',
