@@ -706,6 +706,125 @@ $mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace)
     }
   }
 
+  // ── Problem: source-mix stacked bar ──
+  &-mix {
+    margin-top: 2rem;
+    max-width: 52rem;
+    &__label {
+      display: block;
+      font-family: $mono;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-faint);
+      margin-bottom: 0.6rem;
+    }
+    &__bar {
+      display: flex;
+      gap: 2px;
+      height: 42px;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    &__seg {
+      display: flex;
+      align-items: center;
+      min-width: 5px;
+      border-radius: 2px;
+      &--web { background: #182e5f; }
+      &--pdf { background: #5a6b94; }
+      &--docx { background: #a9b3cb; }
+      &--video { background: #fff; box-shadow: inset 0 0 0 1px #182e5f; }
+    }
+    &__inline {
+      font-family: $mono;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #fff;
+      padding-left: 0.7rem;
+      white-space: nowrap;
+    }
+    &__legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 1.1rem;
+      margin-top: 0.7rem;
+    }
+    &__key {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: $mono;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    &__sw { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+    &__before {
+      display: block;
+      margin-top: 1rem;
+      font-family: $mono;
+      font-size: 0.74rem;
+      color: var(--text-faint);
+    }
+  }
+
+  // ── Feedback loop: hero stat tile + 4-node flow ──
+  &-loop {
+    display: grid;
+    grid-template-columns: minmax(210px, 250px) 1fr;
+    gap: clamp(1rem, 2.5vw, 1.75rem);
+    margin-top: 2rem;
+    &__tile {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 1.4rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05), 0 12px 32px rgba(16, 24, 40, 0.08);
+    }
+    &__num {
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      line-height: 1;
+      color: var(--accent-heading);
+      font-weight: 700;
+    }
+    &__lbl {
+      font-family: $mono;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    &__sub { font-family: $mono; font-size: 0.68rem; color: var(--text-faint); }
+    &__flow { display: flex; flex-direction: column; gap: 0.75rem; }
+    &__nodes {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.6rem;
+      flex: 1;
+    }
+    &__return {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1rem;
+      border: 1px dashed var(--accent-ring, #c3d2ea);
+      border-radius: 10px;
+      background: var(--accent-soft, #eaf0f8);
+      font-family: $mono;
+      font-size: 0.74rem;
+      color: var(--accent-text-soft);
+      svg { width: 1.05em; height: 1.05em; flex: none; }
+    }
+  }
+
   // ── macOS window chrome (mock panels, hero-proof frame, chart panel) ──
   &-frame__dots i,
   &-mock__bar .d {
@@ -910,6 +1029,8 @@ $mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace)
     &-wins { grid-template-columns: 1fr; }
     &-dash { grid-template-columns: 1fr; }
     &-costcards { grid-template-columns: 1fr; }
+    &-loop { grid-template-columns: 1fr; }
+    &-loop__nodes { grid-template-columns: repeat(2, 1fr); }
   }
 }
 

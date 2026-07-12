@@ -35,11 +35,16 @@ const czsChatbot = {
     { value: '1', label: '8 GB server runs everything' },
   ],
   problem: {
-    title: 'A thousand pages, one inbox',
-    body: [
-      'The CZS website holds close to a thousand pages of study-abroad rules in Czech and English, and the rules do not stay in one place: they also live in PDFs, Word documents, and recorded info sessions, and they change constantly. Students emailed their questions and staff answered each one by hand.',
+    title: '778 sources, one inbox.',
+    body: 'The rules live in 778 constantly changing sources in Czech and English, and every student question used to be answered by hand, one email at a time.',
+    corpusLabel: 'Source corpus, CS + EN',
+    mix: [
+      { fmt: 'web', k: 'web pages', n: 530, short: '530 web' },
+      { fmt: 'pdf', k: 'PDF', n: 174, short: '174 PDF' },
+      { fmt: 'docx', k: 'docx', n: 60, short: '' },
+      { fmt: 'video', k: 'video transcripts', n: 3, short: '' },
     ],
-    mediaStat: '778 sources: ~530 web pages · 174 PDFs · 60 Word docs · 3 video transcripts',
+    before: 'Before: every question answered manually, by email',
   },
   product: {
     title: 'Ask in Czech or English. Get an answer with receipts.',
@@ -87,20 +92,20 @@ const czsChatbot = {
     chartCaption: 'Accuracy distribution across 10,438 gradeable answers from 15,362 judged runs. The correct source appears in the top retrieval results 92 percent of the time, up from 79 before the parent-child index.',
   },
   golden: {
-    title: 'A knowledge base that reviews itself',
+    title: 'Every approved answer makes the next one instant.',
     intro:
-      'CZS staff handed over their archive of real student questions with verified answers, and the team extended it into a curated dataset of 715 question-answer pairs. Every new question runs through it before any generation happens.',
-    stepsLabel: 'From a new question to a golden pair',
-    steps: [
-      'Answerability check: is the question in scope at all, or off-topic.',
-      'Similarity search against the FAQ: has a near-identical question already been answered.',
-      'If a verified CZS-staff answer exists, serve it directly.',
-      'If not, draft an answer with full retrieval across the 778 sources.',
-      'The draft goes to CZS staff to review, edit, and approve in the admin queue.',
-      'An approved answer becomes a golden FAQ pair, reused for all future similar questions.',
+      'CZS handed over their archive of real student questions with verified answers; the system turns every new answer back into that archive.',
+    statNum: '707 / 715',
+    statLabel: 'Q&A pairs staff verified',
+    statSub: '8 promoted from live chats',
+    nodes: [
+      { k: 'New question', v: 'scope check + FAQ match' },
+      { k: 'Known & verified?', v: 'serve it, or draft from sources' },
+      { k: 'Staff review', v: 'edit, approve' },
+      { k: 'Golden pair', v: 'joins the verified FAQ' },
     ],
-    closer:
-      'The knowledge base compounds: every approved answer makes the next identical question instant and staff-verified. 707 of the 715 pairs carry that verification today.',
+    loopLabel: 'Every approval grows the verified set',
+    closer: '707 of 715 pairs are already staff verified, and the loop only adds to that number.',
   },
   wins: {
     title: 'What measurement actually catches',

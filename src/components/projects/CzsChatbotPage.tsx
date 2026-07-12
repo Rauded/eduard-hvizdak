@@ -53,18 +53,6 @@ const FAQ_ROWS = [
   { q: 'Is there a list of internship host institutions?', sim: 0.82 },
 ];
 
-// Real, mundane study-abroad question types students actually ask (anonymized).
-const QUESTION_CHIPS = [
-  'When is the application deadline?',
-  'Can I go on Erasmus in my first year?',
-  'Which currency is the stipend paid in?',
-  'Do I need a language certificate?',
-  'Who is the coordinator for my faculty?',
-  'How much is the grant for Norway?',
-  'Can I do an internship instead of study?',
-  'Where do I upload the Learning Agreement?',
-];
-
 // Build an SVG polyline for a series scaled into the chart box.
 function polyline(values: number[], min: number, max: number, w: number, h: number, pad: number): string {
   const innerW = w - pad * 2;
@@ -152,13 +140,25 @@ const CzsChatbotPage: React.FC = () => {
       {/* ── Problem ──────────────────────────────────────────── */}
       <section className="czs-block">
         <Reveal><span className="czs-kicker">01 / Problem</span><h2 className="czs-block__title">{t.problem.title}</h2></Reveal>
-        <div className="czs-prose">
-          {t.problem.body.map((p, i) => <Reveal key={i}><p>{p}</p></Reveal>)}
-        </div>
-        <Reveal className="czs-qchips" aria-label="Example student questions">
-          {QUESTION_CHIPS.map(q => <span className="czs-qchip" key={q}>{q}</span>)}
+        <Reveal><p className="czs-prose">{t.problem.body}</p></Reveal>
+        <Reveal className="czs-mix">
+          <span className="czs-mix__label">{t.problem.corpusLabel}</span>
+          <div className="czs-mix__bar">
+            {t.problem.mix.map(seg => (
+              <span className={`czs-mix__seg czs-mix__seg--${seg.fmt}`} key={seg.fmt} style={{ flexGrow: seg.n }} title={`${seg.n} ${seg.k}`}>
+                {seg.short && <span className="czs-mix__inline">{seg.short}</span>}
+              </span>
+            ))}
+          </div>
+          <div className="czs-mix__legend">
+            {t.problem.mix.map(seg => (
+              <span className="czs-mix__key" key={seg.fmt}>
+                <i className={`czs-mix__sw czs-mix__seg--${seg.fmt}`} aria-hidden="true" />{seg.n} {seg.k}
+              </span>
+            ))}
+          </div>
+          <span className="czs-mix__before">{t.problem.before}</span>
         </Reveal>
-        <Reveal><p className="czs-qstat">{t.problem.mediaStat}</p></Reveal>
       </section>
 
       {/* ── Live product ─────────────────────────────────────── */}
@@ -213,21 +213,32 @@ const CzsChatbotPage: React.FC = () => {
         </Reveal>
       </section>
 
-      {/* ── Golden dataset / knowledge loop ──────────────────── */}
+      {/* ── Golden dataset / feedback loop ───────────────────── */}
       <section className="czs-block czs-block--tint">
-        <Reveal><span className="czs-kicker">04 / Knowledge</span><h2 className="czs-block__title">{t.golden.title}</h2></Reveal>
-        <Reveal><p className="czs-prose czs-prose--lead">{t.golden.intro}</p></Reveal>
-        <Reveal className="czs-flow">
-          <span className="czs-flow__label">{t.golden.stepsLabel}</span>
-          <ol className="czs-flow__list">
-            {t.golden.steps.map((s, i) => (
-              <li className="czs-flow__step" key={i}>
-                <span className="czs-flow__n">{String(i + 1).padStart(2, '0')}</span>
-                <span className="czs-flow__t">{s}</span>
-              </li>
-            ))}
-          </ol>
-        </Reveal>
+        <Reveal><span className="czs-kicker">04 / Feedback loop</span><h2 className="czs-block__title">{t.golden.title}</h2></Reveal>
+        <Reveal><p className="czs-prose">{t.golden.intro}</p></Reveal>
+        <div className="czs-loop">
+          <Reveal className="czs-loop__tile" as="div">
+            <span className="czs-loop__num pixel-accent">{t.golden.statNum}</span>
+            <span className="czs-loop__lbl">{t.golden.statLabel}</span>
+            <span className="czs-loop__sub">{t.golden.statSub}</span>
+          </Reveal>
+          <Reveal className="czs-loop__flow" as="div">
+            <ol className="czs-loop__nodes">
+              {t.golden.nodes.map((n, i) => (
+                <li className="czs-node" key={n.k}>
+                  <span className="czs-node__n">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="czs-node__k">{n.k}</span>
+                  <span className="czs-node__v">{n.v}</span>
+                </li>
+              ))}
+            </ol>
+            <div className="czs-loop__return">
+              <LuRefreshCw aria-hidden="true" />
+              <span>{t.golden.loopLabel}</span>
+            </div>
+          </Reveal>
+        </div>
         <Reveal><p className="czs-closer">{t.golden.closer}</p></Reveal>
       </section>
 
