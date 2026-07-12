@@ -8,8 +8,9 @@ import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
 import { useTheme } from '../theme/ThemeContext';
 import Reveal from '../_21test/Reveal';
-import promoBox from '../../assets/projects/czs/promo-box.jpg';
-import widgetOpen from '../../assets/projects/czs/widget-open.jpg';
+import livePage from '../../assets/projects/czs/czs-live-page.jpg';
+import liveWidget from '../../assets/projects/czs/czs-live-widget.jpg';
+import liveAnswer from '../../assets/projects/czs/czs-live-answer.jpg';
 import './czs-chatbot.scss';
 
 const EMAIL = 'eduardd.hv@gmail.com';
@@ -100,6 +101,18 @@ const CzsChatbotPage: React.FC = () => {
         </dl>
       </header>
 
+      {/* ── Hero proof: the bot on the official MUNI site ─────── */}
+      <Reveal as="figure" className="czs-herofig">
+        <div className="czs-frame czs-frame--browser">
+          <span className="czs-frame__bar">
+            <span className="czs-frame__dots"><i /><i /><i /></span>
+            <span className="czs-frame__url">czs.muni.cz/cs/student-mu/studijni-pobyty/erasmus-evropa</span>
+          </span>
+          <img src={livePage} alt="The CZS chatbot live on Masaryk University's official Erasmus+ page" />
+        </div>
+        <figcaption className="czs-caption">{t.hero.figureCaption}</figcaption>
+      </Reveal>
+
       {/* ── Metric band ──────────────────────────────────────── */}
       <Reveal as="section" className="czs-metrics" aria-label="Key numbers">
         {t.metrics.map(m => (
@@ -127,15 +140,15 @@ const CzsChatbotPage: React.FC = () => {
         <div className="czs-shots">
           <Reveal className="czs-shot">
             <div className="czs-frame">
-              <img src={promoBox} alt="The CZS chatbot promo box on the official Masaryk University page" loading="lazy" />
+              <img src={liveWidget} alt="The open CZS chat widget on the live Masaryk University page, with an AI disclaimer and suggested questions" loading="lazy" />
             </div>
-            <p className="czs-caption">{t.product.captionPromo}</p>
+            <p className="czs-caption">{t.product.captionWidgetLive}</p>
           </Reveal>
           <Reveal className="czs-shot">
             <div className="czs-frame">
-              <img src={widgetOpen} alt="The open CZS chat widget with an AI disclaimer and suggested questions" loading="lazy" />
+              <img src={liveAnswer} alt="A real chatbot answer on the live site, citing 11 named source documents with feedback buttons" loading="lazy" />
             </div>
-            <p className="czs-caption">{t.product.captionOpen}</p>
+            <p className="czs-caption">{t.product.captionAnswerLive}</p>
           </Reveal>
         </div>
 
