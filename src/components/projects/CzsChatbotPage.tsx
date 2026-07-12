@@ -31,6 +31,8 @@ const CONVO_ROWS = [
   { id: 4818, src: 'student', conf: 0.91, fb: 'up', time: '7.3s', intent: 'find_contact', program: 'Bilateral', q: 'Who is the coordinator for my faculty?' },
   { id: 4817, src: 'dev', conf: 0.83, fb: '', time: '10.2s', intent: 'explain_procedure', program: 'Internship', q: 'How do I get my traineeship certificate signed?' },
   { id: 4816, src: 'student', conf: 0.79, fb: '', time: '12.8s', intent: 'clarify_document', program: 'BIP', q: 'Do I upload the Learning Agreement before or after?' },
+  { id: 4815, src: 'student', conf: 0.96, fb: 'up', time: '6.9s', intent: 'find_deadline', program: 'Erasmus+', q: 'When do results of the selection come out?' },
+  { id: 4814, src: 'student', conf: 0.87, fb: '', time: '9.1s', intent: 'check_requirements', program: 'CEEPUS', q: 'How many ECTS do I need to complete abroad?' },
 ];
 
 const SOURCE_ROWS = [
@@ -45,6 +47,18 @@ const FAQ_ROWS = [
   { q: 'Can I go on Erasmus if I am over 26?', sim: 0.91 },
   { q: 'Which currency is the stipend paid in?', sim: 0.87 },
   { q: 'Is there a list of internship host institutions?', sim: 0.82 },
+];
+
+// Real, mundane study-abroad question types students actually ask (anonymized).
+const QUESTION_CHIPS = [
+  'When is the application deadline?',
+  'Can I go on Erasmus in my first year?',
+  'Which currency is the stipend paid in?',
+  'Do I need a language certificate?',
+  'Who is the coordinator for my faculty?',
+  'How much is the grant for Norway?',
+  'Can I do an internship instead of study?',
+  'Where do I upload the Learning Agreement?',
 ];
 
 // Build an SVG polyline for a series scaled into the chart box.
@@ -64,10 +78,24 @@ const CzsChatbotPage: React.FC = () => {
   const { theme } = useTheme();
   const t = useT('czsChatbot');
 
-  const chartW = 640;
-  const chartH = 220;
-  const accLine = polyline(ACCURACY_POINTS, 6, 10, chartW, chartH, 24);
-  const halLine = polyline(HALLUCINATION_POINTS, 0, 20, chartW, chartH, 24);
+  // ── Analytics chart geometry ──
+  const CW = 860, CH = 300;
+  const pL = 46, pR = CW - 40, pT = 30, pB = CH - 40;
+  const pW = pR - pL, pH = pB - pT;
+  const N = ACCURACY_POINTS.length;
+  const accX = (i: number) => pL + (pW * i) / (N - 1);
+  const accY = (v: number) => pB - (v / 10) * pH;      // accuracy axis 0..10
+  const HAL_MAX = 15;
+  const halY = (v: number) => pB - (v / HAL_MAX) * pH;  // secondary axis 0..15
+  const CYCLES = 37;
+  const cycleX = (c: number) => pL + (pW * (c - 1)) / (CYCLES - 1);
+  const accPts = ACCURACY_POINTS.map((v, i) => [accX(i), accY(v)] as const);
+  const accPath = accPts.map(p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
+  const areaPath = `M ${accX(0).toFixed(1)} ${pB} `
+    + accPts.map(p => `L ${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' ')
+    + ` L ${accX(N - 1).toFixed(1)} ${pB} Z`;
+  const annoIdx = 17; // cycle where the parent-child (v4) retrieval index shipped
+  void polyline;
 
   return (
     <div className="czs" data-theme={theme}>
@@ -126,15 +154,19 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Problem ──────────────────────────────────────────── */}
       <section className="czs-block">
-        <Reveal><h2 className="czs-block__title">{t.problem.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">01 / Problem</span><h2 className="czs-block__title">{t.problem.title}</h2></Reveal>
         <div className="czs-prose">
           {t.problem.body.map((p, i) => <Reveal key={i}><p>{p}</p></Reveal>)}
         </div>
+        <Reveal className="czs-qchips" aria-label="Example student questions">
+          {QUESTION_CHIPS.map(q => <span className="czs-qchip" key={q}>{q}</span>)}
+        </Reveal>
+        <Reveal><p className="czs-qstat">300+ source pages · 2 languages · 9 programs · answered by hand, one inbox at a time</p></Reveal>
       </section>
 
       {/* ── Live product ─────────────────────────────────────── */}
       <section className="czs-block">
-        <Reveal><h2 className="czs-block__title">{t.product.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">02 / Product</span><h2 className="czs-block__title">{t.product.title}</h2></Reveal>
         <div className="czs-prose">
           {t.product.body.map((p, i) => <Reveal key={i}><p>{p}</p></Reveal>)}
         </div>
@@ -156,7 +188,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Architecture ─────────────────────────────────────── */}
       <section className="czs-block czs-block--tint">
-        <Reveal><h2 className="czs-block__title">{t.architecture.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">03 / System</span><h2 className="czs-block__title">{t.architecture.title}</h2></Reveal>
         <div className="czs-prose">
           {t.architecture.body.map((p, i) => <Reveal key={i}><p>{p}</p></Reveal>)}
         </div>
@@ -186,29 +218,63 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Evaluation ───────────────────────────────────────── */}
       <section className="czs-block">
-        <Reveal><h2 className="czs-block__title">{t.evaluation.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">04 / Evaluation</span><h2 className="czs-block__title">{t.evaluation.title}</h2></Reveal>
         <div className="czs-prose">
           {t.evaluation.body.map((p, i) => <Reveal key={i}><p>{p}</p></Reveal>)}
         </div>
         <Reveal className="czs-chart">
+          <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>chatbot.czs.muni.cz/evaluation</em></div>
           <span className="czs-chart__title">{t.evaluation.chartTitle}</span>
-          <svg viewBox={`0 0 ${chartW} ${chartH}`} role="img" aria-label={t.evaluation.chartTitle} className="czs-chart__svg">
-            <line x1="24" y1={chartH - 24} x2={chartW - 24} y2={chartH - 24} className="czs-chart__axis" />
-            <line x1="24" y1="24" x2="24" y2={chartH - 24} className="czs-chart__axis" />
-            <polyline points={accLine} className="czs-chart__acc" fill="none" />
-            <polyline points={halLine} className="czs-chart__hal" fill="none" />
+          <svg viewBox={`0 0 ${CW} ${CH}`} role="img" aria-label={t.evaluation.chartTitle} className="czs-chart__svg">
+            {/* horizontal gridlines + accuracy (left) ticks */}
+            {[0, 2, 4, 6, 8, 10].map(tk => (
+              <g key={`y${tk}`}>
+                <line className="czs-chart__grid" x1={pL} y1={accY(tk)} x2={pR} y2={accY(tk)} />
+                <text className="czs-chart__tick" x={pL - 7} y={accY(tk) + 3} textAnchor="end">{tk}</text>
+              </g>
+            ))}
+            {/* hallucination (right) ticks */}
+            {[0, 5, 10, 15].map(tk => (
+              <text key={`h${tk}`} className="czs-chart__tick" x={pR + 7} y={halY(tk) + 3} textAnchor="start">{tk}</text>
+            ))}
+            {/* x-axis cycle ticks */}
+            {[1, 10, 20, 30, 37].map(c => (
+              <g key={`x${c}`}>
+                <line className="czs-chart__axis" x1={cycleX(c)} y1={pB} x2={cycleX(c)} y2={pB + 4} />
+                <text className="czs-chart__tick" x={cycleX(c)} y={pB + 17} textAnchor="middle">{c}</text>
+              </g>
+            ))}
+            {/* axis titles */}
+            <text className="czs-chart__axislabel" x={pL - 30} y={pT - 12}>accuracy /10</text>
+            <text className="czs-chart__axislabel" x={pR + 30} y={pT - 12} textAnchor="end">halluc.</text>
+            <text className="czs-chart__axislabel" x={(pL + pR) / 2} y={CH - 6} textAnchor="middle">eval cycle</text>
+            {/* hallucination bars (secondary axis) */}
+            {HALLUCINATION_POINTS.map((c, i) => c > 0 ? (
+              <rect key={`b${i}`} className="czs-chart__bar" x={accX(i) - 2.5} y={halY(c)} width={5} height={pB - halY(c)} />
+            ) : null)}
+            {/* accuracy area + line + per-cycle dots */}
+            <path className="czs-chart__area" d={areaPath} />
+            <polyline className="czs-chart__acc" points={accPath} />
+            {accPts.map((p, i) => <circle key={`d${i}`} className="czs-chart__dot" cx={p[0]} cy={p[1]} r={2.6} />)}
+            {/* ship annotation */}
+            <line className="czs-chart__anno" x1={accX(annoIdx)} y1={pT} x2={accX(annoIdx)} y2={pB} />
+            <text className="czs-chart__annolabel" x={accX(annoIdx) + 4} y={pT + 7}>v4 retrieval</text>
+            {/* axes */}
+            <line className="czs-chart__axis" x1={pL} y1={pT} x2={pL} y2={pB} />
+            <line className="czs-chart__axis" x1={pR} y1={pT} x2={pR} y2={pB} />
+            <line className="czs-chart__axis" x1={pL} y1={pB} x2={pR} y2={pB} />
           </svg>
           <div className="czs-chart__legend">
             <span className="czs-chart__key czs-chart__key--acc">{t.evaluation.chartAccuracy}</span>
             <span className="czs-chart__key czs-chart__key--hal">{t.evaluation.chartHallucination}</span>
           </div>
-          <p className="czs-caption">{t.evaluation.chartCaption}</p>
         </Reveal>
+        <Reveal><p className="czs-caption">{t.evaluation.chartCaption}</p></Reveal>
       </section>
 
       {/* ── Before / after wins ──────────────────────────────── */}
       <section className="czs-block czs-block--tint">
-        <Reveal><h2 className="czs-block__title">{t.wins.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">05 / Iteration</span><h2 className="czs-block__title">{t.wins.title}</h2></Reveal>
         <div className="czs-wins">
           {t.wins.items.map(w => (
             <Reveal className="czs-win" key={w.tag} as="article">
@@ -228,14 +294,18 @@ const CzsChatbotPage: React.FC = () => {
       </section>
 
       {/* ── Dashboards ───────────────────────────────────────── */}
-      <section className="czs-block">
-        <Reveal><h2 className="czs-block__title">{t.dashboards.title}</h2></Reveal>
+      <section className="czs-block czs-dashband">
+        <Reveal><span className="czs-kicker">06 / Operations</span><h2 className="czs-block__title">{t.dashboards.title}</h2></Reveal>
         <Reveal><p className="czs-prose czs-prose--lead">{t.dashboards.intro}</p></Reveal>
         <div className="czs-dash">
           {/* Conversation Database (full width) */}
           <Reveal className="czs-dashcard czs-dashcard--wide">
             <div className="czs-mock">
-              <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>Conversation Database · live registry of interactions</em></div>
+              <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>chatbot.czs.muni.cz/dashboard</em></div>
+              <div className="czs-apptoolbar">
+                <span className="czs-apptoolbar__name">Conversation Database</span>
+                <span className="czs-apptoolbar__actions"><span className="czs-apptoolbar__btn">Export CSV</span><span className="czs-apptoolbar__btn">Columns</span></span>
+              </div>
               <div className="czs-mock__filters">
                 <span className="czs-filter"><b>Show:</b> Students</span>
                 <span className="czs-filter"><b>Program:</b> All</span>
@@ -267,15 +337,19 @@ const CzsChatbotPage: React.FC = () => {
           {/* Flagged & Resolved */}
           <Reveal className="czs-dashcard">
             <div className="czs-mock">
-              <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>Flagged &amp; Resolved</em></div>
+              <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>chatbot.czs.muni.cz/flagged-resolved</em></div>
+              <div className="czs-apptoolbar">
+                <span className="czs-apptoolbar__name">Flagged &amp; Resolved</span>
+                <span className="czs-apptoolbar__actions"><span className="czs-apptoolbar__btn">3 open</span></span>
+              </div>
               <div className="czs-mock__queue">
                 <div className="czs-queue-item open">
-                  <span className="czs-queue-item__flag">Needs review</span>
+                  <span className="czs-queue-item__flag"><span className="czs-statusdot czs-statusdot--flag" />Needs review</span>
                   <span className="czs-queue-item__q">Is the 20 ECTS requirement an Erasmus rule or an MU policy?</span>
                   <div className="czs-queue-item__actions"><span>Verify</span><span>Edit answer</span><span>Resolve</span></div>
                 </div>
-                <div className="czs-queue-item"><span className="czs-queue-item__flag lo">Low confidence</span><span className="czs-queue-item__q">Which currency is the stipend paid in?</span></div>
-                <div className="czs-queue-item"><span className="czs-queue-item__flag lo">Thumbs down</span><span className="czs-queue-item__q">Is there a list of internship host institutions?</span></div>
+                <div className="czs-queue-item"><span className="czs-queue-item__flag lo"><span className="czs-statusdot czs-statusdot--flag" />Low confidence</span><span className="czs-queue-item__q">Which currency is the stipend paid in?</span></div>
+                <div className="czs-queue-item"><span className="czs-queue-item__flag lo"><span className="czs-statusdot czs-statusdot--flag" />Thumbs down</span><span className="czs-queue-item__q">Is there a list of internship host institutions?</span></div>
               </div>
             </div>
             <h3 className="czs-dashcard__title">{t.dashboards.items[1].title}</h3>
@@ -285,7 +359,11 @@ const CzsChatbotPage: React.FC = () => {
           {/* Manage Sources */}
           <Reveal className="czs-dashcard">
             <div className="czs-mock">
-              <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>Manage Sources · 778</em></div>
+              <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>chatbot.czs.muni.cz/links</em></div>
+              <div className="czs-apptoolbar">
+                <span className="czs-apptoolbar__name">Manage Sources · 778</span>
+                <span className="czs-apptoolbar__actions"><span className="czs-apptoolbar__btn">+ Add source</span></span>
+              </div>
               <table className="czs-mock__table">
                 <thead><tr><th>Source URL</th><th>Status</th><th>Chunks</th></tr></thead>
                 <tbody>
@@ -306,7 +384,11 @@ const CzsChatbotPage: React.FC = () => {
           {/* FAQ Review */}
           <Reveal className="czs-dashcard">
             <div className="czs-mock">
-              <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>FAQ Review</em></div>
+              <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>chatbot.czs.muni.cz/faq-review</em></div>
+              <div className="czs-apptoolbar">
+                <span className="czs-apptoolbar__name">FAQ Review</span>
+                <span className="czs-apptoolbar__actions"><span className="czs-apptoolbar__btn">42 pending</span></span>
+              </div>
               <div className="czs-mock__faq">
                 {FAQ_ROWS.map((r, i) => (
                   <div className="czs-faq-item" key={i}>
@@ -326,7 +408,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Privacy ──────────────────────────────────────────── */}
       <section className="czs-block">
-        <Reveal><h2 className="czs-block__title">{t.privacy.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">07 / Privacy</span><h2 className="czs-block__title">{t.privacy.title}</h2></Reveal>
         <div className="czs-prose">
           {t.privacy.body.map((p, i) => <Reveal key={i}><p>{p}</p></Reveal>)}
         </div>
@@ -334,7 +416,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Cost ─────────────────────────────────────────────── */}
       <section className="czs-block czs-block--tint">
-        <Reveal><h2 className="czs-block__title">{t.cost.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">08 / Cost</span><h2 className="czs-block__title">{t.cost.title}</h2></Reveal>
         <div className="czs-prose">
           {t.cost.body.map((p, i) => <Reveal key={i}><p>{p}</p></Reveal>)}
         </div>
