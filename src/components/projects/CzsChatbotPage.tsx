@@ -158,7 +158,7 @@ const CzsChatbotPage: React.FC = () => {
         <Reveal className="czs-qchips" aria-label="Example student questions">
           {QUESTION_CHIPS.map(q => <span className="czs-qchip" key={q}>{q}</span>)}
         </Reveal>
-        <Reveal><p className="czs-qstat">300+ source pages · 2 languages · 9 programs · answered by hand, one inbox at a time</p></Reveal>
+        <Reveal><p className="czs-qstat">{t.problem.mediaStat}</p></Reveal>
       </section>
 
       {/* ── Live product ─────────────────────────────────────── */}
@@ -211,11 +211,33 @@ const CzsChatbotPage: React.FC = () => {
             {t.architecture.stack.map(s => <span className="czs-stack__chip" key={s}>{s}</span>)}
           </div>
         </Reveal>
+        <Reveal className="czs-builders">
+          <span className="czs-builders__label">{t.architecture.forBuildersLabel}</span>
+          <p>{t.architecture.forBuilders}</p>
+        </Reveal>
+      </section>
+
+      {/* ── Golden dataset / knowledge loop ──────────────────── */}
+      <section className="czs-block czs-block--tint">
+        <Reveal><span className="czs-kicker">04 / Knowledge</span><h2 className="czs-block__title">{t.golden.title}</h2></Reveal>
+        <Reveal><p className="czs-prose czs-prose--lead">{t.golden.intro}</p></Reveal>
+        <Reveal className="czs-flow">
+          <span className="czs-flow__label">{t.golden.stepsLabel}</span>
+          <ol className="czs-flow__list">
+            {t.golden.steps.map((s, i) => (
+              <li className="czs-flow__step" key={i}>
+                <span className="czs-flow__n">{String(i + 1).padStart(2, '0')}</span>
+                <span className="czs-flow__t">{s}</span>
+              </li>
+            ))}
+          </ol>
+        </Reveal>
+        <Reveal><p className="czs-closer">{t.golden.closer}</p></Reveal>
       </section>
 
       {/* ── Evaluation ───────────────────────────────────────── */}
       <section className="czs-block">
-        <Reveal><span className="czs-kicker">04 / Evaluation</span><h2 className="czs-block__title">{t.evaluation.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">05 / Evaluation</span><h2 className="czs-block__title">{t.evaluation.title}</h2></Reveal>
         <div className="czs-prose">
           {t.evaluation.body.map((p, i) => <Reveal key={i}><p>{p}</p></Reveal>)}
         </div>
@@ -261,7 +283,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Before / after wins ──────────────────────────────── */}
       <section className="czs-block czs-block--tint">
-        <Reveal><span className="czs-kicker">05 / Iteration</span><h2 className="czs-block__title">{t.wins.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">06 / Iteration</span><h2 className="czs-block__title">{t.wins.title}</h2></Reveal>
         <div className="czs-wins">
           {t.wins.items.map(w => (
             <Reveal className="czs-win" key={w.tag} as="article">
@@ -282,7 +304,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Dashboards ───────────────────────────────────────── */}
       <section className="czs-block czs-dashband">
-        <Reveal><span className="czs-kicker">06 / Operations</span><h2 className="czs-block__title">{t.dashboards.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">07 / Operations</span><h2 className="czs-block__title">{t.dashboards.title}</h2></Reveal>
         <Reveal><p className="czs-prose czs-prose--lead">{t.dashboards.intro}</p></Reveal>
         <div className="czs-dash">
           {/* Conversation Database (full width) */}
@@ -395,7 +417,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Privacy ──────────────────────────────────────────── */}
       <section className="czs-block">
-        <Reveal><span className="czs-kicker">07 / Privacy</span><h2 className="czs-block__title">{t.privacy.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">08 / Privacy</span><h2 className="czs-block__title">{t.privacy.title}</h2></Reveal>
         <div className="czs-prose">
           {t.privacy.body.map((p, i) => <Reveal key={i}><p>{p}</p></Reveal>)}
         </div>
@@ -403,7 +425,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Cost ─────────────────────────────────────────────── */}
       <section className="czs-block czs-block--tint">
-        <Reveal><span className="czs-kicker">08 / Cost</span><h2 className="czs-block__title">{t.cost.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">09 / Cost</span><h2 className="czs-block__title">{t.cost.title}</h2></Reveal>
         <div className="czs-prose">
           {t.cost.body.map((p, i) => <Reveal key={i}><p>{p}</p></Reveal>)}
         </div>

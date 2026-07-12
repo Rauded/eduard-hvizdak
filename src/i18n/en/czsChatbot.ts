@@ -35,15 +35,16 @@ const czsChatbot = {
     { value: '1', label: '8 GB server runs everything' },
   ],
   problem: {
-    title: '300 pages, one inbox',
+    title: 'A thousand pages, one inbox',
     body: [
-      'Study-abroad rules live across 300+ Czech and English pages that change constantly, so students email the same questions and staff answer by hand.',
+      'The CZS website holds close to a thousand pages of study-abroad rules in Czech and English, and the rules do not stay in one place: they also live in PDFs, Word documents, and recorded info sessions, and they change constantly. Students emailed their questions and staff answered each one by hand.',
     ],
+    mediaStat: '778 sources: ~530 web pages · 174 PDFs · 60 Word docs · 3 video transcripts',
   },
   product: {
     title: 'Ask in Czech or English. Get an answer with receipts.',
     body: [
-      'Students ask in Czech or English; answers come only from CZS content, sources linked, deadlines and contacts injected from human-approved tables.',
+      'An assistant that answers study-abroad questions in Czech and English, grounded in retrieved CZS sources and citing them, so every claim can be traced back to a page. Facts that must never be guessed (the current date and semester, application deadlines, CZS contact details) are injected by deterministic tool calls instead of the model\'s memory.',
     ],
     captionWidgetLive: 'Opens with an AI disclaimer and suggested questions, in the student\'s language.',
     captionAnswerLive: 'A real answer citing 11 named source documents, with feedback that routes to human review.',
@@ -57,8 +58,10 @@ const czsChatbot = {
   architecture: {
     title: 'The pipeline behind a straight answer',
     body: [
-      'Each question runs through intent classification, hybrid OpenSearch retrieval (BM25 plus vectors), two rerankers, and an answerability gate. Facts that must never be guessed, like deadlines and the right coordinator, come from a deterministic tool call, not the model\'s memory. Generation runs on CERIT.',
+      'Every question runs through a query classifier (intent, entities, language) and then hybrid retrieval on a self-hosted OpenSearch index: BM25 plus Voyage voyage-3.5 dense vectors fused with Reciprocal Rank Fusion, reranked by two independent cross-encoders and diversified with MMR. Chunking is heading-aware and token-sized, with a parent-child index: the system matches on small precise child passages, then expands to the full parent section for generation. A CRAG-style answerability gate checks whether the retrieved context can actually support an answer and re-retrieves with a rewritten query if not; verified facts (date, semester, deadlines, contacts) are injected by deterministic tool calls rather than LLM function-calling, which keeps the response streamable. Generation runs on DeepSeek-v3.2 via CERIT, the Czech national academic AI infrastructure, and streams to the browser over Server-Sent Events.',
     ],
+    forBuildersLabel: 'For builders',
+    forBuilders: 'Keep fact injection deterministic (dates, deadlines, contacts as plain lookups, not LLM tool calls) so you never break SSE streaming, and gate answerability before generation so the model asks or refuses instead of inventing.',
     stepsLabel: 'The path of one question',
     steps: [
       { k: 'Question', v: 'Czech or English' },
@@ -78,12 +81,28 @@ const czsChatbot = {
   evaluation: {
     title: 'Measured, not vibes',
     body: [
-      '37 automated evaluation cycles, 15,362 graded runs: accuracy around 9.0/10, groundedness 8.6/10, hallucinations near 1 percent, correct source in top results 92 percent.',
+      'A continuous LLM-as-judge harness evaluates the system on in-domain questions drawn from the CZS FAQ: real historical student questions plus generated variations, all answerable from the sources, not off-topic noise. Each answer is graded against the reference material for accuracy and groundedness and checked for hallucination. Across 37 cycles and 15,362 graded runs, 10,438 produced a gradeable answer (the rest were clarifying questions, out-of-scope probes, or empty retrievals); of those, 84 percent scored 9 or 10 out of 10, with a mean of 9.0, groundedness of 8.6, and hallucinations flagged on about 1 percent.',
     ],
     chartTitle: 'How 10,438 graded answers scored',
     chartAccuracy: 'scored 9 or 10',
     chartHallucination: 'scored 0 to 8',
-    chartCaption: 'Of 15,362 eval runs, 10,438 produced a gradeable answer. 84 percent scored 9 or 10; the average is 9.0 out of 10. Judged by an LLM against the source pages, with hallucinations flagged on about 1 percent.',
+    chartCaption: 'Accuracy distribution across 10,438 gradeable answers from 15,362 judged runs. The correct source appears in the top retrieval results 92 percent of the time, up from 79 before the parent-child index.',
+  },
+  golden: {
+    title: 'A knowledge base that reviews itself',
+    intro:
+      'CZS staff handed over their archive of real student questions with verified answers, and the team extended it into a curated dataset of 715 question-answer pairs. Every new question runs through it before any generation happens.',
+    stepsLabel: 'From a new question to a golden pair',
+    steps: [
+      'Answerability check: is the question in scope at all, or off-topic.',
+      'Similarity search against the FAQ: has a near-identical question already been answered.',
+      'If a verified CZS-staff answer exists, serve it directly.',
+      'If not, draft an answer with full retrieval across the 778 sources.',
+      'The draft goes to CZS staff to review, edit, and approve in the admin queue.',
+      'An approved answer becomes a golden FAQ pair, reused for all future similar questions.',
+    ],
+    closer:
+      'The knowledge base compounds: every approved answer makes the next identical question instant and staff-verified. 707 of the 715 pairs carry that verification today.',
   },
   wins: {
     title: 'What measurement actually catches',

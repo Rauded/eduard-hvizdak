@@ -169,15 +169,21 @@ $mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace)
   // ── Blocks ──
   &-block {
     padding-block: clamp(2.25rem, 5vw, 3.75rem);
+    // Contained content column with a full-width tinted background behind it,
+    // so titles, prose and closers all left-align to the same column edge.
     &--tint {
-      max-width: none;
-      padding-inline: 0;
-      background: var(--surface, #f6f6f6);
-      border-block: 1px solid var(--border);
-      > * {
-        max-width: $maxw;
-        margin-inline: auto;
-        padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+      position: relative;
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 100vw;
+        transform: translateX(-50%);
+        background: var(--surface, #f6f6f6);
+        border-block: 1px solid var(--border);
+        z-index: -1;
       }
     }
     &__title {
@@ -407,8 +413,8 @@ $mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace)
     gap: 1rem;
     margin-top: 1.5rem;
     &__closer {
-      margin: 1.75rem auto 0;
-      max-width: 60ch;
+      margin: 1.75rem 0 0;
+      max-width: 48rem;
       font-size: 1.15rem;
       font-weight: 500;
       line-height: 1.5;
@@ -527,8 +533,8 @@ $mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace)
     }
   }
   &-closer {
-    margin: 1.75rem auto 0;
-    max-width: 62ch;
+    margin: 1.75rem 0 0;
+    max-width: 48rem;
     font-size: 1.1rem;
     line-height: 1.55;
     font-weight: 500;
@@ -628,6 +634,78 @@ $mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace)
     margin-top: 1.2rem;
   }
 
+  // Golden-dataset workflow (numbered process list)
+  &-flow {
+    margin-top: 2rem;
+    &__label {
+      display: block;
+      font-family: $mono;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-faint);
+      margin-bottom: 1rem;
+    }
+    &__list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.6rem;
+      max-width: 52rem;
+    }
+    &__step {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 0.8rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+    }
+    &__n {
+      font-family: $mono;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent-text-soft);
+      background: var(--accent-soft, #eaf0f8);
+      border-radius: 6px;
+      padding: 0.2rem 0.45rem;
+      flex: none;
+    }
+    &__t {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--text-strong);
+    }
+  }
+
+  // For-builders note
+  &-builders {
+    margin-top: 2rem;
+    max-width: 48rem;
+    padding: 1rem 1.2rem;
+    border: 1px dashed var(--accent-ring, #c3d2ea);
+    border-radius: 10px;
+    background: var(--accent-soft, #eaf0f8);
+    &__label {
+      display: block;
+      font-family: $mono;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-text-soft);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+    p {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+  }
+
   // ── macOS window chrome (mock panels, hero-proof frame, chart panel) ──
   &-frame__dots i,
   &-mock__bar .d {
@@ -688,14 +766,19 @@ $mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace)
 
   // Dashboards band lifts the white panels off the page
   &-dashband {
-    max-width: none;
-    padding-inline: 0;
-    background: #f3f4f6;
-    border-block: 1px solid var(--border);
-    > * {
-      max-width: 1120px;
-      margin-inline: auto;
-      padding-inline: clamp(1.25rem, 5vw, 2.5rem);
+    position: relative;
+    max-width: 1120px;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 100vw;
+      transform: translateX(-50%);
+      background: #f3f4f6;
+      border-block: 1px solid var(--border);
+      z-index: -1;
     }
   }
 
