@@ -219,7 +219,10 @@ const CzsChatbotPage: React.FC = () => {
         <Reveal><p className="czs-prose">{t.golden.intro}</p></Reveal>
         <div className="czs-loop">
           <Reveal className="czs-loop__tile" as="div">
-            <span className="czs-loop__num pixel-accent">{t.golden.statNum}</span>
+            <span className="czs-loop__num">
+              <span className="czs-loop__big pixel-accent">{t.golden.statNum}</span>
+              <span className="czs-loop__den pixel-accent">{t.golden.statDen}</span>
+            </span>
             <span className="czs-loop__lbl">{t.golden.statLabel}</span>
             <span className="czs-loop__sub">{t.golden.statSub}</span>
           </Reveal>

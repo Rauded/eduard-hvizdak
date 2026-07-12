@@ -63,7 +63,7 @@ const czsChatbot = {
   architecture: {
     title: 'The pipeline behind a straight answer',
     body: [
-      'Each question runs a classifier (intent, entities, language), then hybrid OpenSearch retrieval: BM25 plus Voyage voyage-3.5 vectors fused with RRF, two cross-encoder rerankers, MMR for diversity. Heading-aware parent-child chunking matches small child passages, then expands to full parent sections for generation; a CRAG-style answerability gate re-retrieves on weak context. Verified facts (dates, deadlines, contacts) come from deterministic tool calls, not LLM function-calling, so answers stream over SSE from DeepSeek-v3.2 on CERIT.',
+      'Every question is classified, then answered from hybrid OpenSearch retrieval (BM25 plus Voyage dense vectors, fused with RRF, two rerankers, MMR) over a heading-aware parent-child index, with a CRAG-style gate that re-retrieves on weak context. Verified facts come from deterministic tool calls, not the model, so answers stream over SSE from DeepSeek-v3.2 on CERIT.',
     ],
     stepsLabel: 'The path of one question',
     steps: [
@@ -77,7 +77,7 @@ const czsChatbot = {
       { k: 'Cited answer', v: 'streamed with sources' },
     ],
     freshnessLabel: 'Freshness loop',
-    freshness: 'A change monitor watches all 778 CZS source pages. When any page changes, a webhook re-ingests and re-indexes just that page, and a scheduled job sweeps every source daily. Update a deadline on the website and the bot knows, with no ticket and no manual re-training.',
+    freshness: 'A change monitor watches all 778 sources. Any change fires a webhook that re-indexes just that page, and a daily job sweeps the rest, so the bot never goes stale.',
     stackLabel: 'Stack',
     stack: ['Python', 'FastAPI', 'OpenSearch', 'Voyage AI', 'DeepSeek via CERIT', 'PostHog', 'nginx', 'Hetzner'],
   },
@@ -95,7 +95,8 @@ const czsChatbot = {
     title: 'Every approved answer makes the next one instant.',
     intro:
       'CZS handed over their archive of real student questions with verified answers; the system turns every new answer back into that archive.',
-    statNum: '707 / 715',
+    statNum: '707',
+    statDen: '/ 715',
     statLabel: 'Q&A pairs staff verified',
     statSub: '8 promoted from live chats',
     nodes: [
