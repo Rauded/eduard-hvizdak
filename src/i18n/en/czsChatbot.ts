@@ -80,10 +80,10 @@ const czsChatbot = {
     body: [
       '37 automated evaluation cycles, 15,362 graded runs: accuracy around 9.0/10, groundedness 8.6/10, hallucinations near 1 percent, correct source in top results 92 percent.',
     ],
-    chartTitle: 'Answer accuracy across evaluation cycles',
-    chartAccuracy: 'accuracy / 10',
-    chartHallucination: 'hallucination rate %',
-    chartCaption: 'Continuous LLM-judge grading, roughly 748 questions per cycle. Accuracy holds near 9/10 and the hallucination rate stays near 1 percent across all 37 cycles.',
+    chartTitle: 'How 10,438 graded answers scored',
+    chartAccuracy: 'scored 9 or 10',
+    chartHallucination: 'scored 0 to 8',
+    chartCaption: 'Of 15,362 eval runs, 10,438 produced a gradeable answer. 84 percent scored 9 or 10; the average is 9.0 out of 10. Judged by an LLM against the source pages, with hallucinations flagged on about 1 percent.',
   },
   wins: {
     title: 'What measurement actually catches',

@@ -19,11 +19,12 @@ const BOOKING_URL = process.env.REACT_APP_BOOKING_URL || 'https://cal.com/eduard
 // Representative accuracy trend, derived from the real 37 eval cycles (accuracy
 // held ~8.9 to 9.1 out of 10; hallucination counts stayed in the single digits
 // per ~748 questions). Shown as a shape, not exact per-cycle figures.
-const ACCURACY_POINTS = [9.48, 8.58, 8.29, 8.29, 8.18, 7.96, 8.73, 9.0, 8.47, 8.0, 7.89, 8.4, 8.86, 8.8, 8.77, 7.84, 8.62, 9.07, 9.06, 9.05, 8.96, 8.99, 9.02, 9.05, 9.02, 9.08, 8.95, 9.0, 8.87];
-// Hallucination RATE (percent of graded questions), not raw count: later cycles
-// tested ~748 questions vs ~150 early, so raw counts rise while the rate holds
-// near 1 percent. Plotting the rate is the honest, comparable measure.
-const HALLUCINATION_POINTS = [1.9, 0.7, 0.0, 0.7, 1.4, 2.0, 0.0, 0.0, 0.7, 1.4, 2.0, 0.0, 0.0, 0.6, 1.4, 3.3, 1.3, 1.1, 0.6, 0.9, 1.2, 1.1, 0.7, 1.2, 1.1, 1.7, 0.9, 1.5, 1.1];
+// Real distribution of answer scores from the evaluation database
+// (continuous_eval.sqlite). Index = score 0..10, value = number of graded
+// answers. Of 15,362 eval runs, 10,438 produced a gradeable answer (the rest
+// were clarifications, out-of-scope probes, or empty retrievals). 84 percent
+// of gradeable answers scored 9 or 10; the average is 9.0 out of 10.
+const SCORE_DIST = [117, 135, 76, 91, 152, 2, 66, 618, 394, 2690, 6097];
 
 // Anonymized illustrative rows for the Conversation Database mock. No real
 // student data: generic procedural questions, invented confidence and timing.
@@ -81,23 +82,16 @@ const CzsChatbotPage: React.FC = () => {
   const { theme } = useTheme();
   const t = useT('czsChatbot');
 
-  // ── Analytics chart geometry ──
+  // ── Answer-score distribution histogram geometry ──
   const CW = 860, CH = 300;
-  const pL = 46, pR = CW - 40, pT = 30, pB = CH - 40;
+  const pL = 54, pR = CW - 24, pT = 34, pB = CH - 42;
   const pW = pR - pL, pH = pB - pT;
-  const N = ACCURACY_POINTS.length;
-  const accX = (i: number) => pL + (pW * i) / (N - 1);
-  const accY = (v: number) => pB - (v / 10) * pH;      // accuracy axis 0..10
-  const HAL_MAX = 5;
-  const halY = (v: number) => pB - (v / HAL_MAX) * pH;  // secondary axis 0..5 percent
-  const CYCLES = 37;
-  const cycleX = (c: number) => pL + (pW * (c - 1)) / (CYCLES - 1);
-  const accPts = ACCURACY_POINTS.map((v, i) => [accX(i), accY(v)] as const);
-  const accPath = accPts.map(p => `${p[0].toFixed(1)},${p[1].toFixed(1)}`).join(' ');
-  const areaPath = `M ${accX(0).toFixed(1)} ${pB} `
-    + accPts.map(p => `L ${p[0].toFixed(1)} ${p[1].toFixed(1)}`).join(' ')
-    + ` L ${accX(N - 1).toFixed(1)} ${pB} Z`;
-  const annoIdx = 17; // cycle where the parent-child (v4) retrieval index shipped
+  const YMAX = 6500;
+  const barY = (n: number) => pB - (n / YMAX) * pH;
+  const slot = pW / SCORE_DIST.length;   // 11 slots for scores 0..10
+  const barW = slot * 0.6;
+  const barCX = (s: number) => pL + slot * (s + 0.5);
+  const meanX = pL + slot * (9.0 + 0.5);  // mean score 9.0 sits between bars 9 and 10
   void polyline;
 
   return (
@@ -229,42 +223,32 @@ const CzsChatbotPage: React.FC = () => {
           <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>chatbot.czs.muni.cz/evaluation</em></div>
           <span className="czs-chart__title">{t.evaluation.chartTitle}</span>
           <svg viewBox={`0 0 ${CW} ${CH}`} role="img" aria-label={t.evaluation.chartTitle} className="czs-chart__svg">
-            {/* horizontal gridlines + accuracy (left) ticks */}
-            {[0, 2, 4, 6, 8, 10].map(tk => (
+            {/* horizontal gridlines + count ticks */}
+            {[0, 2000, 4000, 6000].map(tk => (
               <g key={`y${tk}`}>
-                <line className="czs-chart__grid" x1={pL} y1={accY(tk)} x2={pR} y2={accY(tk)} />
-                <text className="czs-chart__tick" x={pL - 7} y={accY(tk) + 3} textAnchor="end">{tk}</text>
+                <line className="czs-chart__grid" x1={pL} y1={barY(tk)} x2={pR} y2={barY(tk)} />
+                <text className="czs-chart__tick" x={pL - 8} y={barY(tk) + 3} textAnchor="end">{tk === 0 ? '0' : `${tk / 1000}k`}</text>
               </g>
             ))}
-            {/* hallucination rate (right) ticks, percent */}
-            {[0, 1, 2, 3, 4, 5].map(tk => (
-              <text key={`h${tk}`} className="czs-chart__tick" x={pR + 7} y={halY(tk) + 3} textAnchor="start">{tk}</text>
+            {/* one bar per score, 9 and 10 highlighted */}
+            {SCORE_DIST.map((n, s) => (
+              <rect key={s} className={s >= 9 ? 'czs-chart__barhi' : 'czs-chart__barlo'} x={barCX(s) - barW / 2} y={barY(n)} width={barW} height={pB - barY(n)} rx={2} />
             ))}
-            {/* x-axis cycle ticks */}
-            {[1, 10, 20, 30, 37].map(c => (
-              <g key={`x${c}`}>
-                <line className="czs-chart__axis" x1={cycleX(c)} y1={pB} x2={cycleX(c)} y2={pB + 4} />
-                <text className="czs-chart__tick" x={cycleX(c)} y={pB + 17} textAnchor="middle">{c}</text>
-              </g>
+            {/* counts above the two dominant bars */}
+            <text className="czs-chart__vallabel" x={barCX(10)} y={barY(6097) - 7} textAnchor="middle">6,097</text>
+            <text className="czs-chart__vallabel" x={barCX(9)} y={barY(2690) - 7} textAnchor="middle">2,690</text>
+            {/* x-axis score labels */}
+            {SCORE_DIST.map((n, s) => (
+              <text key={`x${s}`} className="czs-chart__tick" x={barCX(s)} y={pB + 17} textAnchor="middle">{s}</text>
             ))}
             {/* axis titles */}
-            <text className="czs-chart__axislabel" x={pL - 30} y={pT - 12}>accuracy /10</text>
-            <text className="czs-chart__axislabel" x={pR + 30} y={pT - 12} textAnchor="end">halluc. %</text>
-            <text className="czs-chart__axislabel" x={(pL + pR) / 2} y={CH - 6} textAnchor="middle">eval cycle</text>
-            {/* hallucination bars (secondary axis) */}
-            {HALLUCINATION_POINTS.map((c, i) => c > 0 ? (
-              <rect key={`b${i}`} className="czs-chart__bar" x={accX(i) - 2.5} y={halY(c)} width={5} height={pB - halY(c)} />
-            ) : null)}
-            {/* accuracy area + line + per-cycle dots */}
-            <path className="czs-chart__area" d={areaPath} />
-            <polyline className="czs-chart__acc" points={accPath} />
-            {accPts.map((p, i) => <circle key={`d${i}`} className="czs-chart__dot" cx={p[0]} cy={p[1]} r={2.6} />)}
-            {/* ship annotation */}
-            <line className="czs-chart__anno" x1={accX(annoIdx)} y1={pT} x2={accX(annoIdx)} y2={pB} />
-            <text className="czs-chart__annolabel" x={accX(annoIdx) + 4} y={pT + 7}>v4 retrieval</text>
+            <text className="czs-chart__axislabel" x={pL - 40} y={pT - 14}>answers</text>
+            <text className="czs-chart__axislabel" x={(pL + pR) / 2} y={CH - 6} textAnchor="middle">answer score / 10</text>
+            {/* mean marker */}
+            <line className="czs-chart__anno" x1={meanX} y1={pT} x2={meanX} y2={pB} />
+            <text className="czs-chart__annolabel" x={meanX + 5} y={pT + 7}>mean 9.0</text>
             {/* axes */}
             <line className="czs-chart__axis" x1={pL} y1={pT} x2={pL} y2={pB} />
-            <line className="czs-chart__axis" x1={pR} y1={pT} x2={pR} y2={pB} />
             <line className="czs-chart__axis" x1={pL} y1={pB} x2={pR} y2={pB} />
           </svg>
           <div className="czs-chart__legend">
