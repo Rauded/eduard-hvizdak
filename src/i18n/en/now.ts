@@ -40,8 +40,8 @@ const now = {
     },
     kouzelnik: {
       tagline:
-        'A marketplace connecting event organisers with magicians across Czechia and Slovakia, and my live sandbox for SEO, GEO, and online-ads experiments.',
-      status: 'Live · marketplace + marketing lab',
+        'A marketplace connecting event organisers with magicians across Czechia and Slovakia, and where I sharpen my SEO and online-marketing craft on a real product.',
+      status: 'Live · growing',
     },
     nasadclaw: {
       tagline:

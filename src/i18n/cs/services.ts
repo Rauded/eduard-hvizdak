@@ -34,7 +34,7 @@ const services = {
   signalKicker: 'Dodáno, v produkci, ve velkém',
   signals: [
     { value: 'Miliony', label: 'veřejných zakázek zařazených do kategorií a zpřístupněných k vyhledávání, paralelně' },
-    { value: '200 tis.+', label: 'studentů využívá AI asistenta na 10 evropských univerzitách' },
+    { value: '200 tis.+', label: 'studentů na platformě digitálního kampusu 10 evropských univerzit, kam jsem nasadil AI asistenta' },
     { value: 'Od začátku do konce', label: 'jeden člověk to nadefinuje, postaví, dodá a předá' },
   ],
 
@@ -69,7 +69,7 @@ const services = {
 
   whyMe: 'Proč pracovat se mnou',
   proof: [
-    'Reálné produkční systémy s platícími zákazníky (InzerPro, NasadClaw, KouzelnikNaAkci), ne dema, která po prezentaci zhasnou.',
+    'Vlastní produkty v produkci: InzerPro (platící zákazníci), NasadClaw a KouzelnikNaAkci. Ne dema, která po prezentaci zhasnou.',
     'RAG v praxi: vektorové vyhledávání, BM25, MMR retrieval a přeřazování přes LLM, k tomu ověřování faktů, aby odpovědi vycházely ze zdroje.',
     'Neefektní části jsou pořešené: naplánované úlohy, které se spustí včas, fakturace přes Stripe s trialy a řešením neúspěšných plateb, autentizace, rate limity, zabezpečení on-prem.',
     'Jeden člověk, od začátku do konce. Žádné vrstvy agentury, žádné předávání, žádný account manažer mezi vámi a člověkem, který píše kód.',

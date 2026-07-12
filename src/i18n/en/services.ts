@@ -41,7 +41,7 @@ const services = {
   signalKicker: 'Shipped, in production, at scale',
   signals: [
     { value: 'Millions', label: 'of public contracts categorized and made searchable in parallel' },
-    { value: '200k+', label: 'students served by an AI assistant across 10 European universities' },
+    { value: '200k+', label: 'students on the digital campus platform of 10 European universities where my AI assistant shipped' },
     { value: 'End to end', label: 'one person scopes it, builds it, ships it, and hands it over' },
   ],
 
@@ -76,7 +76,7 @@ const services = {
 
   whyMe: 'Why work with me',
   proof: [
-    'Real production systems with paying customers (InzerPro, NasadClaw, KouzelnikNaAkci), not demos that die after the pitch.',
+    'My own products in production: InzerPro (paying customers), NasadClaw and KouzelnikNaAkci. Not demos that die after the pitch.',
     'RAG in the wild: vector search, BM25, MMR retrieval and LLM reranking, plus fact-verification so answers stay grounded in the source.',
     'The unglamorous parts are handled: scheduled jobs that fire on time, Stripe billing with trials and failed-payment recovery, auth, rate limits, on-prem hardening.',
     'One person, end to end. No agency layers, no handoffs, no account manager between you and the person writing the code.',

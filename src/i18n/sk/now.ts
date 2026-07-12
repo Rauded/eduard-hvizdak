@@ -39,8 +39,8 @@ const now = {
     },
     kouzelnik: {
       tagline:
-        'Trhovisko, ktoré spája organizátorov akcií s kúzelníkmi po Česku a Slovensku, a zároveň moje živé pieskovisko na experimenty so SEO, GEO a online reklamou.',
-      status: 'V prevádzke · trhovisko + marketingové laboratórium',
+        'Trhovisko, ktoré spája organizátorov akcií s kúzelníkmi po Česku a Slovensku. Zároveň miesto, kde si na skutočnom produkte brúsim SEO a online marketing.',
+      status: 'V prevádzke · rastie',
     },
     nasadclaw: {
       tagline:

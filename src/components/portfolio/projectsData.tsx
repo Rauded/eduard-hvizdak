@@ -104,7 +104,7 @@ export const PROJECTS: PortfolioProject[] = [
       motivation:
         'The goal was an assistant CZS could put its name on: one that only says what the university\'s own pages say, <strong>cites where it got every claim</strong>, answers in the student\'s language, and stays current when a page changes. That meant grounding, not guessing, and it meant being able to <strong>prove</strong> the thing was right before it went live in front of real students.',
       challenges:
-        'Grounded answers with <strong>no hallucination</strong> on university-specific facts; <strong>bilingual</strong> Czech and English retrieval; facts that must never be guessed (this year\'s deadlines, the right coordinator); <strong>freshness</strong> as the source pages change; and doing all of it on a <strong>single 8 GB server</strong>. On top of that, the hardest part of any AI product: knowing whether it actually works, continuously, not just in a demo.',
+        'Grounded answers with <strong>no hallucination</strong> on university-specific facts; <strong>bilingual</strong> Czech and English retrieval; facts that must never be guessed (this year\'s deadlines, the right coordinator); and <strong>freshness</strong> as the source pages change. On top of that, the hardest part of any AI product: knowing whether it actually works, continuously, not just in a demo.',
       solution:
         'I built a hybrid <strong>RAG</strong> pipeline on self-hosted <strong>OpenSearch</strong>: BM25 and dense vectors fused with RRF, reranked by two models, with heading-aware <strong>parent-child chunking</strong>, a query classifier, an <strong>answerability gate</strong> with corrective re-retrieval, and deterministic injection of verified deadlines and contacts. Generation runs on <strong>DeepSeek via CERIT</strong> (Czech national academic AI infrastructure), embeddings and reranking on <strong>Voyage AI</strong>. <strong>changedetection.io</strong> watches all 778 source URLs and re-indexes on change. A <strong>continuous evaluation</strong> harness grades answers against the sources around the clock (15,362 runs, 37 cycles, roughly 90 percent accuracy, hallucinations near 1 percent), and a full admin suite lets CZS staff review conversations, flag answers, manage sources, and approve mined FAQs.',
       story:
@@ -117,7 +117,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'InzerPro',
     subtitle: 'A SaaS I run on the side',
     description:
-      'Keeps power sellers\' listings at the top of Bazoš.cz and Bazoš.sk: scheduled re-posting, bulk upload, analytics. Bazoš has no public API, so the engine drives the live site. Hackathon build turned side business with paying customers.',
+      'Auto-renewal, bulk posting, and analytics for power sellers on Czech and Slovak second-hand marketplaces. The daily relisting grind runs on schedule instead of by hand. Hackathon build turned side business with paying customers.',
     tags: ['React', 'Supabase', 'Stripe', 'Deno', 'PostHog', 'SaaS', 'Hackathon'],
     links: [
       { label: 'www.inzerpro.cz', url: 'https://www.inzerpro.cz', type: 'demo', favicon: '/brand/sites/inzerpro.svg' },
@@ -131,43 +131,43 @@ export const PROJECTS: PortfolioProject[] = [
     reversed: false,
     caseStudy: {
       problem:
-        'Power sellers on <strong>Bazoš.cz</strong> and <strong>Bazoš.sk</strong> depend on listing position. Back to the top of a category means delete and re-post. High-volume sellers were <strong>re-listing dozens of ads by hand every day</strong>, and competitors still buried them overnight.',
+        'Power sellers on Czech and Slovak <strong>second-hand marketplaces</strong> depend on listing freshness. Older listings sink, so high-volume sellers were <strong>re-listing dozens of ads by hand every day</strong>, and competitors still buried them overnight.',
       motivation:
         'InzerPro started at a <strong>hackathon</strong>. Resellers, e-shops and car dealers burned mornings on relisting: a scheduling problem a computer should own. The goal: give small sellers the <strong>automation, bulk posting and analytics</strong> the big marketplaces keep for themselves.',
       challenges:
-        'Bazoš has <strong>no public API</strong>: everything runs through the live site. Sessions, cookies, image uploads, category rules, CAPTCHAs, rate limits, listing caps, all without getting accounts flagged. Plus the real SaaS work: on-time scheduled jobs, multi-account management, <strong>Stripe billing</strong> with trials, upgrades and failed-payment recovery.',
+        'The hard parts of any real SaaS: <strong>scheduled jobs</strong> that fire on time for every user, multi-account management, image handling and category rules that differ per marketplace, and <strong>Stripe billing</strong> with trials, upgrades and failed-payment recovery.',
       solution:
-        'A <strong>Deno</strong> engine handles auto-renewal, scheduled re-posting and bulk listing across seller accounts. <strong>Supabase</strong> covers auth, Postgres and storage, <strong>Stripe</strong> subscriptions. A <strong>React</strong> dashboard manages listings and analytics; <strong>PostHog</strong> shows what drives retention. A seller\'s ads stay on top on their own.',
+        'A <strong>Deno</strong> engine handles auto-renewal, scheduled re-posting and bulk listing across seller accounts. <strong>Supabase</strong> covers auth, Postgres and storage, <strong>Stripe</strong> subscriptions. A <strong>React</strong> dashboard manages listings and analytics; <strong>PostHog</strong> shows what drives retention. The relisting grind runs on autopilot.',
       story:
         'The weekend hackathon build is now a <strong>side business with paying customers</strong> at <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. I pitched it again at the <a href="/blog/zero-to-done">Zero to Done hackathon</a> in Brno: real customers, not a demo.',
     },
     subtitle_cs: 'SaaS, který provozuji vedle práce',
     description_cs:
-      'Drží inzeráty velkých prodejců nahoře na Bazoš.cz a Bazoš.sk: naplánované přidávání, hromadný upload, analytika. Bazoš nemá veřejné API, engine řídí živý web. Z hackathonu je dnes byznys vedle práce s platícími zákazníky.',
+      'Automatické obnovování, hromadné přidávání a analytika pro velké prodejce na českých a slovenských bazarových tržištích. Každodenní dřina s obnovováním inzerátů běží podle plánu místo ručně. Z hackathonu je dnes byznys vedle práce s platícími zákazníky.',
     caseStudy_cs: {
       problem:
-        'Velcí prodejci na <strong>Bazoš.cz</strong> a <strong>Bazoš.sk</strong> stojí a padají s pozicí inzerátu. Na vrchol kategorie vede jen smazání a nové přidání. Prodejci s velkým objemem tak ručně <strong>obnovovali desítky inzerátů denně</strong> a konkurence je přes noc stejně zasypala.',
+        'Velcí prodejci na českých a slovenských <strong>bazarových tržištích</strong> stojí a padají s čerstvostí inzerátu. Starší inzeráty klesají dolů, takže prodejci s velkým objemem <strong>obnovovali desítky inzerátů ručně každý den</strong> a konkurence je přes noc stejně zasypala.',
       motivation:
         'InzerPro vzniklo na <strong>hackathonu</strong>. Second-handy, e-shopy a autobazary trávily rána obnovováním inzerátů: problém plánování, který má řešit počítač. Cíl: dát malým prodejcům <strong>automatizaci, hromadné přidávání a analytiku</strong>, jaké si velká tržiště nechávají pro sebe.',
       challenges:
-        'Bazoš nemá <strong>veřejné API</strong>: všechno běží přes živý web. Relace, cookies, nahrávání obrázků, pravidla kategorií, CAPTCHA, rate limity, limity počtu inzerátů, a to bez zablokovaných účtů. K tomu skutečná práce SaaS: úlohy spuštěné včas, správa více účtů, <strong>billing přes Stripe</strong> se zkušebními obdobími, upgrady a obnovou po neúspěšné platbě.',
+        'Těžké části každého skutečného SaaS: spolehlivé <strong>naplánované úlohy</strong> spuštěné včas pro každého uživatele, správa více účtů, práce s obrázky a pravidla kategorií lišící se podle tržiště, a <strong>předplatné přes Stripe</strong> se zkušebními obdobími, upgrady a obnovou po neúspěšné platbě.',
       solution:
-        'Engine na <strong>Deno</strong> zvládá obnovování, naplánované přidávání a hromadnou inzerci napříč účty prodejců. <strong>Supabase</strong> drží autentizaci, Postgres a úložiště, <strong>Stripe</strong> předplatné. <strong>React</strong> dashboard řeší správu inzerátů a analytiku; <strong>PostHog</strong> ukazuje, co drží zákazníky. Inzeráty zůstávají nahoře samy.',
+        'Engine na <strong>Deno</strong> zvládá obnovování, naplánované přidávání a hromadnou inzerci napříč účty prodejců. <strong>Supabase</strong> drží autentizaci, Postgres a úložiště, <strong>Stripe</strong> předplatné. <strong>React</strong> dashboard řeší správu inzerátů a analytiku; <strong>PostHog</strong> ukazuje, co drží zákazníky. Dřina s obnovováním běží na autopilotu.',
       story:
         'Z víkendového hackathonového projektu je dnes <strong>byznys vedle práce s platícími zákazníky</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Znovu jsem ho odprezentoval na <a href="/cs/blog/zero-to-done">hackathonu Zero to Done</a> v Brně: skuteční zákazníci, ne demo.',
     },
     subtitle_sk: 'SaaS, ktorý prevádzkujem popri práci',
     description_sk:
-      'Drží inzeráty veľkých predajcov na vrchu Bazoš.cz a Bazoš.sk: naplánované pridávanie, hromadný upload, analytika. Bazoš nemá verejné API, engine riadi živý web. Z hackathonu je dnes popri práci biznis s platiacimi zákazníkmi.',
+      'Automatické obnovovanie, hromadné pridávanie a analytika pre veľkých predajcov na českých a slovenských bazárových trhoviskách. Každodenná drina s obnovovaním inzerátov beží podľa plánu namiesto ručne. Z hackathonu je dnes popri práci biznis s platiacimi zákazníkmi.',
     caseStudy_sk: {
       problem:
-        'Veľkí predajcovia na <strong>Bazoš.cz</strong> a <strong>Bazoš.sk</strong> stoja a padajú s pozíciou inzerátu. Na vrch kategórie vedie len zmazanie a nové pridanie. Predajcovia s veľkým objemom tak ručne <strong>obnovovali desiatky inzerátov denne</strong> a konkurencia ich cez noc aj tak zasypala.',
+        'Veľkí predajcovia na českých a slovenských <strong>bazárových trhoviskách</strong> stoja a padajú s čerstvosťou inzerátu. Staršie inzeráty klesajú nižšie, takže predajcovia s veľkým objemom <strong>obnovovali desiatky inzerátov ručne každý deň</strong> a konkurencia ich cez noc aj tak zasypala.',
       motivation:
         'InzerPro vzniklo na <strong>hackathone</strong>. Second-handy, e-shopy a autobazáre trávili rána obnovovaním inzerátov: problém plánovania, ktorý má riešiť počítač. Cieľ: dať malým predajcom <strong>automatizáciu, hromadné pridávanie a analytiku</strong>, aké si veľké trhoviská nechávajú pre seba.',
       challenges:
-        'Bazoš nemá <strong>verejné API</strong>: všetko beží cez živú stránku. Relácie, cookies, nahrávanie obrázkov, pravidlá kategórií, CAPTCHA, rate limity, limity počtu inzerátov, a to bez zablokovaných účtov. K tomu skutočná práca SaaS: úlohy spustené načas, správa viacerých účtov, <strong>billing cez Stripe</strong> so skúšobnými obdobiami, upgradmi a obnovou po neúspešnej platbe.',
+        'Náročné časti každého skutočného SaaS: spoľahlivé <strong>naplánované úlohy</strong> spustené načas pre každého používateľa, správa viacerých účtov, práca s obrázkami a pravidlá kategórií líšiace sa podľa trhoviska, a <strong>predplatné cez Stripe</strong> so skúšobnými obdobiami, upgradmi a obnovou po neúspešnej platbe.',
       solution:
-        'Engine na <strong>Deno</strong> zvláda obnovovanie, naplánované pridávanie a hromadnú inzerciu naprieč účtami predajcov. <strong>Supabase</strong> drží autentifikáciu, Postgres a úložisko, <strong>Stripe</strong> predplatné. <strong>React</strong> dashboard rieši správu inzerátov a analytiku; <strong>PostHog</strong> ukazuje, čo drží zákazníkov. Inzeráty zostávajú na vrchu samy.',
+        'Engine na <strong>Deno</strong> zvláda obnovovanie, naplánované pridávanie a hromadnú inzerciu naprieč účtami predajcov. <strong>Supabase</strong> drží autentifikáciu, Postgres a úložisko, <strong>Stripe</strong> predplatné. <strong>React</strong> dashboard rieši správu inzerátov a analytiku; <strong>PostHog</strong> ukazuje, čo drží zákazníkov. Drina s obnovovaním beží na autopilote.',
       story:
         'Z víkendového hackathonového projektu je dnes <strong>biznis popri práci s platiacimi zákazníkmi</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Znova som ho odprezentoval na <a href="/sk/blog/zero-to-done">hackathone Zero to Done</a> v Brne: skutoční zákazníci, nie demo.',
     },
