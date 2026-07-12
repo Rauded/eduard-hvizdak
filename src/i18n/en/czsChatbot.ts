@@ -44,7 +44,7 @@ const czsChatbot = {
   product: {
     title: 'Ask in Czech or English. Get an answer with receipts.',
     body: [
-      'An assistant that answers study-abroad questions in Czech and English, grounded in retrieved CZS sources and citing them, so every claim can be traced back to a page. Facts that must never be guessed (the current date and semester, application deadlines, CZS contact details) are injected by deterministic tool calls instead of the model\'s memory.',
+      'Answers study-abroad questions in Czech or English, grounded in retrieved CZS sources and cited, so every claim traces back to a page. Facts that must not be guessed (current date, deadlines, contacts) come from deterministic tool calls, not the model\'s memory.',
     ],
     captionWidgetLive: 'Opens with an AI disclaimer and suggested questions, in the student\'s language.',
     captionAnswerLive: 'A real answer citing 11 named source documents, with feedback that routes to human review.',
@@ -58,10 +58,8 @@ const czsChatbot = {
   architecture: {
     title: 'The pipeline behind a straight answer',
     body: [
-      'Every question runs through a query classifier (intent, entities, language) and then hybrid retrieval on a self-hosted OpenSearch index: BM25 plus Voyage voyage-3.5 dense vectors fused with Reciprocal Rank Fusion, reranked by two independent cross-encoders and diversified with MMR. Chunking is heading-aware and token-sized, with a parent-child index: the system matches on small precise child passages, then expands to the full parent section for generation. A CRAG-style answerability gate checks whether the retrieved context can actually support an answer and re-retrieves with a rewritten query if not; verified facts (date, semester, deadlines, contacts) are injected by deterministic tool calls rather than LLM function-calling, which keeps the response streamable. Generation runs on DeepSeek-v3.2 via CERIT, the Czech national academic AI infrastructure, and streams to the browser over Server-Sent Events.',
+      'Each question runs a classifier (intent, entities, language), then hybrid OpenSearch retrieval: BM25 plus Voyage voyage-3.5 vectors fused with RRF, two cross-encoder rerankers, MMR for diversity. Heading-aware parent-child chunking matches small child passages, then expands to full parent sections for generation; a CRAG-style answerability gate re-retrieves on weak context. Verified facts (dates, deadlines, contacts) come from deterministic tool calls, not LLM function-calling, so answers stream over SSE from DeepSeek-v3.2 on CERIT.',
     ],
-    forBuildersLabel: 'For builders',
-    forBuilders: 'Keep fact injection deterministic (dates, deadlines, contacts as plain lookups, not LLM tool calls) so you never break SSE streaming, and gate answerability before generation so the model asks or refuses instead of inventing.',
     stepsLabel: 'The path of one question',
     steps: [
       { k: 'Question', v: 'Czech or English' },
@@ -81,7 +79,7 @@ const czsChatbot = {
   evaluation: {
     title: 'Measured, not vibes',
     body: [
-      'A continuous LLM-as-judge harness evaluates the system on in-domain questions drawn from the CZS FAQ: real historical student questions plus generated variations, all answerable from the sources, not off-topic noise. Each answer is graded against the reference material for accuracy and groundedness and checked for hallucination. Across 37 cycles and 15,362 graded runs, 10,438 produced a gradeable answer (the rest were clarifying questions, out-of-scope probes, or empty retrievals); of those, 84 percent scored 9 or 10 out of 10, with a mean of 9.0, groundedness of 8.6, and hallucinations flagged on about 1 percent.',
+      'A continuous LLM-as-judge harness grades in-domain questions from the CZS FAQ (real historical plus generated) against the sources for accuracy, groundedness, and hallucination. Across 37 cycles and 15,362 runs, 10,438 were gradeable answers: 84 percent scored 9 or 10, mean 9.0, groundedness 8.6, hallucinations near 1 percent.',
     ],
     chartTitle: 'How 10,438 graded answers scored',
     chartAccuracy: 'scored 9 or 10',

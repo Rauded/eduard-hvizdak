@@ -211,10 +211,6 @@ const CzsChatbotPage: React.FC = () => {
             {t.architecture.stack.map(s => <span className="czs-stack__chip" key={s}>{s}</span>)}
           </div>
         </Reveal>
-        <Reveal className="czs-builders">
-          <span className="czs-builders__label">{t.architecture.forBuildersLabel}</span>
-          <p>{t.architecture.forBuilders}</p>
-        </Reveal>
       </section>
 
       {/* ── Golden dataset / knowledge loop ──────────────────── */}
