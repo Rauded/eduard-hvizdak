@@ -587,6 +587,101 @@ $mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace)
   }
 }
 
+// ── Centered layout + real-UI component styles ──
+.czs {
+  &-hero { text-align: center; }
+  &-back { margin-inline: auto; }
+  &-clientlogo { margin-inline: auto; }
+  &-eyebrow { text-align: center; }
+  &-hero__title { margin-inline: auto; }
+  &-hero__lead { margin-inline: auto; }
+  &-hero__cta { justify-content: center; }
+  &-meta { justify-content: center; text-align: center; }
+
+  &-block__title { margin-inline: auto; text-align: center; }
+  &-prose { margin-inline: auto; text-align: center; }
+  &-caption { text-align: center; }
+  &-metric { align-items: center; text-align: center; }
+  &-stack { justify-content: center; }
+  &-pipe__label { text-align: center; }
+  &-pipe__loop { justify-content: center; }
+  &-chart { margin-inline: auto; }
+  &-chart__title { text-align: center; }
+  &-chart__legend { justify-content: center; }
+  &-costcard { align-items: center; text-align: center; }
+
+  // Wins: centered cards
+  &-win { align-items: center; text-align: center; }
+  &-win__stat { justify-content: center; }
+  &-wins__closer, &-closer {
+    border-left: 0;
+    padding-left: 0;
+    text-align: center;
+  }
+
+  // Dashboard cards: center titles/captions, keep the mock UI left-aligned
+  &-dashcard__title { text-align: center; }
+  &-mock { text-align: left; }
+
+  // Real chat-widget crops (high-res screenshots)
+  &-shots--widgets { align-items: start; }
+  &-widgetframe {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 6px 24px rgba(10, 21, 48, 0.08);
+    max-width: 360px;
+    margin-inline: auto;
+    img { display: block; width: 100%; height: auto; }
+  }
+
+  // Conversation Database spans the full row
+  &-dashcard--wide { grid-column: 1 / -1; }
+  &-mock__filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.7rem;
+    background: var(--surface, #f6f6f6);
+    border-bottom: 1px solid var(--border);
+  }
+  &-filter {
+    font-family: $mono;
+    font-size: 0.68rem;
+    padding: 0.22rem 0.5rem;
+    border: 1px solid var(--border-strong, var(--border));
+    border-radius: 6px;
+    color: var(--text-muted);
+    background: #fff;
+    b { color: var(--text-faint); font-weight: 600; }
+  }
+  &-search {
+    font-family: $mono;
+    font-size: 0.68rem;
+    padding: 0.22rem 0.6rem;
+    border: 1px solid var(--border-strong, var(--border));
+    border-radius: 6px;
+    color: var(--text-faint);
+    background: #fff;
+    flex: 1;
+    min-width: 130px;
+    text-align: left;
+  }
+  &-src {
+    font-family: $mono;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 0.12rem 0.4rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    &.student { background: rgba(46, 125, 84, 0.14); color: #2e7d54; }
+    &.dev { background: var(--surface-sunken, #eef0f2); color: var(--text-faint); }
+  }
+}
+
 // ── Responsive ──
 @media (max-width: 860px) {
   .czs {

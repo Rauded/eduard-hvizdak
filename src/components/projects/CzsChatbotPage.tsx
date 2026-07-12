@@ -2,15 +2,15 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   LuArrowLeft, LuArrowRight, LuCalendar, LuMail, LuExternalLink,
-  LuThumbsUp, LuThumbsDown, LuCircleCheck, LuServer, LuRefreshCw,
+  LuThumbsUp, LuThumbsDown, LuServer, LuRefreshCw,
 } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
 import { useTheme } from '../theme/ThemeContext';
 import Reveal from '../_21test/Reveal';
 import livePage from '../../assets/projects/czs/czs-live-page.jpg';
-import liveWidget from '../../assets/projects/czs/czs-live-widget.jpg';
-import liveAnswer from '../../assets/projects/czs/czs-live-answer.jpg';
+import widgetShot from '../../assets/projects/czs/czs-widget.png';
+import answerShot from '../../assets/projects/czs/czs-answer.png';
 import './czs-chatbot.scss';
 
 const EMAIL = 'eduardd.hv@gmail.com';
@@ -25,12 +25,12 @@ const HALLUCINATION_POINTS = [6, 1, 0, 1, 1, 3, 0, 0, 1, 1, 3, 0, 0, 0, 0, 2, 1,
 // Anonymized illustrative rows for the Conversation Database mock. No real
 // student data: generic procedural questions, invented confidence and timing.
 const CONVO_ROWS = [
-  { conf: 0.94, fb: 'up', time: '8.1s', intent: 'check_requirements', program: 'Erasmus+', q: 'What documents do I need for the selection?' },
-  { conf: 0.88, fb: '', time: '11.4s', intent: 'find_deadline', program: 'Erasmus', q: 'When is the application deadline this year?' },
-  { conf: 0.72, fb: 'down', time: '9.7s', intent: 'scholarship_query', program: 'Erasmus+', q: 'How much is the grant for a semester in Norway?' },
-  { conf: 0.91, fb: 'up', time: '7.3s', intent: 'find_contact', program: 'Bilateral', q: 'Who is the coordinator for my faculty?' },
-  { conf: 0.83, fb: '', time: '10.2s', intent: 'explain_procedure', program: 'Internship', q: 'How do I get my traineeship certificate signed?' },
-  { conf: 0.79, fb: '', time: '12.8s', intent: 'clarify_document', program: 'BIP', q: 'Do I upload the Learning Agreement before or after?' },
+  { id: 4821, src: 'student', conf: 0.94, fb: 'up', time: '8.1s', intent: 'check_requirements', program: 'Erasmus+', q: 'What documents do I need for the selection?' },
+  { id: 4820, src: 'student', conf: 0.88, fb: '', time: '11.4s', intent: 'find_deadline', program: 'Erasmus', q: 'When is the application deadline this year?' },
+  { id: 4819, src: 'student', conf: 0.72, fb: 'down', time: '9.7s', intent: 'scholarship_query', program: 'Erasmus+', q: 'How much is the grant for a semester in Norway?' },
+  { id: 4818, src: 'student', conf: 0.91, fb: 'up', time: '7.3s', intent: 'find_contact', program: 'Bilateral', q: 'Who is the coordinator for my faculty?' },
+  { id: 4817, src: 'dev', conf: 0.83, fb: '', time: '10.2s', intent: 'explain_procedure', program: 'Internship', q: 'How do I get my traineeship certificate signed?' },
+  { id: 4816, src: 'student', conf: 0.79, fb: '', time: '12.8s', intent: 'clarify_document', program: 'BIP', q: 'Do I upload the Learning Agreement before or after?' },
 ];
 
 const SOURCE_ROWS = [
@@ -138,41 +138,20 @@ const CzsChatbotPage: React.FC = () => {
         <div className="czs-prose">
           {t.product.body.map((p, i) => <Reveal key={i}><p>{p}</p></Reveal>)}
         </div>
-        <div className="czs-shots">
+        <div className="czs-shots czs-shots--widgets">
           <Reveal className="czs-shot">
-            <div className="czs-frame">
-              <img src={liveWidget} alt="The open CZS chat widget on the live Masaryk University page, with an AI disclaimer and suggested questions" loading="lazy" />
+            <div className="czs-widgetframe">
+              <img src={widgetShot} alt="The open CZS chat widget with an AI disclaimer and suggested questions" loading="lazy" />
             </div>
             <p className="czs-caption">{t.product.captionWidgetLive}</p>
           </Reveal>
           <Reveal className="czs-shot">
-            <div className="czs-frame">
-              <img src={liveAnswer} alt="A real chatbot answer on the live site, citing 11 named source documents with feedback buttons" loading="lazy" />
+            <div className="czs-widgetframe">
+              <img src={answerShot} alt="A real chatbot answer citing 11 named source documents with feedback buttons" loading="lazy" />
             </div>
             <p className="czs-caption">{t.product.captionAnswerLive}</p>
           </Reveal>
         </div>
-
-        {/* Answer-with-sources mockup */}
-        <Reveal className="czs-answer">
-          <span className="czs-answer__eyebrow">{t.product.answerHeading}</span>
-          <div className="czs-answer__card">
-            <div className="czs-answer__q">{t.product.answerQuestion}</div>
-            <div className="czs-answer__a">
-              <p>{t.product.answerBody}</p>
-              <ul>
-                {t.product.answerList.map(li => <li key={li}><LuCircleCheck aria-hidden="true" /> {li}</li>)}
-              </ul>
-              <div className="czs-answer__foot">
-                <span className="czs-chip">{t.product.answerSources}</span>
-                <span className="czs-answer__fb">
-                  <LuThumbsUp aria-hidden="true" /><LuThumbsDown aria-hidden="true" />
-                </span>
-              </div>
-            </div>
-          </div>
-          <p className="czs-caption">{t.product.answerCaption}</p>
-        </Reveal>
       </section>
 
       {/* ── Architecture ─────────────────────────────────────── */}
@@ -253,15 +232,23 @@ const CzsChatbotPage: React.FC = () => {
         <Reveal><h2 className="czs-block__title">{t.dashboards.title}</h2></Reveal>
         <Reveal><p className="czs-prose czs-prose--lead">{t.dashboards.intro}</p></Reveal>
         <div className="czs-dash">
-          {/* Conversation Database */}
-          <Reveal className="czs-dashcard">
+          {/* Conversation Database (full width) */}
+          <Reveal className="czs-dashcard czs-dashcard--wide">
             <div className="czs-mock">
-              <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>Conversation Database</em></div>
+              <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>Conversation Database · live registry of interactions</em></div>
+              <div className="czs-mock__filters">
+                <span className="czs-filter"><b>Show:</b> Students</span>
+                <span className="czs-filter"><b>Program:</b> All</span>
+                <span className="czs-filter"><b>Direction:</b> Outgoing</span>
+                <span className="czs-search">Search questions...</span>
+              </div>
               <table className="czs-mock__table">
-                <thead><tr><th>Conf.</th><th>FB</th><th>Time</th><th>Intent</th><th>Program</th><th>Question</th></tr></thead>
+                <thead><tr><th>ID</th><th>Source</th><th>Conf.</th><th>FB</th><th>Time</th><th>Intent</th><th>Program</th><th>User query</th></tr></thead>
                 <tbody>
-                  {CONVO_ROWS.map((r, i) => (
-                    <tr key={i}>
+                  {CONVO_ROWS.map((r) => (
+                    <tr key={r.id}>
+                      <td className="mono dim">{r.id}</td>
+                      <td><span className={`czs-src ${r.src}`}>{r.src === 'student' ? 'STUDENT' : 'DEV'}</span></td>
                       <td><span className={`czs-conf ${r.conf < 0.8 ? 'lo' : ''}`}>{r.conf.toFixed(2)}</span></td>
                       <td>{r.fb === 'up' ? <LuThumbsUp className="fb up" /> : r.fb === 'down' ? <LuThumbsDown className="fb down" /> : <span className="fb none">·</span>}</td>
                       <td className="mono">{r.time}</td>
@@ -335,6 +322,14 @@ const CzsChatbotPage: React.FC = () => {
           </Reveal>
         </div>
         <Reveal><p className="czs-closer">{t.dashboards.closer}</p></Reveal>
+      </section>
+
+      {/* ── Privacy ──────────────────────────────────────────── */}
+      <section className="czs-block">
+        <Reveal><h2 className="czs-block__title">{t.privacy.title}</h2></Reveal>
+        <div className="czs-prose">
+          {t.privacy.body.map((p, i) => <Reveal key={i}><p>{p}</p></Reveal>)}
+        </div>
       </section>
 
       {/* ── Cost ─────────────────────────────────────────────── */}

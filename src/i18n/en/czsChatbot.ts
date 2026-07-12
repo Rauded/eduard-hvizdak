@@ -45,8 +45,8 @@ const czsChatbot = {
     body: [
       'Students ask in Czech or English; answers come only from CZS content, sources linked, deadlines and contacts injected from human-approved tables.',
     ],
-    captionWidgetLive: 'The live widget: AI disclaimer and suggested questions, in the student\'s language.',
-    captionAnswerLive: 'A production answer citing 11 source documents, with feedback that routes to human review.',
+    captionWidgetLive: 'Opens with an AI disclaimer and suggested questions, in the student\'s language.',
+    captionAnswerLive: 'A real answer citing 11 named source documents, with feedback that routes to human review.',
     answerHeading: 'The same answer, in English',
     answerQuestion: 'What do I need to submit for the Erasmus+ selection?',
     answerBody: 'For the Erasmus+ selection the documents vary by faculty, but generally you will need:',
@@ -57,7 +57,7 @@ const czsChatbot = {
   architecture: {
     title: 'The pipeline behind a straight answer',
     body: [
-      'Each question runs through intent classification, hybrid OpenSearch retrieval (BM25 plus vectors), two rerankers, and an answerability gate before generation on CERIT.',
+      'Each question runs through intent classification, hybrid OpenSearch retrieval (BM25 plus vectors), two rerankers, and an answerability gate. Facts that must never be guessed, like deadlines and the right coordinator, come from a deterministic tool call, not the model\'s memory. Generation runs on CERIT.',
     ],
     stepsLabel: 'The path of one question',
     steps: [
@@ -66,12 +66,12 @@ const czsChatbot = {
       { k: 'Hybrid search', v: 'BM25 plus vectors, fused' },
       { k: 'Rerank', v: 'two models, diversified' },
       { k: 'Answerability gate', v: 're-retrieve if weak' },
-      { k: 'Fact injection', v: 'deadlines, contacts, date' },
+      { k: 'Tool call', v: 'verified deadlines, contacts, date' },
       { k: 'Generate', v: 'DeepSeek on CERIT' },
       { k: 'Cited answer', v: 'streamed with sources' },
     ],
     freshnessLabel: 'Freshness loop',
-    freshness: 'A change on any of the 778 monitored URLs triggers automatic re-indexing.',
+    freshness: 'A change monitor watches all 778 CZS source pages. When any page changes, a webhook re-ingests and re-indexes just that page, and a scheduled job sweeps every source daily. Update a deadline on the website and the bot knows, with no ticket and no manual re-training.',
     stackLabel: 'Stack',
     stack: ['Python', 'FastAPI', 'OpenSearch', 'Voyage AI', 'DeepSeek via CERIT', 'PostHog', 'nginx', 'Hetzner'],
   },
@@ -100,21 +100,21 @@ const czsChatbot = {
       },
       {
         tag: 'Retrieval index',
-        before: '1',
-        after: '5.8',
-        scale: 'searchable chunks per page (avg)',
-        title: 'Most knowledge was invisible.',
+        before: '0.79',
+        after: '0.92',
+        scale: 'correct source in top 7 results',
+        title: 'Small chunks to find, full sections to answer.',
         body:
-          'The scraper had collapsed 258 of 326 pages into one chunk each; rebuilding it around heading structure turned the Czech Erasmus page into 35 searchable sections.',
+          'I built a parent-child index: match on small, precise passages, then expand to the full section so the model answers with complete context. The right page now reaches the top results 92 percent of the time, up from 79.',
       },
       {
-        tag: 'Hybrid search',
-        before: '0.65',
-        after: '0.75',
-        scale: 'recall at 7 results',
-        title: 'A feature silently died.',
+        tag: 'Answer speed',
+        before: '15.0s',
+        after: '10.6s',
+        scale: 'median (p50) answer latency',
+        title: 'Faster, at higher accuracy.',
         body:
-          'Logs showed hybrid search rejected on 93 of 93 retrievals, silently falling back to an older method; only instrumentation caught it, both fixes landed the same week.',
+          'The same retrieval redesign cut median answer latency by 4.4 seconds while answer accuracy went up, not down. Better context reached the model in fewer, cleaner passages.',
       },
     ],
   },
@@ -155,6 +155,13 @@ const czsChatbot = {
       { k: 'Compute', v: 'One 8 GB VPS runs retrieval, dashboards, eval' },
       { k: 'Generation', v: 'CERIT academic infrastructure, near-zero marginal cost' },
       { k: 'Scale path', v: 'RAM upgrade and OpenAI failover designed' },
+    ],
+  },
+  privacy: {
+    title: 'Private by default',
+    body: [
+      'Students need no account and hand over no personal data to use it. Conversations are logged for quality review with IP addresses hashed, never stored raw.',
+      'Everything runs on the university\'s own server, not a third-party AI service, and the bot only ever reads CZS\'s own public pages. The data, the model traffic, and the logs stay inside the institution.',
     ],
   },
   cta: {
