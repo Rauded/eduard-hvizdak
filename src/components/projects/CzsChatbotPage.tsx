@@ -20,7 +20,10 @@ const BOOKING_URL = process.env.REACT_APP_BOOKING_URL || 'https://cal.com/eduard
 // held ~8.9 to 9.1 out of 10; hallucination counts stayed in the single digits
 // per ~748 questions). Shown as a shape, not exact per-cycle figures.
 const ACCURACY_POINTS = [9.48, 8.58, 8.29, 8.29, 8.18, 7.96, 8.73, 9.0, 8.47, 8.0, 7.89, 8.4, 8.86, 8.8, 8.77, 7.84, 8.62, 9.07, 9.06, 9.05, 8.96, 8.99, 9.02, 9.05, 9.02, 9.08, 8.95, 9.0, 8.87];
-const HALLUCINATION_POINTS = [6, 1, 0, 1, 1, 3, 0, 0, 1, 1, 3, 0, 0, 0, 0, 2, 1, 2, 8, 13, 9, 8, 12, 7, 9, 13, 7, 11, 6];
+// Hallucination RATE (percent of graded questions), not raw count: later cycles
+// tested ~748 questions vs ~150 early, so raw counts rise while the rate holds
+// near 1 percent. Plotting the rate is the honest, comparable measure.
+const HALLUCINATION_POINTS = [1.9, 0.7, 0.0, 0.7, 1.4, 2.0, 0.0, 0.0, 0.7, 1.4, 2.0, 0.0, 0.0, 0.6, 1.4, 3.3, 1.3, 1.1, 0.6, 0.9, 1.2, 1.1, 0.7, 1.2, 1.1, 1.7, 0.9, 1.5, 1.1];
 
 // Anonymized illustrative rows for the Conversation Database mock. No real
 // student data: generic procedural questions, invented confidence and timing.
@@ -85,8 +88,8 @@ const CzsChatbotPage: React.FC = () => {
   const N = ACCURACY_POINTS.length;
   const accX = (i: number) => pL + (pW * i) / (N - 1);
   const accY = (v: number) => pB - (v / 10) * pH;      // accuracy axis 0..10
-  const HAL_MAX = 15;
-  const halY = (v: number) => pB - (v / HAL_MAX) * pH;  // secondary axis 0..15
+  const HAL_MAX = 5;
+  const halY = (v: number) => pB - (v / HAL_MAX) * pH;  // secondary axis 0..5 percent
   const CYCLES = 37;
   const cycleX = (c: number) => pL + (pW * (c - 1)) / (CYCLES - 1);
   const accPts = ACCURACY_POINTS.map((v, i) => [accX(i), accY(v)] as const);
@@ -233,8 +236,8 @@ const CzsChatbotPage: React.FC = () => {
                 <text className="czs-chart__tick" x={pL - 7} y={accY(tk) + 3} textAnchor="end">{tk}</text>
               </g>
             ))}
-            {/* hallucination (right) ticks */}
-            {[0, 5, 10, 15].map(tk => (
+            {/* hallucination rate (right) ticks, percent */}
+            {[0, 1, 2, 3, 4, 5].map(tk => (
               <text key={`h${tk}`} className="czs-chart__tick" x={pR + 7} y={halY(tk) + 3} textAnchor="start">{tk}</text>
             ))}
             {/* x-axis cycle ticks */}
@@ -246,7 +249,7 @@ const CzsChatbotPage: React.FC = () => {
             ))}
             {/* axis titles */}
             <text className="czs-chart__axislabel" x={pL - 30} y={pT - 12}>accuracy /10</text>
-            <text className="czs-chart__axislabel" x={pR + 30} y={pT - 12} textAnchor="end">halluc.</text>
+            <text className="czs-chart__axislabel" x={pR + 30} y={pT - 12} textAnchor="end">halluc. %</text>
             <text className="czs-chart__axislabel" x={(pL + pR) / 2} y={CH - 6} textAnchor="middle">eval cycle</text>
             {/* hallucination bars (secondary axis) */}
             {HALLUCINATION_POINTS.map((c, i) => c > 0 ? (

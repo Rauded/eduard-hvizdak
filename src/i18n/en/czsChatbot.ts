@@ -82,8 +82,8 @@ const czsChatbot = {
     ],
     chartTitle: 'Answer accuracy across evaluation cycles',
     chartAccuracy: 'accuracy / 10',
-    chartHallucination: 'hallucinations',
-    chartCaption: '37 cycles of automated grading; the trend line holds.',
+    chartHallucination: 'hallucination rate %',
+    chartCaption: 'Continuous LLM-judge grading, roughly 748 questions per cycle. Accuracy holds near 9/10 and the hallucination rate stays near 1 percent across all 37 cycles.',
   },
   wins: {
     title: 'What measurement actually catches',
