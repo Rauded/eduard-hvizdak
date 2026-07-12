@@ -91,6 +91,18 @@ const ServicesPage: React.FC = () => {
         </Link>
       </Reveal>
 
+      {/* Case study: links to the CZS Masaryk University chatbot case study page. */}
+      <Reveal className="services-block" as="section">
+        <Link to="/projects/czs-muni-chatbot" className="svc-featured svc-featured--case">
+          <div>
+            <span className="svc-featured__eyebrow">{t.caseStudy.eyebrow}</span>
+            <h2 className="svc-featured__title">{t.caseStudy.title}</h2>
+            <p className="svc-featured__text">{t.caseStudy.body}</p>
+          </div>
+          <span className="svc-featured__cta">{t.caseStudy.cta} <LuArrowRight aria-hidden="true" /></span>
+        </Link>
+      </Reveal>
+
       {/* Signature band: the one bold, unmissable moment. */}
       <Reveal className="services-signal" as="section">
         <p className="services-signal__kicker">{t.signalKicker}</p>

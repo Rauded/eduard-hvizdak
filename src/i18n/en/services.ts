@@ -8,6 +8,13 @@ const services = {
     cta: 'See the AI Employee',
   },
 
+  caseStudy: {
+    eyebrow: 'Case study',
+    title: 'AI assistant for Masaryk University',
+    body: 'Source-cited answers live on the university site. 15,362 graded runs, roughly 90 percent accuracy.',
+    cta: 'Read the case study',
+  },
+
   seoTitle: 'AI Consulting & Automation',
   seoDescription:
     'AI consulting and automation for teams: workflow automation, document intelligence and RAG, AI agents, and private on-premise deployment. Scoped, built, and shipped end to end by Eduard Hvizdak.',

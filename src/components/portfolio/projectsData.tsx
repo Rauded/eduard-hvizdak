@@ -94,6 +94,10 @@ export const PROJECTS: PortfolioProject[] = [
     },
     accent: '#182e5f',
     reversed: false,
+    // Hidden from the homepage Projects section for now; still live at its own
+    // /projects/czs-muni-chatbot page and linked from /services. Flip to false
+    // (and renumber) to feature it on the homepage again.
+    hidden: true,
     caseStudy: {
       problem:
         'Masaryk University\'s <strong>Centre for International Cooperation (CZS)</strong> runs study-abroad programs for thousands of students. The information they need (Erasmus+ deadlines, required documents, stipend rules, faculty coordinators) lives across more than <strong>300 Czech and English pages</strong> and changes constantly, so students email the same procedural questions again and again and staff answer them by hand. An off-the-shelf chatbot was not an option: on an <strong>official university site</strong>, a confident wrong answer is worse than no answer, and a generic language model will happily invent university rules.',
@@ -109,7 +113,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'inzerpro',
-    number: '02',
+    number: '01',
     title: 'InzerPro',
     subtitle: 'A SaaS I run on the side',
     description:
@@ -170,7 +174,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'studyexe',
-    number: '03',
+    number: '02',
     title: 'StudyExe',
     subtitle: 'Deep work for ADHD brains',
     description:
@@ -239,7 +243,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'kouzelnici',
-    number: '04',
+    number: '03',
     title: 'KouzelnikNaAkci.cz',
     subtitle: 'A directory for Czech & Slovak magicians',
     description:
@@ -300,7 +304,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'newsmatics',
-    number: '05',
+    number: '04',
     title: 'Newsmatics Globe',
     subtitle: 'News as geography',
     description:
@@ -362,7 +366,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'nasadclaw',
-    number: '06',
+    number: '05',
     title: 'NasadClaw',
     subtitle: 'AI infrastructure for Czech & Slovak enterprises',
     description:
@@ -423,7 +427,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'psychetab',
-    number: '07',
+    number: '06',
     title: 'PsycheTab',
     subtitle: 'Your browser, your aesthetic',
     description:
@@ -485,7 +489,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'mindtype',
-    number: '08',
+    number: '07',
     title: 'MindType',
     subtitle: 'Cognitive conditioning, one keystroke at a time',
     description:
@@ -504,7 +508,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'bookreader-xr',
-    number: '09',
+    number: '08',
     title: 'BookReader for Even Realities G1',
     subtitle: 'Read books on XR glasses',
     description:

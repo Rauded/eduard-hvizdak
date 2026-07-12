@@ -75,7 +75,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Hero ─────────────────────────────────────────────── */}
       <header className="czs-hero">
-        <Link to="/" className="czs-back"><LuArrowLeft aria-hidden="true" /> {t.back}</Link>
+        <Link to="/services" className="czs-back"><LuArrowLeft aria-hidden="true" /> {t.back}</Link>
         <span className="czs-eyebrow">{t.hero.eyebrow}</span>
         <h1 className="czs-hero__title">{t.hero.title}</h1>
         <p className="czs-hero__lead">{t.hero.lead}</p>
