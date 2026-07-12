@@ -4,7 +4,6 @@ import { LuArrowRight, LuPlus, LuCircleCheck } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
 import { useTheme } from '../theme/ThemeContext';
-import ContactGradient from '../_21test/ContactGradient';
 import SectionMarker from '../common/SectionMarker';
 import './services.scss';
 import './services-featured.scss';
@@ -278,18 +277,22 @@ const ServicesPage: React.FC = () => {
         </div>
       </section>
 
-      {/* One repeat of the single primary CTA before the shared contact block. */}
+      {/* Closing CTA: the same block as the hero, and nothing after it. */}
       <Reveal className="services-cta-repeat" as="section">
+        <h2 className="services-cta-repeat__title">{t.ctaRepeatTitle}</h2>
         <a className="services-btn services-btn--primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
           {t.ctaConsult}
           <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
         </a>
+        <p className="services-hero__alt">
+          {t.ctaAltPrefix}{' '}
+          <a href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>{EMAIL}</a>
+          {' '}{t.ctaAltOr}{' '}
+          <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a>
+        </p>
       </Reveal>
 
     </div>
-
-    {/* The single, shared contact block, identical to the home page bottom. */}
-    <ContactGradient />
     </>
   );
 };
