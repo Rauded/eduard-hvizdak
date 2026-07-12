@@ -183,8 +183,8 @@ const czsChatbot = {
   privacy: {
     title: 'Private by default',
     body: [
-      'Students need no account and hand over no personal data to use it. Conversations are logged for quality review with IP addresses hashed, never stored raw.',
-      'Everything runs on the university\'s own server, not a third-party AI service, and the bot only ever reads CZS\'s own public pages. The data, the model traffic, and the logs stay inside the institution.',
+      'No account, no personal data collected. Conversations are logged for quality review with IP addresses hashed.',
+      'Everything runs on the university\'s own server, not a third-party service, and the bot reads only CZS\'s public pages.',
     ],
   },
   cta: {
