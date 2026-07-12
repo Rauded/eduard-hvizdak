@@ -23,9 +23,20 @@ const services = {
   heroTitle: 'I ship AI systems that pay for themselves.',
   heroLead:
     'I help teams put AI to work on real problems: automating the manual work that slows them down, making their documents answerable, and deploying systems that run reliably in production. Scoped, built and delivered end to end.',
-  ctaConsult: 'Free, no-obligation consultation',
-  ctaEmail: 'Email me',
-  ctaCall: 'Call',
+  ctaConsult: 'Book a free consultation',
+  ctaAltPrefix: 'Prefer writing? Reach me at',
+  ctaAltOr: 'or call',
+  ctaRepeatTitle: 'Have a process that should run itself?',
+
+  sectionServices: 'Services',
+  sectionDemo: 'In action',
+  sectionWhyMe: 'Why me',
+  sectionProcess: 'Process',
+  sectionMethod: 'Method',
+
+  demoTitle: 'See it in action',
+  demoLead:
+    'Live, interactive demos of the systems I build: an agent pipeline, a working assistant run, and the stack it plugs into.',
 
   signalKicker: 'Shipped, in production, at scale',
   signals: [
@@ -35,30 +46,31 @@ const services = {
   ],
 
   whatIDo: 'What I do',
+  youGet: 'You get',
   services: [
     {
-      stat: '24/7',
-      statLabel: 'runs itself, no babysitting',
-      title: 'Kill the copy-paste busywork',
-      outcome: 'Automate the repetitive manual work that eats your team’s hours.',
+      question: 'Still copy-pasting between tools every morning?',
+      outcome:
+        'I automate the routine end to end, so it runs unattended and only pings a human when something actually needs one.',
+      deliverables: ['process teardown', 'built and deployed pipeline', 'alerting', 'handover doc'],
     },
     {
-      stat: '< 2s',
-      statLabel: 'to a cited answer over millions of docs',
-      title: 'Turn document piles into instant answers',
-      outcome: 'Ask in plain language, get an answer cited to the exact source.',
+      question: 'Ten years of documents and nobody can find anything?',
+      outcome:
+        'Ask in plain language and get the answer with the exact source cited, across everything you have ever filed.',
+      deliverables: ['search over all your docs', 'cited answers', 'accuracy eval set'],
     },
     {
-      stat: '5 steps',
-      statLabel: 'run end to end, unattended',
-      title: 'Agents that do the work, not just chat',
-      outcome: 'Hand off a whole process: read, research, verify, summarize, act.',
+      question: 'Drowning in work an agent could finish overnight?',
+      outcome:
+        'Hand off the whole process, not a chat window: the agent reads, researches, verifies and acts, and shows its work.',
+      deliverables: ['scoped agent workflow', 'guardrails and logs', 'human-in-the-loop review'],
     },
     {
-      stat: '0',
-      statLabel: 'sensitive data leaves your building',
-      title: 'Private AI that never leaves your business',
-      outcome: 'The leverage of AI without shipping sensitive data to someone else’s cloud.',
+      question: 'Not allowed to send your data to a cloud?',
+      outcome:
+        'The same leverage on your own hardware: private models, access controls, and nothing sensitive leaving the building.',
+      deliverables: ['on-prem deployment', 'audit logs', 'zero data egress'],
     },
   ],
 

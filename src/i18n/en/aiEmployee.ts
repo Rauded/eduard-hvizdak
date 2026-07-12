@@ -14,8 +14,8 @@ const aiEmployee = {
     lead:
       'Not another chatbot bolted onto one app. A single agent your whole team talks to in Slack and on the web, connected to the tools you already use, that investigates across all of them, produces the finished work, and does it under a security model your IT can sign off on.',
     book: 'Book a discovery call',
-    email: 'Email me',
-    call: 'Call',
+    altPrefix: 'Prefer writing? Reach me at',
+    altOr: 'or call',
   },
   what: {
     title: 'What it actually does',

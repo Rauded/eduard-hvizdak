@@ -72,8 +72,28 @@
 
   &__cta {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 14px;
+  }
+
+  // Secondary contact routes, demoted from buttons to one quiet text line.
+  &__alt {
+    margin: 0;
+    font-size: var(--text-small);
+    line-height: var(--leading-body);
+    color: var(--text-soft);
+
+    a {
+      color: var(--accent-strong);
+      font-weight: var(--weight-medium);
+      text-decoration: underline;
+      text-decoration-color: var(--accent-ring);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.18s ease;
+
+      &:hover { text-decoration-color: var(--accent); }
+    }
   }
 }
 
@@ -82,8 +102,8 @@
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  padding: 13px 24px;
-  border-radius: 12px;
+  padding: 13px 26px;
+  border-radius: 999px; // pills, matching the Home CTAs and ContactGradient
   font-size: var(--text-small);
   font-weight: var(--weight-medium);
   letter-spacing: 0.01em;
@@ -116,6 +136,20 @@
   }
 }
 
+// ─── Section markers (shared SectionMarker, same rhythm as Home) ────
+// The marker's own Row is built for the full-width page container; inside
+// the 900px services column we zero its container vars so the rule spans
+// the column exactly.
+.services-marker {
+  margin-top: 40px;
+  --container-max: none;
+  --container-px: 0;
+
+  // The marker already carries generous top padding; tighten the section
+  // that follows so the marker and its heading read as one unit.
+  + .services-block { margin-top: 16px; }
+}
+
 // ─── Content blocks ─────────────────────────────────────────────────
 .services-block {
   margin-top: 56px;
@@ -129,6 +163,123 @@
     color: var(--heading);
     margin: 0 0 24px;
   }
+}
+
+// ─── Services index (question-led accordion rows) ───────────────────
+// Icon-free: mono index, serif question, plus mark. Hairline rules carry
+// the geometry, same language as the stat strip and SectionMarkers.
+.services-index {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+
+  &__row {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  &__head {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    width: 100%;
+    padding: 22px 4px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+
+    &:hover .services-index__q { color: var(--accent); }
+  }
+
+  &__n {
+    flex: 0 0 auto;
+    min-width: 2.4em;
+    font-family: var(--font-mono);
+    font-size: var(--text-small);
+    font-weight: var(--weight-heading);
+    color: var(--accent);
+  }
+
+  &__q {
+    flex: 1 1 auto;
+    font-family: var(--font-display);
+    font-size: var(--text-h4);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-heading);
+    color: var(--heading);
+    transition: color 0.18s ease;
+  }
+
+  &__mark {
+    flex: 0 0 auto;
+    align-self: center;
+    width: 1.15em;
+    height: 1.15em;
+    stroke-width: 2;
+    color: var(--text-mute);
+    transition: transform 0.22s ease, color 0.18s ease;
+  }
+
+  &__head[aria-expanded='true'] &__mark {
+    transform: rotate(45deg);
+    color: var(--accent);
+  }
+
+  // Collapsible panel: grid-rows 0fr -> 1fr, no max-height guesswork.
+  &__panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.28s ease;
+
+    &[data-open='true'] { grid-template-rows: 1fr; }
+  }
+
+  &__panel-inner {
+    overflow: hidden;
+    // Indent the detail under the question, past the index column.
+    padding-left: calc(2.4em + 18px);
+    padding-right: 4px;
+
+    @media (max-width: 640px) { padding-left: 4px; }
+  }
+
+  &__outcome {
+    margin: 0 0 12px;
+    font-size: var(--text-small);
+    line-height: var(--leading-body);
+    color: var(--text-soft);
+    max-width: 58ch;
+  }
+
+  &__deliverables {
+    margin: 0 0 22px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.03em;
+    line-height: var(--leading-body);
+    color: var(--text-mute);
+  }
+
+  &__deliverables-label {
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    color: var(--accent);
+    margin-right: 10px;
+  }
+
+  &__dot {
+    margin: 0 8px;
+    color: var(--text-mute);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-index__panel { transition: none; }
+  .services-index__mark { transition: none; }
 }
 
 .services-grid {
@@ -164,7 +315,7 @@
     justify-content: center;
     width: 44px;
     height: 44px;
-    border-radius: 11px;
+    border-radius: 10px;
     margin-bottom: 16px;
     color: var(--accent);
     background: color-mix(in srgb, var(--accent) 12%, transparent);
@@ -207,21 +358,22 @@
   }
 }
 
-// ─── Signature band (the one bold, unmissable moment) ───────────────
-.services-signal {
-  margin-top: 64px;
-  padding: clamp(32px, 5vw, 48px);
-  border-radius: 20px;
-  background: var(--accent-strong); // deep navy, high contrast on the page
-  color: #fff;
+// ─── Proof strip (quiet, ruled, typographic) ────────────────────────
+// Stats read as editorial confidence, not as a widget: hairline rules top
+// and bottom, navy numerals, muted labels. No filled surface.
+.services-stats {
+  margin-top: 56px;
+  padding: 26px 0 30px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
 
   &__kicker {
     font-family: var(--font-mono);
     font-size: var(--text-label);
     letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.66);
-    margin: 0 0 24px;
+    color: var(--text-mute);
+    margin: 0 0 20px;
   }
 
   &__grid {
@@ -229,28 +381,28 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 28px;
 
-    @media (max-width: 680px) { grid-template-columns: 1fr; gap: 24px; }
+    @media (max-width: 680px) { grid-template-columns: 1fr; gap: 22px; }
   }
 
   &__item {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
 
   &__value {
     font-family: var(--font-display);
-    font-size: var(--text-h1);
+    font-size: var(--text-h2);
     font-weight: var(--weight-heading);
-    line-height: var(--leading-display);
+    line-height: var(--leading-heading);
     letter-spacing: var(--tracking-heading);
-    color: #fff;
+    color: var(--accent-strong);
   }
 
   &__label {
     font-size: var(--text-small);
     line-height: var(--leading-body);
-    color: rgba(255, 255, 255, 0.82);
+    color: var(--text-soft);
     max-width: 30ch;
   }
 }
@@ -372,4 +524,45 @@
   &__stage {
     margin-top: 28px;
   }
+}
+
+// ─── In action (curated 21st.dev demos) ─────────────────────────────
+.services-demo {
+  &__lead {
+    font-size: var(--text-lead);
+    line-height: var(--leading-body);
+    color: var(--text-soft);
+    max-width: 62ch;
+    margin: 0;
+  }
+
+  &__stage {
+    margin-top: 48px;
+  }
+}
+
+// ─── CTA block (hero composition; repeated once, button only, at the end) ──
+.services-cta-repeat {
+  margin-top: 96px;
+
+  // Inside the hero the block sits tight under the lead.
+  &--hero { margin-top: 44px; }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 18px;
+
+  &__title {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
+    color: var(--heading);
+    margin: 0;
+    max-width: 26ch;
+  }
+
+  .services-hero__alt { margin-top: -4px; }
 }

@@ -24,7 +24,7 @@
     width: 48px;
     height: 48px;
     margin: 0;
-    border-radius: 13px;
+    border-radius: 10px;
     color: var(--accent);
     background: var(--accent-soft);
     svg { width: 1.5em; height: 1.5em; stroke-width: 2; }
@@ -40,7 +40,7 @@
   }
   .svc-stat__value {
     font-family: var(--font-mono);
-    font-size: 2.15rem;
+    font-size: var(--text-h2);
     font-weight: 700;
     line-height: 0.95;
     letter-spacing: -0.02em;
@@ -48,74 +48,28 @@
     font-feature-settings: 'tnum';
   }
   .svc-stat__label {
-    font-size: 0.72rem;
-    line-height: 1.3;
-    color: var(--text-faint, #7484a0);
+    font-size: var(--text-label);
+    line-height: var(--leading-tight);
+    color: var(--text-faint);
     max-width: 17ch;
   }
 
   // Serif title matches the rest of the page; bigger, legible body.
   .services-card__title {
     font-family: var(--font-display);
-    font-size: 1.4rem;
+    font-size: var(--text-h3);
     font-weight: 700;
-    line-height: 1.18;
-    letter-spacing: -0.01em;
+    line-height: var(--leading-heading);
+    letter-spacing: var(--tracking-heading);
     color: var(--accent-heading);
     margin: 0 0 9px;
   }
   .services-card__outcome {
-    font-size: 1.05rem;
-    font-weight: 600;
-    line-height: 1.5;
+    font-size: var(--text-body);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-body);
     color: var(--text, var(--text-strong)); // dark, not colored
     margin: 0;
     max-width: 34ch;
   }
-}
-
-// ─── Hero "free consultation" CTA: bigger, single line, with a light sweep ───
-// Center the hero CTA row so this button sits in the middle.
-.services-hero__cta { justify-content: center; }
-
-.svc-free-btn {
-  position: relative;
-  overflow: hidden;
-  padding: 16px 32px;
-  border-radius: 14px;
-  gap: 11px;
-  align-items: center;
-  font-size: 1.06rem;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-
-  // The moving highlight. A translucent white band sweeps across on a loop.
-  &__shine {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 55%;
-    pointer-events: none;
-    background: linear-gradient(
-      100deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.30) 50%,
-      transparent 100%
-    );
-    transform: skewX(-18deg) translateX(-220%);
-    animation: svc-shine 3.8s ease-in-out infinite;
-  }
-
-  // The icon and arrow sit a touch bigger to match the larger button.
-  > svg { width: 1.25em; height: 1.25em; }
-}
-
-@keyframes svc-shine {
-  0%        { transform: skewX(-18deg) translateX(-220%); }
-  60%, 100% { transform: skewX(-18deg) translateX(340%); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .svc-free-btn__shine { animation: none; display: none; }
 }
