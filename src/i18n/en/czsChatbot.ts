@@ -15,7 +15,7 @@ const czsChatbot = {
     eyebrow: 'Case study · Masaryk University, CZS',
     title: '300 scattered pages. One assistant that cites its sources.',
     lead:
-      'A bilingual assistant answers study-abroad questions on Masaryk University\'s official site, grounded in the university\'s own pages, every answer cited.',
+      'A bilingual assistant answers study-abroad questions on <strong>Masaryk University\'s official site</strong>, grounded in the university\'s own pages, <strong>every answer cited</strong>.',
     live: 'See it live on the Erasmus page',
     liveUrl: 'https://czs.muni.cz/cs/student-mu/studijni-pobyty/erasmus-evropa',
     figureCaption: 'The production widget on the official CZS site, not a prototype.',
@@ -36,7 +36,7 @@ const czsChatbot = {
   ],
   problem: {
     title: '778 sources, one inbox.',
-    body: 'The rules live in 778 constantly changing sources in Czech and English, and every student question used to be answered by hand, one email at a time.',
+    body: 'The rules live in <strong>778 constantly changing sources</strong> in Czech and English, and every student question used to be answered <strong>by hand, one email at a time</strong>.',
     corpusLabel: 'Source corpus, CS + EN',
     mix: [
       { fmt: 'web', k: 'web pages', n: 530, short: '530 web' },
@@ -49,7 +49,7 @@ const czsChatbot = {
   product: {
     title: 'Ask in Czech or English. Get an answer with receipts.',
     body: [
-      'Answers study-abroad questions in Czech or English, grounded in retrieved CZS sources and cited, so every claim traces back to a page. Facts that must not be guessed (current date, deadlines, contacts) come from deterministic tool calls, not the model\'s memory.',
+      'Answers study-abroad questions in <strong>Czech or English</strong>, grounded in retrieved CZS sources and <strong>cited</strong>, so every claim traces back to a page. Facts that must not be guessed (current date, deadlines, contacts) come from <strong>deterministic tool calls</strong>, not the model\'s memory.',
     ],
     captionWidgetLive: 'Opens with an AI disclaimer and suggested questions, in the student\'s language.',
     captionAnswerLive: 'A real answer citing 11 named source documents, with feedback that routes to human review.',
@@ -63,7 +63,7 @@ const czsChatbot = {
   architecture: {
     title: 'The pipeline behind a straight answer',
     body: [
-      'Every question is classified, then answered from hybrid OpenSearch retrieval (BM25 plus Voyage dense vectors, fused with RRF, two rerankers, MMR) over a heading-aware parent-child index, with a CRAG-style gate that re-retrieves on weak context. Verified facts come from deterministic tool calls, not the model, so answers stream over SSE from DeepSeek-v3.2 on CERIT.',
+      'Every question is classified, then answered from <strong>hybrid OpenSearch retrieval</strong> (BM25 plus Voyage dense vectors, fused with RRF, two rerankers, MMR) over a heading-aware <strong>parent-child index</strong>, with a <strong>CRAG-style answerability gate</strong> that re-retrieves on weak context. Verified facts come from <strong>deterministic tool calls</strong>, not the model, so answers stream over SSE from <strong>DeepSeek-v3.2 on CERIT</strong>.',
     ],
     stepsLabel: 'The path of one question',
     steps: [
@@ -77,14 +77,14 @@ const czsChatbot = {
       { k: 'Cited answer', v: 'streamed with sources' },
     ],
     freshnessLabel: 'Freshness loop',
-    freshness: 'A change monitor watches all 778 sources. Any change fires a webhook that re-indexes just that page, and a daily job sweeps the rest, so the bot never goes stale.',
+    freshness: 'A change monitor watches all <strong>778 sources</strong>. Any change fires a <strong>webhook</strong> that re-indexes just that page, and a <strong>daily job</strong> sweeps the rest, so the bot never goes stale.',
     stackLabel: 'Stack',
     stack: ['Python', 'FastAPI', 'OpenSearch', 'Voyage AI', 'DeepSeek via CERIT', 'PostHog', 'nginx', 'Hetzner'],
   },
   evaluation: {
     title: 'Measured, not vibes',
     body: [
-      'A continuous LLM-as-judge harness grades in-domain questions from the CZS FAQ (real historical plus generated) against the sources for accuracy, groundedness, and hallucination. Across 37 cycles and 15,362 runs, 10,438 were gradeable answers: 84 percent scored 9 or 10, mean 9.0, groundedness 8.6, hallucinations near 1 percent.',
+      'A continuous <strong>LLM-as-judge</strong> harness grades in-domain questions from the CZS FAQ (real historical plus generated) against the sources for accuracy, groundedness, and hallucination. Across <strong>37 cycles</strong> and <strong>15,362 runs</strong>, <strong>10,438</strong> were gradeable answers: <strong>84 percent scored 9 or 10</strong>, mean <strong>9.0</strong>, groundedness <strong>8.6</strong>, hallucinations <strong>near 1 percent</strong>.',
     ],
     chartTitle: 'How 10,438 graded answers scored',
     chartAccuracy: 'scored 9 or 10',
@@ -94,7 +94,7 @@ const czsChatbot = {
   golden: {
     title: 'Every approved answer makes the next one instant.',
     intro:
-      'CZS handed over their archive of real student questions with verified answers; the system turns every new answer back into that archive.',
+      'CZS handed over their archive of real student questions with <strong>verified answers</strong>; the system turns every new answer back into that archive.',
     statNum: '707',
     statDen: '/ 715',
     statLabel: 'Q&A pairs staff verified',
@@ -119,7 +119,7 @@ const czsChatbot = {
         scale: 'answer accuracy / 10',
         title: 'The bot interrogated students.',
         body:
-          'Evaluation showed 18.6 percent of questions got a counter-question instead of an answer; I rewrote the clarification policy and verified the gain with an A/B evaluation.',
+          'Evaluation showed <strong>18.6 percent</strong> of questions got a counter-question instead of an answer; I rewrote the clarification policy and verified the gain with an <strong>A/B evaluation</strong>.',
       },
       {
         tag: 'Retrieval index',
@@ -128,7 +128,7 @@ const czsChatbot = {
         scale: 'correct source in top 7 results',
         title: 'Small chunks to find, full sections to answer.',
         body:
-          'I built a parent-child index: match on small, precise passages, then expand to the full section so the model answers with complete context. The right page now reaches the top results 92 percent of the time, up from 79.',
+          'I built a <strong>parent-child index</strong>: match on small, precise passages, then expand to the full section so the model answers with complete context. The right page now reaches the top results <strong>92 percent</strong> of the time, up from <strong>79</strong>.',
       },
       {
         tag: 'Answer speed',
@@ -137,14 +137,14 @@ const czsChatbot = {
         scale: 'median (p50) answer latency',
         title: 'Faster, at higher accuracy.',
         body:
-          'The same retrieval redesign cut median answer latency by 4.4 seconds while answer accuracy went up, not down. Better context reached the model in fewer, cleaner passages.',
+          'The same retrieval redesign cut median answer latency by <strong>4.4 seconds</strong> while answer accuracy went up, not down. Better context reached the model in fewer, cleaner passages.',
       },
     ],
   },
   dashboards: {
     title: 'CZS staff run this. Not me.',
     intro:
-      'Staff see every conversation, review anything questionable, and update the knowledge base without touching code.',
+      'Staff see <strong>every conversation</strong>, review anything questionable, and update the knowledge base <strong>without touching code</strong>.',
     items: [
       {
         title: 'Conversation Database',
@@ -172,7 +172,7 @@ const czsChatbot = {
   cost: {
     title: 'Enterprise-grade retrieval, hobby-server bill',
     body: [
-      'Everything runs on one 8 GB server; generation rides CERIT at near-zero marginal cost, with a RAM upgrade and OpenAI failover already designed.',
+      'Everything runs on <strong>one 8 GB server</strong>; generation rides <strong>CERIT</strong> at <strong>near-zero marginal cost</strong>, with a RAM upgrade and OpenAI failover already designed.',
     ],
     cards: [
       { k: 'Compute', v: 'One 8 GB VPS runs retrieval, dashboards, eval' },
@@ -183,8 +183,8 @@ const czsChatbot = {
   privacy: {
     title: 'Private by default',
     body: [
-      'No account, no personal data collected. Conversations are logged for quality review with IP addresses hashed.',
-      'Everything runs on the university\'s own server, not a third-party service, and the bot reads only CZS\'s public pages.',
+      'No account, <strong>no personal data collected</strong>. Conversations are logged for quality review with <strong>IP addresses hashed</strong>.',
+      'Everything runs on the <strong>university\'s own server</strong>, not a third-party service, and the bot reads only CZS\'s public pages.',
     ],
   },
   cta: {
