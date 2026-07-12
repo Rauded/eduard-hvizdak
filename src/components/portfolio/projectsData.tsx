@@ -77,8 +77,39 @@ export interface PortfolioProject {
 // ─── Projects ────────────────────────────────────────────────────
 export const PROJECTS: PortfolioProject[] = [
   {
-    id: 'inzerpro',
+    id: 'czs-muni-chatbot',
     number: '01',
+    title: 'Masaryk University AI Assistant',
+    subtitle: 'A source-cited chatbot, live on a university\'s official site',
+    description:
+      'A bilingual AI assistant on Masaryk University\'s official study-abroad pages. It answers students\' Erasmus and internship questions grounded only in the university\'s own content, cites every source, and stays current as those pages change. I also built the continuous evaluation system that proves it works: 15,362 graded runs, roughly 90 percent accuracy, hallucinations near 1 percent, all on one small server.',
+    tags: ['RAG', 'OpenSearch', 'FastAPI', 'DeepSeek / CERIT', 'Voyage AI', 'Python', 'Evaluation'],
+    links: [
+      { label: 'Read the case study', url: '/projects/czs-muni-chatbot', type: 'demo' },
+      { label: 'See it live on czs.muni.cz', url: 'https://czs.muni.cz/cs/student-mu/studijni-pobyty/erasmus-evropa', type: 'demo' },
+    ],
+    media: {
+      type: 'image',
+      images: [asset('czs/widget-open.jpg')],
+    },
+    accent: '#182e5f',
+    reversed: false,
+    caseStudy: {
+      problem:
+        'Masaryk University\'s <strong>Centre for International Cooperation (CZS)</strong> runs study-abroad programs for thousands of students. The information they need (Erasmus+ deadlines, required documents, stipend rules, faculty coordinators) lives across more than <strong>300 Czech and English pages</strong> and changes constantly, so students email the same procedural questions again and again and staff answer them by hand. An off-the-shelf chatbot was not an option: on an <strong>official university site</strong>, a confident wrong answer is worse than no answer, and a generic language model will happily invent university rules.',
+      motivation:
+        'The goal was an assistant CZS could put its name on: one that only says what the university\'s own pages say, <strong>cites where it got every claim</strong>, answers in the student\'s language, and stays current when a page changes. That meant grounding, not guessing, and it meant being able to <strong>prove</strong> the thing was right before it went live in front of real students.',
+      challenges:
+        'Grounded answers with <strong>no hallucination</strong> on university-specific facts; <strong>bilingual</strong> Czech and English retrieval; facts that must never be guessed (this year\'s deadlines, the right coordinator); <strong>freshness</strong> as the source pages change; and doing all of it on a <strong>single 8 GB server</strong>. On top of that, the hardest part of any AI product: knowing whether it actually works, continuously, not just in a demo.',
+      solution:
+        'I built a hybrid <strong>RAG</strong> pipeline on self-hosted <strong>OpenSearch</strong>: BM25 and dense vectors fused with RRF, reranked by two models, with heading-aware <strong>parent-child chunking</strong>, a query classifier, an <strong>answerability gate</strong> with corrective re-retrieval, and deterministic injection of verified deadlines and contacts. Generation runs on <strong>DeepSeek via CERIT</strong> (Czech national academic AI infrastructure), embeddings and reranking on <strong>Voyage AI</strong>. <strong>changedetection.io</strong> watches all 778 source URLs and re-indexes on change. A <strong>continuous evaluation</strong> harness grades answers against the sources around the clock (15,362 runs, 37 cycles, roughly 90 percent accuracy, hallucinations near 1 percent), and a full admin suite lets CZS staff review conversations, flag answers, manage sources, and approve mined FAQs.',
+      story:
+        'It is live now on the CZS study-abroad pages at <a href="https://czs.muni.cz/cs/student-mu/studijni-pobyty/erasmus-evropa" target="_blank" rel="noopener noreferrer">czs.muni.cz</a>. Read the full <a href="/projects/czs-muni-chatbot">case study</a> for the architecture, the evaluation numbers, and the before-and-after wins.',
+    },
+  },
+  {
+    id: 'inzerpro',
+    number: '02',
     title: 'InzerPro',
     subtitle: 'A SaaS I run on the side',
     description:
@@ -139,7 +170,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'studyexe',
-    number: '02',
+    number: '03',
     title: 'StudyExe',
     subtitle: 'Deep work for ADHD brains',
     description:
@@ -208,7 +239,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'kouzelnici',
-    number: '03',
+    number: '04',
     title: 'KouzelnikNaAkci.cz',
     subtitle: 'A directory for Czech & Slovak magicians',
     description:
@@ -269,7 +300,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'newsmatics',
-    number: '04',
+    number: '05',
     title: 'Newsmatics Globe',
     subtitle: 'News as geography',
     description:
@@ -331,7 +362,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'nasadclaw',
-    number: '05',
+    number: '06',
     title: 'NasadClaw',
     subtitle: 'AI infrastructure for Czech & Slovak enterprises',
     description:
@@ -392,7 +423,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'psychetab',
-    number: '06',
+    number: '07',
     title: 'PsycheTab',
     subtitle: 'Your browser, your aesthetic',
     description:
@@ -454,7 +485,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'mindtype',
-    number: '07',
+    number: '08',
     title: 'MindType',
     subtitle: 'Cognitive conditioning, one keystroke at a time',
     description:
@@ -473,7 +504,7 @@ export const PROJECTS: PortfolioProject[] = [
   },
   {
     id: 'bookreader-xr',
-    number: '08',
+    number: '09',
     title: 'BookReader for Even Realities G1',
     subtitle: 'Read books on XR glasses',
     description:

@@ -24,6 +24,7 @@ import orbitStack from './orbitStack';
 import projects from './projects';
 import blog from './blog';
 import notfound from './notfound';
+import czsChatbot from './czsChatbot';
 
 export const en = {
   header,
@@ -46,6 +47,7 @@ export const en = {
   projects,
   blog,
   notfound,
+  czsChatbot,
 };
 
 export type Dict = typeof en;

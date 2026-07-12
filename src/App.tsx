@@ -46,6 +46,9 @@ const ThingsPage = lazy(() => import('./components/things/ThingsPage.tsx'));
 const SharePreviewPage = lazy(() => import('./components/share/SharePreviewPage.tsx'));
 // @ts-ignore
 const StyleguidePage = lazy(() => import('./components/styleguide/StyleguidePage.tsx'));
+
+// @ts-ignore
+const CzsChatbotPage = lazy(() => import('./components/projects/CzsChatbotPage.tsx'));
 // @ts-ignore
 const NotFound = lazy(() => import('./components/notfound/NotFound.tsx'));
 
@@ -153,6 +156,7 @@ const pageRoutes = () => (
     <Route path="services" element={<Shell><ServicesPage /></Shell>} />
     <Route path="services/ai-employee" element={<Shell><AiEmployeePage /></Shell>} />
     <Route path="things" element={<Shell><ThingsPage /></Shell>} />
+    <Route path="projects/czs-muni-chatbot" element={<Shell><CzsChatbotPage /></Shell>} />
     <Route path="share-preview" element={<Shell><SharePreviewPage /></Shell>} />
     <Route path="styleguide" element={<Shell><StyleguidePage /></Shell>} />
     <Route path="*" element={<Shell><NotFound /></Shell>} />

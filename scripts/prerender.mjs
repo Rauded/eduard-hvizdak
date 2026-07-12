@@ -27,6 +27,7 @@ const ROUTES = [
   '/now',
   '/things',
   '/services',
+  '/projects/czs-muni-chatbot',
   '/styleguide',
   '/404',
   '/blog/newsmatics-hackathon',

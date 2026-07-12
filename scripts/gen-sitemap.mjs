@@ -17,6 +17,7 @@ const PAGES = [
   { path: '/blog', lastmod: '2026-07-11', priority: '0.8', changefreq: 'weekly' },
   { path: '/now', lastmod: '2026-07-11', priority: '0.6', changefreq: 'weekly' },
   { path: '/things', lastmod: '2026-07-11', priority: '0.5', changefreq: 'monthly' },
+  { path: '/projects/czs-muni-chatbot', lastmod: '2026-07-12', priority: '0.9', changefreq: 'monthly' },
   { path: '/blog/newsmatics-hackathon', lastmod: '2026-06-27', priority: '0.7' },
   { path: '/blog/digital-fairness-act-youth-dialogue', lastmod: '2026-06-25', priority: '0.7' },
   { path: '/blog/zero-to-done', lastmod: '2026-06-08', priority: '0.7' },
