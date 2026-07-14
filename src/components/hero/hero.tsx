@@ -85,6 +85,18 @@ const Content = styled.div<{ $handsOffset: boolean }>`
 // Full serif headline, humandelta style (their h1 is the serif face, navy).
 // Follows the switchable display face (Geist by default, Jeju under
 // ?type=serif) instead of pinning the serif, so the hero tracks the site.
+// Name eyebrow above the claim headline, so the hero still reads as
+// Eduard's site even though the H1 is the positioning sentence.
+const Kicker = styled.p`
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted, #3e4b66);
+  margin: 0 0 1.1em;
+`;
+
 const Headline = styled.h1`
   font-family: var(--font-display) !important;
   /* Sized for a full claim sentence (jamny-style hero), not a short name. */
@@ -412,6 +424,7 @@ const Hero: React.FC = () => {
         {CORNERS.map((pos) => (
           <CornerTick key={pos} $pos={pos} aria-hidden="true" />
         ))}
+        <Kicker>{t.kicker}</Kicker>
         <Headline>{t.name}</Headline>
         <Tagline>{t.tagline}</Tagline>
         <CtaRow>
