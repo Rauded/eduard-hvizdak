@@ -48,16 +48,17 @@ const readHero = (): HeroState => {
 const HeroContainer = styled.section`
   position: relative;
   /* Fill the viewport below the fixed nav using dynamic vh so mobile browser
-     chrome never eats the bottom. min-height (not height) lets the section grow
-     and scroll instead of cropping on unusually short screens. Content is
-     top-aligned so its vertical position is deterministic and tracks the
-     width-driven hands artwork above it. */
+     chrome never eats the bottom. The hands artwork is height-capped via
+     --hands-h (see ReachingHands) and the text is pushed below that band by
+     the same variable plus a gap, so the name and the art never overlap and
+     everything still fits without cropping. */
+  --hands-h: clamp(170px, 30vh, 360px);
   min-height: calc(100dvh - 64px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: clamp(56px, 7vh, 104px) var(--container-px, 64px) clamp(40px, 6vh, 72px);
+  padding: clamp(48px, 6vh, 92px) var(--container-px, 64px) clamp(40px, 6vh, 72px);
   box-sizing: border-box;
   color: var(--text, #0e1320);
   overflow: hidden;
@@ -80,14 +81,11 @@ const Content = styled.div<{ $handsOffset: boolean }>`
   text-align: center;
   max-width: 760px;
 
-  /* The reaching-hands band is sized by WIDTH (aspect-ratio 2.85:1), so its
-     height scales with vw. Offsetting the text by a vw value keeps the name
-     parked in the fingertip gap on any aspect ratio, instead of a vh value
-     that drifts into or away from the hands. min(..., 34vh) is a safety cap
-     that pulls the text up on unusually short windows so nothing crops. */
+  /* Sit entirely below the hands band (its height is --hands-h) plus a gap, so
+     the name clears the artwork on every screen. Non-hands concepts centre. */
   @media (min-width: 769px) {
     margin-top: ${(p) =>
-      p.$handsOffset ? 'min(clamp(150px, 17.5vw, 420px), 34vh)' : '0'};
+      p.$handsOffset ? 'calc(var(--hands-h) + clamp(20px, 3vh, 40px))' : '0'};
   }
 `;
 
