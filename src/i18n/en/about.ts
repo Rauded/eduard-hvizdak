@@ -18,9 +18,9 @@ const about = {
   interestsSuffix:
     'from the first call to the deployed system. Fixed scope, fixed price, handed over documented.',
   skillsPrefix: 'On the side I run',
-  skillsSpan: 'InzerPro, a SaaS with paying customers',
+  skillsSpan: 'InzerPro, a SaaS with paying customers.',
   skillsSuffix:
-    'so billing, scheduled jobs, and support are familiar territory.',
+    'Billing, scheduled jobs, support: familiar territory.',
   outside:
     "Outside work: books, new tools, and more Twitter than I'd like to admit.",
   highlightEyebrow: 'Recent Highlight',

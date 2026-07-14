@@ -16,9 +16,9 @@ const about = {
   interestsSuffix:
     'od prvního hovoru po nasazený systém. Pevný rozsah, pevná cena, předané a zdokumentované.',
   skillsPrefix: 'Vedle toho provozuji',
-  skillsSpan: 'InzerPro, SaaS s platícími zákazníky',
+  skillsSpan: 'InzerPro, SaaS s platícími zákazníky.',
   skillsSuffix:
-    'takže billing, naplánované úlohy i podpora jsou známý terén.',
+    'Billing, naplánované úlohy, podpora: známý terén.',
   outside:
     'Mimo práci: knihy, nové nástroje a víc Twitteru, než bych rád přiznal.',
   highlightEyebrow: 'Nedávný milník',
