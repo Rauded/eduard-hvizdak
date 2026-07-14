@@ -47,18 +47,12 @@ const readHero = (): HeroState => {
 
 const HeroContainer = styled.section`
   position: relative;
-  /* Fill the viewport below the fixed nav using dynamic vh so mobile browser
-     chrome never eats the bottom. The hands artwork is height-capped via
-     --hands-h (see ReachingHands) and the text is pushed below that band by
-     the same variable plus a gap, so the name and the art never overlap and
-     everything still fits without cropping. */
-  --hands-h: clamp(170px, 30vh, 360px);
-  min-height: calc(100dvh - 64px);
+  min-height: 88vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
-  padding: clamp(48px, 6vh, 92px) var(--container-px, 64px) clamp(40px, 6vh, 72px);
+  justify-content: center;
+  padding: 120px var(--container-px, 64px) 80px;
   box-sizing: border-box;
   color: var(--text, #0e1320);
   overflow: hidden;
@@ -67,8 +61,8 @@ const HeroContainer = styled.section`
   background: var(--page-bg, #ffffff);
 
   @media (max-width: 768px) {
-    justify-content: center;
-    padding: clamp(48px, 7vh, 88px) var(--container-px, 24px) clamp(36px, 5vh, 56px);
+    padding: 110px var(--container-px, 24px) 64px;
+    min-height: 80vh;
   }
 `;
 
@@ -81,11 +75,10 @@ const Content = styled.div<{ $handsOffset: boolean }>`
   text-align: center;
   max-width: 760px;
 
-  /* Sit entirely below the hands band (its height is --hands-h) plus a gap, so
-     the name clears the artwork on every screen. Non-hands concepts centre. */
+  /* With the hands concept the type sits below the top-band artwork; every
+     other concept centres the type in the hero. */
   @media (min-width: 769px) {
-    margin-top: ${(p) =>
-      p.$handsOffset ? 'calc(var(--hands-h) + clamp(20px, 3vh, 40px))' : '0'};
+    margin-top: ${(p) => (p.$handsOffset ? '44vh' : '0')};
   }
 `;
 

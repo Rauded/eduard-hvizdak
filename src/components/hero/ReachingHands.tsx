@@ -20,18 +20,13 @@ const reachLeft = keyframes`
   50% { transform: translateX(-1.8%) scale(1.02); }
 `;
 
-// Height-capped so the hands never grow tall enough to collide with the text
-// below. Width tracks the height at the artwork's 2.85:1 ratio (centred), so
-// the composition stays undistorted; on wide screens it may inset from the
-// edges rather than crop the text. --hands-h is set on the hero container.
 const Band = styled.div`
   position: absolute;
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: var(--hands-h, 30vh);
-  width: calc(var(--hands-h, 30vh) * 2.85);
-  max-width: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  aspect-ratio: 2.85 / 1;
   z-index: 1;
   pointer-events: none;
 
