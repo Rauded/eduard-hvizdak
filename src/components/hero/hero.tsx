@@ -85,22 +85,22 @@ const Content = styled.div<{ $handsOffset: boolean }>`
 // Full serif headline, humandelta style (their h1 is the serif face, navy).
 // Follows the switchable display face (Geist by default, Jeju under
 // ?type=serif) instead of pinning the serif, so the hero tracks the site.
-// Name eyebrow above the claim headline, so the hero still reads as
-// Eduard's site even though the H1 is the positioning sentence.
-const Kicker = styled.p`
-  font-family: var(--font-mono);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--text-muted, #3e4b66);
-  margin: 0 0 1.1em;
+// The positioning claim under the name: display face, one step below the
+// name headline, one step above the muted tagline.
+const Claim = styled.h2`
+  font-family: var(--font-display) !important;
+  font-size: clamp(1.35em, 2.8vw, 2em);
+  font-weight: var(--weight-display, 600);
+  color: var(--accent, #182e5f);
+  margin: -0.3em 0 0.9em;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  max-width: 22em;
 `;
 
 const Headline = styled.h1`
   font-family: var(--font-display) !important;
-  /* Sized for a full claim sentence (jamny-style hero), not a short name. */
-  font-size: clamp(2em, 4.6vw, 3.4em);
+  font-size: clamp(2.8em, 6.5vw, 4.8em);
   font-weight: var(--weight-display, 600);
   color: var(--accent, #182e5f);
   margin: 0 0 0.5em;
@@ -424,8 +424,8 @@ const Hero: React.FC = () => {
         {CORNERS.map((pos) => (
           <CornerTick key={pos} $pos={pos} aria-hidden="true" />
         ))}
-        <Kicker>{t.kicker}</Kicker>
         <Headline>{t.name}</Headline>
+        <Claim>{t.claim}</Claim>
         <Tagline>{t.tagline}</Tagline>
         <CtaRow>
           <PrimaryCta href="#projects">

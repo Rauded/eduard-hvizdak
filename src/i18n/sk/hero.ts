@@ -1,6 +1,6 @@
 const hero = {
-  kicker: 'Eduard Hvizdak · AI inžinier',
-  name: 'Staviam AI agentov a automatizačné systémy, ktoré bežia v produkcii.',
+  name: 'Som Eduard Hvizdak.',
+  claim: 'Staviam AI agentov a automatizačné systémy, ktoré bežia v produkcii.',
   tagline:
     'Žiadne slajdy. Žiadne POC. Reálne systémy, ktoré vášmu tímu ušetria hodiny každý týždeň. Jeden človek, od zadania po nasadenie.',
   viewProjects: 'Pozrieť projekty',
