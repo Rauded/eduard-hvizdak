@@ -85,19 +85,6 @@ const Content = styled.div<{ $handsOffset: boolean }>`
 // Full serif headline, humandelta style (their h1 is the serif face, navy).
 // Follows the switchable display face (Geist by default, Jeju under
 // ?type=serif) instead of pinning the serif, so the hero tracks the site.
-// The positioning claim under the name: display face, one step below the
-// name headline, one step above the muted tagline.
-const Claim = styled.h2`
-  font-family: var(--font-display) !important;
-  font-size: clamp(1.35em, 2.8vw, 2em);
-  font-weight: var(--weight-display, 600);
-  color: var(--accent, #182e5f);
-  margin: -0.3em 0 0.9em;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
-  max-width: 22em;
-`;
-
 const Headline = styled.h1`
   font-family: var(--font-display) !important;
   font-size: clamp(2.8em, 6.5vw, 4.8em);
@@ -425,7 +412,6 @@ const Hero: React.FC = () => {
           <CornerTick key={pos} $pos={pos} aria-hidden="true" />
         ))}
         <Headline>{t.name}</Headline>
-        <Claim>{t.claim}</Claim>
         <Tagline>{t.tagline}</Tagline>
         <CtaRow>
           <PrimaryCta href="#projects">
