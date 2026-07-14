@@ -28,5 +28,8 @@ pnpm-debug.log*
 !/public/blog/**/*.png
 !/public/brand/**/*.png
 !/public/og-image.png
+!/public/logo192.png
+!/public/logo512.png
+!/public/apple-touch-icon.png
 # Local-only original showcase videos (kept for revert, not committed)
 /src/assets/projects/originals/
