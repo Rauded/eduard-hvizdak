@@ -5,7 +5,7 @@
 const seo = {
   ogLocale: 'en_US',
   homeDescription:
-    'AI engineer and indie founder. I build production AI systems (RAG pipelines, multi-agent tooling) and run real SaaS products: InzerPro, NasadClaw, KouzelnikNaAkci.',
+    'AI engineer. I build production AI systems for businesses: automation, agents, document intelligence. I also run InzerPro, a SaaS with paying customers.',
 };
 
 export default seo;

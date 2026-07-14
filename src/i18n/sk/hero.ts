@@ -1,7 +1,7 @@
 const hero = {
   name: 'Som Eduard Hvizdak.',
   tagline:
-    'Staviam AI systémy, ktoré bežia v produkcii. Žiadne demá: tri produkty s platiacimi zákazníkmi a univerzitný asistent doložený 15 362 ohodnotenými evaluačnými behmi.',
+    'Staviam AI systémy, ktoré sa samy zaplatia: automatizácie, agentov a prácu s dokumentmi bežiace v produkcii. Žiadne slajdy. Žiadne demá.',
   viewProjects: 'Pozrieť projekty',
   emailMe: 'Napíšte mi',
   accepting: 'Prijímam nové projekty',

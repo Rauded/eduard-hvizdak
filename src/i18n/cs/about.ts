@@ -1,22 +1,24 @@
-// About section, Czech. Same segment keys as en/about.ts, jamny-style rules:
-// čísla místo přídavných jmen, krátké věty, žádná vata.
+// About section, Czech. Same segment keys as en/about.ts. Client-facing copy
+// per Eduard's direction (2026-07-12): bez chlubení chatbotem, platící
+// zákazníci = pouze InzerPro.
 const about = {
   title: 'O mně',
   greeting: 'Jsem',
-  introExpert: 'Stavím AI systémy, které běží v produkci.',
+  introExpert:
+    'Stavím AI systémy pro firmy: od zadání po nasazení, celé jedním člověkem.',
   introStudent:
-    'Studuji informatiku na Masarykově univerzitě a stavím AI systémy, které běží v produkci.',
-  recentPrefix: 'Ten poslední je',
+    'Studuji informatiku na Masarykově univerzitě a stavím AI systémy pro firmy od zadání po nasazení.',
+  recentPrefix: 'Poslední práce:',
   recentSpan:
-    'asistent s citovanými zdroji, který odpovídá na dotazy o studiu v zahraničí na oficiálním webu Masarykovy univerzity',
-  interestsPrefix: 'Funguje a umím to doložit:',
-  interestsSpan:
-    '15 362 ohodnocených evaluačních běhů, přesnost kolem 90 procent, halucinace kolem 1 procenta',
-  interestsSuffix: 'měřeno nepřetržitě, ne jednou před spuštěním.',
+    'dokumentové pipeline, které zpracovaly miliony veřejných zakázek, vyhledávací systémy a automatizace procesů',
+  interestsPrefix: 'Spolupracujete s',
+  interestsSpan: 'člověkem, který ten kód sám píše',
+  interestsSuffix:
+    'od prvního hovoru po nasazený systém. Pevný rozsah, pevná cena, předané a zdokumentované.',
   skillsPrefix: 'Vedle toho provozuji',
-  skillsSpan: 'tři produkty s platícími zákazníky',
+  skillsSpan: 'InzerPro, SaaS s platícími zákazníky',
   skillsSuffix:
-    '(InzerPro, NasadClaw, KouzelnikNaAkci). Naplánované úlohy, platby přes Stripe, obnova po neúspěšné platbě: i ta nudná část je moje.',
+    'takže billing, naplánované úlohy i podpora jsou známý terén.',
   outside:
     'Mimo práci: knihy, nové nástroje a víc Twitteru, než bych rád přiznal.',
   highlightEyebrow: 'Nedávný milník',

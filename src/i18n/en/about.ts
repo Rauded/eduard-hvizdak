@@ -1,24 +1,26 @@
 // About section. The prose is broken into segments so the inline highlighted
 // spans (purple-text) and the expert/student positioning branch stay intact.
-// Copy follows jamny-style: numbers instead of adjectives, short declaratives,
-// no filler. Keep it tight; do not pad it back out.
+// Copy is client-facing per Eduard's direction (2026-07-12): no university
+// chatbot bragging, no "three products" claim (paying customers = InzerPro
+// only), lead with what a buyer gets. Keep it tight; do not pad it back out.
 const about = {
   title: 'About Me',
   greeting: "I'm",
-  introExpert: 'I build AI systems that run in production.',
+  introExpert:
+    'I build AI systems for businesses: scoped, built, and shipped end to end by one person.',
   introStudent:
-    'I study computer science at Masaryk University and build AI systems that run in production.',
-  recentPrefix: 'The latest one is',
+    'I study computer science at Masaryk University and build AI systems for businesses end to end.',
+  recentPrefix: 'Recent work:',
   recentSpan:
-    "a source-cited assistant answering study-abroad questions on Masaryk University's official site",
-  interestsPrefix: 'It works and I can prove it:',
-  interestsSpan:
-    '15,362 graded evaluation runs, roughly 90 percent accuracy, hallucinations near 1 percent',
-  interestsSuffix: 'graded around the clock, not once before launch.',
+    'document pipelines that processed millions of public contracts, retrieval systems, and workflow automation',
+  interestsPrefix: 'You work with',
+  interestsSpan: 'the person who writes the code',
+  interestsSuffix:
+    'from the first call to the deployed system. Fixed scope, fixed price, handed over documented.',
   skillsPrefix: 'On the side I run',
-  skillsSpan: 'three products with paying customers',
+  skillsSpan: 'InzerPro, a SaaS with paying customers',
   skillsSuffix:
-    '(InzerPro, NasadClaw, KouzelnikNaAkci). Scheduled jobs, Stripe billing, failed-payment recovery: the unglamorous parts are mine too.',
+    'so billing, scheduled jobs, and support are familiar territory.',
   outside:
     "Outside work: books, new tools, and more Twitter than I'd like to admit.",
   highlightEyebrow: 'Recent Highlight',
