@@ -1,24 +1,22 @@
-// About section, Czech. Same segment keys as en/about.ts. Client-facing copy
-// per Eduard's direction (2026-07-12): bez chlubení chatbotem, platící
-// zákazníci = pouze InzerPro.
+// About section, Czech. Mirrors jakubjamny.com/cs about structure, adapted to
+// Eduard's true facts. Platící zákazníci = pouze InzerPro; bez metrik chatbotu.
 const about = {
   title: 'O mně',
   greeting: 'Jsem',
-  introExpert:
-    'Stavím AI systémy pro firmy: od zadání po nasazení, celé jedním člověkem.',
+  introExpert: 'Pohybuji se mezi byznysem a technologiemi.',
   introStudent:
-    'Studuji informatiku na Masarykově univerzitě a stavím AI systémy pro firmy od zadání po nasazení.',
-  recentPrefix: 'Poslední práce:',
+    'Studuji informatiku na Masarykově univerzitě a pohybuji se mezi byznysem a technologiemi.',
+  recentPrefix: 'Poslední dva roky stavím AI systémy napříč',
   recentSpan:
-    'dokumentové pipeline, které zpracovaly miliony veřejných zakázek, vyhledávací systémy a automatizace procesů',
-  interestsPrefix: 'Spolupracujete s',
-  interestsSpan: 'člověkem, který ten kód sám píše',
+    'dokumentovými pipeline pro veřejné zakázky, univerzitními znalostními systémy a AI asistenty pro samosprávy',
+  interestsPrefix: 'Teď se soustředím na',
+  interestsSpan: 'produkční AI agenty a automatizační systémy',
   interestsSuffix:
-    'od prvního hovoru po nasazený systém. Pevný rozsah, pevná cena, předané a zdokumentované.',
+    'které běží podle plánu, pracují s reálnými daty, provádějí akce a reportují výsledky. Žádné chatboty. Žádná dema.',
   skillsPrefix: 'Vedle toho provozuji',
   skillsSpan: 'InzerPro, SaaS s platícími zákazníky.',
   skillsSuffix:
-    'Billing, naplánované úlohy, podpora: známý terén.',
+    'Pracuji s Claude Code a moderními AI nástroji: integrace, automatizace a interní nástroje dodávám bez týmu vývojářů za zády.',
   outside:
     'Mimo práci: knihy, nové nástroje a víc Twitteru, než bych rád přiznal.',
   highlightEyebrow: 'Nedávný milník',

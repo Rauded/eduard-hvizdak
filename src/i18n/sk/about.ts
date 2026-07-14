@@ -1,24 +1,22 @@
-// About section, Slovak. Same segment keys as en/about.ts. Client-facing copy
-// per Eduard's direction (2026-07-12): bez chválenia sa chatbotom, platiaci
-// zákazníci = iba InzerPro.
+// About section, Slovak. Mirrors jakubjamny.com about structure, adapted to
+// Eduard's true facts. Platiaci zákazníci = iba InzerPro; bez metrík chatbotu.
 const about = {
   title: 'O mne',
   greeting: 'Som',
-  introExpert:
-    'Staviam AI systémy pre firmy: od zadania po nasadenie, celé jedným človekom.',
+  introExpert: 'Pohybujem sa medzi biznisom a technológiami.',
   introStudent:
-    'Študujem informatiku na Masarykovej univerzite a staviam AI systémy pre firmy od zadania po nasadenie.',
-  recentPrefix: 'Posledná práca:',
+    'Študujem informatiku na Masarykovej univerzite a pohybujem sa medzi biznisom a technológiami.',
+  recentPrefix: 'Posledné dva roky staviam AI systémy naprieč',
   recentSpan:
-    'dokumentové pipeline, ktoré spracovali milióny verejných zákaziek, vyhľadávacie systémy a automatizácia procesov',
-  interestsPrefix: 'Spolupracujete s',
-  interestsSpan: 'človekom, ktorý ten kód sám píše',
+    'dokumentovými pipeline pre verejné zákazky, univerzitnými znalostnými systémami a AI asistentmi pre samosprávy',
+  interestsPrefix: 'Teraz sa sústredím na',
+  interestsSpan: 'produkčných AI agentov a automatizačné systémy',
   interestsSuffix:
-    'od prvého hovoru po nasadený systém. Pevný rozsah, pevná cena, odovzdané a zdokumentované.',
+    'ktoré bežia podľa plánu, pracujú s reálnymi dátami, vykonávajú akcie a reportujú výsledky. Žiadne chatboty. Žiadne demá.',
   skillsPrefix: 'Popri tom prevádzkujem',
   skillsSpan: 'InzerPro, SaaS s platiacimi zákazníkmi.',
   skillsSuffix:
-    'Billing, naplánované úlohy, podpora: známy terén.',
+    'Pracujem s Claude Code a modernými AI nástrojmi: integrácie, automatizácie a interné nástroje dodávam bez tímu vývojárov za chrbtom.',
   outside:
     'Mimo práce: knihy, nové nástroje a viac Twitteru, než by som rád priznal.',
   highlightEyebrow: 'Nedávny míľnik',

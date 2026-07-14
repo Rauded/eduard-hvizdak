@@ -1,7 +1,7 @@
 const hero = {
-  name: "I'm Eduard Hvizdak.",
+  name: 'I build AI agents and automation systems that run in production.',
   tagline:
-    'I build AI systems that pay for themselves: automations, agents, and document intelligence running in production. Not slides. Not demos.',
+    'Not slides. Not POCs. Real systems that save your team hours every week. One person, end to end.',
   viewProjects: 'View projects',
   emailMe: 'Email me',
   accepting: 'Accepting new projects',

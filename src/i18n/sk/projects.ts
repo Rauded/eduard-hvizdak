@@ -2,7 +2,7 @@
 // en/projects.ts. Per-project prose lives in the `_sk` fields on the data.
 const projects = {
   heading: 'Projekty',
-  intro: 'Vydané produkty, veci z hackathonov a nástroje, ktoré sám používam.',
+  intro: 'Systémy a produkty, ktoré som dodal. Každá case study opisuje problém, čo som postavil a výsledok.',
   demoSoon: 'Ukážka už čoskoro',
   caseStudyEyebrow: 'Prípadová štúdia',
   closeCaseStudy: 'Zavrieť prípadovú štúdiu',

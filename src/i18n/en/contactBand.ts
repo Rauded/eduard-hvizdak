@@ -1,9 +1,9 @@
 // Shared contact band (bottom of both the services page and the home page).
 const contactBand = {
   eyebrow: 'Get in touch',
-  title: "Let's work together",
+  title: "Let's talk.",
   lead:
-    'Tell me what your team still does by hand. 30 minutes is enough to tell whether it can run itself.',
+    'Currently open to fixed-scope AI builds, end-to-end automation, and advisory for founders building with AI.',
   emailMe: 'Email me',
   book: 'Book 30 min',
   directPrefix: 'Or email me directly at',

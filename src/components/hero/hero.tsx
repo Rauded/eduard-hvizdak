@@ -87,7 +87,8 @@ const Content = styled.div<{ $handsOffset: boolean }>`
 // ?type=serif) instead of pinning the serif, so the hero tracks the site.
 const Headline = styled.h1`
   font-family: var(--font-display) !important;
-  font-size: clamp(2.8em, 6.5vw, 4.8em);
+  /* Sized for a full claim sentence (jamny-style hero), not a short name. */
+  font-size: clamp(2em, 4.6vw, 3.4em);
   font-weight: var(--weight-display, 600);
   color: var(--accent, #182e5f);
   margin: 0 0 0.5em;

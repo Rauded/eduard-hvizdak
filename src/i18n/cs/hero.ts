@@ -1,7 +1,7 @@
 const hero = {
-  name: 'Jsem Eduard Hvižďák.',
+  name: 'Stavím AI agenty a automatizační systémy, které běží v produkci.',
   tagline:
-    'Stavím AI systémy, které se samy zaplatí: automatizace, agenty a práci s dokumenty běžící v produkci. Žádné slidy. Žádná dema.',
+    'Žádné slidy. Žádné POC. Reálné systémy, které vašemu týmu ušetří hodiny každý týden. Jeden člověk, od zadání po nasazení.',
   viewProjects: 'Zobrazit projekty',
   emailMe: 'Napište mi',
   accepting: 'Přijímám nové projekty',
