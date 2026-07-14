@@ -1,5 +1,10 @@
 MIT License
 
+Copyright (c) 2026 Eduard Hvizdak
+
+This project was forked from the tjklint portfolio template. The original
+template copyright below applies to the template code.
+
 Copyright (c) 2024 [TJ Klint](https://github.com/tjklint)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
