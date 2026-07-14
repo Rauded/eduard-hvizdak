@@ -11,7 +11,8 @@ import Resume from '../resume/resume.tsx';
 // @ts-ignore
 import Projects from '../projects/projects.tsx';
 // TEST: 21st.dev component ports (delete this block + restore <Contact/> to revert)
-import TechMarquee from '../_21test/TechMarquee';
+// TechMarquee removed from the homepage 2026-07-12 (Eduard's request); the
+// component still exists in _21test if it should come back.
 import ContactGradient from '../_21test/ContactGradient';
 import { useT } from '../../i18n';
 
@@ -26,8 +27,6 @@ const Home: React.FC = () => {
       path="/"
     />
     <Hero />
-    {/* TEST: 21st.dev tech marquee */}
-    <TechMarquee />
     <SectionMarker index="01" label={t.sections.about} />
     <About />
     <SectionMarker index="02" label={t.sections.experience} />
