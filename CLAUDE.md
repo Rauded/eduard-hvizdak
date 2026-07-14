@@ -76,3 +76,10 @@ the agreed final design:
 - He reviews via screenshots and gives directional feedback ("too big", "more obvious",
   "vertical not horizontal"). Make the change, ship it, and tell him to hard-refresh.
 - Always **commit + push + deploy** as part of "doing the change" — he expects to view it live.
+
+## Copy style: jamny-style (added 2026-07-12)
+Eduard wants all site copy modeled on jakubjamny.com: minimal text, numbers instead of
+adjectives, production proof, nothing AI-sounding. Before writing or rewriting ANY copy
+in this repo, use the `jamny-style` skill (`~/.claude/skills/jamny-style/`) and see the
+extraction pack + adaptation plan at `~/Desktop/Projects/jakubjamny-inspiration/`
+(start with `analysis/adaptation-plan.md`). Homepage word budget: under 500 words.
