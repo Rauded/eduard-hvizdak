@@ -42,7 +42,7 @@ const services = {
   signals: [
     { value: 'Millions', label: 'of public contracts categorized and made searchable in parallel' },
     { value: '200k+', label: 'students on the digital campus platform of 10 European universities where my AI assistant shipped' },
-    { value: 'End to end', label: 'one person scopes it, builds it, ships it, and hands it over' },
+    { value: 'End to end', label: 'scoped, built, shipped, and handed over under one roof' },
   ],
 
   whatIDo: 'What I do',
@@ -79,7 +79,7 @@ const services = {
     'My own products in production: InzerPro (paying customers), NasadClaw and KouzelnikNaAkci. Not demos that die after the pitch.',
     'RAG in the wild: vector search, BM25, MMR retrieval and LLM reranking, plus fact-verification so answers stay grounded in the source.',
     'The unglamorous parts are handled: scheduled jobs that fire on time, Stripe billing with trials and failed-payment recovery, auth, rate limits, on-prem hardening.',
-    'One person, end to end. No agency layers, no handoffs, no account manager between you and the person writing the code.',
+    'Direct access to the builder. No layers, no handoffs, no account manager between you and the person writing the code.',
   ],
 
   howItWorks: 'How it works',
