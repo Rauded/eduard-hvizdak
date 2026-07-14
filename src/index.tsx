@@ -7,6 +7,7 @@ import App from './App.tsx';
 import reportWebVitals from './reportWebVitals';
 import { POSTHOG_KEY, POSTHOG_HOST, analyticsEnabled } from './analytics';
 import { stripLocale } from './config/locale';
+import { SHOW_CZS_CASE_STUDY } from './config/czsCaseStudy';
 
 // Pageviews are captured manually on route change (see App.tsx).
 if (analyticsEnabled) {
@@ -36,7 +37,7 @@ function preloadRouteChunk(pathname: string): Promise<unknown> {
   if (pathname === '/services') return import('./components/services/ServicesPage');
   if (pathname === '/services/ai-employee') return import('./components/services/AiEmployeePage');
   if (pathname === '/things') return import('./components/things/ThingsPage');
-  if (pathname === '/projects/czs-muni-chatbot') return import('./components/projects/CzsChatbotPage');
+  if (SHOW_CZS_CASE_STUDY && pathname === '/projects/czs-muni-chatbot') return import('./components/projects/CzsChatbotPage');
   if (pathname === '/references') return import('./components/references/ReferencesPage');
   if (pathname === '/share-preview') return import('./components/share/SharePreviewPage');
   if (pathname === '/styleguide') return import('./components/styleguide/StyleguidePage');

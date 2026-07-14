@@ -5,6 +5,7 @@ import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
 import { useTheme } from '../theme/ThemeContext';
 import SectionMarker from '../common/SectionMarker';
+import { SHOW_CZS_CASE_STUDY } from '../../config/czsCaseStudy';
 import './services.scss';
 import './services-featured.scss';
 // 21st.dev showcase components, curated under the "In action" section below.
@@ -104,16 +105,18 @@ const ServicesPage: React.FC = () => {
       </Reveal>
 
       {/* Case study: links to the CZS Masaryk University chatbot case study page. */}
-      <Reveal className="services-block" as="section">
-        <Link to="/projects/czs-muni-chatbot" className="svc-featured svc-featured--case">
-          <div>
-            <span className="svc-featured__eyebrow">{t.caseStudy.eyebrow}</span>
-            <h2 className="svc-featured__title">{t.caseStudy.title}</h2>
-            <p className="svc-featured__text">{t.caseStudy.body}</p>
-          </div>
-          <span className="svc-featured__cta">{t.caseStudy.cta} <LuArrowRight aria-hidden="true" /></span>
-        </Link>
-      </Reveal>
+      {SHOW_CZS_CASE_STUDY && (
+        <Reveal className="services-block" as="section">
+          <Link to="/projects/czs-muni-chatbot" className="svc-featured svc-featured--case">
+            <div>
+              <span className="svc-featured__eyebrow">{t.caseStudy.eyebrow}</span>
+              <h2 className="svc-featured__title">{t.caseStudy.title}</h2>
+              <p className="svc-featured__text">{t.caseStudy.body}</p>
+            </div>
+            <span className="svc-featured__cta">{t.caseStudy.cta} <LuArrowRight aria-hidden="true" /></span>
+          </Link>
+        </Reveal>
+      )}
 
       <div className="services-marker"><SectionMarker index="01" label={t.sectionServices} /></div>
       <section className="services-block" aria-labelledby="what-i-do">

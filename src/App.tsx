@@ -10,6 +10,7 @@ import { isLocale, localizedPath, stripLocale, saveLocale } from './config/local
 import { applyCanvasPreset } from './config/canvas';
 import { applyTypePreset } from './config/typeface';
 import { getBackgroundPreset } from './config/background';
+import { SHOW_CZS_CASE_STUDY } from './config/czsCaseStudy';
 // @ts-ignore
 import SiteEmbroidery from './components/background/SiteEmbroidery.tsx';
 // Type scale (sizes/weights/tracking) loads before the family layer so the
@@ -159,7 +160,7 @@ const pageRoutes = () => (
     <Route path="services" element={<Shell><ServicesPage /></Shell>} />
     <Route path="services/ai-employee" element={<Shell><AiEmployeePage /></Shell>} />
     <Route path="things" element={<Shell><ThingsPage /></Shell>} />
-    <Route path="projects/czs-muni-chatbot" element={<Shell><CzsChatbotPage /></Shell>} />
+    {SHOW_CZS_CASE_STUDY && <Route path="projects/czs-muni-chatbot" element={<Shell><CzsChatbotPage /></Shell>} />}
     <Route path="references" element={<Shell><ReferencesPage /></Shell>} />
     <Route path="share-preview" element={<Shell><SharePreviewPage /></Shell>} />
     <Route path="styleguide" element={<Shell><StyleguidePage /></Shell>} />
