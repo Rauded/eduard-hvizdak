@@ -16,7 +16,7 @@ const about = {
   skillsPrefix: 'Popri tom prevádzkujem',
   skillsSpan: 'InzerPro, SaaS s platiacimi zákazníkmi.',
   skillsSuffix:
-    'Pracujem s Claude Code a modernými AI nástrojmi: integrácie, automatizácie a interné nástroje dodávam bez tímu vývojárov za chrbtom.',
+    'Staviam s Claude Code a modernými AI nástrojmi, takže integrácie, automatizácie a interné nástroje dodám v priebehu dní, nie mesiacov.',
   outside:
     'Mimo práce: knihy, nové nástroje a viac Twitteru, než by som rád priznal.',
   highlightEyebrow: 'Nedávny míľnik',

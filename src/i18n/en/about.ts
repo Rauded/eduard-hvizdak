@@ -19,7 +19,7 @@ const about = {
   skillsPrefix: 'On the side I run',
   skillsSpan: 'InzerPro, a SaaS with paying customers.',
   skillsSuffix:
-    'The way I work is Claude Code and modern AI tools: I ship integrations, automations, and internal tools without needing a dev team for every iteration.',
+    'I build with Claude Code and modern AI tooling, so integrations, automations, and internal tools ship in days, not quarters.',
   outside:
     "I spend my free time reading books, experimenting with new tools (token-maxxing) and doom-scrolling Twitter...",
   highlightEyebrow: 'Recent Highlight',
