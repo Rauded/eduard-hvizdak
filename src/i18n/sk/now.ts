@@ -15,17 +15,17 @@ const now = {
     aria: 'Čomu sa práve venujem',
     expertA: 'Som ',
     expertRole: 'AI inžinier',
-    expertB: ' a väčšinu času venujem stavbe ',
+    expertB: '. Väčšinu času venujem stavbe ',
     studentA: 'Dokončujem si ',
     studentBsc: 'bakalára z informatiky',
     studentB: ' na Masarykovej univerzite a pracujem ako ',
     studentRole: 'AI inžinier',
     studentC: '. Väčšinu času venujem stavbe ',
-    agentsBold: 'AI agentov a agentických systémov',
+    agentsBold: 'produkčných AI agentov a automatizačných systémov',
     mid:
-      ': automatizácie, orchestrácia viacerých agentov a všetko naokolo, čo ich udržiava v chode. Skúsil som si rozbehnúť aj pár vlastných SaaS produktov a ten, ktorý stále beží, je ',
+      ': naplánovaní agenti, orchestrácia viacerých agentov a všetko naokolo, čo ich udržiava v chode. Popri tom prevádzkujem ',
     outro:
-      '. Popri tom, skôr ako doplnok než hlavná práca, robím AI konzultácie plus automatizáciu a nasadzovanie AI, len ja, žiadna firma za tým.',
+      ', SaaS s platiacimi zákazníkmi. K tomu beriem AI konzultácie, automatizáciu a nasadzovanie AI pre firmy.',
   },
   building: {
     title: 'Práve staviam',

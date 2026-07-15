@@ -1,26 +1,24 @@
-// About section. The prose is broken into segments so the inline highlighted
-// spans (purple-text) and the expert/student positioning branch stay intact.
+// About section, Czech. Mirrors jakubjamny.com/cs about structure, adapted to
+// Eduard's true facts. Platící zákazníci = pouze InzerPro; bez metrik chatbotu.
 const about = {
   title: 'O mně',
-  greeting: 'Zdravím! Jmenuji se',
-  introExpert:
-    'Jsem AI inženýr a zaměřuji se na stavbu reálných systémů poháněných velkými jazykovými modely.',
+  greeting: 'Jsem',
+  introExpert: 'Pohybuji se mezi byznysem a technologiemi.',
   introStudent:
-    'Studuji informatiku na Masarykově univerzitě a jako AI vývojář stavím reálné systémy poháněné velkými jazykovými modely.',
-  recentPrefix: 'V poslední době pracuji na AI infrastruktuře pro',
+    'Studuji informatiku na Masarykově univerzitě a pohybuji se mezi byznysem a technologiemi.',
+  recentPrefix: 'Poslední dva roky stavím AI systémy napříč',
   recentSpan:
-    'zpracování dokumentů, multiagentní pipeline a znalostní systémy s rozšířeným vyhledáváním',
-  interestsPrefix:
-    'Moje zájmy se mění podle problémů, které zrovna zkoumám, ale v poslední době mě obzvlášť táhne k',
-  interestsSpan:
-    'agentním AI systémům, architekturám vyhledávání a rozsáhlé analýze dokumentů',
-  interestsSuffix: 's moderními embedding modely a vektorovým vyhledáváním.',
-  skillsPrefix:
-    'Ovládám širokou škálu technologií a pevně věřím, že k problému je potřeba vybrat správný nástroj, ne se upnout na jeden framework či stack. Baví mě navrhovat systémy, kde jazykové modely spolupracují s vyhledávacími nástroji, strukturovanými daty a externími nástroji při řešení složitých úloh. Velká část mé práce je stavba',
-  skillsSpan: 'FastAPI backendů, asynchronních pipeline a infrastruktury pro vektorové vyhledávání',
-  skillsSuffix: 'díky které AI systémy fungují spolehlivě i ve velkém rozsahu.',
+    'dokumentovými pipeline pro veřejné zakázky, univerzitními znalostními systémy a AI asistenty pro samosprávy',
+  interestsPrefix: 'Teď se soustředím na',
+  interestsSpan: 'produkční AI agenty a automatizační systémy',
+  interestsSuffix:
+    'které běží podle plánu, pracují s reálnými daty, provádějí akce a reportují výsledky. Žádné chatboty. Žádná dema.',
+  skillsPrefix: 'Vedle toho provozuji',
+  skillsSpan: 'InzerPro, SaaS s platícími zákazníky.',
+  skillsSuffix:
+    'Pracuji s Claude Code a moderními AI nástroji: integrace, automatizace a interní nástroje dodávám bez týmu vývojářů za zády.',
   outside:
-    'Mimo programování mě většinou najdete u knihy, u zkoušení nových technologií a občas u prohlížení Twitteru.',
+    'Mimo práci: knihy, nové nástroje a víc Twitteru, než bych rád přiznal.',
   highlightEyebrow: 'Nedávný milník',
   highlightTitlePrefix: 'Pozvání od',
   highlightTitleSpan: 'Evropské komise',

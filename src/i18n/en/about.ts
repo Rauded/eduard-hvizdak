@@ -1,26 +1,27 @@
 // About section. The prose is broken into segments so the inline highlighted
 // spans (purple-text) and the expert/student positioning branch stay intact.
+// Copy mirrors jakubjamny.com's about structure per Eduard's request
+// (2026-07-12), adapted to Eduard's true facts. Paying customers = InzerPro
+// only; no chatbot metrics.
 const about = {
   title: 'About Me',
-  greeting: 'Hello! My name is',
-  introExpert:
-    "I'm an AI engineer focused on building real-world systems powered by large language models.",
+  greeting: "I'm",
+  introExpert: 'A builder who sits between business and technology.',
   introStudent:
-    "I'm a computer science student at Masaryk University and AI developer focused on building real-world systems powered by large language models.",
-  recentPrefix: "Most recently, I've been working on AI infrastructure for",
+    'A computer science student at Masaryk University who sits between business and technology.',
+  recentPrefix: "For the past two years I've built AI systems across",
   recentSpan:
-    'document intelligence, multi-agent pipelines, and retrieval-augmented knowledge systems',
-  interestsPrefix:
-    "My interests evolve with the problems I'm exploring, but lately I've been especially focused on",
-  interestsSpan:
-    'agentic AI systems, retrieval architectures, and large-scale document analysis',
-  interestsSuffix: 'using modern embedding models and vector search.',
-  skillsPrefix:
-    'My skillset spans a wide range of technologies, and I believe strongly in choosing the right tool for the problem rather than locking into a single framework or stack. I enjoy designing systems where language models interact with retrieval engines, structured data, and external tools to solve complex tasks. Much of my work involves building',
-  skillsSpan: 'FastAPI backends, asynchronous pipelines, and vector search infrastructure',
-  skillsSuffix: 'that allows AI systems to operate reliably at scale.',
+    'public-contract document pipelines, university knowledge systems, and municipal AI assistants',
+  interestsPrefix: "Now I'm focused on building",
+  interestsSpan: 'production AI agents and automation systems',
+  interestsSuffix:
+    'that run on schedule, work with real data, take real actions, and report results. Not chatbots. Not demos.',
+  skillsPrefix: 'On the side I run',
+  skillsSpan: 'InzerPro, a SaaS with paying customers.',
+  skillsSuffix:
+    'The way I work is Claude Code and modern AI tools: I ship integrations, automations, and internal tools without needing a dev team for every iteration.',
   outside:
-    "Outside of programming, you'll usually find me reading, experimenting with new technologies and occasionally scrolling Twitter.",
+    "Outside work: books, new tools, and more Twitter than I'd like to admit.",
   highlightEyebrow: 'Recent Highlight',
   highlightTitlePrefix: 'Invited by the',
   highlightTitleSpan: 'European Commission',

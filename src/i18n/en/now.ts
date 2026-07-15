@@ -16,17 +16,17 @@ const now = {
     aria: "What I'm focused on right now",
     expertA: "I'm an ",
     expertRole: 'AI engineer',
-    expertB: ', and most of my time goes into building ',
+    expertB: '. Most of my time goes into building ',
     studentA: "I'm wrapping up my ",
     studentBsc: 'BSc in Computer Science',
     studentB: ' at Masaryk University and working as an ',
     studentRole: 'AI engineer',
     studentC: '. Most of my time goes into building ',
-    agentsBold: 'AI agents and agentic systems',
+    agentsBold: 'production AI agents and automation systems',
     mid:
-      ": automations, multi-agent orchestration, and the wiring that keeps them running. I've also had a go at running a few SaaS products of my own, and the one still going is ",
+      ': scheduled agents, multi-agent orchestration, and the wiring that keeps them running. On the side I run ',
     outro:
-      '. On the side, more of an extra than a main job, I do AI consultations plus automation and AI implementation work, just me, no company behind it.',
+      ', a SaaS with paying customers. Alongside that I take on AI consulting, automation, and implementation work for businesses.',
   },
   building: {
     title: 'Currently building',

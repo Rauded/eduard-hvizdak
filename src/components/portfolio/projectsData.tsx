@@ -117,7 +117,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'InzerPro',
     subtitle: 'A SaaS I run on the side',
     description:
-      'Auto-renewal, bulk posting, and analytics for power sellers on Czech and Slovak second-hand marketplaces. It automates the daily relisting grind power sellers used to do by hand. Born from a hackathon, now a side business with paying customers.',
+      'Auto-renewal, bulk posting, and analytics for power sellers on Czech and Slovak second-hand marketplaces. The daily relisting grind runs on schedule instead of by hand. Hackathon build turned side business with paying customers.',
     tags: ['React', 'Supabase', 'Stripe', 'Deno', 'PostHog', 'SaaS', 'Hackathon'],
     links: [
       { label: 'www.inzerpro.cz', url: 'https://www.inzerpro.cz', type: 'demo', favicon: '/brand/sites/inzerpro.svg' },
@@ -131,45 +131,45 @@ export const PROJECTS: PortfolioProject[] = [
     reversed: false,
     caseStudy: {
       problem:
-        'Power sellers on Czech and Slovak <strong>second-hand marketplaces</strong> live and die by listing freshness. Older listings sink, so high-volume sellers were manually <strong>re-listing dozens of classified ads every single day</strong>, an endless copy-paste grind that ate hours and still let competitors bury them overnight.',
+        'Power sellers on Czech and Slovak <strong>second-hand marketplaces</strong> depend on listing freshness. Older listings sink, so high-volume sellers were <strong>re-listing dozens of ads by hand every day</strong>, and competitors still buried them overnight.',
       motivation:
-        'InzerPro started as a <strong>hackathon</strong> project. I watched second-hand resellers, e-shops and car dealers burn their mornings on this repetitive relisting busywork and realised the whole thing was a scheduling problem a computer should own. The goal: give small sellers the same <strong>automation, bulk posting and analytics</strong> the big marketplaces keep for themselves.',
+        'InzerPro started at a <strong>hackathon</strong>. Resellers, e-shops and car dealers burned mornings on relisting: a scheduling problem a computer should own. The goal: give small sellers the <strong>automation, bulk posting and analytics</strong> the big marketplaces keep for themselves.',
       challenges:
-        'The hard parts of any real SaaS: reliable <strong>scheduled jobs</strong> that fire on time for every user, multi-account management, image handling and category rules that differ per marketplace, and <strong>Stripe subscription billing</strong> with trials, upgrades and failed-payment recovery.',
+        'The hard parts of any real SaaS: <strong>scheduled jobs</strong> that fire on time for every user, multi-account management, image handling and category rules that differ per marketplace, and <strong>Stripe billing</strong> with trials, upgrades and failed-payment recovery.',
       solution:
-        'I built an automation engine on <strong>Deno</strong> that handles auto-renewal, scheduled re-posting and bulk listing across multiple seller accounts, backed by <strong>Supabase</strong> for auth, Postgres data and storage, <strong>Stripe</strong> for subscriptions, and a fast <strong>React</strong> dashboard for managing listings and reading performance analytics. <strong>PostHog</strong> tracks product usage so I can see exactly which features drive retention. The result: the relisting grind runs on autopilot.',
+        'A <strong>Deno</strong> engine handles auto-renewal, scheduled re-posting and bulk listing across seller accounts. <strong>Supabase</strong> covers auth, Postgres and storage, <strong>Stripe</strong> subscriptions. A <strong>React</strong> dashboard manages listings and analytics; <strong>PostHog</strong> shows what drives retention. The relisting grind runs on autopilot.',
       story:
-        'What began as a weekend hackathon build is now a real <strong>side business with paying customers</strong> at <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. I later pitched it again at the <a href="/blog/zero-to-done">Zero to Done startup-build hackathon</a> in Brno, where the whole point was getting real customers, not just shipping a demo.',
+        'The weekend hackathon build is now a <strong>side business with paying customers</strong> at <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. I pitched it again at the <a href="/blog/zero-to-done">Zero to Done hackathon</a> in Brno: real customers, not a demo.',
     },
     subtitle_cs: 'SaaS, který provozuji vedle práce',
     description_cs:
-      'Automatické obnovování, hromadné přidávání inzerátů a analytika pro velké prodejce na českých a slovenských bazarových tržištích. Automatizuje každodenní dřinu s opětovným přidáváním inzerátů, kterou velcí prodejci dřív dělali ručně. Vzniklo na hackathonu, dnes je to byznys vedle práce s platícími zákazníky.',
+      'Automatické obnovování, hromadné přidávání a analytika pro velké prodejce na českých a slovenských bazarových tržištích. Každodenní dřina s obnovováním inzerátů běží podle plánu místo ručně. Z hackathonu je dnes byznys vedle práce s platícími zákazníky.',
     caseStudy_cs: {
       problem:
-        'Velcí prodejci na českých a slovenských <strong>bazarových tržištích</strong> žijí a padají s čerstvostí inzerátu. Starší inzeráty klesají dolů, takže prodejci s velkým objemem ručně <strong>znovu přidávali desítky inzerátů každý jediný den</strong>. Nekonečná dřina kopírování a přidávání, která spolykala hodiny a konkurence je stejně přes noc zasypala.',
+        'Velcí prodejci na českých a slovenských <strong>bazarových tržištích</strong> stojí a padají s čerstvostí inzerátu. Starší inzeráty klesají dolů, takže prodejci s velkým objemem <strong>obnovovali desítky inzerátů ručně každý den</strong> a konkurence je přes noc stejně zasypala.',
       motivation:
-        'InzerPro vzniklo jako projekt na <strong>hackathonu</strong>. Díval jsem se, jak prodejci second-handu, e-shopy a autobazary promarní rána touhle opakovanou robotou s obnovováním inzerátů, a došlo mi, že celé je to problém plánování, který by měl vlastnit počítač. Cíl: dát malým prodejcům stejnou <strong>automatizaci, hromadné přidávání a analytiku</strong>, jakou si velká tržiště nechávají pro sebe.',
+        'InzerPro vzniklo na <strong>hackathonu</strong>. Second-handy, e-shopy a autobazary trávily rána obnovováním inzerátů: problém plánování, který má řešit počítač. Cíl: dát malým prodejcům <strong>automatizaci, hromadné přidávání a analytiku</strong>, jaké si velká tržiště nechávají pro sebe.',
       challenges:
-        'Těžké části každého skutečného SaaS: spolehlivé <strong>naplánované úlohy</strong>, které se spustí včas pro každého uživatele, správa více účtů, práce s obrázky a pravidla kategorií, která se liší podle tržiště, a <strong>předplatné přes Stripe</strong> se zkušebními obdobími, přechody na vyšší plány a obnovou po neúspěšné platbě.',
+        'Těžké části každého skutečného SaaS: spolehlivé <strong>naplánované úlohy</strong> spuštěné včas pro každého uživatele, správa více účtů, práce s obrázky a pravidla kategorií lišící se podle tržiště, a <strong>předplatné přes Stripe</strong> se zkušebními obdobími, upgrady a obnovou po neúspěšné platbě.',
       solution:
-        'Postavil jsem automatizační engine na <strong>Deno</strong>, který zvládá automatické obnovování, naplánované opětovné přidávání a hromadné inzerování napříč více účty prodejců. Podpírá ho <strong>Supabase</strong> pro autentizaci, data v Postgresu a úložiště, <strong>Stripe</strong> pro předplatné a rychlý <strong>React</strong> dashboard na správu inzerátů a čtení analytiky výkonu. <strong>PostHog</strong> sleduje používání produktu, takže přesně vidím, které funkce drží zákazníky. Výsledek: dřina s obnovováním běží na autopilotu.',
+        'Engine na <strong>Deno</strong> zvládá obnovování, naplánované přidávání a hromadnou inzerci napříč účty prodejců. <strong>Supabase</strong> drží autentizaci, Postgres a úložiště, <strong>Stripe</strong> předplatné. <strong>React</strong> dashboard řeší správu inzerátů a analytiku; <strong>PostHog</strong> ukazuje, co drží zákazníky. Dřina s obnovováním běží na autopilotu.',
       story:
-        'Z toho, co vzniklo o víkendu na hackathonu, je dnes skutečný <strong>byznys vedle práce s platícími zákazníky</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Později jsem ho znovu odprezentoval na <a href="/cs/blog/zero-to-done">hackathonu Zero to Done</a> v Brně, kde celá pointa byla získat skutečné zákazníky, ne jen vypustit ukázku.',
+        'Z víkendového hackathonového projektu je dnes <strong>byznys vedle práce s platícími zákazníky</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Znovu jsem ho odprezentoval na <a href="/cs/blog/zero-to-done">hackathonu Zero to Done</a> v Brně: skuteční zákazníci, ne demo.',
     },
     subtitle_sk: 'SaaS, ktorý prevádzkujem popri práci',
     description_sk:
-      'Automatické obnovovanie, hromadné pridávanie inzerátov a analytika pre veľkých predajcov na českých a slovenských bazárových trhoviskách. Automatizuje každodennú drinu s opätovným pridávaním inzerátov, ktorú veľkí predajcovia predtým robili ručne. Vzniklo na hackathone, dnes je to popri práci biznis s platiacimi zákazníkmi.',
+      'Automatické obnovovanie, hromadné pridávanie a analytika pre veľkých predajcov na českých a slovenských bazárových trhoviskách. Každodenná drina s obnovovaním inzerátov beží podľa plánu namiesto ručne. Z hackathonu je dnes popri práci biznis s platiacimi zákazníkmi.',
     caseStudy_sk: {
       problem:
-        'Veľkí predajcovia na českých a slovenských <strong>bazárových trhoviskách</strong> žijú a padajú s čerstvosťou inzerátu. Staršie inzeráty klesajú nižšie, takže predajcovia s veľkým objemom ručne <strong>opätovne pridávali desiatky inzerátov každý jeden deň</strong>. Nekonečná drina kopírovania a pridávania, ktorá zožrala hodiny a konkurencia ich aj tak cez noc zasypala.',
+        'Veľkí predajcovia na českých a slovenských <strong>bazárových trhoviskách</strong> stoja a padajú s čerstvosťou inzerátu. Staršie inzeráty klesajú nižšie, takže predajcovia s veľkým objemom <strong>obnovovali desiatky inzerátov ručne každý deň</strong> a konkurencia ich cez noc aj tak zasypala.',
       motivation:
-        'InzerPro vzniklo ako projekt na <strong>hackathone</strong>. Sledoval som, ako predajcovia second-handu, e-shopy a autobazáre premárnia rána na tejto opakovanej robote s obnovovaním inzerátov, a uvedomil som si, že celé je to problém plánovania, ktorý by mal vlastniť počítač. Cieľ: dať malým predajcom rovnakú <strong>automatizáciu, hromadné pridávanie a analytiku</strong>, akú si veľké trhoviská nechávajú pre seba.',
+        'InzerPro vzniklo na <strong>hackathone</strong>. Second-handy, e-shopy a autobazáre trávili rána obnovovaním inzerátov: problém plánovania, ktorý má riešiť počítač. Cieľ: dať malým predajcom <strong>automatizáciu, hromadné pridávanie a analytiku</strong>, aké si veľké trhoviská nechávajú pre seba.',
       challenges:
-        'Náročné časti každého skutočného SaaS: spoľahlivé <strong>naplánované úlohy</strong>, ktoré sa spustia načas pre každého používateľa, správa viacerých účtov, práca s obrázkami a pravidlá kategórií, ktoré sa líšia podľa trhoviska, a <strong>predplatné cez Stripe</strong> so skúšobnými obdobiami, prechodmi na vyššie plány a obnovou po neúspešnej platbe.',
+        'Náročné časti každého skutočného SaaS: spoľahlivé <strong>naplánované úlohy</strong> spustené načas pre každého používateľa, správa viacerých účtov, práca s obrázkami a pravidlá kategórií líšiace sa podľa trhoviska, a <strong>predplatné cez Stripe</strong> so skúšobnými obdobiami, upgradmi a obnovou po neúspešnej platbe.',
       solution:
-        'Postavil som automatizačný engine na <strong>Deno</strong>, ktorý zvláda automatické obnovovanie, naplánované opätovné pridávanie a hromadné inzerovanie naprieč viacerými účtami predajcov. Podopiera ho <strong>Supabase</strong> pre autentifikáciu, dáta v Postgrese a úložisko, <strong>Stripe</strong> pre predplatné a rýchly <strong>React</strong> dashboard na správu inzerátov a čítanie analytiky výkonu. <strong>PostHog</strong> sleduje používanie produktu, takže presne vidím, ktoré funkcie držia zákazníkov. Výsledok: drina s obnovovaním beží na autopilote.',
+        'Engine na <strong>Deno</strong> zvláda obnovovanie, naplánované pridávanie a hromadnú inzerciu naprieč účtami predajcov. <strong>Supabase</strong> drží autentifikáciu, Postgres a úložisko, <strong>Stripe</strong> predplatné. <strong>React</strong> dashboard rieši správu inzerátov a analytiku; <strong>PostHog</strong> ukazuje, čo drží zákazníkov. Drina s obnovovaním beží na autopilote.',
       story:
-        'Z toho, čo vzniklo cez víkend na hackathone, je dnes skutočný <strong>biznis popri práci s platiacimi zákazníkmi</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Neskôr som ho znova odprezentoval na <a href="/sk/blog/zero-to-done">hackathone Zero to Done</a> v Brne, kde celá pointa bola získať skutočných zákazníkov, nielen vypustiť ukážku.',
+        'Z víkendového hackathonového projektu je dnes <strong>biznis popri práci s platiacimi zákazníkmi</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Znova som ho odprezentoval na <a href="/sk/blog/zero-to-done">hackathone Zero to Done</a> v Brne: skutoční zákazníci, nie demo.',
     },
   },
   {
@@ -178,7 +178,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'StudyExe',
     subtitle: 'Deep work for ADHD brains',
     description:
-      'Real-time eye tracking alerts you after 5 seconds of looking away. Full screen lock eliminates every distraction. AI-scored recall sessions measure what you actually retained, not just how long you stared at a screen.',
+      'Webcam eye tracking flags you 5 seconds after your gaze drifts. Full-screen lock removes every distraction. AI-scored recall tests measure what stuck, not minutes stared.',
     tags: ['Python', 'OpenAI API', 'Eye Tracking', 'Tkinter', 'Desktop App', 'AI'],
     links: [
       { label: 'GitHub', url: 'https://github.com/Rauded', type: 'github' },
@@ -200,45 +200,45 @@ export const PROJECTS: PortfolioProject[] = [
     reversed: true,
     caseStudy: {
       problem:
-        'Most study apps measure the wrong thing: <strong>time on screen</strong>, not learning. For an <strong>ADHD</strong> brain, an open textbook and a wandering gaze can look identical to "studying" while nothing actually goes in. The real problems are silent attention drift and the total absence of any honest signal for <strong>how much you actually retained</strong>.',
+        'Most study apps measure <strong>time on screen</strong>, not learning. An <strong>ADHD</strong> brain can stare at an open textbook while nothing goes in. There is no honest signal for <strong>how much you retained</strong>.',
       motivation:
-        'I built StudyExe out of my own fight with focus and <strong>deep work</strong>. I wanted a tool that didn’t just block distractions but actively kept my eyes on the page and then <strong>proved</strong> whether the session worked, measuring recall, not minutes.',
+        'StudyExe comes from my own fight with focus and <strong>deep work</strong>. I wanted a tool that keeps my eyes on the page and <strong>proves</strong> the session worked. Recall, not minutes.',
       challenges:
-        'Real-time <strong>eye tracking</strong> from a plain webcam is unforgiving: gaze detection had to be fast and low-latency, robust to head movement, lighting and glasses, and tuned to avoid false "you looked away" alarms while still catching genuine drift within seconds. Locking the screen into a true distraction-free <strong>full-screen</strong> mode on desktop, and getting an LLM to fairly <strong>score active recall</strong> against the source material, were each their own rabbit holes, all inside a <strong>Python</strong> / <strong>Tkinter</strong> desktop app.',
+        'Real-time <strong>eye tracking</strong> from a plain webcam is unforgiving. Detection had to be fast, survive head movement, lighting and glasses, and catch drift within seconds without false alarms. Add a true <strong>full-screen</strong> lock and an LLM that fairly <strong>scores active recall</strong>, all inside a <strong>Python</strong> / <strong>Tkinter</strong> desktop app.',
       solution:
-        'StudyExe uses computer-vision <strong>gaze tracking</strong> to alert you after just 5 seconds of looking away, a full-screen lock that removes every distraction, and <strong>AI-scored recall sessions</strong> powered by the <strong>OpenAI API</strong> that test what you actually remember. Instead of rewarding time served, it rewards retention, turning studying into a measurable feedback loop.',
+        'Computer-vision <strong>gaze tracking</strong> alerts you 5 seconds after you look away. A full-screen lock removes distractions. <strong>AI-scored recall sessions</strong> on the <strong>OpenAI API</strong> test what you remember. Retention, not time served.',
       story:
-        'It shipped as a polished desktop app with several themes (Obsidian, cyberpunk, cyberforest) at <a href="https://www.studyexe.com" target="_blank" rel="noopener noreferrer">studyexe.com</a>, a focus tool built by someone who genuinely needed it.',
+        'Shipped as a desktop app with several themes (Obsidian, cyberpunk, cyberforest) at <a href="https://www.studyexe.com" target="_blank" rel="noopener noreferrer">studyexe.com</a>. A focus tool built by someone who needed it.',
     },
     subtitle_cs: 'Hluboká práce pro mozky s ADHD',
     description_cs:
-      'Sledování očí v reálném čase vás upozorní po 5 sekundách, kdy se díváte jinam. Uzamčení celé obrazovky odstraní každé vyrušení. Sezení s vybavováním z paměti, která hodnotí AI, měří, co jste si opravdu zapamatovali, ne jen jak dlouho jste zírali do obrazovky.',
+      'Sledování očí přes webkameru vás upozorní 5 sekund po odvedení pohledu. Zámek celé obrazovky odstraní každé vyrušení. Testy vybavování hodnocené AI měří, co se uchytilo, ne odzírané minuty.',
     caseStudy_cs: {
       problem:
-        'Většina studijních aplikací měří špatnou věc: <strong>čas u obrazovky</strong>, ne učení. Pro mozek s <strong>ADHD</strong> může otevřená učebnice a bloudící pohled vypadat stejně jako "studium", přitom dovnitř ve skutečnosti nic nejde. Skutečné problémy jsou tichý únik pozornosti a úplná absence jakéhokoli poctivého signálu o tom, <strong>kolik jste si opravdu zapamatovali</strong>.',
+        'Většina studijních aplikací měří <strong>čas u obrazovky</strong>, ne učení. Mozek s <strong>ADHD</strong> dokáže zírat do otevřené učebnice, aniž by dovnitř cokoli šlo. Chybí poctivý signál, <strong>kolik jste si zapamatovali</strong>.',
       motivation:
-        'StudyExe jsem postavil z vlastního boje se soustředěním a <strong>hlubokou prací</strong>. Chtěl jsem nástroj, který nejen blokuje vyrušení, ale aktivně mi drží oči na stránce a pak <strong>dokáže</strong>, jestli sezení zabralo, tedy měří vybavování z paměti, ne minuty.',
+        'StudyExe vzešlo z mého vlastního boje se soustředěním a <strong>hlubokou prací</strong>. Chtěl jsem nástroj, který mi drží oči na stránce a <strong>dokáže</strong>, jestli sezení zabralo. Vybavování, ne minuty.',
       challenges:
-        '<strong>Sledování očí</strong> v reálném čase z obyčejné webkamery neodpouští: detekce pohledu musela být rychlá a s nízkou odezvou, odolná vůči pohybu hlavy, osvětlení a brýlím a vyladěná tak, aby se vyhnula falešným poplachům "podívali jste se jinam" a přitom zachytila skutečný únik pozornosti během sekund. Uzamčení obrazovky do opravdu bezrušivého režimu <strong>celé obrazovky</strong> na počítači a přimět LLM, aby férově <strong>hodnotil aktivní vybavování</strong> oproti zdrojovému materiálu, byly každé samostatnou králičí norou, a to všechno uvnitř desktopové aplikace v <strong>Pythonu</strong> a <strong>Tkinteru</strong>.',
+        '<strong>Sledování očí</strong> v reálném čase z obyčejné webkamery neodpouští. Detekce musela být rychlá, zvládnout pohyb hlavy, osvětlení i brýle a zachytit únik pozornosti během sekund bez falešných poplachů. K tomu opravdový zámek <strong>celé obrazovky</strong> a LLM, který férově <strong>hodnotí aktivní vybavování</strong>, to celé v aplikaci v <strong>Pythonu</strong> a <strong>Tkinteru</strong>.',
       solution:
-        'StudyExe využívá <strong>sledování pohledu</strong> pomocí počítačového vidění, aby vás upozornilo už po 5 sekundách, kdy se díváte jinam, uzamčení celé obrazovky, které odstraní každé vyrušení, a <strong>sezení s vybavováním hodnocená AI</strong> poháněná přes <strong>OpenAI API</strong>, která testují, co si opravdu pamatujete. Místo odměňování odseděného času odměňuje zapamatování a mění studium na měřitelnou zpětnou vazbu.',
+        '<strong>Sledování pohledu</strong> počítačovým viděním vás upozorní 5 sekund poté, co se podíváte jinam. Zámek celé obrazovky odstraní vyrušení. <strong>Sezení s vybavováním hodnocená AI</strong> přes <strong>OpenAI API</strong> testují, co si pamatujete. Zapamatování, ne odseděný čas.',
       story:
-        'Vypustil jsem to jako vypiplanou desktopovou aplikaci s několika tématy (Obsidian, cyberpunk, cyberforest) na <a href="https://www.studyexe.com" target="_blank" rel="noopener noreferrer">studyexe.com</a>, nástroj na soustředění postavený někým, kdo ho opravdu potřeboval.',
+        'Vyšlo jako desktopová aplikace s několika tématy (Obsidian, cyberpunk, cyberforest) na <a href="https://www.studyexe.com" target="_blank" rel="noopener noreferrer">studyexe.com</a>. Nástroj na soustředění od někoho, kdo ho potřeboval.',
     },
     subtitle_sk: 'Hlboká práca pre mozgy s ADHD',
     description_sk:
-      'Sledovanie očí v reálnom čase vás upozorní po 5 sekundách odvrátenia pohľadu. Uzamknutie celej obrazovky odstráni každé vyrušenie. Sedenia s vybavovaním z pamäte hodnotené AI merajú, čo ste si naozaj zapamätali, nie len ako dlho ste civeli do obrazovky.',
+      'Sledovanie očí cez webkameru vás upozorní 5 sekúnd po odvedení pohľadu. Zámok celej obrazovky odstráni každé vyrušenie. Testy vybavovania hodnotené AI merajú, čo sa uchytilo, nie odsedené minúty.',
     caseStudy_sk: {
       problem:
-        'Väčšina študijných aplikácií meria nesprávnu vec: <strong>čas pred obrazovkou</strong>, nie učenie. Pre mozog s <strong>ADHD</strong> môže otvorená učebnica a blúdiaci pohľad vyzerať rovnako ako "štúdium", pričom v skutočnosti dovnútra nič nejde. Skutočné problémy sú tichý únik pozornosti a úplná absencia akéhokoľvek úprimného signálu o tom, <strong>koľko ste si naozaj zapamätali</strong>.',
+        'Väčšina študijných aplikácií meria <strong>čas pred obrazovkou</strong>, nie učenie. Mozog s <strong>ADHD</strong> dokáže civieť do otvorenej učebnice bez toho, aby dovnútra čokoľvek išlo. Chýba úprimný signál, <strong>koľko ste si zapamätali</strong>.',
       motivation:
-        'StudyExe som postavil z vlastného boja so sústredením a <strong>hlbokou prácou</strong>. Chcel som nástroj, ktorý nielen blokuje vyrušenia, ale aktívne mi drží oči na stránke a potom <strong>dokáže</strong>, či sedenie zabralo, teda meria vybavovanie z pamäte, nie minúty.',
+        'StudyExe vzišlo z môjho vlastného boja so sústredením a <strong>hlbokou prácou</strong>. Chcel som nástroj, ktorý mi drží oči na stránke a <strong>dokáže</strong>, či sedenie zabralo. Vybavovanie, nie minúty.',
       challenges:
-        '<strong>Sledovanie očí</strong> v reálnom čase z obyčajnej webkamery neodpúšťa: detekcia pohľadu musela byť rýchla a s nízkou odozvou, odolná voči pohybu hlavy, osvetleniu a okuliarom a vyladená tak, aby sa vyhla falošným poplachom "pozreli ste sa preč" a pritom zachytila skutočný únik pozornosti v priebehu sekúnd. Uzamknutie obrazovky do naozaj bezrušivého režimu <strong>celej obrazovky</strong> na počítači a prinútenie LLM férovo <strong>hodnotiť aktívne vybavovanie</strong> oproti zdrojovému materiálu boli každé samostatnou zajačou norou, a to všetko vnútri desktopovej aplikácie v <strong>Pythone</strong> a <strong>Tkinteri</strong>.',
+        '<strong>Sledovanie očí</strong> v reálnom čase z obyčajnej webkamery neodpúšťa. Detekcia musela byť rýchla, zvládnuť pohyb hlavy, osvetlenie aj okuliare a zachytiť únik pozornosti v priebehu sekúnd bez falošných poplachov. K tomu skutočný zámok <strong>celej obrazovky</strong> a LLM, ktorý férovo <strong>hodnotí aktívne vybavovanie</strong>, to celé v aplikácii v <strong>Pythone</strong> a <strong>Tkinteri</strong>.',
       solution:
-        'StudyExe využíva <strong>sledovanie pohľadu</strong> pomocou počítačového videnia, aby vás upozornilo už po 5 sekundách odvrátenia pohľadu, uzamknutie celej obrazovky, ktoré odstráni každé vyrušenie, a <strong>sedenia s vybavovaním hodnotené AI</strong> poháňané cez <strong>OpenAI API</strong>, ktoré testujú, čo si naozaj pamätáte. Namiesto odmeňovania odsedeného času odmeňuje zapamätanie a mení štúdium na merateľnú spätnú väzbu.',
+        '<strong>Sledovanie pohľadu</strong> počítačovým videním vás upozorní 5 sekúnd po tom, čo sa pozriete inam. Zámok celej obrazovky odstráni vyrušenia. <strong>Sedenia s vybavovaním hodnotené AI</strong> cez <strong>OpenAI API</strong> testujú, čo si pamätáte. Zapamätanie, nie odsedený čas.',
       story:
-        'Vypustil som to ako vypiplanú desktopovú aplikáciu s viacerými témami (Obsidian, cyberpunk, cyberforest) na <a href="https://www.studyexe.com" target="_blank" rel="noopener noreferrer">studyexe.com</a>, nástroj na sústredenie postavený niekým, kto ho naozaj potreboval.',
+        'Vyšlo ako desktopová aplikácia s viacerými témami (Obsidian, cyberpunk, cyberforest) na <a href="https://www.studyexe.com" target="_blank" rel="noopener noreferrer">studyexe.com</a>. Nástroj na sústredenie od niekoho, kto ho potreboval.',
     },
   },
   {
@@ -247,7 +247,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'KouzelnikNaAkci.cz',
     subtitle: 'A directory for Czech & Slovak magicians',
     description:
-      'A two-sided marketplace connecting event organisers with professional magicians. Curated performer profiles, Stripe-powered listings, automated email, and 20+ city & occasion landing pages tuned for local search.',
+      'Two-sided marketplace for hiring magicians in Czechia and Slovakia. Curated profiles, Stripe listings, automated email, 20+ city and occasion landing pages built for local search.',
     tags: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Vercel'],
     links: [
       { label: 'www.kouzelniknaakci.cz', url: 'https://www.kouzelniknaakci.cz', type: 'demo', favicon: '/brand/sites/kouzelniknaakci.svg' },
@@ -261,45 +261,45 @@ export const PROJECTS: PortfolioProject[] = [
     reversed: false,
     caseStudy: {
       problem:
-        'If you need to <strong>book a professional magician</strong> for a wedding, birthday, corporate event or kids’ party in the Czech Republic or Slovakia, there was no good place to look. Performers were scattered across outdated personal sites and Facebook pages, and event organisers had no central, trustworthy way to compare and hire them: a classic fragmented local market.',
+        'Booking a <strong>professional magician</strong> for a wedding, birthday, corporate event or kids\' party in Czechia or Slovakia had no good starting point. Performers sat on outdated sites and Facebook pages; organisers had nowhere central to <strong>compare and hire</strong> them.',
       motivation:
-        'I saw a textbook <strong>two-sided marketplace</strong> gap with a strong <strong>local-SEO</strong> angle: high-intent searches like "magician for a party in Brno" with almost no one ranking properly for them. Owning that search traffic could connect organisers and magicians far better than the status quo.',
+        'A <strong>two-sided marketplace</strong> gap with a <strong>local-SEO</strong> angle: high-intent searches like "magician for a party in Brno" and almost nobody ranking for them. Owning that traffic connects organisers and magicians.',
       challenges:
-        'Marketplaces have the classic <strong>cold-start chicken-and-egg problem</strong>: no organisers without performers, no performers without organisers. On top of that I needed real <strong>programmatic SEO</strong>: generating and maintaining 20+ city × occasion landing pages that rank locally without turning into thin duplicate content, plus <strong>Stripe</strong> paid listings and reliable automated transactional email for enquiries.',
+        'The <strong>cold-start chicken-and-egg problem</strong>: no organisers without performers, and vice versa. Plus real <strong>programmatic SEO</strong>: 20+ city × occasion landing pages that rank locally without becoming thin duplicate content, <strong>Stripe</strong> paid listings, automated transactional email.',
       solution:
-        'I built it on <strong>Next.js</strong> + <strong>React</strong> + <strong>TypeScript</strong> with <strong>Tailwind CSS</strong>, deployed on <strong>Vercel</strong> for fast server-rendered, SEO-friendly pages. It has curated performer profiles, <strong>Stripe-powered</strong> listings, automated email notifications, and 20+ programmatic <strong>city & occasion landing pages</strong> tuned for local search, so the right magician shows up exactly when someone searches for one.',
+        '<strong>Next.js</strong> + <strong>React</strong> + <strong>TypeScript</strong> with <strong>Tailwind CSS</strong> on <strong>Vercel</strong>: fast server-rendered, SEO-friendly pages. Curated profiles, <strong>Stripe</strong> listings, automated email, 20+ programmatic <strong>city & occasion landing pages</strong> tuned for local search.',
       story:
-        'It runs today at <a href="https://www.kouzelniknaakci.cz" target="_blank" rel="noopener noreferrer">kouzelniknaakci.cz</a>, a small but genuinely useful niche marketplace serving the Czech and Slovak events scene.',
+        'It runs today at <a href="https://www.kouzelniknaakci.cz" target="_blank" rel="noopener noreferrer">kouzelniknaakci.cz</a>, a small niche marketplace for the Czech and Slovak events scene.',
     },
     subtitle_cs: 'Katalog českých a slovenských kouzelníků',
     description_cs:
-      'Oboustranné tržiště, které spojuje organizátory akcí s profesionálními kouzelníky. Vybrané profily vystupujících, placené inzeráty přes Stripe, automatizované e-maily a 20+ vstupních stránek pro města a příležitosti vyladěných na lokální vyhledávání.',
+      'Oboustranné tržiště pro objednání kouzelníka v Česku a na Slovensku. Vybrané profily, inzeráty přes Stripe, automatizované e-maily, 20+ vstupních stránek pro města a příležitosti stavěných na lokální vyhledávání.',
     caseStudy_cs: {
       problem:
-        'Pokud si v Česku nebo na Slovensku potřebujete <strong>objednat profesionálního kouzelníka</strong> na svatbu, oslavu narozenin, firemní akci nebo dětskou párty, nebylo kde hledat. Vystupující byli roztroušení po zastaralých osobních stránkách a facebookových profilech a organizátoři akcí neměli centrální, důvěryhodné místo, kde je porovnat a najmout: klasický roztříštěný lokální trh.',
+        'Kdo si chtěl v Česku nebo na Slovensku <strong>objednat profesionálního kouzelníka</strong> na svatbu, narozeniny, firemní akci nebo dětskou párty, neměl kde hledat. Vystupující byli roztroušení po zastaralých webech a Facebooku; organizátoři je neměli kde <strong>porovnat a najmout</strong>.',
       motivation:
-        'Viděl jsem učebnicovou mezeru pro <strong>oboustranné tržiště</strong> se silným <strong>lokálně-SEO</strong> úhlem: vyhledávání s vysokým záměrem jako "kouzelník na oslavu v Brně", na která skoro nikdo pořádně nerankoval. Ovládnutí tohohle vyhledávacího provozu mohlo spojit organizátory a kouzelníky mnohem líp než dosavadní stav.',
+        'Mezera pro <strong>oboustranné tržiště</strong> s <strong>lokálně-SEO</strong> úhlem: vyhledávání jako "kouzelník na oslavu v Brně", na která skoro nikdo nerankoval. Ovládnout ten provoz znamená propojit organizátory a kouzelníky.',
       challenges:
-        'Tržiště mají klasický <strong>problém studeného startu, slepice a vejce</strong>: žádní organizátoři bez vystupujících, žádní vystupující bez organizátorů. Navíc jsem potřeboval skutečné <strong>programatické SEO</strong>: vytvořit a udržovat 20+ vstupních stránek kombinujících město a příležitost, které rankují lokálně, aniž by se změnily v tenký duplicitní obsah, plus placené inzeráty přes <strong>Stripe</strong> a spolehlivé automatizované transakční e-maily pro poptávky.',
+        '<strong>Problém studeného startu</strong>: žádní organizátoři bez vystupujících a naopak. K tomu <strong>programatické SEO</strong>: 20+ vstupních stránek pro města a příležitosti, které rankují lokálně a nezvrhnou se v tenký duplicitní obsah, placené inzeráty přes <strong>Stripe</strong>, automatizované transakční e-maily.',
       solution:
-        'Postavil jsem to na <strong>Next.js</strong> + <strong>React</strong> + <strong>TypeScript</strong> s <strong>Tailwind CSS</strong>, nasazené na <strong>Vercel</strong> pro rychlé serverem renderované stránky přátelské k SEO. Má vybrané profily vystupujících, inzeráty <strong>poháněné přes Stripe</strong>, automatizovaná e-mailová upozornění a 20+ programatických <strong>vstupních stránek pro města a příležitosti</strong> vyladěných na lokální vyhledávání, aby se správný kouzelník ukázal přesně tehdy, když ho někdo hledá.',
+        '<strong>Next.js</strong> + <strong>React</strong> + <strong>TypeScript</strong> s <strong>Tailwind CSS</strong> na <strong>Vercelu</strong>: rychlé serverem renderované stránky přívětivé k SEO. Vybrané profily, inzeráty přes <strong>Stripe</strong>, automatizované e-maily, 20+ programatických <strong>stránek pro města a příležitosti</strong> laděných na lokální vyhledávání.',
       story:
-        'Běží dnes na <a href="https://www.kouzelniknaakci.cz" target="_blank" rel="noopener noreferrer">kouzelniknaakci.cz</a>, malé, ale opravdu užitečné nišové tržiště sloužící české a slovenské scéně akcí.',
+        'Běží dnes na <a href="https://www.kouzelniknaakci.cz" target="_blank" rel="noopener noreferrer">kouzelniknaakci.cz</a>, malé nišové tržiště pro českou a slovenskou scénu akcí.',
     },
     subtitle_sk: 'Katalóg pre českých a slovenských kúzelníkov',
     description_sk:
-      'Obojstranné trhovisko, ktoré spája organizátorov akcií s profesionálnymi kúzelníkmi. Vybrané profily účinkujúcich, platené inzeráty cez Stripe, automatizované e-maily a 20+ vstupných stránok pre mestá a príležitosti vyladených na lokálne vyhľadávanie.',
+      'Obojstranné trhovisko na objednanie kúzelníka v Česku a na Slovensku. Vybrané profily, inzeráty cez Stripe, automatizované e-maily, 20+ vstupných stránok pre mestá a príležitosti stavaných na lokálne vyhľadávanie.',
     caseStudy_sk: {
       problem:
-        'Ak si v Česku alebo na Slovensku potrebujete <strong>objednať profesionálneho kúzelníka</strong> na svadbu, oslavu narodenín, firemnú akciu alebo detskú párty, nebolo kde hľadať. Účinkujúci boli roztrúsení po zastaraných osobných stránkach a facebookových profiloch a organizátori akcií nemali centrálne, dôveryhodné miesto, kde ich porovnať a najať: klasický roztrieštený lokálny trh.',
+        'Kto si chcel v Česku alebo na Slovensku <strong>objednať profesionálneho kúzelníka</strong> na svadbu, narodeniny, firemnú akciu alebo detskú párty, nemal kde hľadať. Účinkujúci boli roztrúsení po zastaraných weboch a Facebooku; organizátori ich nemali kde <strong>porovnať a najať</strong>.',
       motivation:
-        'Videl som učebnicovú medzeru pre <strong>obojstranné trhovisko</strong> so silným <strong>lokálno-SEO</strong> uhlom: vyhľadávania s vysokým zámerom ako "kúzelník na oslavu v Brne", na ktoré takmer nikto poriadne nerankoval. Ovládnutie tohto vyhľadávacieho dopytu mohlo spojiť organizátorov a kúzelníkov oveľa lepšie než dovtedajší stav.',
+        'Medzera pre <strong>obojstranné trhovisko</strong> s <strong>lokálno-SEO</strong> uhlom: vyhľadávania ako "kúzelník na oslavu v Brne", na ktoré takmer nikto nerankoval. Ovládnuť tento dopyt znamená prepojiť organizátorov a kúzelníkov.',
       challenges:
-        'Trhoviská majú klasický <strong>problém studeného štartu, sliepka a vajce</strong>: žiadni organizátori bez účinkujúcich, žiadni účinkujúci bez organizátorov. Navrch som potreboval skutočné <strong>programatické SEO</strong>: vytvoriť a udržiavať 20+ vstupných stránok kombinujúcich mesto a príležitosť, ktoré rankujú lokálne bez toho, aby sa zmenili na tenký duplicitný obsah, plus platené inzeráty cez <strong>Stripe</strong> a spoľahlivé automatizované transakčné e-maily pre dopyty.',
+        '<strong>Problém studeného štartu</strong>: žiadni organizátori bez účinkujúcich a naopak. K tomu <strong>programatické SEO</strong>: 20+ vstupných stránok pre mestá a príležitosti, ktoré rankujú lokálne a nezvrhnú sa na tenký duplicitný obsah, platené inzeráty cez <strong>Stripe</strong>, automatizované transakčné e-maily.',
       solution:
-        'Postavil som to na <strong>Next.js</strong> + <strong>React</strong> + <strong>TypeScript</strong> s <strong>Tailwind CSS</strong>, nasadené na <strong>Vercel</strong> pre rýchle serverom renderované stránky priateľské k SEO. Má vybrané profily účinkujúcich, inzeráty <strong>poháňané cez Stripe</strong>, automatizované e-mailové upozornenia a 20+ programatických <strong>vstupných stránok pre mestá a príležitosti</strong> vyladených na lokálne vyhľadávanie, aby sa správny kúzelník ukázal presne vtedy, keď ho niekto hľadá.',
+        '<strong>Next.js</strong> + <strong>React</strong> + <strong>TypeScript</strong> s <strong>Tailwind CSS</strong> na <strong>Verceli</strong>: rýchle serverom renderované stránky priateľské k SEO. Vybrané profily, inzeráty cez <strong>Stripe</strong>, automatizované e-maily, 20+ programatických <strong>stránok pre mestá a príležitosti</strong> ladených na lokálne vyhľadávanie.',
       story:
-        'Beží dnes na <a href="https://www.kouzelniknaakci.cz" target="_blank" rel="noopener noreferrer">kouzelniknaakci.cz</a>, malé, ale naozaj užitočné nišové trhovisko slúžiace českej a slovenskej scéne akcií.',
+        'Beží dnes na <a href="https://www.kouzelniknaakci.cz" target="_blank" rel="noopener noreferrer">kouzelniknaakci.cz</a>, malé nišové trhovisko pre českú a slovenskú scénu akcií.',
     },
   },
   {
@@ -308,7 +308,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'Newsmatics Globe',
     subtitle: 'News as geography',
     description:
-      'A geolocation pipeline that extracts locations from news articles via NLP, matches them against the GeoNames database, and visualises them on an interactive 3D globe. Timeline playback lets you watch events unfold across the world in real time.',
+      'Extracts place names from news articles with NLP, resolves them against GeoNames, and plots them on an interactive 3D globe. Timeline playback replays world events. Built in one hackathon weekend.',
     tags: ['Python', 'JavaScript', 'Globe.gl', 'LangChain', 'NLP', 'Data Viz', 'Hackathon'],
     links: [
       { label: 'GitHub', url: 'https://github.com/Rauded', type: 'github' },
@@ -323,45 +323,45 @@ export const PROJECTS: PortfolioProject[] = [
     reversed: true,
     caseStudy: {
       problem:
-        'The news tells you <strong>what</strong> happened but makes it hard to feel <strong>where</strong> and <strong>when</strong> it happened. Thousands of articles a day reference places, but that geography is locked inside plain text; there was no easy way to watch global events light up across a map over time.',
+        'The news tells you <strong>what</strong> happened, rarely <strong>where</strong> and <strong>when</strong>. Thousands of articles a day name places, but the geography stays locked in plain text, invisible on any map.',
       motivation:
-        'At the <strong>Newsmatics Hackathon</strong> in Brno, my team <strong>MOGGERS</strong> wanted to turn the firehose of news into something spatial and alive ("news as geography") and prove we could build the whole <strong>NLP-to-visualisation</strong> pipeline in a single weekend.',
+        'At the <strong>Newsmatics Hackathon</strong> in Brno, my team <strong>MOGGERS</strong> set out to make news spatial ("news as geography") and build the whole <strong>NLP-to-visualisation</strong> pipeline in one weekend.',
       challenges:
-        'Pulling locations out of messy article text meant real <strong>named-entity recognition</strong> and the nasty problem of <strong>geographic disambiguation</strong>: is "Paris" the French capital or a town in Texas? Matching those mentions against the <strong>GeoNames</strong> database accurately, keeping the extraction pipeline fast, rendering thousands of points smoothly on a 3D globe, and syncing it all to a <strong>timeline playback</strong> (all against a hard hackathon deadline) were the core battles.',
+        'Extracting locations meant <strong>named-entity recognition</strong> plus <strong>geographic disambiguation</strong>: is "Paris" the French capital or a town in Texas? Then matching against <strong>GeoNames</strong>, keeping extraction fast, rendering thousands of points on a 3D globe, and syncing a <strong>timeline playback</strong>, all before the deadline.',
       solution:
-        'We built a <strong>Python</strong> pipeline using <strong>LangChain</strong> and <strong>NLP</strong> to extract locations from articles, matched them to coordinates via the <strong>GeoNames</strong> gazetteer, and visualised everything on an interactive 3D globe with <strong>Globe.gl</strong> in <strong>JavaScript</strong>. A timeline scrubber lets you watch events unfold across the world in real time, turning raw news into an explorable <strong>data-visualisation</strong>.',
+        'A <strong>Python</strong> pipeline with <strong>LangChain</strong> and <strong>NLP</strong> extracts locations, matches them to coordinates via the <strong>GeoNames</strong> gazetteer, and plots them on a 3D globe with <strong>Globe.gl</strong> in <strong>JavaScript</strong>. A timeline scrubber replays events across the world.',
       story:
-        'Newsmatics Globe is one of the projects I’m proudest of. Read the full weekend write-up in <a href="/blog/newsmatics-hackathon">my Newsmatics Hackathon story</a>.',
+        'One of the projects I\'m proudest of. Read the full weekend write-up in <a href="/blog/newsmatics-hackathon">my Newsmatics Hackathon story</a>.',
     },
     subtitle_cs: 'Zprávy jako geografie',
     description_cs:
-      'Geolokalizační linka, která pomocí NLP vytahuje místa z novinových článků, páruje je s databází GeoNames a zobrazuje je na interaktivním 3D globusu. Přehrávání časové osy vám dá sledovat, jak se události odvíjejí po celém světě v reálném čase.',
+      'Pomocí NLP vytahuje místa z novinových článků, páruje je s databází GeoNames a vykresluje na interaktivním 3D globusu. Časová osa přehrává světové události. Postaveno za jeden hackathonový víkend.',
     caseStudy_cs: {
       problem:
-        'Zprávy vám řeknou, <strong>co</strong> se stalo, ale ztěžují vnímání toho, <strong>kde</strong> a <strong>kdy</strong> se to stalo. Tisíce článků denně zmiňují místa, jenže tahle geografie je uzamčená uvnitř čistého textu; nebyl jednoduchý způsob, jak sledovat, jak se globální události rozsvěcejí na mapě v čase.',
+        'Zprávy řeknou, <strong>co</strong> se stalo, málokdy <strong>kde</strong> a <strong>kdy</strong>. Tisíce článků denně zmiňují místa, ale ta geografie zůstává zamčená v prostém textu, neviditelná na mapě.',
       motivation:
-        'Na <strong>hackathonu Newsmatics</strong> v Brně chtěl můj tým <strong>MOGGERS</strong> proměnit příval zpráv v něco prostorového a živého ("zprávy jako geografie") a dokázat, že umíme postavit celou linku <strong>od NLP po vizualizaci</strong> za jediný víkend.',
+        'Na <strong>hackathonu Newsmatics</strong> v Brně si můj tým <strong>MOGGERS</strong> vzal za cíl udělat zprávy prostorové ("zprávy jako geografie") a postavit celou linku <strong>od NLP po vizualizaci</strong> za jeden víkend.',
       challenges:
-        'Vytahování míst z neuspořádaného textu článků znamenalo skutečné <strong>rozpoznávání pojmenovaných entit</strong> a nepříjemný problém <strong>geografické disambiguace</strong>: je "Paříž" francouzská metropole, nebo městečko v Texasu? Přesné párování těchhle zmínek oproti databázi <strong>GeoNames</strong>, udržení extrakční linky rychlé, plynulé vykreslení tisíců bodů na 3D globusu a sesynchronizování toho všeho s <strong>přehráváním časové osy</strong> (a to všechno proti tvrdému termínu hackathonu) byly hlavní boje.',
+        'Vytáhnout místa z článků znamenalo <strong>rozpoznávání pojmenovaných entit</strong> a <strong>geografickou disambiguaci</strong>: je "Paříž" francouzská metropole, nebo městečko v Texasu? Pak spárovat zmínky s <strong>GeoNames</strong>, udržet extrakci rychlou, vykreslit tisíce bodů na 3D globusu a sladit to s <strong>časovou osou</strong>, všechno do termínu.',
       solution:
-        'Postavili jsme linku v <strong>Pythonu</strong> pomocí <strong>LangChain</strong> a <strong>NLP</strong> na vytahování míst z článků, spárovali jsme je se souřadnicemi přes rejstřík <strong>GeoNames</strong> a všechno jsme zobrazili na interaktivním 3D globusu s <strong>Globe.gl</strong> v <strong>JavaScriptu</strong>. Posuvník časové osy vám dá sledovat, jak se události odvíjejí po celém světě v reálném čase, a mění surové zprávy v prozkoumatelnou <strong>datovou vizualizaci</strong>.',
+        'Linka v <strong>Pythonu</strong> s <strong>LangChain</strong> a <strong>NLP</strong> vytahuje místa, páruje je se souřadnicemi přes rejstřík <strong>GeoNames</strong> a vykresluje je na 3D globusu s <strong>Globe.gl</strong> v <strong>JavaScriptu</strong>. Posuvník časové osy přehrává události po celém světě.',
       story:
-        'Newsmatics Globe je jeden z projektů, na které jsem nejpyšnější. Celý víkendový zápis si přečtěte v <a href="/cs/blog/newsmatics-hackathon">mém příběhu z hackathonu Newsmatics</a>.',
+        'Jeden z projektů, na které jsem nejpyšnější. Celý víkendový zápis je v <a href="/cs/blog/newsmatics-hackathon">mém příběhu z hackathonu Newsmatics</a>.',
     },
     subtitle_sk: 'Správy ako geografia',
     description_sk:
-      'Geolokalizačná linka, ktorá pomocou NLP vyťahuje miesta z novinových článkov, páruje ich s databázou GeoNames a zobrazuje na interaktívnom 3D glóbuse. Prehrávanie časovej osi vám dá sledovať, ako sa udalosti odvíjajú po celom svete v reálnom čase.',
+      'Pomocou NLP vyťahuje miesta z novinových článkov, páruje ich s databázou GeoNames a vykresľuje na interaktívnom 3D glóbuse. Časová os prehráva svetové udalosti. Postavené za jeden hackathonový víkend.',
     caseStudy_sk: {
       problem:
-        'Správy vám povedia, <strong>čo</strong> sa stalo, ale sťažujú vnímanie toho, <strong>kde</strong> a <strong>kedy</strong> sa to stalo. Tisíce článkov denne spomínajú miesta, no táto geografia je uzamknutá vnútri čistého textu; nebol jednoduchý spôsob, ako sledovať, ako sa globálne udalosti rozsvecujú na mape v čase.',
+        'Správy povedia, <strong>čo</strong> sa stalo, málokedy <strong>kde</strong> a <strong>kedy</strong>. Tisíce článkov denne spomínajú miesta, ale tá geografia zostáva zamknutá v prostom texte, neviditeľná na mape.',
       motivation:
-        'Na <strong>hackathone Newsmatics</strong> v Brne chcel môj tím <strong>MOGGERS</strong> premeniť príval správ na niečo priestorové a živé ("správy ako geografia") a dokázať, že vieme postaviť celú linku <strong>od NLP po vizualizáciu</strong> za jediný víkend.',
+        'Na <strong>hackathone Newsmatics</strong> v Brne si môj tím <strong>MOGGERS</strong> dal za cieľ urobiť správy priestorové ("správy ako geografia") a postaviť celú linku <strong>od NLP po vizualizáciu</strong> za jeden víkend.',
       challenges:
-        'Vyťahovanie miest z neusporiadaného textu článkov znamenalo skutočné <strong>rozpoznávanie pomenovaných entít</strong> a nepríjemný problém <strong>geografickej disambiguácie</strong>: je "Paríž" francúzska metropola alebo mestečko v Texase? Presné párovanie týchto zmienok oproti databáze <strong>GeoNames</strong>, udržanie extrakčnej linky rýchlej, plynulé vykreslenie tisícov bodov na 3D glóbuse a zosynchronizovanie toho všetkého s <strong>prehrávaním časovej osi</strong> (a to všetko oproti tvrdému termínu hackathonu) boli hlavné boje.',
+        'Vytiahnuť miesta z článkov znamenalo <strong>rozpoznávanie pomenovaných entít</strong> a <strong>geografickú disambiguáciu</strong>: je "Paríž" francúzska metropola alebo mestečko v Texase? Potom spárovať zmienky s <strong>GeoNames</strong>, udržať extrakciu rýchlu, vykresliť tisíce bodov na 3D glóbuse a zladiť to s <strong>časovou osou</strong>, všetko do termínu.',
       solution:
-        'Postavili sme linku v <strong>Pythone</strong> pomocou <strong>LangChain</strong> a <strong>NLP</strong> na vyťahovanie miest z článkov, spárovali sme ich so súradnicami cez register <strong>GeoNames</strong> a všetko sme zobrazili na interaktívnom 3D glóbuse s <strong>Globe.gl</strong> v <strong>JavaScripte</strong>. Posuvník časovej osi vám dá sledovať, ako sa udalosti odvíjajú po celom svete v reálnom čase, a mení surové správy na preskúmateľnú <strong>dátovú vizualizáciu</strong>.',
+        'Linka v <strong>Pythone</strong> s <strong>LangChain</strong> a <strong>NLP</strong> vyťahuje miesta, páruje ich so súradnicami cez register <strong>GeoNames</strong> a vykresľuje ich na 3D glóbuse s <strong>Globe.gl</strong> v <strong>JavaScripte</strong>. Posuvník časovej osi prehráva udalosti po celom svete.',
       story:
-        'Newsmatics Globe je jeden z projektov, na ktoré som najhrdší. Celý víkendový zápis si prečítajte v <a href="/sk/blog/newsmatics-hackathon">mojom príbehu z hackathonu Newsmatics</a>.',
+        'Jeden z projektov, na ktoré som najhrdší. Celý víkendový zápis je v <a href="/sk/blog/newsmatics-hackathon">mojom príbehu z hackathonu Newsmatics</a>.',
     },
   },
   {
@@ -370,7 +370,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'NasadClaw',
     subtitle: 'AI infrastructure for Czech & Slovak enterprises',
     description:
-      "Professional deployment of the OpenClaw AI assistant for business teams. Physical installation on dedicated hardware at the client's office, full InfoSec hardening, and ongoing maintenance, so teams get leverage from day one without a new software project to manage.",
+      "OpenClaw AI assistant deployed for business teams: installed on dedicated hardware in the client's office, InfoSec hardened, maintained. No data leaves the building.",
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'PostHog', 'B2B', 'SaaS'],
     links: [
       { label: 'www.nasadclaw.cz', url: 'https://www.nasadclaw.cz', type: 'demo', favicon: '/brand/sites/nasadclaw.png' },
@@ -384,45 +384,45 @@ export const PROJECTS: PortfolioProject[] = [
     reversed: false,
     caseStudy: {
       problem:
-        'Most <strong>small and mid-sized businesses</strong> in the Czech Republic and Slovakia know <strong>AI</strong> could give their teams real leverage, but they can’t realistically run a new software project to get it, and many are rightly nervous about <strong>data privacy</strong> and sending sensitive company data into someone else’s cloud.',
+        'Most <strong>small and mid-sized businesses</strong> in Czechia and Slovakia know <strong>AI</strong> could help their teams. They cannot run a software project to get it, and they worry about <strong>data privacy</strong> in someone else\'s cloud.',
       motivation:
-        'I wanted to remove every excuse a non-technical team has for not adopting AI: no setup, no maintenance burden, no data leaving the building. Deliver the leverage as a <strong>done-for-you, managed deployment</strong> rather than yet another app they have to learn and babysit.',
+        'Remove every excuse a non-technical team has for skipping AI: no setup, no maintenance, no data leaving the building. A <strong>done-for-you, managed deployment</strong>, instead of another app to babysit.',
       challenges:
-        'Going <strong>on-premise</strong> instead of pure cloud means real-world hardware: provisioning <strong>dedicated hardware</strong>, physically installing it at a client’s office, and doing serious <strong>InfoSec hardening</strong> and <strong>GDPR-friendly</strong> data handling so everything stays local. Then there’s the ongoing reliability, updates and maintenance, plus the <strong>B2B SaaS</strong> machinery of contracts, billing and onboarding for non-technical buyers.',
+        '<strong>On-premise</strong> means real hardware: provisioning <strong>dedicated hardware</strong>, installing it at the client\'s office, <strong>InfoSec hardening</strong>, <strong>GDPR-friendly</strong> data handling so everything stays local. Then updates, maintenance, and the <strong>B2B SaaS</strong> side: contracts, billing, onboarding.',
       solution:
-        'NasadClaw is the professional deployment of the <strong>OpenClaw</strong> AI assistant for business teams: physical installation on dedicated hardware at the client’s office, full InfoSec hardening, and ongoing maintenance, so teams get value from day one. The product surface (marketing site, dashboard and billing) runs on <strong>Next.js</strong>, <strong>TypeScript</strong> and <strong>Tailwind CSS</strong>, with <strong>Stripe</strong> for payments and <strong>PostHog</strong> for analytics.',
+        'NasadClaw deploys the <strong>OpenClaw</strong> AI assistant: physical installation on dedicated hardware at the client\'s office, InfoSec hardening, ongoing maintenance. The product surface runs on <strong>Next.js</strong>, <strong>TypeScript</strong> and <strong>Tailwind CSS</strong>, with <strong>Stripe</strong> for payments and <strong>PostHog</strong> for analytics.',
       story:
-        'It’s live as a <strong>B2B</strong> offering at <a href="https://www.nasadclaw.cz" target="_blank" rel="noopener noreferrer">nasadclaw.cz</a>, bringing private, on-site AI to Czech and Slovak enterprises.',
+        'Live as a <strong>B2B</strong> offering at <a href="https://www.nasadclaw.cz" target="_blank" rel="noopener noreferrer">nasadclaw.cz</a>: private, on-site AI for Czech and Slovak enterprises.',
     },
     subtitle_cs: 'AI infrastruktura pro české a slovenské firmy',
     description_cs:
-      'Profesionální nasazení AI asistenta OpenClaw pro firemní týmy. Fyzická instalace na vyhrazeném hardwaru v kanceláři klienta, plné zabezpečení z pohledu InfoSec a průběžná údržba, takže týmy získají páku od prvního dne bez nového softwarového projektu, který je potřeba spravovat.',
+      'AI asistent OpenClaw nasazený pro firemní týmy: instalace na vyhrazeném hardwaru v kanceláři klienta, zabezpečení z pohledu InfoSec, průběžná údržba. Žádná data neopouštějí budovu.',
     caseStudy_cs: {
       problem:
-        'Většina <strong>malých a středních firem</strong> v Česku a na Slovensku ví, že <strong>AI</strong> by jejich týmům mohla dát skutečnou páku, ale reálně nedokážou rozjet nový softwarový projekt, aby ji získali, a mnohé jsou právem nervózní z <strong>ochrany dat</strong> a posílání citlivých firemních údajů do cizího cloudu.',
+        'Většina <strong>malých a středních firem</strong> v Česku a na Slovensku ví, že <strong>AI</strong> by jejich týmům pomohla. Nemají kapacitu rozjet softwarový projekt a bojí se o <strong>ochranu dat</strong> v cizím cloudu.',
       motivation:
-        'Chtěl jsem odstranit každou výmluvu, kterou netechnický tým má pro to, aby AI nepřijal: žádné nastavování, žádná zátěž s údržbou, žádná data opouštějící budovu. Doručit páku jako <strong>nasazení na klíč, spravované za vás</strong>, a ne jako další aplikaci, kterou se musí učit a hlídat.',
+        'Odstranit každou výmluvu, proč netechnický tým AI nepřijme: žádné nastavování, žádná údržba, žádná data mimo budovu. <strong>Spravované nasazení na klíč</strong>, ne další aplikace na hlídání.',
       challenges:
-        'Jít <strong>on-premise</strong> místo čistého cloudu znamená hardware z reálného světa: pořízení <strong>vyhrazeného hardwaru</strong>, jeho fyzickou instalaci v kanceláři klienta a seriózní práci na <strong>zabezpečení z pohledu InfoSec</strong> a <strong>nakládání s daty přátelském ke GDPR</strong>, aby všechno zůstalo lokální. Pak je tu průběžná spolehlivost, aktualizace a údržba, plus mašinerie <strong>B2B SaaS</strong> smluv, fakturace a onboardingu pro netechnické kupující.',
+        '<strong>On-premise</strong> znamená skutečný hardware: pořídit <strong>vyhrazený hardware</strong>, nainstalovat ho v kanceláři klienta, k tomu <strong>InfoSec hardening</strong> a nakládání s daty podle <strong>GDPR</strong>, aby všechno zůstalo lokální. Pak aktualizace, údržba a <strong>B2B SaaS</strong> stránka věci: smlouvy, fakturace, onboarding.',
       solution:
-        'NasadClaw je profesionální nasazení AI asistenta <strong>OpenClaw</strong> pro firemní týmy: fyzická instalace na vyhrazeném hardwaru v kanceláři klienta, plné zabezpečení z pohledu InfoSec a průběžná údržba, takže týmy mají přínos od prvního dne. Povrch produktu (marketingová stránka, dashboard a fakturace) běží na <strong>Next.js</strong>, <strong>TypeScript</strong> a <strong>Tailwind CSS</strong>, se <strong>Stripe</strong> pro platby a <strong>PostHog</strong> pro analytiku.',
+        'NasadClaw nasazuje AI asistenta <strong>OpenClaw</strong>: fyzická instalace na vyhrazeném hardwaru v kanceláři klienta, InfoSec hardening, průběžná údržba. Povrch produktu běží na <strong>Next.js</strong>, <strong>TypeScript</strong> a <strong>Tailwind CSS</strong>, se <strong>Stripe</strong> pro platby a <strong>PostHog</strong> pro analytiku.',
       story:
-        'Je v provozu jako <strong>B2B</strong> nabídka na <a href="https://www.nasadclaw.cz" target="_blank" rel="noopener noreferrer">nasadclaw.cz</a> a přináší soukromou AI přímo na místě českým a slovenským firmám.',
+        'Běží jako <strong>B2B</strong> nabídka na <a href="https://www.nasadclaw.cz" target="_blank" rel="noopener noreferrer">nasadclaw.cz</a>: soukromá AI přímo v budově pro české a slovenské firmy.',
     },
     subtitle_sk: 'AI infraštruktúra pre české a slovenské firmy',
     description_sk:
-      'Profesionálne nasadenie AI asistenta OpenClaw pre firemné tímy. Fyzická inštalácia na vyhradenom hardvéri v kancelárii klienta, plné zabezpečenie z pohľadu InfoSec a priebežná údržba, takže tímy získajú páku od prvého dňa bez nového softvérového projektu, ktorý treba spravovať.',
+      'AI asistent OpenClaw nasadený pre firemné tímy: inštalácia na vyhradenom hardvéri v kancelárii klienta, zabezpečenie z pohľadu InfoSec, priebežná údržba. Žiadne dáta neopúšťajú budovu.',
     caseStudy_sk: {
       problem:
-        'Väčšina <strong>malých a stredných firiem</strong> v Česku a na Slovensku vie, že <strong>AI</strong> by ich tímom mohla dať skutočnú páku, ale reálne nedokážu rozbehnúť nový softvérový projekt, aby ju získali, a mnohé sú právom nervózne z <strong>ochrany dát</strong> a posielania citlivých firemných údajov do cudzieho cloudu.',
+        'Väčšina <strong>malých a stredných firiem</strong> v Česku a na Slovensku vie, že <strong>AI</strong> by ich tímom pomohla. Nemajú kapacitu rozbehnúť softvérový projekt a boja sa o <strong>ochranu dát</strong> v cudzom cloude.',
       motivation:
-        'Chcel som odstrániť každú výhovorku, ktorú netechnický tím má pre neprijatie AI: žiadne nastavovanie, žiadna záťaž s údržbou, žiadne dáta opúšťajúce budovu. Doručiť páku ako <strong>nasadenie na kľúč, spravované za vás</strong>, a nie ako ďalšiu aplikáciu, ktorú sa musia učiť a strážiť.',
+        'Odstrániť každú výhovorku, prečo netechnický tím AI neprijme: žiadne nastavovanie, žiadna údržba, žiadne dáta mimo budovy. <strong>Spravované nasadenie na kľúč</strong>, nie ďalšia aplikácia na stráženie.',
       challenges:
-        'Ísť <strong>on-premise</strong> namiesto čistého cloudu znamená hardvér z reálneho sveta: zaobstaranie <strong>vyhradeného hardvéru</strong>, jeho fyzickú inštaláciu v kancelárii klienta a serióznu prácu na <strong>zabezpečení z pohľadu InfoSec</strong> a <strong>narábaní s dátami priateľskom ku GDPR</strong>, aby všetko zostalo lokálne. Potom je tu priebežná spoľahlivosť, aktualizácie a údržba, plus mašinéria <strong>B2B SaaS</strong> zmlúv, fakturácie a onboardingu pre netechnických kupujúcich.',
+        '<strong>On-premise</strong> znamená skutočný hardvér: zaobstarať <strong>vyhradený hardvér</strong>, nainštalovať ho v kancelárii klienta, k tomu <strong>InfoSec hardening</strong> a narábanie s dátami podľa <strong>GDPR</strong>, aby všetko zostalo lokálne. Potom aktualizácie, údržba a <strong>B2B SaaS</strong> stránka veci: zmluvy, fakturácia, onboarding.',
       solution:
-        'NasadClaw je profesionálne nasadenie AI asistenta <strong>OpenClaw</strong> pre firemné tímy: fyzická inštalácia na vyhradenom hardvéri v kancelárii klienta, plné zabezpečenie z pohľadu InfoSec a priebežná údržba, takže tímy majú prínos od prvého dňa. Povrch produktu (marketingová stránka, dashboard a fakturácia) beží na <strong>Next.js</strong>, <strong>TypeScript</strong> a <strong>Tailwind CSS</strong>, so <strong>Stripe</strong> pre platby a <strong>PostHog</strong> pre analytiku.',
+        'NasadClaw nasadzuje AI asistenta <strong>OpenClaw</strong>: fyzická inštalácia na vyhradenom hardvéri v kancelárii klienta, InfoSec hardening, priebežná údržba. Povrch produktu beží na <strong>Next.js</strong>, <strong>TypeScript</strong> a <strong>Tailwind CSS</strong>, so <strong>Stripe</strong> pre platby a <strong>PostHog</strong> pre analytiku.',
       story:
-        'Je v prevádzke ako <strong>B2B</strong> ponuka na <a href="https://www.nasadclaw.cz" target="_blank" rel="noopener noreferrer">nasadclaw.cz</a> a prináša súkromnú AI priamo na mieste českým a slovenským firmám.',
+        'Beží ako <strong>B2B</strong> ponuka na <a href="https://www.nasadclaw.cz" target="_blank" rel="noopener noreferrer">nasadclaw.cz</a>: súkromná AI priamo v budove pre české a slovenské firmy.',
     },
   },
   {
@@ -431,7 +431,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'PsycheTab',
     subtitle: 'Your browser, your aesthetic',
     description:
-      'A Chrome extension that replaces the new tab page with rotating collage wallpapers assembled from your own image library. Drag, resize, rotate, and layer each piece. Every byte lives locally in IndexedDB: no cloud, no tracking, ever.',
+      'Chrome extension that turns the new tab page into rotating collages from your own image library. Drag, resize, rotate, layer. Everything stays in IndexedDB: no cloud, no tracking.',
     tags: ['JavaScript', 'Manifest V3', 'LocalForage', 'IndexedDB', 'Chrome Extension'],
     links: [
       { label: 'Chrome Web Store', url: 'https://chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao', type: 'demo', favicon: '/brand/sites/psychetab.jpg' },
@@ -446,45 +446,45 @@ export const PROJECTS: PortfolioProject[] = [
     reversed: true,
     caseStudy: {
       problem:
-        'You open a new browser tab dozens of times a day and stare at the same generic, soulless default <strong>new tab page</strong>. There was no simple way to make that moment <em>yours</em> with your own images, and the personalisation extensions that do exist usually want to upload your photos to their cloud and track you.',
+        'You open a new tab dozens of times a day and see the same generic default <strong>new tab page</strong>. Extensions that personalise it usually upload <strong>your photos</strong> to their cloud and track you.',
       motivation:
-        'I wanted my browser to reflect my own <strong>aesthetic</strong>: rotating <strong>collage wallpapers</strong> built from my personal image library, fully editable, and crucially <strong>private by design</strong>: no accounts, no cloud, no tracking, every byte staying on my own machine.',
+        'I wanted my browser to reflect my own <strong>aesthetic</strong>: rotating <strong>collage wallpapers</strong> from my personal image library, fully editable and <strong>private by design</strong>. No accounts, no cloud, no tracking.',
       challenges:
-        'Chrome’s <strong>Manifest V3</strong> brings real constraints: service workers, strict content-security policy, and no easy persistent background. Storing a library of full-resolution images entirely on-device meant leaning on <strong>IndexedDB</strong> (via <strong>LocalForage</strong>) and keeping performance smooth while users <strong>drag, resize, rotate and layer</strong> many large images on a canvas. And it all had to pass <strong>Chrome Web Store</strong> review.',
+        'Chrome\'s <strong>Manifest V3</strong> brings real constraints: service workers, strict content-security policy, no persistent background. Full-resolution images on-device meant <strong>IndexedDB</strong> via <strong>LocalForage</strong>, kept smooth while users <strong>drag, resize, rotate and layer</strong> large images. And it had to pass <strong>Chrome Web Store</strong> review.',
       solution:
-        'PsycheTab is a <strong>Manifest V3 Chrome extension</strong> written in <strong>JavaScript</strong> that replaces the new tab page with rotating, editable collages. Each piece can be dragged, resized, rotated and layered, and everything is persisted locally in <strong>IndexedDB</strong> through <strong>LocalForage</strong>: no cloud, no tracking, ever. Your browser, your aesthetic, your data.',
+        'A <strong>Manifest V3 Chrome extension</strong> in <strong>JavaScript</strong> that replaces the new tab page with rotating, editable collages. Drag, resize, rotate, layer. Everything persists locally in <strong>IndexedDB</strong> through <strong>LocalForage</strong>: no cloud, no tracking, ever.',
       story:
-        'It’s published and installable on the <a href="https://chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao" target="_blank" rel="noopener noreferrer">Chrome Web Store</a>, with the source on <a href="https://github.com/Rauded/college_extension_chrome" target="_blank" rel="noopener noreferrer">GitHub</a>.',
+        'Published on the <a href="https://chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao" target="_blank" rel="noopener noreferrer">Chrome Web Store</a>, source on <a href="https://github.com/Rauded/college_extension_chrome" target="_blank" rel="noopener noreferrer">GitHub</a>.',
     },
     subtitle_cs: 'Váš prohlížeč, vaše estetika',
     description_cs:
-      'Rozšíření do Chromu, které nahradí stránku nové karty rotujícími kolážovými tapetami poskládanými z vaší vlastní knihovny obrázků. Každý kousek posunete, zvětšíte, otočíte a navrstvíte. Každý bajt žije lokálně v IndexedDB: žádný cloud, žádné sledování, nikdy.',
+      'Rozšíření do Chromu, které promění novou kartu v rotující koláže z vaší vlastní knihovny obrázků. Posunout, zvětšit, otočit, navrstvit. Všechno zůstává v IndexedDB: žádný cloud, žádné sledování.',
     caseStudy_cs: {
       problem:
-        'Novou kartu prohlížeče otevíráte mnohokrát denně a zíráte na tu samou generickou, bezduchou výchozí <strong>stránku nové karty</strong>. Nebyl jednoduchý způsob, jak si tuhle chvíli udělat <em>vlastní</em> s vlastními obrázky, a personalizační rozšíření, která existují, obvykle chtějí nahrát vaše fotky do svého cloudu a sledovat vás.',
+        'Novou kartu otevíráte mnohokrát denně a vidíte pořád tu samou generickou výchozí <strong>stránku nové karty</strong>. Rozšíření, která ji personalizují, obvykle nahrávají <strong>vaše fotky</strong> do svého cloudu a sledují vás.',
       motivation:
-        'Chtěl jsem, aby můj prohlížeč odrážel moji vlastní <strong>estetiku</strong>: rotující <strong>kolážové tapety</strong> sestavené z mojí osobní knihovny obrázků, plně upravitelné a hlavně <strong>soukromé už z principu</strong>: žádné účty, žádný cloud, žádné sledování, každý bajt zůstává na mém vlastním počítači.',
+        'Chtěl jsem, aby prohlížeč odrážel moji <strong>estetiku</strong>: rotující <strong>kolážové tapety</strong> z vlastní knihovny obrázků, plně upravitelné a <strong>soukromé už z principu</strong>. Žádné účty, žádný cloud, žádné sledování.',
       challenges:
-        '<strong>Manifest V3</strong> v Chromu přináší skutečná omezení: service workery, přísnou politiku bezpečnosti obsahu a žádné jednoduché trvalé pozadí. Uložení knihovny obrázků v plném rozlišení celé na zařízení znamenalo opřít se o <strong>IndexedDB</strong> (přes <strong>LocalForage</strong>) a udržet plynulý výkon, zatímco uživatelé <strong>táhnou, mění velikost, otáčejí a vrství</strong> spoustu velkých obrázků na plátně. A to všechno muselo projít kontrolou <strong>Chrome Web Store</strong>.',
+        '<strong>Manifest V3</strong> v Chromu přináší reálná omezení: service workery, přísnou content-security policy, žádné trvalé pozadí. Obrázky v plném rozlišení na zařízení znamenaly <strong>IndexedDB</strong> přes <strong>LocalForage</strong> a plynulý výkon, i když uživatelé <strong>táhnou, zvětšují, otáčejí a vrství</strong> velké obrázky. A muselo to projít kontrolou <strong>Chrome Web Store</strong>.',
       solution:
-        'PsycheTab je <strong>rozšíření do Chromu na Manifest V3</strong> napsané v <strong>JavaScriptu</strong>, které nahradí stránku nové karty rotujícími, upravitelnými kolážemi. Každý kousek se dá posunout, zvětšit, otočit a navrstvit a všechno se ukládá lokálně v <strong>IndexedDB</strong> přes <strong>LocalForage</strong>: žádný cloud, žádné sledování, nikdy. Váš prohlížeč, vaše estetika, vaše data.',
+        '<strong>Rozšíření do Chromu na Manifest V3</strong> v <strong>JavaScriptu</strong>, které nahradí novou kartu rotujícími, upravitelnými kolážemi. Posunout, zvětšit, otočit, navrstvit. Všechno se ukládá lokálně v <strong>IndexedDB</strong> přes <strong>LocalForage</strong>: žádný cloud, žádné sledování, nikdy.',
       story:
-        'Je publikované a instalovatelné v <a href="https://chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao" target="_blank" rel="noopener noreferrer">Chrome Web Store</a>, se zdrojovým kódem na <a href="https://github.com/Rauded/college_extension_chrome" target="_blank" rel="noopener noreferrer">GitHubu</a>.',
+        'Publikované v <a href="https://chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao" target="_blank" rel="noopener noreferrer">Chrome Web Store</a>, zdrojový kód na <a href="https://github.com/Rauded/college_extension_chrome" target="_blank" rel="noopener noreferrer">GitHubu</a>.',
     },
     subtitle_sk: 'Váš prehliadač, vaša estetika',
     description_sk:
-      'Rozšírenie do Chrome, ktoré nahradí stránku novej karty rotujúcimi kolážovými tapetami poskladanými z vašej vlastnej knižnice obrázkov. Každý kúsok potiahnete, zmeníte mu veľkosť, otočíte ho a navrstvíte. Každý bajt žije lokálne v IndexedDB: žiadny cloud, žiadne sledovanie, nikdy.',
+      'Rozšírenie do Chrome, ktoré premení novú kartu na rotujúce koláže z vašej vlastnej knižnice obrázkov. Potiahnuť, zväčšiť, otočiť, navrstviť. Všetko zostáva v IndexedDB: žiadny cloud, žiadne sledovanie.',
     caseStudy_sk: {
       problem:
-        'Novú kartu prehliadača otvárate desiatky ráz denne a civíte na tú istú generickú, bezduchú predvolenú <strong>stránku novej karty</strong>. Nebol jednoduchý spôsob, ako si túto chvíľu spraviť <em>vlastnou</em> s vlastnými obrázkami, a personalizačné rozšírenia, ktoré existujú, obvykle chcú nahrať vaše fotky do svojho cloudu a sledovať vás.',
+        'Novú kartu otvárate desiatky ráz denne a vidíte stále tú istú generickú predvolenú <strong>stránku novej karty</strong>. Rozšírenia, ktoré ju personalizujú, obvykle nahrávajú <strong>vaše fotky</strong> do svojho cloudu a sledujú vás.',
       motivation:
-        'Chcel som, aby môj prehliadač odrážal moju vlastnú <strong>estetiku</strong>: rotujúce <strong>kolážové tapety</strong> zostavené z mojej osobnej knižnice obrázkov, plne upraviteľné a hlavne <strong>súkromné už z princípu</strong>: žiadne účty, žiadny cloud, žiadne sledovanie, každý bajt zostáva na mojom vlastnom počítači.',
+        'Chcel som, aby prehliadač odrážal moju <strong>estetiku</strong>: rotujúce <strong>kolážové tapety</strong> z vlastnej knižnice obrázkov, plne upraviteľné a <strong>súkromné už z princípu</strong>. Žiadne účty, žiadny cloud, žiadne sledovanie.',
       challenges:
-        '<strong>Manifest V3</strong> v Chrome prináša skutočné obmedzenia: service workery, prísnu politiku bezpečnosti obsahu a žiadne jednoduché trvalé pozadie. Uloženie knižnice obrázkov v plnom rozlíšení celkom na zariadení znamenalo oprieť sa o <strong>IndexedDB</strong> (cez <strong>LocalForage</strong>) a udržať plynulý výkon, kým používatelia <strong>ťahajú, menia veľkosť, otáčajú a vrstvia</strong> mnoho veľkých obrázkov na plátne. A to všetko muselo prejsť kontrolou <strong>Chrome Web Store</strong>.',
+        '<strong>Manifest V3</strong> v Chrome prináša reálne obmedzenia: service workery, prísnu content-security policy, žiadne trvalé pozadie. Obrázky v plnom rozlíšení na zariadení znamenali <strong>IndexedDB</strong> cez <strong>LocalForage</strong> a plynulý výkon, aj keď používatelia <strong>ťahajú, zväčšujú, otáčajú a vrstvia</strong> veľké obrázky. A muselo to prejsť kontrolou <strong>Chrome Web Store</strong>.',
       solution:
-        'PsycheTab je <strong>rozšírenie do Chrome na Manifest V3</strong> napísané v <strong>JavaScripte</strong>, ktoré nahradí stránku novej karty rotujúcimi, upraviteľnými kolážami. Každý kúsok sa dá potiahnuť, zmeniť mu veľkosť, otočiť ho a navrstviť, a všetko sa ukladá lokálne v <strong>IndexedDB</strong> cez <strong>LocalForage</strong>: žiadny cloud, žiadne sledovanie, nikdy. Váš prehliadač, vaša estetika, vaše dáta.',
+        '<strong>Rozšírenie do Chrome na Manifest V3</strong> v <strong>JavaScripte</strong>, ktoré nahradí novú kartu rotujúcimi, upraviteľnými kolážami. Potiahnuť, zväčšiť, otočiť, navrstviť. Všetko sa ukladá lokálne v <strong>IndexedDB</strong> cez <strong>LocalForage</strong>: žiadny cloud, žiadne sledovanie, nikdy.',
       story:
-        'Je publikované a inštalovateľné v <a href="https://chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao" target="_blank" rel="noopener noreferrer">Chrome Web Store</a>, so zdrojovým kódom na <a href="https://github.com/Rauded/college_extension_chrome" target="_blank" rel="noopener noreferrer">GitHube</a>.',
+        'Publikované v <a href="https://chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao" target="_blank" rel="noopener noreferrer">Chrome Web Store</a>, zdrojový kód na <a href="https://github.com/Rauded/college_extension_chrome" target="_blank" rel="noopener noreferrer">GitHube</a>.',
     },
   },
   {

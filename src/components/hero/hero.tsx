@@ -95,6 +95,16 @@ const Headline = styled.h1`
   line-height: 1.12;
 `;
 
+// One-line positioning claim under the name (jamny-style: claim, disqualifier,
+// metric). Kept muted so the serif headline stays the visual anchor.
+const Tagline = styled.p`
+  margin: -0.2em 0 1.6em;
+  max-width: 34em;
+  font-size: clamp(1em, 1.6vw, 1.15em);
+  line-height: 1.55;
+  color: var(--text-muted, #3e4b66);
+`;
+
 const CtaRow = styled.div`
   display: flex;
   align-items: center;
@@ -402,6 +412,7 @@ const Hero: React.FC = () => {
           <CornerTick key={pos} $pos={pos} aria-hidden="true" />
         ))}
         <Headline>{t.name}</Headline>
+        <Tagline>{t.tagline}</Tagline>
         <CtaRow>
           <PrimaryCta href="#projects">
             {t.viewProjects} <LuArrowRight /> <KeyChip>P</KeyChip>

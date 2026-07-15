@@ -1,7 +1,7 @@
 const seo = {
   ogLocale: 'sk_SK',
   homeDescription:
-    'AI inžinier a nezávislý zakladateľ. Staviam produkčné AI systémy (RAG pipeline, viacagentové nástroje) a prevádzkujem reálne SaaS produkty: InzerPro, NasadClaw, KouzelnikNaAkci.',
+    'AI inžinier. Staviam produkčné AI systémy pre firmy: automatizácie, agentov, prácu s dokumentmi. Popri tom prevádzkujem InzerPro, SaaS s platiacimi zákazníkmi.',
 };
 
 export default seo;
