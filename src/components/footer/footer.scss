@@ -111,6 +111,47 @@
     }
   }
 
+  // Interface-sound toggle. Small hairline pill on the dark footer bar; fills
+  // navy when sounds are on. The footer is always dark, so one style covers
+  // both themes.
+  .footer-sound-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 10px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: transparent;
+    color: rgba(248, 250, 252, 0.55);
+    font-family: var(--font-body);
+    font-size: var(--text-small);
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+
+    svg {
+      width: 1.05em;
+      height: 1.05em;
+    }
+
+    &:hover {
+      color: #fff;
+      border-color: rgba(255, 255, 255, 0.32);
+    }
+
+    &[aria-pressed='true'] {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      margin-top: 4px;
+    }
+  }
+
   .center-align {
     text-align: center;
   }

@@ -34,6 +34,7 @@ const LanguageSwitcher: React.FC = () => {
             aria-current={active ? 'true' : undefined}
             aria-label={fullName[code]}
             title={fullName[code]}
+            data-cuelume-toggle
             onClick={() => saveLocale(code)}
           >
             {SHORT[code]}

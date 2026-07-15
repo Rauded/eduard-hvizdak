@@ -64,7 +64,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="header-container">
-      <a href="#home" className="logo" onClick={(e) => goToSection(e, 'home')}>
+      <a href="#home" className="logo" data-cuelume-hover="tick" onClick={(e) => goToSection(e, 'home')}>
         Eduard Hvizdak
       </a>
       <button
@@ -78,25 +78,26 @@ const Header: React.FC = () => {
         {isOpen ? <FaTimes size={30} className="close-icon" /> : <FaBars size={30} />}
       </button>
       <nav id="site-nav" className={`nav ${isOpen ? 'open' : ''}`}>
-        <a href="#home" className="nav-link" onClick={(e) => goToSection(e, 'home')}>
+        <a href="#home" className="nav-link" data-cuelume-hover="tick" onClick={(e) => goToSection(e, 'home')}>
           <FaHome />
           {t.nav.home}
         </a>
-        <a href="#about" className="nav-link" onClick={(e) => goToSection(e, 'about')}>
+        <a href="#about" className="nav-link" data-cuelume-hover="tick" onClick={(e) => goToSection(e, 'about')}>
           <FaUser />
           {t.nav.about}
         </a>
-        <a href="#resume" className="nav-link" onClick={(e) => goToSection(e, 'resume')}>
+        <a href="#resume" className="nav-link" data-cuelume-hover="tick" onClick={(e) => goToSection(e, 'resume')}>
           <FaFileAlt />
           {t.nav.resume}
         </a>
-        <a href="#projects" className="nav-link" onClick={(e) => goToSection(e, 'projects')}>
+        <a href="#projects" className="nav-link" data-cuelume-hover="tick" onClick={(e) => goToSection(e, 'projects')}>
           <FaCode />
           {t.nav.projects}
         </a>
         <LocaleLink
           to="/services"
           className={`nav-link ${isServices ? 'nav-link--active' : ''}`}
+          data-cuelume-hover="tick"
           onClick={() => setIsOpen(false)}
         >
           <FaBriefcase />
@@ -105,6 +106,7 @@ const Header: React.FC = () => {
         <LocaleLink
           to="/blog"
           className={`nav-link ${isBlog ? 'nav-link--active' : ''}`}
+          data-cuelume-hover="tick"
           onClick={() => setIsOpen(false)}
         >
           <FaPen />
@@ -113,6 +115,7 @@ const Header: React.FC = () => {
         <LocaleLink
           to="/now"
           className={`nav-link ${isNow ? 'nav-link--active' : ''}`}
+          data-cuelume-hover="tick"
           onClick={() => setIsOpen(false)}
         >
           <FaRegClock />
@@ -123,6 +126,7 @@ const Header: React.FC = () => {
           <button
             type="button"
             className="site-theme-toggle"
+            data-cuelume-toggle
             onClick={toggleTheme}
             aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
           >

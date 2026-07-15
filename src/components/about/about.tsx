@@ -39,7 +39,7 @@ const About: React.FC = () => {
         </div>
       </section>
 
-      <LocaleLink to="/blog/digital-fairness-act-youth-dialogue" className="about-highlight">
+      <LocaleLink to="/blog/digital-fairness-act-youth-dialogue" className="about-highlight" data-cuelume-press>
         <div className="about-highlight__media">
           <img
             src="/blog/digital-fairness/youth-policy-dialogue.png"

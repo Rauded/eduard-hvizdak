@@ -75,6 +75,7 @@ const Slideshow: React.FC<{ images: string[] }> = ({ images }) => {
             aria-label={`Slide ${i + 1}`}
             aria-current={i === current}
             className={`slideshow__dot ${i === current ? 'slideshow__dot--active' : ''}`}
+            data-cuelume-press="tick"
             onClick={() => setCurrent(i)}
           />
         ))}
@@ -348,6 +349,7 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
         ref={triggerRef}
         type="button"
         className="pcard__case-trigger"
+        data-cuelume-press="page"
         onClick={() => setOpen(true)}
         aria-haspopup="dialog"
       >

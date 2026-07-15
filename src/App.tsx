@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import posthog from 'posthog-js';
 import { analyticsEnabled } from './analytics';
 import { ThemeProvider } from './components/theme/ThemeContext';
+import { SoundProvider } from './components/sound/SoundContext';
 import { LocaleProvider } from './i18n/LocaleContext';
 import { isLocale, localizedPath, stripLocale, saveLocale } from './config/locale';
 import { applyCanvasPreset } from './config/canvas';
@@ -174,6 +175,7 @@ const App: React.FC = () => {
   return (
     <HelmetProvider>
       <ThemeProvider>
+        <SoundProvider>
         <Router>
           {/* LocaleProvider is INSIDE Router so it can derive locale from the path. */}
           <LocaleProvider>
@@ -190,6 +192,7 @@ const App: React.FC = () => {
             {EditOverlay && <EditOverlay />}
           </LocaleProvider>
         </Router>
+        </SoundProvider>
       </ThemeProvider>
     </HelmetProvider>
   );

@@ -453,5 +453,25 @@
       &:hover { color: var(--accent); }
     }
     p { color: var(--text-faint); }
+
+    // The base footer styles target the dark bar; on the light surface the
+    // sound toggle needs dark-on-light hairline styling, going solid navy when
+    // interface sounds are on.
+    .footer-sound-toggle {
+      border-color: var(--border-strong);
+      background: transparent;
+      color: var(--text-muted);
+
+      &:hover {
+        color: var(--text-strong);
+        border-color: var(--text-muted);
+      }
+
+      &[aria-pressed='true'] {
+        color: #ffffff;
+        background: var(--accent);
+        border-color: var(--accent);
+      }
+    }
   }
 }

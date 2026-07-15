@@ -21,12 +21,12 @@ const ContactGradient: React.FC = () => {
           {t.lead}
         </p>
         <div className="contactg__actions">
-          <a className="contactg__btn contactg__btn--primary" href={`mailto:${EMAIL}`}>
+          <a className="contactg__btn contactg__btn--primary" href={`mailto:${EMAIL}`} data-cuelume-press>
             <LuMail aria-hidden="true" />
             {t.emailMe}
             <LuArrowRight className="contactg__btn-arrow" aria-hidden="true" />
           </a>
-          <a className="contactg__btn contactg__btn--ghost" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+          <a className="contactg__btn contactg__btn--ghost" href={BOOKING_URL} target="_blank" rel="noopener noreferrer" data-cuelume-press>
             <LuCalendar aria-hidden="true" />
             {t.book}
           </a>

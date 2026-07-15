@@ -414,10 +414,10 @@ const Hero: React.FC = () => {
         <Headline>{t.name}</Headline>
         <Tagline>{t.tagline}</Tagline>
         <CtaRow>
-          <PrimaryCta href="#projects">
+          <PrimaryCta href="#projects" data-cuelume-press>
             {t.viewProjects} <LuArrowRight /> <KeyChip>P</KeyChip>
           </PrimaryCta>
-          <GhostCta href="#contact">
+          <GhostCta href="#contact" data-cuelume-press>
             {t.emailMe} <KeyChip $ghost>E</KeyChip>
           </GhostCta>
         </CtaRow>
