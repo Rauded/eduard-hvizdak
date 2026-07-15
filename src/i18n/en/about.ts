@@ -6,7 +6,7 @@
 const about = {
   title: 'About Me',
   greeting: "I'm",
-  introExpert: 'A builder who sits between business and technology.',
+  introExpert: 'I try my best to position myself between business and technology.',
   introStudent:
     'A computer science student at Masaryk University who sits between business and technology.',
   recentPrefix: "For the past two years I've built AI systems across",
@@ -15,13 +15,13 @@ const about = {
   interestsPrefix: "Now I'm focused on building",
   interestsSpan: 'production AI agents and automation systems',
   interestsSuffix:
-    'that run on schedule, work with real data, take real actions, and report results. Not chatbots. Not demos.',
+    'that run on schedule, work with real data, take real actions, and report results.',
   skillsPrefix: 'On the side I run',
   skillsSpan: 'InzerPro, a SaaS with paying customers.',
   skillsSuffix:
     'The way I work is Claude Code and modern AI tools: I ship integrations, automations, and internal tools without needing a dev team for every iteration.',
   outside:
-    "Outside work: books, new tools, and more Twitter than I'd like to admit.",
+    "I spend my free time reading books, experimenting with new tools (token-maxxing) and doom-scrolling Twitter...",
   highlightEyebrow: 'Recent Highlight',
   highlightTitlePrefix: 'Invited by the',
   highlightTitleSpan: 'European Commission',

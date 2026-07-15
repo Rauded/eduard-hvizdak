@@ -24,7 +24,7 @@
           "website": "https://onebond.tech",
           "dates": "2025 – 2026",
           "bulletPoints": [
-            "Architected an autonomous multi-agent pipeline for analyzing public government contracts using OCR, scraping, search, fact-verification, and LLM summarization.",
+            "Architected an autonomous multi-agent pipeline for analyzing public government contracts using OCR,web scraping, search, fact-verification, and LLM summarization.",
             "Built a Retrieval-Augmented Generation (RAG) system with LangChain, PostgreSQL, and VoyageAI embeddings enabling semantic contract intelligence.",
             "Implemented distributed embedding pipelines and async job queues to categorize millions of contracts in parallel."
           ]
@@ -46,7 +46,7 @@
           "dates": "2025",
           "bulletPoints": [
             "Developed AI knowledge assistants for Czech and Slovak municipalities using LangChain and vector search (PGVector).",
-            "Implemented AI-driven form automation enabling structured data completion from internal municipal datasets."
+            "Implemented AI-driven form automation enabling structured data completion from internal datasets."
           ]
         },
         {
@@ -55,7 +55,7 @@
           "website": "https://www.educalliance.eu",
           "dates": "2024 – 2025",
           "bulletPoints": [
-            "Developed an AI assistant deployed on the alliance's digital campus platform, built for 10 European universities with 200k+ students.",
+            "Developed an AI assistant deployed on the university alliance's digital campus platform, built for 10 European universities with 200k+ students.",
             "Collaborated with partner institutions on AI deployment strategy, governance, and GDPR compliance."
           ]
         }
