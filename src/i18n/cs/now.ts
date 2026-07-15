@@ -16,17 +16,17 @@ const now = {
     aria: 'Na co se právě teď soustředím',
     expertA: 'Jsem ',
     expertRole: 'AI inženýr',
-    expertB: ' a většina mého času jde do stavění ',
+    expertB: '. Většina mého času jde do stavění ',
     studentA: 'Dokončuju ',
     studentBsc: 'bakaláře z informatiky',
     studentB: ' na Masarykově univerzitě a pracuju jako ',
     studentRole: 'AI inženýr',
     studentC: '. Většina mého času jde do stavění ',
-    agentsBold: 'AI agentů a agentních systémů',
+    agentsBold: 'produkčních AI agentů a automatizačních systémů',
     mid:
-      ': automatizace, orchestrace více agentů a propojení, které je udrží v běhu. Zkusil jsem si i provozovat pár vlastních SaaS produktů a ten, který stále běží, je ',
+      ': naplánovaní agenti, orchestrace více agentů a propojení, které je udrží v běhu. Vedle toho provozuji ',
     outro:
-      '. Vedle toho, spíš jako doplněk než hlavní práce, dělám AI konzultace a k tomu automatizace a nasazování AI, jen já, žádná firma za tím.',
+      ', SaaS s platícími zákazníky. K tomu beru AI konzultace, automatizace a nasazování AI pro firmy.',
   },
   building: {
     title: 'Právě stavím',
