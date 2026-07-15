@@ -2,6 +2,19 @@
 
 Guidance for Claude Code when working in this repo. Read this before making changes.
 
+## Content source of truth (READ FIRST for any copy/content work)
+The canonical content for this site lives in Obsidian, NOT invented ad hoc:
+**`/Users/macbook/Obsidian/Mac Eduard/_Business General/Personal Portfolio Website/`**
+- `Portfolio website content index.md` maps the site sections to their notes.
+- `About me page.md` (hero/about text), `Now page.md`, `Projects.md` +
+  `Projects/`, `Case Studies/`, `AI Services.md` + `AI Services/`, `Blogs/`.
+- Eduard writes each project write-up, the about text, and the experience info in
+  these notes. When updating site copy, pull from the matching note first; only
+  fall back to the style rules below (and the `jamny-style` skill) for voice.
+- The notes may be empty or stale in places. If a note is empty, ask Eduard or use
+  what is already live, do not fabricate. Keep the site copy in sync with the notes
+  as they get filled in.
+
 ## Roadmap
 Improvement ideas, gaps, and the prioritized TODO list live in **`ROADMAP.md`** (analytics, SEO/OG,
 `/now` + `/uses`, personal tracker widgets, founder/traction sections, "Elsewhere" links). Check it
