@@ -1,8 +1,8 @@
 const contact = {
   eyebrow: 'Get in touch',
-  title: "Let's talk.",
+  title: "Let's work together",
   lead:
-    'Currently open to fixed-scope AI builds, end-to-end automation, and advisory for founders building with AI.',
+    "Building something with AI, need a product shipped, or just want to talk shop? I'm always up for an interesting problem.",
   emailMe: 'Email me',
   book: 'Book 30 min',
   callMe: 'Call me',

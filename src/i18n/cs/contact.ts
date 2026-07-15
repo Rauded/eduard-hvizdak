@@ -1,8 +1,8 @@
 const contact = {
   eyebrow: 'Ozvěte se',
-  title: 'Ozvěte se.',
+  title: 'Pojďme spolupracovat',
   lead:
-    'Aktuálně otevřený pro AI projekty s pevným rozsahem, automatizace od A do Z a poradenství pro zakladatele stavějící s AI.',
+    'Stavíte něco s AI, potřebujete dotáhnout produkt, nebo si jen chcete popovídat o oboru? Zajímavý problém si nikdy nenechám ujít.',
   emailMe: 'Napište mi',
   book: 'Rezervovat 30 min',
   callMe: 'Zavolejte mi',

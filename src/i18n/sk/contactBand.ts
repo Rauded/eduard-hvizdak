@@ -1,8 +1,8 @@
 const contactBand = {
   eyebrow: 'Ozvite sa',
-  title: 'Ozvite sa.',
+  title: 'Poďme spolupracovať',
   lead:
-    'Aktuálne otvorený pre AI projekty s pevným rozsahom, automatizácie od A po Z a poradenstvo pre zakladateľov stavajúcich s AI.',
+    'Máte proces, ktorý sa oplatí zautomatizovať, dokumenty, z ktorých treba vedieť odpovedať, alebo produkt, ktorý treba nasadiť? Napíšte mi, čo spomaľuje váš tím.',
   emailMe: 'Napíšte mi',
   book: 'Rezervovať 30 min',
   directPrefix: 'Alebo mi napíšte priamo na',
