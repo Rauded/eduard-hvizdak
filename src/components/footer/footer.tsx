@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './footer.scss';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
-import { LuVolume2, LuVolumeX } from 'react-icons/lu';
+import { LuArrowRight, LuVolume2, LuVolumeX } from 'react-icons/lu';
 import { useT } from '../../i18n';
+import { useLocalizedPath } from '../common/LocaleLink';
 import { useSound } from '../sound/SoundContext';
 
 const EMAIL = 'eduardd.hv@gmail.com';
@@ -13,6 +15,10 @@ const PHONE_DISPLAY = '+421 950 774 038';
 const Footer: React.FC = () => {
   const t = useT('footer');
   const { soundOn, toggleSound } = useSound();
+  const localize = useLocalizedPath();
+  // Home path in the active locale + the contact anchor. Works from any route:
+  // ScrollToTop in App scrolls to #contact once the section mounts.
+  const contactHref = `${localize('/')}#contact`;
   return (
     <footer className="footer-container">
       <div className="left-align">
@@ -32,6 +38,10 @@ const Footer: React.FC = () => {
         </button>
       </div>
       <div className="center-align">
+        <Link className="footer-contact" to={contactHref} data-cuelume-press>
+          {t.contact}
+          <LuArrowRight aria-hidden="true" />
+        </Link>
         <p>&copy; Eduard Hvizdak 2026</p>
         <p>
           <a className="footer-email" href={`mailto:${EMAIL}`}>{EMAIL}</a>

@@ -1,5 +1,6 @@
 const footer = {
   builtBy: 'Navrhl a postavil',
+  contact: 'Kontakt',
   sound: {
     on: 'Zvuk zapnutý',
     off: 'Zvuk vypnutý',
