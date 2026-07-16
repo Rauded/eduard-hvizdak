@@ -83,6 +83,8 @@
     gap: 10px;
   }
 
+  // Solid dark fill (not a translucent outline) so white text keeps constant
+  // contrast no matter where the animated gradient is behind it.
   &__wizard-choice {
     display: inline-flex;
     align-items: center;
@@ -96,20 +98,20 @@
     font-size: var(--text-small);
     font-weight: var(--weight-medium);
     color: #fff;
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(10, 19, 43, 0.62);
+    border: 1px solid rgba(255, 255, 255, 0.28);
     cursor: pointer;
     transition: background 0.16s ease-out, border-color 0.16s ease-out, transform 0.16s ease-out;
 
-    svg { width: 1.05em; height: 1.05em; opacity: 0.85; transition: transform 0.16s ease-out, opacity 0.16s ease-out; }
+    svg { width: 1.05em; height: 1.05em; opacity: 0.9; transition: transform 0.16s ease-out; }
 
     &:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: #fff;
+      background: rgba(10, 19, 43, 0.8);
+      border-color: rgba(255, 255, 255, 0.6);
       transform: translateY(-1px);
-      svg { transform: translateX(3px); opacity: 1; }
+      svg { transform: translateX(3px); }
     }
-    &.is-selected { border-color: #fff; background: rgba(255, 255, 255, 0.18); }
+    &.is-selected { border-color: #fff; background: rgba(10, 19, 43, 0.85); }
   }
 
   &__wizard-input {
