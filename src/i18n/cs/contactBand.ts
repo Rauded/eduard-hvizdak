@@ -1,15 +1,35 @@
 // Shared contact band (bottom of both the services page and the home page).
 const contactBand = {
   eyebrow: 'Ozvěte se',
-  title: 'Pojďme spolupracovat',
-  lead:
-    'Máte proces, který stojí za automatizaci, dokumenty, ve kterých se má dát vyhledávat, nebo produkt, který potřebuje dotáhnout? Napište mi, co váš tým zdržuje.',
+  title: 'Pojďme si promluvit.',
+  lead: 'Řekněte mi, co potřebujete. Každá zpráva přijde přímo ke mně.',
   emailMe: 'Napište mi',
   book: 'Rezervovat 30 minut',
   directPrefix: 'Nebo mi napište přímo na',
   githubAria: 'GitHub',
   xAria: 'X (dříve Twitter)',
   linkedinAria: 'LinkedIn',
+  wizard: {
+    q1Label: 'S čím přicházíte?',
+    optAutomate: 'Zautomatizovat proces',
+    optBuild: 'Postavit AI agenta nebo appku',
+    optRole: 'Nábor nebo pracovní nabídka',
+    optOther: 'Něco jiného',
+    q2Label: 'Kde vás zastihnu?',
+    q2Placeholder: 'vy@firma.cz',
+    q3Label: 'A vaše jméno?',
+    q3Placeholder: 'Vaše jméno',
+    back: 'Zpět',
+    next: 'Dále',
+    send: 'Odeslat',
+    sending: 'Odesílám',
+    doneTitle: 'Mám to.',
+    doneBody: 'Ozvu se do jednoho dne.',
+    invalidEmail: 'Zadejte platný e-mail',
+    required: 'Toto pole je potřeba vyplnit',
+    errorPrefix: 'Něco se pokazilo. Napište mi na',
+    prefer: 'Raději klasicky?',
+  },
 };
 
 export default contactBand;

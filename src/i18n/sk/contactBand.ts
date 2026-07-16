@@ -1,14 +1,34 @@
 const contactBand = {
   eyebrow: 'Ozvite sa',
-  title: 'Poďme spolupracovať',
-  lead:
-    'Máte proces, ktorý sa oplatí zautomatizovať, dokumenty, z ktorých treba vedieť odpovedať, alebo produkt, ktorý treba nasadiť? Napíšte mi, čo spomaľuje váš tím.',
+  title: 'Poďme sa porozprávať.',
+  lead: 'Povedzte mi, čo potrebujete. Každá správa príde priamo ku mne.',
   emailMe: 'Napíšte mi',
   book: 'Rezervovať 30 min',
   directPrefix: 'Alebo mi napíšte priamo na',
   githubAria: 'GitHub',
   xAria: 'X (predtým Twitter)',
   linkedinAria: 'LinkedIn',
+  wizard: {
+    q1Label: 'S čím prichádzate?',
+    optAutomate: 'Zautomatizovať proces',
+    optBuild: 'Postaviť AI agenta alebo appku',
+    optRole: 'Nábor alebo pracovná ponuka',
+    optOther: 'Niečo iné',
+    q2Label: 'Kde vás zastihnem?',
+    q2Placeholder: 'vy@firma.sk',
+    q3Label: 'A vaše meno?',
+    q3Placeholder: 'Vaše meno',
+    back: 'Späť',
+    next: 'Ďalej',
+    send: 'Odoslať',
+    sending: 'Odosielam',
+    doneTitle: 'Mám to.',
+    doneBody: 'Ozvem sa do jedného dňa.',
+    invalidEmail: 'Zadajte platný e-mail',
+    required: 'Toto pole treba vyplniť',
+    errorPrefix: 'Niečo sa pokazilo. Napíšte mi na',
+    prefer: 'Radšej klasicky?',
+  },
 };
 
 export default contactBand;

@@ -156,6 +156,31 @@
     text-align: center;
   }
 
+  // Dark footer (#09090b), so this reads in white rather than the light-mode
+  // navy accent tokens, which would sink into the background here.
+  .footer-contact {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.92);
+    font-size: var(--text-small);
+    font-weight: var(--weight-medium);
+    text-decoration: none;
+    transition: color 0.2s ease, opacity 0.2s ease;
+
+    svg {
+      width: 0.95em;
+      height: 0.95em;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      color: #fff;
+      svg { transform: translateX(3px); }
+    }
+  }
+
   .right-align {
     text-align: right;
 
