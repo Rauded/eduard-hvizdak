@@ -11,7 +11,9 @@ import { useT } from '../../i18n';
 // no backend, lands in the inbox). Without a key it opens a prefilled email to
 // EMAIL, so the wizard always works.
 const EMAIL = 'eduardd.hv@gmail.com';
-const WEB3FORMS_KEY = process.env.REACT_APP_WEB3FORMS_KEY;
+// Web3Forms access key. Safe to ship client-side: it only ever delivers to the
+// verified inbox tied to the key. Override with REACT_APP_WEB3FORMS_KEY if needed.
+const WEB3FORMS_KEY = process.env.REACT_APP_WEB3FORMS_KEY || '4bf607c2-fd73-49d8-a569-baf93abe5cdd';
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const TOTAL = 3;
 
