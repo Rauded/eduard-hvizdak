@@ -34,6 +34,10 @@
   color: var(--text);
   font-family: var(--font-body);
 
+  @media (max-width: 768px) {
+    padding: 56px 0 56px;
+  }
+
   // Full-bleed background layer so light mode can paint over the dark
   // AppContainer gradient that sits behind this page.
   &::before {
@@ -514,7 +518,7 @@
   display: inline-flex;
   flex-direction: column;
   gap: 11px;
-  max-width: 360px;
+  max-width: min(360px, 100%);
   text-decoration: none;
   color: inherit;
 

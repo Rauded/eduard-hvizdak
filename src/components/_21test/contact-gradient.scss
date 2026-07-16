@@ -1,12 +1,19 @@
 // TEST: Contact content on the animated navy gradient (combined component).
 .contactg {
   // contained rounded card, same footprint as the original contact section
+  // box-sizing so the horizontal padding is inside the 92% width. Without it
+  // (there is no global reset) the card is 92% + 72px and overflows a phone.
+  box-sizing: border-box;
   width: 92%;
   max-width: 680px;
   margin: 36px auto;
   padding: 40px 36px;
   border-radius: 24px;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    padding: 30px 22px;
+  }
   text-align: center;
   color: #fff;
   // The old light stop (--accent-text-soft, a pale periwinkle) made the card
@@ -165,6 +172,7 @@
     transition: color 0.16s ease-out;
     svg { width: 1em; height: 1em; }
     &:hover { color: #fff; }
+    @media (max-width: 768px) { padding: 10px 6px; min-height: 40px; }
   }
 
   &__wizard-bar {

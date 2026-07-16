@@ -249,6 +249,12 @@
 
     &:hover { color: var(--heading); border-color: var(--heading); }
     &--open svg { transform: rotate(180deg); }
+
+    // comfortable tap target on touch screens
+    @media (max-width: 768px) {
+      padding: 9px 12px;
+      min-height: 40px;
+    }
   }
 
   // ── expandable detail ──
