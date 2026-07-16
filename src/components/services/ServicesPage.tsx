@@ -9,6 +9,7 @@ import { SHOW_CZS_CASE_STUDY } from '../../config/czsCaseStudy';
 import './services.scss';
 import './services-featured.scss';
 // 21st.dev showcase components, curated under the "In action" section below.
+import ContactGradient from '../_21test/ContactGradient';
 import ServicesShowcase from '../_21test/ServicesShowcase';
 import AgentPipeline from '../_21test/AgentPipeline';
 import OrbitingStack from '../_21test/OrbitingStack';
@@ -292,20 +293,8 @@ const ServicesPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Closing CTA: the same block as the hero, and nothing after it. */}
-      <Reveal className="services-cta-repeat" as="section">
-        <h2 className="services-cta-repeat__title">{t.ctaRepeatTitle}</h2>
-        <a className="services-btn services-btn--primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-          {t.ctaConsult}
-          <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
-        </a>
-        <p className="services-hero__alt">
-          {t.ctaAltPrefix}{' '}
-          <a href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>{EMAIL}</a>
-          {' '}{t.ctaAltOr}{' '}
-          <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a>
-        </p>
-      </Reveal>
+      {/* Closing CTA: the shared contact band with the one-question wizard. */}
+      <ContactGradient />
 
     </div>
     </>
