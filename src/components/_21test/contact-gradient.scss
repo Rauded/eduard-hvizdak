@@ -9,11 +9,15 @@
   overflow: hidden;
   text-align: center;
   color: #fff;
+  // The old light stop (--accent-text-soft, a pale periwinkle) made the card
+  // go too light on one phase of the pan, washing out white text and the airy
+  // pill borders. Keep the motion, but cap the lightest stop at a mid navy so
+  // contrast holds throughout.
   background: linear-gradient(
     120deg,
     var(--accent-strong),
     var(--accent),
-    var(--accent-text-soft),
+    color-mix(in srgb, var(--accent-text-soft) 52%, var(--accent-strong)),
     var(--accent),
     var(--accent-strong)
   );
@@ -83,8 +87,8 @@
     gap: 10px;
   }
 
-  // Solid dark fill (not a translucent outline) so white text keeps constant
-  // contrast no matter where the animated gradient is behind it.
+  // Airy outline pills that match the card. They stay legible because the
+  // gradient no longer pales out (see the background note above).
   &__wizard-choice {
     display: inline-flex;
     align-items: center;
@@ -98,20 +102,20 @@
     font-size: var(--text-small);
     font-weight: var(--weight-medium);
     color: #fff;
-    background: rgba(10, 19, 43, 0.62);
-    border: 1px solid rgba(255, 255, 255, 0.28);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.42);
     cursor: pointer;
     transition: background 0.16s ease-out, border-color 0.16s ease-out, transform 0.16s ease-out;
 
-    svg { width: 1.05em; height: 1.05em; opacity: 0.9; transition: transform 0.16s ease-out; }
+    svg { width: 1.05em; height: 1.05em; opacity: 0.8; transition: transform 0.16s ease-out, opacity 0.16s ease-out; }
 
     &:hover {
-      background: rgba(10, 19, 43, 0.8);
-      border-color: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.13);
+      border-color: rgba(255, 255, 255, 0.75);
       transform: translateY(-1px);
-      svg { transform: translateX(3px); }
+      svg { transform: translateX(3px); opacity: 1; }
     }
-    &.is-selected { border-color: #fff; background: rgba(10, 19, 43, 0.85); }
+    &.is-selected { border-color: #fff; background: rgba(255, 255, 255, 0.16); }
   }
 
   &__wizard-input {
