@@ -4,6 +4,7 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import './contact-gradient.scss';
 import { useT } from '../../i18n';
+import ContactWizard from './ContactWizard';
 
 // ── TEST: the real Contact section combined with the animated gradient band ──
 // Same layout/content as contact.tsx, on the slowly panning navy gradient.
@@ -20,6 +21,8 @@ const ContactGradient: React.FC = () => {
         <p className="contactg__lead">
           {t.lead}
         </p>
+        <ContactWizard />
+        <p className="contactg__alt-label">{t.wizard.prefer}</p>
         <div className="contactg__actions">
           <a className="contactg__btn contactg__btn--primary" href={`mailto:${EMAIL}`} data-cuelume-press>
             <LuMail aria-hidden="true" />
