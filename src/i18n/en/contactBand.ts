@@ -2,7 +2,7 @@
 const contactBand = {
   eyebrow: 'Get in touch',
   title: "Let's talk.",
-  lead: 'Tell me what you need. Three steps, not a long form.',
+  lead: 'Tell me what you need. Every message reaches me directly.',
   emailMe: 'Email me',
   book: 'Book 30 min',
   directPrefix: 'Or email me directly at',

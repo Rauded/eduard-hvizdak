@@ -2,7 +2,7 @@
 const contactBand = {
   eyebrow: 'Ozvěte se',
   title: 'Pojďme si promluvit.',
-  lead: 'Řekněte mi, co potřebujete. Tři kroky, žádný dlouhý formulář.',
+  lead: 'Řekněte mi, co potřebujete. Každá zpráva přijde přímo ke mně.',
   emailMe: 'Napište mi',
   book: 'Rezervovat 30 minut',
   directPrefix: 'Nebo mi napište přímo na',
