@@ -15,6 +15,29 @@ The canonical content for this site lives in Obsidian, NOT invented ad hoc:
   what is already live, do not fabricate. Keep the site copy in sync with the notes
   as they get filled in.
 
+## Blog posts: Eduard writes them, we only transfer them (2026-07-26)
+Blog posts are **authored by Eduard in Obsidian**, one note per post, in
+`…/Personal Portfolio Website/Blogs/<slug>.md` (photos in `Blogs/photos/<slug>/`).
+`_TEMPLATE.md`, `HOW TO WRITE A BLOG POST.md` and a worked example live in that folder.
+
+**Hard rule on his text: fix spelling, grammar, and typos. Change nothing else.**
+No smoothing, no restructuring, no "improving" the phrasing, no adding sentences he
+did not write. A rough sentence in his voice ships rough. Only rewrite when he asks
+for it explicitly on that specific post. The earlier posts were drafted by Claude and
+he does not want more of that.
+
+Transfer checklist when he says "publish the blog post <slug>":
+1. Read the note. Convert to the `BlogPost` HTML shape in `src/data/blog.ts`
+   (`<p>`, `<h2>`, `figure.blog-figure` + `img.blog-img` + optional `figcaption`).
+   `PHOTO: file.jpg  caption` lines in the note become figures.
+2. Copy photos to `public/blog/<folder>/`, compress if large, write real alt text.
+   Blog images are whitelisted in `.gitignore`; confirm with `git ls-files`.
+3. Translate to SK and CS (`*_sk` / `*_cs` fields). Same rule applies: translate what
+   he wrote, do not upgrade it.
+4. Add the route to `scripts/prerender.mjs`, three `<url>` blocks (en/sk/cs) to
+   `public/sitemap.xml`, one `<item>` to `public/rss.xml` (both hand-maintained).
+5. `CI=false npm run build` (expect all routes prerendered), commit, push, verify live.
+
 ## Roadmap
 Improvement ideas, gaps, and the prioritized TODO list live in **`ROADMAP.md`** (analytics, SEO/OG,
 `/now` + `/uses`, personal tracker widgets, founder/traction sections, "Elsewhere" links). Check it
