@@ -34,6 +34,7 @@ const ROUTES = [
   '/blog/digital-fairness-act-youth-dialogue',
   '/blog/zero-to-done',
   '/blog/erasmus-bridges-not-walls',
+  '/blog/fintech-unbundled-prague',
 ];
 
 // Bake every route in all three locales. English stays at the root; sk/cs get

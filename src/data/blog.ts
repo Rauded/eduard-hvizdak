@@ -601,6 +601,176 @@ export const BLOG_POSTS: BlogPost[] = [
     footnote_cs:
       'Bridges, Not Walls, mládežnická výměna Erasmus+ · 20. - 29. 4. 2026, Luoba, Litva<br/>Země: Litva, Ukrajina, Slovensko, Rumunsko, Polsko, Bulharsko<br/>Financováno z programu Erasmus+ Evropské unie.<br/>#BridgesNotWalls #ErasmusPlus #YouthExchange',
   },
+  {
+    slug: 'fintech-unbundled-prague',
+    title: 'Crew for a day at Fintech UnBundled in Prague',
+    date: '2026-05-12',
+    category: 'Conferences & Volunteering',
+    excerpt:
+      'I spent a day in Prague working Fintech UnBundled as crew, volunteering with Fyltr. Empty room at half nine in the morning, a paper badge, and a day spent on the side of the event where the work happens.',
+    thumbnail: '/blog/fintech-unbundled/stage-before-doors.jpg',
+    content: `
+      <p>On <strong>12 May 2026</strong> I spent a day in Prague working <strong><a href="https://fintechweekcee.com/unbundled" target="_blank" rel="noopener noreferrer">Fintech UnBundled</a></strong> as crew. I was there as a volunteer with <strong>Fyltr</strong>, not as a guest with a ticket, so I saw the event from the side where the work happens, which honestly I think is the better side.</p>
+
+      <p>UnBundled was the flagship day of <strong>Fintech Week CEE 2026</strong>. The whole week ran 8 to 15 May and it was the first edition, four flagship events across one week, with Crypto &amp; Banking the day before and Love + roboti the day after. The line for the day was "founders, builders, and the work behind the work", which fit, because most of what happened on stage was about the messy parts and not the launch posts.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/stage-before-doors.jpg" alt="The UnBundled main stage in Prague before doors opened, with State of CEE Fintech on the screen" class="blog-img" />
+        <figcaption>Half nine in the morning, screen already up, nobody in the chairs yet.</figcaption>
+      </figure>
+
+      <h2>Crew, Not Guest</h2>
+      <p>I got there in the morning while the room was still empty. There is something about a conference room before an event that I like a lot more than the event itself. Then you put the badge on and the doors open and it goes fast for the rest of the day.</p>
+      <p>The paper crew badge is a small thing but it changes the day. You are not walking around deciding which talk to sit in, you are the person people ask where the coffee is or where the roundtable room is, and you end up talking to far more people than you would as an attendee.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/crew-badge.jpg" alt="Paper crew badge on a lanyard with sponsor logos, Fintech UnBundled Prague" class="blog-img" />
+      </figure>
+
+      <h2>What The Day Was</h2>
+      <p>The main stage ran five blocks, and the names give a decent idea of the tone: <strong>CTRL+ALT+FINANCE</strong> (reboot required), <strong>NEW MONEY, NEW RAILS</strong> (laying track where there was none), <strong>HUMAN x MACHINE</strong> (automation is easy, trust is hard), <strong>MONEY x FRONTIERS</strong> (capital, borders, and the edges of what is possible), and <strong>FOUNDERS' SCARS</strong> (earned in public). Two invitation-only things ran in parallel, a regulatory roundtable and a VC and founders session. At one point there was a screen in the hallway with the VC pitch sessions on it, which was the part of the day with the most nervous people in one corridor.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/state-of-cee-fintech.jpg" alt="State of CEE Fintech on the big screen at Fintech UnBundled with a full audience" class="blog-img" />
+      </figure>
+
+      <p>The lineup had people like <strong>Georg Hauer</strong> (ex N26), <strong>Dann Bibas</strong> (ex Wise) and <strong>Will Orde</strong> from Passion Capital, and the partners on the wall were <strong>KB</strong>, <strong>Mastercard</strong>, <strong>Visa</strong>, FINREG Partners, The FinTechers, BD Partners and KB Smart Solutions. For a first edition in Prague that is a serious room.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/sponsor-wall.jpg" alt="Audience facing the sponsor LED wall at Fintech UnBundled Prague" class="blog-img" />
+      </figure>
+
+      <h2>Why It Mattered To Me</h2>
+      <p>I work on a crypto payment gateway, so NEW MONEY, NEW RAILS was the block I cared about most. When you spend your days on webhooks, quotes, settlement and the reconciliation nobody puts on a slide, it is strange and also nice to hear founders describe the exact same problems in one sentence and watch a room nod like it is simple. It is not simple. FOUNDERS' SCARS was the honest version of that.</p>
+      <p>The other thing I did not expect: most of the value was in the hallway. Not in a networking way, more that as crew you talk to speakers before they go on and after they come off, and people are a lot more real then.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/room-wide.jpg" alt="Wide view of the packed UnBundled ballroom in Prague from the balcony" class="blog-img" />
+      </figure>
+
+      <h2>Final Thoughts</h2>
+      <p>One day, no ticket, and I got more out of it than I would have sitting in the audience. If you are a student or early in fintech and you are wondering how to get into a room like this, volunteering is the cheat code. Nobody minds, and everybody talks to you.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/crew-group.jpg" alt="The UnBundled volunteer crew on stage after the event" class="blog-img" />
+        <figcaption>The crew. You are not supposed to stand out, you are supposed to make the day run.</figcaption>
+      </figure>
+
+      <p>The full gallery from the organisers is on the <a href="https://fintechweekcee.com/2026/gallery/unbundled" target="_blank" rel="noopener noreferrer">Fintech Week CEE site</a> if you want to see the scale of it. The next edition is provisionally 19 to 23 April 2027. I will probably be around.</p>
+    `,
+    footnote:
+      'Fintech UnBundled · Prague, Czech Republic · 12 May 2026<br/>Flagship day of Fintech Week CEE 2026 (8 - 15 May) · Volunteer crew with Fyltr<br/>Event photos courtesy of the organisers · <a href="https://fintechweekcee.com/2026/gallery/unbundled" target="_blank" rel="noopener noreferrer">fintechweekcee.com</a>',
+    title_sk: 'Deň ako dobrovoľník na Fintech UnBundled v Prahe',
+    category_sk: 'Konferencie a dobrovoľníctvo',
+    excerpt_sk:
+      'Strávil som deň v Prahe ako člen organizačného tímu na Fintech UnBundled, dobrovoľnícky cez Fyltr. Prázdna sála o pol desiatej ráno, papierová visačka a celý deň strávený na tej strane akcie, kde sa robí práca.',
+    content_sk: `
+      <p><strong>12. mája 2026</strong> som strávil deň v Prahe ako člen organizačného tímu na <strong><a href="https://fintechweekcee.com/unbundled" target="_blank" rel="noopener noreferrer">Fintech UnBundled</a></strong>. Bol som tam ako dobrovoľník cez <strong>Fyltr</strong>, nie ako hosť so vstupenkou, takže som akciu videl z tej strany, kde sa robí práca. Popravde si myslím, že je to tá lepšia strana.</p>
+
+      <p>UnBundled bol hlavný deň <strong>Fintech Week CEE 2026</strong>. Celý týždeň bežal od 8. do 15. mája a bol to prvý ročník, štyri veľké akcie v jednom týždni, deň predtým Crypto &amp; Banking a deň po ňom Love + roboti. Motto dňa znelo "founders, builders, and the work behind the work", čo sedelo, lebo väčšina toho, čo sa dialo na pódiu, bola o tých neusporiadaných častiach, nie o launch postoch.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/stage-before-doors.jpg" alt="Hlavné pódium UnBundled v Prahe pred otvorením dverí, na obrazovke State of CEE Fintech" class="blog-img" />
+        <figcaption>Pol desiatej ráno, obrazovka už beží, na stoličkách zatiaľ nikto.</figcaption>
+      </figure>
+
+      <h2>Organizátor, nie hosť</h2>
+      <p>Prišiel som ráno, keď bola sála ešte prázdna. Na konferenčnej sále pred akciou je niečo, čo mám radšej než samotnú akciu. Potom si dáš visačku na krk, otvoria sa dvere a zvyšok dňa ide rýchlo.</p>
+      <p>Papierová visačka je malá vec, ale mení celý deň. Nechodíš po sále a nerozhoduješ sa, na ktorú prednášku si sadneš, si ten človek, ktorého sa ľudia pýtajú, kde je káva alebo kde je miestnosť s okrúhlym stolom, a nakoniec sa rozprávaš s oveľa viac ľuďmi, než keby si bol návštevník.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/crew-badge.jpg" alt="Papierová visačka organizátora so šnúrkou a logami partnerov, Fintech UnBundled Praha" class="blog-img" />
+      </figure>
+
+      <h2>Ako deň vyzeral</h2>
+      <p>Na hlavnom pódiu bolo päť blokov a ich názvy dávajú slušnú predstavu o tóne: <strong>CTRL+ALT+FINANCE</strong> (reboot required), <strong>NEW MONEY, NEW RAILS</strong> (laying track where there was none), <strong>HUMAN x MACHINE</strong> (automation is easy, trust is hard), <strong>MONEY x FRONTIERS</strong> (capital, borders, and the edges of what is possible) a <strong>FOUNDERS' SCARS</strong> (earned in public). Paralelne bežali dve veci len na pozvánku, regulačný okrúhly stôl a session pre VC a zakladateľov. V jednu chvíľu bola na chodbe obrazovka s VC pitch sessions, čo bola tá časť dňa s najviac nervóznymi ľuďmi na jednej chodbe.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/state-of-cee-fintech.jpg" alt="State of CEE Fintech na veľkej obrazovke na Fintech UnBundled pred plnou sálou" class="blog-img" />
+      </figure>
+
+      <p>V programe boli ľudia ako <strong>Georg Hauer</strong> (predtým N26), <strong>Dann Bibas</strong> (predtým Wise) a <strong>Will Orde</strong> z Passion Capital a na stene partnerov boli <strong>KB</strong>, <strong>Mastercard</strong>, <strong>Visa</strong>, FINREG Partners, The FinTechers, BD Partners a KB Smart Solutions. Na prvý ročník v Prahe je to poriadna spoločnosť.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/sponsor-wall.jpg" alt="Publikum otočené k LED stene partnerov na Fintech UnBundled v Prahe" class="blog-img" />
+      </figure>
+
+      <h2>Prečo to pre mňa niečo znamenalo</h2>
+      <p>Robím na krypto platobnej bráne, takže blok NEW MONEY, NEW RAILS ma zaujímal najviac. Keď tráviš dni na webhookoch, quotoch, settlemente a rekonciliácii, ktorú nikto nedá na slajd, je zvláštne a zároveň príjemné počuť zakladateľov opísať presne tie isté problémy jednou vetou a sledovať, ako sála prikyvuje, akoby to bolo jednoduché. Nie je to jednoduché. FOUNDERS' SCARS bola úprimná verzia toho istého.</p>
+      <p>Druhá vec, ktorú som nečakal: väčšina hodnoty bola na chodbe. Nie v zmysle networkingu, skôr tak, že ako organizátor sa rozprávaš s rečníkmi predtým, než idú na pódium, a potom, ako z neho zídu, a vtedy sú ľudia oveľa reálnejší.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/room-wide.jpg" alt="Široký záber na plnú sálu UnBundled v Prahe z balkóna" class="blog-img" />
+      </figure>
+
+      <h2>Na záver</h2>
+      <p>Jeden deň, žiadna vstupenka, a odniesol som si viac, než keby som sedel v publiku. Ak si študent alebo si vo fintechu na začiatku a rozmýšľaš, ako sa dostať do takejto miestnosti, dobrovoľníčenie je cheat code. Nikomu to nevadí a každý sa s tebou rozpráva.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/crew-group.jpg" alt="Dobrovoľnícky tím UnBundled na pódiu po skončení akcie" class="blog-img" />
+        <figcaption>Tím. Nemáš vyčnievať, máš sa postarať, aby deň bežal.</figcaption>
+      </figure>
+
+      <p>Celá galéria od organizátorov je na <a href="https://fintechweekcee.com/2026/gallery/unbundled" target="_blank" rel="noopener noreferrer">stránke Fintech Week CEE</a>, ak si chceš pozrieť, aké to bolo veľké. Ďalší ročník je predbežne 19. až 23. apríla 2027. Asi tam budem.</p>
+    `,
+    footnote_sk:
+      'Fintech UnBundled · Praha, Česká republika · 12. mája 2026<br/>Hlavný deň Fintech Week CEE 2026 (8. - 15. mája) · Dobrovoľnícky tím cez Fyltr<br/>Fotky z akcie so súhlasom organizátorov · <a href="https://fintechweekcee.com/2026/gallery/unbundled" target="_blank" rel="noopener noreferrer">fintechweekcee.com</a>',
+    title_cs: 'Den jako dobrovolník na Fintech UnBundled v Praze',
+    category_cs: 'Konference a dobrovolnictví',
+    excerpt_cs:
+      'Strávil jsem den v Praze jako člen organizačního týmu na Fintech UnBundled, dobrovolnicky přes Fyltr. Prázdný sál o půl desáté ráno, papírová visačka a celý den strávený na té straně akce, kde se dělá práce.',
+    content_cs: `
+      <p><strong>12. května 2026</strong> jsem strávil den v Praze jako člen organizačního týmu na <strong><a href="https://fintechweekcee.com/unbundled" target="_blank" rel="noopener noreferrer">Fintech UnBundled</a></strong>. Byl jsem tam jako dobrovolník přes <strong>Fyltr</strong>, ne jako host se vstupenkou, takže jsem akci viděl z té strany, kde se dělá práce. Popravdě si myslím, že je to ta lepší strana.</p>
+
+      <p>UnBundled byl hlavní den <strong>Fintech Week CEE 2026</strong>. Celý týden běžel od 8. do 15. května a byl to první ročník, čtyři velké akce v jednom týdnu, den předtím Crypto &amp; Banking a den po něm Love + roboti. Motto dne znělo "founders, builders, and the work behind the work", což sedělo, protože většina toho, co se dělo na pódiu, byla o těch neuspořádaných částech, ne o launch postech.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/stage-before-doors.jpg" alt="Hlavní pódium UnBundled v Praze před otevřením dveří, na obrazovce State of CEE Fintech" class="blog-img" />
+        <figcaption>Půl desáté ráno, obrazovka už běží, na židlích zatím nikdo.</figcaption>
+      </figure>
+
+      <h2>Organizátor, ne host</h2>
+      <p>Přišel jsem ráno, když byl sál ještě prázdný. Na konferenčním sále před akcí je něco, co mám radši než samotnou akci. Pak si dáš visačku na krk, otevřou se dveře a zbytek dne jde rychle.</p>
+      <p>Papírová visačka je malá věc, ale mění celý den. Nechodíš po sále a nerozhoduješ se, na kterou přednášku si sedneš, jsi ten člověk, kterého se lidi ptají, kde je káva nebo kde je místnost s kulatým stolem, a nakonec se bavíš s mnohem víc lidmi, než kdybys byl návštěvník.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/crew-badge.jpg" alt="Papírová visačka organizátora se šňůrkou a logy partnerů, Fintech UnBundled Praha" class="blog-img" />
+      </figure>
+
+      <h2>Jak den vypadal</h2>
+      <p>Na hlavním pódiu bylo pět bloků a jejich názvy dávají slušnou představu o tónu: <strong>CTRL+ALT+FINANCE</strong> (reboot required), <strong>NEW MONEY, NEW RAILS</strong> (laying track where there was none), <strong>HUMAN x MACHINE</strong> (automation is easy, trust is hard), <strong>MONEY x FRONTIERS</strong> (capital, borders, and the edges of what is possible) a <strong>FOUNDERS' SCARS</strong> (earned in public). Paralelně běžely dvě věci jen na pozvánku, regulační kulatý stůl a session pro VC a zakladatele. V jednu chvíli byla na chodbě obrazovka s VC pitch sessions, což byla ta část dne s nejvíc nervózními lidmi na jedné chodbě.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/state-of-cee-fintech.jpg" alt="State of CEE Fintech na velké obrazovce na Fintech UnBundled před plným sálem" class="blog-img" />
+      </figure>
+
+      <p>V programu byli lidi jako <strong>Georg Hauer</strong> (dříve N26), <strong>Dann Bibas</strong> (dříve Wise) a <strong>Will Orde</strong> z Passion Capital a na stěně partnerů byly <strong>KB</strong>, <strong>Mastercard</strong>, <strong>Visa</strong>, FINREG Partners, The FinTechers, BD Partners a KB Smart Solutions. Na první ročník v Praze je to pořádná společnost.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/sponsor-wall.jpg" alt="Publikum otočené k LED stěně partnerů na Fintech UnBundled v Praze" class="blog-img" />
+      </figure>
+
+      <h2>Proč to pro mě něco znamenalo</h2>
+      <p>Dělám na krypto platební bráně, takže blok NEW MONEY, NEW RAILS mě zajímal nejvíc. Když trávíš dny na webhoocích, quotech, settlementu a rekonciliaci, kterou nikdo nedá na slajd, je zvláštní a zároveň příjemné slyšet zakladatele popsat přesně ty samé problémy jednou větou a sledovat, jak sál přikyvuje, jako by to bylo jednoduché. Není to jednoduché. FOUNDERS' SCARS byla upřímná verze toho samého.</p>
+      <p>Druhá věc, kterou jsem nečekal: většina hodnoty byla na chodbě. Ne ve smyslu networkingu, spíš tak, že jako organizátor se bavíš s řečníky předtím, než jdou na pódium, a potom, co z něj sejdou, a tehdy jsou lidi mnohem reálnější.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/room-wide.jpg" alt="Široký záběr na plný sál UnBundled v Praze z balkonu" class="blog-img" />
+      </figure>
+
+      <h2>Na závěr</h2>
+      <p>Jeden den, žádná vstupenka, a odnesl jsem si víc, než kdybych seděl v publiku. Pokud jsi student nebo jsi ve fintechu na začátku a přemýšlíš, jak se dostat do takové místnosti, dobrovolničení je cheat code. Nikomu to nevadí a každý se s tebou baví.</p>
+
+      <figure class="blog-figure">
+        <img src="/blog/fintech-unbundled/crew-group.jpg" alt="Dobrovolnický tým UnBundled na pódiu po skončení akce" class="blog-img" />
+        <figcaption>Tým. Nemáš vyčnívat, máš se postarat, aby den běžel.</figcaption>
+      </figure>
+
+      <p>Celá galerie od organizátorů je na <a href="https://fintechweekcee.com/2026/gallery/unbundled" target="_blank" rel="noopener noreferrer">stránce Fintech Week CEE</a>, pokud si chceš prohlédnout, jak to bylo velké. Další ročník je předběžně 19. až 23. dubna 2027. Asi tam budu.</p>
+    `,
+    footnote_cs:
+      'Fintech UnBundled · Praha, Česká republika · 12. května 2026<br/>Hlavní den Fintech Week CEE 2026 (8. - 15. května) · Dobrovolnický tým přes Fyltr<br/>Fotky z akce se souhlasem organizátorů · <a href="https://fintechweekcee.com/2026/gallery/unbundled" target="_blank" rel="noopener noreferrer">fintechweekcee.com</a>',
+  },
 ];
 
 export function localizeBlogPost(p: BlogPost, locale: 'en' | 'sk' | 'cs'): BlogPost {
