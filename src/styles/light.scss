@@ -128,10 +128,55 @@
 
   .hamburger { color: var(--text-strong); }
 
-  // Mobile full-screen menu
+  // ─── Mobile full-screen menu (editorial restyle) ────────────────────────
+  // Opaque white sheet (the translucent + blur combo left smudgy ghosts of
+  // the page behind it), serif display links with mono index numbers in the
+  // house SectionMarker manner, no template icons, CTA at the bottom.
   .nav {
     @media (max-width: 768px) {
-      background: rgba(255, 255, 255, 0.98);
+      background: var(--page-bg, #ffffff);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      counter-reset: navi;
+      align-items: flex-start;
+      box-sizing: border-box;
+      padding: 96px var(--container-px, 24px) 40px;
+      border-left: none;
+    }
+  }
+
+  .nav-link {
+    @media (max-width: 768px) {
+      counter-increment: navi;
+      align-items: baseline;
+      margin-bottom: 6px;
+      padding: 8px 0;
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 7.5vw, 2.2rem);
+      font-weight: var(--weight-display, 600);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+      color: var(--accent-heading, #182e5f);
+
+      // Mono index number, the SectionMarker convention ("01  ABOUT").
+      &::before {
+        content: counter(navi, decimal-leading-zero);
+        font-family: var(--font-mono);
+        font-size: 0.65rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        color: var(--text-faint, #7484a0);
+        margin-right: 16px;
+      }
+
+      // The FontAwesome icons are the template's look, not this site's.
+      svg {
+        display: none;
+      }
+
+      &--active {
+        color: var(--accent) !important;
+      }
     }
   }
 

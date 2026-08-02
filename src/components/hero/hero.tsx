@@ -61,8 +61,8 @@ const HeroContainer = styled.section`
   background: var(--page-bg, #ffffff);
 
   @media (max-width: 768px) {
-    padding: 110px var(--container-px, 24px) 64px;
-    min-height: 80vh;
+    padding: 110px var(--container-px, 24px) 56px;
+    min-height: 74vh;
   }
 `;
 
@@ -79,6 +79,12 @@ const Content = styled.div<{ $handsOffset: boolean }>`
      other concept centres the type in the hero. */
   @media (min-width: 769px) {
     margin-top: ${(p) => (p.$handsOffset ? '44vh' : '0')};
+  }
+
+  /* Mobile: the hands sit in a scaled top band (pushed 58px below the fixed
+     header), so the type drops below it. */
+  @media (max-width: 768px) {
+    margin-top: ${(p) => (p.$handsOffset ? '154px' : '0')};
   }
 `;
 

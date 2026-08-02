@@ -68,6 +68,12 @@
     @media (max-width: 1200px) {
       height: 60vh;
     }
+
+    /* Phones can't render the inline PDF (it shows as a giant black box),
+       so the embed goes away and the Download / Open buttons carry the CV. */
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 }
 

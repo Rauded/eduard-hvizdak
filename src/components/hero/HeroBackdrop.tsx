@@ -49,10 +49,6 @@ const Full = styled.div<{ $faint: boolean }>`
     p.$faint
       ? 'linear-gradient(180deg, transparent 0%, #000 14%, #000 90%, transparent 100%)'
       : 'linear-gradient(180deg, #000 0%, #000 72%, transparent 100%)'};
-
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
 
 interface Props {

@@ -36,8 +36,12 @@ const Fallback = styled.span`
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
-  font-size: 12vw;
-  color: color-mix(in srgb, var(--accent) 12%, transparent);
+  /* Fills the band edge to edge so the small-screen band keeps the oversized
+     signature moment instead of a small floating word. */
+  font-size: 27vw;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: color-mix(in srgb, var(--accent) 16%, transparent);
 
   @media (max-width: 640px) {
     display: flex;

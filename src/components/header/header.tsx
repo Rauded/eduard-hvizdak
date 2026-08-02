@@ -14,6 +14,7 @@ const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { theme, toggleTheme, canToggle } = useTheme();
   const t = useT('header');
+  const heroT = useT('hero');
   const { locale } = useLocale();
   const location = useLocation();
   const navigate = useNavigate();
@@ -49,6 +50,16 @@ const Header: React.FC = () => {
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
+  }, [isOpen]);
+
+  // Lock page scroll behind the full-screen mobile menu.
+  useEffect(() => {
+    if (!isOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, [isOpen]);
 
   // Works from any route: if we're not on the homepage, route there first,
@@ -121,6 +132,10 @@ const Header: React.FC = () => {
           <FaRegClock />
           {t.nav.now}
         </LocaleLink>
+        {/* Mobile-menu-only primary action; hidden on the desktop nav bar. */}
+        <a href="#contact" className="nav-cta" data-cuelume-press onClick={(e) => goToSection(e, 'contact')}>
+          {heroT.emailMe}
+        </a>
         <LanguageSwitcher />
         {canToggle && (
           <button

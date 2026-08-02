@@ -55,6 +55,12 @@
   &:hover {
     color: var(--accent-text-soft);
   }
+
+  // Stays visible above the open full-screen menu (which sits at z 999),
+  // so the wordmark and the close button frame the overlay.
+  @media (max-width: 768px) {
+    z-index: 1001;
+  }
 }
 
 .nav {
@@ -201,6 +207,27 @@
 .close-icon {
   display: block;
   z-index: 1002;
+}
+
+// Primary action inside the mobile menu; the desktop bar never shows it
+// (the hero and contact band carry the CTA there).
+.nav-cta {
+  display: none;
+
+  @media (max-width: 768px) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 26px;
+    padding: 13px 30px;
+    border-radius: 999px;
+    background: var(--accent, #182e5f);
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 1em;
+    font-weight: 600;
+    text-decoration: none;
+  }
 }
 
 // Language switcher: compact segmented [EN | SK | CZ] control at the end of the

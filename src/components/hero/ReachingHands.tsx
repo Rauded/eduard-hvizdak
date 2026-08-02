@@ -30,8 +30,17 @@ const Band = styled.div`
   z-index: 1;
   pointer-events: none;
 
+  /* On a narrow portrait screen the horizontal reaching composition is scaled
+     up and centred so both hands read large and the fingertip gap stays on the
+     screen's centre line (arms bleed off the sides). Dropped below the fixed
+     header (~54px) so the wrists aren't sliced off; the headline drops below
+     the band via the Content offset. */
   @media (max-width: 768px) {
-    display: none;
+    width: 150%;
+    top: 58px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
   }
 `;
 
