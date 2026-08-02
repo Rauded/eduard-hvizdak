@@ -26,6 +26,11 @@
   line-height: var(--leading-body);
   margin: 0 0 8px;
   max-width: 480px;
+
+  // Same rule as .pcard__description: mono paragraphs are a desktop accent.
+  @media (max-width: 768px) {
+    font-family: var(--font-body);
+  }
 }
 
 // The shared .port-projects adds its own generous top/bottom padding;

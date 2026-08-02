@@ -463,6 +463,13 @@
   color: rgba(248, 250, 252, 0.62);
   line-height: 1.85;
   margin: 0 0 28px;
+
+  // Mono body copy is a desktop accent; at phone width it eats ~30% more
+  // vertical space and reads slowly. Tags and labels stay mono.
+  @media (max-width: 768px) {
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
 }
 
 // ─── Tags ─────────────────────────────────────────────────────────────────────

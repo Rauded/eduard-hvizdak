@@ -80,6 +80,9 @@
     flex-direction: column;
     justify-content: center;
     overflow-y: auto;
+    // Don't let a swipe inside the menu chain into scrolling the page
+    // behind it (iOS Safari).
+    overscroll-behavior: contain;
     // Hidden off-canvas menu must leave the tab order, otherwise a keyboard
     // user tabs through every off-screen link. visibility flips after the
     // slide-out finishes; it flips on instantly when opening.

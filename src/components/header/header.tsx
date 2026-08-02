@@ -52,13 +52,21 @@ const Header: React.FC = () => {
     return () => document.removeEventListener('keydown', onKey);
   }, [isOpen]);
 
-  // Lock page scroll behind the full-screen mobile menu.
+  // Lock page scroll behind the full-screen mobile menu. iOS Safari ignores
+  // overflow:hidden for touch scrolling (the gesture chains through to the
+  // page), so the lock is the position:fixed body technique instead.
   useEffect(() => {
     if (!isOpen) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    const y = window.scrollY;
+    const { position, top, width } = document.body.style;
+    document.body.style.position = 'fixed';
+    document.body.style.top = `-${y}px`;
+    document.body.style.width = '100%';
     return () => {
-      document.body.style.overflow = prev;
+      document.body.style.position = position;
+      document.body.style.top = top;
+      document.body.style.width = width;
+      window.scrollTo(0, y);
     };
   }, [isOpen]);
 

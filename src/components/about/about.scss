@@ -37,8 +37,10 @@
       padding-right: 0;
       text-align: left;
 
+      // Left-aligned with tighter leading on phones: five centred paragraphs
+      // at 1.8 leading read like a poem and stretch the scroll.
       @media (max-width: 768px) {
-        text-align: center;
+        text-align: left;
         padding-right: 0;
       }
 
@@ -47,6 +49,11 @@
         margin-bottom: 20px;
         line-height: 1.8;
         color: rgba(248, 250, 252, 0.65);
+
+        @media (max-width: 768px) {
+          line-height: 1.6;
+          margin-bottom: 16px;
+        }
       }
 
       .purple-text {
