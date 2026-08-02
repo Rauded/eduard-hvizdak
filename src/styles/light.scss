@@ -499,6 +499,13 @@
     }
     p { color: var(--text-faint); }
 
+    // Base style paints this white for the old dark bar; on the light
+    // surface it was invisible (white on white).
+    .footer-contact {
+      color: var(--accent-strong);
+      &:hover { color: var(--accent); }
+    }
+
     // The base footer styles target the dark bar; on the light surface the
     // sound toggle needs dark-on-light hairline styling, going solid navy when
     // interface sounds are on.

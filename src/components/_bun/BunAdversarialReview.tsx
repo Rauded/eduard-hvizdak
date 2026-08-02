@@ -206,7 +206,9 @@ const BunAdversarialReview: React.FC = () => {
         <button type="button" className="rv-btn" style={{ cursor: 'pointer', borderRadius: 6, border: '1px solid var(--border)', background: '#fff', padding: '6px 14px', fontFamily: 'var(--font-mono)', fontSize: 13, color: 'var(--text)' }}>&#9654; play</button>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, padding: '0 28px 12px' }}>
+      {/* auto-fit stacks the two role cards on narrow screens, where fixed
+          1fr 1fr columns made the labels overlap each other */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(230px, 1fr))', gap: 16, padding: '0 28px 12px' }}>
         <div style={{ minWidth: 0 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 24, height: 24, borderRadius: '50%', fontSize: 13, flexShrink: 0, background: 'color-mix(in srgb, var(--claude) 16%, #fff)', color: 'var(--claude)' }}>&#10039;</span>

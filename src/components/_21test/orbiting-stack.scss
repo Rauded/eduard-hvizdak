@@ -63,6 +63,11 @@
 .orbit {
   position: absolute;
   inset: 0;
+  // inset:0 + explicit width/height anchors an absolute box TOP-LEFT; the
+  // auto margins recentre it so both rings share the core's centre. Without
+  // this the rings drift off-centre as the stage narrows (chips collided
+  // with the core on phones).
+  margin: auto;
   display: grid;
   place-items: center;
   border-radius: 50%;
