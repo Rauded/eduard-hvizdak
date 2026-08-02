@@ -18,7 +18,7 @@ import SiteEmbroidery from './components/background/SiteEmbroidery.tsx';
 // !important font-family assignments in typography.scss always win.
 import './styles/typescale.scss';
 import './styles/typography.scss';
-import './styles/light.scss';
+import './styles/decorations.scss';
 
 
 // Header, Footer and Home are on the homepage critical path, so they stay eager.

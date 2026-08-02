@@ -132,21 +132,27 @@
 }
 
 // ─── Media wrapper ────────────────────────────────────────────────────────────
+// Project media reads as a framed panel on the white page: a defined
+// navy-tinted hairline plus a soft tinted shadow, so even light-coloured
+// screenshots do not bleed into the background. The tile itself stays dark
+// so video/screenshots read as intentional objects.
 .pcard__media {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   aspect-ratio: 16 / 10;
   background: #0b0b14;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55),
-              inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  border: 2px solid color-mix(in srgb, var(--accent) 22%, var(--border-strong));
+  box-shadow:
+    0 1px 0 rgba(22, 22, 26, 0.05),
+    0 16px 40px rgba(22, 22, 26, 0.14);
   transition: border-color 0.35s ease, box-shadow 0.35s ease;
 
   &:hover {
-    border-color: rgba(255, 255, 255, 0.14);
-    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.65),
-                inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    border-color: var(--accent);
+    box-shadow:
+      0 1px 0 rgba(22, 22, 26, 0.06),
+      0 24px 56px rgba(22, 22, 26, 0.18);
   }
 
   @media (max-width: 900px) {
@@ -434,8 +440,8 @@
   letter-spacing: var(--tracking-display);
   position: relative;
   // Consistent high-contrast title across every card (no more raw, saturated
-  // per-project colour on the heading itself — that read garish/sloppy).
-  color: #f5f7fb;
+  // per-project colour on the heading itself: that read garish/sloppy).
+  color: var(--text-strong);
   display: inline-block;
 
   // The accent now lives as a short underline marker, cohesive across cards.
@@ -452,7 +458,7 @@
 
 .pcard__subtitle {
   font-size: var(--text-label);
-  color: rgba(248, 250, 252, 0.4);
+  color: var(--text-faint);
   margin: 0 0 22px;
   letter-spacing: var(--tracking-label);
   text-transform: uppercase;
@@ -460,7 +466,7 @@
 
 .pcard__description {
   font-size: var(--text-small);
-  color: rgba(248, 250, 252, 0.62);
+  color: var(--text-muted);
   line-height: 1.85;
   margin: 0 0 28px;
 
@@ -487,9 +493,9 @@
   letter-spacing: var(--tracking-label);
   padding: 4px 10px;
   border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  color: rgba(248, 250, 252, 0.45);
-  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  background: var(--surface-sunken);
 }
 
 // ─── Links ────────────────────────────────────────────────────────────────────
@@ -530,17 +536,18 @@
     }
   }
 
-  // Secondary: source code — a restrained ghost button.
+  // Secondary: source code, a restrained light ghost button (the demo link
+  // keeps its per-card accent).
   &--github {
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    color: rgba(248, 250, 252, 0.78);
-    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
+    background: var(--surface);
 
     &:hover {
       transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.28);
-      color: #f8fafc;
-      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--accent-ring);
+      color: var(--text-strong);
+      background: var(--surface-sunken);
     }
   }
 
@@ -609,11 +616,14 @@
   &__backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(5, 5, 12, 0.74);
+    background: rgba(22, 22, 26, 0.38);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
   }
 
+  // Clean light document with the same near-black text / blue accent as the
+  // rest of the page. The modal is portalled to <body>, so these are the only
+  // styles it gets.
   &__panel {
     position: relative;
     z-index: 1;
@@ -623,9 +633,9 @@
     overflow-y: auto;
     padding: clamp(28px, 5vw, 52px);
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    background: #12121a;
-    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: 0 30px 90px rgba(22, 22, 26, 0.22);
     transform: translateY(16px) scale(0.985);
     transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
     font-family: var(--font-mono);
@@ -657,13 +667,13 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(248, 250, 252, 0.7);
+    background: var(--surface-sunken);
+    border: 1px solid var(--border-strong);
+    color: var(--text-muted);
     cursor: pointer;
     transition: background 0.2s ease, color 0.2s ease;
 
-    &:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+    &:hover { background: var(--accent-soft); color: var(--accent-strong); }
 
     svg { font-size: 1.15em; }
   }
@@ -675,6 +685,8 @@
 
   // The same showcase media (video / slideshow / screenshot) at the top of the
   // story, so the reader feels like a mini blog post for the project.
+  // The media stays a dark focal tile so video/screenshots read as intentional
+  // objects on the light page; the frame is softened to match light surfaces.
   &__media {
     position: relative;
     aspect-ratio: 16 / 10;
@@ -682,8 +694,8 @@
     overflow: hidden;
     margin-bottom: 30px;
     background: #0b0b14;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
 
     video,
     img,
@@ -702,7 +714,7 @@
     font-weight: var(--weight-label);
     letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    color: var(--accent-text);
+    color: var(--accent-strong);
   }
 
   &__title {
@@ -710,7 +722,7 @@
     font-weight: var(--weight-heading);
     letter-spacing: var(--tracking-display);
     line-height: var(--leading-display);
-    color: #f5f7fb;
+    color: var(--text-strong);
     margin: 9px 0 6px;
   }
 
@@ -718,7 +730,7 @@
     font-size: var(--text-label);
     letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    color: rgba(248, 250, 252, 0.4);
+    color: var(--text-faint);
     margin: 0;
   }
 
@@ -734,25 +746,25 @@
     font-weight: var(--weight-label);
     letter-spacing: var(--tracking-label);
     text-transform: uppercase;
-    color: var(--accent-text);
+    color: var(--accent-strong);
   }
 
   &__p {
     margin: 0;
     font-size: var(--text-body);
     line-height: 1.75;
-    color: rgba(248, 250, 252, 0.74);
+    color: var(--text-muted);
 
-    strong { color: #f8fafc; font-weight: 600; }
+    strong { color: var(--text-strong); font-weight: 600; }
 
     a {
-      color: var(--accent-text);
+      color: var(--accent-strong);
       text-decoration: underline;
       text-underline-offset: 2px;
-      text-decoration-color: color-mix(in srgb, var(--accent) 50%, transparent);
+      text-decoration-color: var(--accent-ring);
       transition: text-decoration-color 0.2s ease;
 
-      &:hover { text-decoration-color: currentColor; }
+      &:hover { text-decoration-color: var(--accent); }
     }
   }
 

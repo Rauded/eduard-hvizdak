@@ -295,9 +295,10 @@ html[data-theme] body *::after {
 
 /* ─── Professional light theme (home page) ──────────────────────────────────
    Applied only when the home route sets data-theme="light" on <html>. Drives
-   every home section through CSS variables + the [data-theme='light'] overrides
-   in styles/light.scss. Dark mode leaves these unset so the original look — the
-   near-black gradient — falls through unchanged. */
+   every home section through these CSS variables; the component SCSS files
+   consume them directly (the old styles/light.scss override layer was merged
+   into the components). Dark mode leaves these unset so the original look,
+   the near-black gradient, falls through unchanged. */
 :root[data-theme='light'] {
   /* Humandelta palette: pure white canvas, #f6f6f6 raised surfaces, slate ink
      text, one deep navy accent. Borders are quiet hairlines, shadows neutral. */

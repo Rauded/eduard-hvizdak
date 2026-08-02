@@ -1,13 +1,13 @@
 .footer-container {
-  background-color: #09090b;
-  color: #fff;
+  background-color: var(--surface);
+  color: var(--text-muted);
   padding: 24px 40px;
   text-align: center;
   font-family: var(--font-body);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  border-top: 1px solid var(--border);
 
   @media (max-width: 768px) {
     display: flex;
@@ -28,7 +28,7 @@
   }
 
   .purple-heart {
-    color: var(--accent-text-soft);
+    color: var(--accent);
     animation: pulse 2s ease-in-out infinite;
   }
 
@@ -42,16 +42,16 @@
   }
 
   .footer-link {
-    color: var(--accent-text-soft);
+    color: var(--accent-strong);
     text-decoration: underline;
-    text-decoration-color: color-mix(in srgb, var(--accent-text-soft) 30%, transparent);
+    text-decoration-color: var(--accent-ring);
     margin-left: 5px;
     transition: color 0.2s ease;
     font-weight: var(--weight-medium);
 
     &:hover {
-      color: var(--accent-heading);
-      text-decoration-color: color-mix(in srgb, var(--accent-heading) 50%, transparent);
+      color: var(--accent);
+      text-decoration-color: var(--accent);
     }
   }
 
@@ -59,15 +59,15 @@
   .footer-phone {
     display: inline-block;
     margin-top: 4px;
-    color: rgba(248, 250, 252, 0.5);
+    color: var(--text-muted);
     font-size: var(--text-small);
     text-decoration: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    border-bottom: 1px solid var(--border-strong);
     transition: color 0.2s ease, border-color 0.2s ease;
 
     &:hover {
-      color: var(--accent-heading);
-      border-color: color-mix(in srgb, var(--accent-heading) 50%, transparent);
+      color: var(--accent);
+      border-color: var(--accent);
     }
   }
 
@@ -81,14 +81,14 @@
     }
 
     a {
-      color: rgba(248, 250, 252, 0.4);
+      color: var(--text-faint);
       font-size: clamp(1.3em, 2vw, 1.6em);
       transition: color 0.2s ease, transform 0.2s ease;
       position: relative;
       z-index: 1;
 
       &:hover {
-        color: var(--accent-text-soft);
+        color: var(--accent);
         transform: translateY(-2px);
       }
     }
@@ -96,7 +96,7 @@
 
   p {
     margin: 0;
-    color: rgba(248, 250, 252, 0.4);
+    color: var(--text-faint);
     font-size: var(--text-small);
     position: relative;
     z-index: 1;
@@ -111,9 +111,8 @@
     }
   }
 
-  // Interface-sound toggle. Small hairline pill on the dark footer bar; fills
-  // navy when sounds are on. The footer is always dark, so one style covers
-  // both themes.
+  // Interface-sound toggle. Small dark-on-light hairline pill on the light
+  // footer surface; fills solid navy when interface sounds are on.
   .footer-sound-toggle {
     display: inline-flex;
     align-items: center;
@@ -121,9 +120,9 @@
     margin-top: 10px;
     padding: 5px 11px;
     border-radius: 999px;
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    border: 1px solid var(--border-strong);
     background: transparent;
-    color: rgba(248, 250, 252, 0.55);
+    color: var(--text-muted);
     font-family: var(--font-body);
     font-size: var(--text-small);
     cursor: pointer;
@@ -137,12 +136,12 @@
     }
 
     &:hover {
-      color: #fff;
-      border-color: rgba(255, 255, 255, 0.32);
+      color: var(--text-strong);
+      border-color: var(--text-muted);
     }
 
     &[aria-pressed='true'] {
-      color: #fff;
+      color: #ffffff;
       background: var(--accent);
       border-color: var(--accent);
     }
@@ -156,14 +155,12 @@
     text-align: center;
   }
 
-  // Dark footer (#09090b), so this reads in white rather than the light-mode
-  // navy accent tokens, which would sink into the background here.
   .footer-contact {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     margin-bottom: 8px;
-    color: rgba(255, 255, 255, 0.92);
+    color: var(--accent-strong);
     font-size: var(--text-small);
     font-weight: var(--weight-medium);
     text-decoration: none;
@@ -176,7 +173,7 @@
     }
 
     &:hover {
-      color: #fff;
+      color: var(--accent);
       svg { transform: translateX(3px); }
     }
   }

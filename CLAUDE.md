@@ -97,11 +97,15 @@ Icons via **react-icons**. Routing via **react-router-dom**.
   `!important`). Components should compose the tokens, never hardcode font sizes. Full reference in
   `STYLEGUIDE.md` and the live `/styleguide` page (reads computed values back for QA). Blog reading
   keeps Source Serif 4 / Inter; General Sans is a body fallback (and the body face in serif mode).
-- **Light mode only (2026-07-09).** `src/components/theme/ThemeContext.tsx` sets `THEME_PINNED =
-  true`: the site ships light-only because the navy dark palette was never finished. The context
-  exposes `canToggle` (false while pinned) and the header hides the light/dark button so there is
-  no dead toggle. TO RESTORE DARK MODE: build the navy dark tokens in `src/index.css`, set
-  `THEME_PINNED = false`, and the toggle returns automatically.
+- **Light mode only (2026-07-09; single-layer since 2026-08-03).** `src/components/theme/
+  ThemeContext.tsx` sets `THEME_PINNED = true`: the site ships light-only because the navy dark
+  palette was never finished. The old dual-layer theming (dark base styles + a `styles/light.scss`
+  retint) was consolidated on 2026-08-03: light values now live directly in the component SCSS
+  files, `light.scss` is gone, and the halftone dot patches live in `styles/decorations.scss`.
+  Style new elements light-first in their component file; there is no retint layer to update.
+  TO RESTORE DARK MODE: this is now a real project, not a flag flip. Build navy dark tokens in
+  `src/index.css`, reintroduce a dark override layer (or dark token values) per component, restyle
+  the hidden `.site-theme-toggle` in header.scss, and set `THEME_PINNED = false`.
 - **Hero (2026-07-09).** The "humandelta" hero: a human hand and a robot hand reaching toward
   each other (Creation-of-Adam), rendered as a navy dithered halftone by
   `src/components/hero/AsciiDitherBackground.tsx` from `src/assets/hero/hands.jpg`, with the name

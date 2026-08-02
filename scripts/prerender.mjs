@@ -133,7 +133,9 @@ async function main() {
           const m = document.getElementById('main-content');
           return m && m.children.length > 0;
         },
-        { timeout: 20000 }
+        // 45s: the sk/cs services pages (heaviest lazy chunks, all the demos)
+        // were missing a 20s window on a loaded machine.
+        { timeout: 45000 }
       );
       // Trigger scroll-reveal IntersectionObservers, then return to top.
       await page.evaluate(async () => {

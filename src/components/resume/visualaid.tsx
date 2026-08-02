@@ -74,7 +74,7 @@ const VisualAid: React.FC<{ section: ResumeSection }> = ({ section }) => {
             </>
           );
           return (
-          <div key={entry.title} className="job-container">
+          <div key={`${entry.title}@${entry.company}`} className="job-container">
             <h3 className="job-title">
               {entry.title}{' '}
               {entry.website ? (

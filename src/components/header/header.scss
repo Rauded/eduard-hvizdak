@@ -1,44 +1,31 @@
+// Header: flat white full-width bar with one hairline (humandelta style).
 .header-container {
-  background: rgba(9, 9, 11, 0.85);
-  padding: 16px 36px;
+  background: #ffffff;
+  padding: 14px var(--container-px, 64px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #fff;
+  color: var(--text);
   font-family: var(--font-body);
   position: fixed;
-  top: 18px;
-  left: 18px;
-  right: 18px;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-  max-width: calc(100% - 36px);
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  box-shadow: none;
+  max-width: 100%;
   margin: 0 auto;
 
-  // The blur lives on a pseudo-element rather than the container itself.
-  // A `backdrop-filter` on the container would make it the containing block
-  // for the position:fixed mobile nav, collapsing the full-screen menu to
-  // the header's height and pushing links off-screen. Keeping it here
-  // preserves the glass look without trapping the fixed overlay.
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    z-index: -1;
-  }
-
   @media (max-width: 768px) {
-    padding: 14px 20px;
-    top: 10px;
-    left: 10px;
-    right: 10px;
-    max-width: calc(100% - 20px);
-    border-radius: 12px;
+    padding: 12px var(--container-px, 24px);
+    top: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    border-radius: 0;
   }
 }
 
@@ -46,14 +33,14 @@
   font-size: var(--text-h4);
   font-weight: var(--weight-heading);
   letter-spacing: 1.5px;
-  color: #f8fafc;
+  color: var(--text-strong);
   text-decoration: none;
   transition: color 0.2s ease;
   position: relative;
   z-index: 1;
 
   &:hover {
-    color: var(--accent-text-soft);
+    color: var(--accent);
   }
 
   // Stays visible above the open full-screen menu (which sits at z 999),
@@ -67,6 +54,10 @@
   display: flex;
   align-items: center;
 
+  // Mobile full-screen menu (editorial restyle): opaque white sheet (the
+  // translucent + blur combo left smudgy ghosts of the page behind it),
+  // serif display links with mono index numbers in the house SectionMarker
+  // manner, no template icons, CTA at the bottom.
   @media (max-width: 768px) {
     position: fixed;
     top: 0;
@@ -74,11 +65,13 @@
     width: 100vw;
     height: 100vh;
     height: 100dvh;
-    background: rgba(9, 9, 11, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: var(--page-bg, #ffffff);
+    counter-reset: navi;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding: 96px var(--container-px, 24px) 40px;
     overflow-y: auto;
     // Don't let a swipe inside the menu chain into scrolling the page
     // behind it (iOS Safari).
@@ -105,7 +98,7 @@
   display: flex;
   align-items: center;
   margin-left: 32px;
-  color: rgba(248, 250, 252, 0.55);
+  color: var(--text-muted);
   text-decoration: none;
   font-size: var(--text-small);
   transition: color 0.2s ease;
@@ -116,11 +109,11 @@
   letter-spacing: 0.04em;
 
   &:hover {
-    color: #f8fafc;
+    color: var(--text-strong);
   }
 
   &--active {
-    color: var(--accent-text-soft) !important;
+    color: var(--accent) !important;
 
     svg {
       opacity: 1 !important;
@@ -139,15 +132,43 @@
 
   @media (max-width: 768px) {
     margin-left: 0;
-    margin-bottom: 28px;
-    font-size: clamp(1.2em, 4vw, 1.5em);
-    color: rgba(248, 250, 252, 0.7);
+    counter-increment: navi;
+    align-items: baseline;
+    margin-bottom: 6px;
+    padding: 8px 0;
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 7.5vw, 2.2rem);
+    font-weight: var(--weight-display, 600);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--accent-heading, #182e5f);
+
+    // Mono index number, the SectionMarker convention ("01  ABOUT").
+    &::before {
+      content: counter(navi, decimal-leading-zero);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--text-faint, #7484a0);
+      margin-right: 16px;
+    }
+
+    // The FontAwesome icons are the template's look, not this site's.
+    svg {
+      display: none;
+    }
+
+    &--active {
+      color: var(--accent) !important;
+    }
   }
 }
 
 .hamburger {
   display: none;
   cursor: pointer;
+  color: var(--text-strong);
   // Button reset so the semantic <button> looks identical to the old div.
   background: none;
   border: 0;
@@ -161,33 +182,33 @@
     top: 12px;
     right: 20px;
     z-index: 1001;
-    color: rgba(248, 250, 252, 0.7);
   }
 }
 
+// Primary header CTA: solid navy pill, white text, no colored shadow.
 .button {
   display: flex;
   align-items: center;
   margin-left: 32px;
   padding: 8px 16px;
-  border: 1px solid color-mix(in srgb, var(--accent-text-soft) 35%, transparent);
-  background: color-mix(in srgb, var(--accent) 8%, transparent);
-  color: var(--accent-text-soft);
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: #ffffff;
   text-decoration: none;
   font-size: var(--text-small);
   transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
   font-family: var(--font-body);
-  border-radius: 8px;
+  border-radius: 999px;
   font-weight: var(--weight-medium);
   letter-spacing: 0.04em;
   position: relative;
   z-index: 1;
 
   &:hover {
-    background: color-mix(in srgb, var(--accent) 18%, transparent);
-    color: var(--accent-heading);
-    border-color: color-mix(in srgb, var(--accent-text-soft) 60%, transparent);
-    box-shadow: 0 2px 12px color-mix(in srgb, var(--accent) 20%, transparent);
+    background: var(--accent-strong);
+    color: #ffffff;
+    border-color: var(--accent-strong);
+    box-shadow: none;
   }
 
   svg {
@@ -233,17 +254,18 @@
   }
 }
 
-// Language switcher: compact segmented [EN | SK | CZ] control at the end of the
-// nav. Base (dark header) styling; the light theme retints it in light.scss.
+// Language switcher: compact segmented [EN | SK | CZ] control at the end of
+// the nav. Hairline pill on the white bar; active segment is the solid navy
+// accent.
 .lang-switcher {
   display: inline-flex;
   align-items: center;
   margin-left: 24px;
   padding: 3px;
   gap: 2px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid var(--border);
   border-radius: 9px;
-  background: rgba(255, 255, 255, 0.04);
+  background: transparent;
   position: relative;
   z-index: 1;
 
@@ -251,7 +273,7 @@
     appearance: none;
     border: none;
     background: transparent;
-    color: rgba(248, 250, 252, 0.6);
+    color: var(--text-muted);
     font-family: var(--font-mono);
     font-size: 0.72rem;
     font-weight: var(--weight-medium);
@@ -262,12 +284,12 @@
     transition: color 0.2s ease, background 0.2s ease;
 
     &:hover {
-      color: #f8fafc;
+      color: var(--text-strong);
     }
 
     &--active {
       background: var(--accent);
-      color: var(--accent-text, #fff);
+      color: #ffffff;
     }
   }
 
@@ -282,39 +304,8 @@
   }
 }
 
-// Site light/dark toggle — sits at the end of the nav. Base (dark) styling; the
-// light theme retints it via styles/light.scss.
+// Site light/dark toggle. Hidden: light mode is pinned (see ThemeContext.tsx),
+// which also removes the button from the DOM via canToggle.
 .site-theme-toggle {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: 24px;
-  width: 38px;
-  height: 38px;
-  border-radius: 9px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(255, 255, 255, 0.04);
-  color: rgba(248, 250, 252, 0.75);
-  cursor: pointer;
-  position: relative;
-  z-index: 1;
-  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-
-  svg {
-    width: 1.05em;
-    height: 1.05em;
-  }
-
-  &:hover {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.09);
-    border-color: rgba(255, 255, 255, 0.28);
-  }
-
-  @media (max-width: 768px) {
-    margin-left: 0;
-    margin-top: 8px;
-    width: 46px;
-    height: 46px;
-  }
+  display: none;
 }

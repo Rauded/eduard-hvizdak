@@ -2,14 +2,14 @@
   width: 80%;
   margin: 0 auto;
   font-family: var(--font-body);
-  color: white;
+  color: var(--text);
   padding: 40px 0;
 
   h2 {
     font-size: var(--text-h1);
     padding-top: 10px;
     margin: 0 0 30px 0;
-    color: var(--accent-heading);
+    color: var(--accent);
     font-family: var(--font-body);
     text-align: left;
     font-weight: var(--weight-heading);
@@ -48,7 +48,7 @@
         font-size: var(--text-body);
         margin-bottom: 20px;
         line-height: 1.8;
-        color: rgba(248, 250, 252, 0.65);
+        color: var(--text-muted);
 
         @media (max-width: 768px) {
           line-height: 1.6;
@@ -57,44 +57,44 @@
       }
 
       .purple-text {
-        color: var(--accent-text-soft);
+        color: var(--accent-strong);
         font-weight: 600;
 
         a {
-          color: var(--accent-text-soft);
+          color: var(--accent-strong);
           text-decoration: none;
 
           &:hover {
-            color: var(--accent-heading);
+            color: var(--accent);
           }
         }
       }
 
       a {
-        color: var(--accent-text-soft);
+        color: var(--accent-strong);
         text-decoration: underline;
-        text-decoration-color: color-mix(in srgb, var(--accent-text-soft) 35%, transparent);
+        text-decoration-color: var(--accent-ring);
         transition: color 0.2s ease, text-decoration-color 0.2s ease;
 
         &:visited {
-          color: var(--accent-text-soft);
+          color: var(--accent-strong);
         }
 
         &:hover {
-          color: var(--accent-heading);
-          text-decoration-color: color-mix(in srgb, var(--accent-heading) 60%, transparent);
+          color: var(--accent);
+          text-decoration-color: var(--accent);
         }
       }
 
       .specializations {
         margin: 28px 0;
         padding: 20px 0;
-        border-top: 1px solid color-mix(in srgb, var(--accent-text-soft) 15%, transparent);
-        border-bottom: 1px solid color-mix(in srgb, var(--accent-text-soft) 15%, transparent);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
 
         .spec-title {
           font-size: var(--text-body);
-          color: var(--accent-heading);
+          color: var(--text-strong);
           font-weight: var(--weight-medium);
           letter-spacing: 0.05em;
           margin: 0 0 14px 0;
@@ -102,13 +102,13 @@
 
         .spec-item {
           font-size: var(--text-body);
-          color: rgba(248, 250, 252, 0.75);
+          color: var(--text-muted);
           padding: 5px 0;
           line-height: var(--leading-body);
           letter-spacing: 0.02em;
 
           .spec-arrow {
-            color: var(--accent-text-soft);
+            color: var(--accent);
             font-weight: 600;
             margin-right: 6px;
           }
@@ -135,14 +135,14 @@
         aspect-ratio: 3 / 4;
         object-fit: cover;
         border-radius: 12px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: var(--shadow-card);
+        border: 1px solid var(--border);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
 
         &:hover {
           transform: translateY(-5px);
-          box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-          border-color: color-mix(in srgb, var(--accent-text-soft) 30%, transparent);
+          box-shadow: var(--shadow-card);
+          border-color: var(--accent-ring);
         }
       }
 
@@ -166,8 +166,9 @@
     width: 100%;
     max-width: 840px;
     margin: 0 auto 40px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid color-mix(in srgb, var(--accent-text-soft) 15%, transparent);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
     border-radius: 14px;
     overflow: hidden;
     text-decoration: none;
@@ -175,12 +176,13 @@
     transition: border-color 0.25s ease, background 0.25s ease, transform 0.2s ease;
 
     &:hover {
-      border-color: color-mix(in srgb, var(--accent-text-soft) 45%, transparent);
-      background: color-mix(in srgb, var(--accent-text-soft) 6%, transparent);
+      border-color: var(--accent-ring);
+      background: var(--surface);
+      box-shadow: 0 14px 40px rgba(22, 22, 26, 0.10);
       transform: translateY(-2px);
 
       .about-highlight__cta {
-        background: var(--accent-text);
+        background: var(--accent-strong);
         transform: translateY(-1px);
       }
 
@@ -194,7 +196,7 @@
       width: clamp(300px, 46%, 440px);
       align-self: stretch;
       overflow: hidden;
-      background: #0b0b14;
+      background: var(--surface-sunken);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -220,7 +222,7 @@
       p {
         font-size: var(--text-body);
         line-height: var(--leading-body);
-        color: rgba(248, 250, 252, 0.65);
+        color: var(--text-muted);
         margin: 0 0 16px;
       }
     }
@@ -230,13 +232,13 @@
       font-weight: var(--weight-label);
       letter-spacing: var(--tracking-label);
       text-transform: uppercase;
-      color: var(--accent-text-soft);
+      color: var(--accent-strong);
       margin-bottom: 10px;
     }
 
     &__title {
       font-size: var(--text-h3) !important;
-      color: #f8fafc !important;
+      color: var(--text-strong) !important;
       margin: 0 0 12px 0 !important;
       padding-top: 0 !important;
       line-height: var(--leading-tight);
@@ -255,6 +257,7 @@
       letter-spacing: 0.02em;
       color: #ffffff;
       background: var(--accent);
+      box-shadow: var(--shadow-accent);
       border-radius: 999px;
       transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
     }
@@ -288,6 +291,7 @@
     margin-bottom: 40px;
   }
 
+  // About contact form (defensive: renders only in some configs).
   .about-contact {
     form {
       display: flex;
@@ -303,14 +307,14 @@
         margin-bottom: 20px;
         padding: 10px;
         font-size: 1em;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        border: 1px solid var(--border);
         border-radius: 6px;
         font-family: var(--font-body);
-        background: rgba(255, 255, 255, 0.04);
-        color: #f8fafc;
+        background: var(--surface);
+        color: var(--text);
 
         &:focus {
-          border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+          border-color: var(--accent);
         }
 
         &:focus-visible {
@@ -322,7 +326,7 @@
       button {
         padding: 10px 20px;
         font-size: 1.1em;
-        color: #f8fafc;
+        color: #fff;
         background: var(--accent);
         border: none;
         border-radius: 6px;
@@ -331,7 +335,7 @@
         font-family: var(--font-body);
 
         &:hover {
-          background: var(--accent-text);
+          background: var(--accent-strong);
         }
       }
     }

@@ -8,13 +8,13 @@
   margin: 0 auto;
   padding: 80px clamp(24px, 6vw, 100px) 40px;
   font-family: var(--font-mono);
-  color: #f8fafc;
+  color: var(--text);
 }
 
 .projects-container .section-title {
   font-size: var(--text-h1);
   margin-bottom: 12px;
-  color: var(--accent-heading);
+  color: var(--accent);
   font-weight: var(--weight-heading);
   letter-spacing: var(--tracking-heading);
   line-height: var(--leading-heading);
@@ -22,7 +22,7 @@
 
 .projects-intro {
   font-size: var(--text-body);
-  color: rgba(248, 250, 252, 0.55);
+  color: var(--text-muted);
   line-height: var(--leading-body);
   margin: 0 0 8px;
   max-width: 480px;
