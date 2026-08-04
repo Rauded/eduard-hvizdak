@@ -608,6 +608,8 @@
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.28s ease, visibility 0.28s ease;
+  // Nothing that happens inside the overlay should reach the page behind it.
+  overscroll-behavior: contain;
 
   &--open {
     visibility: visible;
@@ -632,6 +634,11 @@
     max-width: 760px;
     max-height: 86vh;
     overflow-y: auto;
+    // Without this, a wheel or trackpad gesture that reaches the end of the
+    // story keeps going and scrolls the page underneath the reader.
+    overscroll-behavior: contain;
+    // Momentum scrolling inside the panel on iOS.
+    -webkit-overflow-scrolling: touch;
     padding: clamp(28px, 5vw, 52px);
     border-radius: 20px;
     border: 1px solid var(--border);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
+import useScrollLock from '../common/useScrollLock';
 import { LuBookOpen, LuArrowUpRight, LuGithub, LuX } from 'react-icons/lu';
 import { PortfolioProject, CaseStudy, localizeProject } from './projectsData';
 // @ts-ignore: the `projects` namespace is registered centrally by the parent.
@@ -292,17 +293,19 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
       }
     };
     document.addEventListener('keydown', onKey);
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
     const trigger = triggerRef.current;
     // Focus the close button once the panel is revealed.
     closeRef.current?.focus();
     return () => {
       document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = prevOverflow;
       trigger?.focus();
     };
   }, [open]);
+
+  // Body scroll lock lives in useScrollLock: this used to set
+  // body.style.overflow = 'hidden', which does nothing here because <html> is
+  // the scrolling element, so the page kept scrolling behind the reader.
+  useScrollLock(open);
 
   if (!cs) return null;
   const titleId = `case-title-${project.id}`;
