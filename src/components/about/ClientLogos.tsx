@@ -25,7 +25,13 @@ const ClientLogos: React.FC = () => {
               rel="noopener noreferrer"
               title={`${c.name} (${c.role}, ${c.dates})`}
             >
-              <img src={c.logo} alt={c.name} loading="lazy" decoding="async" />
+              <img
+                src={c.logo}
+                alt={c.name}
+                loading="lazy"
+                decoding="async"
+                style={{ '--logo-scale': c.scale ?? 1 } as React.CSSProperties}
+              />
             </a>
           </li>
         ))}

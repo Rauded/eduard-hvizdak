@@ -1,6 +1,10 @@
 // Homepage client logo strip. Deliberately quiet: the logos are proof, not
 // decoration, so they sit in grey and come up to full colour on hover.
 .client-logos {
+  // Shared base height; each logo multiplies it by its own --logo-scale
+  // (see the `scale` field in src/data/clients.ts) so marks with very
+  // different aspect ratios end up looking the same size.
+  --logo-h: 56px;
   max-width: 1000px;
   margin: 0 auto;
   padding: 56px clamp(20px, 5vw, 40px) 8px;
@@ -33,11 +37,9 @@
   line-height: 0;
 
   img {
-    // Cap by height so logos of different aspect ratios sit on one optical
-    // baseline instead of one shared width.
-    height: 58px;
+    height: calc(var(--logo-h) * var(--logo-scale, 1));
     width: auto;
-    max-width: 240px;
+    max-width: 260px;
     object-fit: contain;
     filter: grayscale(1);
     opacity: 0.62;
@@ -67,8 +69,11 @@
     gap: 26px 32px;
   }
 
+  .client-logos {
+    --logo-h: 40px;
+  }
+
   .client-logos__link img {
-    height: 40px;
-    max-width: 170px;
+    max-width: 180px;
   }
 }
