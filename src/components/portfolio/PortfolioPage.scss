@@ -465,16 +465,18 @@
 }
 
 .pcard__description {
-  // Mono was already dropped here at phone width for reading speed; the same
-  // argument holds on desktop, where these run three or four lines. The
-  // technical texture stays on everything around the prose: the number, the
-  // subtitle, the tags, the links, the case trigger. Revert = delete the two
-  // lines below.
-  font-family: var(--font-body);
   font-size: var(--text-small);
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.85;
   margin: 0 0 28px;
+
+  // Mono body copy is a desktop accent; at phone width it eats ~30% more
+  // vertical space and reads slowly. Tags and labels stay mono. Eduard likes
+  // the mono texture on desktop, so it stays there.
+  @media (max-width: 768px) {
+    font-family: var(--font-body);
+    line-height: 1.6;
+  }
 }
 
 // ─── Tags ─────────────────────────────────────────────────────────────────────
@@ -748,12 +750,8 @@
     color: var(--accent-strong);
   }
 
-  // Same reasoning as .pcard__description: the case study is the longest prose
-  // on the page, so it reads in the body face. The eyebrow, section headings
-  // and subtitle above stay mono.
   &__p {
     margin: 0;
-    font-family: var(--font-body);
     font-size: var(--text-body);
     line-height: 1.75;
     color: var(--text-muted);

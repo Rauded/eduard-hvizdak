@@ -1,7 +1,5 @@
 import React from 'react';
-import { LuArrowRight } from 'react-icons/lu';
 import { CLIENTS } from '../../data/clients';
-import LocaleLink from '../common/LocaleLink';
 import { useT } from '../../i18n';
 import './clientLogos.scss';
 
@@ -32,10 +30,6 @@ const ClientLogos: React.FC = () => {
           </li>
         ))}
       </ul>
-      <LocaleLink to="/references" className="client-logos__more">
-        {t.more}
-        <LuArrowRight aria-hidden="true" />
-      </LocaleLink>
     </section>
   );
 };

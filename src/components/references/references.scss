@@ -57,11 +57,19 @@ $mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace)
   }
 
   &-card {
+    // The li is the grid item; make it a flex container so the card fills the
+    // row height by growing, not by a percentage.
+    display: flex;
+
     &__link {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      height: 100%;
+      // Was `height: 100%` with 1.5rem of padding and no border-box sizing, so
+      // every card's border box came out exactly padding + border (50px)
+      // taller than its grid row and spilled over the card below it.
+      box-sizing: border-box;
+      flex: 1;
       padding: 1.5rem;
       border: 1px solid var(--border);
       border-radius: 14px;
