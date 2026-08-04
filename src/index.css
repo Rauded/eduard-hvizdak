@@ -1,112 +1,14 @@
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-Thin.ttf') format('truetype');
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-ThinItalic.ttf') format('truetype');
-  font-weight: 100;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-ExtraLight.ttf') format('truetype');
-  font-weight: 200;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-ExtraLightItalic.ttf') format('truetype');
-  font-weight: 200;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-Light.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-LightItalic.ttf') format('truetype');
-  font-weight: 300;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-Italic.ttf') format('truetype');
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-MediumItalic.ttf') format('truetype');
-  font-weight: 500;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-SemiBold.ttf') format('truetype');
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-SemiBoldItalic.ttf') format('truetype');
-  font-weight: 600;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-Bold.ttf') format('truetype');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'RobotoMono';
-  src: url('./fonts/RobotoMono/RobotoMono-BoldItalic.ttf') format('truetype');
-  font-weight: 700;
-  font-style: italic;
-}
-
 /* ── Source Serif 4 (variable) — article reading serif ───────────── */
 @font-face {
   font-family: 'Source Serif 4';
-  src: url('./fonts/SourceSerif4/SourceSerif4.ttf') format('truetype');
+  src: url('./fonts/SourceSerif4/SourceSerif4.woff2') format('woff2');
   font-weight: 200 900;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Source Serif 4';
-  src: url('./fonts/SourceSerif4/SourceSerif4-Italic.ttf') format('truetype');
+  src: url('./fonts/SourceSerif4/SourceSerif4-Italic.woff2') format('woff2');
   font-weight: 200 900;
   font-style: italic;
   font-display: swap;
@@ -115,28 +17,28 @@
 /* ── Inter — article reading sans (also used elsewhere in the UI) ── */
 @font-face {
   font-family: 'Inter';
-  src: url('./fonts/Inter/Inter-Regular.ttf') format('truetype');
+  src: url('./fonts/Inter/Inter-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Inter';
-  src: url('./fonts/Inter/Inter-Medium.ttf') format('truetype');
+  src: url('./fonts/Inter/Inter-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Inter';
-  src: url('./fonts/Inter/Inter-SemiBold.ttf') format('truetype');
+  src: url('./fonts/Inter/Inter-SemiBold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Inter';
-  src: url('./fonts/Inter/Inter-Bold.ttf') format('truetype');
+  src: url('./fonts/Inter/Inter-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;

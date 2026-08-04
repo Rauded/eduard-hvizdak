@@ -30,30 +30,27 @@ const Resume: React.FC = () => {
               <VisualAid key={section.title} section={section} />
             ))}
         </div>
-        <div className="right-column">
-          {/* #toolbar=0 hides Chrome's PDF toolbar AND the auto-opening
-              thumbnail sidebar (Chrome ignores navpanes/pagemode). The
-              download/open actions below replace the toolbar's buttons. */}
-          <iframe
-            title={t.iframeTitle}
-            src={`${cvPdf}#toolbar=0`}
-          ></iframe>
-          <div className="cv-actions">
-            <a className="cv-actions__btn cv-actions__btn--primary" href={cvPdf} download="EduardHvizdakCV.pdf">
-              <LuDownload aria-hidden="true" />
-              {t.downloadCv}
-            </a>
-            <a
-              className="cv-actions__btn cv-actions__btn--ghost"
-              href={cvPdf}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <LuExternalLink aria-hidden="true" />
-              {t.openNewTab}
-            </a>
-          </div>
-        </div>
+      </div>
+      {/* The CV used to render inline in an <iframe> next to this list. It
+          duplicated the same history in a denser, less readable form, it was
+          the heaviest thing in the section, and the browser PDF viewer painted
+          a black rectangle whenever it scrolled out of its own page box (on
+          phones it had already been hidden for exactly that reason). The list
+          is the canonical version; the PDF is a download. */}
+      <div className="cv-actions">
+        <a className="cv-actions__btn cv-actions__btn--primary" href={cvPdf} download="EduardHvizdakCV.pdf">
+          <LuDownload aria-hidden="true" />
+          {t.downloadCv}
+        </a>
+        <a
+          className="cv-actions__btn cv-actions__btn--ghost"
+          href={cvPdf}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <LuExternalLink aria-hidden="true" />
+          {t.openNewTab}
+        </a>
       </div>
     </div>
   );

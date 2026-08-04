@@ -8,9 +8,9 @@ import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
 import { useTheme } from '../theme/ThemeContext';
 import Reveal from '../_21test/Reveal';
-import livePage from '../../assets/projects/czs/czs-live-page.jpg';
-import widgetShot from '../../assets/projects/czs/czs-widget.png';
-import answerShot from '../../assets/projects/czs/czs-answer.png';
+import livePage from '../../assets/projects/czs/czs-live-page.webp';
+import widgetShot from '../../assets/projects/czs/czs-widget.webp';
+import answerShot from '../../assets/projects/czs/czs-answer.webp';
 import './czs-chatbot.scss';
 
 const EMAIL = 'eduardd.hv@gmail.com';

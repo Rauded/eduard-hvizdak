@@ -42,7 +42,7 @@ const About: React.FC = () => {
       <LocaleLink to="/blog/digital-fairness-act-youth-dialogue" className="about-highlight" data-cuelume-press>
         <div className="about-highlight__media">
           <img
-            src="/blog/digital-fairness/youth-policy-dialogue.png"
+            src="/blog/digital-fairness/youth-policy-dialogue.webp"
             alt="Youth Policy Dialogue on the Digital Fairness Act with Commissioner Michael McGrath in Ljubljana"
             loading="lazy"
             width={872}

@@ -25,7 +25,12 @@ const ROWS: Row[] = [
   },
 ];
 
-const REST = 'oklch(0.72 0.008 263)';
+// Resting tile colour. This was 0.72 lightness at almost zero chroma, which on
+// the white page left the band reading as a blank third-of-a-screen above the
+// footer unless the colour wave happened to be passing through. Darker and
+// slightly more navy, so the wordmark is legible at rest and the wave still
+// reads as movement on top of it.
+const REST = 'oklch(0.62 0.03 263)';
 const BRAND_HUE = 263;
 const GLOW_LCH = '0.36 0.09 263';
 const SPARK = '63,91,160';

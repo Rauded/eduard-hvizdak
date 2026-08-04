@@ -22,8 +22,12 @@ import orbitStack from './orbitStack';
 import projects from './projects';
 import blog from './blog';
 import notfound from './notfound';
+import clients from './clients';
+import testimonials from './testimonials';
 
 export const cs: DeepPartial<Dict> = {
+  testimonials,
+  clients,
   header,
   common,
   seo,

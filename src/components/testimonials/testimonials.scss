@@ -1,0 +1,87 @@
+// Quote cards. Kept flat and quiet: a testimonial is convincing because of who
+// said it, so the name and role carry the weight, not the container.
+.testimonials {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px clamp(20px, 5vw, 40px) 40px;
+}
+
+.testimonials__label {
+  margin: 0 0 30px;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: var(--weight-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-faint);
+  text-align: center;
+}
+
+.testimonials__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.testimonial {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 22px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.testimonial__quote {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.7;
+  color: var(--text-strong);
+}
+
+.testimonial__person {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial__photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex: none;
+}
+
+.testimonial__meta {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.testimonial__name {
+  font-size: var(--text-small);
+  font-weight: var(--weight-medium);
+  color: var(--text-strong);
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+}
+
+.testimonial__role {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--tracking-label);
+  color: var(--text-faint);
+}

@@ -28,6 +28,41 @@ const services = {
   ctaAltOr: 'or call',
   ctaRepeatTitle: 'Have a process that should run itself?',
 
+  // Who the page is aimed at, shown beside the hero. Kept concrete so a reader
+  // can place themselves in it or rule themselves out in one pass.
+  fitKicker: 'Who this is for',
+  fit: [
+    'Teams with a manual process that already costs real hours every week',
+    'Companies sitting on documents nobody can search',
+    'Regulated or data-sensitive work that cannot go to a public cloud',
+    'Founders who want the thing built and handed over, not a pilot',
+  ],
+
+  sectionFaq: 'FAQ',
+  faqTitle: 'Working together',
+  faq: [
+    {
+      q: 'How does a project start?',
+      a: 'A short discovery call, then a written scope with one clear deliverable, a timeline and a fixed price. You see all of that before anything is agreed.',
+    },
+    {
+      q: 'What happens when it is finished?',
+      a: 'It goes live in your environment, documented, with a handover so your team can run it without me. No retainer required to keep it working.',
+    },
+    {
+      q: 'Can it run on our own hardware?',
+      a: 'Yes. Private models, access controls and audit logs, with no data leaving your infrastructure. That is a normal request, not an exception.',
+    },
+    {
+      q: 'Who actually does the work?',
+      a: 'I do. You talk to the person writing the code, with no account manager or handoffs in between.',
+    },
+    {
+      q: 'How do I know the AI-generated parts are sound?',
+      a: 'Everything goes through adversarial review and a green build before it ships. The Method section above shows how that runs.',
+    },
+  ],
+
   sectionServices: 'Services',
   sectionDemo: 'In action',
   sectionWhyMe: 'Why me',

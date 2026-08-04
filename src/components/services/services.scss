@@ -41,6 +41,26 @@
 .services-hero {
   margin-bottom: 64px;
 
+  // Two columns from tablet up: copy on the left, proof and audience on the
+  // right. Below that they stack and the aside follows the CTA.
+  @media (min-width: 900px) {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+    gap: clamp(40px, 6vw, 84px);
+    align-items: start;
+  }
+
+  &__aside {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    margin-top: 40px;
+
+    @media (min-width: 900px) {
+      margin-top: 6px;
+    }
+  }
+
   &__eyebrow {
     display: inline-block;
     font-family: var(--font-mono);
@@ -545,8 +565,6 @@
 .services-cta-repeat {
   margin-top: 96px;
 
-  // Inside the hero the block sits tight under the lead.
-  &--hero { margin-top: 44px; }
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -565,4 +583,98 @@
   }
 
   .services-hero__alt { margin-top: -4px; }
+
+  // Declared last on purpose. Sass emits a rule's own declarations at their
+  // source position, so a modifier written above `align-items: center` lands
+  // earlier in the CSS and loses to it (both are single classes, same
+  // specificity). In the hero the block aligns left with the copy column;
+  // centered text under a left-aligned headline was the main reason the fold
+  // read as unfinished.
+  &--hero {
+    margin-top: 40px;
+    align-items: flex-start;
+    text-align: left;
+    gap: 14px;
+  }
+}
+
+
+// ─── Who this is for (hero aside) ────────────────────────────────────────────
+.services-fit {
+  &__kicker {
+    margin: 0 0 14px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    font-weight: var(--weight-label);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: var(--text-small);
+    line-height: 1.55;
+    color: var(--text-soft);
+
+    svg {
+      flex: none;
+      margin-top: 3px;
+      width: 1em;
+      height: 1em;
+      color: var(--accent);
+    }
+  }
+}
+
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+.services-faq {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+
+  &__row {
+    padding: 26px 0;
+    border-top: 1px solid var(--border);
+
+    &:last-child { border-bottom: 1px solid var(--border); }
+
+    @media (min-width: 800px) {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: clamp(24px, 5vw, 64px);
+      align-items: start;
+    }
+  }
+
+  &__q {
+    margin: 0 0 8px;
+    font-family: var(--font-display);
+    font-size: var(--text-h4, var(--text-lead));
+    font-weight: var(--weight-heading);
+    line-height: var(--leading-heading);
+    color: var(--heading);
+
+    @media (min-width: 800px) { margin-bottom: 0; }
+  }
+
+  &__a {
+    margin: 0;
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    color: var(--text-soft);
+  }
 }

@@ -41,6 +41,21 @@ const Slideshow: React.FC<{ images: string[] }> = ({ images }) => {
   const [current, setCurrent] = useState(0);
   const [paused, setPaused] = useState(false);
 
+  // The slides are stacked and cross-faded, so every <img> that carries a src
+  // downloads even though only one is visible. `loading="lazy"` does not help:
+  // once the card scrolls into view they are all "near the viewport". So we
+  // only give a slide its src once it has been reached, plus the next one to
+  // preload the fade. A six-image card costs one image on arrival, not six.
+  const [armed, setArmed] = useState<number[]>([0, 1]);
+  useEffect(() => {
+    const next = (current + 1) % images.length;
+    setArmed(prev =>
+      prev.includes(current) && prev.includes(next)
+        ? prev
+        : prev.concat([current, next].filter(i => !prev.includes(i))),
+    );
+  }, [current, images.length]);
+
   // Auto-advance, but stop while hovered/focused and skip it entirely under
   // reduced-motion (the dots still let a reader page through manually).
   useEffect(() => {
@@ -60,7 +75,7 @@ const Slideshow: React.FC<{ images: string[] }> = ({ images }) => {
       {images.map((src, i) => (
         <img
           key={i}
-          src={src}
+          src={armed.includes(i) ? src : undefined}
           alt=""
           loading="lazy"
           decoding="async"

@@ -8,6 +8,11 @@
 // break the whole bundle. assetSafe() swallows that so we can declare
 // a video "slot" (e.g. inzerpro.mp4) before the file exists; the card
 // falls back to a poster/placeholder until the real file is dropped in.
+//
+// COST OF THIS TRICK: the template literal makes webpack build a require
+// context over ALL of src/assets/projects and emit every file it finds,
+// imported or not. Anything you drop in that folder ships to production. Keep
+// archive masters and working files outside src/ (see .gitignore).
 export function asset(path: string): string {
   return require(`../../assets/projects/${path}`);
 }
@@ -90,7 +95,7 @@ export const PROJECTS: PortfolioProject[] = [
     ],
     media: {
       type: 'image',
-      images: [asset('czs/widget-open.jpg')],
+      images: [asset('czs/widget-open.webp')],
     },
     accent: '#182e5f',
     reversed: false,
@@ -125,7 +130,7 @@ export const PROJECTS: PortfolioProject[] = [
     media: {
       type: 'video',
       video: assetSafe('inzerpro.mp4'),
-      poster: asset('inzerpro-poster.jpg'),
+      poster: asset('inzerpro-poster.webp'),
     },
     accent: '#3b82f6',
     reversed: false,
@@ -188,12 +193,12 @@ export const PROJECTS: PortfolioProject[] = [
       type: 'slideshow',
       video: assetSafe('studyexe.mp4'), // upgrades to video if dropped in
       images: [
-        asset('obsidian_theme_dashboard.png'),
-        asset('obsidian_theme_study_session_reading.png'),
-        asset('obsidian_theme_score.png'),
-        asset('red_cyberpunk_theme_dashboard.png'),
-        asset('cyberforest_theme.png'),
-        asset('obsidian_theme_study_session_configuration.png'),
+        asset('obsidian_theme_dashboard.webp'),
+        asset('obsidian_theme_study_session_reading.webp'),
+        asset('obsidian_theme_score.webp'),
+        asset('red_cyberpunk_theme_dashboard.webp'),
+        asset('cyberforest_theme.webp'),
+        asset('obsidian_theme_study_session_configuration.webp'),
       ],
     },
     accent: '#0ea5e9',
@@ -255,7 +260,7 @@ export const PROJECTS: PortfolioProject[] = [
     media: {
       type: 'video',
       video: assetSafe('kouzelnici.mp4'),
-      poster: asset('kouzelnici-poster.jpg'),
+      poster: asset('kouzelnici-poster.webp'),
     },
     accent: '#ec4899',
     reversed: false,
@@ -317,7 +322,7 @@ export const PROJECTS: PortfolioProject[] = [
     media: {
       type: 'video',
       video: asset('newsmatics-hackathon.mp4'),
-      poster: asset('newsmatics-hackathon-group.jpg'),
+      poster: asset('newsmatics-hackathon-group.webp'),
     },
     accent: '#10b981',
     reversed: true,
@@ -378,7 +383,7 @@ export const PROJECTS: PortfolioProject[] = [
     media: {
       type: 'image',
       video: assetSafe('nasadclaw.mp4'), // upgrades to video if dropped in
-      images: [asset('nasadclaw-real-image.png')],
+      images: [asset('nasadclaw-real-image.webp')],
     },
     accent: '#e11d48',
     reversed: false,
@@ -440,7 +445,7 @@ export const PROJECTS: PortfolioProject[] = [
     media: {
       type: 'video',
       video: asset('psychetab-demo.mp4'),
-      poster: asset('psychetab-main.png'),
+      poster: asset('psychetab-main.webp'),
     },
     accent: '#f59e0b',
     reversed: true,

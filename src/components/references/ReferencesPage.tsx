@@ -5,17 +5,9 @@ import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
 import { useTheme } from '../theme/ThemeContext';
 import Reveal from '../_21test/Reveal';
+import { CLIENTS } from '../../data/clients';
 import './references.scss';
 
-// Company logos live under public/brand/clients (referenced by URL, not import).
-// Roles and dates come from the resume; Artiffine is the current role.
-const CLIENTS = [
-  { name: 'Artiffine', role: 'AI & Web3 studio', dates: 'Present', url: 'https://www.artiffine.com', logo: '/brand/clients/artiffine.svg', current: true },
-  { name: 'Masaryk University, CZS', role: 'AI Systems Engineer', dates: '2025 - Present', url: 'https://czs.muni.cz/cs/', logo: '/brand/clients/masaryk-university.png', current: true },
-  { name: 'OneBond', role: 'AI Systems Engineer', dates: '2025 - 2026', url: 'https://onebond.tech', logo: '/brand/clients/onebond.svg' },
-  { name: 'iGalileo', role: 'AI Developer', dates: '2025', url: 'https://www.igalileo.cz/', logo: '/brand/clients/igalileo.svg' },
-  { name: 'EDUC Alliance', role: 'Think Tank Member & Programmer', dates: '2024 - 2025', url: 'https://www.educalliance.eu', logo: '/brand/clients/educ-alliance.png' },
-];
 
 const ReferencesPage: React.FC = () => {
   const { theme } = useTheme();
@@ -23,7 +15,7 @@ const ReferencesPage: React.FC = () => {
 
   return (
     <div className="refs" data-theme={theme}>
-      <Seo title={t.seo.title} description={t.seo.description} path="/references" noindex />
+      <Seo title={t.seo.title} description={t.seo.description} path="/references" />
 
       <header className="refs-hero">
         <Link to="/" className="refs-back"><LuArrowLeft aria-hidden="true" /> {t.back}</Link>

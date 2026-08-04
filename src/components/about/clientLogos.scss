@@ -1,0 +1,90 @@
+// Homepage client logo strip. Deliberately quiet: the logos are proof, not
+// decoration, so they sit in grey and come up to full colour on hover.
+.client-logos {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 56px clamp(20px, 5vw, 40px) 8px;
+  text-align: center;
+}
+
+.client-logos__label {
+  margin: 0 0 28px;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: var(--weight-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.client-logos__row {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(28px, 5vw, 56px);
+}
+
+.client-logos__link {
+  display: block;
+  line-height: 0;
+
+  img {
+    // Cap by height so logos of different aspect ratios sit on one optical
+    // baseline instead of one shared width.
+    height: 34px;
+    width: auto;
+    max-width: 168px;
+    object-fit: contain;
+    filter: grayscale(1);
+    opacity: 0.62;
+    transition: filter 0.2s ease, opacity 0.2s ease;
+  }
+
+  &:hover img,
+  &:focus-visible img {
+    filter: grayscale(0);
+    opacity: 1;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 6px;
+    border-radius: 4px;
+  }
+}
+
+.client-logos__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 30px;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: var(--weight-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--accent-text);
+  text-decoration: none;
+  transition: gap 0.2s ease;
+
+  &:hover { gap: 11px; }
+}
+
+@media (max-width: 640px) {
+  .client-logos {
+    padding-top: 40px;
+  }
+
+  .client-logos__row {
+    gap: 26px 32px;
+  }
+
+  .client-logos__link img {
+    height: 26px;
+    max-width: 130px;
+  }
+}

@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import LocaleLink, { useLocalizedPath } from '../common/LocaleLink';
 import { FaArrowLeft } from 'react-icons/fa';
 import { BLOG_POSTS, localizeBlogPost } from '../../data/blog';
 import Seo, { SITE_URL, PERSON_ID } from '../../seo/Seo';
+import NotFound from '../notfound/NotFound';
 import { formatDate, getThumbnail, readingTime } from './blogUtils';
 import { useTheme } from '../theme/ThemeContext';
 import { useT } from '../../i18n';
@@ -89,8 +90,12 @@ const BlogPostPage: React.FC = () => {
 
   const localizedPath = useLocalizedPath();
 
+  // An unknown slug used to <Navigate> to /blog, which left the reader on the
+  // listing URL under a "Page not found" title with no explanation. Render the
+  // real 404 in place instead: the URL they typed stays in the bar, the page
+  // says what happened, and Seo's noindex keeps the soft-404 out of search.
   if (!rawPost) {
-    return <Navigate to={localizedPath('/blog')} replace />;
+    return <NotFound />;
   }
 
   const post = localizeBlogPost(rawPost, locale);

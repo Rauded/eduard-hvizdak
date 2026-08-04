@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FaHome, FaUser, FaCode, FaFileAlt, FaBars, FaTimes, FaPen, FaRegClock, FaBriefcase } from 'react-icons/fa';
+import { FaBars, FaTimes } from 'react-icons/fa';
 import { LuSun, LuMoon } from 'react-icons/lu';
 import { useTheme } from '../theme/ThemeContext';
 import { useT } from '../../i18n';
@@ -98,19 +98,15 @@ const Header: React.FC = () => {
       </button>
       <nav id="site-nav" className={`nav ${isOpen ? 'open' : ''}`}>
         <a href="#home" className="nav-link" data-cuelume-hover="tick" onClick={(e) => goToSection(e, 'home')}>
-          <FaHome />
           {t.nav.home}
         </a>
         <a href="#about" className="nav-link" data-cuelume-hover="tick" onClick={(e) => goToSection(e, 'about')}>
-          <FaUser />
           {t.nav.about}
         </a>
         <a href="#resume" className="nav-link" data-cuelume-hover="tick" onClick={(e) => goToSection(e, 'resume')}>
-          <FaFileAlt />
           {t.nav.resume}
         </a>
         <a href="#projects" className="nav-link" data-cuelume-hover="tick" onClick={(e) => goToSection(e, 'projects')}>
-          <FaCode />
           {t.nav.projects}
         </a>
         <LocaleLink
@@ -119,7 +115,6 @@ const Header: React.FC = () => {
           data-cuelume-hover="tick"
           onClick={() => setIsOpen(false)}
         >
-          <FaBriefcase />
           {t.nav.services}
         </LocaleLink>
         <LocaleLink
@@ -128,7 +123,6 @@ const Header: React.FC = () => {
           data-cuelume-hover="tick"
           onClick={() => setIsOpen(false)}
         >
-          <FaPen />
           {t.nav.blog}
         </LocaleLink>
         <LocaleLink
@@ -137,7 +131,6 @@ const Header: React.FC = () => {
           data-cuelume-hover="tick"
           onClick={() => setIsOpen(false)}
         >
-          <FaRegClock />
           {t.nav.now}
         </LocaleLink>
         {/* Mobile-menu-only primary action; hidden on the desktop nav bar. */}

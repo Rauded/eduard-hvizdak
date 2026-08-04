@@ -26,8 +26,12 @@ import blog from './blog';
 import notfound from './notfound';
 import czsChatbot from './czsChatbot';
 import references from './references';
+import clients from './clients';
+import testimonials from './testimonials';
 
 export const en = {
+  testimonials,
+  clients,
   header,
   common,
   seo,

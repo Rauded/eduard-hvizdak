@@ -27,6 +27,7 @@ const ROUTES = [
   '/now',
   '/things',
   '/services',
+  '/references',
   // '/projects/czs-muni-chatbot', // hidden pending CZS permission; see src/config/czsCaseStudy.ts
   '/styleguide',
   '/404',
@@ -146,6 +147,46 @@ async function main() {
         window.scrollTo(0, 0);
       });
       await new Promise((r) => setTimeout(r, 300));
+
+      // Restore the text-node boundaries that outerHTML throws away.
+      //
+      // React renders `{date} · {minutes} {label}` as four SEPARATE DOM text
+      // nodes and expects to hydrate against four. outerHTML serializes them as
+      // one run of characters, and the HTML parser then rebuilds them as ONE
+      // node on the next load. React sees one node where it wanted four,
+      // reports #418 (text content mismatch), then #423, and throws the whole
+      // prerendered tree away to client-render from scratch. That fired on
+      // every route and cost us most of the benefit of prerendering at all.
+      //
+      // Real SSR (ReactDOMServer) solves this by emitting an empty comment
+      // between adjacent text nodes; the parser keeps them separate and React
+      // hydrates cleanly. We are snapshotting a live DOM rather than running
+      // SSR, so we insert the same separators ourselves right before
+      // serializing. Matches React's own marker exactly: `<!-- -->`.
+      await page.evaluate(() => {
+        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+        const needsSeparator = [];
+        let node;
+        while ((node = walker.nextNode())) {
+          const next = node.nextSibling;
+          if (next && next.nodeType === Node.TEXT_NODE) needsSeparator.push(node);
+        }
+        for (const n of needsSeparator) {
+          n.parentNode.insertBefore(document.createComment(' '), n.nextSibling);
+        }
+      });
+
+      // NOT DONE HERE, ON PURPOSE: bracketing #root's children with React's
+      // `<!--$-->` / `<!--/$-->` Suspense markers. That does silence the
+      // remaining #418/#423 (verified 2026-08-04), because those come from the
+      // <Suspense> in App.tsx having no boundary markers in a DOM snapshot.
+      // But then hydration SUCCEEDS and React keeps the baked DOM verbatim,
+      // including everything that was mid-flight when the snapshot was taken:
+      // scroll-reveal classes, the slideshow's current slide, and lazy images
+      // that had not loaded. The hero lost its name and CTAs and the client
+      // logo strip came up empty. A recovered client render is invisible to
+      // the reader; a broken hero is not. The real fix is streaming SSR in
+      // this script so the markup and the markers are both React's own.
 
       const html = await page.evaluate(() => '<!DOCTYPE html>\n' + document.documentElement.outerHTML);
       // Cheap insurance: make sure a /sk or /cs route actually baked in that

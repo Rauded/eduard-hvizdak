@@ -35,7 +35,11 @@
     padding: 11px 20px;
     border-radius: 8px;
     background: var(--accent);
-    color: var(--accent-text, #fff);
+    // Not --accent-text: that token is navy (it is the colour for accent text
+    // ON the page, not text on an accent fill), so the label and arrow came out
+    // navy-on-navy and the button read as an empty pill. Filled pills elsewhere
+    // in the site hardcode white the same way.
+    color: #ffffff;
     text-decoration: none;
     font-weight: var(--weight-medium);
     transition: transform 0.2s ease, background 0.2s ease;

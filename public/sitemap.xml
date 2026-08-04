@@ -287,4 +287,34 @@
     <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/blog/erasmus-bridges-not-walls"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/blog/erasmus-bridges-not-walls"/>
   </url>
+  <url>
+    <loc>https://eduardhvizdak.com/references</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/references"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/references"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/references"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/references"/>
+  </url>
+  <url>
+    <loc>https://eduardhvizdak.com/sk/references</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/references"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/references"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/references"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/references"/>
+  </url>
+  <url>
+    <loc>https://eduardhvizdak.com/cs/references</loc>
+    <lastmod>2026-08-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/references"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/references"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/references"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/references"/>
+  </url>
 </urlset>

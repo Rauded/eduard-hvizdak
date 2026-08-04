@@ -56,42 +56,64 @@ const ServicesPage: React.FC = () => {
         path="/services"
       />
 
+      {/* Two columns on desktop. The fold used to be a left-aligned headline, a
+          centered CTA, and a large empty right half, so the page opened looking
+          thinner than it is. The proof strip moved up here from below the fold:
+          it is the reason to keep reading, so it should be visible without
+          scrolling. */}
       <header className="services-hero">
-        <span className="services-hero__eyebrow">{t.heroEyebrow}</span>
-        <h1 className="services-hero__title">
-          {t.heroTitle}
-        </h1>
-        <p className="services-hero__lead">
-          {t.heroLead}
-        </p>
-        <div className="services-cta-repeat services-cta-repeat--hero">
-          <h2 className="services-cta-repeat__title">{t.ctaRepeatTitle}</h2>
-          <a className="services-btn services-btn--primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
-            {t.ctaConsult}
-            <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
-          </a>
-          <p className="services-hero__alt">
-            {t.ctaAltPrefix}{' '}
-            <a href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>{EMAIL}</a>
-            {' '}{t.ctaAltOr}{' '}
-            <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a>
+        <div className="services-hero__copy">
+          <span className="services-hero__eyebrow">{t.heroEyebrow}</span>
+          <h1 className="services-hero__title">
+            {t.heroTitle}
+          </h1>
+          <p className="services-hero__lead">
+            {t.heroLead}
           </p>
+          <div className="services-cta-repeat services-cta-repeat--hero">
+            <h2 className="services-cta-repeat__title">{t.ctaRepeatTitle}</h2>
+            <a className="services-btn services-btn--primary" href={BOOKING_URL} target="_blank" rel="noopener noreferrer">
+              {t.ctaConsult}
+              <LuArrowRight className="services-btn__arrow" aria-hidden="true" />
+            </a>
+            <p className="services-hero__alt">
+              {t.ctaAltPrefix}{' '}
+              <a href={`mailto:${EMAIL}?subject=AI%20project%20enquiry`}>{EMAIL}</a>
+              {' '}{t.ctaAltOr}{' '}
+              <a href={`tel:${PHONE}`}>{PHONE_DISPLAY}</a>
+            </p>
+          </div>
         </div>
-      </header>
 
-      {/* Proof strip: quiet, ruled, typographic. The hero button stays the
-          boldest element on the page. */}
-      <Reveal className="services-stats" as="section">
-        <p className="services-stats__kicker">{t.signalKicker}</p>
-        <div className="services-stats__grid">
-          {t.signals.map((s) => (
-            <div className="services-stats__item" key={s.label}>
-              <div className="services-stats__value">{s.value}</div>
-              <div className="services-stats__label">{s.label}</div>
+        <aside className="services-hero__aside">
+          <section className="services-stats">
+            <p className="services-stats__kicker">{t.signalKicker}</p>
+            <div className="services-stats__grid">
+              {t.signals.map((s) => (
+                <div className="services-stats__item" key={s.label}>
+                  <div className="services-stats__value">{s.value}</div>
+                  <div className="services-stats__label">{s.label}</div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </Reveal>
+          </section>
+
+          {/* Who this is for. The page described the work in detail but never
+              said who it is aimed at, so a reader had to guess whether they
+              were the audience. */}
+          <section className="services-fit">
+            <p className="services-fit__kicker">{t.fitKicker}</p>
+            <ul className="services-fit__list">
+              {t.fit.map((f) => (
+                <li className="services-fit__item" key={f}>
+                  <LuCircleCheck aria-hidden="true" />
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </aside>
+      </header>
 
       {/* Featured: links to the (unlisted) AI Employee page with the live demo. */}
       <Reveal className="services-block" as="section">
@@ -291,6 +313,24 @@ const ServicesPage: React.FC = () => {
             <Reveal><BunGitLogAnimation /></Reveal>
           </div>
         </div>
+      </section>
+
+      {/* FAQ. The page answered "what can he build" thoroughly and "what is it
+          like to hire him" not at all, which is the question someone actually
+          has by the time they reach the bottom. Answers restate commitments
+          already made elsewhere on the page (fixed scope, handover, on-prem,
+          direct access), so there is nothing new to live up to here. */}
+      <div className="services-marker"><SectionMarker index="05" label={t.sectionFaq} /></div>
+      <section className="services-block" aria-labelledby="services-faq">
+        <Reveal><h2 className="services-block__title" id="services-faq">{t.faqTitle}</h2></Reveal>
+        <ul className="services-faq">
+          {t.faq.map((item, i) => (
+            <Reveal as="li" className="services-faq__row" key={item.q} delay={i * 60}>
+              <h3 className="services-faq__q">{item.q}</h3>
+              <p className="services-faq__a">{item.a}</p>
+            </Reveal>
+          ))}
+        </ul>
       </section>
 
       {/* Closing CTA: the shared contact band with the one-question wizard. */}

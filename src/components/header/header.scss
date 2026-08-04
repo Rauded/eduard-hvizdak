@@ -114,20 +114,6 @@
 
   &--active {
     color: var(--accent) !important;
-
-    svg {
-      opacity: 1 !important;
-    }
-  }
-
-  svg {
-    margin-right: 7px;
-    opacity: 0.6;
-    transition: opacity 0.2s ease;
-  }
-
-  &:hover svg {
-    opacity: 1;
   }
 
   @media (max-width: 768px) {

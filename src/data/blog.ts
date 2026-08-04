@@ -153,12 +153,12 @@ export const BLOG_POSTS: BlogPost[] = [
     pinned: true,
     excerpt:
       'I joined a European Commission Youth Policy Dialogue in Ljubljana with EU Commissioner Michael McGrath, where we worked through what the upcoming Digital Fairness Act should actually do about deceptive design, pricing, and digital contracts.',
-    thumbnail: '/blog/digital-fairness/youth-policy-dialogue.png',
+    thumbnail: '/blog/digital-fairness/youth-policy-dialogue.webp',
     content: `
       <p>I took part in a <strong>European Commission Youth Policy Dialogue</strong> in <strong>Ljubljana</strong> and sat down with <strong>EU Commissioner Michael McGrath</strong> to talk about the <strong>Digital Fairness Act</strong>, the EU's upcoming push to clean up how online services treat people. What stuck with me was that the conversation about the rules happened <em>with</em> the people they're meant to protect, not just about them.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/youth-policy-dialogue.png" alt="Youth Policy Dialogue on the Digital Fairness Act with Commissioner Michael McGrath in Ljubljana" class="blog-img" />
+        <img src="/blog/digital-fairness/youth-policy-dialogue.webp" alt="Youth Policy Dialogue on the Digital Fairness Act with Commissioner Michael McGrath in Ljubljana" class="blog-img" />
       </figure>
 
       <figure class="blog-figure">
@@ -208,7 +208,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Zúčastnil som sa <strong>Youth Policy Dialogue Európskej komisie</strong> v <strong>Ľubľane</strong> a sadol si s <strong>eurokomisárom Michaelom McGrathom</strong>, aby sme sa rozprávali o <strong>Digital Fairness Act</strong>, pripravovanej snahe EÚ upratať to, ako online služby zaobchádzajú s ľuďmi. Najviac mi utkvelo, že rozhovor o pravidlách prebiehal <em>s</em> ľuďmi, ktorých majú chrániť, nielen o nich.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/youth-policy-dialogue.png" alt="Youth Policy Dialogue o Digital Fairness Act s komisárom Michaelom McGrathom v Ľubľane" class="blog-img" />
+        <img src="/blog/digital-fairness/youth-policy-dialogue.webp" alt="Youth Policy Dialogue o Digital Fairness Act s komisárom Michaelom McGrathom v Ľubľane" class="blog-img" />
       </figure>
 
       <figure class="blog-figure">
@@ -258,7 +258,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Zúčastnil jsem se <strong>Youth Policy Dialogue Evropské komise</strong> v <strong>Lublani</strong> a sedl si s <strong>eurokomisařem Michaelem McGrathem</strong>, abychom se bavili o <strong>Digital Fairness Act</strong>, připravované snaze EU uklidit to, jak online služby zacházejí s lidmi. Nejvíc mi utkvělo, že rozhovor o pravidlech probíhal <em>s</em> lidmi, které mají chránit, nejen o nich.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/youth-policy-dialogue.png" alt="Youth Policy Dialogue o Digital Fairness Act s komisařem Michaelem McGrathem v Lublani" class="blog-img" />
+        <img src="/blog/digital-fairness/youth-policy-dialogue.webp" alt="Youth Policy Dialogue o Digital Fairness Act s komisařem Michaelem McGrathem v Lublani" class="blog-img" />
       </figure>
 
       <figure class="blog-figure">

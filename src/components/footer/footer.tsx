@@ -42,6 +42,11 @@ const Footer: React.FC = () => {
           {t.contact}
           <LuArrowRight aria-hidden="true" />
         </Link>
+        {/* /references was previously reachable only by someone typing the URL.
+            It is the client list, so it gets a permanent way in. */}
+        <p>
+          <Link className="footer-link" to={localize('/references')}>{t.references}</Link>
+        </p>
         <p>&copy; Eduard Hvizdak 2026</p>
         <p>
           <a className="footer-email" href={`mailto:${EMAIL}`}>{EMAIL}</a>

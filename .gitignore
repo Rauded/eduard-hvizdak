@@ -31,5 +31,9 @@ pnpm-debug.log*
 !/public/logo192.png
 !/public/logo512.png
 !/public/apple-touch-icon.png
-# Local-only original showcase videos (kept for revert, not committed)
-/src/assets/projects/originals/
+# Archive masters for the showcase videos now live OUTSIDE the repo, at
+# ~/Desktop/Projects/portfolio/video-originals/. They must never sit under
+# src/assets/projects/: assetSafe() in components/portfolio/projectsData.tsx
+# uses a template-literal require(), so webpack builds a context over that whole
+# directory and emits every file in it, imported or not. 25 MB of archive video
+# shipped to production that way.

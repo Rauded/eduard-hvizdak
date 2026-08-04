@@ -4,6 +4,8 @@ import SectionMarker from '../common/SectionMarker';
 import TileWordmark from '../../effects/tile-field/TileField';
 // @ts-ignore
 import Hero from '../hero/hero.tsx';
+import ClientLogos from '../about/ClientLogos';
+import Testimonials from '../testimonials/Testimonials';
 // @ts-ignore
 import About from '../about/about.tsx';
 // @ts-ignore
@@ -27,12 +29,17 @@ const Home: React.FC = () => {
       path="/"
     />
     <Hero />
+    {/* Proof before self-description: who has actually paid for this work,
+        directly under the hero, before the About copy. */}
+    <ClientLogos />
     <SectionMarker index="01" label={t.sections.about} />
     <About />
     <SectionMarker index="02" label={t.sections.experience} />
     <Resume />
     <SectionMarker index="03" label={t.sections.projects} />
     <Projects />
+    {/* Renders nothing until real quotes land in src/data/testimonials.ts. */}
+    <Testimonials />
     <SectionMarker index="04" label={t.sections.contact} />
     {/* TEST: Contact combined with the animated gradient band */}
     <ContactGradient />

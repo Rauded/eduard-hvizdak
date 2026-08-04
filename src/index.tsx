@@ -51,8 +51,18 @@ function preloadRouteChunk(pathname: string): Promise<unknown> {
 // that code-splitting needs: React logs #418/#423 and recovers by client-rendering
 // the root. Content and SEO are unaffected (crawlers read the baked HTML; the DOM
 // settles to identical markup). We still hydrate rather than createRoot so the
-// prerendered paint is reused without a visible teardown. A fully clean hydrate
-// would need true streaming SSR in prerender.mjs (tracked in AUDIT_TODO.md).
+// prerendered paint is reused without a visible teardown.
+//
+// Investigated 2026-08-04. Two separate causes were found:
+//   1. Adjacent JSX text nodes serialized into one node by outerHTML. FIXED in
+//      prerender.mjs by writing React's own `<!-- -->` separators.
+//   2. The missing Suspense boundary markers. Injecting `<!--$-->`/`<!--/$-->`
+//      does silence the errors, but then hydration succeeds and React keeps the
+//      snapshot verbatim, freezing whatever transient state the prerender
+//      captured (reveal classes, slideshow position, unloaded lazy images). It
+//      visibly broke the hero and the client logo strip, so it is deliberately
+//      NOT done. See the note in prerender.mjs.
+// A fully clean hydrate needs true streaming SSR in prerender.mjs.
 const rootEl = document.getElementById('root') as HTMLElement;
 const app = (
   <React.StrictMode>

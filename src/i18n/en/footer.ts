@@ -1,6 +1,7 @@
 const footer = {
   builtBy: 'Designed and built by',
   contact: 'Contact',
+  references: 'Clients & references',
   sound: {
     on: 'Sound on',
     off: 'Sound off',
