@@ -62,7 +62,9 @@
     position: fixed;
     top: 0;
     right: -100%;
-    width: 100vw;
+    // 100% of the viewport without the scrollbar gutter (100vw overshoots by
+    // the scrollbar width on desktop-sized 768px viewports).
+    width: 100%;
     height: 100vh;
     height: 100dvh;
     background: var(--page-bg, #ffffff);
@@ -177,10 +179,16 @@
   appearance: none;
 
   @media (max-width: 768px) {
-    display: block;
+    // 44px hit area around the 30px glyph (negative margin keeps the icon
+    // visually where it was).
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
     position: absolute;
-    top: 12px;
-    right: 20px;
+    top: 5px;
+    right: 13px;
     z-index: 1001;
   }
 }
@@ -298,8 +306,10 @@
     margin-top: 8px;
 
     &__option {
-      padding: 9px 14px;
+      padding: 12px 16px;
       font-size: 0.9rem;
+      min-height: 44px;
+      box-sizing: border-box;
     }
   }
 }

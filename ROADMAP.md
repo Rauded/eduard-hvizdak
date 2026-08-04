@@ -61,7 +61,7 @@ Footer keeps its baseline social links. `social_links.tsx` left in repo (unused)
 - [x] **Hackathon Story link** — Newsmatics project's "Hackathon Story" link was `#/blog/newsmatics-hackathon` (dead HashRouter URL after the BrowserRouter migration). Fixed to `/blog/newsmatics-hackathon` so it links from the project (`projectsData.tsx`).
 - [x] **PsycheTab Chrome Web Store link** — added next to GitHub on the PsycheTab project (`chromewebstore.google.com/detail/psychetab/pggjodgkdanopccgkgiongeddplopbao`).
 - [x] **Add blog for "Zero to Done"** — DONE. Post `zero-to-done` (slug) in `blog.ts`, dated 2026-06-08, links to `zero-to-done.com`. Story: presented InzerPro at the first run of the Zero to Done startup-build hackathon, hosted by Petr Sochora + mime digital in Brno — a "get real customers, not a demo" event, high quality, lots of advice. Added to `sitemap.xml` + `rss.xml`. No photos yet (organisers said end of June) → text-only, no thumbnail; add a cover later when photos arrive.
-- [ ] **Make it look good on mobile too** — full responsive pass across pages (projects, `/now`, contact, blog).
+- [x] **Make it look good on mobile too**: DONE 2026-08-04. Full responsive pass at 375px/768px across home, `/portfolio`, `/now`, blog, `/things`, contact. Fixed the doubled projects gutter (48px per side on phones), long project names clipping (`overflow-wrap` guards in `index.css` + `.pcard__title`), the 100vw mobile nav sheet, 44px tap targets (hamburger, lang switcher, case-modal close, blog reading controls, social icon rows, case trigger, agent toggles, things index), `--text-caption` lifted to 13px under 768px, gutters aligned to the 24px `--container-px` token (about, resume, `/now`, `/things`, footer), references breakpoint 640 to 768 plus font floors, contact card breakpoint 600 to 768, hero headline floor 2.8em to 2rem plus status row wrap, and `/things` got its first mobile block.
 - [x] **Expandable project case studies (SEO/GEO)** — DONE. Each visible project has a keyword-rich `caseStudy` (problem / motivation / challenges / solution / story) in `projectsData.tsx`, rendered by `ProjectCard.tsx` inside a "Read the full story" expander. The body is **always in the DOM** (collapsed via CSS `grid-template-rows: 0fr→1fr`, not conditionally rendered) so crawlers/LLMs get the full narrative + tech keywords whether or not a human expands it. Appears on both `/` and `/portfolio` (shared card).
 - [x] **Official Goodreads/Letterboxd brand marks on `/now`** — DONE. Replaced the indigo monochrome icons with the real logos in official colours: Goodreads brown "g" on a cream badge, Letterboxd's three official dots (orange #FF8000 / green #00E054 / blue #40BCF4) on a dark badge (`.brandmark` in `now.scss`). Per Eduard, **removed the links to his Letterboxd/Goodreads profiles** — the "Auto-synced from …" labels are now plain text.
 
@@ -69,7 +69,7 @@ Footer keeps its baseline social links. `social_links.tsx` left in repo (unused)
 - [ ] **Products / "What I'm building" section** above projects: InzerPro, NasadClaw, KouzelníkNaAkci — one-line value prop + status (live, paying customers) + your role (founder, solo eng).
 - [ ] **Selective traction metrics** (honest, current): paying customers, listings auto-posted, live-since date, uptime. Show traction *signals*, not necessarily exact MRR.
 - [ ] **1–2 case-study deep-dives** (problem → constraints → what you built → architecture diagram → **outcome with numbers**). This is what reads as senior vs junior.
-- [ ] **Dark/light toggle** (extract SCSS to CSS variables; persist choice). Baseline expectation in 2026.
+- ~~**Dark/light toggle** (extract SCSS to CSS variables; persist choice).~~ OBSOLETE 2026-08-04: per `CLAUDE.md` the site is deliberately light-mode-only since the 2026-07-09 humandelta redesign (navy-on-white, `THEME_PINNED = true`; the dual-layer theming was consolidated away on 2026-08-03). Restoring dark mode is a real project (navy dark tokens + per-component dark values), not a toggle task; see the "Light mode only" section in `CLAUDE.md` if it is ever wanted back.
 - [ ] **Expand project context** — for each flagship, state what *you* did (honest attribution on team/hackathon work).
 
 ## Sprint 3 — Personality & craft
@@ -157,8 +157,8 @@ Goodreads/Letterboxd marks, books→media swap, "what's running" showcase — ar
 - [ ] **Fix project-card link & title styling** — the "Website" link, "Read the full story" link, and
   project **title colours** currently read sloppy/low-quality. Make links obvious Lucide-arrow pills;
   fix title contrast/weight. (goals.md — recurring complaint)
-- [ ] **Full mobile responsive pass** (also already in Sprint-1 polish) — re-verify projects, `/now`,
-  contact, blog, and the new gear page on phone widths. (goals.md)
+- [x] **Full mobile responsive pass** (also already in Sprint-1 polish): DONE 2026-08-04, see the
+  Sprint-1 polish entry for the fix list (projects, `/now`, contact, blog, `/things` all covered). (goals.md)
 - [ ] **Evaluate reactbits.dev/showcase** components for tasteful motion/polish — adopt only what fits
   the restrained indigo aesthetic. (goals.md)
 - [ ] **Review the @bensig personal-site idea** — https://x.com/bensig/status/2070737149666926645 —

@@ -151,8 +151,15 @@ $mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace)
   &-card__link:hover &-visit svg { transform: translate(2px, -2px); }
 }
 
-@media (max-width: 640px) {
+// Was 640px; 641-768px squeezed two cards into ~257px columns. 768px is the
+// site breakpoint convention.
+@media (max-width: 768px) {
   .refs-grid { grid-template-columns: 1fr; }
+
+  // Readability floors on phone: 9.9px/11.8px/12.2px mono is too small.
+  .refs-badge { font-size: 0.72rem; }
+  .refs-dates,
+  .refs-visit { font-size: 0.8125rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

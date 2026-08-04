@@ -301,3 +301,22 @@ code {
 #resume {
   scroll-margin-top: 100px;
 }
+
+/* ─── Mobile overflow guards (responsive pass, 2026-08-04) ──────────────────
+   Long unbreakable strings (project names like "KouzelnikNaAkci.cz", URLs in
+   blog prose, the footer email) must wrap instead of clipping behind the
+   body's overflow-x: hidden. break-word only splits when a string cannot fit
+   its line, so normal copy renders exactly as before. */
+body {
+  overflow-wrap: break-word;
+}
+h1,
+h2,
+h3,
+.pcard__title,
+.case-modal__title,
+.blog-post__title,
+.blog-post__body a,
+.blog-post__body code {
+  overflow-wrap: anywhere;
+}

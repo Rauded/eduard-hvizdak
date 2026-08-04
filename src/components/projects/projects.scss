@@ -37,4 +37,94 @@
 // trim the top here so it sits tight under the heading on the homepage.
 .projects-container .port-projects {
   padding-top: 32px;
+
+  // Responsive pass 2026-08-04: this block is nested inside .projects-container,
+  // so both gutters applied and phones got 48px per side (279px of card width
+  // at 375px). Drop the inner gutter on mobile; the outer container keeps the
+  // 24px site rhythm.
+  @media (max-width: 768px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+// ─── Overflow cards + "show more" ────────────────────────────────────────────
+// Collapsed with CSS grid-rows rather than unmounting, so the case-study
+// markup inside every card stays in the DOM for crawlers. Same technique the
+// per-card case study already uses.
+.projects-overflow {
+  display: grid;
+  grid-template-rows: 0fr;
+  // .projects-container is a flex column, and a flex item defaults to
+  // min-height:auto, which floors this at its content height and defeats the
+  // 0fr track. Without this the collapsed block still occupied 200px.
+  min-height: 0;
+  transition: grid-template-rows 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  // The collapsed track must clip, or the cards paint over everything below.
+  overflow: hidden;
+
+  // The single grid item. min-height:0 lets it actually shrink to the 0fr
+  // track instead of being floored by its content.
+  > * {
+    min-height: 0;
+  }
+
+  // Nothing inside a collapsed block should be tabbable or read aloud.
+  &[data-open='false'] {
+    visibility: hidden;
+  }
+
+  &[data-open='true'] {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    // Spacing lives on the OPEN state, not on the child. A 0fr track still
+    // reserves the child's own padding (that is what kept the collapsed block
+    // 200px tall: 120px top + 80px bottom from .port-projects).
+    padding: 120px 0 0;
+  }
+
+  .port-projects {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.projects-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 48px auto 0;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid var(--accent-ring);
+  background: #ffffff;
+  color: var(--accent-strong);
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  font-weight: var(--weight-label);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+
+  svg {
+    width: 1.05em;
+    height: 1.05em;
+  }
+
+  &:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+}
+
+.projects-container {
+  display: flex;
+  flex-direction: column;
 }

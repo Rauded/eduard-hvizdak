@@ -9,6 +9,14 @@
   padding: 40px 0;
   font-family: var(--font-body);
 
+  // Responsive pass 2026-08-04: 95% left only 9px gutters at 375px while
+  // neighbouring sections sat at 24px. Align to the site gutter token.
+  @media (max-width: 768px) {
+    width: auto;
+    padding: 40px var(--container-px, 24px);
+    box-sizing: border-box;
+  }
+
   // Big section headings pop in the brand blue; per-item job titles stay dark.
   .resume-title {
     font-size: var(--text-h1);
@@ -177,6 +185,12 @@
   margin-bottom: 20px;
   padding-left: 40px;
   position: relative;
+
+  // The 40px timeline indent eats too much of a 375px line; 24px keeps the
+  // rule visible while widening the copy measure.
+  @media (max-width: 768px) {
+    padding-left: 24px;
+  }
 
   &:before {
     content: "";

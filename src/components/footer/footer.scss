@@ -14,6 +14,8 @@
     flex-direction: column;
     text-align: center;
     gap: 10px;
+    // Follow the site gutter token (24px) instead of the desktop 40px.
+    padding: 24px var(--container-px, 24px);
   }
 
   .footer-content {
@@ -90,6 +92,15 @@
       &:hover {
         color: var(--accent);
         transform: translateY(-2px);
+      }
+
+      // 44px tap target on touch widths; the glyph itself stays the same size.
+      @media (max-width: 768px) {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
       }
     }
   }

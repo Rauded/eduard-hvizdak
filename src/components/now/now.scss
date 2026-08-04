@@ -31,6 +31,14 @@
   max-width: 880px;
   margin: 0 auto;
   padding: 96px 0 80px;
+
+  // Responsive pass 2026-08-04: align the page gutter to the 24px site token
+  // and trim the desktop-sized top padding on phones.
+  @media (max-width: 768px) {
+    width: auto;
+    padding: 72px var(--container-px, 24px) 64px;
+    box-sizing: border-box;
+  }
   color: var(--text);
   font-family: var(--font-body);
 

@@ -443,6 +443,12 @@
   // per-project colour on the heading itself: that read garish/sloppy).
   color: var(--text-strong);
   display: inline-block;
+  // Unbreakable names ("KouzelnikNaAkci.cz") must wrap, not clip, on phones.
+  overflow-wrap: anywhere;
+
+  @media (max-width: 768px) {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
 
   // The accent now lives as a short underline marker, cohesive across cards.
   &::after {
@@ -580,6 +586,12 @@
   align-items: center;
   gap: 9px;
   padding: 9px 0;
+
+  // 44px minimum tap target on touch widths.
+  @media (max-width: 768px) {
+    min-height: 44px;
+    padding: 12px 0;
+  }
   background: none;
   border: none;
   cursor: pointer;
@@ -777,7 +789,13 @@
   }
 
   @media (max-width: 600px) {
-    &__panel { max-height: 92vh; border-radius: 16px; }
+    &__panel { max-height: 92vh; border-radius: 16px; padding: 24px 20px; }
+    // 44px close target, and keep the title clear of it.
+    &__close { width: 44px; height: 44px; top: 10px; right: 10px; }
+    &__head { padding-right: 52px; }
+    // The display leading (1.05) is too tight once the title wraps to 2-3
+    // lines at phone widths.
+    &__title { line-height: var(--leading-heading); }
   }
 }
 

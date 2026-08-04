@@ -5,6 +5,14 @@
   color: var(--text);
   padding: 40px 0;
 
+  // Responsive pass 2026-08-04: 80% gave 37.5px gutters at 375px, the widest
+  // on the site. Follow the 24px site gutter token on phones instead.
+  @media (max-width: 768px) {
+    width: auto;
+    padding: 40px var(--container-px, 24px);
+    box-sizing: border-box;
+  }
+
   h2 {
     font-size: var(--text-h1);
     padding-top: 10px;
@@ -193,7 +201,10 @@
 
     &__media {
       flex: 0 0 auto;
-      width: clamp(300px, 46%, 440px);
+      // 240px floor (was 300px): just above 768px the container is ~630px and
+      // a non-shrinking 300px image left no room for the text column.
+      width: clamp(240px, 46%, 440px);
+      min-width: 0;
       align-self: stretch;
       overflow: hidden;
       background: var(--surface-sunken);
@@ -282,6 +293,9 @@
 
       &__text {
         text-align: left;
+        // Desktop card padding (24px 28px) squeezed the measure to ~244px on
+        // a 375px phone; tighten it to win copy width back.
+        padding: 20px 18px;
       }
     }
   }

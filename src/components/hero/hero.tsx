@@ -93,7 +93,7 @@ const Content = styled.div<{ $handsOffset: boolean }>`
 // ?type=serif) instead of pinning the serif, so the hero tracks the site.
 const Headline = styled.h1`
   font-family: var(--font-display) !important;
-  font-size: clamp(2.8em, 6.5vw, 4.8em);
+  font-size: clamp(2rem, 6.5vw, 4.8em);
   font-weight: var(--weight-display, 600);
   color: var(--accent, #182e5f);
   margin: 0 0 0.5em;
@@ -217,6 +217,8 @@ const Ruler: React.FC<{ side: 'left' | 'right' }> = ({ side }) => (
 const StatusRow = styled.div`
   display: flex;
   align-items: center;
+  /* Wrap instead of clipping on very narrow phones (sub-375px). */
+  flex-wrap: wrap;
   gap: 14px;
   margin-top: 28px;
 `;

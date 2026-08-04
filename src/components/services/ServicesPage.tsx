@@ -8,22 +8,18 @@ import SectionMarker from '../common/SectionMarker';
 import { SHOW_CZS_CASE_STUDY } from '../../config/czsCaseStudy';
 import './services.scss';
 import './services-featured.scss';
-// 21st.dev showcase components, curated under the "In action" section below.
+// 21st.dev showcase components. AgentPipeline and OrbitingStack were dropped
+// from "In action" (see the note at that section); re-import them to restore.
 import ContactGradient from '../_21test/ContactGradient';
 import ServicesShowcase from '../_21test/ServicesShowcase';
-import AgentPipeline from '../_21test/AgentPipeline';
-import OrbitingStack from '../_21test/OrbitingStack';
 import Reveal from '../_21test/Reveal';
 
-// Process visualizations: how I run large, AI-assisted engineering work.
+// Process visualization: how I run large, AI-assisted engineering work.
 // Restyled onto the site's navy/light palette and framed honestly as method,
-// not as claims about a specific client project.
+// not as claims about a specific client project. Four sibling visualizations
+// were removed for weight; the components remain in src/components/_bun/.
 import BunSectionHeading from '../_bun/BunSectionHeading';
 import BunAdversarialReview from '../_bun/BunAdversarialReview';
-import BunCommitsHeatmapDefault from '../_bun/BunCommitsHeatmap';
-import BunErrorsWorkflow from '../_bun/BunErrorsWorkflow';
-import BunBuildKite from '../_bun/BunBuildKite';
-import BunGitLogAnimation from '../_bun/BunGitLogAnimation';
 
 const EMAIL = 'eduardd.hv@gmail.com';
 const BOOKING_URL = process.env.REACT_APP_BOOKING_URL || 'https://cal.com/eduardhv/30min';
@@ -188,9 +184,12 @@ const ServicesPage: React.FC = () => {
           <h2 className="services-block__title" id="in-action">{t.demoTitle}</h2>
           <p className="services-demo__lead">{t.demoLead}</p>
         </Reveal>
-        <div className="services-demo__stage"><Reveal><AgentPipeline /></Reveal></div>
+        {/* One demo, not three. The section was 1,687px for 176 words, and the
+            three ran the same idea three times: a diagram of the pipeline, the
+            pipeline running, and a ring of tool logos. "See it run" is the only
+            one with numbers in it, so it is the one that stays. AgentPipeline
+            and OrbitingStack are still imported below if you want to swap. */}
         <div className="services-demo__stage"><Reveal><ServicesShowcase /></Reveal></div>
-        <div className="services-demo__stage"><Reveal><OrbitingStack /></Reveal></div>
       </section>
 
       <div className="services-marker"><SectionMarker index="03" label={t.sectionWhyMe} /></div>
@@ -254,65 +253,17 @@ const ServicesPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Errors to fixes: parallel agents across worktrees */}
-        <div className="services-how__item">
-          <Reveal>
-            <BunSectionHeading
-              accent="var(--accent)"
-              subtitle={t.errorsSubtitle}
-            >
-              {t.errorsTitle}
-            </BunSectionHeading>
-          </Reveal>
-          <div className="services-how__stage">
-            <Reveal><BunErrorsWorkflow /></Reveal>
-          </div>
-        </div>
+        {/* Four more visualizations used to live here: errors cleared in
+            parallel, the CI race to green, a commit heatmap, and a git log
+            replay. Together they were 2,608px, and the section as a whole was
+            39% of this page. They showed an engineering effort a reader cannot
+            attribute to any named client, so they cost the most screen for the
+            least proof. Adversarial review stays because it answers the one
+            real objection a buyer has about AI-written code. The components
+            (BunErrorsWorkflow, BunBuildKite, BunCommitsHeatmap,
+            BunGitLogAnimation) are still in src/components/_bun/ with their
+            copy in the i18n services dict, so any of them can come back. */}
 
-        {/* CI race to green */}
-        <div className="services-how__item">
-          <Reveal>
-            <BunSectionHeading
-              accent="var(--accent)"
-              subtitle={t.greenSubtitle}
-            >
-              {t.greenTitle}
-            </BunSectionHeading>
-          </Reveal>
-          <div className="services-how__stage">
-            <Reveal><BunBuildKite /></Reveal>
-          </div>
-        </div>
-
-        {/* Commit intensity heatmap */}
-        <div className="services-how__item">
-          <Reveal>
-            <BunSectionHeading
-              accent="var(--accent)"
-              subtitle={t.deliverySubtitle}
-            >
-              {t.deliveryTitle}
-            </BunSectionHeading>
-          </Reveal>
-          <div className="services-how__stage">
-            <Reveal><BunCommitsHeatmapDefault /></Reveal>
-          </div>
-        </div>
-
-        {/* Git log replay */}
-        <div className="services-how__item">
-          <Reveal>
-            <BunSectionHeading
-              accent="var(--accent)"
-              subtitle={t.historySubtitle}
-            >
-              {t.historyTitle}
-            </BunSectionHeading>
-          </Reveal>
-          <div className="services-how__stage">
-            <Reveal><BunGitLogAnimation /></Reveal>
-          </div>
-        </div>
       </section>
 
       {/* FAQ. The page answered "what can he build" thoroughly and "what is it

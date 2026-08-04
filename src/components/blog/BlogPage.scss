@@ -55,6 +55,12 @@ $ui-font: var(--font-body);
   height: 34px;
   border: 1px solid var(--border, rgba(255, 255, 255, 0.1));
   border-radius: 8px;
+
+  // 44px tap target on touch widths.
+  @media (max-width: 768px) {
+    width: 44px;
+    height: 44px;
+  }
   background: transparent;
   color: var(--text-soft, #{$text-dim});
   cursor: pointer;
@@ -684,6 +690,12 @@ $ui-font: var(--font-body);
       text-transform: uppercase;
       padding: 7px 11px;
       cursor: pointer;
+
+      // Readable size + 44px-ish tap height on touch widths.
+      @media (max-width: 768px) {
+        font-size: 0.8125rem;
+        padding: 12px 14px;
+      }
       transition: background 0.2s ease, color 0.2s ease;
 
       &:not(:last-child) {

@@ -127,3 +127,14 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-mono);
   font-size: var(--text-small);
 }
+
+// ── Mobile readability floor (responsive pass, 2026-08-04) ─────────────────
+// --text-caption carries real reading content (dates, subtitles, captions);
+// 12px is below the comfortable floor on a phone, so lift it to 13px under
+// the site breakpoint. --text-label stays 12px: it is decorative mono
+// eyebrows/tags that are deliberately tight.
+@media (max-width: 768px) {
+  :root {
+    --text-caption: 0.8125rem;
+  }
+}

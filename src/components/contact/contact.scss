@@ -124,10 +124,24 @@
         color: var(--accent);
         transform: translateY(-3px);
       }
+
+      // 44px tap target on touch widths.
+      @media (max-width: 768px) {
+        align-items: center;
+        justify-content: center;
+        min-width: 44px;
+        min-height: 44px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      gap: 8px;
     }
   }
 
-  @media (max-width: 600px) {
+  // Was 600px; the site breakpoint convention is 768px, and 601-768px kept
+  // the desktop 40px card padding.
+  @media (max-width: 768px) {
     padding: 36px 22px;
   }
 }

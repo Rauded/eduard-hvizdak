@@ -235,3 +235,46 @@
     text-align: center;
   }
 }
+
+// ── Mobile pass (responsive pass, 2026-08-04) ──────────────────────────────
+// This file previously had no media queries at all: the page kept desktop
+// metrics (96px top padding, 72px chapter gaps, 15px gutters) at 375px.
+@media (max-width: 768px) {
+  .things-page {
+    width: auto;
+    padding: 56px var(--container-px, 24px) 64px;
+    box-sizing: border-box;
+  }
+
+  .things-index {
+    margin-bottom: 36px;
+    padding: 18px;
+
+    // Full-width, comfortably tall tap rows in the index list.
+    &__list a {
+      padding: 12px 0;
+      min-height: 44px;
+      width: 100%;
+      box-sizing: border-box;
+      align-items: center;
+    }
+  }
+
+  .chapters {
+    gap: 48px;
+  }
+
+  .chapter {
+    &__head {
+      gap: 12px;
+    }
+
+    &__num {
+      min-width: 1.8em;
+    }
+
+    &__gallery {
+      gap: 16px;
+    }
+  }
+}
