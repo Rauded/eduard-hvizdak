@@ -21,6 +21,40 @@ const services = {
   ctaAltOr: 'nebo zavolejte na',
   ctaRepeatTitle: 'Máte proces, který by měl běžet sám?',
 
+  // Pro koho je stránka, vedle hero sekce.
+  fitKicker: 'Pro koho to je',
+  fit: [
+    'Týmy s ruční prací, která už teď stojí reálné hodiny každý týden',
+    'Firmy s archivem dokumentů, ve kterém se nedá vyhledávat',
+    'Regulovaná nebo citlivá agenda, která nesmí do veřejného cloudu',
+    'Zakladatelé, kteří chtějí věc postavenou a předanou, ne pilot',
+  ],
+
+  sectionFaq: 'Otázky',
+  faqTitle: 'Spolupráce',
+  faq: [
+    {
+      q: 'Jak projekt začíná?',
+      a: 'Krátkým hovorem. Pak dostanete písemný rozsah s jedním jasným výstupem, harmonogramem a pevnou cenou. Všechno vidíte dřív, než se na čemkoli domluvíme.',
+    },
+    {
+      q: 'Co bude, až to bude hotové?',
+      a: 'Nasadím to ve vašem prostředí, zdokumentované a s předáním, aby to váš tým uměl provozovat i beze mě. Abyste to udrželi v chodu, paušál nepotřebujete.',
+    },
+    {
+      q: 'Může to běžet na našem vlastním hardwaru?',
+      a: 'Ano. Privátní modely, řízení přístupů a audit logy, přičemž žádná data neopustí vaši infrastrukturu. Je to běžný požadavek, ne výjimka.',
+    },
+    {
+      q: 'Kdo tu práci doopravdy dělá?',
+      a: 'Já. Bavíte se přímo s člověkem, který píše kód, bez account manažera a bez předávání mezi lidmi.',
+    },
+    {
+      q: 'Jak poznám, že části napsané AI jsou v pořádku?',
+      a: 'Všechno projde protivnickou revizí a zeleným buildem, teprve pak to jde ven. Sekce Metoda výše ukazuje, jak to běží.',
+    },
+  ],
+
   sectionServices: 'Služby',
   sectionDemo: 'Naživo',
   sectionWhyMe: 'Proč já',

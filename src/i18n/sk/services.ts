@@ -19,6 +19,41 @@ const services = {
   ctaAltOr: 'alebo zavolajte na',
   ctaRepeatTitle: 'Máte proces, ktorý by mal bežať sám?',
 
+  // Pre koho je stránka, vedľa hero sekcie. Konkrétne, aby sa čitateľ vedel
+  // zaradiť alebo vylúčiť na prvý pohľad.
+  fitKicker: 'Pre koho to je',
+  fit: [
+    'Tímy s manuálnym procesom, ktorý už teraz stojí reálne hodiny každý týždeň',
+    'Firmy s archívom dokumentov, v ktorom sa nedá vyhľadávať',
+    'Regulovaná alebo citlivá agenda, ktorá nesmie ísť do verejného cloudu',
+    'Zakladatelia, ktorí chcú vec postavenú a odovzdanú, nie pilot',
+  ],
+
+  sectionFaq: 'Otázky',
+  faqTitle: 'Spolupráca',
+  faq: [
+    {
+      q: 'Ako sa projekt začína?',
+      a: 'Krátkym hovorom. Potom dostanete písomný rozsah s jedným jasným výstupom, harmonogramom a pevnou cenou. Všetko vidíte skôr, než sa na čomkoľvek dohodneme.',
+    },
+    {
+      q: 'Čo bude, keď to bude hotové?',
+      a: 'Nasadím to vo vašom prostredí, zdokumentované a s odovzdaním, aby to váš tím vedel prevádzkovať aj bezo mňa. Na to, aby to fungovalo, nepotrebujete paušál.',
+    },
+    {
+      q: 'Môže to bežať na našom vlastnom hardvéri?',
+      a: 'Áno. Súkromné modely, riadenie prístupov a audit logy, pričom žiadne dáta neopustia vašu infraštruktúru. Je to bežná požiadavka, nie výnimka.',
+    },
+    {
+      q: 'Kto tú prácu naozaj robí?',
+      a: 'Ja. Bavíte sa priamo s človekom, ktorý píše kód, bez account manažéra a bez preposielania medzi ľuďmi.',
+    },
+    {
+      q: 'Ako viem, že časti napísané AI sú v poriadku?',
+      a: 'Všetko prejde kontrolou protivníkom a zeleným buildom, až potom to ide von. Sekcia Metóda vyššie ukazuje, ako to beží.',
+    },
+  ],
+
   sectionServices: 'Služby',
   sectionDemo: 'Naživo',
   sectionWhyMe: 'Prečo ja',
