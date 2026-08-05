@@ -9,6 +9,7 @@ import { useTheme } from '../theme/ThemeContext';
 import Reveal from '../_21test/Reveal';
 import { asset } from '../portfolio/projectsData';
 import './czs-chatbot.scss';
+import './inzerpro-cs.scss';
 
 const demoVideo = asset('inzerpro.mp4');
 const demoPoster = asset('inzerpro-poster.webp');
@@ -54,7 +55,7 @@ const InzerproCaseStudyPage: React.FC = () => {
   const t = useT('inzerproCaseStudy');
 
   return (
-    <div className="czs" data-theme={theme}>
+    <div className="czs czs--inz" data-theme={theme}>
       <Seo title={t.seo.title} description={t.seo.description} path="/projects/inzerpro" />
 
       {/* ── Hero ─────────────────────────────────────────────── */}
@@ -91,7 +92,7 @@ const InzerproCaseStudyPage: React.FC = () => {
         <div className="czs-frame czs-frame--browser">
           <span className="czs-frame__bar">
             <span className="czs-frame__dots"><i /><i /><i /></span>
-            <span className="czs-frame__url">www.inzerpro.cz</span>
+            <span className="czs-frame__url"><img src="/brand/sites/inzerpro.svg" alt="" />www.inzerpro.cz</span>
           </span>
           <video src={demoVideo} poster={demoPoster} autoPlay muted loop playsInline aria-label="InzerPro dashboard walkthrough" />
         </div>
@@ -199,7 +200,7 @@ const InzerproCaseStudyPage: React.FC = () => {
             <div className="czs-mock">
               <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>www.inzerpro.cz/app/jobs</em></div>
               <div className="czs-apptoolbar">
-                <span className="czs-apptoolbar__name">Scheduled jobs</span>
+                <span className="czs-apptoolbar__name"><img src="/brand/sites/inzerpro.svg" alt="" />Scheduled jobs</span>
                 <span className="czs-apptoolbar__actions"><span className="czs-apptoolbar__btn">Today</span><span className="czs-apptoolbar__btn">All marketplaces</span></span>
               </div>
               <table className="czs-mock__table">
@@ -227,7 +228,7 @@ const InzerproCaseStudyPage: React.FC = () => {
             <div className="czs-mock">
               <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>posting canary · hourly</em></div>
               <div className="czs-apptoolbar">
-                <span className="czs-apptoolbar__name">Posting canary</span>
+                <span className="czs-apptoolbar__name"><img src="/brand/sites/inzerpro.svg" alt="" />Posting canary</span>
                 <span className="czs-apptoolbar__actions"><span className="czs-apptoolbar__btn">all green</span></span>
               </div>
               <table className="czs-mock__table">

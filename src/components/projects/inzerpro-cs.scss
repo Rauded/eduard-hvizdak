@@ -1,0 +1,63 @@
+// InzerPro skin for the shared case-study layout (czs-* classes).
+// Scoped under .czs--inz so the CZS page keeps its navy look untouched.
+// Pulls the product's own design language (tailwind.config.js in the
+// InzerPro repo): primary #ff5a00, pill buttons and badges, rounded-xl
+// cards, bold numerals. Page chrome (headings, CTAs, type scale) stays
+// on the portfolio's navy tokens; only the product-flavored components
+// go orange. Flat fills only, per the site's de-slop rules.
+
+.czs--inz {
+  --inz: #ff5a00;
+  --inz-strong: #d94c00;
+  --inz-soft: #fff2ea;
+  --inz-border: #ffd0b3;
+
+  // ── brand accents on labels and numerals ──
+  .czs-eyebrow,
+  .czs-kicker { color: var(--inz-strong); }
+  .czs-metric__value { color: var(--inz); }
+  .czs-node__n { color: var(--inz); }
+  .czs-win__after { color: var(--inz); }
+  .czs-mix__before { color: var(--inz-strong); }
+  .czs-pipe__loop svg { color: var(--inz); }
+
+  // ── marketplace cards: rounded-xl product cards ──
+  .czs-mkt {
+    border-radius: 14px;
+    transition: border-color 140ms ease, background 140ms ease;
+
+    &:hover {
+      border-color: var(--inz-border);
+      background: var(--inz-soft);
+    }
+  }
+
+  // ── pills, the app's dominant shape ──
+  .czs-badge { border-radius: 999px; padding: 0.16rem 0.55rem; }
+  .czs-stack__chip { border-radius: 999px; }
+  .czs-apptoolbar__btn {
+    border-radius: 999px;
+    border-color: var(--inz-border);
+    background: var(--inz-soft);
+    color: var(--inz-strong);
+    font-weight: 600;
+  }
+
+  // ── mock windows read as InzerPro app screens ──
+  .czs-apptoolbar__name {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+
+    img { width: 16px; height: 16px; border-radius: 4px; display: block; }
+  }
+  .czs-mock__bar em,
+  .czs-frame__url { color: var(--inz-strong); }
+  .czs-frame__url {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    img { width: 14px; height: 14px; border-radius: 3px; display: block; }
+  }
+}
