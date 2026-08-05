@@ -20,15 +20,26 @@ const demoPoster = asset('inzerpro-poster.webp');
 const EMAIL = 'eduardd.hv@gmail.com';
 const BOOKING_URL = process.env.REACT_APP_BOOKING_URL || 'https://cal.com/eduardhv/30min';
 
+// Marketplace favicons, the same set the InzerPro app itself uses. Bazos and
+// the third-party icons are the official ones; bazar-sk.svg is a vector
+// recreation of their favicon (the original only exists at 16px).
+const MKT_ICONS: Record<string, string> = {
+  'bazos-cz': '/brand/marketplaces/bazos.svg',
+  'bazos-sk': '/brand/marketplaces/bazos.svg',
+  'bazar-cz': '/brand/marketplaces/bazar-cz.png',
+  'bazar-sk': '/brand/marketplaces/bazar-sk.svg',
+  'aukro': '/brand/marketplaces/aukro.png',
+};
+
 // Anonymized illustrative rows for the Scheduled jobs mock. No real customer
 // data: invented listings, times and statuses.
 const JOB_ROWS = [
-  { id: 9312, action: 'relist', market: 'Bazos.cz', listing: 'iPhone 13, 128 GB', when: '06:00', status: 'ok' },
-  { id: 9311, action: 'relist', market: 'Bazos.sk', listing: 'iPhone 13, 128 GB', when: '06:00', status: 'ok' },
-  { id: 9310, action: 'post', market: 'Bazar.cz', listing: 'Skoda Octavia III 2.0 TDI', when: '05:45', status: 'ok' },
-  { id: 9309, action: 'relist', market: 'Bazar.sk', listing: 'Detsky bicykel 16"', when: '05:30', status: 'retry' },
-  { id: 9308, action: 'delete', market: 'Bazos.cz', listing: 'Herna konzole PS5 (sold)', when: '05:15', status: 'ok' },
-  { id: 9307, action: 'relist', market: 'Bazos.sk', listing: 'Sedaci souprava, rohova', when: '05:00', status: 'ok' },
+  { id: 9312, action: 'relist', mkt: 'bazos-cz', market: 'Bazoš.cz', listing: 'iPhone 13, 128 GB', when: '06:00', status: 'ok' },
+  { id: 9311, action: 'relist', mkt: 'bazos-sk', market: 'Bazoš.sk', listing: 'iPhone 13, 128 GB', when: '06:00', status: 'ok' },
+  { id: 9310, action: 'post', mkt: 'bazar-cz', market: 'Bazar.cz', listing: 'Skoda Octavia III 2.0 TDI', when: '05:45', status: 'ok' },
+  { id: 9309, action: 'relist', mkt: 'bazar-sk', market: 'Bazar.sk', listing: 'Detsky bicykel 16"', when: '05:30', status: 'retry' },
+  { id: 9308, action: 'delete', mkt: 'bazos-cz', market: 'Bazoš.cz', listing: 'Herna konzole PS5 (sold)', when: '05:15', status: 'ok' },
+  { id: 9307, action: 'relist', mkt: 'bazos-sk', market: 'Bazoš.sk', listing: 'Sedaci souprava, rohova', when: '05:00', status: 'ok' },
 ];
 
 const CANARY_ROWS = [
@@ -103,18 +114,15 @@ const InzerproCaseStudyPage: React.FC = () => {
         <Reveal><p className="czs-prose" dangerouslySetInnerHTML={{ __html: t.problem.body }} /></Reveal>
         <Reveal className="czs-mix">
           <span className="czs-mix__label">{t.problem.corpusLabel}</span>
-          <div className="czs-mix__bar">
-            {t.problem.mix.map(seg => (
-              <span className={`czs-mix__seg czs-mix__seg--${seg.fmt}`} key={seg.fmt} style={{ flexGrow: seg.n }} title={seg.k}>
-                {seg.short && <span className="czs-mix__inline">{seg.short}</span>}
-              </span>
-            ))}
-          </div>
-          <div className="czs-mix__legend">
-            {t.problem.mix.map(seg => (
-              <span className="czs-mix__key" key={seg.fmt}>
-                <i className={`czs-mix__sw czs-mix__seg--${seg.fmt}`} aria-hidden="true" />{seg.k}
-              </span>
+          <div className="czs-mkts">
+            {t.problem.marketplaces.map(m => (
+              <div className="czs-mkt" key={m.id}>
+                <img className="czs-mkt__icon" src={MKT_ICONS[m.id]} alt={m.name} width="28" height="28" loading="lazy" />
+                <span className="czs-mkt__meta">
+                  <span className="czs-mkt__name">{m.name} <span className={`czs-badge ${m.badge === 'live' ? 'ok' : 'changed'}`}>{m.badge}</span></span>
+                  <span className="czs-mkt__detail">{m.detail}</span>
+                </span>
+              </div>
             ))}
           </div>
           <span className="czs-mix__before">{t.problem.before}</span>
@@ -201,7 +209,7 @@ const InzerproCaseStudyPage: React.FC = () => {
                     <tr key={r.id}>
                       <td className="mono dim">{r.id}</td>
                       <td className="mono">{r.action}</td>
-                      <td>{r.market}</td>
+                      <td className="mkt"><img className="czs-mkticon" src={MKT_ICONS[r.mkt]} alt="" width="16" height="16" loading="lazy" />{r.market}</td>
                       <td className="q">{r.listing}</td>
                       <td className="mono">{r.when}</td>
                       <td><span className={`czs-badge ${r.status === 'ok' ? 'ok' : 'changed'}`}>{r.status === 'ok' ? 'done' : 'retrying'}</span></td>

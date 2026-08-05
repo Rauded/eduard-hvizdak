@@ -710,6 +710,57 @@ $mono: var(--font-mono, 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace)
     }
   }
 
+  // ── Problem: marketplace strip (InzerPro case study) ──
+  &-mkts {
+    margin-top: 0.9rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+    gap: 0.75rem;
+  }
+  &-mkt {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.8rem 0.95rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+
+    &__icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      flex: none;
+      object-fit: contain;
+    }
+    &__meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      min-width: 0;
+    }
+    &__name {
+      font-weight: 600;
+      font-size: 0.92rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    &__detail {
+      font-family: $mono;
+      font-size: 0.72rem;
+      line-height: 1.4;
+      color: var(--text-faint);
+    }
+  }
+  &-mkticon {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    vertical-align: -3px;
+    margin-right: 0.4rem;
+  }
+
   // ── Problem: source-mix stacked bar ──
   &-mix {
     margin-top: 2rem;

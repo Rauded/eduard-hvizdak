@@ -38,12 +38,15 @@ const inzerproCaseStudy = {
     title: 'New listings sit on top. Old ones sink.',
     body:
       'Resellers, small e-shops and car dealers were <strong>deleting and re-posting dozens of ads by hand every day</strong>, and competitors still buried them overnight. The marketplaces sell paid promotion but give small sellers <strong>no automation at all</strong>: none of them has a public API.',
-    corpusLabel: 'Integration surface, no public API anywhere',
-    mix: [
-      { fmt: 'web', k: 'Bazos CZ + SK: undocumented mobile API, datacenter IPs blocked', n: 2, short: 'Bazos CZ + SK' },
-      { fmt: 'pdf', k: 'Bazar.cz: ASP.NET VIEWSTATE form replay', n: 1, short: 'Bazar.cz' },
-      { fmt: 'docx', k: 'Bazar.sk: Azet OAuth session', n: 1, short: 'Bazar.sk' },
-      { fmt: 'video', k: 'Aukro: sandbox, beta', n: 1, short: '' },
+    corpusLabel: 'The integration surface, one project per marketplace',
+    // Icons for these live in public/brand/marketplaces/ and are mapped by id
+    // in the component. Same set and branding the InzerPro app itself uses.
+    marketplaces: [
+      { id: 'bazos-cz', name: 'Bazoš.cz', detail: 'undocumented mobile API, datacenter IPs blocked', badge: 'live' },
+      { id: 'bazos-sk', name: 'Bazoš.sk', detail: 'same API, own categories and section rules', badge: 'live' },
+      { id: 'bazar-cz', name: 'Bazar.cz', detail: 'ASP.NET VIEWSTATE form replay', badge: 'live' },
+      { id: 'bazar-sk', name: 'Bazar.sk', detail: 'Azet OAuth login session', badge: 'live' },
+      { id: 'aukro', name: 'Aukro', detail: 'official partner API, posting in sandbox', badge: 'beta' },
     ],
     before: 'Before: delete and re-post every ad by hand, marketplace by marketplace',
   },
