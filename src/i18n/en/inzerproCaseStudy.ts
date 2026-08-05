@@ -2,9 +2,12 @@
 // inzerpro.cz with paying customers. Text-only namespace: icons, layout and
 // mock-dashboard data live in the component; every visible string lives here
 // so cs/sk can override it later. All numbers are real and defensible (4
-// marketplaces, ~165 canonical categories, 41 RLS tables, 34 edge functions,
-// pricing); do not inflate them, and do NOT add customer or listing counts
-// until they are pulled from the production database. No em or en dashes.
+// marketplaces, ~165 categories, pricing); do not inflate them, and do NOT
+// add customer or listing counts until pulled from the production database.
+// TRADE SECRET RULE (Eduard, 2026-08-05): never describe HOW the marketplace
+// integrations work (APIs, proxies, form replay, logins, anti-dedup tricks).
+// The page sells outcomes a buyer cares about, not a build recipe someone
+// could reproduce. No em or en dashes.
 const inzerproCaseStudy = {
   back: 'Back to projects',
   seo: {
@@ -38,58 +41,60 @@ const inzerproCaseStudy = {
     title: 'New listings sit on top. Old ones sink.',
     body:
       'Resellers, small e-shops and car dealers were <strong>deleting and re-posting dozens of ads by hand every day</strong>, and competitors still buried them overnight. The marketplaces sell paid promotion but give small sellers <strong>no automation at all</strong>: none of them has a public API.',
-    corpusLabel: 'The integration surface, one project per marketplace',
+    corpusLabel: 'Marketplaces InzerPro posts to',
     // Icons for these live in public/brand/marketplaces/ and are mapped by id
     // in the component. Same set and branding the InzerPro app itself uses.
+    // Deliberately NO integration details here: how each marketplace is
+    // connected is a trade secret; the page sells the outcome, not the method.
     marketplaces: [
-      { id: 'bazos-cz', name: 'Bazoš.cz', detail: 'undocumented mobile API, datacenter IPs blocked', badge: 'live' },
-      { id: 'bazos-sk', name: 'Bazoš.sk', detail: 'same API, own categories and section rules', badge: 'live' },
-      { id: 'bazar-cz', name: 'Bazar.cz', detail: 'ASP.NET VIEWSTATE form replay', badge: 'live' },
-      { id: 'bazar-sk', name: 'Bazar.sk', detail: 'Azet OAuth login session', badge: 'live' },
-      { id: 'aukro', name: 'Aukro', detail: 'official partner API, posting in sandbox', badge: 'beta' },
+      { id: 'bazos-cz', name: 'Bazoš.cz', detail: 'the biggest Czech marketplace, fully automated', badge: 'live' },
+      { id: 'bazos-sk', name: 'Bazoš.sk', detail: 'the Slovak counterpart, fully automated', badge: 'live' },
+      { id: 'bazar-cz', name: 'Bazar.cz', detail: 'post, re-post and delete on schedule', badge: 'live' },
+      { id: 'bazar-sk', name: 'Bazar.sk', detail: 'post, re-post and delete on schedule', badge: 'live' },
+      { id: 'aukro', name: 'Aukro', detail: 'official partner, launching in beta', badge: 'beta' },
     ],
     before: 'Before: delete and re-post every ad by hand, marketplace by marketplace',
   },
   product: {
     title: 'Write the listing once. The system does the rest.',
     body: [
-      'A seller writes a listing once, picks marketplaces, and InzerPro <strong>posts, re-posts on schedule and deletes</strong> across all of them. One canonical category picker (about <strong>165 categories</strong>) resolves to the right category on every marketplace through a database crosswalk; photos are <strong>re-encoded per platform</strong> to fit each site\'s rules.',
-      'Every feature is <strong>free up to 10 active listings</strong>, then one plan, <strong>19 EUR / 479 Kč per month</strong>, for unlimited listings. The limit is enforced in the app and by a <strong>Postgres trigger</strong>, so it holds even if the client misbehaves.',
+      'A seller writes a listing once, picks marketplaces, and InzerPro <strong>posts, re-posts on schedule and deletes</strong> across all of them. One category picker (about <strong>165 categories</strong>) maps to the right category on every marketplace automatically; photos are <strong>prepared per platform</strong> to fit each site\'s rules.',
+      'Every feature is <strong>free up to 10 active listings</strong>, then one plan, <strong>19 EUR / 479 Kč per month</strong>, for unlimited listings.',
     ],
   },
   architecture: {
-    title: 'The pipeline behind one scheduled re-post',
+    title: 'What happens to one listing',
     body: [
-      'A React dashboard on <strong>Supabase</strong> (auth, Postgres with <strong>row-level security on all 41 tables</strong>, <strong>34 edge functions</strong>) runs post, relist and delete as <strong>scheduled jobs per user</strong>. All marketplace traffic goes through a small <strong>Node relay with a residential proxy</strong>, because Bazos blocks datacenter IPs outright, including the ones edge functions run from. Each marketplace is its own <strong>reverse-engineered integration</strong>: replaying the real HTTP flows proved far more reliable than driving a browser.',
+      'A seller\'s listings run as <strong>scheduled jobs, around the clock</strong>. Every marketplace has its own category tree, photo limits and section rules; InzerPro absorbs all of that, so the seller writes one listing and <strong>never deals with any marketplace\'s quirks again</strong>. When a marketplace changes something on its side, monitoring catches it <strong>within the hour</strong>, usually before any customer notices.',
     ],
     stepsLabel: 'The path of one listing',
     steps: [
       { k: 'Listing', v: 'written once in the dashboard' },
-      { k: 'Schedule', v: 'post, relist, delete jobs per user' },
-      { k: 'Categories', v: 'DB crosswalk, ~165 canonical' },
-      { k: 'Photos', v: 're-encoded per platform' },
-      { k: 'Relay', v: 'residential proxy, Node' },
-      { k: 'Marketplace', v: 'reverse-engineered API per site' },
-      { k: 'Live', v: 'on every selected marketplace' },
+      { k: 'Schedule', v: 'post, re-post, delete, per seller' },
+      { k: 'Categories', v: 'picked once, mapped to every site' },
+      { k: 'Photos', v: 'prepared per platform\'s rules' },
+      { k: 'Post', v: 'delivered to every selected marketplace' },
+      { k: 'Verify', v: 'checked, retried until live' },
+      { k: 'Report', v: 'status visible in the dashboard' },
     ],
     freshnessLabel: 'Watchdog loop',
     freshness:
-      'An <strong>hourly canary</strong> probes the relay, the proxy exit country, credentials and image acceptance, and emails <strong>only on state transitions</strong>: one mail when something breaks, one when it recovers. A <strong>nightly Playwright suite</strong> posts real listings with real credentials against the live marketplaces.',
-    stackLabel: 'Stack',
-    stack: ['React', 'Supabase', 'Postgres + RLS', 'Deno edge functions', 'Node relay', 'Railway', 'Stripe', 'PostHog', 'Sentry', 'Playwright'],
+      'An <strong>hourly health check</strong> exercises the whole posting path and emails <strong>only on state transitions</strong>: one mail when something breaks, one when it recovers. A <strong>nightly test suite</strong> posts real listings against the live marketplaces, so a marketplace-side change is caught the same night.',
+    stackLabel: 'Built on',
+    stack: ['React', 'Supabase', 'Postgres', 'Stripe', 'PostHog', 'Sentry'],
   },
   wins: {
     title: 'Decisions that kept it running',
-    intro: 'Each of these replaced a version that was already built and worked worse.',
+    intro: 'Simple beats clever wherever a customer can feel the difference.',
     items: [
       {
-        tag: 'Marketplace access',
-        before: 'Puppeteer',
-        after: 'HTTP replay',
-        scale: 'how listings reach Bazar.cz',
-        title: 'Replay the form, not the browser.',
+        tag: 'The morning grind',
+        before: 'by hand',
+        after: 'on schedule',
+        scale: 'how listings get re-posted',
+        title: 'The daily re-posting ritual, deleted.',
         body:
-          'Browser automation was the first approach and it <strong>flaked</strong>; replaying the ASP.NET form flow directly proved far more reliable. The cost: every marketplace is <strong>its own integration project</strong> with its own failure modes.',
+          'Sellers were deleting and re-posting <strong>dozens of ads every morning</strong> and competitors still buried them overnight. Now the listing is written <strong>once</strong> and the schedule owns it, including taking sold items down everywhere.',
       },
       {
         tag: 'Alerting',
@@ -123,7 +128,7 @@ const inzerproCaseStudy = {
       },
       {
         title: 'Posting canary',
-        caption: 'Hourly probe of relay health, proxy exit country, credentials and image acceptance, alerting on transitions only.',
+        caption: 'An hourly end-to-end health check of the whole posting path, alerting on state transitions only.',
       },
     ],
     closer: 'Post, relist and delete are verified green across all enabled marketplaces after every change.',

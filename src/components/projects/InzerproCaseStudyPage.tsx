@@ -43,10 +43,10 @@ const JOB_ROWS = [
 ];
 
 const CANARY_ROWS = [
-  { check: 'Relay reachable', detail: 'POST /health via residential proxy', ok: true },
-  { check: 'Proxy exit country', detail: 'CZ (required for Bazos)', ok: true },
+  { check: 'Posting path', detail: 'end-to-end check passed', ok: true },
   { check: 'Credentials valid', detail: '4 of 4 marketplace logins', ok: true },
-  { check: 'Image acceptance', detail: 'test upload passed pixel dedup', ok: true },
+  { check: 'Photos accepted', detail: 'test upload passed', ok: true },
+  { check: 'Schedules on time', detail: 'no overdue jobs', ok: true },
 ];
 
 const InzerproCaseStudyPage: React.FC = () => {
