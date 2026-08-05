@@ -38,6 +38,7 @@ function preloadRouteChunk(pathname: string): Promise<unknown> {
   if (pathname === '/services/ai-employee') return import('./components/services/AiEmployeePage');
   if (pathname === '/things') return import('./components/things/ThingsPage');
   if (SHOW_CZS_CASE_STUDY && pathname === '/projects/czs-muni-chatbot') return import('./components/projects/CzsChatbotPage');
+  if (pathname === '/projects/inzerpro') return import('./components/projects/InzerproCaseStudyPage');
   if (pathname === '/references') return import('./components/references/ReferencesPage');
   if (pathname === '/share-preview') return import('./components/share/SharePreviewPage');
   if (pathname === '/styleguide') return import('./components/styleguide/StyleguidePage');

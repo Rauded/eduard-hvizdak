@@ -153,6 +153,66 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/things"/>
   </url>
   <url>
+    <loc>https://eduardhvizdak.com/projects/czs-muni-chatbot</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/projects/czs-muni-chatbot"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/projects/czs-muni-chatbot"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/projects/czs-muni-chatbot"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/projects/czs-muni-chatbot"/>
+  </url>
+  <url>
+    <loc>https://eduardhvizdak.com/sk/projects/czs-muni-chatbot</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/projects/czs-muni-chatbot"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/projects/czs-muni-chatbot"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/projects/czs-muni-chatbot"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/projects/czs-muni-chatbot"/>
+  </url>
+  <url>
+    <loc>https://eduardhvizdak.com/cs/projects/czs-muni-chatbot</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/projects/czs-muni-chatbot"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/projects/czs-muni-chatbot"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/projects/czs-muni-chatbot"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/projects/czs-muni-chatbot"/>
+  </url>
+  <url>
+    <loc>https://eduardhvizdak.com/projects/inzerpro</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/projects/inzerpro"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/projects/inzerpro"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/projects/inzerpro"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/projects/inzerpro"/>
+  </url>
+  <url>
+    <loc>https://eduardhvizdak.com/sk/projects/inzerpro</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/projects/inzerpro"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/projects/inzerpro"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/projects/inzerpro"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/projects/inzerpro"/>
+  </url>
+  <url>
+    <loc>https://eduardhvizdak.com/cs/projects/inzerpro</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/projects/inzerpro"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/projects/inzerpro"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/projects/inzerpro"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/projects/inzerpro"/>
+  </url>
+  <url>
     <loc>https://eduardhvizdak.com/blog/newsmatics-hackathon</loc>
     <lastmod>2026-06-27</lastmod>
     <priority>0.7</priority>
@@ -234,33 +294,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/blog/zero-to-done"/>
   </url>
   <url>
-    <loc>https://eduardhvizdak.com/blog/fintech-unbundled-prague</loc>
-    <lastmod>2026-05-12</lastmod>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/blog/fintech-unbundled-prague"/>
-    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/blog/fintech-unbundled-prague"/>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/blog/fintech-unbundled-prague"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/blog/fintech-unbundled-prague"/>
-  </url>
-  <url>
-    <loc>https://eduardhvizdak.com/sk/blog/fintech-unbundled-prague</loc>
-    <lastmod>2026-05-12</lastmod>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/blog/fintech-unbundled-prague"/>
-    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/blog/fintech-unbundled-prague"/>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/blog/fintech-unbundled-prague"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/blog/fintech-unbundled-prague"/>
-  </url>
-  <url>
-    <loc>https://eduardhvizdak.com/cs/blog/fintech-unbundled-prague</loc>
-    <lastmod>2026-05-12</lastmod>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/blog/fintech-unbundled-prague"/>
-    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/blog/fintech-unbundled-prague"/>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/blog/fintech-unbundled-prague"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/blog/fintech-unbundled-prague"/>
-  </url>
-  <url>
     <loc>https://eduardhvizdak.com/blog/erasmus-bridges-not-walls</loc>
     <lastmod>2026-05-06</lastmod>
     <priority>0.7</priority>
@@ -286,35 +319,5 @@
     <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/blog/erasmus-bridges-not-walls"/>
     <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/blog/erasmus-bridges-not-walls"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/blog/erasmus-bridges-not-walls"/>
-  </url>
-  <url>
-    <loc>https://eduardhvizdak.com/references</loc>
-    <lastmod>2026-08-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/references"/>
-    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/references"/>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/references"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/references"/>
-  </url>
-  <url>
-    <loc>https://eduardhvizdak.com/sk/references</loc>
-    <lastmod>2026-08-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/references"/>
-    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/references"/>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/references"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/references"/>
-  </url>
-  <url>
-    <loc>https://eduardhvizdak.com/cs/references</loc>
-    <lastmod>2026-08-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://eduardhvizdak.com/references"/>
-    <xhtml:link rel="alternate" hreflang="sk" href="https://eduardhvizdak.com/sk/references"/>
-    <xhtml:link rel="alternate" hreflang="cs" href="https://eduardhvizdak.com/cs/references"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://eduardhvizdak.com/references"/>
   </url>
 </urlset>

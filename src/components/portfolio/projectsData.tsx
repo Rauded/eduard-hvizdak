@@ -144,7 +144,7 @@ export const PROJECTS: PortfolioProject[] = [
       solution:
         'A <strong>Deno</strong> engine handles auto-renewal, scheduled re-posting and bulk listing across seller accounts. <strong>Supabase</strong> covers auth, Postgres and storage, <strong>Stripe</strong> subscriptions. A <strong>React</strong> dashboard manages listings and analytics; <strong>PostHog</strong> shows what drives retention. The relisting grind runs on autopilot.',
       story:
-        'The weekend hackathon build is now a <strong>side business with paying customers</strong> at <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. I pitched it again at the <a href="/blog/zero-to-done">Zero to Done hackathon</a> in Brno: real customers, not a demo.',
+        'The weekend hackathon build is now a <strong>side business with paying customers</strong> at <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. I pitched it again at the <a href="/blog/zero-to-done">Zero to Done hackathon</a> in Brno: real customers, not a demo. Read the full <a href="/projects/inzerpro">case study</a> for the architecture, the reverse-engineered integrations, and how it runs unattended.',
     },
     subtitle_cs: 'SaaS, který provozuji vedle práce',
     description_cs:
@@ -159,7 +159,7 @@ export const PROJECTS: PortfolioProject[] = [
       solution:
         'Engine na <strong>Deno</strong> zvládá obnovování, naplánované přidávání a hromadnou inzerci napříč účty prodejců. <strong>Supabase</strong> drží autentizaci, Postgres a úložiště, <strong>Stripe</strong> předplatné. <strong>React</strong> dashboard řeší správu inzerátů a analytiku; <strong>PostHog</strong> ukazuje, co drží zákazníky. Dřina s obnovováním běží na autopilotu.',
       story:
-        'Z víkendového hackathonového projektu je dnes <strong>byznys vedle práce s platícími zákazníky</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Znovu jsem ho odprezentoval na <a href="/cs/blog/zero-to-done">hackathonu Zero to Done</a> v Brně: skuteční zákazníci, ne demo.',
+        'Z víkendového hackathonového projektu je dnes <strong>byznys vedle práce s platícími zákazníky</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Znovu jsem ho odprezentoval na <a href="/cs/blog/zero-to-done">hackathonu Zero to Done</a> v Brně: skuteční zákazníci, ne demo. Celá <a href="/cs/projects/inzerpro">případová studie</a> popisuje architekturu, reverzně vytvořené integrace a jak systém běží bez dozoru.',
     },
     subtitle_sk: 'SaaS, ktorý prevádzkujem popri práci',
     description_sk:
@@ -174,7 +174,7 @@ export const PROJECTS: PortfolioProject[] = [
       solution:
         'Engine na <strong>Deno</strong> zvláda obnovovanie, naplánované pridávanie a hromadnú inzerciu naprieč účtami predajcov. <strong>Supabase</strong> drží autentifikáciu, Postgres a úložisko, <strong>Stripe</strong> predplatné. <strong>React</strong> dashboard rieši správu inzerátov a analytiku; <strong>PostHog</strong> ukazuje, čo drží zákazníkov. Drina s obnovovaním beží na autopilote.',
       story:
-        'Z víkendového hackathonového projektu je dnes <strong>biznis popri práci s platiacimi zákazníkmi</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Znova som ho odprezentoval na <a href="/sk/blog/zero-to-done">hackathone Zero to Done</a> v Brne: skutoční zákazníci, nie demo.',
+        'Z víkendového hackathonového projektu je dnes <strong>biznis popri práci s platiacimi zákazníkmi</strong> na <a href="https://www.inzerpro.cz" target="_blank" rel="noopener noreferrer">inzerpro.cz</a>. Znova som ho odprezentoval na <a href="/sk/blog/zero-to-done">hackathone Zero to Done</a> v Brne: skutoční zákazníci, nie demo. Celá <a href="/sk/projects/inzerpro">prípadová štúdia</a> opisuje architektúru, reverzne vytvorené integrácie a ako systém beží bez dozoru.',
     },
   },
   {

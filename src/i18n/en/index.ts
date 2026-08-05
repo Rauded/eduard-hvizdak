@@ -25,6 +25,7 @@ import projects from './projects';
 import blog from './blog';
 import notfound from './notfound';
 import czsChatbot from './czsChatbot';
+import inzerproCaseStudy from './inzerproCaseStudy';
 import references from './references';
 import clients from './clients';
 import testimonials from './testimonials';
@@ -53,6 +54,7 @@ export const en = {
   blog,
   notfound,
   czsChatbot,
+  inzerproCaseStudy,
   references,
 };
 

@@ -28,7 +28,8 @@ const ROUTES = [
   '/things',
   '/services',
   '/references',
-  // '/projects/czs-muni-chatbot', // hidden pending CZS permission; see src/config/czsCaseStudy.ts
+  '/projects/czs-muni-chatbot',
+  '/projects/inzerpro',
   '/styleguide',
   '/404',
   '/blog/newsmatics-hackathon',
