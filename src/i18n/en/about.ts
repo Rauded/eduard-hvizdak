@@ -11,7 +11,7 @@ const about = {
     'A computer science student at Masaryk University who sits between business and technology.',
   recentPrefix: "For the past two years I've built AI systems across",
   recentSpan:
-    'public-contract document pipelines, university knowledge systems, and municipal AI assistants',
+    'public-contract document pipelines, university knowledge systems, and business AI assistants',
   interestsPrefix: "Now I'm focused on building",
   interestsSpan: 'production AI agents and automation systems',
   interestsSuffix:
@@ -21,7 +21,7 @@ const about = {
   skillsSuffix:
     'I build with Claude Code and modern AI tooling, so integrations, automations, and internal tools ship in days, not quarters.',
   outside:
-    "I spend my free time reading books, experimenting with new tools (token-maxxing) and doom-scrolling Twitter...",
+    "I spend my free time reading books, experimenting with new tools and doom-scrolling Twitter...",
   highlightEyebrow: 'Recent Highlight',
   highlightTitlePrefix: 'Invited by the',
   highlightTitleSpan: 'European Commission',

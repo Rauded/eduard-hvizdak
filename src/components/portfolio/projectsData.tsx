@@ -122,7 +122,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'InzerPro',
     subtitle: 'A SaaS I run on the side',
     description:
-      'Auto-renewal, bulk posting, and analytics for power sellers on Czech and Slovak second-hand marketplaces. The daily relisting runs on schedule instead of by hand. Hackathon build turned into side business with paying customers.',
+      'Auto-renewal, bulk posting, and analytics platform for power sellers on Czech and Slovak second-hand marketplaces. The daily relisting runs on schedule instead of by hand. Hackathon build turned into side business with paying customers.',
     tags: ['React', 'Supabase', 'Stripe', 'Deno', 'PostHog', 'SaaS', 'Hackathon'],
     links: [
       { label: 'www.inzerpro.cz', url: 'https://www.inzerpro.cz', type: 'demo', favicon: '/brand/sites/inzerpro.svg' },
@@ -183,7 +183,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'StudyExe',
     subtitle: 'Study tool I built for myself',
     description:
-      'A study tool I built for myself to help with my ADHD. Takes advantage of body doubling, knowledge retrieval from memory, eye tracking, AI scoring of recall study tests. Flash card AI generation. Full screen lock to destroy distractions',
+      'A study tool I built for myself to help with my ADHD. Takes advantage of body doubling, knowledge retrieval from memory, eye tracking, AI scoring of recall study tests. Flash card AI generation. Full screen lock to eliminate any distractions',
     tags: ['Python', 'OpenAI API', 'Eye Tracking', 'Tkinter', 'Desktop App', 'AI'],
     links: [
       { label: 'GitHub', url: 'https://github.com/Rauded', type: 'github' },
@@ -252,7 +252,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'Newsmatics Globe',
     subtitle: 'News as geography',
     description:
-      'Extracts place names from news articles with NLP, resolves them against GeoNames, and plots them on an interactive 3D globe. Timeline playback replays world events. Built in one hackathon weekend.',
+      'Extracts place names from news articles with NLP, resolves them against GeoNames, and plots them on an interactive 3D globe. Timeline playback replays world events. Built in one hackathon weekend. Lets you track where global events happen from news articles.',
     tags: ['Python', 'JavaScript', 'Globe.gl', 'LangChain', 'NLP', 'Data Viz', 'Hackathon'],
     links: [
       { label: 'GitHub', url: 'https://github.com/Rauded', type: 'github' },
@@ -314,7 +314,7 @@ export const PROJECTS: PortfolioProject[] = [
     title: 'KouzelnikNaAkci.cz',
     subtitle: 'A directory for Czech & Slovak magicians',
     description:
-      'Two-sided marketplace for hiring magicians in Czechia and Slovakia. Curated profiles, Stripe listings, automated email, 20+ city and occasion landing pages built for local search. Experimented with SEO, GEO, EMD here a lot.',
+      'Two-sided marketplace for hiring magicians in Czechia and Slovakia. Curated profiles, Stripe listings, automated email, 20+ city and location based landing pages built for local search. Experimented with SEO, GEO, EMD here a lot.',
     tags: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Vercel'],
     links: [
       { label: 'www.kouzelniknaakci.cz', url: 'https://www.kouzelniknaakci.cz', type: 'demo', favicon: '/brand/sites/kouzelniknaakci.svg' },
