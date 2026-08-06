@@ -79,6 +79,7 @@ const services = {
     { value: '200k+', label: 'students on the digital campus platform of 10 European universities where my AI assistant shipped' },
     { value: 'End to end', label: 'scoped, built, shipped, and handed over under one roof' },
   ],
+  referencesLink: 'Clients & references',
 
   whatIDo: 'What I do',
   youGet: 'You get',

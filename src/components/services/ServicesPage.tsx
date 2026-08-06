@@ -92,6 +92,11 @@ const ServicesPage: React.FC = () => {
                 </div>
               ))}
             </div>
+            <p className="services-stats__refs">
+              <Link to="/references">
+                {t.referencesLink} <LuArrowRight aria-hidden="true" />
+              </Link>
+            </p>
           </section>
 
           {/* Who this is for. The page described the work in detail but never

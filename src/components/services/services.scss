@@ -419,6 +419,28 @@
     color: var(--accent-strong);
   }
 
+  &__refs {
+    margin: 24px 0 0;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: var(--text-label);
+      letter-spacing: var(--tracking-label);
+      text-transform: uppercase;
+      color: var(--accent-text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 2px;
+
+      &:hover { border-bottom-color: var(--accent-text); }
+
+      svg { width: 13px; height: 13px; }
+    }
+  }
+
   &__label {
     font-size: var(--text-small);
     line-height: var(--leading-body);

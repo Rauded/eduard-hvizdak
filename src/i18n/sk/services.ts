@@ -70,6 +70,7 @@ const services = {
     { value: '200k+', label: 'študentov na platforme digitálneho kampusu 10 európskych univerzít, kam som nasadil AI asistenta' },
     { value: 'Od začiatku po koniec', label: 'navrhnuté, postavené, nasadené a odovzdané pod jednou strechou' },
   ],
+  referencesLink: 'Klienti a referencie',
 
   whatIDo: 'Čo robím',
   youGet: 'Dostanete',
