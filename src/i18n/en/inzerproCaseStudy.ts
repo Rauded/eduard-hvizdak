@@ -55,89 +55,63 @@ const inzerproCaseStudy = {
     ],
     before: 'Before: delete and re-post every ad by hand, marketplace by marketplace',
   },
-  product: {
-    title: 'Write the listing once. The system does the rest.',
-    body: [
-      'A seller writes a listing once, picks marketplaces, and InzerPro <strong>posts, re-posts on schedule and deletes</strong> across all of them. One category picker (about <strong>165 categories</strong>) maps to the right category on every marketplace automatically; photos are <strong>prepared per platform</strong> to fit each site\'s rules.',
-      'Every feature is <strong>free up to 10 active listings</strong>, then one plan, <strong>19 EUR / 479 Kč per month</strong>, for unlimited listings.',
-    ],
+  // Sections 02+ are visual-first (2026-08-05 redesign): each section is a
+  // heading, at most one sentence, and a bespoke component. Keep it that way.
+  fanout: {
+    title: 'Write it once.',
+    lead: 'Pick the marketplaces. InzerPro posts, re-posts and deletes everywhere, on schedule.',
+    card: {
+      photoAlt: 'Demo listing photo: an iPhone 13',
+      listingTitle: 'iPhone 13, 128 GB',
+      price: '9 990 Kč',
+      pill: 're-posts daily · 06:00',
+    },
+    statusPosted: 'posted',
+    statusBeta: 'beta',
   },
-  architecture: {
-    title: 'What happens to one listing',
-    body: [
-      'A seller\'s listings run as <strong>scheduled jobs, around the clock</strong>. Every marketplace has its own category tree, photo limits and section rules; InzerPro absorbs all of that, so the seller writes one listing and <strong>never deals with any marketplace\'s quirks again</strong>. When a marketplace changes something on its side, monitoring catches it <strong>within the hour</strong>, usually before any customer notices.',
-    ],
-    stepsLabel: 'The path of one listing',
-    steps: [
-      { k: 'Listing', v: 'written once in the dashboard' },
-      { k: 'Schedule', v: 'post, re-post, delete, per seller' },
-      { k: 'Categories', v: 'picked once, mapped to every site' },
-      { k: 'Photos', v: 'prepared per platform\'s rules' },
-      { k: 'Post', v: 'delivered to every selected marketplace' },
-      { k: 'Verify', v: 'checked, retried until live' },
-      { k: 'Report', v: 'status visible in the dashboard' },
-    ],
-    freshnessLabel: 'Watchdog loop',
-    freshness:
-      'An <strong>hourly health check</strong> exercises the whole posting path and emails <strong>only on state transitions</strong>: one mail when something breaks, one when it recovers. A <strong>nightly test suite</strong> posts real listings against the live marketplaces, so a marketplace-side change is caught the same night.',
-    stackLabel: 'Built on',
-    stack: ['React', 'Supabase', 'Postgres', 'Stripe', 'PostHog', 'Sentry'],
-  },
-  wins: {
-    title: 'Decisions that kept it running',
-    intro: 'Simple beats clever wherever a customer can feel the difference.',
-    items: [
-      {
-        tag: 'The morning grind',
-        before: 'by hand',
-        after: 'on schedule',
-        scale: 'how listings get re-posted',
-        title: 'The daily re-posting ritual, deleted.',
-        body:
-          'Sellers were deleting and re-posting <strong>dozens of ads every morning</strong> and competitors still buried them overnight. Now the listing is written <strong>once</strong> and the schedule owns it, including taking sold items down everywhere.',
-      },
-      {
-        tag: 'Alerting',
-        before: 'every failure',
-        after: 'transitions',
-        scale: 'when the canary sends email',
-        title: 'One mail when it breaks. One when it recovers.',
-        body:
-          'A check that fails for six hours sends <strong>one email, not six</strong>. Alert fatigue is a real risk when <strong>one person is the whole on-call rotation</strong>.',
-      },
-      {
-        tag: 'Pricing',
-        before: '3 tiers',
-        after: '1 plan',
-        scale: 'billing model',
-        title: 'Charge for volume, not features.',
-        body:
-          'The credit-based tier model <strong>confused users</strong>. Now everything is free to 10 active listings, then <strong>19 EUR / 479 Kč</strong> for unlimited: simple to explain, and <strong>enforced in Postgres</strong>, not just the UI.',
-      },
-    ],
+  day: {
+    title: 'The morning runs itself.',
+    railStart: '00:00',
+    railEnd: '24:00',
+    events: {
+      test: 'nightly test posts real listings',
+      reposts: 're-posts fire',
+      canary: 'health check, every hour',
+      wake: '07:30 · seller wakes up, already on top',
+    },
   },
   ops: {
-    title: 'It runs while nobody watches.',
-    intro:
-      'The system is built to run <strong>unattended</strong> and to tell one person that something broke <strong>before a customer does</strong>: scheduled jobs, an hourly canary, Sentry on every function, and a nightly end-to-end suite against the real marketplaces.',
-    note: 'The screens shown here are illustrative mockups with invented example data; the real dashboards live behind the app login.',
-    items: [
-      {
-        title: 'Scheduled jobs',
-        caption: 'Every post, relist and delete is a job with per-marketplace status and retries; the queue is the product.',
-      },
-      {
-        title: 'Posting canary',
-        caption: 'An hourly end-to-end health check of the whole posting path, alerting on state transitions only.',
-      },
-    ],
-    closer: 'Post, relist and delete are verified green across all enabled marketplaces after every change.',
+    title: 'If something breaks, I know first.',
+    lead: 'Hourly checks, nightly test listings on the live marketplaces, one email per state change.',
+    note: 'Illustrative mockup with invented example data; the real dashboard lives behind the app login.',
+    jobsTitle: 'Scheduled jobs',
+    jobsCaption: 'Every post, re-post and delete is a job with per-marketplace status and retries.',
+    strip: {
+      ok: 'running',
+      down: 'down · 1 email',
+      back: 'recovered · 1 email',
+      caption: 'Alerts only on change: a six-hour outage is two emails, not six.',
+    },
+  },
+  pricing: {
+    title: 'One plan.',
+    free: {
+      value: '0 Kč',
+      label: 'every feature',
+      detail: 'up to 10 active listings',
+    },
+    paid: {
+      value: '19 EUR',
+      alt: '479 Kč / month',
+      label: 'unlimited listings',
+      detail: 'one plan, nothing to compare',
+    },
   },
   cta: {
     eyebrow: 'Accepting new projects',
     title: 'Have a process a computer should own?',
     body:
-      'InzerPro is my own product: a manual daily workflow automated end to end, running in production with paying customers. If your team burns hours on work like this, I build the system that takes it over and the monitoring that proves it keeps working.',
+      'InzerPro automates a manual daily workflow end to end, with paying customers. If your team burns hours on work like this, I build the system that takes it over.',
     book: 'Book an intro call',
     email: 'Email me',
     outcome: 'A workflow that runs itself, with the monitoring to prove it.',

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  LuArrowLeft, LuArrowRight, LuCalendar, LuMail, LuExternalLink, LuRefreshCw,
+  LuArrowLeft, LuArrowRight, LuCalendar, LuMail, LuExternalLink,
 } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
@@ -13,6 +13,7 @@ import './inzerpro-cs.scss';
 
 const demoVideo = asset('inzerpro.mp4');
 const demoPoster = asset('inzerpro-poster.webp');
+const listingPhoto = asset('inzerpro-listing.webp');
 
 // The czs-* classes are the shared case-study design system (hero, metric
 // band, mix bar, pipeline nodes, mock windows, win tiles, CTA); this page
@@ -41,13 +42,6 @@ const JOB_ROWS = [
   { id: 9309, action: 'relist', mkt: 'bazar-sk', market: 'Bazar.sk', listing: 'Detsky bicykel 16"', when: '05:30', status: 'retry' },
   { id: 9308, action: 'delete', mkt: 'bazos-cz', market: 'Bazoš.cz', listing: 'Herna konzole PS5 (sold)', when: '05:15', status: 'ok' },
   { id: 9307, action: 'relist', mkt: 'bazos-sk', market: 'Bazoš.sk', listing: 'Sedaci souprava, rohova', when: '05:00', status: 'ok' },
-];
-
-const CANARY_ROWS = [
-  { check: 'Posting path', detail: 'end-to-end check passed', ok: true },
-  { check: 'Credentials valid', detail: '4 of 4 marketplace logins', ok: true },
-  { check: 'Photos accepted', detail: 'test upload passed', ok: true },
-  { check: 'Schedules on time', detail: 'no overdue jobs', ok: true },
 ];
 
 const InzerproCaseStudyPage: React.FC = () => {
@@ -130,77 +124,72 @@ const InzerproCaseStudyPage: React.FC = () => {
         </Reveal>
       </section>
 
-      {/* ── Product ──────────────────────────────────────────── */}
+      {/* ── 02 Product: one listing fans out to every marketplace ── */}
       <section className="czs-block">
-        <Reveal><span className="czs-kicker">02 / Product</span><h2 className="czs-block__title">{t.product.title}</h2></Reveal>
-        <div className="czs-prose">
-          {t.product.body.map((p, i) => <Reveal key={i}><p dangerouslySetInnerHTML={{ __html: p }} /></Reveal>)}
-        </div>
-      </section>
-
-      {/* ── Architecture ─────────────────────────────────────── */}
-      <section className="czs-block czs-block--tint">
-        <Reveal><span className="czs-kicker">03 / System</span><h2 className="czs-block__title">{t.architecture.title}</h2></Reveal>
-        <div className="czs-prose">
-          {t.architecture.body.map((p, i) => <Reveal key={i}><p dangerouslySetInnerHTML={{ __html: p }} /></Reveal>)}
-        </div>
-
-        <Reveal className="czs-pipe">
-          <span className="czs-pipe__label">{t.architecture.stepsLabel}</span>
-          <ol className="czs-pipe__row">
-            {t.architecture.steps.map((s, i) => (
-              <li className="czs-node" key={s.k}>
-                <span className="czs-node__n">{String(i + 1).padStart(2, '0')}</span>
-                <span className="czs-node__k">{s.k}</span>
-                <span className="czs-node__v">{s.v}</span>
+        <Reveal><span className="czs-kicker">02 / Product</span><h2 className="czs-block__title">{t.fanout.title}</h2></Reveal>
+        <Reveal><p className="czs-prose inz-lead">{t.fanout.lead}</p></Reveal>
+        <Reveal className="inz-fan">
+          <article className="inz-listing">
+            <img className="inz-listing__photo" src={listingPhoto} alt={t.fanout.card.photoAlt} loading="lazy" />
+            <div className="inz-listing__body">
+              <span className="inz-listing__title">{t.fanout.card.listingTitle}</span>
+              <span className="inz-listing__price">{t.fanout.card.price}</span>
+              <span className="inz-listing__pill">{t.fanout.card.pill}</span>
+            </div>
+          </article>
+          <svg className="inz-fan__wires" viewBox="0 0 100 320" preserveAspectRatio="none" aria-hidden="true">
+            {[28, 92, 156, 220, 284].map((y, i) => (
+              <path key={y} className={i === 4 ? 'beta' : ''} d={`M 0 160 C 55 160, 45 ${y}, 100 ${y}`} />
+            ))}
+          </svg>
+          <ul className="inz-fan__targets">
+            {t.problem.marketplaces.map(m => (
+              <li className="inz-target" key={m.id}>
+                <img src={MKT_ICONS[m.id]} alt="" width="22" height="22" loading="lazy" />
+                <span className="inz-target__name">{m.name}</span>
+                <span className={`czs-badge ${m.badge === 'live' ? 'ok' : 'changed'}`}>
+                  {m.badge === 'live' ? t.fanout.statusPosted : t.fanout.statusBeta}
+                </span>
               </li>
             ))}
-          </ol>
-          <div className="czs-pipe__loop">
-            <LuRefreshCw aria-hidden="true" />
-            <span className="czs-pipe__loop-label">{t.architecture.freshnessLabel}:</span>
-            <span dangerouslySetInnerHTML={{ __html: t.architecture.freshness }} />
-          </div>
-          <div className="czs-stack">
-            <span className="czs-stack__label">{t.architecture.stackLabel}</span>
-            {t.architecture.stack.map(s => <span className="czs-stack__chip" key={s}>{s}</span>)}
+          </ul>
+        </Reveal>
+      </section>
+
+      {/* ── 03 Schedule: a seller's day on one rail ──────────── */}
+      <section className="czs-block czs-block--tint">
+        <Reveal><span className="czs-kicker">03 / Schedule</span><h2 className="czs-block__title">{t.day.title}</h2></Reveal>
+        <Reveal className="inz-day">
+          <div className="inz-day__scroll">
+            <div className="inz-day__rail">
+              <div className="inz-day__band" style={{ left: `${(5 / 24) * 100}%`, width: `${(1.5 / 24) * 100}%` }} />
+              {[0, 6, 12, 18, 24].map(h => (
+                <span className={`inz-day__hour${h === 0 ? ' is-start' : h === 24 ? ' is-end' : ''}`} key={h} style={{ left: `${(h / 24) * 100}%` }}>
+                  <i />{String(h).padStart(2, '0')}:00
+                </span>
+              ))}
+              {Array.from({ length: 23 }, (_, i) => i + 1).map(h => (
+                <span className="inz-day__dot" key={h} style={{ left: `${(h / 24) * 100}%` }} />
+              ))}
+              <span className="inz-day__flag inz-day__flag--test" style={{ left: `${(2 / 24) * 100}%` }}>{t.day.events.test}</span>
+              <span className="inz-day__flag inz-day__flag--reposts" style={{ left: `${(5.75 / 24) * 100}%` }}>{t.day.events.reposts}</span>
+              <span className="inz-day__flag inz-day__flag--wake" style={{ left: `${(7.5 / 24) * 100}%` }}>{t.day.events.wake}</span>
+            </div>
+            <span className="inz-day__legend">{t.day.events.canary}</span>
           </div>
         </Reveal>
       </section>
 
-      {/* ── Decisions / before-after wins ────────────────────── */}
-      <section className="czs-block czs-block--tint">
-        <Reveal><span className="czs-kicker">04 / Decisions</span><h2 className="czs-block__title">{t.wins.title}</h2></Reveal>
-        <div className="czs-wins">
-          {t.wins.items.map(w => (
-            <Reveal className="czs-win" key={w.tag} as="article">
-              <span className="czs-win__tag">{w.tag}</span>
-              <div className="czs-win__stat">
-                <span className="czs-win__before pixel-accent">{w.before}</span>
-                <LuArrowRight aria-hidden="true" />
-                <span className="czs-win__after pixel-accent">{w.after}</span>
-              </div>
-              <span className="czs-win__scale">{w.scale}</span>
-              <h3 className="czs-win__title">{w.title}</h3>
-              <p className="czs-win__body" dangerouslySetInnerHTML={{ __html: w.body }} />
-            </Reveal>
-          ))}
-        </div>
-        <Reveal><p className="czs-wins__closer">{t.wins.intro}</p></Reveal>
-      </section>
-
-      {/* ── Operations ───────────────────────────────────────── */}
+      {/* ── 04 Reliability: the queue and the alerting policy ── */}
       <section className="czs-block czs-dashband">
-        <Reveal><span className="czs-kicker">05 / Operations</span><h2 className="czs-block__title">{t.ops.title}</h2></Reveal>
-        <Reveal><p className="czs-prose czs-prose--lead" dangerouslySetInnerHTML={{ __html: t.ops.intro }} /></Reveal>
-        <Reveal><p className="czs-caption">{t.ops.note}</p></Reveal>
+        <Reveal><span className="czs-kicker">04 / Reliability</span><h2 className="czs-block__title">{t.ops.title}</h2></Reveal>
+        <Reveal><p className="czs-prose inz-lead">{t.ops.lead}</p></Reveal>
         <div className="czs-dash">
-          {/* Scheduled jobs (full width) */}
           <Reveal className="czs-dashcard czs-dashcard--wide">
             <div className="czs-mock">
               <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>www.inzerpro.cz/app/jobs</em></div>
               <div className="czs-apptoolbar">
-                <span className="czs-apptoolbar__name"><img src="/brand/sites/inzerpro.svg" alt="" />Scheduled jobs</span>
+                <span className="czs-apptoolbar__name"><img src="/brand/sites/inzerpro.svg" alt="" />{t.ops.jobsTitle}</span>
                 <span className="czs-apptoolbar__actions"><span className="czs-apptoolbar__btn">Today</span><span className="czs-apptoolbar__btn">All marketplaces</span></span>
               </div>
               <table className="czs-mock__table">
@@ -219,36 +208,35 @@ const InzerproCaseStudyPage: React.FC = () => {
                 </tbody>
               </table>
             </div>
-            <h3 className="czs-dashcard__title">{t.ops.items[0].title}</h3>
-            <p className="czs-caption">{t.ops.items[0].caption}</p>
-          </Reveal>
-
-          {/* Posting canary */}
-          <Reveal className="czs-dashcard czs-dashcard--wide">
-            <div className="czs-mock">
-              <div className="czs-mock__bar"><span className="d" /><span className="d" /><span className="d" /><em>posting canary · hourly</em></div>
-              <div className="czs-apptoolbar">
-                <span className="czs-apptoolbar__name"><img src="/brand/sites/inzerpro.svg" alt="" />Posting canary</span>
-                <span className="czs-apptoolbar__actions"><span className="czs-apptoolbar__btn">all green</span></span>
-              </div>
-              <table className="czs-mock__table">
-                <thead><tr><th>Check</th><th>Detail</th><th>Status</th></tr></thead>
-                <tbody>
-                  {CANARY_ROWS.map((r, i) => (
-                    <tr key={i}>
-                      <td>{r.check}</td>
-                      <td className="mono dim">{r.detail}</td>
-                      <td><span className="czs-badge ok">pass</span></td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <h3 className="czs-dashcard__title">{t.ops.items[1].title}</h3>
-            <p className="czs-caption">{t.ops.items[1].caption}</p>
+            <p className="czs-caption">{t.ops.jobsCaption} {t.ops.note}</p>
           </Reveal>
         </div>
-        <Reveal><p className="czs-closer">{t.ops.closer}</p></Reveal>
+        <Reveal className="inz-strip">
+          <div className="inz-strip__bar">
+            <span className="inz-strip__seg is-ok" style={{ flexGrow: 5 }}>{t.ops.strip.ok}</span>
+            <span className="inz-strip__seg is-down" style={{ flexGrow: 2 }}><LuMail aria-hidden="true" />{t.ops.strip.down}</span>
+            <span className="inz-strip__seg is-ok" style={{ flexGrow: 4 }}><LuMail aria-hidden="true" />{t.ops.strip.back}</span>
+          </div>
+          <span className="inz-strip__caption">{t.ops.strip.caption}</span>
+        </Reveal>
+      </section>
+
+      {/* ── 05 Pricing: two flat blocks ──────────────────────── */}
+      <section className="czs-block">
+        <Reveal><span className="czs-kicker">05 / Pricing</span><h2 className="czs-block__title">{t.pricing.title}</h2></Reveal>
+        <div className="inz-price">
+          <Reveal className="inz-price__card" as="article">
+            <span className="inz-price__value pixel-accent">{t.pricing.free.value}</span>
+            <span className="inz-price__label">{t.pricing.free.label}</span>
+            <span className="inz-price__detail">{t.pricing.free.detail}</span>
+          </Reveal>
+          <Reveal className="inz-price__card inz-price__card--paid" as="article">
+            <span className="inz-price__value pixel-accent">{t.pricing.paid.value}</span>
+            <span className="inz-price__alt">{t.pricing.paid.alt}</span>
+            <span className="inz-price__label">{t.pricing.paid.label}</span>
+            <span className="inz-price__detail">{t.pricing.paid.detail}</span>
+          </Reveal>
+        </div>
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────── */}

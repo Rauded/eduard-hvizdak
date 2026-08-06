@@ -43,6 +43,271 @@
     font-weight: 600;
   }
 
+  // ── one-sentence section leads (the only prose below the fold) ──
+  .inz-lead {
+    max-width: 34rem;
+    margin-top: 0.5rem;
+  }
+
+  // ── 02: fan-out, one listing wired to every marketplace ──
+  .inz-fan {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: minmax(220px, 300px) minmax(60px, 130px) minmax(230px, 330px);
+    align-items: center;
+    justify-content: center;
+  }
+  .inz-listing {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #fff;
+    overflow: hidden;
+
+    &__photo {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border);
+    }
+    &__body {
+      padding: 0.85rem 1rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    &__title { font-weight: 600; font-size: 0.95rem; }
+    &__price { color: var(--inz); font-weight: 700; font-size: 1.05rem; }
+    &__pill {
+      align-self: flex-start;
+      margin-top: 0.3rem;
+      font-family: var(--font-mono, monospace);
+      font-size: 0.68rem;
+      padding: 0.22rem 0.6rem;
+      border-radius: 999px;
+      background: var(--inz-soft);
+      border: 1px solid var(--inz-border);
+      color: var(--inz-strong);
+    }
+  }
+  .inz-fan__wires {
+    width: 100%;
+    height: 320px;
+
+    path {
+      fill: none;
+      stroke: var(--inz-border);
+      stroke-width: 2;
+      &.beta { stroke-dasharray: 5 5; }
+    }
+  }
+  .inz-fan__targets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+  .inz-target {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: #fff;
+    padding: 0.45rem 0.8rem 0.45rem 0.55rem;
+
+    img { border-radius: 50%; flex: none; }
+    &__name { font-weight: 600; font-size: 0.88rem; flex: 1; }
+  }
+  @media (max-width: 760px) {
+    .inz-fan { grid-template-columns: 1fr; gap: 1rem; justify-items: center; }
+    .inz-fan__wires { display: none; }
+    .inz-listing { width: min(300px, 100%); }
+    .inz-fan__targets { width: min(330px, 100%); }
+  }
+
+  // ── 03: the seller's day on one rail ──
+  .inz-day { margin-top: 2.2rem; }
+  .inz-day__scroll { overflow-x: auto; padding-bottom: 0.5rem; }
+  .inz-day__rail {
+    position: relative;
+    min-width: 760px;
+    height: 140px;
+    border-bottom: 2px solid var(--border-strong, #cdd3da);
+    margin-bottom: 0.4rem;
+  }
+  .inz-day__band {
+    position: absolute;
+    bottom: 0;
+    height: 46px;
+    background: var(--inz-soft);
+    border: 1px solid var(--inz-border);
+    border-bottom: none;
+    border-radius: 6px 6px 0 0;
+  }
+  .inz-day__hour {
+    position: absolute;
+    bottom: -1.6rem;
+    transform: translateX(-50%);
+    font-family: var(--font-mono, monospace);
+    font-size: 0.68rem;
+    color: var(--text-faint);
+
+    i {
+      position: absolute;
+      left: 50%;
+      bottom: 1.45rem;
+      width: 2px;
+      height: 10px;
+      background: var(--border-strong, #cdd3da);
+    }
+    &.is-start { transform: translateX(0); i { left: 1px; } }
+    &.is-end { transform: translateX(-100%); i { left: auto; right: 1px; } }
+  }
+  .inz-day__dot {
+    position: absolute;
+    bottom: -3px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--inz);
+    transform: translateX(-50%);
+  }
+  .inz-day__flag {
+    position: absolute;
+    transform: translateX(-50%);
+    font-family: var(--font-mono, monospace);
+    font-size: 0.7rem;
+    white-space: nowrap;
+    padding: 0.24rem 0.6rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: #fff;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 100%;
+      width: 2px;
+      background: var(--border-strong, #cdd3da);
+    }
+    &--test {
+      top: 4px;
+      transform: translateX(0);
+      color: var(--text-muted);
+      &::after { left: 0; height: 108px; }
+    }
+    &--reposts {
+      top: 48px;
+      color: var(--inz-strong);
+      border-color: var(--inz-border);
+      background: var(--inz-soft);
+      font-weight: 600;
+      &::after { height: 64px; background: var(--inz-border); }
+    }
+    &--wake {
+      top: 92px;
+      transform: translateX(0);
+      margin-left: 14px;
+      color: var(--text-muted);
+      &::after { left: -14px; top: 50%; width: 12px; height: 2px; }
+    }
+  }
+  .inz-day__legend {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    margin-top: 2.2rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.7rem;
+    color: var(--text-faint);
+
+    &::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--inz);
+    }
+  }
+
+  // ── 04: transition-only alerting as a state strip ──
+  .inz-strip {
+    max-width: 1060px;
+    margin: 1.6rem auto 0;
+  }
+  .inz-strip__bar {
+    display: flex;
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .inz-strip__seg {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.6rem 0.5rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.72rem;
+    white-space: nowrap;
+
+    svg { flex: none; }
+    &.is-ok { background: #ecfdf3; color: #067647; }
+    &.is-down { background: #fef3f2; color: #b42318; }
+    & + & { border-left: 1px solid var(--border); }
+  }
+  .inz-strip__caption {
+    display: block;
+    margin-top: 0.6rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+  @media (max-width: 560px) {
+    .inz-strip__seg { font-size: 0.62rem; padding-inline: 0.3rem; }
+  }
+
+  // ── 05: pricing, two flat blocks ──
+  .inz-price {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 340px));
+    gap: 1rem;
+    justify-content: center;
+  }
+  .inz-price__card {
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: #fff;
+    padding: 1.6rem 1.5rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    &--paid {
+      border-color: var(--inz-border);
+      background: var(--inz-soft);
+
+      .inz-price__value { color: var(--inz); }
+    }
+  }
+  .inz-price__value {
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    line-height: 1;
+    color: var(--accent-heading, #182e5f);
+  }
+  .inz-price__alt {
+    font-family: var(--font-mono, monospace);
+    font-size: 0.72rem;
+    color: var(--text-faint);
+  }
+  .inz-price__label { margin-top: 0.55rem; font-weight: 600; }
+  .inz-price__detail { color: var(--text-muted); font-size: 0.9rem; }
+
   // ── mock windows read as InzerPro app screens ──
   .czs-apptoolbar__name {
     display: inline-flex;
