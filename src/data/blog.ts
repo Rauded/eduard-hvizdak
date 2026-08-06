@@ -190,7 +190,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </figure>
 
       <h2>Final Thoughts</h2>
-      <p>I left convinced that youth input on digital policy isn't just a box-ticking exercise. The people who grew up inside these systems tend to spot the manipulation fastest. Thanks to the <strong>European Commission</strong> and Commissioner <strong>Michael McGrath</strong> for actually listening.</p>
+      <p>I left convinced that youth input on digital policy is incredibly important. The people who grew up inside these systems tend to spot the manipulation fastest. Thanks to the <strong>European Commission</strong> and Commissioner <strong>Michael McGrath</strong> for actually listening.</p>
 
       <figure class="blog-figure">
         <img src="/blog/digital-fairness/df-01.jpg" alt="Group photo of the young participants with Commissioner Michael McGrath in Ljubljana" class="blog-img" />
