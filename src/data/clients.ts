@@ -24,10 +24,12 @@ export interface Client {
   scale?: number;
 }
 
+// Ordered by impressiveness: MUNI first, then EDUC Alliance, Artiffine,
+// OneBond, iGalileo last.
 export const CLIENTS: Client[] = [
-  { name: 'Artiffine', role: 'AI & Web3 studio', dates: 'Present', url: 'https://www.artiffine.com', logo: '/brand/clients/artiffine.svg', scale: 0.7, current: true },
-  { name: 'Masaryk University, CZS', role: 'AI Systems Engineer', dates: '2025 - Present', url: 'https://czs.muni.cz/cs/', logo: '/brand/clients/masaryk-university.png', scale: 0.95, current: true },
-  { name: 'OneBond', role: 'AI Systems Engineer', dates: '2025 - 2026', url: 'https://onebond.tech', logo: '/brand/clients/onebond.svg', scale: 1.2 },
-  { name: 'iGalileo', role: 'AI Developer', dates: '2025', url: 'https://www.igalileo.cz/', logo: '/brand/clients/igalileo.svg', scale: 0.95 },
+  { name: 'Masaryk University, CZS', role: 'AI Systems Engineer', dates: '2025 - Present', url: 'https://czs.muni.cz/cs/', logo: '/brand/clients/masaryk-university.png', scale: 0.78, current: true },
   { name: 'EDUC Alliance', role: 'Think Tank Member & Programmer', dates: '2024 - 2025', url: 'https://www.educalliance.eu', logo: '/brand/clients/educ-alliance.png', scale: 1.0 },
+  { name: 'Artiffine', role: 'AI & Web3 studio', dates: 'Present', url: 'https://www.artiffine.com', logo: '/brand/clients/artiffine.svg', scale: 0.62, current: true },
+  { name: 'OneBond', role: 'AI Systems Engineer', dates: '2025 - 2026', url: 'https://onebond.tech', logo: '/brand/clients/onebond.svg', scale: 0.85 },
+  { name: 'iGalileo', role: 'AI Developer', dates: '2025', url: 'https://www.igalileo.cz/', logo: '/brand/clients/igalileo.svg', scale: 0.9 },
 ];
