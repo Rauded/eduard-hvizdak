@@ -44,9 +44,46 @@ const JOB_ROWS = [
   { id: 9307, action: 'relist', mkt: 'bazos-sk', market: 'Bazoš.sk', listing: 'Sedaci souprava, rohova', when: '05:00', status: 'ok' },
 ];
 
+// Fallback wire endpoints for the first paint; replaced by measured positions.
+const FAN_FALLBACK = { start: 160, ys: [28, 92, 156, 220, 284] };
+
 const InzerproCaseStudyPage: React.FC = () => {
   const { theme } = useTheme();
   const t = useT('inzerproCaseStudy');
+
+  // The fan-out wires must end at the vertical center of each marketplace row.
+  // Those centers depend on rendered row heights (locale text, font metrics),
+  // so they are measured from the DOM and mapped into the SVG's viewBox space
+  // instead of being hardcoded.
+  const fanSvgRef = React.useRef<SVGSVGElement>(null);
+  const fanCardRef = React.useRef<HTMLElement>(null);
+  const fanListRef = React.useRef<HTMLUListElement>(null);
+  const [fan, setFan] = React.useState(FAN_FALLBACK);
+
+  React.useLayoutEffect(() => {
+    const measure = () => {
+      const svg = fanSvgRef.current;
+      const card = fanCardRef.current;
+      const list = fanListRef.current;
+      if (!svg || !card || !list) return;
+      const s = svg.getBoundingClientRect();
+      if (s.height === 0) return; // wires are display:none on mobile
+      const toVb = (y: number) => ((y - s.top) / s.height) * 320;
+      const cardR = card.getBoundingClientRect();
+      setFan({
+        start: toVb(cardR.top + cardR.height / 2),
+        ys: Array.from(list.children).map((li) => {
+          const r = (li as HTMLElement).getBoundingClientRect();
+          return toVb(r.top + r.height / 2);
+        }),
+      });
+    };
+    measure();
+    // Font swaps change row heights after first paint; re-measure when ready.
+    if (document.fonts?.ready) document.fonts.ready.then(measure);
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
 
   return (
     <div className="czs czs--inz" data-theme={theme}>
@@ -129,7 +166,7 @@ const InzerproCaseStudyPage: React.FC = () => {
         <Reveal><span className="czs-kicker">02 / Product</span><h2 className="czs-block__title">{t.fanout.title}</h2></Reveal>
         <Reveal><p className="czs-prose inz-lead">{t.fanout.lead}</p></Reveal>
         <Reveal className="inz-fan">
-          <article className="inz-listing">
+          <article className="inz-listing" ref={fanCardRef}>
             <img className="inz-listing__photo" src={listingPhoto} alt={t.fanout.card.photoAlt} loading="lazy" />
             <div className="inz-listing__body">
               <span className="inz-listing__title">{t.fanout.card.listingTitle}</span>
@@ -137,12 +174,12 @@ const InzerproCaseStudyPage: React.FC = () => {
               <span className="inz-listing__pill">{t.fanout.card.pill}</span>
             </div>
           </article>
-          <svg className="inz-fan__wires" viewBox="0 0 100 320" preserveAspectRatio="none" aria-hidden="true">
-            {[28, 92, 156, 220, 284].map((y, i) => (
-              <path key={y} className={i === 4 ? 'beta' : ''} d={`M 0 160 C 55 160, 45 ${y}, 100 ${y}`} />
+          <svg ref={fanSvgRef} className="inz-fan__wires" viewBox="0 0 100 320" preserveAspectRatio="none" aria-hidden="true">
+            {fan.ys.map((y, i) => (
+              <path key={i} className={i === fan.ys.length - 1 ? 'beta' : ''} d={`M 0 ${fan.start} C 55 ${fan.start}, 45 ${y}, 100 ${y}`} />
             ))}
           </svg>
-          <ul className="inz-fan__targets">
+          <ul className="inz-fan__targets" ref={fanListRef}>
             {t.problem.marketplaces.map(m => (
               <li className="inz-target" key={m.id}>
                 <img src={MKT_ICONS[m.id]} alt="" width="22" height="22" loading="lazy" />

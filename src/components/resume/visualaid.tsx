@@ -17,6 +17,13 @@ const splitCompany = (company: string): { name: string; sub?: string } => {
 // the alternation matches "Retrieval-Augmented Generation" before "RAG".
 const KEYWORDS = [
   'Retrieval-Augmented Generation',
+  'digital campus platform',
+  'AI deployment strategy',
+  '10 European universities',
+  '200k+ students',
+  'GDPR compliance',
+  'AI assistant',
+  'governance',
   'autonomous multi-agent pipeline',
   'knowledge ingestion pipelines',
   'AI knowledge assistants',
