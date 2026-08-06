@@ -610,7 +610,7 @@ export const BLOG_POSTS: BlogPost[] = [
       'I spent a day in Prague working Fintech UnBundled as crew, volunteering with Fyltr. Empty room at half nine in the morning, a paper badge, and a day spent on the side of the event where the work happens.',
     thumbnail: '/blog/fintech-unbundled/stage-before-doors.jpg',
     content: `
-      <p>On <strong>12 May 2026</strong> I spent a day in Prague working <strong><a href="https://fintechweekcee.com/unbundled" target="_blank" rel="noopener noreferrer">Fintech UnBundled</a></strong> as crew. I was there as a volunteer with <strong>Fyltr</strong>, not as a guest with a ticket, so I saw the event from the side where the work happens, which honestly I think is the better side.</p>
+      <p>On <strong>12 May 2026</strong> I spent a day in Prague working <strong><a href="https://fintechweekcee.com/unbundled" target="_blank" rel="noopener noreferrer">Fintech UnBundled</a></strong> as crew. I was there as a volunteer with <strong>Fyltr</strong>, I saw the event from the side where the work happens, which honestly I think is the better side.</p>
 
       <p>UnBundled was the flagship day of <strong>Fintech Week CEE 2026</strong>. The whole week ran 8 to 15 May and it was the first edition, four flagship events across one week, with Crypto &amp; Banking the day before and Love + roboti the day after. The line for the day was "founders, builders, and the work behind the work", which fit, because most of what happened on stage was about the messy parts and not the launch posts.</p>
 
@@ -621,27 +621,27 @@ export const BLOG_POSTS: BlogPost[] = [
 
       <h2>Crew, Not Guest</h2>
       <p>I got there in the morning while the room was still empty. There is something about a conference room before an event that I like a lot more than the event itself. Then you put the badge on and the doors open and it goes fast for the rest of the day.</p>
-      <p>The paper crew badge is a small thing but it changes the day. You are not walking around deciding which talk to sit in, you are the person people ask where the coffee is or where the roundtable room is, and you end up talking to far more people than you would as an attendee.</p>
+      <p>The paper crew badge is a small thing but it changes the day. You are not walking around deciding which talk to sit in, you are the person people ask for help and you end up talking to far more people than you would as an attendee.</p>
 
       <figure class="blog-figure">
         <img src="/blog/fintech-unbundled/crew-badge.jpg" alt="Paper crew badge on a lanyard with sponsor logos, Fintech UnBundled Prague" class="blog-img" />
       </figure>
 
       <h2>What The Day Was</h2>
-      <p>The main stage ran five blocks, and the names give a decent idea of the tone: <strong>CTRL+ALT+FINANCE</strong> (reboot required), <strong>NEW MONEY, NEW RAILS</strong> (laying track where there was none), <strong>HUMAN x MACHINE</strong> (automation is easy, trust is hard), <strong>MONEY x FRONTIERS</strong> (capital, borders, and the edges of what is possible), and <strong>FOUNDERS' SCARS</strong> (earned in public). Two invitation-only things ran in parallel, a regulatory roundtable and a VC and founders session. At one point there was a screen in the hallway with the VC pitch sessions on it, which was the part of the day with the most nervous people in one corridor.</p>
+      <p>The main stage ran five blocks, and the names give a decent idea of the tone: <strong>CTRL+ALT+FINANCE</strong> (reboot required), <strong>NEW MONEY, NEW RAILS</strong> (laying track where there was none), <strong>HUMAN x MACHINE</strong> (automation is easy, trust is hard), <strong>MONEY x FRONTIERS</strong> (capital, borders, and the edges of what is possible), and <strong>FOUNDERS' SCARS</strong> (earned in public). Two invitation-only things ran in parallel, a regulatory roundtable and a VC and founders session. At one point there was a screen in the hallway with the VC pitch sessions on it, which was the part of the day which I enjoyed the most.</p>
 
       <figure class="blog-figure">
         <img src="/blog/fintech-unbundled/state-of-cee-fintech.jpg" alt="State of CEE Fintech on the big screen at Fintech UnBundled with a full audience" class="blog-img" />
       </figure>
 
-      <p>The lineup had people like <strong>Georg Hauer</strong> (ex N26), <strong>Dann Bibas</strong> (ex Wise) and <strong>Will Orde</strong> from Passion Capital, and the partners on the wall were <strong>KB</strong>, <strong>Mastercard</strong>, <strong>Visa</strong>, FINREG Partners, The FinTechers, BD Partners and KB Smart Solutions. For a first edition in Prague that is a serious room.</p>
+      <p>The lineup had people like <strong>Georg Hauer</strong> (ex N26), <strong>Dann Bibas</strong> (ex Wise) and <strong>Will Orde</strong> from Passion Capital, and the partners on the wall were <strong>KB</strong>, <strong>Mastercard</strong>, <strong>Visa</strong>, FINREG Partners, The FinTechers, BD Partners and KB Smart Solutions. For a first edition in Prague that is pretty cool.</p>
 
       <figure class="blog-figure">
         <img src="/blog/fintech-unbundled/sponsor-wall.jpg" alt="Audience facing the sponsor LED wall at Fintech UnBundled Prague" class="blog-img" />
       </figure>
 
       <h2>Why It Mattered To Me</h2>
-      <p>I work on a crypto payment gateway, so NEW MONEY, NEW RAILS was the block I cared about most. When you spend your days on webhooks, quotes, settlement and the reconciliation nobody puts on a slide, it is strange and also nice to hear founders describe the exact same problems in one sentence and watch a room nod like it is simple. It is not simple. FOUNDERS' SCARS was the honest version of that.</p>
+      <p>I worked on a crypto payment gateway, so NEW MONEY, NEW RAILS was the block I cared about most. When you spend your days on webhooks, quotes, settlement and the reconciliation nobody puts on a slide, it is strange and also nice to hear founders describe the exact same problems in one sentence and watch a room nod like it is simple. It is not simple.</p>
       <p>The other thing I did not expect: most of the value was in the hallway. Not in a networking way, more that as crew you talk to speakers before they go on and after they come off, and people are a lot more real then.</p>
 
       <figure class="blog-figure">
@@ -649,14 +649,14 @@ export const BLOG_POSTS: BlogPost[] = [
       </figure>
 
       <h2>Final Thoughts</h2>
-      <p>One day, no ticket, and I got more out of it than I would have sitting in the audience. If you are a student or early in fintech and you are wondering how to get into a room like this, volunteering is the cheat code. Nobody minds, and everybody talks to you.</p>
+      <p>One day helping people out and I got more out of it than I would have sitting in the audience. If you are a student or early in fintech and you are wondering how to get into a room like this, volunteering is the cheat code. Nobody minds, and everybody talks to you.</p>
 
       <figure class="blog-figure">
         <img src="/blog/fintech-unbundled/crew-group.jpg" alt="The UnBundled volunteer crew on stage after the event" class="blog-img" />
         <figcaption>The crew. You are not supposed to stand out, you are supposed to make the day run.</figcaption>
       </figure>
 
-      <p>The full gallery from the organisers is on the <a href="https://fintechweekcee.com/2026/gallery/unbundled" target="_blank" rel="noopener noreferrer">Fintech Week CEE site</a> if you want to see the scale of it. The next edition is provisionally 19 to 23 April 2027. I will probably be around.</p>
+      <p>The full gallery from the organisers is on the <a href="https://fintechweekcee.com/2026/gallery/unbundled" target="_blank" rel="noopener noreferrer">Fintech Week CEE site</a> if you want to see more of it.</p>
     `,
     footnote:
       'Fintech UnBundled · Prague, Czech Republic · 12 May 2026<br/>Flagship day of Fintech Week CEE 2026 (8 - 15 May) · Volunteer crew with Fyltr<br/>Event photos courtesy of the organisers · <a href="https://fintechweekcee.com/2026/gallery/unbundled" target="_blank" rel="noopener noreferrer">fintechweekcee.com</a>',
