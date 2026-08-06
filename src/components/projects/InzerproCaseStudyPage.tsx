@@ -228,6 +228,14 @@ const InzerproCaseStudyPage: React.FC = () => {
             <p className="czs-caption">{t.ops.jobsCaption}</p>
           </Reveal>
         </div>
+        <Reveal as="div" className="czs-metrics inz-stats" aria-label="Engineering numbers">
+          {t.ops.stats.map(m => (
+            <div className="czs-metric" key={m.label}>
+              <span className="czs-metric__value pixel-accent">{m.value}</span>
+              <span className="czs-metric__label">{m.label}</span>
+            </div>
+          ))}
+        </Reveal>
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────── */}

@@ -73,7 +73,9 @@ const inzerproCaseStudy = {
     hard: [
       { lead: 'No marketplace offers an API.', rest: 'Every connection is engineered from scratch and kept alive as the sites change.' },
       { lead: 'Five category trees, one picker.', rest: 'About 165 canonical categories map to the right one per site; category fixes are data edits, not releases.' },
+      { lead: 'Aukro alone has ~5,800 categories.', rest: 'The crosswalk collapses its whole tree into the same picker, validated against Aukro\'s live category dump.' },
       { lead: 'Every site rejects something.', rest: 'Photos, sections and limits differ per marketplace; listings are adapted to each automatically.' },
+      { lead: 'Buyers get scam-checked.', rest: 'Phone numbers, emails and bank accounts screen against the Czech fraud database podvodnabazaru.cz.' },
     ],
   },
   day: {
@@ -100,6 +102,15 @@ const inzerproCaseStudy = {
       back: 'recovered · 1 email',
       caption: 'Alerts only on change: a six-hour outage is two emails, not six.',
     },
+    // Engineering-proof band. Real repo numbers (2026-08-06): 141 files in
+    // supabase/migrations, 133 unit test cases, 14 live+showcase Playwright
+    // specs (incl. signed Stripe webhooks in test mode), ~55k LOC src+supabase.
+    stats: [
+      { value: '141', label: 'database migrations shipped' },
+      { value: '133', label: 'unit tests on every push' },
+      { value: '14', label: 'live scenarios run nightly' },
+      { value: '55k', label: 'lines of code, one author' },
+    ],
   },
   cta: {
     eyebrow: 'Accepting new projects',
