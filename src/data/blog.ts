@@ -155,7 +155,7 @@ export const BLOG_POSTS: BlogPost[] = [
       'I joined a European Commission Youth Policy Dialogue in Ljubljana with EU Commissioner Michael McGrath, where we worked through what the upcoming Digital Fairness Act should actually do about deceptive design, pricing, and digital contracts.',
     thumbnail: '/blog/digital-fairness/youth-policy-dialogue.webp',
     content: `
-      <p>I took part in a <strong>European Commission Youth Policy Dialogue</strong> in <strong>Ljubljana</strong> and sat down with <strong>EU Commissioner Michael McGrath</strong> to talk about the <strong>Digital Fairness Act</strong>, the EU's upcoming push to clean up how online services treat people. What stuck with me was that the conversation about the rules happened <em>with</em> the people they're meant to protect, not just about them.</p>
+      <p>I took part in a <strong>European Commission Youth Policy Dialogue</strong> in <strong>Ljubljana</strong> and sat down with <strong>EU Commissioner Michael McGrath</strong> to talk about the <strong>Digital Fairness Act</strong>, the EU's upcoming push to clean up how online services treat people. What stuck with me was that the conversation about the rules happened <em>with</em> the people they're meant to protect.</p>
 
       <figure class="blog-figure">
         <img src="/blog/digital-fairness/youth-policy-dialogue.webp" alt="Youth Policy Dialogue on the Digital Fairness Act with Commissioner Michael McGrath in Ljubljana" class="blog-img" />
@@ -178,7 +178,7 @@ export const BLOG_POSTS: BlogPost[] = [
         <video class="blog-video" controls preload="metadata" playsinline poster="/blog/digital-fairness/df-wetalk-poster.jpg">
           <source src="/blog/digital-fairness/df-wetalk.mp4" type="video/mp4" />
         </video>
-        <figcaption>A few moments from the day: the roundtables, the side conversations, the open discussion.</figcaption>
+        <figcaption>Talk with Klemen Selakovič, co-founder of AstraAI, leading study AI app with over 1 milion downloads on App Store</figcaption>
       </figure>
 
       <h2>Why It Matters</h2>
