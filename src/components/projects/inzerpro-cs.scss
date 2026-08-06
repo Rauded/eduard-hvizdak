@@ -342,6 +342,42 @@
     }
   }
   .inz-stats { margin-top: 1.4rem; }
+  .inz-stats__caption {
+    max-width: 1060px;
+    margin: 0.2rem auto 0;
+  }
+
+  // ── 05: product depth, the app's own demo-mode screens ──
+  .inz-depth {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+  }
+  .inz-depth__item {
+    margin: 0;
+
+    &--wide { grid-column: 1 / -1; }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+    figcaption {
+      margin-top: 0.6rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text-muted);
+
+      strong { color: var(--text-strong); font-weight: 650; }
+    }
+  }
+  @media (max-width: 720px) {
+    .inz-depth { grid-template-columns: 1fr; }
+  }
 
   .inz-uptime__caption {
     display: block;

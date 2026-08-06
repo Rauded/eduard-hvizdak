@@ -14,6 +14,9 @@ import './inzerpro-cs.scss';
 const demoVideo = asset('inzerpro.mp4');
 const demoPoster = asset('inzerpro-poster.webp');
 const listingPhoto = asset('inzerpro-listing.webp');
+const shotTrends = asset('inzerpro/trends.webp');
+const shotCrm = asset('inzerpro/crm.webp');
+const shotFraud = asset('inzerpro/fraud.webp');
 
 // The czs-* classes are the shared case-study design system (hero, metric
 // band, mix bar, pipeline nodes, mock windows, win tiles, CTA); this page
@@ -265,13 +268,6 @@ const InzerproCaseStudyPage: React.FC = () => {
             <p className="czs-caption">{t.ops.jobsCaption}</p>
           </Reveal>
         </div>
-        <Reveal className="inz-hard inz-hard--tech" as="ul">
-          {t.ops.tech.map(h => (
-            <li className="inz-hard__row" key={h.lead}>
-              <strong>{h.lead}</strong> {h.rest}
-            </li>
-          ))}
-        </Reveal>
         <Reveal as="div" className="czs-metrics inz-stats" aria-label="Engineering numbers">
           {t.ops.stats.map(m => (
             <div className="czs-metric" key={m.label}>
@@ -280,6 +276,27 @@ const InzerproCaseStudyPage: React.FC = () => {
             </div>
           ))}
         </Reveal>
+        <Reveal><p className="czs-caption inz-stats__caption">{t.ops.statsCaption}</p></Reveal>
+      </section>
+
+      {/* ── 05 Product depth: the product's own screens ──────── */}
+      <section className="czs-block">
+        <Reveal><span className="czs-kicker">05 / Beyond re-posting</span><h2 className="czs-block__title">{t.depth.title}</h2></Reveal>
+        <Reveal><p className="czs-prose inz-lead">{t.depth.lead}</p></Reveal>
+        <div className="inz-depth">
+          <Reveal className="inz-depth__item inz-depth__item--wide" as="figure">
+            <img src={shotTrends} alt="InzerPro Market Trends screen: price history chart, demand score, recommended pricing" loading="lazy" />
+            <figcaption><strong>{t.depth.items[0].title}.</strong> {t.depth.items[0].caption}</figcaption>
+          </Reveal>
+          <Reveal className="inz-depth__item" as="figure">
+            <img src={shotCrm} alt="InzerPro buyer CRM: kanban board of conversations from new to sold" loading="lazy" />
+            <figcaption><strong>{t.depth.items[1].title}.</strong> {t.depth.items[1].caption}</figcaption>
+          </Reveal>
+          <Reveal className="inz-depth__item" as="figure">
+            <img src={shotFraud} alt="InzerPro fraud protection: a chat with a flagged scammer and a zero trust score" loading="lazy" />
+            <figcaption><strong>{t.depth.items[2].title}.</strong> {t.depth.items[2].caption}</figcaption>
+          </Reveal>
+        </div>
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────── */}

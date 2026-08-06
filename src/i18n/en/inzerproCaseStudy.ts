@@ -72,10 +72,8 @@ const inzerproCaseStudy = {
     // scanners fixate the first ~2 words of a row). No integration mechanics.
     hard: [
       { lead: 'No marketplace offers an API.', rest: 'Every connection is engineered from scratch and kept alive as the sites change.' },
-      { lead: 'Five category trees, one picker.', rest: 'About 165 canonical categories map to the right one per site; category fixes are data edits, not releases.' },
-      { lead: 'Aukro alone has ~5,800 categories.', rest: 'The crosswalk collapses its whole tree into the same picker, validated against Aukro\'s live category dump.' },
+      { lead: 'Five category trees, one picker.', rest: 'Aukro alone has ~5,800 categories; the crosswalk collapses them into ~165, and fixes are data edits, not releases.' },
       { lead: 'Every site rejects something.', rest: 'Photos, sections and limits differ per marketplace; listings are adapted to each automatically.' },
-      { lead: 'Buyers get scam-checked.', rest: 'Phone numbers, emails and bank accounts screen against the Czech fraud database podvodnabazaru.cz.' },
     ],
   },
   day: {
@@ -102,22 +100,35 @@ const inzerproCaseStudy = {
       back: 'recovered · 1 email',
       caption: 'Alerts only on change: a six-hour outage is two emails, not six.',
     },
-    // Engineering mechanics ledger. Showable per Eduard's refined rule
-    // (2026-08-06): general architecture yes, marketplace posting/sync
-    // internals never.
-    tech: [
-      { lead: 'Postgres owns the rules.', rest: 'Row-level security on all 41 tables; even the free-tier limit is a database trigger, not UI code.' },
-      { lead: '34 edge functions run everything.', rest: 'Posting, re-posting, deleting and billing are scheduled jobs; there is no server to babysit.' },
-      { lead: 'The nightly suite signs real Stripe webhooks.', rest: 'Checkout, webhook and tier update are verified end to end in test mode, every night.' },
-    ],
-    // Engineering-proof band. Real repo numbers (2026-08-06): 141 files in
-    // supabase/migrations, 133 unit test cases, 14 live+showcase Playwright
-    // specs (incl. signed Stripe webhooks in test mode), ~55k LOC src+supabase.
+    // Engineering-proof band. Real repo numbers (2026-08-06): 41 tables all
+    // under RLS, 34 edge functions, 141 files in supabase/migrations, 133
+    // unit test cases, 14 live+showcase Playwright specs, ~55k LOC.
     stats: [
+      { value: '41', label: 'tables, all row-level security' },
+      { value: '34', label: 'edge functions run every job' },
       { value: '141', label: 'database migrations shipped' },
       { value: '133', label: 'unit tests on every push' },
       { value: '14', label: 'live scenarios run nightly' },
       { value: '55k', label: 'lines of code, one author' },
+    ],
+    statsCaption: 'The nightly suite even signs real Stripe webhooks: checkout to tier update, verified in test mode.',
+  },
+  depth: {
+    title: 'Re-posting got sellers in the door. It kept growing.',
+    lead: 'The screens below are the product\'s own demo mode.',
+    items: [
+      {
+        title: 'Market trends',
+        caption: 'Live price history, demand score and recommended pricing for any product a seller types in.',
+      },
+      {
+        title: 'Buyer CRM',
+        caption: 'Every conversation tracked on a kanban from first message to sold, across all marketplaces.',
+      },
+      {
+        title: 'Fraud protection',
+        caption: 'Buyers screen against the Czech fraud database podvodnabazaru.cz; known scammers get flagged mid-chat.',
+      },
     ],
   },
   cta: {
