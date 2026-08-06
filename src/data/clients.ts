@@ -24,12 +24,14 @@ export interface Client {
   scale?: number;
 }
 
-// Ordered by impressiveness: MUNI first, then EDUC Alliance, Artiffine,
-// OneBond, iGalileo last.
+// Ordered by impressiveness: MUNI (the only household name) first, then EDUC
+// Alliance (EU-level), OneBond (VC fund), Artiffine, iGalileo. Scales were
+// tuned by eye against screenshots: MUNI reads slightly larger on purpose,
+// the rest sit on one shared visual weight.
 export const CLIENTS: Client[] = [
-  { name: 'Masaryk University, CZS', role: 'AI Systems Engineer', dates: '2025 - Present', url: 'https://czs.muni.cz/cs/', logo: '/brand/clients/masaryk-university.png', scale: 0.78, current: true },
-  { name: 'EDUC Alliance', role: 'Think Tank Member & Programmer', dates: '2024 - 2025', url: 'https://www.educalliance.eu', logo: '/brand/clients/educ-alliance.png', scale: 1.0 },
-  { name: 'Artiffine', role: 'AI & Web3 studio', dates: 'Present', url: 'https://www.artiffine.com', logo: '/brand/clients/artiffine.svg', scale: 0.62, current: true },
-  { name: 'OneBond', role: 'AI Systems Engineer', dates: '2025 - 2026', url: 'https://onebond.tech', logo: '/brand/clients/onebond.svg', scale: 0.85 },
-  { name: 'iGalileo', role: 'AI Developer', dates: '2025', url: 'https://www.igalileo.cz/', logo: '/brand/clients/igalileo.svg', scale: 0.9 },
+  { name: 'Masaryk University, CZS', role: 'AI Systems Engineer', dates: '2025 - Present', url: 'https://czs.muni.cz/cs/', logo: '/brand/clients/masaryk-university.png', scale: 0.72, current: true },
+  { name: 'EDUC Alliance', role: 'Think Tank Member & Programmer', dates: '2024 - 2025', url: 'https://www.educalliance.eu', logo: '/brand/clients/educ-alliance.png', scale: 0.92 },
+  { name: 'OneBond', role: 'AI Systems Engineer', dates: '2025 - 2026', url: 'https://onebond.tech', logo: '/brand/clients/onebond.svg', scale: 0.64 },
+  { name: 'Artiffine', role: 'AI & Web3 studio', dates: 'Present', url: 'https://www.artiffine.com', logo: '/brand/clients/artiffine.svg', scale: 0.58, current: true },
+  { name: 'iGalileo', role: 'AI Developer', dates: '2025', url: 'https://www.igalileo.cz/', logo: '/brand/clients/igalileo.svg', scale: 0.78 },
 ];
