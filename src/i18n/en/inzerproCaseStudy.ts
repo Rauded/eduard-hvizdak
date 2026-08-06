@@ -17,9 +17,9 @@ const inzerproCaseStudy = {
   },
   hero: {
     eyebrow: 'Case study · InzerPro, own product',
-    title: 'Sellers re-posted dozens of ads by hand. Every morning.',
+    title: 'One listing. Every marketplace. On schedule.',
     lead:
-      'On Czech and Slovak second-hand marketplaces, listing age decides visibility. InzerPro writes the listing once and posts, re-posts and deletes it across every marketplace on schedule, unattended.',
+      'On Czech and Slovak second-hand marketplaces, listing age decides visibility, and power sellers were re-posting dozens of ads by hand every morning. InzerPro does it for them, unattended.',
     live: 'See it live at inzerpro.cz',
     liveUrl: 'https://www.inzerpro.cz',
     figureCaption: 'The production dashboard: one listing, posted and re-posted across marketplaces on schedule.',
@@ -82,7 +82,10 @@ const inzerproCaseStudy = {
   },
   ops: {
     title: 'If something breaks, I know first.',
-    lead: 'Hourly checks, nightly test listings on the live marketplaces, one email per state change.',
+    // The one paragraph of prose in the case study (Eduard's rule: max one,
+    // 3 to 5 sentences, highest-signal). Everything else stays one-liners.
+    lead:
+      'The hard part is not posting, it is staying posted. None of these marketplaces offers automation, each has its own categories, photo rules and quirks, and any of them can change something overnight. So InzerPro tests itself against the real sites: a nightly suite posts actual listings end to end, and an hourly health check walks the whole posting path. When something breaks I get one email, when it recovers I get another, and customers usually never notice either.',
     note: 'Illustrative mockup with invented example data; the real dashboard lives behind the app login.',
     jobsTitle: 'Scheduled jobs',
     jobsCaption: 'Every post, re-post and delete is a job with per-marketplace status and retries.',

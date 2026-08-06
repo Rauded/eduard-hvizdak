@@ -12,6 +12,27 @@
   --inz-soft: #fff2ea;
   --inz-border: #ffd0b3;
 
+  // ── compact sans headings: this page reads like product UI, not an
+  // editorial spread. Overrides the site's display-face assignment
+  // (typography.scss uses !important, so this must too). ──
+  .czs-hero__title {
+    font-family: var(--font-body) !important;
+    font-size: clamp(1.9rem, 4vw, 2.9rem);
+    font-weight: 650;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+    max-width: 21ch;
+  }
+  .czs-block__title,
+  .czs-cta__title {
+    font-family: var(--font-body) !important;
+    font-size: clamp(1.35rem, 2.6vw, 1.85rem);
+    font-weight: 650;
+    letter-spacing: -0.01em;
+  }
+  .czs-hero { padding-top: clamp(1.5rem, 4vw, 2.5rem); }
+  .czs-hero__lead { max-width: 44rem; }
+
   // ── brand accents on labels and numerals ──
   .czs-eyebrow,
   .czs-kicker { color: var(--inz-strong); }
