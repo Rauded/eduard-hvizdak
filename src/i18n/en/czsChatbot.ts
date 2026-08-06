@@ -62,7 +62,7 @@ const czsChatbot = {
   architecture: {
     title: 'The pipeline behind a straight answer',
     body: [
-      'Every question is classified, then answered from <strong>hybrid OpenSearch retrieval</strong> (BM25 plus Voyage dense vectors, fused with RRF, two rerankers, MMR) over a heading-aware <strong>parent-child index</strong>, with a <strong>CRAG-style answerability gate</strong> that re-retrieves on weak context. Verified facts come from <strong>deterministic tool calls</strong>, not the model, so answers stream over SSE from <strong>DeepSeek-v3.2 on CERIT</strong>.',
+      'Every question is classified, then answered from <strong>hybrid OpenSearch retrieval</strong> (BM25 plus Voyage dense vectors, fused with RRF, two rerankers, MMR) over a heading-aware <strong>parent-child index</strong>, with a <strong>CRAG-style answerability gate</strong> that re-retrieves on weak context. Verified facts come from <strong>deterministic tool calls</strong>, answers stream over SSE from <strong>DeepSeek-v3.2 on CERIT</strong>.',
     ],
     stepsLabel: 'The path of one question',
     steps: [
