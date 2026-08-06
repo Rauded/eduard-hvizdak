@@ -102,6 +102,14 @@ const inzerproCaseStudy = {
       back: 'recovered · 1 email',
       caption: 'Alerts only on change: a six-hour outage is two emails, not six.',
     },
+    // Engineering mechanics ledger. Showable per Eduard's refined rule
+    // (2026-08-06): general architecture yes, marketplace posting/sync
+    // internals never.
+    tech: [
+      { lead: 'Postgres owns the rules.', rest: 'Row-level security on all 41 tables; even the free-tier limit is a database trigger, not UI code.' },
+      { lead: '34 edge functions run everything.', rest: 'Posting, re-posting, deleting and billing are scheduled jobs; there is no server to babysit.' },
+      { lead: 'The nightly suite signs real Stripe webhooks.', rest: 'Checkout, webhook and tier update are verified end to end in test mode, every night.' },
+    ],
     // Engineering-proof band. Real repo numbers (2026-08-06): 141 files in
     // supabase/migrations, 133 unit test cases, 14 live+showcase Playwright
     // specs (incl. signed Stripe webhooks in test mode), ~55k LOC src+supabase.
