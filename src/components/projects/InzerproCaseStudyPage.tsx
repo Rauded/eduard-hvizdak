@@ -191,6 +191,16 @@ const InzerproCaseStudyPage: React.FC = () => {
       <section className="czs-block czs-dashband">
         <Reveal><span className="czs-kicker">04 / Reliability</span><h2 className="czs-block__title">{t.ops.title}</h2></Reveal>
         <Reveal><p className="czs-prose inz-lead">{t.ops.lead}</p></Reveal>
+        <Reveal className="inz-uptime">
+          <div className="inz-uptime__row">
+            {Array.from({ length: 48 }, (_, i) => (
+              <i key={i} className={i >= 22 && i < 28 ? 'bad' : ''} />
+            ))}
+            <span className="inz-uptime__flag is-down" style={{ left: `${(22 / 48) * 100}%` }}><LuMail aria-hidden="true" />{t.ops.uptime.down}</span>
+            <span className="inz-uptime__flag is-back" style={{ left: `${(28 / 48) * 100}%` }}><LuMail aria-hidden="true" />{t.ops.uptime.back}</span>
+          </div>
+          <span className="inz-uptime__caption">{t.ops.uptime.caption}</span>
+        </Reveal>
         <div className="czs-dash">
           <Reveal className="czs-dashcard czs-dashcard--wide">
             <div className="czs-mock">
@@ -215,33 +225,7 @@ const InzerproCaseStudyPage: React.FC = () => {
                 </tbody>
               </table>
             </div>
-            <p className="czs-caption">{t.ops.jobsCaption} {t.ops.note}</p>
-          </Reveal>
-        </div>
-        <Reveal className="inz-strip">
-          <div className="inz-strip__bar">
-            <span className="inz-strip__seg is-ok" style={{ flexGrow: 5 }}>{t.ops.strip.ok}</span>
-            <span className="inz-strip__seg is-down" style={{ flexGrow: 2 }}><LuMail aria-hidden="true" />{t.ops.strip.down}</span>
-            <span className="inz-strip__seg is-ok" style={{ flexGrow: 4 }}><LuMail aria-hidden="true" />{t.ops.strip.back}</span>
-          </div>
-          <span className="inz-strip__caption">{t.ops.strip.caption}</span>
-        </Reveal>
-      </section>
-
-      {/* ── 05 Pricing: two flat blocks ──────────────────────── */}
-      <section className="czs-block">
-        <Reveal><span className="czs-kicker">05 / Pricing</span><h2 className="czs-block__title">{t.pricing.title}</h2></Reveal>
-        <div className="inz-price">
-          <Reveal className="inz-price__card" as="article">
-            <span className="inz-price__value pixel-accent">{t.pricing.free.value}</span>
-            <span className="inz-price__label">{t.pricing.free.label}</span>
-            <span className="inz-price__detail">{t.pricing.free.detail}</span>
-          </Reveal>
-          <Reveal className="inz-price__card inz-price__card--paid" as="article">
-            <span className="inz-price__value pixel-accent">{t.pricing.paid.value}</span>
-            <span className="inz-price__alt">{t.pricing.paid.alt}</span>
-            <span className="inz-price__label">{t.pricing.paid.label}</span>
-            <span className="inz-price__detail">{t.pricing.paid.detail}</span>
+            <p className="czs-caption">{t.ops.jobsCaption}</p>
           </Reveal>
         </div>
       </section>

@@ -89,33 +89,16 @@ const inzerproCaseStudy = {
   },
   ops: {
     title: 'If something breaks, I know first.',
-    // The one paragraph of prose in the case study. Eduard's rule, backed by
-    // NN/g reading research (users read ~20% of words, first sentences carry
-    // ~everything): max 3 sentences, each front-loaded with its point.
+    // The only prose block in the case study. Keep it 3 SHORT sentences,
+    // each front-loaded (write-for-skimmers rules).
     lead:
-      'The hard part is not posting, it is staying posted: no marketplace offers automation, and any of them can change something overnight. InzerPro tests itself every night by posting real listings on the live sites, plus an hourly end-to-end health check. Breaks send me one email, recoveries another; customers rarely notice either.',
-    note: 'Illustrative mockup with invented example data; the real dashboard lives behind the app login.',
+      'InzerPro tests itself in production: real listings posted nightly on the live marketplaces, the whole posting path checked hourly. One email when something breaks, one when it recovers. Customers rarely notice either.',
     jobsTitle: 'Scheduled jobs',
-    jobsCaption: 'Every post, re-post and delete is a job with per-marketplace status and retries.',
-    strip: {
-      ok: 'running',
+    jobsCaption: 'Mockup with example data; the real dashboard is behind the app login.',
+    uptime: {
       down: 'down · 1 email',
       back: 'recovered · 1 email',
       caption: 'Alerts only on change: a six-hour outage is two emails, not six.',
-    },
-  },
-  pricing: {
-    title: 'One plan.',
-    free: {
-      value: '0 Kč',
-      label: 'every feature',
-      detail: 'up to 10 active listings',
-    },
-    paid: {
-      value: '19 EUR',
-      alt: '479 Kč / month',
-      label: 'unlimited listings',
-      detail: 'one plan, nothing to compare',
     },
   },
   cta: {

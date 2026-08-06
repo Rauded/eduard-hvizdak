@@ -273,79 +273,80 @@
     }
   }
 
-  // ── 04: transition-only alerting as a state strip ──
-  .inz-strip {
+  // ── 04: transition-only alerting as an uptime monitor ──
+  // 48 half-hour ticks, a six-tick outage window, and the only two emails
+  // that whole incident produced flagged at the state changes.
+  .inz-uptime {
     max-width: 1060px;
-    margin: 1.6rem auto 0;
+    margin: 1.8rem auto 0;
   }
-  .inz-strip__bar {
+  .inz-uptime__row {
+    position: relative;
     display: flex;
-    border-radius: 999px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-  }
-  .inz-strip__seg {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    padding: 0.6rem 0.5rem;
-    font-family: var(--font-mono, monospace);
-    font-size: 0.72rem;
-    white-space: nowrap;
+    gap: 4px;
+    align-items: flex-end;
+    padding-top: 46px;
 
-    svg { flex: none; }
-    &.is-ok { background: #ecfdf3; color: #067647; }
-    &.is-down { background: #fef3f2; color: #b42318; }
-    & + & { border-left: 1px solid var(--border); }
-  }
-  .inz-strip__caption {
-    display: block;
-    margin-top: 0.6rem;
-    font-family: var(--font-mono, monospace);
-    font-size: 0.72rem;
-    color: var(--text-faint);
-  }
-  @media (max-width: 560px) {
-    .inz-strip__seg { font-size: 0.62rem; padding-inline: 0.3rem; }
-  }
+    i {
+      flex: 1;
+      height: 38px;
+      border-radius: 3px;
+      background: #27a567;
 
-  // ── 05: pricing, two flat blocks ──
-  .inz-price {
-    margin-top: 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 340px));
-    gap: 1rem;
-    justify-content: center;
-  }
-  .inz-price__card {
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    background: #fff;
-    padding: 1.6rem 1.5rem 1.4rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-
-    &--paid {
-      border-color: var(--inz-border);
-      background: var(--inz-soft);
-
-      .inz-price__value { color: var(--inz); }
+      &.bad { background: #e0524b; }
     }
   }
-  .inz-price__value {
-    font-size: clamp(2rem, 4vw, 2.6rem);
-    line-height: 1;
-    color: var(--accent-heading, #182e5f);
+  .inz-uptime__flag {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    white-space: nowrap;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.26rem 0.6rem;
+    border-radius: 999px;
+    background: #fff;
+
+    svg { flex: none; }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      width: 2px;
+      height: 14px;
+      background: var(--border-strong, #cdd3da);
+    }
+    // Anchor the down flag's right edge and the recovery flag's left edge
+    // to their tick, so the two pills grow away from each other.
+    &.is-down {
+      color: #b42318;
+      border: 1px solid #fecdca;
+      transform: translateX(calc(-100% + 12px));
+      &::after { right: 10px; }
+    }
+    &.is-back {
+      color: #067647;
+      border: 1px solid #abefc6;
+      transform: translateX(-12px);
+      &::after { left: 10px; }
+    }
   }
-  .inz-price__alt {
+  .inz-uptime__caption {
+    display: block;
+    margin-top: 0.7rem;
     font-family: var(--font-mono, monospace);
     font-size: 0.72rem;
     color: var(--text-faint);
   }
-  .inz-price__label { margin-top: 0.55rem; font-weight: 600; }
-  .inz-price__detail { color: var(--text-muted); font-size: 0.9rem; }
+  @media (max-width: 640px) {
+    .inz-uptime__row { gap: 2px; }
+    .inz-uptime__flag { font-size: 0.6rem; }
+  }
 
   // ── mock windows read as InzerPro app screens ──
   .czs-apptoolbar__name {
