@@ -9,9 +9,9 @@ import ProjectCard from '../portfolio/ProjectCard.tsx';
 import { useT } from '../../i18n';
 
 // How many cards show before the reader asks for more. Six cards ran 4,018px,
-// 45% of the homepage, for 321 words. Three make the same point in half the
-// height, and the rest are one click away.
-const FEATURED_COUNT = 3;
+// 45% of the homepage, for 321 words. Four cover the strongest work (through
+// Newsmatics Globe); the rest are one click away.
+const FEATURED_COUNT = 4;
 
 // Homepage Projects section: the single home for the project showcase.
 // (The standalone /portfolio page was removed; each card's deep dive now

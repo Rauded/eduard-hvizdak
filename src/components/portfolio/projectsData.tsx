@@ -193,12 +193,12 @@ export const PROJECTS: PortfolioProject[] = [
       type: 'slideshow',
       video: assetSafe('studyexe.mp4'), // upgrades to video if dropped in
       images: [
+        asset('obsidian_theme_study_session_configuration.webp'),
         asset('obsidian_theme_dashboard.webp'),
         asset('obsidian_theme_study_session_reading.webp'),
         asset('obsidian_theme_score.webp'),
         asset('red_cyberpunk_theme_dashboard.webp'),
         asset('cyberforest_theme.webp'),
-        asset('obsidian_theme_study_session_configuration.webp'),
       ],
     },
     accent: '#0ea5e9',
@@ -244,67 +244,6 @@ export const PROJECTS: PortfolioProject[] = [
         '<strong>Sledovanie pohľadu</strong> počítačovým videním vás upozorní 5 sekúnd po tom, čo sa pozriete inam. Zámok celej obrazovky odstráni vyrušenia. <strong>Sedenia s vybavovaním hodnotené AI</strong> cez <strong>OpenAI API</strong> testujú, čo si pamätáte. Zapamätanie, nie odsedený čas.',
       story:
         'Vyšlo ako desktopová aplikácia s viacerými témami (Obsidian, cyberpunk, cyberforest) na <a href="https://www.studyexe.com" target="_blank" rel="noopener noreferrer">studyexe.com</a>. Nástroj na sústredenie od niekoho, kto ho potreboval.',
-    },
-  },
-  {
-    id: 'kouzelnici',
-    number: '03',
-    title: 'KouzelnikNaAkci.cz',
-    subtitle: 'A directory for Czech & Slovak magicians',
-    description:
-      'Two-sided marketplace for hiring magicians in Czechia and Slovakia. Curated profiles, Stripe listings, automated email, 20+ city and occasion landing pages built for local search. Experimented with SEO, GEO, EMD here a lot.',
-    tags: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Vercel'],
-    links: [
-      { label: 'www.kouzelniknaakci.cz', url: 'https://www.kouzelniknaakci.cz', type: 'demo', favicon: '/brand/sites/kouzelniknaakci.svg' },
-    ],
-    media: {
-      type: 'video',
-      video: assetSafe('kouzelnici.mp4'),
-      poster: asset('kouzelnici-poster.webp'),
-    },
-    accent: '#ec4899',
-    reversed: false,
-    caseStudy: {
-      problem:
-        'Booking a <strong>professional magician</strong> for a wedding, birthday, corporate event or kids\' party in Czechia or Slovakia had no good starting point. Performers sat on outdated sites and Facebook pages; organisers had nowhere central to <strong>compare and hire</strong> them.',
-      motivation:
-        'A <strong>two-sided marketplace</strong> gap with a <strong>local-SEO</strong> angle: high-intent searches like "magician for a party in Brno" and almost nobody ranking for them. Owning that traffic connects organisers and magicians.',
-      challenges:
-        'The <strong>cold-start chicken-and-egg problem</strong>: no organisers without performers, and vice versa. Plus real <strong>programmatic SEO</strong>: 20+ city × occasion landing pages that rank locally without becoming thin duplicate content, <strong>Stripe</strong> paid listings, automated transactional email.',
-      solution:
-        '<strong>Next.js</strong> + <strong>React</strong> + <strong>TypeScript</strong> with <strong>Tailwind CSS</strong> on <strong>Vercel</strong>: fast server-rendered, SEO-friendly pages. Curated profiles, <strong>Stripe</strong> listings, automated email, 20+ programmatic <strong>city & occasion landing pages</strong> tuned for local search.',
-      story:
-        'It runs today at <a href="https://www.kouzelniknaakci.cz" target="_blank" rel="noopener noreferrer">kouzelniknaakci.cz</a>, a small niche marketplace for the Czech and Slovak events scene.',
-    },
-    subtitle_cs: 'Katalog českých a slovenských kouzelníků',
-    description_cs:
-      'Oboustranné tržiště pro objednání kouzelníka v Česku a na Slovensku. Vybrané profily, inzeráty přes Stripe, automatizované e-maily, 20+ vstupních stránek pro města a příležitosti stavěných na lokální vyhledávání.',
-    caseStudy_cs: {
-      problem:
-        'Kdo si chtěl v Česku nebo na Slovensku <strong>objednat profesionálního kouzelníka</strong> na svatbu, narozeniny, firemní akci nebo dětskou párty, neměl kde hledat. Vystupující byli roztroušení po zastaralých webech a Facebooku; organizátoři je neměli kde <strong>porovnat a najmout</strong>.',
-      motivation:
-        'Mezera pro <strong>oboustranné tržiště</strong> s <strong>lokálně-SEO</strong> úhlem: vyhledávání jako "kouzelník na oslavu v Brně", na která skoro nikdo nerankoval. Ovládnout ten provoz znamená propojit organizátory a kouzelníky.',
-      challenges:
-        '<strong>Problém studeného startu</strong>: žádní organizátoři bez vystupujících a naopak. K tomu <strong>programatické SEO</strong>: 20+ vstupních stránek pro města a příležitosti, které rankují lokálně a nezvrhnou se v tenký duplicitní obsah, placené inzeráty přes <strong>Stripe</strong>, automatizované transakční e-maily.',
-      solution:
-        '<strong>Next.js</strong> + <strong>React</strong> + <strong>TypeScript</strong> s <strong>Tailwind CSS</strong> na <strong>Vercelu</strong>: rychlé serverem renderované stránky přívětivé k SEO. Vybrané profily, inzeráty přes <strong>Stripe</strong>, automatizované e-maily, 20+ programatických <strong>stránek pro města a příležitosti</strong> laděných na lokální vyhledávání.',
-      story:
-        'Běží dnes na <a href="https://www.kouzelniknaakci.cz" target="_blank" rel="noopener noreferrer">kouzelniknaakci.cz</a>, malé nišové tržiště pro českou a slovenskou scénu akcí.',
-    },
-    subtitle_sk: 'Katalóg pre českých a slovenských kúzelníkov',
-    description_sk:
-      'Obojstranné trhovisko na objednanie kúzelníka v Česku a na Slovensku. Vybrané profily, inzeráty cez Stripe, automatizované e-maily, 20+ vstupných stránok pre mestá a príležitosti stavaných na lokálne vyhľadávanie.',
-    caseStudy_sk: {
-      problem:
-        'Kto si chcel v Česku alebo na Slovensku <strong>objednať profesionálneho kúzelníka</strong> na svadbu, narodeniny, firemnú akciu alebo detskú párty, nemal kde hľadať. Účinkujúci boli roztrúsení po zastaraných weboch a Facebooku; organizátori ich nemali kde <strong>porovnať a najať</strong>.',
-      motivation:
-        'Medzera pre <strong>obojstranné trhovisko</strong> s <strong>lokálno-SEO</strong> uhlom: vyhľadávania ako "kúzelník na oslavu v Brne", na ktoré takmer nikto nerankoval. Ovládnuť tento dopyt znamená prepojiť organizátorov a kúzelníkov.',
-      challenges:
-        '<strong>Problém studeného štartu</strong>: žiadni organizátori bez účinkujúcich a naopak. K tomu <strong>programatické SEO</strong>: 20+ vstupných stránok pre mestá a príležitosti, ktoré rankujú lokálne a nezvrhnú sa na tenký duplicitný obsah, platené inzeráty cez <strong>Stripe</strong>, automatizované transakčné e-maily.',
-      solution:
-        '<strong>Next.js</strong> + <strong>React</strong> + <strong>TypeScript</strong> s <strong>Tailwind CSS</strong> na <strong>Verceli</strong>: rýchle serverom renderované stránky priateľské k SEO. Vybrané profily, inzeráty cez <strong>Stripe</strong>, automatizované e-maily, 20+ programatických <strong>stránok pre mestá a príležitosti</strong> ladených na lokálne vyhľadávanie.',
-      story:
-        'Beží dnes na <a href="https://www.kouzelniknaakci.cz" target="_blank" rel="noopener noreferrer">kouzelniknaakci.cz</a>, malé nišové trhovisko pre českú a slovenskú scénu akcií.',
     },
   },
   {
@@ -367,6 +306,67 @@ export const PROJECTS: PortfolioProject[] = [
         'Linka v <strong>Pythone</strong> s <strong>LangChain</strong> a <strong>NLP</strong> vyťahuje miesta, páruje ich so súradnicami cez register <strong>GeoNames</strong> a vykresľuje ich na 3D glóbuse s <strong>Globe.gl</strong> v <strong>JavaScripte</strong>. Posuvník časovej osi prehráva udalosti po celom svete.',
       story:
         'Jeden z projektov, na ktoré som najhrdší. Celý víkendový zápis je v <a href="/sk/blog/newsmatics-hackathon">mojom príbehu z hackathonu Newsmatics</a>.',
+    },
+  },
+  {
+    id: 'kouzelnici',
+    number: '03',
+    title: 'KouzelnikNaAkci.cz',
+    subtitle: 'A directory for Czech & Slovak magicians',
+    description:
+      'Two-sided marketplace for hiring magicians in Czechia and Slovakia. Curated profiles, Stripe listings, automated email, 20+ city and occasion landing pages built for local search. Experimented with SEO, GEO, EMD here a lot.',
+    tags: ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Vercel'],
+    links: [
+      { label: 'www.kouzelniknaakci.cz', url: 'https://www.kouzelniknaakci.cz', type: 'demo', favicon: '/brand/sites/kouzelniknaakci.svg' },
+    ],
+    media: {
+      type: 'video',
+      video: assetSafe('kouzelnici.mp4'),
+      poster: asset('kouzelnici-poster.webp'),
+    },
+    accent: '#ec4899',
+    reversed: false,
+    caseStudy: {
+      problem:
+        'Booking a <strong>professional magician</strong> for a wedding, birthday, corporate event or kids\' party in Czechia or Slovakia had no good starting point. Performers sat on outdated sites and Facebook pages; organisers had nowhere central to <strong>compare and hire</strong> them.',
+      motivation:
+        'A <strong>two-sided marketplace</strong> gap with a <strong>local-SEO</strong> angle: high-intent searches like "magician for a party in Brno" and almost nobody ranking for them. Owning that traffic connects organisers and magicians.',
+      challenges:
+        'The <strong>cold-start chicken-and-egg problem</strong>: no organisers without performers, and vice versa. Plus real <strong>programmatic SEO</strong>: 20+ city × occasion landing pages that rank locally without becoming thin duplicate content, <strong>Stripe</strong> paid listings, automated transactional email.',
+      solution:
+        '<strong>Next.js</strong> + <strong>React</strong> + <strong>TypeScript</strong> with <strong>Tailwind CSS</strong> on <strong>Vercel</strong>: fast server-rendered, SEO-friendly pages. Curated profiles, <strong>Stripe</strong> listings, automated email, 20+ programmatic <strong>city & occasion landing pages</strong> tuned for local search.',
+      story:
+        'It runs today at <a href="https://www.kouzelniknaakci.cz" target="_blank" rel="noopener noreferrer">kouzelniknaakci.cz</a>, a small niche marketplace for the Czech and Slovak events scene.',
+    },
+    subtitle_cs: 'Katalog českých a slovenských kouzelníků',
+    description_cs:
+      'Oboustranné tržiště pro objednání kouzelníka v Česku a na Slovensku. Vybrané profily, inzeráty přes Stripe, automatizované e-maily, 20+ vstupních stránek pro města a příležitosti stavěných na lokální vyhledávání.',
+    caseStudy_cs: {
+      problem:
+        'Kdo si chtěl v Česku nebo na Slovensku <strong>objednat profesionálního kouzelníka</strong> na svatbu, narozeniny, firemní akci nebo dětskou párty, neměl kde hledat. Vystupující byli roztroušení po zastaralých webech a Facebooku; organizátoři je neměli kde <strong>porovnat a najmout</strong>.',
+      motivation:
+        'Mezera pro <strong>oboustranné tržiště</strong> s <strong>lokálně-SEO</strong> úhlem: vyhledávání jako "kouzelník na oslavu v Brně", na která skoro nikdo nerankoval. Ovládnout ten provoz znamená propojit organizátory a kouzelníky.',
+      challenges:
+        '<strong>Problém studeného startu</strong>: žádní organizátoři bez vystupujících a naopak. K tomu <strong>programatické SEO</strong>: 20+ vstupních stránek pro města a příležitosti, které rankují lokálně a nezvrhnou se v tenký duplicitní obsah, placené inzeráty přes <strong>Stripe</strong>, automatizované transakční e-maily.',
+      solution:
+        '<strong>Next.js</strong> + <strong>React</strong> + <strong>TypeScript</strong> s <strong>Tailwind CSS</strong> na <strong>Vercelu</strong>: rychlé serverem renderované stránky přívětivé k SEO. Vybrané profily, inzeráty přes <strong>Stripe</strong>, automatizované e-maily, 20+ programatických <strong>stránek pro města a příležitosti</strong> laděných na lokální vyhledávání.',
+      story:
+        'Běží dnes na <a href="https://www.kouzelniknaakci.cz" target="_blank" rel="noopener noreferrer">kouzelniknaakci.cz</a>, malé nišové tržiště pro českou a slovenskou scénu akcí.',
+    },
+    subtitle_sk: 'Katalóg pre českých a slovenských kúzelníkov',
+    description_sk:
+      'Obojstranné trhovisko na objednanie kúzelníka v Česku a na Slovensku. Vybrané profily, inzeráty cez Stripe, automatizované e-maily, 20+ vstupných stránok pre mestá a príležitosti stavaných na lokálne vyhľadávanie.',
+    caseStudy_sk: {
+      problem:
+        'Kto si chcel v Česku alebo na Slovensku <strong>objednať profesionálneho kúzelníka</strong> na svadbu, narodeniny, firemnú akciu alebo detskú párty, nemal kde hľadať. Účinkujúci boli roztrúsení po zastaraných weboch a Facebooku; organizátori ich nemali kde <strong>porovnať a najať</strong>.',
+      motivation:
+        'Medzera pre <strong>obojstranné trhovisko</strong> s <strong>lokálno-SEO</strong> uhlom: vyhľadávania ako "kúzelník na oslavu v Brne", na ktoré takmer nikto nerankoval. Ovládnuť tento dopyt znamená prepojiť organizátorov a kúzelníkov.',
+      challenges:
+        '<strong>Problém studeného štartu</strong>: žiadni organizátori bez účinkujúcich a naopak. K tomu <strong>programatické SEO</strong>: 20+ vstupných stránok pre mestá a príležitosti, ktoré rankujú lokálne a nezvrhnú sa na tenký duplicitný obsah, platené inzeráty cez <strong>Stripe</strong>, automatizované transakčné e-maily.',
+      solution:
+        '<strong>Next.js</strong> + <strong>React</strong> + <strong>TypeScript</strong> s <strong>Tailwind CSS</strong> na <strong>Verceli</strong>: rýchle serverom renderované stránky priateľské k SEO. Vybrané profily, inzeráty cez <strong>Stripe</strong>, automatizované e-maily, 20+ programatických <strong>stránok pre mestá a príležitosti</strong> ladených na lokálne vyhľadávanie.',
+      story:
+        'Beží dnes na <a href="https://www.kouzelniknaakci.cz" target="_blank" rel="noopener noreferrer">kouzelniknaakci.cz</a>, malé nišové trhovisko pre českú a slovenskú scénu akcií.',
     },
   },
   {
