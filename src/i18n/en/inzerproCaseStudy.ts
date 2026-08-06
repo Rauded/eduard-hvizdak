@@ -68,6 +68,13 @@ const inzerproCaseStudy = {
     },
     statusPosted: 'posted',
     statusBeta: 'beta',
+    // One engineering fact per line, point in the first words (F-pattern:
+    // scanners fixate the first ~2 words of a row). No integration mechanics.
+    hard: [
+      { lead: 'No marketplace offers an API.', rest: 'Every connection is engineered from scratch and kept alive as the sites change.' },
+      { lead: 'Five category trees, one picker.', rest: 'About 165 canonical categories map to the right one per site; category fixes are data edits, not releases.' },
+      { lead: 'Every site rejects something.', rest: 'Photos, sections and limits differ per marketplace; listings are adapted to each automatically.' },
+    ],
   },
   day: {
     title: 'The morning runs itself.',
@@ -82,10 +89,11 @@ const inzerproCaseStudy = {
   },
   ops: {
     title: 'If something breaks, I know first.',
-    // The one paragraph of prose in the case study (Eduard's rule: max one,
-    // 3 to 5 sentences, highest-signal). Everything else stays one-liners.
+    // The one paragraph of prose in the case study. Eduard's rule, backed by
+    // NN/g reading research (users read ~20% of words, first sentences carry
+    // ~everything): max 3 sentences, each front-loaded with its point.
     lead:
-      'The hard part is not posting, it is staying posted. None of these marketplaces offers automation, each has its own categories, photo rules and quirks, and any of them can change something overnight. So InzerPro tests itself against the real sites: a nightly suite posts actual listings end to end, and an hourly health check walks the whole posting path. When something breaks I get one email, when it recovers I get another, and customers usually never notice either.',
+      'The hard part is not posting, it is staying posted: no marketplace offers automation, and any of them can change something overnight. InzerPro tests itself every night by posting real listings on the live sites, plus an hourly end-to-end health check. Breaks send me one email, recoveries another; customers rarely notice either.',
     note: 'Illustrative mockup with invented example data; the real dashboard lives behind the app login.',
     jobsTitle: 'Scheduled jobs',
     jobsCaption: 'Every post, re-post and delete is a job with per-marketplace status and retries.',

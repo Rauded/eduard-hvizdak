@@ -154,6 +154,13 @@ const InzerproCaseStudyPage: React.FC = () => {
             ))}
           </ul>
         </Reveal>
+        <Reveal className="inz-hard" as="ul">
+          {t.fanout.hard.map(h => (
+            <li className="inz-hard__row" key={h.lead}>
+              <strong>{h.lead}</strong> {h.rest}
+            </li>
+          ))}
+        </Reveal>
       </section>
 
       {/* ── 03 Schedule: a seller's day on one rail ──────────── */}

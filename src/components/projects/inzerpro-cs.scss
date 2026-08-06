@@ -149,6 +149,24 @@
     .inz-fan__targets { width: min(330px, 100%); }
   }
 
+  // ── 02b: hard-parts ledger, one engineering fact per hairline row ──
+  .inz-hard {
+    list-style: none;
+    margin: 2.2rem auto 0;
+    padding: 0;
+    max-width: 46rem;
+  }
+  .inz-hard__row {
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.93rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+
+    strong { color: var(--text-strong); font-weight: 650; }
+    &:last-child { border-bottom: 1px solid var(--border); }
+  }
+
   // ── 03: the seller's day on one rail ──
   .inz-day { margin-top: 2.2rem; }
   .inz-day__scroll { overflow-x: auto; padding-bottom: 0.5rem; }
