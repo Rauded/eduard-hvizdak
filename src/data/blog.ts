@@ -309,7 +309,7 @@ export const BLOG_POSTS: BlogPost[] = [
       'A weekend in Brno at Zero to Done, the startup-build hackathon created by angel investor Petr Sochora and hosted at mime digital, one of the fastest-growing e-commerce agencies in the Czech Republic. The goal was not a demo but a real MVP people would pay for. I brought InzerPro and walked it through with mime digital founder and CEO Michal Mervart.',
     thumbnail: '/blog/zero-to-done/fireside.jpg',
     content: `
-      <p>I spent a weekend in Brno at <strong>Zero to Done</strong>, and it's one of the best events I've taken part in. It was the <strong>very first run</strong>, put together by <strong><a href="https://www.linkedin.com/in/petr-sochora/" target="_blank" rel="noopener noreferrer">Petr Sochora</a></strong>, an angel investor and the finance and acquisition partner at <a href="https://www.mimedigital.cz/" target="_blank" rel="noopener noreferrer">mime digital</a>, who ran the whole thing out of mime digital's own office in the centre of Brno. mime digital is one of the <strong>fastest-growing e-commerce agencies in the Czech Republic</strong>: a Shoptet Premium partner, one of only four certified Shopify agencies in the country, and more than <strong>800 e-shops</strong> built by a 40-strong team under founder and CEO <strong><a href="https://cz.linkedin.com/in/michalmervart" target="_blank" rel="noopener noreferrer">Michal Mervart</a></strong>. The premise is right there on the banner, <em>Máš nápad, ale nevíš kde začít?</em> (Got an idea, but don't know where to start?), and the answer they hand you is blunt: build a real MVP in a single weekend. It lives at <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>.</p>
+      <p>I spent a weekend in Brno at <strong>Zero to Done</strong>, and it's one of the best events I've taken part in. It was the <strong>very first run</strong>, put together by <strong><a href="https://www.linkedin.com/in/petr-sochora/" target="_blank" rel="noopener noreferrer">Petr Sochora</a></strong>, and a partner at <a href="https://www.mimedigital.cz/" target="_blank" rel="noopener noreferrer">mime digital</a>, who ran the whole thing out of mime digital's own office in the centre of Brno. mime digital is one of the <strong>fastest-growing e-commerce agencies in the Czech Republic</strong>: one of only four certified Shopify agencies in the country, and more than <strong>800 e-shops</strong> built by a 40-strong team under founder and CEO <strong><a href="https://cz.linkedin.com/in/michalmervart" target="_blank" rel="noopener noreferrer">Michal Mervart</a></strong>. The premise is right there on the banner, <em>Máš nápad, ale nevíš kde začít?</em> (Got an idea, but don't know where to start?), and the answer they hand you is blunt: build a real MVP in a single weekend. It lives at <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>.</p>
 
       <figure class="blog-figure">
         <img src="/blog/zero-to-done/fireside.jpg" alt="Fireside talk on stage at Zero to Done with the audience watching" class="blog-img" />
@@ -348,7 +348,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </figure>
 
       <h2>Final Thoughts</h2>
-      <p>Huge thanks to <strong>Petr Sochora</strong> for creating Zero to Done, and to <strong>Michal Mervart</strong> and the whole <strong>mime digital</strong> team for hosting and setting the bar this high on a first run. Events that push you toward real customers instead of a demo are rare, and this one nailed it. I'd do it again in a heartbeat.</p>
+      <p>Huge thanks to <strong>Petr Sochora</strong> for creating Zero to Done, and to <strong>Michal Mervart</strong> and the whole <strong>mime digital</strong> team for hosting and setting the bar this high on a first run. Events that push you toward real customers instead of a demo are rare, and this one did it well. I would definitely attend again.</p>
 
       <figure class="blog-figure">
         <img src="/blog/zero-to-done/group.jpg" alt="The full Zero to Done cohort posing on the rooftop" class="blog-img" />
@@ -359,7 +359,7 @@ export const BLOG_POSTS: BlogPost[] = [
         <figcaption>The whole cohort on the roof, one weekend in.</figcaption>
       </figure>
 
-      <p>Curious about the product I brought? Head to my <a href="/#projects">projects on my homepage</a> and look for <strong>InzerPro</strong>.</p>
+      <p>Curious about the project I built? Head to my <a href="/#projects">projects on my homepage</a> and look for <strong>InzerPro</strong>.</p>
     `,
     footnote:
       'Zero to Done · Brno, Czech Republic · Created by Petr Sochora (angel investor, mime digital)<br/>Hosted at mime digital · Founder and CEO Michal Mervart · Project: InzerPro · <a href="https://zero-to-done.com/" target="_blank" rel="noopener noreferrer">zero-to-done.com</a>',
