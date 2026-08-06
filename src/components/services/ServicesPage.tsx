@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import LocaleLink from '../common/LocaleLink';
 import { LuArrowRight, LuPlus, LuCircleCheck } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
@@ -93,9 +93,9 @@ const ServicesPage: React.FC = () => {
               ))}
             </div>
             <p className="services-stats__refs">
-              <Link to="/references">
+              <LocaleLink to="/references">
                 {t.referencesLink} <LuArrowRight aria-hidden="true" />
-              </Link>
+              </LocaleLink>
             </p>
           </section>
 
@@ -118,27 +118,27 @@ const ServicesPage: React.FC = () => {
 
       {/* Featured: links to the (unlisted) AI Employee page with the live demo. */}
       <Reveal className="services-block" as="section">
-        <Link to="/services/ai-employee" className="svc-featured">
+        <LocaleLink to="/services/ai-employee" className="svc-featured">
           <div>
             <span className="svc-featured__eyebrow">{t.featured.eyebrow}</span>
             <h2 className="svc-featured__title">{t.featured.title}</h2>
             <p className="svc-featured__text">{t.featured.body}</p>
           </div>
           <span className="svc-featured__cta">{t.featured.cta} <LuArrowRight aria-hidden="true" /></span>
-        </Link>
+        </LocaleLink>
       </Reveal>
 
       {/* Case study: links to the CZS Masaryk University chatbot case study page. */}
       {SHOW_CZS_CASE_STUDY && (
         <Reveal className="services-block" as="section">
-          <Link to="/projects/czs-muni-chatbot" className="svc-featured svc-featured--case">
+          <LocaleLink to="/projects/czs-muni-chatbot" className="svc-featured svc-featured--case">
             <div>
               <span className="svc-featured__eyebrow">{t.caseStudy.eyebrow}</span>
               <h2 className="svc-featured__title">{t.caseStudy.title}</h2>
               <p className="svc-featured__text">{t.caseStudy.body}</p>
             </div>
             <span className="svc-featured__cta">{t.caseStudy.cta} <LuArrowRight aria-hidden="true" /></span>
-          </Link>
+          </LocaleLink>
         </Reveal>
       )}
 
