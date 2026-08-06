@@ -4,7 +4,7 @@
   // Shared base height; each logo multiplies it by its own --logo-scale
   // (see the `scale` field in src/data/clients.ts) so marks with very
   // different aspect ratios end up looking the same size.
-  --logo-h: 56px;
+  --logo-h: 64px;
   max-width: 1000px;
   margin: 0 auto;
   padding: 56px clamp(20px, 5vw, 40px) 8px;
@@ -70,7 +70,7 @@
   }
 
   .client-logos {
-    --logo-h: 40px;
+    --logo-h: 46px;
   }
 
   .client-logos__link img {
