@@ -113,6 +113,47 @@ const inzerproCaseStudy = {
     ],
     statsCaption: 'The nightly suite even signs real Stripe webhooks: checkout to tier update, verified in test mode.',
   },
+  // Section 05, the Aukro partnership. Facts behind it (do not inflate):
+  // Aukro's commercial leadership offered API access on 2026-06-08 after an
+  // introduction from a CZ e-commerce agency; the full listing lifecycle
+  // passed in Aukro's certification sandbox on 2026-06-11; the production
+  // key is not issued yet, so nothing here may claim Aukro posting is live.
+  // 4M+ registered users and "since 2003" are Aukro's own public figures.
+  partner: {
+    title: 'Aukro opened its API to InzerPro.',
+    lead:
+      'Czechia\'s biggest auction marketplace granted official API access in June 2026, after seeing what InzerPro already automates.',
+    card: {
+      name: 'Aukro',
+      tag: 'Official API access',
+      since: 'Granted June 2026',
+      stats: [
+        { value: '#1', label: 'auction marketplace in Czechia' },
+        { value: '4M+', label: 'registered users' },
+        { value: '2003', label: 'trading since' },
+        { value: '~5,800', label: 'categories in their tree' },
+      ],
+    },
+    certTitle: 'Certified end to end, in Aukro\'s own sandbox',
+    // Plain-language lifecycle steps only. No endpoints, no payloads: the
+    // trade-secret rule at the top of this file applies here too.
+    cert: [
+      'Account sign-in',
+      'Category tree',
+      'Required attributes',
+      'Photo upload',
+      'Listing created',
+      'Price edited',
+      'Listing ended',
+    ],
+    certCaption:
+      'Every step of the listing lifecycle passed on Aukro\'s certification environment. Beta sellers next, then everyone.',
+    rows: [
+      { lead: 'Aukro came to us.', rest: 'An introduction from a Czech e-commerce agency turned into an offer of API access from Aukro\'s commercial leadership.' },
+      { lead: 'One documented door, four engineered ones.', rest: 'Aukro is the only marketplace here with a real API; the rest are built and kept alive without any.' },
+      { lead: '5,800 categories, folded into 165.', rest: 'Aukro\'s tree alone is thirty times the picker a seller sees, mapped once and maintained as data.' },
+    ],
+  },
   depth: {
     title: 'Re-posting got sellers in the door. It kept growing.',
     lead: 'The screens below are the product\'s own demo mode.',

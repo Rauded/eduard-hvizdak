@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
-  LuArrowLeft, LuArrowRight, LuCalendar, LuMail, LuExternalLink,
+  LuArrowLeft, LuArrowRight, LuCalendar, LuMail, LuExternalLink, LuCheck,
 } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
@@ -279,9 +279,51 @@ const InzerproCaseStudyPage: React.FC = () => {
         <Reveal><p className="czs-caption inz-stats__caption">{t.ops.statsCaption}</p></Reveal>
       </section>
 
-      {/* ── 05 Product depth: the product's own screens ──────── */}
+      {/* ── 05 Partnership: Aukro's official API access ──────── */}
       <section className="czs-block">
-        <Reveal><span className="czs-kicker">05 / Beyond re-posting</span><h2 className="czs-block__title">{t.depth.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">05 / Partnership</span><h2 className="czs-block__title">{t.partner.title}</h2></Reveal>
+        <Reveal><p className="czs-prose inz-lead">{t.partner.lead}</p></Reveal>
+        <div className="inz-partner">
+          <Reveal className="inz-partner__card" as="article">
+            <span className="inz-partner__head">
+              <img src={MKT_ICONS.aukro} alt="Aukro" width="44" height="44" loading="lazy" />
+              <span>
+                <span className="inz-partner__name">{t.partner.card.name}</span>
+                <span className="inz-partner__tag">{t.partner.card.tag}</span>
+              </span>
+              <span className="inz-partner__since">{t.partner.card.since}</span>
+            </span>
+            <dl className="inz-partner__stats">
+              {t.partner.card.stats.map(s => (
+                <div key={s.label}>
+                  <dt className="pixel-accent">{s.value}</dt>
+                  <dd>{s.label}</dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+          <Reveal className="inz-cert" as="figure">
+            <span className="inz-cert__title">{t.partner.certTitle}</span>
+            <ul className="inz-cert__list">
+              {t.partner.cert.map(step => (
+                <li key={step}><LuCheck aria-hidden="true" />{step}</li>
+              ))}
+            </ul>
+            <figcaption className="czs-caption">{t.partner.certCaption}</figcaption>
+          </Reveal>
+        </div>
+        <Reveal className="inz-hard" as="ul">
+          {t.partner.rows.map(r => (
+            <li className="inz-hard__row" key={r.lead}>
+              <strong>{r.lead}</strong> {r.rest}
+            </li>
+          ))}
+        </Reveal>
+      </section>
+
+      {/* ── 06 Product depth: the product's own screens ──────── */}
+      <section className="czs-block">
+        <Reveal><span className="czs-kicker">06 / Beyond re-posting</span><h2 className="czs-block__title">{t.depth.title}</h2></Reveal>
         <Reveal><p className="czs-prose inz-lead">{t.depth.lead}</p></Reveal>
         <div className="inz-depth">
           <Reveal className="inz-depth__item inz-depth__item--wide" as="figure">

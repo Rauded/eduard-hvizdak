@@ -347,7 +347,119 @@
     margin: 0.2rem auto 0;
   }
 
-  // ── 05: product depth, the app's own demo-mode screens ──
+  // ── 05: the Aukro partnership, a partner card next to the
+  // certification checklist. Two columns on desktop, stacked on mobile. ──
+  .inz-partner {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(260px, 0.85fr);
+    gap: 1.4rem;
+    align-items: start;
+    max-width: 1060px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .inz-partner__card {
+    border: 1px solid var(--inz-border);
+    border-radius: 14px;
+    background: var(--inz-soft);
+    padding: 1.1rem 1.2rem 1.2rem;
+  }
+  .inz-partner__head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    img { border-radius: 10px; flex: none; }
+  }
+  .inz-partner__name {
+    display: block;
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  .inz-partner__tag {
+    display: block;
+    font-weight: 600;
+    font-size: 0.82rem;
+    color: var(--inz-strong);
+  }
+  .inz-partner__since {
+    margin-left: auto;
+    align-self: flex-start;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.66rem;
+    white-space: nowrap;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid var(--inz-border);
+    background: #fff;
+    color: var(--inz-strong);
+  }
+  .inz-partner__stats {
+    margin: 1.1rem 0 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem 1rem;
+
+    div { min-width: 0; }
+    dt {
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 1.1;
+      color: var(--inz);
+    }
+    dd {
+      margin: 0.15rem 0 0;
+      font-size: 0.8rem;
+      line-height: 1.35;
+      color: var(--text-muted);
+    }
+  }
+  .inz-cert {
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #fff;
+    padding: 1.1rem 1.2rem 1.2rem;
+
+    &__title {
+      display: block;
+      font-weight: 650;
+      font-size: 0.93rem;
+      color: var(--text-strong);
+    }
+    &__list {
+      list-style: none;
+      margin: 0.8rem 0 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+
+      li {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.8rem;
+        padding: 0.28rem 0.65rem;
+        border-radius: 999px;
+        border: 1px solid #abefc6;
+        color: #067647;
+        white-space: nowrap;
+      }
+      svg { flex: none; width: 13px; height: 13px; }
+    }
+    .czs-caption { margin-top: 0.9rem; }
+  }
+  // The partnership ledger sits under the two cards, so it takes their
+  // width instead of the narrower reading measure used in section 02.
+  .inz-partner + .inz-hard { max-width: 1060px; }
+
+  @media (max-width: 760px) {
+    .inz-partner { grid-template-columns: 1fr; }
+  }
+
+  // ── 06: product depth, the app's own demo-mode screens ──
   .inz-depth {
     margin-top: 2rem;
     display: grid;
