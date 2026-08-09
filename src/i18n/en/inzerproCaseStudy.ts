@@ -119,14 +119,16 @@ const inzerproCaseStudy = {
   // passed in Aukro's certification sandbox on 2026-06-11; the production
   // key is not issued yet, so nothing here may claim Aukro posting is live.
   // 4M+ registered users and "since 2003" are Aukro's own public figures.
+  // Voice: written with the edo-rewrite skill (semi-casual, clean), so it
+  // reads like Eduard typed it. Plain words, "we", no marketing adjectives.
   partner: {
-    title: 'Aukro opened its API to InzerPro.',
+    title: 'Aukro gave us official API access.',
     lead:
-      'Czechia\'s biggest auction marketplace granted official API access in June 2026, after seeing what InzerPro already automates.',
+      'Aukro is the biggest auction marketplace in Czechia and they do not hand out automation to anyone, they saw what InzerPro does and gave us the API in June 2026.',
     card: {
       name: 'Aukro',
       tag: 'Official API access',
-      since: 'Granted June 2026',
+      since: 'Since June 2026',
       stats: [
         { value: '#1', label: 'auction marketplace in Czechia' },
         { value: '4M+', label: 'registered users' },
@@ -134,7 +136,7 @@ const inzerproCaseStudy = {
         { value: '~5,800', label: 'categories in their tree' },
       ],
     },
-    certTitle: 'Certified end to end, in Aukro\'s own sandbox',
+    certTitle: 'We passed their certification, every step',
     // Plain-language lifecycle steps only. No endpoints, no payloads: the
     // trade-secret rule at the top of this file applies here too.
     cert: [
@@ -147,11 +149,11 @@ const inzerproCaseStudy = {
       'Listing ended',
     ],
     certCaption:
-      'Every step of the listing lifecycle passed on Aukro\'s certification environment. Beta sellers next, then everyone.',
+      'The whole listing flow went through on Aukro\'s certification environment. Beta sellers first, then everyone.',
     rows: [
-      { lead: 'Aukro came to us.', rest: 'An introduction from a Czech e-commerce agency turned into an offer of API access from Aukro\'s commercial leadership.' },
-      { lead: 'One documented door, four engineered ones.', rest: 'Aukro is the only marketplace here with a real API; the rest are built and kept alive without any.' },
-      { lead: '5,800 categories, folded into 165.', rest: 'Aukro\'s tree alone is thirty times the picker a seller sees, mapped once and maintained as data.' },
+      { lead: 'Aukro came to us.', rest: 'A Czech e-commerce agency introduced us, and their commercial people offered the API access, we did not have to push for it.' },
+      { lead: 'One real API, four built by hand.', rest: 'Aukro is the only marketplace here that has an API at all, the rest we built ourselves and keep alive as the sites change.' },
+      { lead: '5,800 categories into 165.', rest: 'Their category tree alone is thirty times bigger than the picker a seller sees, we mapped it once and keep it as data.' },
     ],
   },
   depth: {
