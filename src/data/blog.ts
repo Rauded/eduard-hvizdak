@@ -43,21 +43,21 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Most of the weekend looked exactly like this: laptops open, too many energy drinks, working through the pipeline piece by piece. We split the work, I did the backend, the NLP extraction, the GeoNames matching and the full pipeline and another worked on the front-end globe. The back half of the event was mostly stitching it together and tuning the timeline.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/newsmatics/working.jpg" alt="Working at the hackathon, coding on laptops with a teammate" class="blog-img" />
+        <img src="/blog/newsmatics/working.jpg" alt="Working at the hackathon, coding on laptops with a teammate" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Team MOGGERS</h2>
       <p>We competed as <strong>MOGGERS</strong>, three of us. Pitching the globe to the judges with the timeline running live was the moment everything we'd built that weekend finally clicked into one demo.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/newsmatics/team.jpg" alt="Team MOGGERS portrait at the Newsmatics Hackathon" class="blog-img" />
+        <img src="/blog/newsmatics/team.jpg" alt="Team MOGGERS portrait at the Newsmatics Hackathon" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>The Award Ceremony</h2>
       <p>The event wrapped up with an award ceremony and certificates for the teams. Standing up there with the organisers and the other participants was a great way to close out an intense couple of days.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/newsmatics/awards.jpg" alt="Award ceremony at the Newsmatics Hackathon with participants holding certificates" class="blog-img" />
+        <img src="/blog/newsmatics/awards.jpg" alt="Award ceremony at the Newsmatics Hackathon with participants holding certificates" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Final Thoughts</h2>
@@ -82,21 +82,21 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Väčšina víkendu vyzerala presne takto: otvorené notebooky, priveľa kávy, prechádzali sme pipeline kúsok po kúsku. Prácu sme si rozdelili na tri časti, jeden z nás robil na NLP extrakcii, druhý na párovaní s GeoNames a tretí na frontendovom glóbuse. Druhá polovica akcie bola hlavne o zošívaní všetkého dokopy a ladení časovej osi.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/newsmatics/working.jpg" alt="Práca na hackathone, programovanie na notebookoch s kolegom z tímu" class="blog-img" />
+        <img src="/blog/newsmatics/working.jpg" alt="Práca na hackathone, programovanie na notebookoch s kolegom z tímu" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Tím MOGGERS</h2>
       <p>Súťažili sme ako <strong>MOGGERS</strong>, traja, každý mal na starosti inú časť stacku. Keď sme glóbus prezentovali porote a časová os bežala naživo, v tej chvíli všetko, čo sme cez víkend postavili, konečne zapadlo do jedného dema.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/newsmatics/team.jpg" alt="Portrét tímu MOGGERS na Newsmatics Hackathone" class="blog-img" />
+        <img src="/blog/newsmatics/team.jpg" alt="Portrét tímu MOGGERS na Newsmatics Hackathone" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Vyhlásenie výsledkov</h2>
       <p>Akcia sa zavŕšila vyhlásením výsledkov a certifikátmi pre tímy. Stáť tam hore s organizátormi a ostatnými účastníkmi bol skvelý spôsob, ako uzavrieť náročných pár dní.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/newsmatics/awards.jpg" alt="Vyhlásenie výsledkov na Newsmatics Hackathone, účastníci držia certifikáty" class="blog-img" />
+        <img src="/blog/newsmatics/awards.jpg" alt="Vyhlásenie výsledkov na Newsmatics Hackathone, účastníci držia certifikáty" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Na záver</h2>
@@ -121,21 +121,21 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Většina víkendu vypadala přesně takhle: otevřené notebooky, příliš mnoho kávy, procházeli jsme pipeline kousek po kousku. Práci jsme si rozdělili na tři části, jeden z nás dělal na NLP extrakci, druhý na párování s GeoNames a třetí na frontendovém glóbusu. Druhá polovina akce byla hlavně o sešívání všeho dohromady a ladění časové osy.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/newsmatics/working.jpg" alt="Práce na hackathonu, programování na noteboocích s kolegou z týmu" class="blog-img" />
+        <img src="/blog/newsmatics/working.jpg" alt="Práce na hackathonu, programování na noteboocích s kolegou z týmu" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Tým MOGGERS</h2>
       <p>Soutěžili jsme jako <strong>MOGGERS</strong>, tři, každý měl na starosti jinou část stacku. Když jsme glóbus prezentovali porotě a časová osa běžela naživo, v tu chvíli všechno, co jsme přes víkend postavili, konečně zapadlo do jednoho dema.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/newsmatics/team.jpg" alt="Portrét týmu MOGGERS na Newsmatics Hackathonu" class="blog-img" />
+        <img src="/blog/newsmatics/team.jpg" alt="Portrét týmu MOGGERS na Newsmatics Hackathonu" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Vyhlášení výsledků</h2>
       <p>Akce se završila vyhlášením výsledků a certifikáty pro týmy. Stát tam nahoře s organizátory a ostatními účastníky byl skvělý způsob, jak uzavřít náročných pár dní.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/newsmatics/awards.jpg" alt="Vyhlášení výsledků na Newsmatics Hackathonu, účastníci drží certifikáty" class="blog-img" />
+        <img src="/blog/newsmatics/awards.jpg" alt="Vyhlášení výsledků na Newsmatics Hackathonu, účastníci drží certifikáty" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Na závěr</h2>
@@ -162,7 +162,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </figure>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-03.jpg" alt="Open Q&amp;A with the panel during the Digital Fairness Act dialogue, Commissioner McGrath listening" class="blog-img" />
+        <img src="/blog/digital-fairness/df-03.jpg" alt="Open Q&amp;A with the panel during the Digital Fairness Act dialogue, Commissioner McGrath listening" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>The open Q&amp;A with the panel, Commissioner McGrath listening on the right.</figcaption>
       </figure>
 
@@ -170,7 +170,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Instead of abstract talking points, we mapped out concrete asks across <strong>pricing, marketing practices, and digital contracts</strong>. A few themes kept coming up. Ban <strong>deceptive practices and dark patterns</strong>. Set <strong>standardised requirements</strong> so people actually understand what they're agreeing to. And price things in <strong>real currency</strong> instead of the in-app token systems built to hide how much you're really spending.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-05.jpg" alt="Working group mapping deceptive design and dark patterns for the Digital Fairness Act" class="blog-img" />
+        <img src="/blog/digital-fairness/df-05.jpg" alt="Working group mapping deceptive design and dark patterns for the Digital Fairness Act" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>In our working group, with the "Dark Patterns" board on the table and the Digital Fairness principles in hand.</figcaption>
       </figure>
 
@@ -185,7 +185,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>So much of the modern web is built to nudge and pressure you into things: manipulative defaults, fake urgency, subscriptions that take one click to start and a support ticket to cancel. I build software, so I think a lot about where the line sits between good design and design that just exploits people. Getting to argue that line with the person actually shaping the legislation is not something I expected to be doing this year.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-02.jpg" alt="Eduard Hvizdak listening during a session of the Youth Policy Dialogue" class="blog-img" />
+        <img src="/blog/digital-fairness/df-02.jpg" alt="Eduard Hvizdak listening during a session of the Youth Policy Dialogue" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Listening in during one of the sessions.</figcaption>
       </figure>
 
@@ -193,7 +193,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>I left convinced that youth input on digital policy is incredibly important. The people who grew up inside these systems tend to spot the manipulation fastest. Thanks to the <strong>European Commission</strong> and Commissioner <strong>Michael McGrath</strong> for actually listening.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-01.jpg" alt="Group photo of the young participants with Commissioner Michael McGrath in Ljubljana" class="blog-img" />
+        <img src="/blog/digital-fairness/df-01.jpg" alt="Group photo of the young participants with Commissioner Michael McGrath in Ljubljana" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>The full group of young participants with Commissioner Michael McGrath in Ljubljana.</figcaption>
       </figure>
     `,
@@ -212,7 +212,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </figure>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-03.jpg" alt="Otvorené Q&amp;A s panelom počas dialógu o Digital Fairness Act, komisár McGrath počúva" class="blog-img" />
+        <img src="/blog/digital-fairness/df-03.jpg" alt="Otvorené Q&amp;A s panelom počas dialógu o Digital Fairness Act, komisár McGrath počúva" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Otvorené Q&amp;A s panelom, komisár McGrath počúva vpravo.</figcaption>
       </figure>
 
@@ -220,7 +220,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Namiesto abstraktných téz sme zmapovali konkrétne požiadavky naprieč <strong>cenotvorbou, marketingovými praktikami a digitálnymi zmluvami</strong>. Opakovalo sa pár tém. Zakázať <strong>klamlivé praktiky a temné vzory (dark patterns)</strong>. Nastaviť <strong>štandardizované požiadavky</strong>, aby ľudia naozaj rozumeli, s čím súhlasia. A uvádzať ceny v <strong>reálnej mene</strong> namiesto systémov herných tokenov v aplikáciách, ktoré majú skryť, koľko v skutočnosti míňaš.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-05.jpg" alt="Pracovná skupina mapuje klamlivý dizajn a dark patterns pre Digital Fairness Act" class="blog-img" />
+        <img src="/blog/digital-fairness/df-05.jpg" alt="Pracovná skupina mapuje klamlivý dizajn a dark patterns pre Digital Fairness Act" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>V našej pracovnej skupine, s tabuľou "Dark Patterns" na stole a princípmi Digital Fairness v ruke.</figcaption>
       </figure>
 
@@ -235,7 +235,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Veľká časť moderného webu je postavená tak, aby ťa postrkovala a tlačila do vecí: manipulatívne predvolené nastavenia, falošná naliehavosť, predplatné, ktoré spustíš jedným klikom a na zrušenie potrebuješ ticket na podporu. Vyvíjam softvér, takže veľa premýšľam o tom, kde je hranica medzi dobrým dizajnom a dizajnom, ktorý ľudí len zneužíva. Že sa o tejto hranici môžem hádať s človekom, ktorý reálne tvorí legislatívu, som tento rok nečakal.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-02.jpg" alt="Eduard Hvizdák počúva počas jednej zo sekcií Youth Policy Dialogue" class="blog-img" />
+        <img src="/blog/digital-fairness/df-02.jpg" alt="Eduard Hvizdák počúva počas jednej zo sekcií Youth Policy Dialogue" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Počúvam počas jednej zo sekcií.</figcaption>
       </figure>
 
@@ -243,7 +243,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Odchádzal som s presvedčením, že hlas mladých v digitálnej politike nie je len formalita pre odškrtnutie políčka. Ľudia, ktorí vyrástli vo vnútri týchto systémov, väčšinou odhalia manipuláciu najrýchlejšie. Ďakujem <strong>Európskej komisii</strong> a komisárovi <strong>Michaelovi McGrathovi</strong>, že naozaj počúvali.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-01.jpg" alt="Skupinová fotka mladých účastníkov s komisárom Michaelom McGrathom v Ľubľane" class="blog-img" />
+        <img src="/blog/digital-fairness/df-01.jpg" alt="Skupinová fotka mladých účastníkov s komisárom Michaelom McGrathom v Ľubľane" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Celá skupina mladých účastníkov s komisárom Michaelom McGrathom v Ľubľane.</figcaption>
       </figure>
     `,
@@ -262,7 +262,7 @@ export const BLOG_POSTS: BlogPost[] = [
       </figure>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-03.jpg" alt="Otevřené Q&amp;A s panelem během dialogu o Digital Fairness Act, komisař McGrath poslouchá" class="blog-img" />
+        <img src="/blog/digital-fairness/df-03.jpg" alt="Otevřené Q&amp;A s panelem během dialogu o Digital Fairness Act, komisař McGrath poslouchá" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Otevřené Q&amp;A s panelem, komisař McGrath poslouchá vpravo.</figcaption>
       </figure>
 
@@ -270,7 +270,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Místo abstraktních tezí jsme zmapovali konkrétní požadavky napříč <strong>tvorbou cen, marketingovými praktikami a digitálními smlouvami</strong>. Opakovalo se pár témat. Zakázat <strong>klamavé praktiky a temné vzory (dark patterns)</strong>. Nastavit <strong>standardizované požadavky</strong>, aby lidé opravdu rozuměli, s čím souhlasí. A uvádět ceny v <strong>reálné měně</strong> místo systémů herních tokenů v aplikacích, které mají skrýt, kolik ve skutečnosti utrácíš.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-05.jpg" alt="Pracovní skupina mapuje klamavý design a dark patterns pro Digital Fairness Act" class="blog-img" />
+        <img src="/blog/digital-fairness/df-05.jpg" alt="Pracovní skupina mapuje klamavý design a dark patterns pro Digital Fairness Act" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>V naší pracovní skupině, s tabulí "Dark Patterns" na stole a principy Digital Fairness v ruce.</figcaption>
       </figure>
 
@@ -285,7 +285,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Velká část moderního webu je postavená tak, aby tě popostrkovala a tlačila do věcí: manipulativní výchozí nastavení, falešná naléhavost, předplatné, které spustíš jedním kliknutím a na zrušení potřebuješ ticket na podporu. Vyvíjím software, takže hodně přemýšlím o tom, kde je hranice mezi dobrým designem a designem, který lidi jen zneužívá. Že se o téhle hranici můžu přít s člověkem, který reálně tvoří legislativu, jsem letos nečekal.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-02.jpg" alt="Eduard Hvizdák poslouchá během jedné ze sekcí Youth Policy Dialogue" class="blog-img" />
+        <img src="/blog/digital-fairness/df-02.jpg" alt="Eduard Hvizdák poslouchá během jedné ze sekcí Youth Policy Dialogue" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Poslouchám během jedné ze sekcí.</figcaption>
       </figure>
 
@@ -293,7 +293,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Odcházel jsem s přesvědčením, že hlas mladých v digitální politice není jen formalita pro odškrtnutí políčka. Lidé, kteří vyrostli uvnitř těchto systémů, většinou odhalí manipulaci nejrychleji. Děkuji <strong>Evropské komisi</strong> a komisaři <strong>Michaelu McGrathovi</strong>, že opravdu poslouchali.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/digital-fairness/df-01.jpg" alt="Skupinová fotka mladých účastníků s komisařem Michaelem McGrathem v Lublani" class="blog-img" />
+        <img src="/blog/digital-fairness/df-01.jpg" alt="Skupinová fotka mladých účastníků s komisařem Michaelem McGrathem v Lublani" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Celá skupina mladých účastníků s komisařem Michaelem McGrathem v Lublani.</figcaption>
       </figure>
     `,
@@ -320,7 +320,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>What made it stand out is that it <strong>wasn't a hackathon for fun</strong>. It was a <strong>startup-build event</strong>. The bar wasn't "ship a cool demo," it was "build something people would actually pay for." Over the weekend you were expected to go talk to customers, test the product with real users, and show there was real demand. Investors were in the room, so it wasn't about winning an audience vote. It was about which teams were worth working with after the weekend ended. That changed how you spent every hour.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/zero-to-done/demo-day.jpg" alt="The whole room gathered on couches watching teams present" class="blog-img" />
+        <img src="/blog/zero-to-done/demo-day.jpg" alt="The whole room gathered on couches watching teams present" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Pitch time, with the whole room, mentors and investors included, watching teams present.</figcaption>
       </figure>
 
@@ -351,11 +351,11 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Huge thanks to <strong>Petr Sochora</strong> for creating Zero to Done, and to <strong>Michal Mervart</strong> and the whole <strong>mime digital</strong> team for hosting and setting the bar this high on a first run. Events that push you toward real customers instead of a demo are rare, and this one did it well. I would definitely attend again.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/zero-to-done/group.jpg" alt="The full Zero to Done cohort posing on the rooftop" class="blog-img" />
+        <img src="/blog/zero-to-done/group.jpg" alt="The full Zero to Done cohort posing on the rooftop" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <figure class="blog-figure">
-        <img src="/blog/zero-to-done/group-celebrate.jpg" alt="The same Zero to Done cohort on the rooftop with hands raised" class="blog-img" />
+        <img src="/blog/zero-to-done/group-celebrate.jpg" alt="The same Zero to Done cohort on the rooftop with hands raised" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>The whole cohort on the roof, one weekend in.</figcaption>
       </figure>
 
@@ -379,7 +379,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Čím vynikal, je to, že to <strong>nebol hackathon pre zábavu</strong>. Bola to <strong>akcia na stavbu startupu</strong>. Latka nebola "vypustiť super demo", ale "postaviť niečo, za čo by ľudia naozaj zaplatili". Cez víkend sa od teba čakalo, že pôjdeš hovoriť so zákazníkmi, otestuješ produkt s reálnymi používateľmi a ukážeš, že existuje reálny dopyt. V miestnosti boli investori, takže nešlo o víťazstvo v hlasovaní publika. Šlo o to, s ktorými tímami sa oplatí pracovať aj po skončení víkendu. To zmenilo, ako si trávil každú hodinu.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/zero-to-done/demo-day.jpg" alt="Celá miestnosť pokope na gaučoch sleduje, ako tímy prezentujú" class="blog-img" />
+        <img src="/blog/zero-to-done/demo-day.jpg" alt="Celá miestnosť pokope na gaučoch sleduje, ako tímy prezentujú" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Čas na pitch, celá miestnosť vrátane mentorov a investorov sleduje, ako tímy prezentujú.</figcaption>
       </figure>
 
@@ -410,11 +410,11 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Veľká vďaka <strong>Petrovi Sochorovi</strong> za vytvorenie Zero to Done a <strong>Michalovi Mervartovi</strong> a celému tímu <strong>mime digital</strong> za hostenie a za to, že hneď pri prvom ročníku nastavili latku takto vysoko. Akcie, ktoré ťa tlačia k reálnym zákazníkom namiesto dema, sú vzácne a táto to trafila presne. Bez váhania by som išiel znova.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/zero-to-done/group.jpg" alt="Celá skupina Zero to Done pózuje na streche" class="blog-img" />
+        <img src="/blog/zero-to-done/group.jpg" alt="Celá skupina Zero to Done pózuje na streche" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <figure class="blog-figure">
-        <img src="/blog/zero-to-done/group-celebrate.jpg" alt="Tá istá skupina Zero to Done na streche so zdvihnutými rukami" class="blog-img" />
+        <img src="/blog/zero-to-done/group-celebrate.jpg" alt="Tá istá skupina Zero to Done na streche so zdvihnutými rukami" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Celá skupina na streche, po jednom spoločnom víkende.</figcaption>
       </figure>
 
@@ -438,7 +438,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Čím vynikal, je to, že to <strong>nebyl hackathon pro zábavu</strong>. Byla to <strong>akce na stavbu startupu</strong>. Laťka nebyla "vypustit super demo", ale "postavit něco, za co by lidé opravdu zaplatili". Přes víkend se od tebe čekalo, že půjdeš mluvit se zákazníky, otestuješ produkt s reálnými uživateli a ukážeš, že existuje reálná poptávka. V místnosti byli investoři, takže nešlo o vítězství v hlasování publika. Šlo o to, se kterými týmy se vyplatí pracovat i po skončení víkendu. To změnilo, jak jsi trávil každou hodinu.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/zero-to-done/demo-day.jpg" alt="Celá místnost pohromadě na gaučích sleduje, jak týmy prezentují" class="blog-img" />
+        <img src="/blog/zero-to-done/demo-day.jpg" alt="Celá místnost pohromadě na gaučích sleduje, jak týmy prezentují" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Čas na pitch, celá místnost včetně mentorů a investorů sleduje, jak týmy prezentují.</figcaption>
       </figure>
 
@@ -469,11 +469,11 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Velký dík <strong>Petru Sochorovi</strong> za vytvoření Zero to Done a <strong>Michalu Mervartovi</strong> a celému týmu <strong>mime digital</strong> za hostování a za to, že hned při prvním ročníku nastavili laťku takhle vysoko. Akce, které tě tlačí k reálným zákazníkům místo dema, jsou vzácné a tahle to trefila přesně. Bez váhání bych šel znovu.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/zero-to-done/group.jpg" alt="Celá skupina Zero to Done pózuje na střeše" class="blog-img" />
+        <img src="/blog/zero-to-done/group.jpg" alt="Celá skupina Zero to Done pózuje na střeše" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <figure class="blog-figure">
-        <img src="/blog/zero-to-done/group-celebrate.jpg" alt="Tatáž skupina Zero to Done na střeše se zdviženýma rukama" class="blog-img" />
+        <img src="/blog/zero-to-done/group-celebrate.jpg" alt="Tatáž skupina Zero to Done na střeše se zdviženýma rukama" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Celá skupina na střeše, po jednom společném víkendu.</figcaption>
       </figure>
 
@@ -507,7 +507,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>We stayed at a place in the Lithuanian countryside that also works as a wedding venue. Artificial lake nearby, a lot of open space, good rooms. After long workshop days it was nice to just go for a walk outside. Some of the best conversations I had during that week happened in the evenings around the venue.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/erasmus/photo3.jpg" alt="Group photo at sunset at the venue in Lithuania" class="blog-img" />
+        <img src="/blog/erasmus/photo3.jpg" alt="Group photo at sunset at the venue in Lithuania" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Cultural Nights</h2>
@@ -515,7 +515,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>For the <strong>Slovak Cultural Night</strong>, we wanted to go beyond the obvious stuff and show what Slovakia actually feels like. We cooked traditional food, did the burning of <em>Morena</em>, performed a folk dance, and sang. Seeing people from Ukraine or Romania or Bulgaria genuinely curious about our traditions was something I did not expect to feel as much as I did.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/erasmus/photo1.jpg" alt="Slovak team preparing food for the Cultural Night" class="blog-img" />
+        <img src="/blog/erasmus/photo1.jpg" alt="Slovak team preparing food for the Cultural Night" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Final Thoughts</h2>
@@ -545,7 +545,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Bývali sme na mieste na litovskom vidieku, ktoré slúži aj ako svadobné miesto. Neďaleko umelé jazero, veľa otvoreného priestoru, dobré izby. Po dlhých dňoch workshopov bolo príjemné len tak si vyjsť von na prechádzku. Niektoré z najlepších rozhovorov toho týždňa sa odohrali večer v okolí miesta.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/erasmus/photo3.jpg" alt="Skupinová fotka pri západe slnka na mieste v Litve" class="blog-img" />
+        <img src="/blog/erasmus/photo3.jpg" alt="Skupinová fotka pri západe slnka na mieste v Litve" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Kultúrne večery</h2>
@@ -553,7 +553,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Na <strong>slovenský kultúrny večer</strong> sme chceli ísť za rámec toho očividného a ukázať, aké Slovensko naozaj je. Uvarili sme tradičné jedlo, spravili sme pálenie <em>Moreny</em>, zatancovali ľudový tanec a spievali. Vidieť ľudí z Ukrajiny, Rumunska či Bulharska úprimne zvedavých na naše tradície bolo niečo, čo som nečakal, že ma tak zasiahne.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/erasmus/photo1.jpg" alt="Slovenský tím pripravuje jedlo na kultúrny večer" class="blog-img" />
+        <img src="/blog/erasmus/photo1.jpg" alt="Slovenský tím pripravuje jedlo na kultúrny večer" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Na záver</h2>
@@ -583,7 +583,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Bydleli jsme na místě na litevském venkově, které slouží i jako svatební místo. Nedaleko umělé jezero, hodně otevřeného prostoru, dobré pokoje. Po dlouhých dnech workshopů bylo příjemné jen tak si vyjít ven na procházku. Některé z nejlepších rozhovorů toho týdne se odehrály večer v okolí toho místa.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/erasmus/photo3.jpg" alt="Skupinová fotka při západu slunce na místě v Litvě" class="blog-img" />
+        <img src="/blog/erasmus/photo3.jpg" alt="Skupinová fotka při západu slunce na místě v Litvě" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Kulturní večery</h2>
@@ -591,7 +591,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Na <strong>slovenský kulturní večer</strong> jsme chtěli jít za rámec toho očividného a ukázat, jaké Slovensko doopravdy je. Uvařili jsme tradiční jídlo, udělali jsme pálení <em>Morany</em>, zatančili lidový tanec a zpívali. Vidět lidi z Ukrajiny, Rumunska či Bulharska upřímně zvědavé na naše tradice bylo něco, co jsem nečekal, že mě tak zasáhne.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/erasmus/photo1.jpg" alt="Slovenský tým připravuje jídlo na kulturní večer" class="blog-img" />
+        <img src="/blog/erasmus/photo1.jpg" alt="Slovenský tým připravuje jídlo na kulturní večer" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Na závěr</h2>
@@ -624,20 +624,20 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>The paper crew badge is a small thing but it changes the day. You are not walking around deciding which talk to sit in, you are the person people ask for help and you end up talking to far more people than you would as an attendee.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/crew-badge.jpg" alt="Paper crew badge on a lanyard with sponsor logos, Fintech UnBundled Prague" class="blog-img" />
+        <img src="/blog/fintech-unbundled/crew-badge.jpg" alt="Paper crew badge on a lanyard with sponsor logos, Fintech UnBundled Prague" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>What The Day Was</h2>
       <p>The main stage ran five blocks, and the names give a decent idea of the tone: <strong>CTRL+ALT+FINANCE</strong> (reboot required), <strong>NEW MONEY, NEW RAILS</strong> (laying track where there was none), <strong>HUMAN x MACHINE</strong> (automation is easy, trust is hard), <strong>MONEY x FRONTIERS</strong> (capital, borders, and the edges of what is possible), and <strong>FOUNDERS' SCARS</strong> (earned in public). Two invitation-only things ran in parallel, a regulatory roundtable and a VC and founders session. At one point there was a screen in the hallway with the VC pitch sessions on it, which was the part of the day which I enjoyed the most.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/state-of-cee-fintech.jpg" alt="State of CEE Fintech on the big screen at Fintech UnBundled with a full audience" class="blog-img" />
+        <img src="/blog/fintech-unbundled/state-of-cee-fintech.jpg" alt="State of CEE Fintech on the big screen at Fintech UnBundled with a full audience" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <p>The lineup had people like <strong>Georg Hauer</strong> (ex N26), <strong>Dann Bibas</strong> (ex Wise) and <strong>Will Orde</strong> from Passion Capital, and the partners on the wall were <strong>KB</strong>, <strong>Mastercard</strong>, <strong>Visa</strong>, FINREG Partners, The FinTechers, BD Partners and KB Smart Solutions. For a first edition in Prague that is pretty cool.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/sponsor-wall.jpg" alt="Audience facing the sponsor LED wall at Fintech UnBundled Prague" class="blog-img" />
+        <img src="/blog/fintech-unbundled/sponsor-wall.jpg" alt="Audience facing the sponsor LED wall at Fintech UnBundled Prague" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Why It Mattered To Me</h2>
@@ -645,14 +645,14 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>The other thing I did not expect: most of the value was in the hallway. Not in a networking way, more that as crew you talk to speakers before they go on and after they come off, and people are a lot more real then.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/room-wide.jpg" alt="Wide view of the packed UnBundled ballroom in Prague from the balcony" class="blog-img" />
+        <img src="/blog/fintech-unbundled/room-wide.jpg" alt="Wide view of the packed UnBundled ballroom in Prague from the balcony" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Final Thoughts</h2>
       <p>One day helping people out and I got more out of it than I would have sitting in the audience. If you are a student or early in fintech and you are wondering how to get into a room like this, volunteering is the cheat code. Nobody minds, and everybody talks to you.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/crew-group.jpg" alt="The UnBundled volunteer crew on stage after the event" class="blog-img" />
+        <img src="/blog/fintech-unbundled/crew-group.jpg" alt="The UnBundled volunteer crew on stage after the event" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>The crew. You are not supposed to stand out, you are supposed to make the day run.</figcaption>
       </figure>
 
@@ -679,20 +679,20 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Papierová visačka je malá vec, ale mení celý deň. Nechodíš po sále a nerozhoduješ sa, na ktorú prednášku si sadneš, si ten človek, ktorého sa ľudia pýtajú, kde je káva alebo kde je miestnosť s okrúhlym stolom, a nakoniec sa rozprávaš s oveľa viac ľuďmi, než keby si bol návštevník.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/crew-badge.jpg" alt="Papierová visačka organizátora so šnúrkou a logami partnerov, Fintech UnBundled Praha" class="blog-img" />
+        <img src="/blog/fintech-unbundled/crew-badge.jpg" alt="Papierová visačka organizátora so šnúrkou a logami partnerov, Fintech UnBundled Praha" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Ako deň vyzeral</h2>
       <p>Na hlavnom pódiu bolo päť blokov a ich názvy dávajú slušnú predstavu o tóne: <strong>CTRL+ALT+FINANCE</strong> (reboot required), <strong>NEW MONEY, NEW RAILS</strong> (laying track where there was none), <strong>HUMAN x MACHINE</strong> (automation is easy, trust is hard), <strong>MONEY x FRONTIERS</strong> (capital, borders, and the edges of what is possible) a <strong>FOUNDERS' SCARS</strong> (earned in public). Paralelne bežali dve veci len na pozvánku, regulačný okrúhly stôl a session pre VC a zakladateľov. V jednu chvíľu bola na chodbe obrazovka s VC pitch sessions, čo bola tá časť dňa s najviac nervóznymi ľuďmi na jednej chodbe.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/state-of-cee-fintech.jpg" alt="State of CEE Fintech na veľkej obrazovke na Fintech UnBundled pred plnou sálou" class="blog-img" />
+        <img src="/blog/fintech-unbundled/state-of-cee-fintech.jpg" alt="State of CEE Fintech na veľkej obrazovke na Fintech UnBundled pred plnou sálou" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <p>V programe boli ľudia ako <strong>Georg Hauer</strong> (predtým N26), <strong>Dann Bibas</strong> (predtým Wise) a <strong>Will Orde</strong> z Passion Capital a na stene partnerov boli <strong>KB</strong>, <strong>Mastercard</strong>, <strong>Visa</strong>, FINREG Partners, The FinTechers, BD Partners a KB Smart Solutions. Na prvý ročník v Prahe je to poriadna spoločnosť.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/sponsor-wall.jpg" alt="Publikum otočené k LED stene partnerov na Fintech UnBundled v Prahe" class="blog-img" />
+        <img src="/blog/fintech-unbundled/sponsor-wall.jpg" alt="Publikum otočené k LED stene partnerov na Fintech UnBundled v Prahe" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Prečo to pre mňa niečo znamenalo</h2>
@@ -700,14 +700,14 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Druhá vec, ktorú som nečakal: väčšina hodnoty bola na chodbe. Nie v zmysle networkingu, skôr tak, že ako organizátor sa rozprávaš s rečníkmi predtým, než idú na pódium, a potom, ako z neho zídu, a vtedy sú ľudia oveľa reálnejší.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/room-wide.jpg" alt="Široký záber na plnú sálu UnBundled v Prahe z balkóna" class="blog-img" />
+        <img src="/blog/fintech-unbundled/room-wide.jpg" alt="Široký záber na plnú sálu UnBundled v Prahe z balkóna" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Na záver</h2>
       <p>Jeden deň, žiadna vstupenka, a odniesol som si viac, než keby som sedel v publiku. Ak si študent alebo si vo fintechu na začiatku a rozmýšľaš, ako sa dostať do takejto miestnosti, dobrovoľníčenie je cheat code. Nikomu to nevadí a každý sa s tebou rozpráva.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/crew-group.jpg" alt="Dobrovoľnícky tím UnBundled na pódiu po skončení akcie" class="blog-img" />
+        <img src="/blog/fintech-unbundled/crew-group.jpg" alt="Dobrovoľnícky tím UnBundled na pódiu po skončení akcie" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Tím. Nemáš vyčnievať, máš sa postarať, aby deň bežal.</figcaption>
       </figure>
 
@@ -734,20 +734,20 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Papírová visačka je malá věc, ale mění celý den. Nechodíš po sále a nerozhoduješ se, na kterou přednášku si sedneš, jsi ten člověk, kterého se lidi ptají, kde je káva nebo kde je místnost s kulatým stolem, a nakonec se bavíš s mnohem víc lidmi, než kdybys byl návštěvník.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/crew-badge.jpg" alt="Papírová visačka organizátora se šňůrkou a logy partnerů, Fintech UnBundled Praha" class="blog-img" />
+        <img src="/blog/fintech-unbundled/crew-badge.jpg" alt="Papírová visačka organizátora se šňůrkou a logy partnerů, Fintech UnBundled Praha" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Jak den vypadal</h2>
       <p>Na hlavním pódiu bylo pět bloků a jejich názvy dávají slušnou představu o tónu: <strong>CTRL+ALT+FINANCE</strong> (reboot required), <strong>NEW MONEY, NEW RAILS</strong> (laying track where there was none), <strong>HUMAN x MACHINE</strong> (automation is easy, trust is hard), <strong>MONEY x FRONTIERS</strong> (capital, borders, and the edges of what is possible) a <strong>FOUNDERS' SCARS</strong> (earned in public). Paralelně běžely dvě věci jen na pozvánku, regulační kulatý stůl a session pro VC a zakladatele. V jednu chvíli byla na chodbě obrazovka s VC pitch sessions, což byla ta část dne s nejvíc nervózními lidmi na jedné chodbě.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/state-of-cee-fintech.jpg" alt="State of CEE Fintech na velké obrazovce na Fintech UnBundled před plným sálem" class="blog-img" />
+        <img src="/blog/fintech-unbundled/state-of-cee-fintech.jpg" alt="State of CEE Fintech na velké obrazovce na Fintech UnBundled před plným sálem" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <p>V programu byli lidi jako <strong>Georg Hauer</strong> (dříve N26), <strong>Dann Bibas</strong> (dříve Wise) a <strong>Will Orde</strong> z Passion Capital a na stěně partnerů byly <strong>KB</strong>, <strong>Mastercard</strong>, <strong>Visa</strong>, FINREG Partners, The FinTechers, BD Partners a KB Smart Solutions. Na první ročník v Praze je to pořádná společnost.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/sponsor-wall.jpg" alt="Publikum otočené k LED stěně partnerů na Fintech UnBundled v Praze" class="blog-img" />
+        <img src="/blog/fintech-unbundled/sponsor-wall.jpg" alt="Publikum otočené k LED stěně partnerů na Fintech UnBundled v Praze" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Proč to pro mě něco znamenalo</h2>
@@ -755,14 +755,14 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Druhá věc, kterou jsem nečekal: většina hodnoty byla na chodbě. Ne ve smyslu networkingu, spíš tak, že jako organizátor se bavíš s řečníky předtím, než jdou na pódium, a potom, co z něj sejdou, a tehdy jsou lidi mnohem reálnější.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/room-wide.jpg" alt="Široký záběr na plný sál UnBundled v Praze z balkonu" class="blog-img" />
+        <img src="/blog/fintech-unbundled/room-wide.jpg" alt="Široký záběr na plný sál UnBundled v Praze z balkonu" class="blog-img" loading="lazy" decoding="async" />
       </figure>
 
       <h2>Na závěr</h2>
       <p>Jeden den, žádná vstupenka, a odnesl jsem si víc, než kdybych seděl v publiku. Pokud jsi student nebo jsi ve fintechu na začátku a přemýšlíš, jak se dostat do takové místnosti, dobrovolničení je cheat code. Nikomu to nevadí a každý se s tebou baví.</p>
 
       <figure class="blog-figure">
-        <img src="/blog/fintech-unbundled/crew-group.jpg" alt="Dobrovolnický tým UnBundled na pódiu po skončení akce" class="blog-img" />
+        <img src="/blog/fintech-unbundled/crew-group.jpg" alt="Dobrovolnický tým UnBundled na pódiu po skončení akce" class="blog-img" loading="lazy" decoding="async" />
         <figcaption>Tým. Nemáš vyčnívat, máš se postarat, aby den běžel.</figcaption>
       </figure>
 
