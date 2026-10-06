@@ -5,7 +5,8 @@ import './index.css';
 import App from './App.tsx';
 import reportWebVitals from './reportWebVitals';
 import { initAnalytics } from './analytics';
-import { stripLocale } from './config/locale';
+import { stripLocale, getLocaleFromPath } from './config/locale';
+import { loadLocale } from './i18n';
 import { SHOW_CZS_CASE_STUDY } from './config/czsCaseStudy';
 
 // Pageviews are captured manually on route change (see App.tsx).
@@ -67,7 +68,10 @@ if (rootEl.hasChildNodes()) {
   document.querySelectorAll('body > .case-modal').forEach((n) => n.remove());
   // Strip the /sk or /cs prefix so localized routes warm the right chunk (a
   // /sk/blog load must preload the blog chunk, not fall through to NotFound).
-  preloadRouteChunk(stripLocale(window.location.pathname)).finally(() => {
+  Promise.all([
+    preloadRouteChunk(stripLocale(window.location.pathname)).catch(() => {}),
+    loadLocale(getLocaleFromPath(window.location.pathname)),
+  ]).finally(() => {
     ReactDOM.hydrateRoot(rootEl, app);
   });
 } else {

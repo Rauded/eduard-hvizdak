@@ -12,21 +12,29 @@
 import { useLocale } from './LocaleContext';
 import { Locale } from '../config/locale';
 import { en, Dict } from './en';
-import { sk } from './sk';
-import { cs } from './cs';
 import { DeepPartial } from './types';
 
-const OVERRIDES: Record<Locale, DeepPartial<Dict>> = {
-  en: {},
-  sk,
-  cs,
+// sk and cs live in their own chunks and are filled in by loadLocale() (called
+// before first render for /sk and /cs URLs, and when the language is switched).
+// Until then a non-English locale falls back to English.
+const OVERRIDES: Record<Locale, DeepPartial<Dict>> = { en: {}, sk: {}, cs: {} };
+
+const LOADERS: Record<Locale, () => Promise<object[]>> = {
+  en: () => Promise.resolve([]),
+  sk: () => Promise.all([import('./sk').then((m) => m.sk), import('./sk/heavy').then((m) => m.skHeavy)]),
+  cs: () => Promise.all([import('./cs').then((m) => m.cs), import('./cs/heavy').then((m) => m.csHeavy)]),
 };
+const pending: Partial<Record<Locale, Promise<void>>> = {};
+export function loadLocale(locale: Locale): Promise<void> {
+  return (pending[locale] ??= LOADERS[locale]().then((parts) => {
+    Object.assign(OVERRIDES[locale], ...parts);
+  }));
+}
 
 // Namespaces from ./heavy.ts join the base dictionaries when a lazy page loads.
 const BASE: Record<string, unknown> = { ...en };
-export function registerNamespaces(base: object, over: Partial<Record<Locale, object>>) {
+export function registerNamespaces(base: object) {
   Object.assign(BASE, base);
-  for (const l of Object.keys(over) as Locale[]) Object.assign(OVERRIDES[l], over[l]);
 }
 
 function isPlainObject(v: unknown): v is Record<string, unknown> {

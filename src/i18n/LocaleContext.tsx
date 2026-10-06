@@ -1,5 +1,6 @@
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { loadLocale } from './index';
 import { Locale, getLocaleFromPath, stripLocale, localizedPath, saveLocale } from '../config/locale';
 
 // Single site-wide language source of truth, now derived from the URL PATH so it
@@ -24,6 +25,13 @@ export const LocaleProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const { pathname, search, hash } = useLocation();
   const navigate = useNavigate();
   const locale = getLocaleFromPath(pathname);
+  const [, bump] = useState(0);
+
+  // Safety net: if a non-English dictionary is not loaded yet (e.g. a ?lang=
+  // redirect), render English and re-render once it arrives.
+  useEffect(() => {
+    loadLocale(locale).then(() => bump((n) => n + 1));
+  }, [locale]);
 
   // Keep the document language in sync for screen readers (Helmet's <html lang>
   // in Seo.tsx agrees; this guarantees it even on views without <Seo>).
@@ -33,7 +41,7 @@ export const LocaleProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
   const setLocale = (next: Locale) => {
     saveLocale(next); // remember the preference (does not drive crawlable state)
-    navigate(localizedPath(stripLocale(pathname), next) + search + hash);
+    loadLocale(next).then(() => navigate(localizedPath(stripLocale(pathname), next) + search + hash));
   };
 
   return (
