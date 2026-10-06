@@ -22,6 +22,13 @@ const OVERRIDES: Record<Locale, DeepPartial<Dict>> = {
   cs,
 };
 
+// Namespaces from ./heavy.ts join the base dictionaries when a lazy page loads.
+const BASE: Record<string, unknown> = { ...en };
+export function registerNamespaces(base: object, over: Partial<Record<Locale, object>>) {
+  Object.assign(BASE, base);
+  for (const l of Object.keys(over) as Locale[]) Object.assign(OVERRIDES[l], over[l]);
+}
+
 function isPlainObject(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
@@ -46,9 +53,10 @@ function deepMerge<T>(base: T, over: DeepPartial<T> | undefined): T {
 // Resolve one namespace for an explicit locale (non-hook, for data helpers and
 // prerender-time code).
 export function getDict<K extends keyof Dict>(ns: K, locale: Locale): Dict[K] {
-  if (locale === 'en') return en[ns];
+  const base = BASE[ns as string] as Dict[K];
+  if (locale === 'en') return base;
   const over = OVERRIDES[locale][ns] as DeepPartial<Dict[K]> | undefined;
-  return deepMerge(en[ns], over);
+  return deepMerge(base, over);
 }
 
 // Hook form: resolves the namespace for the active locale and re-renders on

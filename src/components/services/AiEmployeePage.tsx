@@ -8,6 +8,7 @@ import {
 } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
+import '../../i18n/heavy';
 import { useTheme } from '../theme/ThemeContext';
 import ContactGradient from '../_21test/ContactGradient';
 import Reveal from '../_21test/Reveal';

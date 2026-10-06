@@ -3,6 +3,7 @@ import LocaleLink from '../common/LocaleLink';
 import { LuArrowRight, LuPlus, LuCircleCheck } from 'react-icons/lu';
 import Seo from '../../seo/Seo';
 import { useT } from '../../i18n';
+import '../../i18n/heavy';
 import { useTheme } from '../theme/ThemeContext';
 import SectionMarker from '../common/SectionMarker';
 import { SHOW_CZS_CASE_STUDY } from '../../config/czsCaseStudy';

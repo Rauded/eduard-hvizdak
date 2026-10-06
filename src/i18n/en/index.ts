@@ -15,8 +15,6 @@ import about from './about';
 import resume from './resume';
 import now from './now';
 import things from './things';
-import aiEmployee from './aiEmployee';
-import services from './services';
 import showcase from './showcase';
 import agentPipeline from './agentPipeline';
 import contactBand from './contactBand';
@@ -24,11 +22,10 @@ import orbitStack from './orbitStack';
 import projects from './projects';
 import blog from './blog';
 import notfound from './notfound';
-import czsChatbot from './czsChatbot';
-import inzerproCaseStudy from './inzerproCaseStudy';
 import references from './references';
 import clients from './clients';
 import testimonials from './testimonials';
+import type { enHeavy } from './heavy';
 
 export const en = {
   testimonials,
@@ -44,8 +41,6 @@ export const en = {
   resume,
   now,
   things,
-  aiEmployee,
-  services,
   showcase,
   agentPipeline,
   contactBand,
@@ -53,9 +48,7 @@ export const en = {
   projects,
   blog,
   notfound,
-  czsChatbot,
-  inzerproCaseStudy,
   references,
 };
 
-export type Dict = typeof en;
+export type Dict = typeof en & typeof enHeavy;
