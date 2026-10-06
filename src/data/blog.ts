@@ -328,7 +328,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>I brought <strong>InzerPro</strong>, my classifieds-automation product, and used the weekend the way the event wanted: talking to potential customers, testing, and sharpening the pitch instead of just adding features. The highlight was sitting down with <strong>Michal Mervart</strong>, mime digital's founder and CEO, and walking him through the product line by line. Working on something I already care about, in a room full of people doing the same, made the whole thing click.</p>
 
       <figure class="blog-figure">
-        <video class="blog-video" autoplay muted loop playsinline preload="metadata" poster="/blog/zero-to-done/build-montage-poster.jpg">
+        <video class="blog-video" data-autoplay muted loop playsinline preload="none" poster="/blog/zero-to-done/build-montage-poster.jpg">
           <source src="/blog/zero-to-done/build-montage.mp4" type="video/mp4" />
         </video>
         <figcaption>Discussing InzerPro with <strong>Michal Mervart</strong>, founder and CEO of mime digital.</figcaption>
@@ -341,7 +341,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>The office had a rooftop terrace, and that's where most of the breaks happened. Some of the better conversations of the weekend were up there in the sun, away from the laptops.</p>
 
       <figure class="blog-figure">
-        <video class="blog-video blog-video--portrait" autoplay muted loop playsinline preload="metadata" poster="/blog/zero-to-done/rooftop-poster.jpg">
+        <video class="blog-video blog-video--portrait" data-autoplay muted loop playsinline preload="none" poster="/blog/zero-to-done/rooftop-poster.jpg">
           <source src="/blog/zero-to-done/rooftop.mp4" type="video/mp4" />
         </video>
         <figcaption>The view from mime digital's rooftop, over Brno.</figcaption>
@@ -387,7 +387,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Priniesol som <strong>InzerPro</strong>, môj produkt na automatizáciu inzerátov, a víkend som využil tak, ako to akcia chcela: rozhovormi s potenciálnymi zákazníkmi, testovaním a brúsením pitchu namiesto pridávania funkcií. Vrcholom bolo, keď som si sadol s <strong>Michalom Mervartom</strong>, zakladateľom a CEO mime digital, a prešiel som s ním produkt riadok po riadku. Pracovať na niečom, na čom mi už záleží, v miestnosti plnej ľudí, ktorí robia to isté, to celé pospájalo.</p>
 
       <figure class="blog-figure">
-        <video class="blog-video" autoplay muted loop playsinline preload="metadata" poster="/blog/zero-to-done/build-montage-poster.jpg">
+        <video class="blog-video" data-autoplay muted loop playsinline preload="none" poster="/blog/zero-to-done/build-montage-poster.jpg">
           <source src="/blog/zero-to-done/build-montage.mp4" type="video/mp4" />
         </video>
         <figcaption>Rozoberám InzerPro s <strong>Michalom Mervartom</strong>, zakladateľom a CEO mime digital.</figcaption>
@@ -400,7 +400,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Kancelária mala strešnú terasu a práve tam sa odohrala väčšina prestávok. Niektoré z lepších rozhovorov víkendu boli hore na slnku, ďalej od notebookov.</p>
 
       <figure class="blog-figure">
-        <video class="blog-video blog-video--portrait" autoplay muted loop playsinline preload="metadata" poster="/blog/zero-to-done/rooftop-poster.jpg">
+        <video class="blog-video blog-video--portrait" data-autoplay muted loop playsinline preload="none" poster="/blog/zero-to-done/rooftop-poster.jpg">
           <source src="/blog/zero-to-done/rooftop.mp4" type="video/mp4" />
         </video>
         <figcaption>Výhľad zo strechy mime digital na Brno.</figcaption>
@@ -446,7 +446,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Přinesl jsem <strong>InzerPro</strong>, můj produkt na automatizaci inzerátů, a víkend jsem využil tak, jak to akce chtěla: rozhovory s potenciálními zákazníky, testováním a broušením pitche místo přidávání funkcí. Vrcholem bylo, když jsem si sedl s <strong>Michalem Mervartem</strong>, zakladatelem a CEO mime digital, a prošel jsem s ním produkt řádek po řádku. Pracovat na něčem, na čem mi už záleží, v místnosti plné lidí, kteří dělají totéž, to celé propojilo.</p>
 
       <figure class="blog-figure">
-        <video class="blog-video" autoplay muted loop playsinline preload="metadata" poster="/blog/zero-to-done/build-montage-poster.jpg">
+        <video class="blog-video" data-autoplay muted loop playsinline preload="none" poster="/blog/zero-to-done/build-montage-poster.jpg">
           <source src="/blog/zero-to-done/build-montage.mp4" type="video/mp4" />
         </video>
         <figcaption>Rozebírám InzerPro s <strong>Michalem Mervartem</strong>, zakladatelem a CEO mime digital.</figcaption>
@@ -459,7 +459,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <p>Kancelář měla střešní terasu a právě tam se odehrála většina přestávek. Některé z lepších rozhovorů víkendu byly nahoře na slunci, dál od notebooků.</p>
 
       <figure class="blog-figure">
-        <video class="blog-video blog-video--portrait" autoplay muted loop playsinline preload="metadata" poster="/blog/zero-to-done/rooftop-poster.jpg">
+        <video class="blog-video blog-video--portrait" data-autoplay muted loop playsinline preload="none" poster="/blog/zero-to-done/rooftop-poster.jpg">
           <source src="/blog/zero-to-done/rooftop.mp4" type="video/mp4" />
         </video>
         <figcaption>Výhled ze střechy mime digital na Brno.</figcaption>
