@@ -7,9 +7,9 @@ export const POSTHOG_HOST =
   process.env.REACT_APP_POSTHOG_HOST || 'https://eu.i.posthog.com';
 export const analyticsEnabled = Boolean(POSTHOG_KEY);
 
-// posthog-js (~50KB brotli) is loaded on first user interaction, or after a
-// 30s timer for visitors who only read. Captures made before it loads queue on
-// the same promise, so no pageview is lost.
+// posthog-js (~50KB brotli) is loaded on first user interaction, or shortly
+// after the load event so it stays off the critical path while quick bounces
+// are still counted. Captures made before it loads queue on the same promise.
 let ready: Promise<typeof import('posthog-js').default> | null = null;
 const load = () =>
   (ready ??= import('posthog-js').then(({ default: posthog }) => {
@@ -31,10 +31,11 @@ export function initAnalytics() {
   const evts = ['pointerdown', 'keydown', 'wheel', 'touchstart'];
   const go = () => {
     evts.forEach((e) => window.removeEventListener(e, go));
-    clearTimeout(t);
     open();
   };
-  const t = window.setTimeout(go, 30000);
+  const afterLoad = () => window.setTimeout(go, 1500);
+  if (document.readyState === 'complete') afterLoad();
+  else window.addEventListener('load', afterLoad, { once: true });
   evts.forEach((e) => window.addEventListener(e, go, { once: true, passive: true }));
 }
 
