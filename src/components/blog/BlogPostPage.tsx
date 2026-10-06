@@ -15,7 +15,7 @@ type FontPref = 'serif' | 'sans';
 
 const FONT_KEY = 'blog-font';
 
-const AVATAR = '/eduard-hvizdak.jpg';
+const AVATAR = '/eduard-hvizdak-avatar.webp';
 const GITHUB = 'https://github.com/Rauded';
 const LINKEDIN = 'https://www.linkedin.com/in/eduard-hvizdak';
 
