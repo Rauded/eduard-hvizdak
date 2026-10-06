@@ -210,6 +210,18 @@ async function main() {
         tags[0].parentNode.insertBefore(baked, tags[0]);
       });
 
+      // A video poster cannot be lazy, so every poster in the baked HTML is
+      // fetched at parse time and competes with the first screen for bandwidth
+      // (four posters, 288 KB, on the home page). Drop the poster from
+      // play-on-scroll (preload="none") videos that start below this tall
+      // prerender viewport, so none can be on a visitor's first screen; the
+      // client render sets it again as soon as the app boots.
+      await page.evaluate(() => {
+        for (const v of document.querySelectorAll('video[poster][preload="none"]')) {
+          if (v.getBoundingClientRect().top + window.scrollY > window.innerHeight) v.removeAttribute('poster');
+        }
+      });
+
       // Web fonts are only discovered at first layout, so the first frame paints
       // in the fallback face and reflows when they land (on a blog post that
       // swap is the whole layout shift score). Preload the faces this page
