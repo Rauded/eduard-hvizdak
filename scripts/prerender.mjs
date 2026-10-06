@@ -210,7 +210,19 @@ async function main() {
         tags[0].parentNode.insertBefore(baked, tags[0]);
       });
 
-      const html = await page.evaluate(() => '<!DOCTYPE html>\n' + document.documentElement.outerHTML);
+      let html = await page.evaluate(() => '<!DOCTYPE html>\n' + document.documentElement.outerHTML);
+      // The baked markup is already the finished page, so let the browser paint
+      // it before the bundle runs. A deferred script that is cached (or arrives
+      // with the HTML) evaluates before the first frame and holds that frame
+      // back for the whole boot. Keep the early fetch with a preload, and start
+      // the script from the end of <body> two frames in (the first frame is on
+      // screen by then). Hidden tabs get no frames, so they boot at once, and
+      // the timer covers a first frame that is itself held up by slow CSS.
+      html = html.replace(
+        /<script defer="defer" src="(\/static\/js\/main\.[^"]+\.js)"><\/script>([\s\S]*)<\/body>/,
+        (_, src, rest) =>
+          `<link rel="preload" as="script" fetchpriority="low" href="${src}">${rest}<script>!function(){var d=document,s=d.createElement("script"),go=function(){go=function(){};d.head.appendChild(s)};s.src="${src}";d.hidden?go():(requestAnimationFrame(function(){requestAnimationFrame(function(){setTimeout(go)})}),setTimeout(go,1500))}()</script></body>`
+      );
       // Cheap insurance: make sure a /sk or /cs route actually baked in that
       // language (path-derived locale), not English.
       const bakedLang = await page.evaluate(() => document.documentElement.lang);
