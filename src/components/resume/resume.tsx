@@ -37,6 +37,7 @@ const Resume: React.FC = () => {
               Desktop only: phones render the embed as a black box, so
               resume.scss hides it under 768px and the buttons carry the CV. */}
           <iframe
+            loading="lazy"
             title={t.iframeTitle}
             src={`${cvPdf}#toolbar=0`}
           ></iframe>

@@ -15,7 +15,7 @@ type FontPref = 'serif' | 'sans';
 
 const FONT_KEY = 'blog-font';
 
-const AVATAR = '/eduard-hvizdak.jpg';
+const AVATAR = '/eduard-hvizdak-avatar.webp';
 const GITHUB = 'https://github.com/Rauded';
 const LINKEDIN = 'https://www.linkedin.com/in/eduard-hvizdak';
 
@@ -78,6 +78,27 @@ const BlogPostPage: React.FC = () => {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [zoomSrc]);
+
+  // Looping clips in the article start when they scroll into view instead of
+  // downloading on load (autoplay would fetch every clip up front).
+  useEffect(() => {
+    const el = bodyRef.current;
+    if (!el || typeof IntersectionObserver === 'undefined') return;
+    const obs = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((e) => {
+          const v = e.target as HTMLVideoElement;
+          if (e.isIntersecting) v.play().catch(() => {});
+          else v.pause();
+        }),
+      { threshold: 0.25 }
+    );
+    el.querySelectorAll<HTMLVideoElement>('video[data-autoplay]').forEach((v) => {
+      v.muted = true;
+      obs.observe(v);
+    });
+    return () => obs.disconnect();
+  }, [slug, locale]);
 
   // Click any image in the article body to open it full-screen.
   const onBodyClick = useCallback((e: React.MouseEvent) => {
