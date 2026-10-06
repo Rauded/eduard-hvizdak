@@ -210,6 +210,25 @@ async function main() {
         tags[0].parentNode.insertBefore(baked, tags[0]);
       });
 
+      // Web fonts are only discovered at first layout, so the first frame paints
+      // in the fallback face and reflows when they land (on a blog post that
+      // swap is the whole layout shift score). Preload the faces this page
+      // actually fetched so they are there for the first frame.
+      await page.evaluate(() => {
+        const fonts = new Set(
+          performance.getEntriesByType('resource').map((r) => new URL(r.name).pathname).filter((p) => p.endsWith('.woff2'))
+        );
+        for (const href of fonts) {
+          const link = document.createElement('link');
+          link.rel = 'preload';
+          link.as = 'font';
+          link.type = 'font/woff2';
+          link.crossOrigin = '';
+          link.href = href;
+          document.head.appendChild(link);
+        }
+      });
+
       let html = await page.evaluate(() => '<!DOCTYPE html>\n' + document.documentElement.outerHTML);
       // The baked markup is already the finished page, so let the browser paint
       // it before the bundle runs. A deferred script that is cached (or arrives
