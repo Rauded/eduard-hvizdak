@@ -2,8 +2,7 @@ import React, { useEffect, Suspense, lazy } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import posthog from 'posthog-js';
-import { analyticsEnabled } from './analytics';
+import { capturePageview } from './analytics';
 import { ThemeProvider } from './components/theme/ThemeContext';
 import { SoundProvider } from './components/sound/SoundContext';
 import { LocaleProvider } from './i18n/LocaleContext';
@@ -81,9 +80,7 @@ const AppContainer = styled.div`
 const PostHogPageview: React.FC = () => {
   const location = useLocation();
   useEffect(() => {
-    if (analyticsEnabled) {
-      posthog.capture('$pageview', { $current_url: window.location.href });
-    }
+    capturePageview();
   }, [location]);
   return null;
 };

@@ -1,26 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import posthog from 'posthog-js';
 import './index.css';
 // @ts-ignore
 import App from './App.tsx';
 import reportWebVitals from './reportWebVitals';
-import { POSTHOG_KEY, POSTHOG_HOST, analyticsEnabled } from './analytics';
+import { initAnalytics } from './analytics';
 import { stripLocale } from './config/locale';
 import { SHOW_CZS_CASE_STUDY } from './config/czsCaseStudy';
 
 // Pageviews are captured manually on route change (see App.tsx).
-if (analyticsEnabled) {
-  posthog.init(POSTHOG_KEY, {
-    api_host: POSTHOG_HOST,
-    capture_pageview: false,
-    person_profiles: 'identified_only',
-    // Marketing site does not use session replay; disabling it drops the
-    // recorder payload (~part of the ~99KB of PostHog extras the perf audit
-    // flagged). Flip back to false to re-enable replays.
-    disable_session_recording: true,
-  });
-}
+initAnalytics();
 
 // Sub-pages are React.lazy chunks (see App.tsx). When hydrating a prerendered
 // route, the matching chunk must be loaded BEFORE hydrateRoot, otherwise the
