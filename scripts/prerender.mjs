@@ -193,6 +193,23 @@ async function main() {
       // the reader; a broken hero is not. The real fix is streaming SSR in
       // this script so the markup and the markers are both React's own.
 
+      // styled-components inserts its rules through the CSSOM in production, so
+      // its <style> tag serializes empty and the baked markup would paint with
+      // sc-* class names that match nothing until the bundle boots (on the home
+      // page: the hero art at its natural 1600px, twice, pushing the page down).
+      // Write the live rules out as text in a tag of our own, placed where the
+      // library's tag sits so the cascade order is unchanged. The library
+      // ignores it and injects the same rules again once it runs.
+      await page.evaluate(() => {
+        const tags = [...document.querySelectorAll('style[data-styled]')];
+        const css = tags.flatMap((s) => [...(s.sheet ? s.sheet.cssRules : [])].map((r) => r.cssText)).join('');
+        if (!css) return;
+        const baked = document.createElement('style');
+        baked.setAttribute('data-baked-styled', '');
+        baked.textContent = css;
+        tags[0].parentNode.insertBefore(baked, tags[0]);
+      });
+
       const html = await page.evaluate(() => '<!DOCTYPE html>\n' + document.documentElement.outerHTML);
       // Cheap insurance: make sure a /sk or /cs route actually baked in that
       // language (path-derived locale), not English.
