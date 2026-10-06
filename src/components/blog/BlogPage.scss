@@ -616,6 +616,7 @@ $ui-font: var(--font-body);
     }
 
     .blog-img {
+      height: auto;
       object-fit: cover;
       cursor: zoom-in;
       transition: transform 0.25s ease, box-shadow 0.25s ease;
