@@ -114,6 +114,10 @@ async function main() {
     const page = await browser.newPage();
     try {
       await page.setViewport({ width: 1280, height: 1600 });
+      // Headless Chrome cannot render the embedded CV PDF inline, so by default
+      // it saved a copy to ~/Downloads on every prerender of that route.
+      const cdp = await page.createCDPSession();
+      await cdp.send('Browser.setDownloadBehavior', { behavior: 'deny' });
       // Block third-party requests so networkidle is reached and nothing hangs
       // on twitter/youtube/linkedin/posthog embeds.
       await page.setRequestInterception(true);
