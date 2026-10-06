@@ -31,7 +31,7 @@ function preloadRouteChunk(pathname: string): Promise<unknown> {
   if (pathname === '/references') return import('./components/references/ReferencesPage');
   if (pathname === '/share-preview') return import('./components/share/SharePreviewPage');
   if (pathname === '/styleguide') return import('./components/styleguide/StyleguidePage');
-  if (pathname === '/') return Promise.resolve(); // Home is eager
+  if (pathname === '/') return import('./components/home/Home');
   return import('./components/notfound/NotFound'); // catch-all
 }
 

@@ -20,13 +20,14 @@ import './styles/typography.scss';
 import './styles/decorations.scss';
 
 
-// Header, Footer and Home are on the homepage critical path, so they stay eager.
+// Header and Footer are on the critical path, so they stay eager.
 // @ts-ignore
 import Header from './components/header/header.tsx';
 // @ts-ignore
 import Footer from './components/footer/footer.tsx';
+// Home pulls in the hero shaders and the project data, so it is route-split too.
 // @ts-ignore
-import Home from './components/home/Home.tsx';
+const Home = lazy(() => import('./components/home/Home.tsx'));
 
 // Every sub-page is route-split so it is not in the homepage bundle. This is the
 // main lever against the single ~1MB main chunk the perf audit flagged.
