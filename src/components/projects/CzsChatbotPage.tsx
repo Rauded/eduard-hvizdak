@@ -1,5 +1,5 @@
+import LocaleLink from '../common/LocaleLink';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   LuArrowLeft, LuArrowRight, LuCalendar, LuMail, LuExternalLink,
   LuThumbsUp, LuThumbsDown, LuRefreshCw,
@@ -89,7 +89,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Hero ─────────────────────────────────────────────── */}
       <header className="czs-hero">
-        <Link to="/services" className="czs-back"><LuArrowLeft aria-hidden="true" /> {t.back}</Link>
+        <LocaleLink to="/services" className="czs-back"><LuArrowLeft aria-hidden="true" /> {t.back}</LocaleLink>
         <img className="czs-clientlogo" src="/brand/clients/masaryk-university.png" alt="Masaryk University" width="130" height="61" />
         <span className="czs-eyebrow">{t.hero.eyebrow}</span>
         <h1 className="czs-hero__title">{t.hero.title}</h1>

@@ -1,5 +1,5 @@
+import LocaleLink from '../common/LocaleLink';
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   LuArrowLeft, LuArrowRight, LuCalendar, LuMail, LuExternalLink, LuCheck,
 } from 'react-icons/lu';
@@ -95,7 +95,7 @@ const InzerproCaseStudyPage: React.FC = () => {
 
       {/* ── Hero ─────────────────────────────────────────────── */}
       <header className="czs-hero">
-        <Link to="/" className="czs-back"><LuArrowLeft aria-hidden="true" /> {t.back}</Link>
+        <LocaleLink to="/" className="czs-back"><LuArrowLeft aria-hidden="true" /> {t.back}</LocaleLink>
         <img className="czs-clientlogo" src="/brand/sites/inzerpro.svg" alt="InzerPro" width="48" height="48" />
         <span className="czs-eyebrow">{t.hero.eyebrow}</span>
         <h1 className="czs-hero__title">{t.hero.title}</h1>
