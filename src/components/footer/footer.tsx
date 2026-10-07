@@ -34,7 +34,7 @@ const Footer: React.FC = () => {
           className="footer-sound-toggle"
           onClick={toggleSound}
           aria-pressed={soundOn}
-          aria-label={soundOn ? t.sound.disable : t.sound.enable}
+          aria-label={`${soundOn ? t.sound.on : t.sound.off}. ${soundOn ? t.sound.disable : t.sound.enable}`}
         >
           {soundOn ? <LuVolume2 aria-hidden="true" /> : <LuVolumeX aria-hidden="true" />}
           <span>{soundOn ? t.sound.on : t.sound.off}</span>
