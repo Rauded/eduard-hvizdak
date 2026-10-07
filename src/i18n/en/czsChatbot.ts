@@ -34,6 +34,7 @@ const czsChatbot = {
     { value: '778', label: 'source pages monitored' },
   ],
   problem: {
+    kicker: '01 / Problem',
     title: '778 sources, one inbox.',
     body: 'The rules live in <strong>778 constantly changing sources</strong> in Czech and English, and every student question used to be answered <strong>by hand, one email at a time</strong>.',
     corpusLabel: 'Source corpus, CS + EN',
@@ -46,6 +47,7 @@ const czsChatbot = {
     before: 'Before: every question answered manually, by email',
   },
   product: {
+    kicker: '02 / Product',
     title: 'Ask in Czech or English. Get an answer with receipts.',
     body: [
       'Answers study-abroad questions in <strong>Czech or English</strong>, grounded in retrieved CZS sources and <strong>cited</strong>, so every claim traces back to a page. Facts that must not be guessed (current date, deadlines, contacts) come from <strong>deterministic tool calls</strong>, not the model\'s memory.',
@@ -60,6 +62,7 @@ const czsChatbot = {
     answerCaption: 'Every claim backed by a cited CZS source.',
   },
   architecture: {
+    kicker: '03 / System',
     title: 'The pipeline behind a straight answer',
     body: [
       'Every question is classified, then answered from <strong>hybrid OpenSearch retrieval</strong> (BM25 plus Voyage dense vectors, fused with RRF, two rerankers, MMR) over a heading-aware <strong>parent-child index</strong>, with a <strong>CRAG-style answerability gate</strong> that re-retrieves on weak context. Verified facts come from <strong>deterministic tool calls</strong>, answers stream over SSE from <strong>DeepSeek-v3.2 on CERIT</strong>.',
@@ -81,6 +84,7 @@ const czsChatbot = {
     stack: ['Python', 'FastAPI', 'OpenSearch', 'Voyage AI', 'DeepSeek via CERIT', 'PostHog', 'nginx'],
   },
   evaluation: {
+    kicker: '05 / Evaluation',
     title: 'Measured, not vibes',
     body: [
       'A continuous <strong>LLM-as-judge</strong> harness grades in-domain questions from the CZS FAQ (real historical plus generated) against the sources for accuracy, groundedness, and hallucination. Across <strong>37 cycles</strong> and <strong>15,362 runs</strong>, <strong>10,438</strong> were gradeable answers: <strong>84 percent scored 9 or 10</strong>, mean <strong>9.0</strong>, groundedness <strong>8.6</strong>, hallucinations <strong>near 1 percent</strong>.',
@@ -88,9 +92,13 @@ const czsChatbot = {
     chartTitle: 'How 10,438 graded answers scored',
     chartAccuracy: 'scored 9 or 10',
     chartHallucination: 'scored 0 to 8',
+    chartAxisY: 'answers',
+    chartAxisX: 'answer score / 10',
+    chartMean: 'mean 9.0',
     chartCaption: 'Accuracy distribution across 10,438 gradeable answers from 15,362 judged runs. The correct source appears in the top retrieval results 92 percent of the time, up from 79 before the parent-child index.',
   },
   golden: {
+    kicker: '04 / Feedback loop',
     title: 'Every approved answer makes the next one instant.',
     intro:
       'CZS handed over their archive of real student questions with <strong>verified answers</strong>; the system turns every new answer back into that archive.',
@@ -108,6 +116,7 @@ const czsChatbot = {
     closer: '707 of 715 pairs are already staff verified, and the loop only adds to that number.',
   },
   wins: {
+    kicker: '06 / Iteration',
     title: 'What measurement actually catches',
     intro: 'None of these showed up in casual testing.',
     items: [
@@ -141,6 +150,7 @@ const czsChatbot = {
     ],
   },
   dashboards: {
+    kicker: '07 / Operations',
     title: 'CZS staff run this. Not me.',
     intro:
       'Staff see <strong>every conversation</strong>, review anything questionable, and update the knowledge base <strong>without touching code</strong>.',
@@ -170,6 +180,7 @@ const czsChatbot = {
     closer: 'The AI drafts, humans decide; CZS gets the controls, not a support contract.',
   },
   privacy: {
+    kicker: '08 / Privacy',
     title: 'Private by default',
     body: [
       'No account, <strong>no personal data collected</strong>. Conversations are logged for quality review.',

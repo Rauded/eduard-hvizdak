@@ -140,7 +140,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Problem ──────────────────────────────────────────── */}
       <section className="czs-block">
-        <Reveal><span className="czs-kicker">01 / Problem</span><h2 className="czs-block__title">{t.problem.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.problem.kicker}</span><h2 className="czs-block__title">{t.problem.title}</h2></Reveal>
         <Reveal><p className="czs-prose" dangerouslySetInnerHTML={{ __html: t.problem.body }} /></Reveal>
         <Reveal className="czs-mix">
           <span className="czs-mix__label">{t.problem.corpusLabel}</span>
@@ -164,7 +164,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Live product ─────────────────────────────────────── */}
       <section className="czs-block">
-        <Reveal><span className="czs-kicker">02 / Product</span><h2 className="czs-block__title">{t.product.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.product.kicker}</span><h2 className="czs-block__title">{t.product.title}</h2></Reveal>
         <div className="czs-prose">
           {t.product.body.map((p, i) => <Reveal key={i}><p dangerouslySetInnerHTML={{ __html: p }} /></Reveal>)}
         </div>
@@ -186,7 +186,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Architecture ─────────────────────────────────────── */}
       <section className="czs-block czs-block--tint">
-        <Reveal><span className="czs-kicker">03 / System</span><h2 className="czs-block__title">{t.architecture.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.architecture.kicker}</span><h2 className="czs-block__title">{t.architecture.title}</h2></Reveal>
         <div className="czs-prose">
           {t.architecture.body.map((p, i) => <Reveal key={i}><p dangerouslySetInnerHTML={{ __html: p }} /></Reveal>)}
         </div>
@@ -216,7 +216,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Golden dataset / feedback loop ───────────────────── */}
       <section className="czs-block czs-block--tint">
-        <Reveal><span className="czs-kicker">04 / Feedback loop</span><h2 className="czs-block__title">{t.golden.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.golden.kicker}</span><h2 className="czs-block__title">{t.golden.title}</h2></Reveal>
         <Reveal><p className="czs-prose" dangerouslySetInnerHTML={{ __html: t.golden.intro }} /></Reveal>
         <div className="czs-loop">
           <Reveal className="czs-loop__tile" as="div">
@@ -248,7 +248,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Evaluation ───────────────────────────────────────── */}
       <section className="czs-block">
-        <Reveal><span className="czs-kicker">05 / Evaluation</span><h2 className="czs-block__title">{t.evaluation.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.evaluation.kicker}</span><h2 className="czs-block__title">{t.evaluation.title}</h2></Reveal>
         <div className="czs-prose">
           {t.evaluation.body.map((p, i) => <Reveal key={i}><p dangerouslySetInnerHTML={{ __html: p }} /></Reveal>)}
         </div>
@@ -275,11 +275,11 @@ const CzsChatbotPage: React.FC = () => {
               <text key={`x${s}`} className="czs-chart__tick" x={barCX(s)} y={pB + 17} textAnchor="middle">{s}</text>
             ))}
             {/* axis titles */}
-            <text className="czs-chart__axislabel" x={pL - 40} y={pT - 14}>answers</text>
-            <text className="czs-chart__axislabel" x={(pL + pR) / 2} y={CH - 6} textAnchor="middle">answer score / 10</text>
+            <text className="czs-chart__axislabel" x={pL - 40} y={pT - 14}>{t.evaluation.chartAxisY}</text>
+            <text className="czs-chart__axislabel" x={(pL + pR) / 2} y={CH - 6} textAnchor="middle">{t.evaluation.chartAxisX}</text>
             {/* mean marker */}
             <line className="czs-chart__anno" x1={meanX} y1={pT} x2={meanX} y2={pB} />
-            <text className="czs-chart__annolabel" x={meanX + 5} y={pT + 7}>mean 9.0</text>
+            <text className="czs-chart__annolabel" x={meanX + 5} y={pT + 7}>{t.evaluation.chartMean}</text>
             {/* axes */}
             <line className="czs-chart__axis" x1={pL} y1={pT} x2={pL} y2={pB} />
             <line className="czs-chart__axis" x1={pL} y1={pB} x2={pR} y2={pB} />
@@ -294,7 +294,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Before / after wins ──────────────────────────────── */}
       <section className="czs-block czs-block--tint">
-        <Reveal><span className="czs-kicker">06 / Iteration</span><h2 className="czs-block__title">{t.wins.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.wins.kicker}</span><h2 className="czs-block__title">{t.wins.title}</h2></Reveal>
         <div className="czs-wins">
           {t.wins.items.map(w => (
             <Reveal className="czs-win" key={w.tag} as="article">
@@ -315,7 +315,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Dashboards ───────────────────────────────────────── */}
       <section className="czs-block czs-dashband">
-        <Reveal><span className="czs-kicker">07 / Operations</span><h2 className="czs-block__title">{t.dashboards.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.dashboards.kicker}</span><h2 className="czs-block__title">{t.dashboards.title}</h2></Reveal>
         <Reveal><p className="czs-prose czs-prose--lead" dangerouslySetInnerHTML={{ __html: t.dashboards.intro }} /></Reveal>
         <Reveal><p className="czs-caption">{t.dashboards.note}</p></Reveal>
         <div className="czs-dash">
@@ -429,7 +429,7 @@ const CzsChatbotPage: React.FC = () => {
 
       {/* ── Privacy ──────────────────────────────────────────── */}
       <section className="czs-block">
-        <Reveal><span className="czs-kicker">08 / Privacy</span><h2 className="czs-block__title">{t.privacy.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.privacy.kicker}</span><h2 className="czs-block__title">{t.privacy.title}</h2></Reveal>
         <div className="czs-prose">
           {t.privacy.body.map((p, i) => <Reveal key={i}><p dangerouslySetInnerHTML={{ __html: p }} /></Reveal>)}
         </div>

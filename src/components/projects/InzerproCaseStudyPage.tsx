@@ -146,7 +146,7 @@ const InzerproCaseStudyPage: React.FC = () => {
 
       {/* ── Problem ──────────────────────────────────────────── */}
       <section className="czs-block">
-        <Reveal><span className="czs-kicker">01 / Problem</span><h2 className="czs-block__title">{t.problem.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.problem.kicker}</span><h2 className="czs-block__title">{t.problem.title}</h2></Reveal>
         <Reveal><p className="czs-prose" dangerouslySetInnerHTML={{ __html: t.problem.body }} /></Reveal>
         <Reveal className="czs-mix">
           <span className="czs-mix__label">{t.problem.corpusLabel}</span>
@@ -167,7 +167,7 @@ const InzerproCaseStudyPage: React.FC = () => {
 
       {/* ── 02 Product: one listing fans out to every marketplace ── */}
       <section className="czs-block">
-        <Reveal><span className="czs-kicker">02 / Product</span><h2 className="czs-block__title">{t.fanout.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.fanout.kicker}</span><h2 className="czs-block__title">{t.fanout.title}</h2></Reveal>
         <Reveal><p className="czs-prose inz-lead">{t.fanout.lead}</p></Reveal>
         <Reveal className="inz-fan">
           <article className="inz-listing" ref={fanCardRef}>
@@ -206,7 +206,7 @@ const InzerproCaseStudyPage: React.FC = () => {
 
       {/* ── 03 Schedule: a seller's day on one rail ──────────── */}
       <section className="czs-block czs-block--tint">
-        <Reveal><span className="czs-kicker">03 / Schedule</span><h2 className="czs-block__title">{t.day.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.day.kicker}</span><h2 className="czs-block__title">{t.day.title}</h2></Reveal>
         <Reveal className="inz-day">
           <div className="inz-day__scroll">
             <div className="inz-day__rail">
@@ -230,7 +230,7 @@ const InzerproCaseStudyPage: React.FC = () => {
 
       {/* ── 04 Reliability: the queue and the alerting policy ── */}
       <section className="czs-block czs-dashband">
-        <Reveal><span className="czs-kicker">04 / Reliability</span><h2 className="czs-block__title">{t.ops.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.ops.kicker}</span><h2 className="czs-block__title">{t.ops.title}</h2></Reveal>
         <Reveal><p className="czs-prose inz-lead">{t.ops.lead}</p></Reveal>
         <Reveal className="inz-uptime">
           <div className="inz-uptime__row">
@@ -282,7 +282,7 @@ const InzerproCaseStudyPage: React.FC = () => {
 
       {/* ── 05 Partnership: Aukro's official API access ──────── */}
       <section className="czs-block">
-        <Reveal><span className="czs-kicker">05 / Partnership</span><h2 className="czs-block__title">{t.partner.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.partner.kicker}</span><h2 className="czs-block__title">{t.partner.title}</h2></Reveal>
         <Reveal><p className="czs-prose inz-lead">{t.partner.lead}</p></Reveal>
         <div className="inz-partner">
           <Reveal className="inz-partner__card" as="article">
@@ -324,7 +324,7 @@ const InzerproCaseStudyPage: React.FC = () => {
 
       {/* ── 06 Product depth: the product's own screens ──────── */}
       <section className="czs-block">
-        <Reveal><span className="czs-kicker">06 / Beyond re-posting</span><h2 className="czs-block__title">{t.depth.title}</h2></Reveal>
+        <Reveal><span className="czs-kicker">{t.depth.kicker}</span><h2 className="czs-block__title">{t.depth.title}</h2></Reveal>
         <Reveal><p className="czs-prose inz-lead">{t.depth.lead}</p></Reveal>
         <div className="inz-depth">
           <Reveal className="inz-depth__item inz-depth__item--wide" as="figure">
