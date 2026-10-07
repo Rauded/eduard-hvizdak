@@ -18,11 +18,24 @@ function tag(block, name) {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// Fallback when Jikan is down: the anime's own MAL page carries the same
+// poster as its og:image.
+async function malPageCover(link) {
+  try {
+    const r = await fetch(link, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(4000) });
+    if (!r.ok) return '';
+    const m = (await r.text()).match(/<meta property="og:image" content="([^"]+)"/);
+    return m ? m[1] : '';
+  } catch {
+    return '';
+  }
+}
+
 // Look up a single anime's poster via Jikan (the public MAL API mirror).
 // Retries once on a rate-limit/transient failure so fewer covers fall back.
 async function jikanCover(id, attempt = 0) {
   try {
-    const r = await fetch(`https://api.jikan.moe/v4/anime/${id}`, { headers: { 'User-Agent': UA } });
+    const r = await fetch(`https://api.jikan.moe/v4/anime/${id}`, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(4000) });
     if (r.status === 429 && attempt < 1) {
       await sleep(900);
       return jikanCover(id, attempt + 1);
@@ -77,7 +90,15 @@ module.exports = async (req, res) => {
     for (let i = 0; i < items.length; i += BATCH) {
       const slice = items.slice(i, i + BATCH);
       const covers = await Promise.all(
-        slice.map((a) => (a.id ? jikanCover(a.id) : Promise.resolve('')))
+        slice.map((a) => {
+          // Whichever source answers with a cover first wins, so a slow or
+          // dead Jikan no longer stalls the response.
+          const found = (p) => p.then((v) => v || Promise.reject(new Error('no cover')));
+          return Promise.any([
+            found(a.id ? jikanCover(a.id) : Promise.resolve('')),
+            found(malPageCover(a.link)),
+          ]).catch(() => '');
+        })
       );
       slice.forEach((a, k) => { a.cover = covers[k]; });
       if (i + BATCH < items.length) await sleep(700);
