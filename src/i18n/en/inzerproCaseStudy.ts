@@ -38,6 +38,7 @@ const inzerproCaseStudy = {
     { value: '1', label: 'person, design to on-call' },
   ],
   problem: {
+    kicker: '01 / Problem',
     title: 'New listings sit on top. Old ones sink.',
     body:
       'Resellers, small e-shops and car dealers were <strong>deleting and re-posting dozens of ads by hand every day</strong>, and competitors still buried them overnight. The marketplaces sell paid promotion but give small sellers <strong>no automation at all</strong>: none of them has a public API.',
@@ -58,6 +59,7 @@ const inzerproCaseStudy = {
   // Sections 02+ are visual-first (2026-08-05 redesign): each section is a
   // heading, at most one sentence, and a bespoke component. Keep it that way.
   fanout: {
+    kicker: '02 / Product',
     title: 'Write it once.',
     lead: 'Pick the marketplaces. InzerPro posts, re-posts and deletes everywhere, on schedule.',
     card: {
@@ -77,6 +79,7 @@ const inzerproCaseStudy = {
     ],
   },
   day: {
+    kicker: '03 / Schedule',
     title: 'The morning runs itself.',
     railStart: '00:00',
     railEnd: '24:00',
@@ -88,6 +91,7 @@ const inzerproCaseStudy = {
     },
   },
   ops: {
+    kicker: '04 / Reliability',
     title: 'If something breaks, I know first.',
     // The only prose block in the case study. Keep it 3 SHORT sentences,
     // each front-loaded (write-for-skimmers rules).
@@ -122,6 +126,7 @@ const inzerproCaseStudy = {
   // Voice: written with the edo-rewrite skill (semi-casual, clean), so it
   // reads like Eduard typed it. Plain words, "we", no marketing adjectives.
   partner: {
+    kicker: '05 / Partnership',
     title: 'Aukro gave us official API access.',
     lead:
       'Aukro is the biggest auction marketplace in Czechia and they do not hand out automation to anyone, they saw what InzerPro does and gave us the API in June 2026.',
@@ -157,6 +162,7 @@ const inzerproCaseStudy = {
     ],
   },
   depth: {
+    kicker: '06 / Beyond re-posting',
     title: 'Re-posting got sellers in the door. It kept growing.',
     lead: 'The screens below are the product\'s own demo mode.',
     items: [
