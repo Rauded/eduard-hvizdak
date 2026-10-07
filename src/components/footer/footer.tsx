@@ -7,6 +7,7 @@ import { LuArrowRight, LuVolume2, LuVolumeX } from 'react-icons/lu';
 import { useT } from '../../i18n';
 import { useLocalizedPath } from '../common/LocaleLink';
 import { useSound } from '../sound/SoundContext';
+import { useHydrating } from '../common/useHydrating';
 
 const EMAIL = 'eduardd.hv@gmail.com';
 const PHONE = '+421950774038';
@@ -14,7 +15,9 @@ const PHONE_DISPLAY = '+421 950 774 038';
 
 const Footer: React.FC = () => {
   const t = useT('footer');
-  const { soundOn, toggleSound } = useSound();
+  const { soundOn: savedSoundOn, toggleSound } = useSound();
+  // The baked footer says sound is off; a saved "on" shows once hydration is done.
+  const soundOn = !useHydrating() && savedSoundOn;
   const localize = useLocalizedPath();
   // Home path in the active locale + the contact anchor. Works from any route:
   // ScrollToTop in App scrolls to #contact once the section mounts.

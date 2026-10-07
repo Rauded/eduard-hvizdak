@@ -3,9 +3,10 @@
 // so non-JS crawlers and AI search engines (and social/OG bots) see real content
 // instead of an empty <div id="root">. Runs as part of `npm run build`.
 //
-// Technique = the same one react-snap uses (headless Chromium snapshots the
-// rendered DOM), but with a modern, Apple-Silicon-compatible Puppeteer that we
-// fully control. The client then HYDRATES this HTML (see src/index.tsx).
+// Headless Chromium boots the app on each route, then the app string-renders
+// itself (window.__renderStatic in src/index.tsx) and that markup is baked into
+// #root; <head> and the rest of <body> come from the live page. The client then
+// HYDRATES this HTML (see src/index.tsx).
 //
 // SAFETY: any failure here (e.g. Chromium can't launch in a CI sandbox) is
 // caught and the process exits 0 — the deploy still ships as a normal SPA.
@@ -143,7 +144,8 @@ async function main() {
         // were missing a 20s window on a loaded machine.
         { timeout: 45000 }
       );
-      // Trigger scroll-reveal IntersectionObservers, then return to top.
+      // Scroll through once so whatever loads on scroll (lazy chunks and their
+      // stylesheets, late fonts) is in <head> and in the font list below.
       await page.evaluate(async () => {
         for (let y = 0; y < document.body.scrollHeight; y += 600) {
           window.scrollTo(0, y);
@@ -153,45 +155,16 @@ async function main() {
       });
       await new Promise((r) => setTimeout(r, 300));
 
-      // Restore the text-node boundaries that outerHTML throws away.
-      //
-      // React renders `{date} · {minutes} {label}` as four SEPARATE DOM text
-      // nodes and expects to hydrate against four. outerHTML serializes them as
-      // one run of characters, and the HTML parser then rebuilds them as ONE
-      // node on the next load. React sees one node where it wanted four,
-      // reports #418 (text content mismatch), then #423, and throws the whole
-      // prerendered tree away to client-render from scratch. That fired on
-      // every route and cost us most of the benefit of prerendering at all.
-      //
-      // Real SSR (ReactDOMServer) solves this by emitting an empty comment
-      // between adjacent text nodes; the parser keeps them separate and React
-      // hydrates cleanly. We are snapshotting a live DOM rather than running
-      // SSR, so we insert the same separators ourselves right before
-      // serializing. Matches React's own marker exactly: `<!-- -->`.
-      await page.evaluate(() => {
-        const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-        const needsSeparator = [];
-        let node;
-        while ((node = walker.nextNode())) {
-          const next = node.nextSibling;
-          if (next && next.nodeType === Node.TEXT_NODE) needsSeparator.push(node);
-        }
-        for (const n of needsSeparator) {
-          n.parentNode.insertBefore(document.createComment(' '), n.nextSibling);
-        }
-      });
-
-      // NOT DONE HERE, ON PURPOSE: bracketing #root's children with React's
-      // `<!--$-->` / `<!--/$-->` Suspense markers. That does silence the
-      // remaining #418/#423 (verified 2026-08-04), because those come from the
-      // <Suspense> in App.tsx having no boundary markers in a DOM snapshot.
-      // But then hydration SUCCEEDS and React keeps the baked DOM verbatim,
-      // including everything that was mid-flight when the snapshot was taken:
-      // scroll-reveal classes, the slideshow's current slide, and lazy images
-      // that had not loaded. The hero lost its name and CTAs and the client
-      // logo strip came up empty. A recovered client render is invisible to
-      // the reader; a broken hero is not. The real fix is streaming SSR in
-      // this script so the markup and the markers are both React's own.
+      // Bake React's own first render, not a snapshot of the live DOM. The live
+      // DOM is the state after effects ran (canvases a shader library mounted,
+      // reveal classes, a ticking clock) and carries no Suspense markers, so
+      // hydrating it failed on every route (#418, then #423) and React threw
+      // the baked tree away. The app is still mounted and has already loaded
+      // this route's chunks and dictionaries, so the string render is complete;
+      // rendering it also registers the first render's styled-components rules
+      // for the step below.
+      const markup = await page.evaluate(() => window.__renderStatic());
+      if (markup.includes('<!--$!-->')) throw new Error('a Suspense boundary was still pending');
 
       // styled-components inserts its rules through the CSSOM in production, so
       // its <style> tag serializes empty and the baked markup would paint with
@@ -210,15 +183,20 @@ async function main() {
         tags[0].parentNode.insertBefore(baked, tags[0]);
       });
 
+      await page.evaluate((m) => { document.getElementById('root').innerHTML = m; }, markup);
+
       // A video poster cannot be lazy, so every poster in the baked HTML is
       // fetched at parse time and competes with the first screen for bandwidth
-      // (four posters, 288 KB, on the home page). Drop the poster from
-      // play-on-scroll (preload="none") videos that start below this tall
-      // prerender viewport, so none can be on a visitor's first screen; the
-      // client render sets it again as soon as the app boots.
+      // (four posters, 288 KB, on the home page). Park the poster in
+      // data-poster on play-on-scroll (preload="none") videos that start below
+      // this tall prerender viewport, so none can be on a visitor's first
+      // screen; src/index.tsx puts it back as soon as the app boots.
       await page.evaluate(() => {
         for (const v of document.querySelectorAll('video[poster][preload="none"]')) {
-          if (v.getBoundingClientRect().top + window.scrollY > window.innerHeight) v.removeAttribute('poster');
+          if (v.getBoundingClientRect().top + window.scrollY > window.innerHeight) {
+            v.dataset.poster = v.getAttribute('poster');
+            v.removeAttribute('poster');
+          }
         }
       });
 

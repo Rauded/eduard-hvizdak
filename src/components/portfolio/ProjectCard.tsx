@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import useScrollLock from '../common/useScrollLock';
+import { useHydrating } from '../common/useHydrating';
 import { LuBookOpen, LuArrowUpRight, LuGithub, LuX } from 'react-icons/lu';
 import { PortfolioProject, CaseStudy, localizeProject } from './projectsData';
 // @ts-ignore: the `projects` namespace is registered centrally by the parent.
@@ -10,7 +11,8 @@ import { useLocale } from '../../i18n/LocaleContext';
 // ─── Scroll-reveal hook ──────────────────────────────────────────
 export function useReveal(threshold = 0.12) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  // Baked revealed, so the prerendered page paints whole before the bundle runs.
+  const [visible, setVisible] = useState(useHydrating());
 
   useEffect(() => {
     const el = ref.current;
@@ -20,6 +22,9 @@ export function useReveal(threshold = 0.12) {
         if (entry.isIntersecting) {
           setVisible(true);
           obs.unobserve(el);
+        } else if (entry.intersectionRatio === 0) {
+          // A baked card that is still off screen goes back to waiting for its scroll.
+          setVisible(false);
         }
       },
       { threshold }
@@ -307,13 +312,19 @@ const ProjectCaseStudy: React.FC<{ project: PortfolioProject }> = ({ project }) 
   // the scrolling element, so the page kept scrolling behind the reader.
   useScrollLock(open);
 
+  // The server renderer the prerender uses cannot render portals, so the
+  // dialog joins after mount. The baked HTML still carries it: the prerender
+  // serializes <body> from the mounted page.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
   if (!cs) return null;
   const titleId = `case-title-${project.id}`;
 
   // Rendered to <body> so the overlay escapes any card stacking context.
   // The markup is ALWAYS mounted (visibility toggled via CSS) to preserve
   // the in-DOM, indexable case-study text.
-  const dialog = createPortal(
+  const dialog = mounted && createPortal(
     <div
       className={`case-modal ${open ? 'case-modal--open' : ''}`}
       aria-hidden={!open}

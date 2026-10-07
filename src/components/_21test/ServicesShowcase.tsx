@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useHydrating } from '../common/useHydrating';
 import './services-showcase.scss';
 import { LuCheck, LuLoader } from 'react-icons/lu';
 import { useT } from '../../i18n';
@@ -31,6 +32,8 @@ function useInView<T extends HTMLElement>(threshold = 0.35) {
 
 const Ticker: React.FC<Stat & { run: boolean }> = ({ value, suffix, prefix, decimals = 0, label, run }) => {
   const [n, setN] = useState(0);
+  // The baked page states the real figure, not the count-up's starting zero.
+  const shown = useHydrating() ? value : n;
   useEffect(() => {
     if (!run) return;
     let raf = 0; const dur = 1400; const t0 = performance.now();
@@ -45,7 +48,7 @@ const Ticker: React.FC<Stat & { run: boolean }> = ({ value, suffix, prefix, deci
   }, [run, value]);
   return (
     <div className="sx-stat">
-      <div className="sx-stat__num">{prefix}{n.toFixed(decimals)}{suffix}</div>
+      <div className="sx-stat__num">{prefix}{shown.toFixed(decimals)}{suffix}</div>
       <div className="sx-stat__label">{label}</div>
     </div>
   );

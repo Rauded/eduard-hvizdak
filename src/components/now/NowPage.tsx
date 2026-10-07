@@ -597,7 +597,7 @@ const NowPage: React.FC = () => {
       <footer className="now-metafoot">
         <span className="now-hero__loc"><LuMapPin /> {t.foot.location}</span>
         <span className="now-hero__mdot" aria-hidden="true" />
-        <span className="now-hero__loc" title={t.foot.clockTip}><LuClock /> {brnoClock(clock)}</span>
+        <span className="now-hero__loc" title={t.foot.clockTip} suppressHydrationWarning><LuClock /> {brnoClock(clock)}</span>
         <span className="now-hero__mdot" aria-hidden="true" />
         <span className="now-hero__updated">{t.foot.updated} {t.foot.lastUpdated}</span>
       </footer>

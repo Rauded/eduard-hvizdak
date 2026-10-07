@@ -13,10 +13,10 @@ import { SHOW_CZS_CASE_STUDY } from './config/czsCaseStudy';
 initAnalytics();
 
 // Sub-pages are React.lazy chunks (see App.tsx). When hydrating a prerendered
-// route, the matching chunk must be loaded BEFORE hydrateRoot, otherwise the
-// <Suspense fallback={null}> renders null against the baked HTML and React
-// throws a hydration mismatch and tears out the prerendered content. Warm the
-// chunk for the current path first (webpack de-dupes with App's own import()).
+// route, load the matching chunk BEFORE hydrateRoot so the page hydrates in the
+// first pass; otherwise the baked markup sits inert until the chunk arrives.
+// Warm the chunk for the current path first (webpack de-dupes with App's own
+// import()).
 // NB: no .tsx extension so tsc is happy; webpack resolves these to the exact same
 // modules (hence the same chunks) that App.tsx's lazy() imports use, so this only
 // warms the cache, it does not create duplicate bundles.
@@ -36,36 +36,30 @@ function preloadRouteChunk(pathname: string): Promise<unknown> {
   return import('./components/notfound/NotFound'); // catch-all
 }
 
-// The build prerenders each route to static HTML (scripts/prerender.mjs) as a DOM
-// snapshot (outerHTML), not React SSR output, so it has no Suspense hydration
-// markers. hydrateRoot therefore cannot cleanly hydrate the <Suspense> boundary
-// that code-splitting needs: React logs #418/#423 and recovers by client-rendering
-// the root. Content and SEO are unaffected (crawlers read the baked HTML; the DOM
-// settles to identical markup). We still hydrate rather than createRoot so the
-// prerendered paint is reused without a visible teardown.
-//
-// Investigated 2026-08-04. Two separate causes were found:
-//   1. Adjacent JSX text nodes serialized into one node by outerHTML. FIXED in
-//      prerender.mjs by writing React's own `<!-- -->` separators.
-//   2. The missing Suspense boundary markers. Injecting `<!--$-->`/`<!--/$-->`
-//      does silence the errors, but then hydration succeeds and React keeps the
-//      snapshot verbatim, freezing whatever transient state the prerender
-//      captured (reveal classes, slideshow position, unloaded lazy images). It
-//      visibly broke the hero and the client logo strip, so it is deliberately
-//      NOT done. See the note in prerender.mjs.
-// A fully clean hydrate needs true streaming SSR in prerender.mjs.
 const rootEl = document.getElementById('root') as HTMLElement;
 const app = (
   <React.StrictMode>
     <App />
   </React.StrictMode>
 );
+// scripts/prerender.mjs bakes the string this returns into each route's HTML,
+// so what hydrateRoot meets is React's own first render (Suspense markers and
+// text separators included), not a snapshot of the DOM after effects ran. The
+// server renderer is its own chunk and no visitor ever fetches it.
+(window as any).__renderStatic = () =>
+  import('react-dom/server').then(({ renderToString }) => renderToString(app));
+
 if (rootEl.hasChildNodes()) {
   // The case-study modals render through a portal onto <body>, so the prerender
   // snapshot bakes them OUTSIDE #root. React portals never hydrate, they append,
   // which would leave two copies (and duplicate element ids). Drop the baked
   // copies before hydrating so React re-creates a single fresh set.
   document.querySelectorAll('body > .case-modal').forEach((n) => n.remove());
+  // The prerender parks below-fold video posters in data-poster, and hydration
+  // does not patch attributes, so put them back by hand.
+  document.querySelectorAll<HTMLVideoElement>('video[data-poster]').forEach((v) => {
+    v.poster = v.dataset.poster as string;
+  });
   // Strip the /sk or /cs prefix so localized routes warm the right chunk (a
   // /sk/blog load must preload the blog chunk, not fall through to NotFound).
   Promise.all([

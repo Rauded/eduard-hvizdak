@@ -9,6 +9,7 @@ import { formatDate, getThumbnail, readingTime } from './blogUtils';
 import { useTheme } from '../theme/ThemeContext';
 import { useT } from '../../i18n';
 import { useLocale } from '../../i18n/LocaleContext';
+import { useHydrating } from '../common/useHydrating';
 import './BlogPage.scss';
 
 type FontPref = 'serif' | 'sans';
@@ -32,17 +33,19 @@ const BlogPostPage: React.FC = () => {
   const rawPost = BLOG_POSTS.find((p) => p.slug === slug);
   const FONT_LABELS: Record<FontPref, string> = { serif: t.fontSerif, sans: t.fontSans };
 
-  const [font, setFont] = useState<FontPref>(() =>
+  const [savedFont, setFont] = useState<FontPref>(() =>
     getStored<FontPref>(FONT_KEY, 'serif', ['serif', 'sans'])
   );
+  // The baked post is serif; a saved preference applies once hydration is done.
+  const font = useHydrating() ? 'serif' : savedFont;
   const { theme } = useTheme();
   const [progress, setProgress] = useState(0);
   const [zoomSrc, setZoomSrc] = useState<string | null>(null);
   const bodyRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    window.localStorage.setItem(FONT_KEY, font);
-  }, [font]);
+    window.localStorage.setItem(FONT_KEY, savedFont);
+  }, [savedFont]);
 
   // Reading-progress bar tied to the article body's scroll position.
   useEffect(() => {
