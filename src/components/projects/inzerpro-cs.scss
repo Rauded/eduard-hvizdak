@@ -9,6 +9,8 @@
 .czs--inz {
   --inz: #ff5a00;
   --inz-strong: #d94c00;
+  // Small orange labels: --inz-strong is 4.2:1 on white, this reaches 4.5:1.
+  --inz-text: color-mix(in srgb, var(--inz-strong) 80%, var(--text));
   --inz-soft: #fff2ea;
   --inz-border: #ffd0b3;
 
@@ -34,7 +36,7 @@
   .czs-hero__lead { max-width: 44rem; }
 
   // ── brand accents on labels and numerals ──
-  .czs-eyebrow,
+  .czs-eyebrow { color: var(--inz-text); }
   .czs-kicker { color: var(--inz-strong); }
   .czs-metric__value { color: var(--inz); }
   .czs-node__n { color: var(--inz); }
@@ -511,9 +513,9 @@
 
     img { width: 16px; height: 16px; border-radius: 4px; display: block; }
   }
-  .czs-mock__bar em,
-  .czs-frame__url { color: var(--inz-strong); }
+  .czs-mock__bar em { color: var(--inz-strong); }
   .czs-frame__url {
+    color: var(--inz-text);
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;

@@ -41,7 +41,8 @@ const Fallback = styled.span`
   font-size: 27vw;
   letter-spacing: -0.02em;
   white-space: nowrap;
-  color: color-mix(in srgb, var(--accent) 16%, transparent);
+  /* 55% is the lightest tint of the accent that still reads at 3:1 on white. */
+  color: color-mix(in srgb, var(--accent) 55%, transparent);
 
   @media (max-width: 640px) {
     display: flex;
